@@ -45,7 +45,9 @@ https://developer.android.com/about/versions/12/features/bluetooth-permissions -
 ### IOS
 
 1. In the Info.plist let’s add:
-```
+
+
+```xml
 <key>NSBluetoothAlwaysUsageDescription</key>
 
 <string>This app uses Bluetooth to connect to nearby devices for communication.</string>
