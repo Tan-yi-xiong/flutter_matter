@@ -16,6 +16,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  pointycastle: ^3.0.1
 
   flutter_matter:
     # When depending on this package from a real application you should use:
@@ -28,6 +29,20 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  crypto: ^3.0.3
+  hex: ^0.2.0
+  nanodart: ^2.0.0
+  fluttertoast: ^8.2.8
+  permission_handler: ^11.3.1
+  shared_preferences: ^2.2.3
+  mobile_scanner: ^5.1.1
+  flutter_reactive_ble: ^5.3.1
+  flutter_blue_plus: ^1.34.5
+  # nsd: ^4.0.3
+  pem: ^2.0.5
+  basic_utils: ^5.7.0
+  path_provider: ^2.1.4
+  bonsoir: ^5.1.10
 
 dev_dependencies:
   integration_test:
@@ -40,7 +55,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  # flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
