@@ -11,6 +11,7 @@
        attemptNetworkScanWiFi:(BOOL)attemptNetworkScanWiFi
      attemptNetworkScanThread:(BOOL)attemptNetworkScanThread
     skipCommissioningComplete:(BOOL)skipCommissioningComplete
+skipAttestationCertificateValidation:(BOOL)skipAttestationCertificateValidation
                   countryCode:(NSString *)countryCode
        regulatoryLocationType:(NSInteger)regulatoryLocationType
               keypairDelegate:(id)keypairDelegate
@@ -34,6 +35,7 @@
         _attemptNetworkScanWiFi = attemptNetworkScanWiFi;
         _attemptNetworkScanThread = attemptNetworkScanThread;
         _skipCommissioningComplete = skipCommissioningComplete;
+        _skipAttestationCertificateValidation = skipAttestationCertificateValidation;
         _regulatoryLocationType = regulatoryLocationType;
         _adminSubject = adminSubject;
         _enableServerInteractions = enableServerInteractions;
