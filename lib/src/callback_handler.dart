@@ -9,7 +9,7 @@ abstract class CallbackHandler<T> implements MethodCallHandler {
   Map<String, T> _handlers = {};
 
   CallbackHandler() {
-    (FlutterMatterPlatform.instance as MethodChannelFlutterMatter).addHandler(this);
+    FlutterMatterPlatform.instance.addHandler(this);
   }
 
   Map<String, T> get handlers => UnmodifiableMapView(_handlers);

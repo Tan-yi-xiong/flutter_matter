@@ -52,7 +52,7 @@ class NsdManager implements MethodCallHandler {
 
   static NsdManager? _instance;
   NsdManager._() {
-    (FlutterMatterPlatform.instance as MethodChannelFlutterMatter).addHandler(this);
+    FlutterMatterPlatform.instance.addHandler(this);
   }
   
   factory NsdManager() => _instance ??= NsdManager._();
@@ -117,7 +117,7 @@ class NsdManager implements MethodCallHandler {
   }
 
   Future<Map<String, dynamic>?> _requestPlatform(String methodName, String methodParamsJson) async {
-    final channelFlutterMatter = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channelFlutterMatter = FlutterMatterPlatform.instance;
     final result = await channelFlutterMatter.requestPlatform(
       RequestPlatformParams(methodName: createRequestPlatformUrl(nsdHostName, methodName), methodParamsJson: methodParamsJson));
     if (result.code == 0) {

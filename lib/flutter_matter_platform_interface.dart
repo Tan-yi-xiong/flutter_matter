@@ -23,5 +23,15 @@ abstract class FlutterMatterPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  
+  void addHandler(MethodCallHandler handler) {
+    throw UnimplementedError('addHandler() has not been implemented.');
+  }
+
+  void removeHandler(MethodCallHandler handler) {
+    throw UnimplementedError('removeHandler() has not been implemented.');
+  }
+
+  Future<PlatformResult> requestPlatform(RequestPlatformParams params) {
+    throw UnimplementedError('requestPlatform() has not been implemented.');
+  }
 }

@@ -75,10 +75,12 @@ class MethodChannelFlutterMatter extends FlutterMatterPlatform {
 
   final _handlers = <MethodCallHandler>{};
 
+  @override
   void addHandler(MethodCallHandler handler) {
     _handlers.add(handler);
   }
   
+  @override
   void removeHandler(MethodCallHandler handler) {
     _handlers.remove(handler);
   }
@@ -106,6 +108,7 @@ class MethodChannelFlutterMatter extends FlutterMatterPlatform {
     });
   }
 
+  @override
   Future<PlatformResult> requestPlatform(RequestPlatformParams params) async {
     matterPrint("$runtimeType requestPlatform -> $params");
     final result = await methodChannel.invokeMethod(params.methodName, params.methodParamsJson);

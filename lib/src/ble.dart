@@ -321,7 +321,7 @@ final BlePlatformDelegateCallbackHandler _blePlatformDelegateCallbackHandler =
 class BLELayerPlatform {
 
   static Future<Map<String, dynamic>?> _requestPlatform(String methodName, String methodParamsJson) async {
-    final channelFlutterMatter = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channelFlutterMatter = FlutterMatterPlatform.instance;
     final result = await channelFlutterMatter.requestPlatform(
       RequestPlatformParams(methodName: createRequestPlatformUrl(bleHostName, methodName), methodParamsJson: methodParamsJson));
     if (result.code == 0) {
@@ -336,7 +336,7 @@ class BLELayerPlatform {
       throw Exception("Already set delegate");
     }
     final channel =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+        FlutterMatterPlatform.instance;
     final String? id;
     if (delegate == null) {
       id = null;
@@ -490,10 +490,10 @@ class BLELayerPlatform {
 }
 
 class BLEManager {
-  late MethodChannelFlutterMatter _channel;
+  late FlutterMatterPlatform _channel;
 
   BLEManager() {
-    _channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    _channel = FlutterMatterPlatform.instance;
   }
 
   Future<int?> connect(OnboardingPayload onboardingPayload) async {
