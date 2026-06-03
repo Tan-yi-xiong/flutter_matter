@@ -66,10 +66,10 @@ class OnboardingPayload {
 
 class OnboardingPayloadParser  {
 
-  late MethodChannelFlutterMatter _channel;
+  late FlutterMatterPlatform _channel;
 
   OnboardingPayloadParser() {
-    _channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    _channel = FlutterMatterPlatform.instance;
   }
 
   Future<OnboardingPayload> parse(String code) async {
