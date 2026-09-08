@@ -1,6 +1,6 @@
 name: flutter_matter
 description: "Matter plugin for Flutter"
-version: 0.0.10
+version: 0.0.11
 homepage: https://github.com/Tan-yi-xiong/flutter_matter
 
 environment:

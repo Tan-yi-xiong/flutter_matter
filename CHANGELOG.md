@@ -1,3 +1,10 @@
+## 0.0.11
+
+### Bug Fixes
+- Fixed iOS attribute path parsing for read and subscribe operations.
+- Added support for converting Flutter wildcard path IDs to Matter SDK wildcard values.
+- Added validation for malformed iOS attribute path input.
+
 ## 0.0.10
 
 ### Improvements
