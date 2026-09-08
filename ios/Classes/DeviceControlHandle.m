@@ -910,6 +910,104 @@ static NSString *invoke(NSString *params) {
     return createFlutterRequestResultWithCode(0, @{});
 }
 
+static NSNumber * mapFlutterPathId(id jsonValue, NSError **error) {
+    if (![jsonValue isKindOfClass:[NSDictionary class]]) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:@"FlutterMatter"
+                                         code:1
+                                     userInfo:@{NSLocalizedDescriptionKey: @"Invalid ChipPathId"}];
+        }
+        return nil;
+    }
+
+    NSDictionary *pathId = (NSDictionary *)jsonValue;
+    id typeValue = pathId[@"type"];
+    NSNumber *idValue = pathId[@"id"];
+
+    if (typeValue != nil && ![typeValue isKindOfClass:[NSString class]]) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:@"FlutterMatter"
+                                         code:1
+                                     userInfo:@{NSLocalizedDescriptionKey: @"Invalid ChipPathId.type"}];
+        }
+        return nil;
+    }
+
+    NSString *type = (NSString *)typeValue;
+    if ([type caseInsensitiveCompare:@"wildcard"] == NSOrderedSame) {
+        // The Matter iOS API represents wildcards with nil, not -1.
+        return nil;
+    }
+
+    if (type != nil && [type caseInsensitiveCompare:@"concrete"] != NSOrderedSame) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:@"FlutterMatter"
+                                         code:1
+                                     userInfo:@{NSLocalizedDescriptionKey: @"Unknown ChipPathId.type"}];
+        }
+        return nil;
+    }
+
+    if (![idValue isKindOfClass:[NSNumber class]] || idValue.longLongValue < 0) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:@"FlutterMatter"
+                                         code:1
+                                     userInfo:@{NSLocalizedDescriptionKey: @"Invalid ChipPathId.id"}];
+        }
+        return nil;
+    }
+
+    return idValue;
+}
+
+static NSArray<ZGMTRAttributeRequestPath *> * mapFlutterAttributePaths(
+    id jsonValue,
+    NSError **error) {
+
+    if (jsonValue == nil || jsonValue == [NSNull null]) {
+        return nil;
+    }
+
+    if (![jsonValue isKindOfClass:[NSArray class]]) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:@"FlutterMatter"
+                                         code:1
+                                     userInfo:@{NSLocalizedDescriptionKey: @"attributePaths must be an array"}];
+        }
+        return nil;
+    }
+
+    NSMutableArray<ZGMTRAttributeRequestPath *> *paths = [NSMutableArray array];
+    for (id item in (NSArray *)jsonValue) {
+        if (![item isKindOfClass:[NSDictionary class]]) {
+            if (error != NULL) {
+                *error = [NSError errorWithDomain:@"FlutterMatter"
+                                             code:1
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Invalid ChipAttributePath"}];
+            }
+            return nil;
+        }
+
+        NSDictionary *attributePath = (NSDictionary *)item;
+        NSError *pathError = nil;
+        NSNumber *endpointId = mapFlutterPathId(attributePath[@"endpointId"], &pathError);
+        NSNumber *clusterId = mapFlutterPathId(attributePath[@"clusterId"], &pathError);
+        NSNumber *attributeId = mapFlutterPathId(attributePath[@"attributeId"], &pathError);
+        if (pathError != nil) {
+            if (error != NULL) {
+                *error = pathError;
+            }
+            return nil;
+        }
+
+        [paths addObject:[ZGMTRAttributeRequestPath requestPathWithEndpointID:endpointId
+                                                                       clusterID:clusterId
+                                                                     attributeID:attributeId]];
+    }
+
+    return [paths copy];
+}
+
 static NSString * subscribe(NSString * params) {
     
    NSDictionary *jsonObject = parseJSONString(params);
@@ -938,16 +1036,11 @@ static NSString * subscribe(NSString * params) {
    subscribeParams.filterByFabric = [isFabricFiltered isEqual:[NSNull null]] ? NO : isFabricFiltered.boolValue;
    subscribeParams.resubscribeAutomatically = false;
    
-   NSMutableArray * attributePaths = nil;
-   if (![attributePathsJson isEqual:[NSNull null]]) {
-       attributePaths = [NSMutableArray array];
-       for (NSUInteger i = 0; i < attributePathsJson.count; i++) {
-           NSDictionary * attributePath = attributePathsJson[i];
-           NSNumber * endpointId = [[attributePath objectForKey:@"endpointId"] objectForKey:@"id"];
-           NSNumber * clusterId = [[attributePath objectForKey:@"clusterId"] objectForKey:@"id"];
-           NSNumber * attributeId = [[attributePath objectForKey:@"attributeId"] objectForKey:@"id"];
-           [attributePaths addObject:[ZGMTRAttributeRequestPath requestPathWithEndpointID:endpointId clusterID:clusterId attributeID:attributeId]];
-       }
+   NSError *attributePathsError = nil;
+   NSArray<ZGMTRAttributeRequestPath *> *attributePaths = mapFlutterAttributePaths(attributePathsJson, &attributePathsError);
+   if (attributePathsError != nil) {
+       FlutterMatterLog([[NSString alloc] initWithFormat:@"Invalid subscribe attributePaths: %@", attributePathsError.localizedDescription]);
+       return createFlutterRequestResultWithCode(1, @{ @"error": attributePathsError.localizedDescription ?: @"Invalid attributePaths" });
    }
    NSMutableArray * eventPaths = nil;
    if (![eventPathsJson isEqual:[NSNull null]]) {
@@ -1019,16 +1112,11 @@ static NSString * readRequest(NSString * params) {
         return createFlutterRequestResultWithCode(1, @{});
     }
     
-    NSMutableArray * attributePaths = nil;
-    if (![attributePathsJson isEqual:[NSNull null]]) {
-        attributePaths = [NSMutableArray array];
-        for (NSUInteger i = 0; i < attributePathsJson.count; i++) {
-            NSDictionary * attributePath = attributePathsJson[i];
-            NSNumber * endpointId = [[attributePath objectForKey:@"endpointId"] objectForKey:@"id"];
-            NSNumber * clusterId = [[attributePath objectForKey:@"clusterId"] objectForKey:@"id"];
-            NSNumber * attributeId = [[attributePath objectForKey:@"attributeId"] objectForKey:@"id"];
-            [attributePaths addObject:[ZGMTRAttributeRequestPath requestPathWithEndpointID:endpointId clusterID:clusterId attributeID:attributeId]];
-        }
+    NSError *attributePathsError = nil;
+    NSArray<ZGMTRAttributeRequestPath *> *attributePaths = mapFlutterAttributePaths(attributePathsJson, &attributePathsError);
+    if (attributePathsError != nil) {
+        FlutterMatterLog([[NSString alloc] initWithFormat:@"Invalid read attributePaths: %@", attributePathsError.localizedDescription]);
+        return createFlutterRequestResultWithCode(1, @{ @"error": attributePathsError.localizedDescription ?: @"Invalid attributePaths" });
     }
     NSMutableArray * eventPaths = nil;
     if (![eventPathsJson isEqual:[NSNull null]]) {
