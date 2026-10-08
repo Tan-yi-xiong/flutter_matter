@@ -231,6 +231,11 @@ static dispatch_queue_t connectDeviceQueue = nil;
     }
 }
 
+- (BOOL)shouldSkipAttestationCertificateValidation {
+    FlutterDeviceController *controller = [controls objectForKey:_handle];
+    return [[controller controllerParams] skipAttestationCertificateValidation];
+}
+
 - (instancetype)initWithHandle:(NSString *)handle {
     self = [super init];
     if (self) {
@@ -279,6 +284,7 @@ static FlutterControllerParams * mapFlutterControllerParams(NSDictionary *jsonOb
     NSNumber *attemptNetworkScanWiFi = [jsonObject objectForKey:@"attemptNetworkScanWiFi"];
     NSNumber *attemptNetworkScanThread = [jsonObject objectForKey:@"attemptNetworkScanThread"];
     NSNumber *skipCommissioningComplete = [jsonObject objectForKey:@"skipCommissioningComplete"];
+    NSNumber *skipAttestationCertificateValidation = [jsonObject objectForKey:@"skipAttestationCertificateValidation"];
     NSString *countryCode = [jsonObject objectForKey:@"countryCode"];
     NSNumber *adminSubject = [jsonObject objectForKey:@"adminSubject"];
     NSNumber *regulatoryLocationType = [jsonObject objectForKey:@"regulatoryLocationType"];
@@ -295,6 +301,9 @@ static FlutterControllerParams * mapFlutterControllerParams(NSDictionary *jsonOb
     if ([skipCommissioningComplete isEqual:[NSNull null]]) {
         skipCommissioningComplete = @(0);
     }
+    if ([skipAttestationCertificateValidation isEqual:[NSNull null]]) {
+        skipAttestationCertificateValidation = @(0);
+    }
     if ([regulatoryLocationType isEqual:[NSNull null]]) {
         regulatoryLocationType = @(0);
     }
@@ -308,7 +317,7 @@ static FlutterControllerParams * mapFlutterControllerParams(NSDictionary *jsonOb
         caseFailsafeTimerSeconds = @(30);
     }
     
-    return [[FlutterControllerParams alloc] init:[fabricId intValue] udpListenPort:[udpListenPort intValue] controllerVendorId:[controllerVendorId intValue] failsafeTimerSeconds:[failsafeTimerSeconds intValue] caseFailsafeTimerSeconds:[caseFailsafeTimerSeconds intValue] attemptNetworkScanWiFi:[attemptNetworkScanWiFi intValue] != 0 attemptNetworkScanThread:[attemptNetworkScanThread intValue] != 0 skipCommissioningComplete:[skipCommissioningComplete intValue] != 0 countryCode:countryCode regulatoryLocationType:[regulatoryLocationType intValue] keypairDelegate:keypairDelegateHandle rootCertificate:rootCertificateData intermediateCertificate:intermediateCertificateData operationalCertificate:operationalCertificateData ipk:ipkData adminSubject:[adminSubject intValue] enableServerInteractions:[enableServerInteractions intValue] != 0 setupURL:nil nodeId:[nodeId intValue]];
+    return [[FlutterControllerParams alloc] init:[fabricId intValue] udpListenPort:[udpListenPort intValue] controllerVendorId:[controllerVendorId intValue] failsafeTimerSeconds:[failsafeTimerSeconds intValue] caseFailsafeTimerSeconds:[caseFailsafeTimerSeconds intValue] attemptNetworkScanWiFi:[attemptNetworkScanWiFi intValue] != 0 attemptNetworkScanThread:[attemptNetworkScanThread intValue] != 0 skipCommissioningComplete:[skipCommissioningComplete intValue] != 0 skipAttestationCertificateValidation:[skipAttestationCertificateValidation intValue] != 0 countryCode:countryCode regulatoryLocationType:[regulatoryLocationType intValue] keypairDelegate:keypairDelegateHandle rootCertificate:rootCertificateData intermediateCertificate:intermediateCertificateData operationalCertificate:operationalCertificateData ipk:ipkData adminSubject:[adminSubject intValue] enableServerInteractions:[enableServerInteractions intValue] != 0 setupURL:nil nodeId:[nodeId intValue]];
 }
 
 static ZGMTRDeviceControllerStartupParams *

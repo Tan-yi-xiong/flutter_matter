@@ -11,6 +11,7 @@
 @property (nonatomic, assign) BOOL attemptNetworkScanWiFi;
 @property (nonatomic, assign) BOOL attemptNetworkScanThread;
 @property (nonatomic, assign) BOOL skipCommissioningComplete;
+@property (nonatomic, assign) BOOL skipAttestationCertificateValidation;
 @property (nonatomic, strong) NSString *countryCode;
 @property (nonatomic, assign) NSInteger regulatoryLocationType;
 @property (nonatomic, strong) id keypairDelegate;  // 可以根据实际需要定义类型
@@ -31,6 +32,7 @@
            attemptNetworkScanWiFi:(BOOL)attemptNetworkScanWiFi
          attemptNetworkScanThread:(BOOL)attemptNetworkScanThread
            skipCommissioningComplete:(BOOL)skipCommissioningComplete
+  skipAttestationCertificateValidation:(BOOL)skipAttestationCertificateValidation
                         countryCode:(NSString *)countryCode
           regulatoryLocationType:(NSInteger)regulatoryLocationType
                      keypairDelegate:(id)keypairDelegate

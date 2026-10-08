@@ -457,7 +457,7 @@ class ControllerParams extends TransportObject {
   final bool attemptNetworkScanWiFi;
   final bool attemptNetworkScanThread;
   final bool skipCommissioningComplete;
-  // final bool skipAttestationCertificateValidation;
+  final bool skipAttestationCertificateValidation;
   final String countryCode;
   final int regulatoryLocationType;
   final KeypairDelegate? keypairDelegate;
@@ -479,7 +479,7 @@ class ControllerParams extends TransportObject {
     this.attemptNetworkScanWiFi = false,
     this.attemptNetworkScanThread = false,
     this.skipCommissioningComplete = false,
-    // this.skipAttestationCertificateValidation = false,
+    this.skipAttestationCertificateValidation = false,
     this.countryCode = "",
     this.regulatoryLocationType = 0,
     this.keypairDelegate,
@@ -507,7 +507,7 @@ class ControllerParams extends TransportObject {
     "attemptNetworkScanWiFi": attemptNetworkScanWiFi,
     "attemptNetworkScanThread": attemptNetworkScanThread,
     "skipCommissioningComplete": skipCommissioningComplete,
-    "skipAttestationCertificateValidation": true,
+    "skipAttestationCertificateValidation": skipAttestationCertificateValidation,
     "countryCode": countryCode,
     "regulatoryLocationType": regulatoryLocationType,
     "keypairDelegateHandle": keypairDelegate?.hashCode.toString(),
