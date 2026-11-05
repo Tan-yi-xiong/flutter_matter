@@ -55,6 +55,10 @@ android {
         implementation fileTree(dir: "libs", include: ["*.jar", "*.so"])
         implementation 'com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.5'
         // implementation 'com.tyx.flutter_matter:flutter_matter_android_prefixed:1.0.0'
+        
+        // Google Play Services for Matter Commissioning API
+        implementation 'com.google.android.gms:play-services-home:16.0.0'
+
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.0.0'
     }

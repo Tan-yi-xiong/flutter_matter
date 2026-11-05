@@ -42,6 +42,9 @@ class FlutterMatterPlugin: FlutterPlugin, MethodCallHandler {
       nsdHost -> {
         onNsdCall(uri.path!!, call.arguments.toString(), result)
       }
+      "playservices" -> {
+        onPlayServicesCall(uri.path!!, call.arguments.toString(), result)
+      }
       else -> {
         result.error("1", "Unable handle $uri", "")
       }
