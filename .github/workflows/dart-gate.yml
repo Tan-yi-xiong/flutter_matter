@@ -1,0 +1,65 @@
+name: Dart Gate
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dart-gate-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: 3.41.0
+  FLUTTER_SUPPRESS_ANALYTICS: "true"
+  PUB_ENVIRONMENT: flutter_matter_ci
+
+jobs:
+  dart-check-and-tests:
+    name: Dart check and tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2.23.0
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve plugin dependencies
+        run: flutter pub get
+
+      - name: Resolve example dependencies
+        working-directory: example
+        run: flutter pub get
+
+      - name: Analyze Dart code
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
+      - name: Run plugin Dart tests
+        shell: bash
+        run: |
+          test_file="$(find test -type f -name '*_test.dart' -print -quit)"
+          if [[ -z "${test_file}" ]]; then
+            echo "::notice::Plugin Dart tests skipped: no test/*_test.dart files exist yet."
+            exit 0
+          fi
+          flutter test
+
+      - name: Run example Dart tests
+        working-directory: example
+        run: flutter test
