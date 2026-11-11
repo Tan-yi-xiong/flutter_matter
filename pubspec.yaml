@@ -1,7 +1,15 @@
 name: flutter_matter
-description: "Matter plugin for Flutter"
+description: A Flutter plugin exposing a low-level Matter API for Android and iOS commissioning and device control.
 version: 0.0.11
 homepage: https://github.com/Tan-yi-xiong/flutter_matter
+repository: https://github.com/Tan-yi-xiong/flutter_matter
+issue_tracker: https://github.com/Tan-yi-xiong/flutter_matter/issues
+topics:
+  - matter
+  - iot
+  - smart-home
+  - bluetooth
+  - flutter-plugin
 
 environment:
   sdk: '>=3.3.3 <4.0.0'
@@ -19,9 +27,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
-  built_value: ^8.9.2
-  built_value_generator: ^8.0.6
-  build_runner: ^2.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -15,9 +15,9 @@ Adopt lightweight API governance in the first engineering phase:
 
 - Maintain a golden export-path test in `test/public_api_test.dart`.
 - Maintain MethodChannel contract tests for URL construction, request parameters, result envelopes, and channel invocation.
-- Maintain `docs/public-api.md` as the human-readable symbol inventory and compatibility policy.
+- Maintain `doc/public-api.md` as the human-readable symbol inventory and compatibility policy.
 - Require pull requests to describe public Dart API, MethodChannel, JSON, and compatibility impact.
-- Use `docs/pr-review-checklist.md` for manual compatibility review.
+- Use `doc/pr-review-checklist.md` for manual compatibility review.
 - Do not add an external API-diff tool or automated native ABI comparison in this phase.
 
 The tests are deliberately focused on high-value drift detection, not on generating a complete language-level API snapshot.

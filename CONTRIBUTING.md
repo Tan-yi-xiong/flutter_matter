@@ -5,10 +5,13 @@ Thank you for contributing to `flutter_matter`. This document defines the minimu
 ## Documentation map
 
 - Architecture and runtime boundaries: [`ARCHITECTURE.md`](ARCHITECTURE.md)
-- Public API inventory and versioning: [`docs/public-api.md`](docs/public-api.md)
-- Platform and toolchain baseline: [`docs/platform-support.md`](docs/platform-support.md)
-- Reviewer checklist: [`docs/pr-review-checklist.md`](docs/pr-review-checklist.md)
-- Architecture decisions: [`docs/adr/`](docs/adr/)
+- Public API inventory and versioning: [`doc/public-api.md`](doc/public-api.md)
+- Platform and toolchain baseline: [`doc/platform-support.md`](doc/platform-support.md)
+- Reviewer checklist: [`doc/pr-review-checklist.md`](doc/pr-review-checklist.md)
+- Architecture decisions: [`doc/adr/`](doc/adr/)
+- Release process: [`doc/releasing.md`](doc/releasing.md)
+- Security policy: [`SECURITY.md`](SECURITY.md)
+- Third-party notices: [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)
 
 ## CI scope
 
@@ -19,7 +22,7 @@ The required `Dart check and tests` workflow verifies:
 - Dart static analysis errors using non-fatal info and warning classification.
 - Plugin Dart tests in the root `test/` suite.
 
-The workflow does not run example tests, compile Android or iOS native code, run native unit tests, run integration or device tests, validate package publication, or enforce formatting. Passing CI therefore means that Dart analysis and root Dart tests passed; it does not prove native builds or real-device behavior.
+The workflow does not run example tests, compile Android or iOS native code, run native unit tests, run integration or device tests, validate package publication, or enforce formatting. Passing CI therefore means that Dart analysis and root Dart tests passed; it does not prove native builds or real-device behavior. Package publication is validated separately by the Release preflight and tag workflow.
 
 Automated tests cover `test/**/*_test.dart` at the plugin root only. `example/**` is a build and manual demonstration target and is never an automated test target.
 
@@ -33,7 +36,7 @@ fvm flutter pub get
 
 If FVM is unavailable, use Flutter `3.41.0` and replace `fvm flutter` with `flutter`. The `pubspec.yaml` lower bounds remain unchanged, but Flutter 3.41.0 is the only currently validated Flutter version.
 
-The documented platform baseline is in [`docs/platform-support.md`](docs/platform-support.md). In particular, iOS validation requires Xcode 16.4 or later and CocoaPods 1.17 on macOS, and the vendored Matter framework supports physical iPhoneOS arm64 devices only. Record the exact Xcode version used in the pull request evidence.
+The documented platform baseline is in [`doc/platform-support.md`](doc/platform-support.md). In particular, iOS validation requires Xcode 16.4 or later and CocoaPods 1.17 on macOS, and the vendored Matter framework supports physical iPhoneOS arm64 devices only. Record the exact Xcode version used in the pull request evidence.
 
 ## Required verification
 
@@ -108,15 +111,33 @@ Call out any change to exported Dart types, method signatures, default values, e
 
 - The only supported consumer import is `package:flutter_matter/flutter_matter.dart`.
 - Direct `src/` imports are internal except in tests.
-- New public symbols must be exported from `lib/flutter_matter.dart`, documented in [`docs/public-api.md`](docs/public-api.md), and reflected in `test/public_api_test.dart` when the export surface changes.
+- New public symbols must be exported from `lib/flutter_matter.dart`, documented in [`doc/public-api.md`](doc/public-api.md), and reflected in `test/public_api_test.dart` when the export surface changes.
 - MethodChannel contract changes must update `test/method_channel_contract_test.dart` and receive compatibility review.
 - Breaking changes must be identified as such and include the intended versioning or migration impact.
 
 The project currently uses lightweight governance rather than an external API-diff tool. Export-path drift and core wire envelopes are automated; method-level compatibility remains a reviewer responsibility.
 
+## Package and release changes
+
+Changes to package metadata, `LICENSE`, third-party notices, public documentation paths, or release automation must also pass:
+
+```bash
+fvm flutter analyze --no-fatal-infos --no-fatal-warnings
+fvm flutter test
+fvm dart pub publish --dry-run
+fvm dart run tool/release.dart validate --tag vX.Y.Z
+fvm dart run tool/release.dart notes --version X.Y.Z
+```
+
+The required Dart check remains unchanged. The `Release` workflow is a manual preflight before tagging and a tag-triggered GitHub Release process after merge; it never publishes to pub.dev. Follow [`doc/releasing.md`](doc/releasing.md) for the complete runbook.
+
+## Security reports
+
+Do not disclose suspected vulnerabilities in a public issue. Use [GitHub Private Vulnerability Reporting](https://github.com/Tan-yi-xiong/flutter_matter/security/advisories/new) and follow [`SECURITY.md`](SECURITY.md).
+
 ## Review and merge
 
-Reviewers must use [`docs/pr-review-checklist.md`](docs/pr-review-checklist.md). A green CI result is necessary but not sufficient for approval. Reviewers must verify that the declared evidence covers the changed code path and affected platforms.
+Reviewers must use [`doc/pr-review-checklist.md`](doc/pr-review-checklist.md). A green CI result is necessary but not sufficient for approval. Reviewers must verify that the declared evidence covers the changed code path and affected platforms.
 
 The `main` branch requires a pull request and the `Dart check and tests` status check. Repository administrators retain an emergency bypass. Bypass use does not remove the obligation to document verification.
 

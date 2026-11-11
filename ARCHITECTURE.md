@@ -152,10 +152,10 @@ Android and iOS build/manual evidence belongs in the pull request template. A gr
 
 ## Related documents
 
-- [Public API](docs/public-api.md)
-- [Platform support](docs/platform-support.md)
-- [ADR 0001: MethodChannel URL and JSON contract](docs/adr/0001-method-channel-url-and-json-contract.md)
-- [ADR 0002: Public API boundary](docs/adr/0002-public-api-boundary-and-semver.md)
-- [ADR 0003: Platform and toolchain baseline](docs/adr/0003-platform-and-toolchain-baseline.md)
-- [ADR 0004: Lightweight API governance](docs/adr/0004-lightweight-api-governance.md)
-- [ADR 0005: Dart-only CI and pull request evidence](docs/adr/0005-dart-only-ci-and-pr-evidence.md)
+- [Public API](doc/public-api.md)
+- [Platform support](doc/platform-support.md)
+- [ADR 0001: MethodChannel URL and JSON contract](doc/adr/0001-method-channel-url-and-json-contract.md)
+- [ADR 0002: Public API boundary](doc/adr/0002-public-api-boundary-and-semver.md)
+- [ADR 0003: Platform and toolchain baseline](doc/adr/0003-platform-and-toolchain-baseline.md)
+- [ADR 0004: Lightweight API governance](doc/adr/0004-lightweight-api-governance.md)
+- [ADR 0005: Dart-only CI and pull request evidence](doc/adr/0005-dart-only-ci-and-pr-evidence.md)
