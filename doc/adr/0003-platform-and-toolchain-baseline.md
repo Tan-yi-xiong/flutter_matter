@@ -33,4 +33,4 @@ The iOS 16.1 minimum is aligned across the podspec, Podfile, app framework metad
 - Toolchain upgrades require configuration, documentation, validation, and compatibility review together.
 - The Dart workflow remains host-only and does not verify any entry in this baseline beyond the Dart layer.
 - Platform build checks are declared in pull requests with the actual device, OS, JDK, Xcode, and CocoaPods versions used.
-- Future changes to Flutter, Dart, Android, iOS, or Matter binary support must update `docs/platform-support.md` and the relevant ADR or add a replacement ADR.
+- Future changes to Flutter, Dart, Android, iOS, or Matter binary support must update `doc/platform-support.md` and the relevant ADR or add a replacement ADR.

@@ -76,7 +76,7 @@ The Android values describe the current repository build configuration and do no
 
 Automated tests cover the plugin root `test/` suite only. The `example/` application is a build and manual demonstration target, never an automated test target.
 
-See [Architecture](ARCHITECTURE.md), [Public API](docs/public-api.md), [Platform support](docs/platform-support.md), [Contributing](CONTRIBUTING.md), and the [PR review checklist](docs/pr-review-checklist.md) for details.
+See [Architecture](ARCHITECTURE.md), [Public API](doc/public-api.md), [Platform support](doc/platform-support.md), [Contributing](CONTRIBUTING.md), and the [PR review checklist](doc/pr-review-checklist.md) for details.
 
 ---
 

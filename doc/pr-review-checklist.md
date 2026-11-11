@@ -52,7 +52,7 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 
 ## Documentation and changelog
 
-- Confirm public usage changes are reflected in `README.md`, `docs/`, or `CHANGELOG.md` when appropriate.
+- Confirm public usage changes are reflected in `README.md`, `doc/`, or `CHANGELOG.md` when appropriate.
 - Confirm all repository documentation, workflow comments, and review guidance are written in English.
 - Preserve non-English text only when it is a required user-facing string or an exact quoted reference.
 

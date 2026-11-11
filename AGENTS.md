@@ -73,7 +73,7 @@ flutter_matter/
 └── test/                                      # root plugin Dart test suite
 ```
 
-New public types and functions must be exported from `lib/flutter_matter.dart`, documented in `docs/public-api.md`, and reflected in the export golden test when the public export list changes. Consumers should not import `src/` paths; tests may do so.
+New public types and functions must be exported from `lib/flutter_matter.dart`, documented in `doc/public-api.md`, and reflected in the export golden test when the public export list changes. Consumers should not import `src/` paths; tests may do so.
 
 ## Dart / Flutter conventions
 

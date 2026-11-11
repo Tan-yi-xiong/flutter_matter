@@ -10,7 +10,7 @@ The package exports many low-level Matter types because callers need paths, stat
 ## Decision
 
 - The only supported consumer import is `package:flutter_matter/flutter_matter.dart`.
-- Every top-level symbol exported by that library is public API and is listed in `docs/public-api.md`.
+- Every top-level symbol exported by that library is public API and is listed in `doc/public-api.md`.
 - Direct imports under `package:flutter_matter/src/...` are internal implementation paths. Tests may use them; application code must not.
 - Public exports follow Semantic Versioning.
 - Before `1.0.0`, a breaking change may be released in a minor version, but it must be explicitly marked in the pull request and `CHANGELOG.md` and include migration guidance.
