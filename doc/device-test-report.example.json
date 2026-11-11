@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-11T12:00:00Z",
+  "test_app": {
+    "name": "flutter_matter_device_test_app",
+    "version": "1.0.0",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "plugin_commit": "dded0d7d0b4ba273eaa8cd16a5d68c59e8e1b112",
+  "controller": {
+    "platform": "android",
+    "device_model": "Pixel 8",
+    "os_version": "Android 15",
+    "app_build": "debug 1.0.0 (1)"
+  },
+  "commissionee": {
+    "type": "real",
+    "model": "Example Matter Plug",
+    "firmware": "1.0.0",
+    "commissioning_transport": "ble",
+    "network_transport": "wifi",
+    "state_change_method": "physical_control",
+    "state_change_notes": "The plug has a local On/Off button used for subscription testing."
+  },
+  "summary": {
+    "result": "passed",
+    "passed": 12,
+    "failed": 0,
+    "not_run": 1
+  },
+  "tests": {
+    "build_install": {
+      "status": "passed",
+      "duration_ms": 42300,
+      "evidence_files": [
+        "android-build-install.png"
+      ]
+    },
+    "ble_discovery": {
+      "status": "passed",
+      "duration_ms": 7200,
+      "evidence_files": [
+        "android-ble-discovery.png"
+      ]
+    },
+    "ble_commissioning": {
+      "status": "passed",
+      "duration_ms": 61200,
+      "evidence_files": [
+        "android-ble-commissioning.png"
+      ]
+    },
+    "operational_connect": {
+      "status": "passed",
+      "duration_ms": 8400,
+      "evidence_files": [
+        "android-operational-connect.png"
+      ]
+    },
+    "onoff_invoke": {
+      "status": "passed",
+      "duration_ms": 2900,
+      "evidence_files": [
+        "android-onoff-invoke.png"
+      ]
+    },
+    "onoff_subscription": {
+      "status": "passed",
+      "duration_ms": 10300,
+      "evidence_files": [
+        "android-onoff-subscription.png"
+      ]
+    },
+    "node_label_persistence": {
+      "status": "passed",
+      "duration_ms": 15800,
+      "evidence_files": [
+        "android-node-label-write.png",
+        "android-node-label-after-restart.png"
+      ]
+    },
+    "app_restart": {
+      "status": "passed",
+      "duration_ms": 6900,
+      "evidence_files": [
+        "android-app-restart.png"
+      ]
+    },
+    "factory_reset_recommission": {
+      "status": "passed",
+      "duration_ms": 70100,
+      "evidence_files": [
+        "android-recommission.png"
+      ]
+    },
+    "invalid_setup_passcode": {
+      "status": "passed",
+      "duration_ms": 6100,
+      "evidence_files": [
+        "android-invalid-setup-passcode.png"
+      ]
+    },
+    "bluetooth_disabled": {
+      "status": "passed",
+      "duration_ms": 2400,
+      "evidence_files": [
+        "android-bluetooth-disabled.png"
+      ]
+    },
+    "invalid_wifi_password": {
+      "status": "passed",
+      "duration_ms": 42000,
+      "evidence_files": [
+        "android-invalid-wifi-credentials.png"
+      ]
+    },
+    "remove_fabric_ui": {
+      "status": "not_run",
+      "duration_ms": 0,
+      "notes": "The test device had already been reset before this optional UI path could be exercised.",
+      "evidence_files": []
+    }
+  },
+  "sanitization": {
+    "reviewed": true,
+    "policy_version": 1
+  }
+}

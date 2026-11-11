@@ -7,6 +7,7 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - Confirm the PR template is fully completed.
 - Identify the affected platforms, public interfaces, native code paths, and user-visible behavior.
 - Check that the summary and scope agree with the actual diff.
+- Identify whether the change affects device behavior and therefore requires device validation reports.
 - Treat an administrator bypass as a process exception, not as proof of correctness.
 - Confirm the automated test scope is the root plugin `test/` suite only.
 
@@ -21,6 +22,19 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - For `Not run`, confirm that the reason is credible and that the remaining risk is stated.
 - Decide explicitly whether the remaining risk is acceptable for this change.
 - Do not accept `example/**` tests as automated evidence; the example is a build and manual demonstration target.
+
+## Device validation reports
+
+- Require the Device Validation section for every commissioning, BLE, networking, controller lifecycle, attribute, command, subscription, callback, MethodChannel, or native Matter change.
+- Verify the report uses schema version `1`, contains all fixed test IDs exactly once, and includes both the generated Markdown summary and sanitized JSON attachment.
+- Verify `plugin_commit` matches the current pull request head; reject stale reports after relevant code changes.
+- Verify every affected platform has a report. Shared behavior requires Android and physical iOS reports; a platform exception must be explicit and technically justified.
+- Verify a qualified real Matter device was preferred. When the Android Virtual Device App was used, confirm the reason a real device was unavailable or did not meet the documented capability requirements.
+- Verify all required P0 results are `passed`. P1 results are stability evidence; P2 failures require an explicit maintainer risk decision.
+- Verify the report describes one commissionee type only. If real-device validation failed and virtual fallback was used, both platform cycles must have restarted against the virtual device.
+- Verify the report includes a clean-cycle statement and that Android and iOS were treated as independent commissioned cycles.
+- Reject reports with device serial numbers, iOS UDIDs, Wi-Fi credentials, setup codes, onboarding payloads, BLE addresses, certificates, private keys, or complete raw logs.
+- Confirm attached JSON, Markdown, and screenshots are accessible and sanitized. Public attachments must be treated as public content.
 
 ## Platform coverage
 
@@ -46,7 +60,7 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 ## Native and functional behavior
 
 - Confirm native compile checks were declared when Kotlin or Objective-C/Swift code changed.
-- Confirm device or manual evidence was declared when commissioning, BLE, Wi-Fi, Thread, ICD, subscription, reconnect, or unpair behavior changed.
+- Confirm versioned device reports were supplied when commissioning, BLE, Wi-Fi, Thread, ICD, subscription, reconnect, or unpair behavior changed.
 - Require regression or negative-case evidence where a change alters an error path.
 - Record which scenarios remain unverified and whether that risk is acceptable.
 
@@ -75,7 +89,10 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - [Architecture](../ARCHITECTURE.md)
 - [Public API](public-api.md)
 - [Platform support](platform-support.md)
+- [Device validation](device-validation.md)
+- [Device test report contract](device-test-report.md)
 - [ADR 0005: Dart-only CI and PR evidence](adr/0005-dart-only-ci-and-pr-evidence.md)
+- [ADR 0006: Device validation report contract](adr/0006-device-validation-report-contract.md)
 
 ## Insufficient evidence examples
 
@@ -83,6 +100,9 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - A Dart test result used to claim Android or iOS native compilation.
 - A successful Android build used to claim that an iOS behavior works.
 - A successful example Dart test used as native or functional evidence.
+- A device-behavior change with no schema-based report for an affected platform.
+- A report whose `plugin_commit` does not match the pull request head.
+- A real-device report mixed with a virtual-device result in the same candidate validation.
 - `Not run` with no explanation.
 - A screenshot that hides the relevant error or device state.
 - A public API change without a compatibility section.

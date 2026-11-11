@@ -128,6 +128,8 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 
 - Prefer `fvm flutter` / `fvm dart` in this repo.
 - Do not add `example/**` tests to required CI or report them as automated evidence.
+- For device-behavior changes, follow `doc/device-validation.md` and `doc/device-test-report.md`; the Dart CI gate does not validate Matter behavior.
+- Device evidence must use the schema-based report contract, match the PR head, and contain no device identifiers, provisioning secrets, certificates, private keys, or raw logs.
 - Do not commit Flutter's Android minSdk 21 -> 24 migration unless it is part of an explicit compatibility task.
 - Do not commit `.history/`, `build/`, `.dart_tool/`, or `pubspec.lock` / `example/pubspec.lock` (gitignored for this plugin).
 - Do not rewrite `ZGMatter.framework` or the prefixed Android Matter AAR unless that is the task.

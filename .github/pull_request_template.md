@@ -39,6 +39,42 @@ build and manual demonstration target, not an automated test target.
 | Manual functional test | Describe the exact scenario | Device and OS |  |  |  |
 | Regression or negative scenario | Describe the exact scenario | Device and OS |  |  |  |
 
+## Device Validation
+
+<!-- Required for changes affecting commissioning, BLE, networking, controller lifecycle, attributes, commands, subscriptions, callbacks, MethodChannel behavior, or native Matter code. Follow doc/device-validation.md and doc/device-test-report.md. Mark Not applicable only for changes that cannot affect device behavior. -->
+
+- [ ] Not applicable; explain why in the field below
+- [ ] Qualified real Matter device used
+- [ ] Android Virtual Device App fallback used
+
+**Applicability or not-applicable reason:**
+
+**Plugin commit under test:**
+
+**Test app version and commit, or interim manual report:**
+
+**Commissionee model, firmware, and state-change method:**
+
+**Android result:** `<Passed|Failed|Not run>` — `<report and attachment links>`
+
+**iOS result:** `<Passed|Failed|Not run>` — `<report and attachment links>`
+
+**Real-device fallback reason:**
+
+<details>
+<summary>Generated Markdown device-test-report summary</summary>
+
+```markdown
+Paste `device-test-report.md` here.
+```
+
+</details>
+
+- [ ] The report commit matches the current PR head.
+- [ ] Sanitized JSON and screenshots are attached in a PR comment and linked above.
+- [ ] Both Android and iOS reports are present for shared behavior, or the platform exception is explained.
+- [ ] The reports and attachments contain no device identifiers, provisioning secrets, certificates, keys, or raw logs.
+
 ## Untested areas and risks
 
 <!-- List every affected behavior that was not verified and the risk reviewers must accept. -->
@@ -57,6 +93,7 @@ build and manual demonstration target, not an automated test target.
 - [ ] I described public API and compatibility impact.
 - [ ] I included no credentials, tokens, private keys, or unsanitized private logs.
 - [ ] I reviewed all added or modified documentation and confirmed it is English.
+- [ ] For device-behavior changes, I supplied reports for every affected platform using the repository report contract.
 
 ## Reviewer checklist
 
@@ -67,3 +104,6 @@ build and manual demonstration target, not an automated test target.
 - [ ] Documentation and changelog impact was reviewed.
 - [ ] All added or modified documentation is English.
 - [ ] A green CI result was not treated as proof of native compilation or device behavior.
+- [ ] Device-behavior evidence uses the versioned report contract, matches the PR head, and covers every affected platform.
+- [ ] The commissionee selection is valid: a qualified real Matter device was preferred, and any virtual fallback reason is credible.
+- [ ] Attached reports and screenshots contain no credentials, device identifiers, provisioning secrets, certificates, keys, or raw logs.

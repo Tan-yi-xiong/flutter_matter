@@ -65,10 +65,12 @@ Required pull request evidence separately covers the relevant path:
 
 - Android debug build on a JDK 17 build host.
 - iOS no-codesign device build on macOS with the documented Xcode and CocoaPods baseline.
-- A concrete manual functional scenario on a physical device when device behavior changes.
+- A schema-based Android and/or iOS device-validation report on the affected controller platform when device behavior changes.
 - An explicit `Not run` reason and residual-risk statement when the required hardware or toolchain is unavailable.
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md), [the PR review checklist](pr-review-checklist.md), and [ADR 0005](adr/0005-dart-only-ci-and-pr-evidence.md).
+Device validation prefers a qualified real Matter device and falls back to the Android Virtual Device App only when the real device is unavailable or does not meet the required capabilities. Shared behavior requires Android and physical iOS reports; stable releases require one clean P0 cycle on both platforms. The repository does not run device tests in hosted CI and does not currently define a self-hosted device runner.
+
+See [CONTRIBUTING.md](../CONTRIBUTING.md), [the device validation process](device-validation.md), [the device test report contract](device-test-report.md), [the PR review checklist](pr-review-checklist.md), [ADR 0005](adr/0005-dart-only-ci-and-pr-evidence.md), and [ADR 0006](adr/0006-device-validation-report-contract.md).
 
 ## Toolchain update policy
 
