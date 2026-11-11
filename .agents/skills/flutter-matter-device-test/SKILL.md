@@ -5,31 +5,33 @@ description: Execute flutter_matter device validation through the dedicated test
 
 # Flutter Matter Device Test
 
-Run flutter_matter device validation without guessing which phone or commissionee to use.
+Run `flutter_matter` device validation without guessing which phone or commissionee to use. Prefer real Matter hardware. Use the official Android Virtual Matter Device App only as a controlled functional fallback.
 
-## Hard Rules
+## Hard rules
 
-1. Never auto-select a controller. Run `devices` and inspect the candidates first.
-2. When multiple phones are connected, require an interactive user choice before starting `serve`. Use the native question/selection UI when available.
-3. Each user-facing choice must show `platform`, `model`, `os_version`, and `short_id`. Do not display the full device ID in the choice label.
-4. Pass the selected candidate's full `id` to `serve --device`. Never omit `--device`.
-5. Prefer a real Matter On/Off device as the commissionee.
-6. If no real Matter device is available, ask a separate interactive question to select an Android device for the virtual commissionee.
-7. The virtual commissionee must be a distinct Android device from the controller. The controller may be Android or physical iOS.
-8. Never use the first candidate, the only candidate, a previous selection, or a remembered ID as an implicit default when a user choice is required.
-9. Never retry a failed P0 test to manufacture a passing result.
-10. Do not put device IDs, UDIDs, SSIDs, passwords, setup codes, onboarding payloads, certificates, or private keys in reports or PR text.
+1. Work from the `flutter_matter` repository root and use `fvm dart` / `fvm flutter` when FVM is available.
+2. Never auto-select a controller. Run `devices` and inspect candidates first.
+3. When multiple phones are connected, show a native interactive user-choice prompt before starting `serve`. Never infer a choice from connection order, platform, model, installed packages, or previous use.
+4. Show `platform`, `model`, `os_version`, and `short_id` in user choices. Do not display the full device ID in the label; retain the full ID privately for `serve`.
+5. Always pass the selected candidate's full ID to `serve --device`.
+6. Prefer a qualified real Matter On/Off commissionee.
+7. If no real Matter device is available, ask a separate interactive question for the distinct Android phone that will run the official Project CHIP Virtual Matter Device App. It cannot be the controller.
+8. Android and physical iOS controllers may test either real Matter hardware or the distinct Android virtual commissionee.
+9. `quick` contains five iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 13 tests.
+10. Never retry a failed P0 test in the same Run to manufacture a passing result.
+11. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
+12. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
+13. Real-device CI is out of scope. Reports are manually attached to the PR and must match its head commit.
 
 ## Preconditions
 
-- Work from the `flutter_matter` repository root.
-- Use `fvm dart` and `fvm flutter` when FVM is available.
 - The dedicated device-test app is built and installed on the selected controller.
-- A real Matter commissionee is prepared, or a second Android phone is available as the virtual commissionee.
-- The Mac and phones are on the same trusted private LAN.
-- The app's `AgentBridgeClient` points at the `serve` WebSocket endpoint.
+- A real Matter commissionee is prepared, or a second Android phone runs the official Project CHIP Virtual Matter Device App.
+- The Mac and phones share a trusted private LAN that permits the WebSocket connection.
+- The app is configured with the endpoint printed by `serve`.
+- `adb` is available for Android devices; Xcode `devicectl` or libimobiledevice is available for iOS devices.
 
-## Step 1: Discover Devices
+## Step 1: Discover devices
 
 ```bash
 fvm dart run tool/device_test_agent.dart devices
@@ -37,36 +39,41 @@ fvm dart run tool/device_test_agent.dart devices
 
 Read the JSON result. Treat `device_selection_required: true` as a workflow invariant.
 
-If at least two controller candidates exist, present an interactive choice. Example options:
+When multiple controller candidates exist, present an interactive choice using:
+
+```text
+platform / model / os_version / short_id
+```
+
+Examples:
 
 - `Android / Essential PH-1 / Android 12 / ph1.lan:5555`
-- `Android / Xiaomi Mi 10 / Android 13 / 192.16...5555`
 - `iOS / iPhone 16 Pro / iOS 27.2 / 96E5E2...F8AB`
 
-Use the `short_id` only for display. Keep the full `id` in your own state for the next command.
+Use `short_id` only for display. Keep the full ID in your own state for the next command. If a candidate is `usable: false`, explain its state and do not start a session with it.
 
-If a candidate is `usable: false`, explain its state and do not start a session with it.
+## Step 2: Select the commissionee
 
-## Step 2: Select the Commissionee
+### Real Matter device
 
-### Real Matter Device
+Ask the operator which physical On/Off device will be used. The operator must be able to change its state physically, through a vendor app, or through the commissionee UI. Record the choice and fallback reason in the PR narrative without exposing provisioning secrets.
 
-Ask the operator which physical On/Off device will be used. The operator must be able to change its state physically, through a vendor app, or through a commissionee UI.
-
-### Virtual Commissionee
+### Virtual commissionee
 
 If no real Matter device is available, ask a second interactive question:
 
 > Select the distinct Android phone that will run the virtual Matter commissionee. It cannot be the same device as the controller.
 
-Show the same `platform / model / os_version / short_id` fields. Never reuse the controller selection automatically.
+Show the same `platform / model / os_version / short_id` fields. Never reuse the controller selection automatically. Reject the selected controller if the user selects it and ask again.
 
-For either commissionee type, verify that its Matter setup code is available to the controller workflow, but do not paste the setup code into logs or reports.
+For either commissionee type, verify that its setup payload is available to the controller workflow, but do not paste it into logs, screenshots, reports, or PR text.
 
-## Step 3: Start the Host Session
+## Step 3: Start the host session
 
 ```bash
-fvm dart run tool/device_test_agent.dart serve --device <selected-controller-id>
+fvm dart run tool/device_test_agent.dart serve \
+  --device <selected-controller-id> \
+  --port 8765
 ```
 
 Start `serve` as a long-lived process. It prints one JSON object with:
@@ -76,11 +83,21 @@ Start `serve` as a long-lived process. It prints one JSON object with:
 - `control_port`
 - `artifact_directory`
 
-If it returns `session_already_running`, run `status`. Reuse only the same explicitly selected controller; otherwise stop the old session first.
+If it returns `session_already_running`, run `status`. Reuse only the same explicitly selected controller; otherwise ask the user before stopping the old session.
 
 If it returns `device_selection_required` or `device_not_found`, return to the device-choice step. Do not infer a device.
 
-## Step 4: Wait for the App Bridge
+## Step 4: Launch the app and wait for the bridge
+
+Read `websocket_endpoint` from the `serve` startup JSON. Treat it as operational data, not as a provisioning secret. Build, install, and launch the app with the endpoint and explicit controller ID:
+
+```bash
+fvm dart run tool/device_test_app.dart run \
+  --device <selected-controller-id> \
+  -- --dart-define=AGENT_WS_URL=<websocket_endpoint>
+```
+
+Run this as a long-lived development process. The wrapper injects the current Git commit metadata and the app reads `AGENT_WS_URL` at compile time. If the app is already installed with the same endpoint, launch it directly instead.
 
 ```bash
 fvm dart run tool/device_test_agent.dart wait --for connected --timeout-seconds 120
@@ -88,42 +105,71 @@ fvm dart run tool/device_test_agent.dart wait --for connected --timeout-seconds 
 
 A socket alone is not enough. Wait for `app_connected: true` after the app sends `hello`.
 
-Inspect `status` if the wait times out. Common fixes:
+If the wait times out:
 
-- Launch the test app on the selected controller.
-- Confirm the app is configured with the printed `websocket_endpoint`.
-- Confirm the Mac and phone share the private LAN.
-- Restart the app with `restart-app` and wait again.
+1. Confirm the app is running on the selected controller.
+2. Confirm the installed build used the printed `websocket_endpoint`.
+3. Confirm the Mac and phone share the trusted private LAN.
+4. Run `restart-app`, then wait again.
+5. Inspect `status` and report the failure.
 
-Do not switch the selected device without asking the user.
+Do not switch the selected device without asking the user again.
 
-## Step 5: Start the Run
+## Step 5: Start the run
 
-Use a stable command ID and reuse the same ID only when retrying the same logical command after a transport failure.
+Use a stable command ID and reuse the same ID only when retrying the same logical command after a transport failure. Because `start_run` includes provisioning material, put its arguments in a temporary JSON file under the ignored build directory. Never print the file, paste its contents into chat, or commit it.
 
-Quick run:
+```bash
+mkdir -p build/device-test-agent
+chmod 700 build/device-test-agent
+```
+
+The file must contain the full setup object. Use placeholders here and replace them only in the local file:
+
+```json
+{
+  "mode": "quick",
+  "commissionee_type": "real",
+  "model": "<commissionee-model>",
+  "firmware": "<firmware-version>",
+  "network_transport": "wifi",
+  "state_change_method": "physical_control",
+  "setup_code": "<setup-code-or-qr-payload>",
+  "wifi_ssid": "<ssid>",
+  "wifi_password": "<password>",
+  "clean_cycle": {
+    "controller_clean": true,
+    "commissionee_clean": true,
+    "secrets_purged": true
+  }
+}
+```
+
+For a virtual commissionee, use `"commissionee_type":"virtual"`, include a non-empty `fallback_reason`, and set `"virtual_fallback_confirmed": true`. For Thread, use `"network_transport":"thread"` and `thread_operational_dataset`. For `"state_change_method":"other"`, include non-empty `state_change_notes`.
+
+Quick iteration run:
 
 ```bash
 fvm dart run tool/device_test_agent.dart command \
   --name start_run \
-  --args-json '{"mode":"quick"}' \
+  --args-file build/device-test-agent/run-args.json \
   --command-id <stable-quick-command-id> \
   --timeout-seconds 1200
 ```
 
-Full run:
+Formal evidence run: set `"mode":"full"` in the same local file and use a new stable command ID:
 
 ```bash
 fvm dart run tool/device_test_agent.dart command \
   --name start_run \
-  --args-json '{"mode":"full"}' \
+  --args-file build/device-test-agent/run-args.json \
   --command-id <stable-full-command-id> \
   --timeout-seconds 3600
 ```
 
-A formal PR report requires `mode: full`. A quick run is development feedback and is not formal acceptance evidence.
+Only `mode: full` produces formal PR or release evidence. A quick run is development feedback and must not be attached as acceptance evidence. Keep the argument file until the terminal result is known; delete it afterward without printing its contents.
 
-## Step 6: Process Prompts
+## Step 6: Process prompts
 
 Poll or wait for meaningful conditions:
 
@@ -135,26 +181,54 @@ fvm dart run tool/device_test_agent.dart wait --for state --value waiting_for_hu
 
 Read the latest state and prompt.
 
-### `agent_android` Prompt
+### `agent_android` prompt
 
-The prompt applies to the Android controller. Use the installed mobile MCP/Android automation capability to inspect the controller screen and perform the requested system action, for example accepting a Bluetooth or local-network permission.
+The prompt applies only to the selected Android controller. Use the installed mobile automation capability to inspect that controller screen and perform the smallest requested action, such as accepting a Bluetooth or local-network permission.
 
 Before acting:
 
-1. Verify the mobile MCP target matches the selected controller ID.
+1. Verify the automation target matches the selected controller ID.
 2. Perform the smallest requested action.
 3. Re-read the test-app state or event stream.
-4. Report the observed result, not merely that a tap was sent.
+4. Confirm the prompt only after the state or visible outcome proves the action succeeded.
 
-Do not use mobile MCP to operate physical Matter state changes or iOS system surfaces.
+```bash
+fvm dart run tool/device_test_agent.dart command \
+  --name confirm_prompt \
+  --args-json '{"prompt_id":"<current-prompt-id>"}' \
+  --command-id <stable-prompt-command-id>
+```
 
-### `human` Prompt
+Do not use mobile automation to operate physical Matter state changes or iOS system surfaces.
 
-Pause and ask the operator to perform the physical or iOS action. State the test ID and exact requested action. Wait for the operator's confirmation and verify the app moved out of `waiting_for_human`.
+### `human` prompt
 
-Do not claim a human action succeeded until the app reports the next semantic state or the operator confirms it.
+Pause and ask the operator to perform the physical Matter, commissionee, or physical iOS action. State the test ID and exact requested action. Wait for operator confirmation, then confirm the prompt and verify that app state moves out of `waiting_for_human`.
 
-## Step 7: Verify Progress and Capture Evidence
+```bash
+fvm dart run tool/device_test_agent.dart command \
+  --name confirm_prompt \
+  --args-json '{"prompt_id":"<current-prompt-id>"}' \
+  --command-id <stable-prompt-command-id>
+```
+
+If the prompt allows skipping or must be failed, use `skip_prompt` or `fail_prompt` with the current `prompt_id` and a concrete reason. Do not claim a human action succeeded until the app reports the next semantic state or the operator explicitly confirms it.
+
+### App restart checkpoint
+
+When state becomes `waiting_for_app`, the `app_restart` case requires a controller app process restart. Use the host restart command or the selected device's mobile automation, wait for the bridge to reconnect, then resume the persisted Run:
+
+```bash
+fvm dart run tool/device_test_agent.dart restart-app
+fvm dart run tool/device_test_agent.dart wait --for connected --timeout-seconds 120
+fvm dart run tool/device_test_agent.dart command \
+  --name resume_run \
+  --command-id <stable-resume-command-id>
+```
+
+Verify that state leaves `waiting_for_app` and the interrupted test resumes at its saved checkpoint. Do not start a new Run.
+
+## Step 7: Verify progress
 
 Use structured state first:
 
@@ -163,16 +237,16 @@ fvm dart run tool/device_test_agent.dart wait --for state --value running --time
 fvm dart run tool/device_test_agent.dart wait --for state --value passed --timeout-seconds 1800
 ```
 
-Use a screenshot only when visual confirmation is needed:
+Use a screenshot only when semantic state is insufficient:
 
 ```bash
 fvm dart run tool/device_test_agent.dart screenshot \
   --output build/device-test-agent/screenshots/<test-id>.png
 ```
 
-Do not inspect or include raw provisioning credentials in screenshots.
+Do not include provisioning credentials or raw logs in screenshots.
 
-## Step 8: Pull the Report
+## Step 8: Pull and verify the report
 
 For a formal full run:
 
@@ -191,22 +265,24 @@ The command writes and prints:
 Verify:
 
 1. `plugin_commit` equals `git rev-parse HEAD` for the tested PR.
-2. All P0 test IDs are `passed`.
-3. Non-P0 statuses and `not_run` reasons are reviewed.
-4. The Markdown and JSON describe the same run.
-5. The report contains no device identifiers or provisioning secrets.
+2. The run mode is `full`.
+3. All P0 test IDs are `passed`.
+4. Non-P0 statuses and `not_run` reasons are reviewed.
+5. The Markdown and JSON describe the same run.
+6. Sanitization is confirmed.
+7. The report contains no full device identifiers or provisioning secrets.
 
-Attach the JSON and Markdown to the PR or link them according to the repository's device-validation policy.
+Attach the JSON and Markdown to the PR manually. If the commit does not match the PR head, rebuild from the PR head, reinstall, and start a fresh Run; do not attach the stale report.
 
-## No-P0-Retry Policy
+## No-P0-retry policy
 
-A P0 `failed`, error, timeout, or crash is evidence. Do not rerun that P0 merely to get a green result.
+A P0 `failed`, error, timeout, or crash is evidence. Do not rerun that P0 merely to obtain a green result.
 
 You may retry a command when the failure is clearly a transport failure and the app never executed it. Reuse the same command ID for that transport retry. If the app executed the test and reported `failed`, preserve the report and report the failure to the user.
 
-P1 and P2 results may be `not_run` with a concrete reason. P2 failures require maintainer risk acceptance.
+P1 and P2 results may be `not_run` with a concrete reason. P2 failures require explicit maintainer risk acceptance.
 
-## Step 9: Purge Reminder
+## Step 9: Purge reminder
 
 After collecting evidence, remind the user to clean up:
 
@@ -214,6 +290,14 @@ After collecting evidence, remind the user to clean up:
 - Factory-reset or recommission the real commissionee as appropriate.
 - Remove credentials and app data from the virtual commissionee.
 - Clear test-only Wi-Fi or Thread credentials.
+- Purge app secrets through the command interface after the Run is no longer active:
+
+```bash
+fvm dart run tool/device_test_agent.dart command \
+  --name purge_secrets \
+  --command-id <stable-purge-command-id>
+```
+
 - Stop the host session if it is no longer needed:
 
 ```bash
@@ -222,29 +306,35 @@ fvm dart run tool/device_test_agent.dart stop
 
 Do not execute destructive purge steps without user confirmation.
 
-## Error Handling
+## Error handling
 
 | Error | Agent action |
 | --- | --- |
 | `device_selection_required` | Show candidates and ask the user. Never choose automatically. |
 | `device_not_found` | Re-run `devices`; do not reuse a stale ID. |
-| `session_already_running` | Inspect `status`; stop only after confirming the old session is no longer needed. |
-| `app_disconnected` | Use `restart-app`, then wait for `connected`. Reuse the same command ID only when retrying the same unexecuted command. |
+| `device_unavailable` | Explain the state and ask the user to make the device usable or choose again. |
+| `session_already_running` | Inspect `status`; ask before stopping the old session. |
+| `app_disconnected` | Use `restart-app`, wait for `connected`, and retry only the same unexecuted command ID. |
 | `command_in_progress` | Wait for the existing command outcome before sending another. |
-| `command_timeout` | Inspect status/events. Do not send a different command ID for the same logical test. |
-| `plugin_commit_mismatch` | Rebuild/reinstall from the PR head and rerun; do not attach the report. |
-| `report_sensitive_data` | Ask the app owner to remove the field/value and regenerate the report. |
-| `wait_timeout` | Inspect `status`, screenshot, and app logs. Do not silently change devices. |
+| `command_timeout` | Inspect status, state, and events. Do not send a different command ID for the same logical test. |
+| `args_file_*` | Correct the local argument file or path. Never print its contents; reuse the same command ID only for a retry of the same unexecuted command. |
+| `invalid_arguments` | Re-read the `start_run` schema and correct the local argument file without exposing secrets in chat. |
+| `report_not_ready` | Wait for the Report validation state to become valid, then retry `report`. |
+| `screenshot_unavailable` | Use the host platform screenshot fallback and inspect the current state. |
+| `plugin_commit_mismatch` | Rebuild/reinstall from the PR head and start a fresh Run; do not attach the report. |
+| `report_sensitive_data` | Do not attach the report. Remove the invalid copy, correct the source, regenerate, and re-review. |
+| `wait_timeout` | Inspect `status` and semantic state; use a screenshot only if needed. Do not silently change devices. |
 
-## Completion Checklist
+## Completion checklist
 
-- Controller was explicitly chosen by the user when multiple devices were connected.
-- Virtual commissionee, when used, was chosen separately and is distinct.
+- The controller was explicitly chosen by the user whenever multiple phones were connected.
+- The virtual commissionee, when used, was selected separately and is distinct from the controller.
 - `serve` used the explicit controller ID.
 - The app bridge connected and reported the expected controller metadata.
-- The run used a stable command ID and the required mode.
-- Agent Android prompts were verified through state, not assumed from a tap.
+- The run used a stable command ID, an `--args-file` input, and the required mode.
+- The temporary Run argument file was deleted without printing its contents.
+- Android prompts were handled only on the selected controller and verified through semantic state.
 - Human prompts were explicitly handed to the operator.
-- The full report matches the PR head and has a clean sanitization confirmation.
-- No P0 test was retried to hide a failure.
+- The formal report is from a `full` run and matches the PR head.
+- Sanitization was verified and no P0 failure was retried to hide a result.
 - The user received the fabric, commissionee, credential, and app-data purge reminder.

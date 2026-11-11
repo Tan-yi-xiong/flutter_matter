@@ -9,6 +9,7 @@
 - [ ] Both platforms
 - [ ] Dart library only
 - [ ] Example app only
+- [ ] Device test app or Agent tooling
 - [ ] Documentation or CI only
 
 ## Public API and compatibility impact
@@ -28,7 +29,8 @@ do not apply. For `Not run`, explain the reason and the remaining risk. Include
 safe evidence links or summaries; never include credentials or private keys.
 
 Automated tests cover the plugin root `test/` suite only. `example/**` is a
-build and manual demonstration target, not an automated test target.
+build and manual demonstration target, not an automated test target. Device test
+app checks are local and are not part of required CI.
 
 | Check | Command or manual scenario | Platform / device | Result | Evidence | Not run reason |
 | --- | --- | --- | --- | --- | --- |
@@ -36,6 +38,9 @@ build and manual demonstration target, not an automated test target.
 | Plugin Dart tests | `flutter test` (`test/` only) | Host |  |  |  |
 | Android debug build | `cd example && flutter build apk --debug` | Android build host |  |  |  |
 | iOS no-codesign build | `cd example && flutter build ios --debug --no-codesign` | macOS |  |  |  |
+| Device test app analyze/tests | `cd device_test_app && flutter analyze --no-fatal-infos --no-fatal-warnings && flutter test` | Host |  |  |  |
+| Device test app Android build | `fvm dart run tool/device_test_app.dart build-apk` | Android build host |  |  |  |
+| Device test app iOS build | `fvm dart run tool/device_test_app.dart build-ios` | macOS |  |  |  |
 | Manual functional test | Describe the exact scenario | Device and OS |  |  |  |
 | Regression or negative scenario | Describe the exact scenario | Device and OS |  |  |  |
 
@@ -71,7 +76,8 @@ Paste `device-test-report.md` here.
 </details>
 
 - [ ] The report commit matches the current PR head.
-- [ ] Sanitized JSON and screenshots are attached in a PR comment and linked above.
+- [ ] Sanitized JSON is attached in a PR comment and linked above.
+- [ ] Any screenshots attached manually are sanitized and linked above.
 - [ ] Both Android and iOS reports are present for shared behavior, or the platform exception is explained.
 - [ ] The reports and attachments contain no device identifiers, provisioning secrets, certificates, keys, or raw logs.
 
@@ -93,7 +99,8 @@ Paste `device-test-report.md` here.
 - [ ] I described public API and compatibility impact.
 - [ ] I included no credentials, tokens, private keys, or unsanitized private logs.
 - [ ] I reviewed all added or modified documentation and confirmed it is English.
-- [ ] For device-behavior changes, I supplied reports for every affected platform using the repository report contract.
+- [ ] For device-behavior changes, I supplied full-profile reports for every affected platform using the repository report contract.
+- [ ] Agent-driven runs used `$flutter-matter-device-test` and requested a user choice when multiple phones were connected.
 
 ## Reviewer checklist
 
@@ -105,5 +112,6 @@ Paste `device-test-report.md` here.
 - [ ] All added or modified documentation is English.
 - [ ] A green CI result was not treated as proof of native compilation or device behavior.
 - [ ] Device-behavior evidence uses the versioned report contract, matches the PR head, and covers every affected platform.
+- [ ] No P0 failure was retried in the same Run to manufacture a green result.
 - [ ] The commissionee selection is valid: a qualified real Matter device was preferred, and any virtual fallback reason is credible.
 - [ ] Attached reports and screenshots contain no credentials, device identifiers, provisioning secrets, certificates, keys, or raw logs.

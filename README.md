@@ -242,6 +242,22 @@ fvm flutter pub get
 fvm flutter run
 ```
 
+
+---
+
+## Device test app
+
+The dedicated validation app lives in `device_test_app/`. It supports Android and physical iOS, prefers a qualified real Matter device, and supports the Android Virtual Device App fallback. It can run a quick five-test commissioning/control profile during development or the full 13-test validation matrix for formal evidence.
+
+```bash
+cd device_test_app
+fvm flutter pub get
+fvm flutter test
+fvm flutter run
+```
+
+Agent-driven runs use the Mac WebSocket bridge and the repository Skill `flutter-matter-device-test`. When more than one phone is connected, the Agent must ask the user which phone to use. See [Device test app](doc/device-test-app.md) and [Agent device testing](doc/agent-device-testing.md).
+
 ---
 
 ## 📌 Notes

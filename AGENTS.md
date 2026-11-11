@@ -47,6 +47,17 @@ iOS example workspace:
 open example/ios/Runner.xcworkspace
 ```
 
+Device test app (local checks are not part of required CI):
+
+```bash
+cd device_test_app
+fvm flutter pub get
+fvm flutter analyze --no-fatal-infos --no-fatal-warnings
+fvm flutter test
+fvm dart run ../tool/device_test_app.dart build-apk
+fvm dart run ../tool/device_test_app.dart build-ios
+```
+
 Do not invent pytest, ruff, mypy, or Docker workflows. Automated tests cover the root plugin `test/` suite only. The example is a build and manual demo target and has no automated test role.
 
 ## Project structure
@@ -70,6 +81,10 @@ flutter_matter/
 ├── ios/frameworks/ZGMatter.framework
 ├── doc/                                       # architecture, API, release, and ADR docs
 ├── tool/release.dart                          # release metadata and notes CLI
+├── tool/device_test_app.dart                  # commit metadata and app build wrapper
+├── tool/device_test_agent.dart                # Mac WebSocket bridge and Agent JSON CLI
+├── device_test_app/                           # dedicated Android/iOS device validation app
+├── .agents/skills/flutter-matter-device-test/ # repo-local Agent device-test workflow
 ├── SECURITY.md                                # security policy
 ├── example/                                   # Android + iOS demo only
 │   └── ios/MatterExt/RequestHandler.swift
@@ -124,6 +139,16 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 - On iOS the example can autofill the current Wi-Fi SSID and commission with an empty password; otherwise it falls back to `WifiInputPage`.
 - The example is for builds and manual functional testing. It has no automated test role.
 
+## Device-test App and Agent Testing
+
+- `device_test_app/` is the primary physical-device validation surface. It is not included in the required Dart CI workflow.
+- The `quick` profile is iteration-only. PR and release evidence require `full` and the schema-versioned JSON/Markdown report.
+- Use `$flutter-matter-device-test` for Agent-driven device runs.
+- When multiple phones are connected, the Agent must ask the user which one to use. It must not choose from connection order, platform, or previous use.
+- For a virtual commissionee, select a distinct Android phone running the Project CHIP Virtual Device App.
+- Real Matter hardware and iOS system permission prompts remain human-operated unless a later workflow explicitly documents otherwise.
+- Never put setup codes, Wi-Fi credentials, full UDIDs, serial numbers, certificates, private keys, or raw logs in evidence.
+
 ## Agent working rules
 
 - Prefer `fvm flutter` / `fvm dart` in this repo.
@@ -146,3 +171,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 | Example iOS build | `cd example && fvm flutter build ios --debug --no-codesign` |
 | Run example | `cd example && fvm flutter run` |
 | iOS workspace | `open example/ios/Runner.xcworkspace` |
+| Device test app analyze/tests | `cd device_test_app && fvm flutter analyze --no-fatal-infos --no-fatal-warnings && fvm flutter test` |
+| Device test app Android build | `fvm dart run tool/device_test_app.dart build-apk` |
+| Device test app iOS build | `fvm dart run tool/device_test_app.dart build-ios` |
+| Agent device-test Skill | `$flutter-matter-device-test` |

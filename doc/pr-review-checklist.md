@@ -10,6 +10,7 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - Identify whether the change affects device behavior and therefore requires device validation reports.
 - Treat an administrator bypass as a process exception, not as proof of correctness.
 - Confirm the automated test scope is the root plugin `test/` suite only.
+- Confirm `device_test_app/` local checks were declared when the app, Agent bridge, report logic, or Skill changed. They are not part of required CI.
 
 ## Verification evidence
 
@@ -34,7 +35,7 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - Verify the report describes one commissionee type only. If real-device validation failed and virtual fallback was used, both platform cycles must have restarted against the virtual device.
 - Verify the report includes a clean-cycle statement and that Android and iOS were treated as independent commissioned cycles.
 - Reject reports with device serial numbers, iOS UDIDs, Wi-Fi credentials, setup codes, onboarding payloads, BLE addresses, certificates, private keys, or complete raw logs.
-- Confirm attached JSON, Markdown, and screenshots are accessible and sanitized. Public attachments must be treated as public content.
+- Confirm attached JSON and Markdown are accessible and sanitized. Any screenshots are optional manual evidence and must also be sanitized. Public attachments must be treated as public content.
 
 ## Platform coverage
 

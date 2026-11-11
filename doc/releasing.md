@@ -30,7 +30,7 @@ Each report must:
 - Identify an exact `plugin_commit` equal to the candidate commit.
 - Cover one complete clean P0 cycle for the controller platform.
 - Use a qualified real Matter On/Off device first, or the Android Virtual Device App fallback with a documented reason.
-- Include sanitized screenshots or bounded evidence attached to the pull request and linked from the Device Validation section.
+- Include optional sanitized screenshots or other manually captured bounded evidence; the app itself emits JSON and Markdown only.
 - Record P1 and P2 results, including reasons for `not_run` entries and any accepted P2 failures.
 
 Both platform reports must show every required P0 case as `passed`. Do not create a stable tag when a report is missing, stale, failed, not run, mixed between real and virtual commissionees, or missing a clean-cycle statement.

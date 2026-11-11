@@ -1,14 +1,14 @@
 # Agent-Driven Device Testing
 
-This document defines the engineering interface between the flutter_matter device-test app, a local host CLI, and an Agent. It does not implement Matter test cases or wire the bridge into the app UI. Those responsibilities belong to the device-test app runner and the app bootstrap.
+This document defines the operational interface between the flutter_matter device-test app, a Mac-hosted CLI, and an Agent. The app owns the declarative Matter runner and state projection; the host owns discovery, explicit controller selection, transport, command serialization, and report retrieval.
 
 ## Goals
 
-- Let an Agent observe semantic test state without reading screenshots on every step.
+- Let an Agent observe semantic test state without taking a screenshot on every step.
 - Let the Agent send one idempotent command at a time to the test app.
-- Keep the app as the WebSocket client so Android and physical iOS devices can connect to a Mac-hosted server.
+- Keep the app as the WebSocket client so Android and physical iOS controllers can connect to a Mac-hosted server.
 - Expose every operation through a JSON CLI that an Agent can call from a shell.
-- Keep all device-test evidence free of device identifiers and provisioning secrets.
+- Keep all evidence free of device identifiers, provisioning secrets, certificates, private keys, and raw logs.
 
 ## Topology
 
@@ -23,27 +23,30 @@ tool/device_test_agent.dart
   |
   +---- LAN WebSocket server -------- device_test_app AgentBridgeClient
                                       |
-                                      +---- declarative test runner
+                                      +---- RunCoordinator and test cases
                                       +---- semantic state and events
+                                      +---- prompt projection
                                       +---- screenshot and report payloads
 ```
 
-The host is a long-running `serve` process. Other CLI commands use a loopback-only control HTTP server created by that process. The test app connects outbound to the LAN WebSocket endpoint. The app never needs to expose an inbound HTTP server, which keeps behavior consistent on Android and physical iOS.
+`serve` is the long-running host process. Other CLI commands use the loopback-only control HTTP server created by that process. The test app connects outward to the LAN WebSocket endpoint and does not expose an inbound HTTP server. This keeps behavior consistent for Android and physical iOS.
 
-The protocol deliberately does not use TLS. It is intended only for a trusted private development LAN. Do not expose the WebSocket port to the public internet.
+The WebSocket deliberately does not use TLS or authentication. Use it only on a trusted private development LAN, and never expose the port to the public internet.
 
-## Component Boundaries
+## Component boundaries
 
 | Component | Responsibility |
 | --- | --- |
-| `device_test_app/lib/src/agent/protocol.dart` | Protocol v1 message envelopes, typed payload models, validation, and opaque IDs. |
-| `device_test_app/lib/src/agent/agent_bridge_client.dart` | Reconnect loop, sequence generation, command deduplication, command serialization, and artifact delivery. |
-| `tool/device_test_agent.dart` | Device discovery, explicit selection, LAN WebSocket server, local control server, platform restart/screenshot helpers, and report persistence. |
-| `.agents/skills/flutter-matter-device-test/SKILL.md` | Agent-safe workflow, user-selection rules, external-action routing, and evidence requirements. |
+| [`protocol.dart`](../device_test_app/lib/src/agent/protocol.dart) | Protocol v1 envelopes, typed payload models, validation, and opaque IDs. |
+| [`agent_bridge_client.dart`](../device_test_app/lib/src/agent/agent_bridge_client.dart) | Reconnect loop, sequence generation, command deduplication, serial command execution, and artifact delivery. |
+| [`run_coordinator.dart`](../device_test_app/lib/src/application/run_coordinator.dart) | Fixed profile execution, prompt handling, failure policy, persistence, and formal report construction. |
+| [`device_test_app_controller.dart`](../device_test_app/lib/src/app/device_test_app_controller.dart) | UI state projection, prompt broker integration, report validation, sharing, resume, and purge. |
+| [`device_test_agent.dart`](../tool/device_test_agent.dart) | Device discovery, mandatory selection, LAN WebSocket server, loopback control server, platform restart and screenshot helpers, and report persistence. |
+| [`SKILL.md`](../.agents/skills/flutter-matter-device-test/SKILL.md) | Mandatory Agent workflow, user-selection rules, prompt routing, evidence rules, and cleanup. |
 
-The app bridge is UI-independent. The app bootstrap should create it after collecting runtime metadata and provide a command handler backed by the test runner.
+The app bridge is UI-independent. The app owns command handling for the runner and projects the same coordinator state used by the visible UI.
 
-## Protocol V1
+## Protocol v1
 
 Every message is a UTF-8 JSON object with this envelope:
 
@@ -60,96 +63,84 @@ Every message is a UTF-8 JSON object with this envelope:
 }
 ```
 
-`command_id` is present only when a message belongs to a command exchange. The protocol name and version are mandatory and are checked by both sides.
+`command_id` is present only when a message belongs to a command exchange. The protocol name and version are mandatory and checked by both sides.
 
 | Type | Direction | Purpose |
 | --- | --- | --- |
 | `hello` | App to host | App identity, controller metadata, plugin commit, capabilities, and app instance ID. |
-| `state` | App to host | Semantic runner phase, counters, current test, prompt, and sanitized details. |
+| `state` | App to host | Semantic runner phase, mode, counters, current test, prompt, and sanitized details. |
 | `event` | App to host | Monotonic progress or failure information. |
 | `command` | Host to app | A named command with JSON arguments and an idempotency key. |
 | `command_result` | App to host | Terminal command status and sanitized result data. |
 | `screenshot` | App to host | Base64 image bytes correlated with a command. |
-| `report` | App to host | Sanitized schema v1 JSON plus the matching Markdown summary. |
+| `report` | App to host | Sanitized schema v1 JSON and the matching Markdown summary. |
 | `error` | Both | Protocol or command failure that does not necessarily close the socket. |
 
-### Sequence Rules
+### Sequence rules
 
 - Each sender increments `sequence` for every transmitted message.
-- The host rejects a non-increasing command sequence within one WebSocket connection.
-- The app continues its sequence across reconnects instead of resetting the sequence on every socket.
-- `hello.instance_id` identifies one app process. A new app process may reset to sequence one, and the host resets its acceptance baseline when the instance ID changes.
+- The host rejects a non-increasing sequence within one WebSocket connection.
+- The app continues its sequence across reconnects.
+- `hello.instance_id` identifies one app process. A new app process may reset to sequence one; the host resets its acceptance baseline when the instance ID changes.
 - The app records the last host sequence per connection. A new socket resets that host-input baseline because the CLI process may have restarted.
 
-### Command Idempotency
+### Command idempotency
 
-The host must reuse a command ID when retrying the same logical operation. The app bridge keeps a bounded cache of terminal outcomes. A duplicate command ID does not execute the handler again; the app resends the cached screenshot, report, and a `command_result` with status `duplicate`.
+Reuse a command ID only when retrying the same logical operation. The app keeps a bounded cache of terminal outcomes. A duplicate command ID does not execute the handler again; the app resends cached artifacts and a `command_result` with status `duplicate`.
 
 The host allows one outstanding command per controller session. The app executes received commands serially even if a non-conforming host sends more than one.
 
-### Reconnect Behavior
+### Reconnect behavior
 
 `AgentBridgeClient`:
 
 - Reconnects with capped exponential backoff.
-- Sends `hello` first after every reconnect.
-- Resends the latest semantic state after `hello`.
-- Buffers new events while disconnected with a bounded queue.
-- Continues sequence numbers for the lifetime of the app process.
-- Preserves command deduplication results across reconnects.
-- Reports its connection state as `stopped`, `connecting`, `connected`, or `waitingToReconnect`.
+- Resends `hello` and the latest semantic state after each reconnect.
+- Buffers bounded state and event messages while disconnected and drops the oldest messages if the buffer limit is exceeded.
+- Reports `stopped`, `connecting`, `connected`, or `waitingToReconnect`.
 
-The host marks the app disconnected when the WebSocket closes. A command waiting at that moment fails with `app_disconnected`; the Agent may retry the same command ID after the app reconnects.
+If the socket closes while a command is waiting, the command fails with `app_disconnected`. The Agent may retry the same command ID after the app reconnects.
 
-## App Hello Data
-
-The app should send only reviewer-safe metadata:
-
-- App name, version, build, and test-app commit.
-- The exact flutter_matter plugin commit under test.
-- Controller platform and app build identifier.
-- Device model and OS version.
-- Capability names such as `state`, `event`, `command`, `screenshot`, and `report`.
-- An opaque app-instance ID generated by the app process.
-
-Do not include serial numbers, UDIDs, BLE addresses, Wi-Fi SSIDs, passwords, setup codes, onboarding payloads, certificates, or private keys.
-
-## Semantic State and Prompts
-
-The runner should publish semantic state whenever its phase changes. Typical statuses are `idle`, `running`, `waiting_for_app`, `waiting_for_agent_android`, `waiting_for_human`, `passed`, `failed`, `not_run`, and `stopped`.
-
-A `waiting_for_agent_android` state may include a prompt with channel `agent_android`. This is limited to Android system or permission UI that an Agent can operate through the installed mobile MCP tooling. A prompt with channel `human` means the Agent must ask the operator to act on a physical Matter device or a physical iOS system surface.
-
-State and event messages should describe the test ID, completed count, and next action. They must not contain raw logs or provisioning secrets.
-
-## Host Device Discovery
+## Device discovery and controller selection
 
 `devices` discovers:
 
 - Android devices through `adb devices -l` and `adb shell getprop`.
 - iOS devices through `xcrun devicectl list devices --json-output`.
-- iOS fallback devices through `idevice_id` and `ideviceinfo` when CoreDevice returns no usable devices.
+- iOS fallback devices through `idevice_id` and `ideviceinfo` when CoreDevice returns no usable candidate.
 
-Each candidate contains `id`, `short_id`, `platform`, `model`, `os_version`, `name`, `state`, `connection`, and `usable`. Public JSON never includes the internal iOS UDID captured for `idevicescreenshot`.
+Each public candidate contains `id`, `short_id`, `platform`, `model`, `os_version`, `name`, `state`, `connection`, and `usable`. Public JSON does not include the internal iOS UDID used by screenshot tooling.
 
-## Explicit Device Selection
+Use a qualified real Matter On/Off device as the commissionee whenever it is available. The Android Virtual Matter Device App is only a functional fallback when no real hardware is available. For an Android controller, the canonical fallback topology is two distinct Android phones. A physical iOS controller can test the same distinct Android virtual commissionee.
 
-The CLI never selects a default device.
+The host CLI never selects a controller by default:
 
 - `devices` only lists candidates.
 - `serve` always requires an explicit `--device`.
-- Missing selection returns `device_selection_required` with all candidates.
+- A missing selector returns `device_selection_required` with all candidates.
 - A selector may be an exact ID, a unique exact name, or a unique ID prefix.
 - An ambiguous selector returns the matching candidates.
 - An unavailable selected device returns `device_unavailable`.
 
-When several physical phones are connected, the Agent must present an interactive user choice and show platform, model, OS version, and `short_id`. The full ID is retained for the subsequent `--device` argument but is not displayed in the choice.
+When more than one phone is connected, the Agent must show an interactive user prompt with `platform`, `model`, `os_version`, and `short_id`, then pass the selected full ID to `serve --device`. The full ID is retained for the command but is not shown as the choice label. Never choose the first, only, previous, or remembered candidate automatically.
 
-When a virtual commissionee is required, the Agent must ask a separate question and choose a distinct Android device. The controller and virtual commissionee cannot be the same device.
+If a virtual commissionee is required, the Agent must ask a separate interactive question and select a distinct Android phone. The virtual commissionee cannot be the controller, even if only two phones are connected. The user must make this choice; the Agent cannot infer it from device model, installed packages, or prior use.
 
-## CLI Commands
+## CLI commands
 
-Run commands from the plugin repository root.
+Run commands from the repository root.
+
+| Command | Required input | Result |
+| --- | --- | --- |
+| `devices` | None | Lists usable and unusable candidates without selecting one. |
+| `serve` | Explicit `--device` | Starts the LAN WebSocket server, loopback control server, and one controller session. |
+| `status` | Active session | Returns connection state, latest app state, prompt, and selected public device metadata. |
+| `wait` | `--for connected` or `--for state --value <state>` | Blocks until the condition or timeout. |
+| `command` | `--name`, one of `--args-json` or `--args-file`, `--command-id` | Sends one idempotent runner command and returns its terminal result. |
+| `screenshot` | Optional `--output` | Captures an app screenshot, with platform fallback if disconnected. |
+| `report` | Optional `--output-dir` | Pulls and validates report JSON and Markdown. |
+| `restart-app` | Active session or explicit `--device` | Restarts the selected controller app. |
+| `stop` | Active session | Stops the host session. |
 
 ```bash
 fvm dart run tool/device_test_agent.dart devices
@@ -161,7 +152,17 @@ fvm dart run tool/device_test_agent.dart serve \
   --port 8765
 ```
 
-`serve` prints one startup JSON object and remains running. Start it in a long-lived shell or background process. Stop it with the `stop` command or an interrupt signal.
+`serve` prints one startup JSON object with `websocket_endpoint`, `selected_device`, `control_port`, and `artifact_directory`, then remains running. Use a fixed WebSocket port when the installed app is built with a stable endpoint.
+
+Build, install, and launch the app with the printed endpoint and the same explicit controller ID:
+
+```bash
+fvm dart run tool/device_test_app.dart run \
+  --device <explicit-id> \
+  -- --dart-define=AGENT_WS_URL=<websocket_endpoint>
+```
+
+The wrapper injects the current Git commit metadata. The app reads `AGENT_WS_URL` at compile time, connects outward to that endpoint, and reconnects without restarting the app.
 
 ```bash
 fvm dart run tool/device_test_agent.dart status
@@ -170,100 +171,167 @@ fvm dart run tool/device_test_agent.dart wait --for state --value running --time
 fvm dart run tool/device_test_agent.dart wait --for state --value waiting_for_agent_android --timeout-seconds 600
 ```
 
+Create the Run argument file under the ignored build directory. It contains provisioning material, so never print the file, paste its contents into chat, or commit it.
+
+```bash
+mkdir -p build/device-test-agent
+chmod 700 build/device-test-agent
+```
+
+Example structure for a real Wi-Fi commissionee:
+
+```json
+{
+  "mode": "quick",
+  "commissionee_type": "real",
+  "model": "<commissionee-model>",
+  "firmware": "<firmware-version>",
+  "network_transport": "wifi",
+  "state_change_method": "physical_control",
+  "setup_code": "<setup-code-or-qr-payload>",
+  "wifi_ssid": "<ssid>",
+  "wifi_password": "<password>",
+  "clean_cycle": {
+    "controller_clean": true,
+    "commissionee_clean": true,
+    "secrets_purged": true
+  }
+}
+```
+
+For a virtual commissionee, use `"commissionee_type": "virtual"`, add a non-empty `fallback_reason`, and set `"virtual_fallback_confirmed": true`. For Thread, use `"network_transport": "thread"` and `thread_operational_dataset`. When `state_change_method` is `other`, include non-empty `state_change_notes`.
+
+Start a run with a stable command ID and the argument file:
+
 ```bash
 fvm dart run tool/device_test_agent.dart command \
   --name start_run \
-  --args-json '{"mode":"quick"}' \
+  --args-file build/device-test-agent/run-args.json \
   --command-id <stable-id> \
   --timeout-seconds 1200
 ```
+
+Use `"mode":"full"` and an appropriate timeout for formal evidence. Retain the file until the command outcome is terminal, then delete it without printing its contents.
 
 ```bash
 fvm dart run tool/device_test_agent.dart screenshot \
   --output build/device-test-agent/screenshots/current.png
 ```
 
-The screenshot command first requests an app screenshot through the bridge. If the app is disconnected or the bridge command fails, the host falls back to `adb exec-out screencap -p` or `idevicescreenshot`.
+The screenshot command requests an app screenshot through the bridge. If the app is disconnected or the bridge command fails, the host falls back to `adb exec-out screencap -p` or `idevicescreenshot`.
 
 ```bash
 fvm dart run tool/device_test_agent.dart report \
   --output-dir build/device-test-agent/reports/<run-id>
 ```
 
-The report command requests the sanitized schema v1 JSON and Markdown payload, verifies the report structure and plugin commit, and writes:
-
-- `device-test-report.json`
-- `device-test-report.md`
+The command verifies the report and writes `device-test-report.json` and `device-test-report.md` under the requested directory.
 
 ```bash
 fvm dart run tool/device_test_agent.dart restart-app
 fvm dart run tool/device_test_agent.dart stop
 ```
 
-`restart-app` uses the active session's selected device by default. Without an active session it requires `--device`.
+`restart-app` uses the active session's selected device by default and requires `--device` without an active session. Android uses an ADB force-stop and launcher start; iOS uses `xcrun devicectl device process launch --device <id> --terminate-existing <bundle-id>`.
 
-- Android uses `adb shell am force-stop` followed by a launcher start.
-- iOS uses `xcrun devicectl device process launch --device <id> --terminate-existing <bundle-id>`.
+## Command payload contract
 
-## Reserved Commands
+A command payload contains:
 
-The bridge is generic, but the device-test app should implement these command names:
+- `name`: the runner command name.
+- `arguments`: a JSON object, for example `{"mode":"full"}`.
+
+The envelope supplies the required non-empty `command_id`. A command result contains `status` (`completed`, `failed`, or `duplicate`), `data`, and optional `error_code` and `error_message`. Artifacts are delivered as separate `screenshot` and `report` messages before the terminal `command_result`.
+
+## Command contract
+
+The app routes the following commands. Prompt commands require the current `prompt_id` from semantic state so a stale decision cannot resolve a later prompt.
 
 | Name | Arguments | Meaning |
 | --- | --- | --- |
-| `start_run` | `{"mode":"quick"}` or `{"mode":"full"}` | Start the declarative runner. |
-| `stop_run` | `{}` | Stop the current run without manufacturing a passing report. |
+| `start_run` | Full setup object with `mode` | Validate and start a `quick` or `full` Run. |
+| `stop_run` | `{}` | Stop the current Run without manufacturing a passing report. |
+| `resume_run` | `{}` | Resume the persisted unfinished Run. |
+| `purge_secrets` | `{}` | Purge stored setup and network secrets after the Run is no longer active. |
+| `confirm_prompt` | `{"prompt_id":"<id>"}` | Confirm the referenced active prompt after the requested action was verified. |
+| `skip_prompt` | `{"prompt_id":"<id>","reason":"<reason>"}` | Skip the referenced prompt when skipping is allowed. |
+| `fail_prompt` | `{"prompt_id":"<id>","reason":"<reason>"}` | Fail the referenced active test with an operator-provided reason. |
+| `screenshot` | `{"label":"<optional>"}` | Return an app screenshot payload. |
+| `report` | `{"run_id":"<optional>"}` | Return the validated sanitized report payload when ready. |
 
-The app may add runner-specific commands. New command names must preserve the same command ID and command-result semantics.
+Requiring `setup_code`, Wi-Fi credentials, or Thread material in `start_run` is deliberate: it keeps the Agent workflow deterministic. Use `--args-file`, never `--args-json`, for that command. Secret values are transient command input and must not appear in state, events, command results, reports, screenshots, logs, or chat.
 
-## Agent Loop
+Every command must preserve command-ID idempotency and one-outstanding-command semantics. The repository Skill identifies the current prompt from semantic state and resolves it only after verifying the requested action.
 
-The repository skill requires this sequence:
+## Hello and state payloads
 
-1. Run `devices` and observe all candidates.
-2. Ask the user to select the controller when multiple phones are connected.
-3. Start `serve` with the explicit controller ID.
-4. Wait for the app bridge to connect.
-5. Start a quick or full run with a stable command ID.
-6. For `agent_android` prompts, use the installed mobile MCP/Android automation to act on the controller device.
-7. For `human` prompts, ask the operator to act on the physical Matter device or iOS system UI.
-8. Use status, state, events, and screenshots to verify progress.
-9. Pull the report and verify that `plugin_commit` equals the PR head.
-10. Never retry a P0 failure to manufacture a passing report.
-11. Remind the operator to remove the fabric, reset the commissionee, clear app data, and reset the virtual commissionee.
+`hello` advertises reviewer-safe app identity:
 
-## Report Verification
+- `instance_id`, `app_name`, `app_version`, `app_build`, `app_commit`
+- `plugin_commit`, `controller_platform`, `device_model`, `os_version`
+- `capabilities`, including `state`, `event`, `command`, `screenshot`, `report`, `start_run`, `resume_run`, prompt commands, and `purge_secrets`
+
+It must not contain serial numbers, UDIDs, BLE addresses, SSIDs, passwords, setup codes, onboarding payloads, certificates, or private keys.
+
+`state` contains:
+
+| Field | Meaning |
+| --- | --- |
+| `run_id` | Opaque current run identifier. |
+| `status` | Semantic runner phase. |
+| `mode` | `none`, `quick`, or `full`. |
+| `current_test_id` | Current fixed test ID when applicable. |
+| `completed_tests` / `total_tests` | Monotonic progress counters. |
+| `message` | Short reviewer-safe status text. |
+| `prompt` | Current actionable prompt, if any. |
+| `details` | Sanitized, versioned context for diagnostics. |
+
+A prompt contains `prompt_id`, `channel`, `title`, `instructions`, optional `action` and `test_id`, `confirm_label`, `can_skip`, and `skip_requires_reason`.
+
+## Semantic state and prompts
+
+Typical state values are `idle`, `running`, `waiting_for_app`, `waiting_for_agent_android`, `waiting_for_human`, `passed`, `failed`, `not_run`, and `stopped`. State includes run ID, mode, current test ID, completed and total counts, and sanitized details.
+
+A prompt with channel `agent_android` applies only to Android system or permission UI on the selected controller. The Agent must verify its mobile automation target matches the selected controller, perform the smallest requested action, and re-read app state before reporting success.
+
+A prompt with channel `human` requires the Agent to pause and ask the operator. This covers physical Matter hardware, commissionee state changes, and physical iOS system surfaces. The Agent must not claim success until app state changes or the operator explicitly confirms completion.
+
+State, events, and prompts must not contain raw logs or provisioning secrets.
+
+## Agent loop
+
+The repository Skill enforces this sequence:
+
+1. Run `devices` and inspect every candidate.
+2. Ask the user to select the controller; never auto-select.
+3. Ask separately whether a real Matter device or a distinct Android virtual commissionee will be used.
+4. Start `serve` with the explicit controller ID.
+5. Launch or connect the app and wait for the bridge connection.
+6. Start `quick` for iteration or `full` for formal evidence with a stable command ID.
+7. Resolve `agent_android` prompts on the selected Android controller only.
+8. Route `human` prompts to the operator and verify the semantic state transition.
+9. Use structured status, state, and events first; use screenshots only when visual confirmation is needed.
+10. Pull and verify the full report.
+11. Preserve P0 failures; never retry a P0 in the same Run to obtain a green result.
+12. Remind the operator to purge fabrics, credentials, commissionee data, and app secrets.
+
+## Report verification
 
 The host performs structural checks before writing report files:
 
 - Envelope and report schema versions are supported.
 - All 13 fixed test IDs occur exactly once.
 - Test statuses and durations have valid types.
-- Summary counts match the tests object.
-- Overall summary result is consistent with P0 and failure rules.
+- Summary counts match the `tests` object.
+- Overall result is consistent with P0 and failure rules.
 - `plugin_commit` matches the current repository HEAD.
 - Test-app commit is a 40-character lowercase Git SHA.
 - Sanitization is explicitly confirmed.
-- Forbidden keys and obvious sensitive text are rejected.
+- Forbidden keys and obvious sensitive values are rejected.
 
-The app remains responsible for complete JSON Schema validation, Markdown generation from the same result object, and final human review before attaching evidence to a pull request.
+The app performs complete JSON Schema validation and generates Markdown from the same result object. A human must review the final report before attaching it to a PR. Report files must never contain full UDIDs, serial numbers, SSIDs, passwords, setup codes, certificates, private keys, or raw logs.
 
-## Error Codes
-
-| Code | Meaning |
-| --- | --- |
-| `device_selection_required` | A selection or more specific selector is required. |
-| `device_not_found` | The explicit selector matched no candidate. |
-| `device_unavailable` | The selected device is not ready. |
-| `session_already_running` | One controller session is already active. |
-| `no_active_session` | A session command was called without `serve`. |
-| `app_disconnected` | The test app WebSocket is not connected. |
-| `command_in_progress` | Another command is already outstanding. |
-| `command_timeout` | The app did not complete the command before the deadline. |
-| `plugin_commit_mismatch` | Report evidence belongs to a different plugin commit. |
-| `report_sensitive_data` | Report JSON contains a forbidden field or value. |
-
-## Runtime Files
+## Runtime files
 
 The host stores its local session descriptor at:
 
@@ -271,7 +339,7 @@ The host stores its local session descriptor at:
 .dart_tool/device_test_agent/session.json
 ```
 
-The file contains the process ID, loopback control port, LAN WebSocket endpoint, selected public device metadata, and artifact directory. It is local operational state and is covered by the ignored `.dart_tool/` directory.
+It contains the process ID, loopback control port, LAN WebSocket endpoint, selected public device metadata, and artifact directory. It is ignored operational state.
 
 Default screenshots and reports are written under:
 
@@ -279,29 +347,19 @@ Default screenshots and reports are written under:
 build/device-test-agent/
 ```
 
-## Non-Goals
+## Non-goals
 
 - TLS, authentication, or public-network exposure.
 - An MCP server.
-- Automated Matter test case implementation.
 - Automatic device selection.
 - Automated control of physical Matter hardware.
 - Automated iOS system-dialog interaction.
-- Evidence upload to GitHub Actions.
+- Real-device CI or automatic evidence upload.
 
-## Verification
+## Verification coverage
 
-Agent bridge tests use fake WebSocket channels to verify:
+Agent bridge tests use fake WebSocket channels to verify hello-first ordering, latest-state replay, monotonic sequence across reconnect, command-ID deduplication, and artifact ordering before command results.
 
-- Hello-first ordering.
-- Latest-state replay.
-- Monotonic sequence across reconnect.
-- Command ID deduplication.
-- Artifact ordering before command results.
+Host CLI tests use fake device candidates to verify ADB parsing, mandatory explicit selection, exact and ambiguous selector handling, and removal of the internal iOS UDID from public JSON.
 
-Host CLI tests use fake device candidates to verify:
-
-- ADB output parsing.
-- Mandatory explicit selection.
-- Exact and ambiguous selector handling.
-- Removal of the internal iOS UDID from public JSON.
+These tests validate protocol and workflow mechanics only. They are not a substitute for physical-device validation.
