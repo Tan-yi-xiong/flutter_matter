@@ -226,8 +226,7 @@ class DeviceTestSetupDraft {
     required this.setupCode,
     required this.profile,
     required this.cleanCycle,
-    this.fallbackReason = '',
-    this.virtualFallbackConfirmed = false,
+    this.commissioningTransport = CommissioningTransport.ip,
     this.stateChangeNotes = '',
     this.wifiSsid = '',
     this.wifiPassword = '',
@@ -235,12 +234,11 @@ class DeviceTestSetupDraft {
   });
 
   final CommissioneeType commissioneeType;
-  final String fallbackReason;
-  final bool virtualFallbackConfirmed;
   final String model;
   final String firmware;
   final NetworkTransport networkTransport;
   final StateChangeMethod stateChangeMethod;
+  final CommissioningTransport commissioningTransport;
   final String stateChangeNotes;
   final String setupCode;
   final String wifiSsid;
@@ -265,7 +263,7 @@ class DeviceTestSetupRequest {
     required this.setupCode,
     required this.profile,
     required this.cleanCycle,
-    this.fallbackReason = '',
+    this.commissioningTransport = CommissioningTransport.ip,
     this.stateChangeNotes = '',
     this.wifiSsid = '',
     this.wifiPassword = '',
@@ -274,11 +272,11 @@ class DeviceTestSetupRequest {
 
   final ControllerInfoViewModel controller;
   final CommissioneeType commissioneeType;
-  final String fallbackReason;
   final String model;
   final String firmware;
   final NetworkTransport networkTransport;
   final StateChangeMethod stateChangeMethod;
+  final CommissioningTransport commissioningTransport;
   final String stateChangeNotes;
   final String setupCode;
   final String wifiSsid;
@@ -292,8 +290,8 @@ class DeviceTestSetupRequest {
 enum SetupField {
   controller,
   preflight,
-  fallbackReason,
-  fallbackConfirmation,
+  commissioneeType,
+  commissioningTransport,
   model,
   firmware,
   networkCredentials,
@@ -337,7 +335,7 @@ extension TestProfilePresentation on TestProfile {
   String get label => this == TestProfile.quick ? 'Quick' : 'Full';
   String get description => this == TestProfile.quick
       ? 'Five-test iteration smoke run. Not formal evidence.'
-      : 'All thirteen tests. Required for formal evidence.';
+      : 'All twelve tests. Required for formal evidence.';
 }
 
 extension DeviceTestStatusPresentation on DeviceTestStatus {

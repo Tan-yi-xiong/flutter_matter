@@ -464,12 +464,14 @@ ProvisioningSecrets makeSecrets({ProvisioningNetworkSecret? network}) =>
       network:
           network ??
           const WifiProvisioningSecret(ssid: 'matter-lab', password: 'correct'),
+      commissioningTransport: CommissioningTransport.ip,
+      supportsOnNetworkDiscovery: true,
     );
 
 const TestTimeouts fastTimeouts = TestTimeouts(
   buildInstall: Duration(milliseconds: 100),
-  bleDiscovery: Duration(milliseconds: 100),
-  bleCommissioning: Duration(milliseconds: 100),
+  ipDiscovery: Duration(milliseconds: 100),
+  ipCommissioning: Duration(milliseconds: 100),
   operationalConnect: Duration(milliseconds: 100),
   onOffInvoke: Duration(milliseconds: 100),
   onOffSubscription: Duration(milliseconds: 100),
@@ -477,7 +479,6 @@ const TestTimeouts fastTimeouts = TestTimeouts(
   appRestart: Duration(milliseconds: 100),
   factoryResetRecommission: Duration(milliseconds: 100),
   invalidSetupPasscode: Duration(milliseconds: 100),
-  bluetoothDisabled: Duration(milliseconds: 100),
   invalidWifiPassword: Duration(milliseconds: 100),
   removeFabricUi: Duration(milliseconds: 100),
 );
@@ -494,9 +495,10 @@ RunSession makeSession({
     appBuild: '1.0.0+1',
   );
   const commissioneeMetadata = CommissioneeMetadata(
-    type: CommissioneeType.virtual,
-    model: 'Matter virtual device',
+    type: CommissioneeType.real,
+    model: 'Matter test device',
     firmware: '1.0.0',
+    commissioningTransport: CommissioningTransport.ip,
     networkTransport: NetworkTransport.wifi,
     stateChangeMethod: StateChangeMethod.commissioneeUi,
   );

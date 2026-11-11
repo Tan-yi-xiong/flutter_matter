@@ -40,35 +40,30 @@ void main() {
     expect(find.byKey(DeviceTestUiKeys.setupValidationSummary), findsOneWidget);
   });
 
-  testWidgets(
-    'virtual commissionee requires fallback reason and confirmation',
-    (tester) async {
-      final controller = FakeDeviceTestUiController(setupState());
-      await tester.pumpWidget(
-        DeviceTestAppShell(
-          controller: controller,
-          initialScreen: DeviceTestScreen.setup,
-        ),
-      );
-      await tester.pumpAndSettle();
+  testWidgets('setup is fixed to real hardware and Wi-Fi/IP', (tester) async {
+    final controller = FakeDeviceTestUiController(setupState());
+    await tester.pumpWidget(
+      DeviceTestAppShell(
+        controller: controller,
+        initialScreen: DeviceTestScreen.setup,
+      ),
+    );
+    await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(DeviceTestUiKeys.virtualCommissionee));
-      await tester.pumpAndSettle();
-      await tester.ensureVisible(find.byKey(DeviceTestUiKeys.startRun));
-      await tester.tap(find.byKey(DeviceTestUiKeys.startRun));
-      await tester.pumpAndSettle();
-
-      expect(controller.submittedRequest, isNull);
-      expect(
-        find.text('Explain why no qualified real Matter device is available.'),
-        findsOneWidget,
-      );
-      expect(
-        find.text('Confirm that the virtual commissionee is the fallback.'),
-        findsOneWidget,
-      );
-    },
-  );
+    expect(
+      find.text(
+        'Device validation requires qualified real Matter hardware. '
+        'Every Run uses Wi-Fi/IP commissioning.',
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.text('A qualified real Matter On/Off device is required.'),
+      findsOneWidget,
+    );
+    expect(find.byKey(DeviceTestUiKeys.wifiSsid), findsOneWidget);
+    expect(find.text('Thread operational dataset'), findsNothing);
+  });
 
   testWidgets('valid setup submits a request and enters the runner', (
     tester,

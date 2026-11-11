@@ -162,7 +162,7 @@ void main() {
       );
       final report = AgentReportPayload(
         runId: 'run-1',
-        reportJson: const <String, Object?>{'schema_version': 1},
+        reportJson: const <String, Object?>{'schema_version': 2},
         reportMarkdown: '### Device validation summary\n',
       );
       final client = AgentBridgeClient(
@@ -208,7 +208,7 @@ AgentStatePayload _idleState() => const AgentStatePayload(
   status: AgentRunStatus.idle,
   mode: AgentRunMode.none,
   completedTests: 0,
-  totalTests: 13,
+  totalTests: 12,
 );
 
 AgentEnvelope _decode(String source) => AgentEnvelope.fromJsonString(source);

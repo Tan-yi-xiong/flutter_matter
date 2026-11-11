@@ -26,16 +26,40 @@ class AgentRunRequestParser {
       'commissionee_type',
       CommissioneeType.parse,
     );
+    if (commissioneeType != CommissioneeType.real) {
+      throw const AgentRunRequestException(
+        'commissionee_type must be real.',
+        issues: <String, String>{
+          'commissionee_type':
+              'Device validation requires real Matter hardware.',
+        },
+      );
+    }
+    final commissioningTransport = _enumValueOrDefault(
+      arguments,
+      'commissioning_transport',
+      CommissioningTransport.parse,
+      defaultValue: CommissioningTransport.ip.wireName,
+    );
+    if (commissioningTransport != CommissioningTransport.ip) {
+      throw const AgentRunRequestException(
+        'commissioning_transport must be ip.',
+        issues: <String, String>{
+          'commissioning_transport':
+              'Only Wi-Fi/IP commissioning is supported.',
+        },
+      );
+    }
     final networkTransport = _enumValue(
       arguments,
       'network_transport',
       NetworkTransport.parse,
     );
-    if (networkTransport == NetworkTransport.unknown) {
+    if (networkTransport != NetworkTransport.wifi) {
       throw const AgentRunRequestException(
-        'network_transport has an unsupported value.',
+        'network_transport must be wifi.',
         issues: <String, String>{
-          'network_transport': 'Expected wifi or thread.',
+          'network_transport': 'Only Wi-Fi/IP commissioning is supported.',
         },
       );
     }
@@ -48,19 +72,15 @@ class AgentRunRequestParser {
     final controller = state.controllerInfo;
     final draft = DeviceTestSetupDraft(
       commissioneeType: commissioneeType,
-      fallbackReason: _optionalString(arguments, 'fallback_reason') ?? '',
-      virtualFallbackConfirmed:
-          _optionalBool(arguments, 'virtual_fallback_confirmed') ?? false,
       model: _requiredString(arguments, 'model'),
       firmware: _requiredString(arguments, 'firmware'),
+      commissioningTransport: commissioningTransport,
       networkTransport: networkTransport,
       stateChangeMethod: stateChangeMethod,
       stateChangeNotes: _optionalString(arguments, 'state_change_notes') ?? '',
       setupCode: _requiredString(arguments, 'setup_code'),
       wifiSsid: _optionalString(arguments, 'wifi_ssid') ?? '',
       wifiPassword: _optionalString(arguments, 'wifi_password') ?? '',
-      threadOperationalDataset:
-          _optionalString(arguments, 'thread_operational_dataset') ?? '',
       profile: profile,
       cleanCycle: CleanCycleConfirmations(
         controllerClean: _requiredBool(
@@ -99,9 +119,9 @@ class AgentRunRequestParser {
     return DeviceTestSetupRequest(
       controller: controller!,
       commissioneeType: draft.commissioneeType,
-      fallbackReason: draft.fallbackReason,
       model: draft.model,
       firmware: draft.firmware,
+      commissioningTransport: draft.commissioningTransport,
       networkTransport: draft.networkTransport,
       stateChangeMethod: draft.stateChangeMethod,
       stateChangeNotes: draft.stateChangeNotes,
@@ -126,9 +146,25 @@ class AgentRunRequestParser {
     String key,
     T Function(String value) parse,
   ) {
-    final value = _requiredString(arguments, key);
+    return _parseEnumValue(key, _requiredString(arguments, key), parse);
+  }
+
+  T _enumValueOrDefault<T>(
+    Map<String, Object?> arguments,
+    String key,
+    T Function(String value) parse, {
+    required String defaultValue,
+  }) {
+    return _parseEnumValue(
+      key,
+      _optionalString(arguments, key) ?? defaultValue,
+      parse,
+    );
+  }
+
+  T _parseEnumValue<T>(String key, String value, T Function(String) parse) {
     try {
-      return parse(value);
+      return parse(value.trim());
     } on FormatException {
       throw AgentRunRequestException(
         '$key has an unsupported value.',
@@ -172,20 +208,6 @@ class AgentRunRequestParser {
       throw AgentRunRequestException(
         '$parent.$key must be a boolean.',
         issues: <String, String>{'$parent.$key': 'Expected boolean.'},
-      );
-    }
-    return value;
-  }
-
-  bool? _optionalBool(Map<String, Object?> values, String key) {
-    final value = values[key];
-    if (value == null) {
-      return null;
-    }
-    if (value is! bool) {
-      throw AgentRunRequestException(
-        '$key must be a boolean.',
-        issues: <String, String>{key: 'Expected boolean.'},
       );
     }
     return value;

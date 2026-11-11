@@ -130,7 +130,7 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
   RunnerStateSnapshot? _snapshot;
   PersistedRunState? unfinished;
   RunnerStateSnapshot? resumeSnapshot;
-  DeviceTestReportV1? reportToBuild;
+  DeviceTestReportV2? reportToBuild;
   int buildReportCount = 0;
   int resumeCount = 0;
   RunStartRequest? startRequest;
@@ -193,7 +193,7 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
   Future<void> stop({String reason = 'Stopped by operator.'}) async {}
 
   @override
-  Future<DeviceTestReportV1?> buildFormalReport({
+  Future<DeviceTestReportV2?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) async {
@@ -244,6 +244,8 @@ DeviceTestAppBootstrap bootstrap({
 DeviceTestSetupRequest setupRequest({
   TestProfile profile = TestProfile.full,
   NetworkTransport networkTransport = NetworkTransport.wifi,
+  CommissioneeType commissioneeType = CommissioneeType.real,
+  CommissioningTransport commissioningTransport = CommissioningTransport.ip,
 }) {
   return DeviceTestSetupRequest(
     controller: const ControllerInfoViewModel(
@@ -252,7 +254,8 @@ DeviceTestSetupRequest setupRequest({
       osVersion: 'Android 16',
       appBuild: '1.0.0 (1)',
     ),
-    commissioneeType: CommissioneeType.real,
+    commissioneeType: commissioneeType,
+    commissioningTransport: commissioningTransport,
     model: 'Matter test plug',
     firmware: '1.2.3',
     networkTransport: networkTransport,

@@ -19,8 +19,6 @@ class SetupScreen extends StatefulWidget {
 }
 
 class _SetupScreenState extends State<SetupScreen> {
-  final TextEditingController _fallbackReasonController =
-      TextEditingController();
   final TextEditingController _modelController = TextEditingController();
   final TextEditingController _firmwareController = TextEditingController();
   final TextEditingController _stateChangeNotesController =
@@ -28,20 +26,14 @@ class _SetupScreenState extends State<SetupScreen> {
   final TextEditingController _setupCodeController = TextEditingController();
   final TextEditingController _wifiSsidController = TextEditingController();
   final TextEditingController _wifiPasswordController = TextEditingController();
-  final TextEditingController _threadDatasetController =
-      TextEditingController();
 
-  CommissioneeType _commissioneeType = CommissioneeType.real;
-  NetworkTransport _networkTransport = NetworkTransport.wifi;
   StateChangeMethod _stateChangeMethod = StateChangeMethod.physicalControl;
   TestProfile _profile = TestProfile.full;
-  bool _virtualFallbackConfirmed = false;
   bool _controllerClean = false;
   bool _commissioneeClean = false;
   bool _secretsPurged = false;
   bool _hideSetupCode = true;
   bool _hideWifiPassword = true;
-  bool _hideThreadDataset = true;
   bool _submitted = false;
   bool _submitting = false;
   String? _actionError;
@@ -49,14 +41,12 @@ class _SetupScreenState extends State<SetupScreen> {
 
   @override
   void dispose() {
-    _fallbackReasonController.dispose();
     _modelController.dispose();
     _firmwareController.dispose();
     _stateChangeNotesController.dispose();
     _setupCodeController.dispose();
     _wifiSsidController.dispose();
     _wifiPasswordController.dispose();
-    _threadDatasetController.dispose();
     super.dispose();
   }
 
@@ -93,8 +83,8 @@ class _SetupScreenState extends State<SetupScreen> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Real Matter hardware is the primary path. The virtual '
-                  'commissionee is a fallback that requires a recorded reason.',
+                  'Device validation requires qualified real Matter hardware. '
+                  'Every Run uses Wi-Fi/IP commissioning.',
                   style: theme.textTheme.bodyMedium,
                 ),
                 if (_actionError != null ||
@@ -124,86 +114,15 @@ class _SetupScreenState extends State<SetupScreen> {
                 const SizedBox(height: 16),
                 PresentationCard(
                   title: 'Commissionee',
-                  subtitle:
-                      'Select the physical device or the distinct Android '
-                      'virtual-device fallback.',
+                  subtitle: 'Use qualified real Matter hardware only.',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: <Widget>[
-                          _selectionChip(
-                            key: DeviceTestUiKeys.realCommissionee,
-                            label: 'Real Matter device',
-                            semanticsLabel: 'Select a real Matter commissionee',
-                            selected:
-                                _commissioneeType == CommissioneeType.real,
-                            enabled: !busy,
-                            onSelected: () =>
-                                _setCommissioneeType(CommissioneeType.real),
-                          ),
-                          _selectionChip(
-                            key: DeviceTestUiKeys.virtualCommissionee,
-                            label: 'Android virtual device',
-                            semanticsLabel:
-                                'Select an Android virtual commissionee',
-                            selected:
-                                _commissioneeType == CommissioneeType.virtual,
-                            enabled: !busy,
-                            onSelected: () =>
-                                _setCommissioneeType(CommissioneeType.virtual),
-                          ),
-                        ],
+                      const InfoBanner(
+                        icon: Icons.devices,
+                        message:
+                            'A qualified real Matter On/Off device is required.',
                       ),
-                      if (_commissioneeType ==
-                          CommissioneeType.virtual) ...<Widget>[
-                        const SizedBox(height: 16),
-                        InfoBanner(
-                          icon: Icons.devices_other,
-                          message:
-                              'The virtual commissionee must be a distinct '
-                              'Android phone running the Project CHIP Virtual '
-                              'Device App.',
-                        ),
-                        const SizedBox(height: 12),
-                        TextField(
-                          key: DeviceTestUiKeys.fallbackReason,
-                          controller: _fallbackReasonController,
-                          enabled: !busy,
-                          minLines: 2,
-                          maxLines: 4,
-                          decoration: _fieldDecoration(
-                            label: 'Fallback reason',
-                            hint:
-                                'Explain why no qualified real Matter On/Off '
-                                'device is available.',
-                            field: SetupField.fallbackReason,
-                          ),
-                          onChanged: (_) =>
-                              _clearError(SetupField.fallbackReason),
-                        ),
-                        CheckboxListTile(
-                          key: DeviceTestUiKeys.fallbackConfirmation,
-                          value: _virtualFallbackConfirmed,
-                          onChanged: busy
-                              ? null
-                              : (value) => setState(() {
-                                  _virtualFallbackConfirmed = value ?? false;
-                                  _errors = _without(
-                                    _errors,
-                                    SetupField.fallbackConfirmation,
-                                  );
-                                }),
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          title: const Text(
-                            'I confirm that a real Matter device is unavailable.',
-                          ),
-                          subtitle: _errorText(SetupField.fallbackConfirmation),
-                        ),
-                      ],
                       const SizedBox(height: 16),
                       TextField(
                         key: DeviceTestUiKeys.modelField,
@@ -242,117 +161,59 @@ class _SetupScreenState extends State<SetupScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text(
-                        'Network transport',
-                        style: theme.textTheme.labelLarge,
-                      ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: <Widget>[
-                          for (final transport in NetworkTransport.values)
-                            _selectionChip(
-                              key: DeviceTestUiKeys.networkChoice(transport),
-                              label: transport.label,
-                              semanticsLabel:
-                                  'Select ${transport.label} network transport',
-                              selected: _networkTransport == transport,
-                              enabled: !busy,
-                              onSelected: () => _setNetworkTransport(transport),
-                            ),
-                        ],
+                      const InfoBanner(
+                        icon: Icons.lan_outlined,
+                        message:
+                            'Device validation uses Wi-Fi/IP commissioning. '
+                            'The commissionee must already be reachable on the '
+                            'same trusted LAN.',
                       ),
                       const SizedBox(height: 16),
-                      if (_networkTransport ==
-                          NetworkTransport.wifi) ...<Widget>[
-                        TextField(
-                          key: DeviceTestUiKeys.wifiSsid,
-                          controller: _wifiSsidController,
-                          enabled: !busy,
-                          textInputAction: TextInputAction.next,
-                          decoration: _fieldDecoration(
-                            label: 'Wi-Fi SSID',
-                            field: SetupField.networkCredentials,
-                          ),
-                          onChanged: (_) =>
-                              _clearError(SetupField.networkCredentials),
+                      TextField(
+                        key: DeviceTestUiKeys.wifiSsid,
+                        controller: _wifiSsidController,
+                        enabled: !busy,
+                        textInputAction: TextInputAction.next,
+                        decoration: _fieldDecoration(
+                          label: 'Wi-Fi SSID',
+                          field: SetupField.networkCredentials,
                         ),
-                        const SizedBox(height: 12),
-                        TextField(
-                          key: DeviceTestUiKeys.wifiPassword,
-                          controller: _wifiPasswordController,
-                          enabled: !busy,
-                          obscureText: _hideWifiPassword,
-                          autocorrect: false,
-                          enableSuggestions: false,
-                          decoration:
-                              _fieldDecoration(
-                                label:
-                                    'Wi-Fi password (optional for open networks)',
-                                field: null,
-                              ).copyWith(
-                                suffixIcon: IconButton(
-                                  tooltip: _hideWifiPassword
-                                      ? 'Show Wi-Fi password'
-                                      : 'Hide Wi-Fi password',
-                                  onPressed: busy
-                                      ? null
-                                      : () => setState(() {
-                                          _hideWifiPassword =
-                                              !_hideWifiPassword;
-                                        }),
-                                  icon: Icon(
-                                    _hideWifiPassword
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                  ),
+                        onChanged: (_) =>
+                            _clearError(SetupField.networkCredentials),
+                      ),
+                      const SizedBox(height: 12),
+                      TextField(
+                        key: DeviceTestUiKeys.wifiPassword,
+                        controller: _wifiPasswordController,
+                        enabled: !busy,
+                        obscureText: _hideWifiPassword,
+                        autocorrect: false,
+                        enableSuggestions: false,
+                        decoration:
+                            _fieldDecoration(
+                              label:
+                                  'Wi-Fi password (optional for open networks)',
+                              field: null,
+                            ).copyWith(
+                              suffixIcon: IconButton(
+                                tooltip: _hideWifiPassword
+                                    ? 'Show Wi-Fi password'
+                                    : 'Hide Wi-Fi password',
+                                onPressed: busy
+                                    ? null
+                                    : () => setState(() {
+                                        _hideWifiPassword = !_hideWifiPassword;
+                                      }),
+                                icon: Icon(
+                                  _hideWifiPassword
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
                                 ),
                               ),
-                          onChanged: (_) =>
-                              _clearError(SetupField.networkCredentials),
-                        ),
-                      ] else if (_networkTransport ==
-                          NetworkTransport.thread) ...<Widget>[
-                        TextField(
-                          key: DeviceTestUiKeys.threadDataset,
-                          controller: _threadDatasetController,
-                          enabled: !busy,
-                          obscureText: _hideThreadDataset,
-                          autocorrect: false,
-                          enableSuggestions: false,
-                          decoration:
-                              _fieldDecoration(
-                                label: 'Thread operational dataset',
-                                field: SetupField.networkCredentials,
-                              ).copyWith(
-                                suffixIcon: IconButton(
-                                  tooltip: _hideThreadDataset
-                                      ? 'Show Thread operational dataset'
-                                      : 'Hide Thread operational dataset',
-                                  onPressed: busy
-                                      ? null
-                                      : () => setState(() {
-                                          _hideThreadDataset =
-                                              !_hideThreadDataset;
-                                        }),
-                                  icon: Icon(
-                                    _hideThreadDataset
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                  ),
-                                ),
-                              ),
-                          onChanged: (_) =>
-                              _clearError(SetupField.networkCredentials),
-                        ),
-                      ] else
-                        const InfoBanner(
-                          icon: Icons.settings_ethernet,
-                          message:
-                              'Unknown transport credentials must be supplied '
-                              'by the test harness before commissioning.',
-                        ),
+                            ),
+                        onChanged: (_) =>
+                            _clearError(SetupField.networkCredentials),
+                      ),
                       const SizedBox(height: 16),
                       Text(
                         'State-change method',
@@ -441,8 +302,8 @@ class _SetupScreenState extends State<SetupScreen> {
                 PresentationCard(
                   title: 'Preflight',
                   subtitle:
-                      'Permissions, Bluetooth, local network, and connectivity '
-                      'must be ready before the Run starts.',
+                      'Local-network access and controller connectivity must '
+                      'be ready before the Run starts.',
                   child: Container(
                     key: DeviceTestUiKeys.preflightList,
                     child: widget.state.preflightChecks.isEmpty
@@ -466,8 +327,8 @@ class _SetupScreenState extends State<SetupScreen> {
                 PresentationCard(
                   title: 'Clean-cycle Confirmations',
                   subtitle:
-                      'Every controller path and every fallback must begin from '
-                      'a clean test state.',
+                      'The controller and real commissionee must begin from a '
+                      'clean test state.',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
@@ -505,7 +366,7 @@ class _SetupScreenState extends State<SetupScreen> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
                         title: const Text(
-                          'Commissionee was factory-reset or has a clean virtual state.',
+                          'Commissionee was factory-reset for this Run.',
                         ),
                         subtitle: _errorText(SetupField.commissioneeClean),
                       ),
@@ -698,21 +559,6 @@ class _SetupScreenState extends State<SetupScreen> {
     return error == null ? null : _InlineError(error: error);
   }
 
-  void _setCommissioneeType(CommissioneeType type) {
-    setState(() {
-      _commissioneeType = type;
-      _errors = _without(_errors, SetupField.fallbackReason);
-      _errors = _without(_errors, SetupField.fallbackConfirmation);
-    });
-  }
-
-  void _setNetworkTransport(NetworkTransport transport) {
-    setState(() {
-      _networkTransport = transport;
-      _errors = _without(_errors, SetupField.networkCredentials);
-    });
-  }
-
   void _setStateChangeMethod(StateChangeMethod method) {
     setState(() {
       _stateChangeMethod = method;
@@ -754,18 +600,16 @@ class _SetupScreenState extends State<SetupScreen> {
       secretsPurged: _secretsPurged,
     );
     final draft = DeviceTestSetupDraft(
-      commissioneeType: _commissioneeType,
-      fallbackReason: _fallbackReasonController.text,
-      virtualFallbackConfirmed: _virtualFallbackConfirmed,
+      commissioneeType: CommissioneeType.real,
       model: _modelController.text,
       firmware: _firmwareController.text,
-      networkTransport: _networkTransport,
+      commissioningTransport: CommissioningTransport.ip,
+      networkTransport: NetworkTransport.wifi,
       stateChangeMethod: _stateChangeMethod,
       stateChangeNotes: _stateChangeNotesController.text,
       setupCode: _setupCodeController.text,
       wifiSsid: _wifiSsidController.text,
       wifiPassword: _wifiPasswordController.text,
-      threadOperationalDataset: _threadDatasetController.text,
       profile: _profile,
       cleanCycle: cleanCycle,
     );
@@ -788,16 +632,15 @@ class _SetupScreenState extends State<SetupScreen> {
     final request = DeviceTestSetupRequest(
       controller: controllerInfo,
       commissioneeType: draft.commissioneeType,
-      fallbackReason: draft.fallbackReason.trim(),
       model: draft.model.trim(),
       firmware: draft.firmware.trim(),
+      commissioningTransport: draft.commissioningTransport,
       networkTransport: draft.networkTransport,
       stateChangeMethod: draft.stateChangeMethod,
       stateChangeNotes: draft.stateChangeNotes.trim(),
       setupCode: draft.setupCode.trim(),
       wifiSsid: draft.wifiSsid.trim(),
       wifiPassword: draft.wifiPassword,
-      threadOperationalDataset: draft.threadOperationalDataset.trim(),
       profile: draft.profile,
       cleanCycle: draft.cleanCycle,
     );
@@ -809,7 +652,6 @@ class _SetupScreenState extends State<SetupScreen> {
       await widget.controller.startRun(request);
       _setupCodeController.clear();
       _wifiPasswordController.clear();
-      _threadDatasetController.clear();
     } on Object {
       if (mounted) {
         setState(() {

@@ -52,7 +52,6 @@ class InvalidWifiPasswordCase implements DeviceTestCase {
 
     TestCaseOutcome diagnosticOutcome;
     try {
-      final target = await discoverTarget(context, secrets: secrets);
       final identityRequest = ControllerIdentityRequest(
         runId: context.runId,
         purpose: ControllerIdentityPurpose.invalidWifiPassword,
@@ -65,7 +64,6 @@ class InvalidWifiPasswordCase implements DeviceTestCase {
       final invalidSecrets = secrets.withInvalidWifiPassword();
       final result = await commissionTarget(
         context,
-        target: target,
         identity: identity,
         secrets: invalidSecrets,
         timeout: context.timeoutFor(id),
@@ -93,14 +91,6 @@ class InvalidWifiPasswordCase implements DeviceTestCase {
               'Invalid Wi-Fi credentials produced an unexpected '
               '${error.code.wireName} failure.',
             );
-    } on BleDiscoveryException catch (error) {
-      diagnosticOutcome = TestCaseOutcome.failed(
-        'Invalid-Wi-Fi discovery failed with ${error.code.wireName}.',
-      );
-    } on MissingDiscoveryTargetException {
-      diagnosticOutcome = TestCaseOutcome.failed(
-        'The commissionee was not rediscovered for the invalid-Wi-Fi test.',
-      );
     } on TimeoutException {
       diagnosticOutcome = TestCaseOutcome.failed(
         'The invalid-Wi-Fi commissioning test timed out.',

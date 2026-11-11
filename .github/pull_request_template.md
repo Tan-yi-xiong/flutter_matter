@@ -50,7 +50,7 @@ app checks are local and are not part of required CI.
 
 - [ ] Not applicable; explain why in the field below
 - [ ] Qualified real Matter device used
-- [ ] Android Virtual Device App fallback used
+- [ ] Wi-Fi/IP commissioning used; no BLE discovery or GATT commissioning
 
 **Applicability or not-applicable reason:**
 
@@ -60,11 +60,15 @@ app checks are local and are not part of required CI.
 
 **Commissionee model, firmware, and state-change method:**
 
+**Commissioning transport and network transport:** `<ip / wifi>`
+
+**Controller and commissionee confirmed on the same trusted LAN:** `<Yes|No>`
+
 **Android result:** `<Passed|Failed|Not run>` — `<report and attachment links>`
 
 **iOS result:** `<Passed|Failed|Not run>` — `<report and attachment links>`
 
-**Real-device fallback reason:**
+**Virtual commissionee use:** `Not used` — virtual commissionees are not supported; every device run, including quick iteration, uses real Matter hardware.
 
 <details>
 <summary>Generated Markdown device-test-report summary</summary>
@@ -113,5 +117,5 @@ Paste `device-test-report.md` here.
 - [ ] A green CI result was not treated as proof of native compilation or device behavior.
 - [ ] Device-behavior evidence uses the versioned report contract, matches the PR head, and covers every affected platform.
 - [ ] No P0 failure was retried in the same Run to manufacture a green result.
-- [ ] The commissionee selection is valid: a qualified real Matter device was preferred, and any virtual fallback reason is credible.
+- [ ] Formal evidence used a qualified real Matter device over Wi-Fi/IP commissioning without BLE discovery or GATT commissioning.
 - [ ] Attached reports and screenshots contain no credentials, device identifiers, provisioning secrets, certificates, keys, or raw logs.

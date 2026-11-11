@@ -90,10 +90,7 @@ class TestContext {
 
   Duration timeoutFor(DeviceTestId id) => timeouts.forTest(id);
 
-  RequiredActor get commissioneeActionActor =>
-      commissionee?.type == CommissioneeType.virtual
-      ? RequiredActor.agentAndroid
-      : RequiredActor.human;
+  RequiredActor get commissioneeActionActor => RequiredActor.human;
 
   RequiredActor get controllerSystemActor =>
       controller?.platform == ControllerPlatform.android

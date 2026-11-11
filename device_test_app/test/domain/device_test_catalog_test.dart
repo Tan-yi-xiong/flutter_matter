@@ -6,8 +6,8 @@ void main() {
     test('keeps the contract order and priorities', () {
       expect(DeviceTestCatalog.all.map((testId) => testId.wireName), <String>[
         'build_install',
-        'ble_discovery',
-        'ble_commissioning',
+        'ip_discovery',
+        'ip_commissioning',
         'operational_connect',
         'onoff_invoke',
         'onoff_subscription',
@@ -15,7 +15,6 @@ void main() {
         'app_restart',
         'factory_reset_recommission',
         'invalid_setup_passcode',
-        'bluetooth_disabled',
         'invalid_wifi_password',
         'remove_fabric_ui',
       ]);
@@ -34,7 +33,6 @@ void main() {
           DeviceTestPriority.p2,
           DeviceTestPriority.p2,
           DeviceTestPriority.p2,
-          DeviceTestPriority.p2,
         ],
       );
     });
@@ -42,8 +40,8 @@ void main() {
     test('quick is the five-step minimum operational path', () {
       expect(TestProfile.quick.testIds, <DeviceTestId>[
         DeviceTestId.buildInstall,
-        DeviceTestId.bleDiscovery,
-        DeviceTestId.bleCommissioning,
+        DeviceTestId.ipDiscovery,
+        DeviceTestId.ipCommissioning,
         DeviceTestId.operationalConnect,
         DeviceTestId.onoffInvoke,
       ]);
@@ -55,7 +53,7 @@ void main() {
 
     test('full contains every fixed test in canonical order', () {
       expect(TestProfile.full.testIds, DeviceTestCatalog.all);
-      expect(TestProfile.full.testIds.toSet(), hasLength(13));
+      expect(TestProfile.full.testIds.toSet(), hasLength(12));
     });
 
     test('wire names round trip and unknown names fail', () {

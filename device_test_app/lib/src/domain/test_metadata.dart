@@ -65,11 +65,20 @@ enum CommissioneeType {
 }
 
 enum CommissioningTransport {
-  ble('ble');
+  ip('ip');
 
   const CommissioningTransport(this.wireName);
 
   final String wireName;
+
+  static CommissioningTransport parse(String value) {
+    for (final transport in values) {
+      if (transport.wireName == value) {
+        return transport;
+      }
+    }
+    throw FormatException('Unknown commissioning transport: $value');
+  }
 }
 
 enum NetworkTransport {
@@ -118,7 +127,7 @@ class CommissioneeMetadata {
     required this.firmware,
     required this.networkTransport,
     required this.stateChangeMethod,
-    this.commissioningTransport = CommissioningTransport.ble,
+    this.commissioningTransport = CommissioningTransport.ip,
     this.stateChangeNotes,
   });
 
@@ -132,9 +141,6 @@ class CommissioneeMetadata {
 
   factory CommissioneeMetadata.fromJson(Map<String, dynamic> json) {
     final transport = _requiredString(json, 'commissioning_transport');
-    if (transport != CommissioningTransport.ble.wireName) {
-      throw FormatException('Unsupported commissioning transport: $transport');
-    }
 
     final rawNotes = json['state_change_notes'];
     if (rawNotes != null && rawNotes is! String) {
@@ -145,6 +151,7 @@ class CommissioneeMetadata {
       type: CommissioneeType.parse(_requiredString(json, 'type')),
       model: _requiredString(json, 'model'),
       firmware: _requiredString(json, 'firmware'),
+      commissioningTransport: CommissioningTransport.parse(transport),
       networkTransport: NetworkTransport.parse(
         _requiredString(json, 'network_transport'),
       ),

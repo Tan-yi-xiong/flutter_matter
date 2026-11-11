@@ -9,6 +9,7 @@ This document defines the operational interface between the flutter_matter devic
 - Keep the app as the WebSocket client so Android and physical iOS controllers can connect to a Mac-hosted server.
 - Expose every operation through a JSON CLI that an Agent can call from a shell.
 - Keep all evidence free of device identifiers, provisioning secrets, certificates, private keys, and raw logs.
+- Use Wi-Fi/IP commissioning with real Matter hardware for every device run; do not run BLE discovery/commissioning or submit virtual-device evidence.
 
 ## Topology
 
@@ -73,7 +74,7 @@ Every message is a UTF-8 JSON object with this envelope:
 | `command` | Host to app | A named command with JSON arguments and an idempotency key. |
 | `command_result` | App to host | Terminal command status and sanitized result data. |
 | `screenshot` | App to host | Base64 image bytes correlated with a command. |
-| `report` | App to host | Sanitized schema v1 JSON and the matching Markdown summary. |
+| `report` | App to host | Sanitized schema v2 JSON and the matching Markdown summary. |
 | `error` | Both | Protocol or command failure that does not necessarily close the socket. |
 
 ### Sequence rules
@@ -111,7 +112,7 @@ If the socket closes while a command is waiting, the command fails with `app_dis
 
 Each public candidate contains `id`, `short_id`, `platform`, `model`, `os_version`, `name`, `state`, `connection`, and `usable`. Public JSON does not include the internal iOS UDID used by screenshot tooling.
 
-Use a qualified real Matter On/Off device as the commissionee whenever it is available. The Android Virtual Matter Device App is only a functional fallback when no real hardware is available. For an Android controller, the canonical fallback topology is two distinct Android phones. A physical iOS controller can test the same distinct Android virtual commissionee.
+A qualified real Matter On/Off device is required for formal acceptance. It must already be connected to the same trusted Wi-Fi/LAN as the controller and in an open commissioning window. The Android Virtual Matter Device App path is retired; the Agent must not select or operate a virtual commissionee in any Run.
 
 The host CLI never selects a controller by default:
 
@@ -124,7 +125,7 @@ The host CLI never selects a controller by default:
 
 When more than one phone is connected, the Agent must show an interactive user prompt with `platform`, `model`, `os_version`, and `short_id`, then pass the selected full ID to `serve --device`. The full ID is retained for the command but is not shown as the choice label. Never choose the first, only, previous, or remembered candidate automatically.
 
-If a virtual commissionee is required, the Agent must ask a separate interactive question and select a distinct Android phone. The virtual commissionee cannot be the controller, even if only two phones are connected. The user must make this choice; the Agent cannot infer it from device model, installed packages, or prior use.
+The Agent must not choose or operate a virtual commissionee in any Run, including quick iteration. If the operator cannot provide real Matter hardware, stop before starting any device Run and report that validation is blocked.
 
 ## CLI commands
 
@@ -178,7 +179,7 @@ mkdir -p build/device-test-agent
 chmod 700 build/device-test-agent
 ```
 
-Example structure for a real Wi-Fi commissionee:
+Example structure for a real Wi-Fi/IP commissionee:
 
 ```json
 {
@@ -186,6 +187,7 @@ Example structure for a real Wi-Fi commissionee:
   "commissionee_type": "real",
   "model": "<commissionee-model>",
   "firmware": "<firmware-version>",
+  "commissioning_transport": "ip",
   "network_transport": "wifi",
   "state_change_method": "physical_control",
   "setup_code": "<setup-code-or-qr-payload>",
@@ -199,7 +201,7 @@ Example structure for a real Wi-Fi commissionee:
 }
 ```
 
-For a virtual commissionee, use `"commissionee_type": "virtual"`, add a non-empty `fallback_reason`, and set `"virtual_fallback_confirmed": true`. For Thread, use `"network_transport": "thread"` and `thread_operational_dataset`. When `state_change_method` is `other`, include non-empty `state_change_notes`.
+For formal evidence, keep `"commissionee_type": "real"`, `"commissioning_transport": "ip"`, and `"network_transport": "wifi"`. Thread is outside the current formal acceptance contract. When `state_change_method` is `other`, include non-empty `state_change_notes`.
 
 Start a run with a stable command ID and the argument file:
 
@@ -211,7 +213,7 @@ fvm dart run tool/device_test_agent.dart command \
   --timeout-seconds 1200
 ```
 
-Use `"mode":"full"` and an appropriate timeout for formal evidence. Retain the file until the command outcome is terminal, then delete it without printing its contents.
+Use `"mode":"full"` and an appropriate timeout for formal evidence. Retain the file until the command outcome is terminal, then delete it without printing its contents. Every Run, including `quick`, must include `"commissioning_transport":"ip"` and `"network_transport":"wifi"`; it must not run BLE discovery or commissioning.
 
 ```bash
 fvm dart run tool/device_test_agent.dart screenshot \
@@ -304,7 +306,7 @@ The repository Skill enforces this sequence:
 
 1. Run `devices` and inspect every candidate.
 2. Ask the user to select the controller; never auto-select.
-3. Ask separately whether a real Matter device or a distinct Android virtual commissionee will be used.
+3. Confirm the operator has prepared the selected real Matter device on the same trusted Wi-Fi/LAN with its commissioning window open.
 4. Start `serve` with the explicit controller ID.
 5. Launch or connect the app and wait for the bridge connection.
 6. Start `quick` for iteration or `full` for formal evidence with a stable command ID.
@@ -320,10 +322,11 @@ The repository Skill enforces this sequence:
 The host performs structural checks before writing report files:
 
 - Envelope and report schema versions are supported.
-- All 13 fixed test IDs occur exactly once.
+- All 12 fixed test IDs occur exactly once.
 - Test statuses and durations have valid types.
 - Summary counts match the `tests` object.
 - Overall result is consistent with P0 and failure rules.
+- Formal evidence records a real commissionee, `commissioning_transport: ip`, and `network_transport: wifi`.
 - `plugin_commit` matches the current repository HEAD.
 - Test-app commit is a 40-character lowercase Git SHA.
 - Sanitization is explicitly confirmed.
@@ -355,6 +358,8 @@ build/device-test-agent/
 - Automated control of physical Matter hardware.
 - Automated iOS system-dialog interaction.
 - Real-device CI or automatic evidence upload.
+- BLE discovery or commissioning in formal acceptance.
+- Submitting a virtual-commissionee report as formal evidence.
 
 ## Verification coverage
 

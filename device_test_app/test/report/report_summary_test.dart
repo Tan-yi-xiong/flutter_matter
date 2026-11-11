@@ -10,10 +10,10 @@ void main() {
     ]);
 
     expect(summary.result, ReportResult.passed);
-    expect(summary.passed, 13);
+    expect(summary.passed, 12);
     expect(summary.failed, 0);
     expect(summary.notRun, 0);
-    expect(summary.total, 13);
+    expect(summary.total, 12);
   });
 
   test('a P0 not_run makes the overall result not_run', () {
@@ -44,7 +44,7 @@ void main() {
 
     expect(summary.result, ReportResult.passed);
     expect(summary.passed, 7);
-    expect(summary.notRun, 6);
+    expect(summary.notRun, 5);
   });
 
   test('any failure makes the overall result failed', () {

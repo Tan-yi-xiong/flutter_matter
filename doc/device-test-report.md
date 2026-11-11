@@ -4,6 +4,8 @@ The device-test report is the reviewable evidence produced by a physical-device 
 
 The dedicated app implements this contract and includes a local report validator. The app and its tests are outside the required CI gate.
 
+Formal acceptance requires a qualified real Matter commissionee, Wi-Fi/IP commissioning, and `network_transport: "wifi"`. BLE discovery/commissioning is not formal acceptance and must not be run. Virtual-commissionee reports are not supported; every device run uses qualified real Matter hardware.
+
 ## Output files
 
 The test app must write these files into a user-selected output directory:
@@ -15,7 +17,7 @@ Both files must describe the same run. The Markdown summary must contain the sam
 
 ## Schema version
 
-The initial schema version is `1`. A compatible addition, such as an optional non-sensitive field, may keep the version when the schema remains backward compatible. A removal, rename, type change, status change, or required-field change requires a new schema version and an update to this document and the PR template.
+The current schema version is `2`. Schema version `1` is retired and must not be accepted as device evidence. A compatible addition, such as an optional non-sensitive field, may keep the version when the schema remains backward compatible. A removal, rename, type change, status change, or required-field change requires a new schema version and an update to this document and the PR template.
 
 Reports with an unknown or unsupported `schema_version` must not be accepted as release evidence.
 
@@ -25,7 +27,7 @@ Reports with an unknown or unsupported `schema_version` must not be accepted as 
 | --- | --- |
 | Run identity | `generated_at`, test-app name/version/commit, and the exact `plugin_commit` under test |
 | Controller | `android` or `ios`, device model, OS version, and app build identifier |
-| Commissionee | `real` or `virtual`, model, firmware, BLE commissioning transport, network transport, and external state-change method |
+| Commissionee | `real` for formal evidence, model, firmware, `ip` commissioning transport, `wifi` network transport, and external state-change method |
 | Summary | Overall `passed`, `failed`, or `not_run`; counts for each status |
 | Tests | A `tests` object keyed by every fixed P0, P1, and P2 test ID, each with result, duration, optional notes, and optional relative evidence filenames |
 | Sanitization | Explicit confirmation that the report and attachments were reviewed for sensitive data |
@@ -37,27 +39,26 @@ Device models and OS versions are sufficient for traceability. Do not add serial
 | Priority | Test ID | Requirement |
 | --- | --- | --- |
 | P0 | `build_install` | Android APK or signed iOS app installs and launches |
-| P0 | `ble_discovery` | Correct commissionee is discovered within 15 seconds |
-| P0 | `ble_commissioning` | Commissioning completes with `errorCode == 0` within 120 seconds |
+| P0 | `ip_discovery` | The QR setup payload advertises the Matter on-network discovery capability and the selected commissioning transport is `ip` |
+| P0 | `ip_commissioning` | The real commissionee is discovered over mDNS/IP and PASE/commissioning completes with `errorCode == 0` within 120 seconds without a BLE pre-scan or GATT connection |
 | P0 | `operational_connect` | CASE connection returns a valid connect context within 30 seconds |
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
 | P0 | `onoff_subscription` | Initial state and an external update arrive within 15 seconds |
 | P0 | `node_label_persistence` | NodeLabel write/read succeeds and survives a commissionee restart |
 | P1 | `app_restart` | Controller restart reconnects without recommissioning |
-| P1 | `factory_reset_recommission` | A later factory reset and full commissioning succeeds |
+| P1 | `factory_reset_recommission` | A later factory reset and full Wi-Fi/IP commissioning succeeds |
 | P2 | `invalid_setup_passcode` | An invalid passcode returns a clear non-zero failure without a crash |
-| P2 | `bluetooth_disabled` | Commissioning fails clearly when Bluetooth is unavailable |
 | P2 | `invalid_wifi_password` | Provisioning fails clearly without reporting false success |
 | P2 | `remove_fabric_ui` | Existing remove/delete-device UI behavior is recorded accurately |
 
-All 13 IDs must appear exactly once as keys in the `tests` object. The priority is determined by the test ID, so it is not duplicated inside each result. Unavailable P1 or P2 scenarios must be represented as `not_run` with a reason; they must not be omitted. A required P0 scenario cannot be omitted, and a stable release requires every P0 entry to be `passed`.
+All 12 IDs must appear exactly once as keys in the `tests` object. The priority is determined by the test ID, so it is not duplicated inside each result. Unavailable P1 or P2 scenarios must be represented as `not_run` with a reason; they must not be omitted. A required P0 scenario cannot be omitted, and a stable release requires every P0 entry to be `passed`.
 
 ## Summary rules
 
-- The overall result is `passed` only when every P0 test is `passed` and every non-P0 test is either `passed` or `not_run` with a reason.
+- The overall result is `passed` only when the commissionee is real hardware, commissioning transport is `ip`, network transport is `wifi`, every P0 test is `passed`, and every non-P0 test is either `passed` or `not_run` with a reason.
 - The overall result is `failed` when any test is `failed`, especially any P0 test.
 - The overall result is `not_run` when any P0 test is `not_run`.
-- Counts must be calculated from the `tests` object and must total 13.
+- Counts must be calculated from the `tests` object and must total 12.
 - P2 failures are valid report data but require explicit maintainer risk acceptance before a stable release.
 
 ## Markdown summary template
@@ -70,8 +71,9 @@ The generated Markdown should follow this structure:
 - Plugin commit: `<40-character SHA>`
 - Test app: `<name> <version> (<commit>)`
 - Controller: `<android|ios>` / `<device model>` / `<OS version>`
-- Commissionee: `<real|virtual>` / `<model>` / `<firmware>`
-- Commissioning transport: `ble`
+- Commissionee: `real` / `<model>` / `<firmware>`
+- Commissioning transport: `ip`
+- Network transport: `wifi`
 - Overall result: `<passed|failed|not_run>`
 
 | ID | Priority | Result | Duration | Notes |
@@ -98,8 +100,8 @@ The dedicated app may render the table automatically. Manual interim reports mus
 
 The dedicated app must:
 
-1. Use the selected commissionee and controller path from [`device-validation.md`](device-validation.md).
-2. Enforce the clean-cycle and real-device-first rules rather than allowing a caller to silently skip them.
+1. Use the selected controller and qualified real Matter commissionee from [`device-validation.md`](device-validation.md).
+2. Enforce the clean-cycle, real-device, and Wi-Fi/IP-only formal-acceptance rules rather than allowing a caller to silently substitute a virtual commissionee or BLE path.
 3. Emit both output files atomically only after the run is complete.
 4. Set `plugin_commit` from the plugin checkout actually exercised by the test app.
 5. Set the test-app commit from the test app's own build metadata.
@@ -119,11 +121,12 @@ For a device-behavior pull request:
 4. Confirm that the report commit matches the PR head.
 5. Update the report after any code change that could affect device behavior.
 
-For a stable release-preparation pull request, provide separate Android and iOS reports against the candidate commit. When the virtual-device fallback is used, both reports must use that same commissionee type and include the reason a qualified real device was unavailable.
+For a stable release-preparation pull request, provide separate Android and iOS reports against the candidate commit. Both reports must use a qualified real Matter commissionee, `ip` commissioning transport, and `wifi` network transport. Virtual-device reports do not satisfy this requirement.
 
 ## Failure handling
 
 - If the report or attachment is missing, reviewers must treat the change as unverified.
 - If the report commit is stale, request a new report against the current PR head.
+- If the commissionee is virtual, the commissioning transport is not `ip`, or the network transport is not `wifi`, reviewers must reject the report as formal evidence.
 - If an attached file contains sensitive data, remove the attachment, regenerate the report, and rotate any exposed credential.
 - If the test app cannot emit a valid report, keep the run result local and record the blocker; do not hand-edit sensitive data into an attachment.

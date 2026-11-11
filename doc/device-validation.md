@@ -4,46 +4,41 @@ This document defines the manual device-validation process for `flutter_matter`.
 
 The process is manual by design. It does not require or define a self-hosted runner, an Actions hardware workflow, or an automated cross-device UI test.
 
+Formal acceptance uses **Wi-Fi/IP commissioning**. A Run must not perform BLE discovery, a BLE pre-scan, or a GATT connection. Future validation uses qualified real Matter hardware only; the Android Virtual Matter Device App path is retired, and virtual-device results are not valid evidence.
+
 ## Definitions
 
-- **Controller**: the Flutter app that commissions, connects to, and controls a Matter device. Both Android and physical iOS controllers are supported.
-- **Commissionee**: the Matter device being commissioned. A commissionee is either a qualified real Matter device or the Project CHIP Android Virtual Device App.
+- **Controller**: the Android or physical iOS app that discovers, commissions, connects to, and controls a Matter device.
+- **Commissionee**: a qualified real Matter device used for formal validation.
+- **Development commissionee**: there is no separate development commissionee. Quick iteration, when a device run is performed, still uses a qualified real Matter device; quick reports are not formal PR or release evidence.
 - **Clean cycle**: a complete validation run that starts with a factory-reset commissionee and a controller with no previous fabric or saved device state.
-- **Device-behavior change**: a change that affects commissioning, BLE, network selection, controller lifecycle, attributes, commands, subscriptions, callbacks, MethodChannel contracts, or native Matter behavior.
+- **Device-behavior change**: a change that affects commissioning, network discovery, Wi-Fi provisioning, controller lifecycle, attributes, commands, subscriptions, callbacks, MethodChannel contracts, or native Matter behavior.
 
 ## Commissionee selection
 
-Use a qualified real Matter device first. If no qualified device is available, use the Project CHIP Android Virtual Device App as the fallback commissionee.
+A qualified real Matter device is required for every device Run, including quick iteration. It is qualified when all of the following are true:
 
-A real device is qualified for the current P0 matrix only when all of the following are true:
-
-- It can be restored to factory state and commissioned again with a valid setup code.
-- It supports BLE commissioning.
+- It can be restored to factory state and commissioned again with a valid setup code or setup payload.
+- It advertises the Matter on-network discovery capability in its setup payload.
+- Its commissioning transport is `ip`.
+- It is connected to the same trusted Wi-Fi/LAN as the controller.
 - It exposes an On/Off server on endpoint `1`, cluster `0x0006`.
 - It supports Basic Information `NodeLabel` on endpoint `0`, cluster `0x0028`, attribute `0x0005`.
 - Its state can be changed independently through a physical control, a vendor app, or another local controller.
 
-The fallback Virtual Device App must be built from connectedhomeip `v1.6.1.0` and configured as an OnOff Switch with:
+If a qualified real device is unavailable, stop validation. Do not substitute a virtual commissionee in any Run, including quick iteration, and do not mark results as passed from virtual-device evidence.
 
-| Field | Value |
+## Hardware layout
+
+Formal validation requires:
+
+| Role | Requirement |
 | --- | --- |
-| Vendor ID | `0xFFF1` |
-| Product ID | `0x8003` |
-| Discriminator | `3841` |
-| Passcode | `20202021` |
-| Application endpoint | `1` |
-| On/Off cluster | `0x0006` |
+| Controller | An Android phone or physical iPhone running `device_test_app` |
+| Commissionee | A qualified real Matter On/Off device |
+| Network | One non-isolated trusted Wi-Fi/LAN reachable by both devices |
 
-Do not mix commissionee types within one candidate validation. If a real device becomes unavailable or fails qualification during validation, discard those results and restart both the Android and iOS cycles with the virtual-device fallback. Record the reason for the fallback in the reports and in the pull request.
-
-## Hardware layouts
-
-| Commissionee path | Required hardware |
-| --- | --- |
-| Qualified real Matter device | One Android controller phone, one physical iPhone, and the real Matter device |
-| Android Virtual Device App fallback | Two Android phones and one physical iPhone; one Android phone runs the controller, the other runs the Virtual Device App |
-
-Use the same non-isolated test Wi-Fi network for both phones and the commissionee. Disable VPNs and private DNS behavior that could block local Matter discovery. Use a temporary test network rather than personal or production credentials whenever possible.
+Both the controller and the commissionee must be connected to the same non-isolated trusted Wi-Fi/LAN. Disable VPNs and private DNS behavior that could block local Matter discovery. Use a temporary test network rather than personal or production credentials whenever possible.
 
 The iOS controller must run on a physical iPhone. The vendored `ZGMatter.framework` has no simulator slice, so simulator results are not valid evidence.
 
@@ -52,24 +47,25 @@ The iOS controller must run on a physical iPhone. The vendored `ZGMatter.framewo
 Record the exact toolchain used in the generated report.
 
 - Flutter: `3.41.0` from `.fvmrc`.
-- Android build host: JDK 17, Android SDK 34, NDK `28.2.13676358`, and Build Tools `31.0.0` when building the Virtual Device App.
+- Android build host: JDK 17 and Android SDK 34 or later.
 - iOS build host: macOS with Xcode 16.4 or later and CocoaPods 1.17.
 - iOS installation: a maintainer signs the app locally with a valid Apple Development identity and provisioning profile. Signing credentials, provisioning profiles, and private keys must never be committed to the repository or included in evidence.
 
-Use `device_test_app/` as the primary validation surface. A manual interim report may still conform to the same schema, but it must not claim that the dedicated app generated it.
+Use `device_test_app/` as the primary validation surface. A manual interim report may still conform to the same report contract, but it must not claim that the dedicated app generated it.
 
 ## Clean cycle procedure
 
 For each controller platform that the change requires:
 
-1. Restore the commissionee to factory state.
+1. Restore the real Matter commissionee to factory state.
 2. Remove the controller app or clear its application data so no fabric, node, or certificate state remains.
-3. Restart both devices and confirm the test Wi-Fi network, Bluetooth, camera permission, and local-network permission are ready.
-4. Commission the commissionee through BLE using a new setup code.
-5. Run every P0 scenario in the order below without replacing a failed result with a later retry.
-6. Save the generated JSON and Markdown reports. Add manually captured screenshots only when they are sanitized and useful.
+3. Restart both devices and confirm the trusted Wi-Fi/LAN, camera permission, local-network permission, and commissioning prerequisites are ready.
+4. Put the real commissionee in an open commissioning window. Do not start a BLE pre-scan or GATT connection.
+5. Run `ip_discovery` and `ip_commissioning` over Wi-Fi/IP using a new setup code or setup payload. `ip_discovery` is a readiness check: it verifies that the setup payload advertises the on-network discovery capability and that the selected commissioning transport is `ip`; it does not itself perform discovery. The controller performs the actual mDNS/IP discovery during `ip_commissioning`.
+6. Run every P0 scenario in the order below without replacing a failed result with a later retry.
+7. Save the generated JSON and Markdown reports. Add manually captured screenshots only when they are sanitized and useful.
 
-Android and iOS are separate clean cycles. The real Matter device must be factory-reset and recomissioned between the Android and iOS cycles; the Android Virtual Device App must likewise be reset between them.
+Android and iOS are separate clean cycles. The real Matter device must be factory-reset and recommissioned between the Android and iOS cycles.
 
 ## P0 matrix
 
@@ -78,26 +74,25 @@ Each required controller platform must pass one clean P0 cycle for a stable rele
 | ID | Scenario | Pass criteria |
 | --- | --- | --- |
 | `build_install` | Build and install the controller app | Android debug APK or signed iOS app launches without a crash; required permissions are reachable |
-| `ble_discovery` | Discover the commissionee over BLE | Correct discriminator is discovered within 15 seconds |
-| `ble_commissioning` | Commission with the active Wi-Fi credentials | `onCommissioningComplete` is received with `errorCode == 0` within 120 seconds |
+| `ip_discovery` | Verify the setup payload advertises on-network discovery | The QR setup payload advertises the Matter on-network discovery capability and the selected commissioning transport is `ip` |
+| `ip_commissioning` | Commission the real device over Wi-Fi/IP | The controller discovers the commissionee over mDNS/IP, completes PASE/commissioning with `errorCode == 0` within 120 seconds, and never performs a BLE pre-scan or GATT connection |
 | `operational_connect` | Connect to the commissioned node | CASE connection succeeds and a `connectContext` is obtained within 30 seconds |
 | `onoff_invoke` | Send Off, On, and Toggle to endpoint `1`, cluster `0x0006` | Each response succeeds within 10 seconds and the commissionee state changes |
 | `onoff_subscription` | Subscribe to endpoint `1`, cluster `0x0006`, attribute `0x0000` | Initial state is received; an externally triggered state change is reported within 15 seconds |
 | `node_label_persistence` | Write and read endpoint `0`, cluster `0x0028`, attribute `0x0005` | Written value is read back, survives a commissionee restart, and is not stale or empty |
 
-For a real device, change the subscribed state through its physical control or vendor app. For the virtual device, change it through the Virtual Device App's OnOff UI.
+A P0 `failed`, timeout, error, crash, or skipped result must be preserved. A failed P0 test must not be retried inside the same Run to manufacture a passing result.
 
 ## P1 and P2 scenarios
 
 P1 results provide stability evidence and do not independently block a stable release:
 
 - `app_restart`: restart the controller without recommissioning and reconnect to the saved node.
-- `factory_reset_recommission`: confirm that a subsequent factory reset and full commissioning cycle succeeds without relying on old fabric state.
+- `factory_reset_recommission`: confirm that a subsequent factory reset and full Wi-Fi/IP commissioning cycle succeeds without relying on old fabric state.
 
 P2 results record defects and must be included in the report:
 
 - Invalid setup passcode.
-- Bluetooth disabled.
 - Invalid Wi-Fi password.
 - Existing remove/delete-device UI flow.
 
@@ -107,8 +102,10 @@ A P2 failure does not block by default. The maintainer must record the failure a
 
 The dedicated device-test app, or an interim manual reporter, must produce both:
 
-- `device-test-report.json` conforming to [`device-test-report.schema.json`](device-test-report.schema.json).
+- `device-test-report.json` conforming to the schema-versioned report contract.
 - `device-test-report.md` generated from the same test data for direct use in a pull request.
+
+A formal report must record `commissionee.type: "real"`, `commissionee.commissioning_transport: "ip"`, and `commissionee.network_transport: "wifi"`. Virtual-commissionee reports are not supported; every device run, including quick iteration, uses qualified real Matter hardware.
 
 The report's `plugin_commit` must match the pull request head or the release-candidate commit. A report cannot be reused after relevant code changes. Record the test app version and commit separately from the plugin commit.
 
@@ -132,14 +129,14 @@ Device-behavior pull requests must include reports for every affected platform:
 For a stable release, the release-preparation pull request must contain:
 
 - One clean Android P0 report and one clean iOS P0 report for the candidate commit.
-- A qualified real-device report or a documented reason why the virtual-device fallback was used.
+- A qualified real-device report for each platform; virtual-device reports do not satisfy this requirement.
 - Sanitized JSON attachments for both reports; screenshots are optional manual evidence.
 - A maintainer confirmation that all required P0 results passed and that P1/P2 results were reviewed.
 
-The stable version tag must not be created when any required P0 result is `Failed` or `Not run`, when the report commit does not match the candidate, or when the commissionee type was mixed without restarting the full validation.
+The stable version tag must not be created when any required P0 result is `Failed` or `Not run`, when the report commit does not match the candidate, when the commissioning transport is not `ip`, or when the commissionee is not real hardware.
 
 ## Known limits
 
 - The repository has no supported public `unPairDevice` method; only the existing UI delete path can be evaluated.
 - iOS simulator results are not valid evidence.
-- Thread-specific credentials, ICD-specific behavior, On-network MVD, and fully automated iOS external-app control remain outside the current app scope. Android virtual-device operation may be assisted through mobile MCP.
+- Thread-specific credentials, ICD-specific behavior, BLE commissioning, and fully automated iOS external-app control remain outside formal acceptance. The virtual-device path is retired entirely.

@@ -48,7 +48,7 @@ void main() {
     expect(result.contains(ReportValidationIssueKind.semantic), isTrue);
     expect(
       result.issues.map((issue) => issue.message).join(' '),
-      contains('All 13 fixed test IDs'),
+      contains('All 12 fixed test IDs'),
     );
   });
 
@@ -83,7 +83,7 @@ void main() {
   test('rejects summary counts or results that do not match tests', () {
     final json = _clone(buildFixtureReport().toJson());
     final summary = json['summary']! as Map<String, dynamic>;
-    summary['passed'] = 11;
+    summary['passed'] = 10;
     summary['result'] = 'failed';
 
     final result = validator.validateMap(json);
@@ -128,13 +128,44 @@ void main() {
     final json = _clone(buildFixtureReport().toJson());
     final tests = json['tests']! as Map<String, dynamic>;
     final commissioning =
-        tests[DeviceTestId.bleCommissioning.wireName]! as Map<String, dynamic>;
+        tests[DeviceTestId.ipCommissioning.wireName]! as Map<String, dynamic>;
     commissioning['notes'] = 'Used setup code: 12345678901 for the retry.';
 
     final result = validator.validateMap(json);
 
     expect(result.isValid, isFalse);
     expect(result.contains(ReportValidationIssueKind.sensitive), isTrue);
+  });
+
+  test('rejects schema version 1 reports', () {
+    final json = _clone(buildFixtureReport().toJson());
+    json['schema_version'] = 1;
+
+    final result = validator.validateMap(json);
+
+    expect(result.isValid, isFalse);
+    expect(
+      result.issues.map((issue) => issue.path),
+      contains(r'$.schema_version'),
+    );
+  });
+
+  test('rejects a non-wifi network transport', () {
+    final json = _clone(buildFixtureReport().toJson());
+    final commissionee = json['commissionee']! as Map<String, dynamic>;
+    commissionee['network_transport'] = 'thread';
+
+    final result = validator.validateMap(json);
+
+    expect(result.isValid, isFalse);
+    expect(
+      result.issues.map((issue) => issue.path),
+      contains(r'$.commissionee.network_transport'),
+    );
+    expect(
+      result.issues.map((issue) => issue.message).join(' '),
+      contains('Wi-Fi network transport'),
+    );
   });
 
   test('rejects quick-profile data as formal evidence', () {

@@ -141,6 +141,8 @@ class MatterControllerService {
     final credentials = _requireCredentials();
     final timeout = request.timeout ?? _config.commissioningTimeout;
 
+    final usesBle =
+        request.commissioningTransport == MatterCommissioningTransport.ble;
     MatterBleDiscoveredDevice? discovered;
     MatterBleGattSession? gattSession;
     MatterGattBleDelegate? delegate;
@@ -149,7 +151,7 @@ class MatterControllerService {
     var commissioningCompleted = false;
 
     try {
-      if (request.preScanBle) {
+      if (usesBle) {
         try {
           discovered = await _bleScanner.scan(
             MatterBleDiscoveryRequest(
@@ -167,7 +169,7 @@ class MatterControllerService {
         }
       }
 
-      if (_targetPlatform == MatterTargetPlatform.android) {
+      if (usesBle && _targetPlatform == MatterTargetPlatform.android) {
         if (discovered == null) {
           throw MatterException(
             MatterFailureCode.bleConnectionFailed,
@@ -217,7 +219,8 @@ class MatterControllerService {
 
       final networkCredentials = request.networkCredentials
           .toPluginCredentials();
-      final connectId = _targetPlatform == MatterTargetPlatform.android
+      final connectId =
+          usesBle && _targetPlatform == MatterTargetPlatform.android
           ? androidMatterBleConnectionId
           : null;
       pairingStarted = true;

@@ -8,15 +8,15 @@ enum DeviceTestId {
     priority: DeviceTestPriority.p0,
     title: 'Build and install',
   ),
-  bleDiscovery(
-    wireName: 'ble_discovery',
+  ipDiscovery(
+    wireName: 'ip_discovery',
     priority: DeviceTestPriority.p0,
-    title: 'BLE discovery',
+    title: 'Wi-Fi/IP discovery readiness',
   ),
-  bleCommissioning(
-    wireName: 'ble_commissioning',
+  ipCommissioning(
+    wireName: 'ip_commissioning',
     priority: DeviceTestPriority.p0,
-    title: 'BLE commissioning',
+    title: 'Wi-Fi/IP commissioning',
   ),
   operationalConnect(
     wireName: 'operational_connect',
@@ -52,11 +52,6 @@ enum DeviceTestId {
     wireName: 'invalid_setup_passcode',
     priority: DeviceTestPriority.p2,
     title: 'Invalid setup passcode',
-  ),
-  bluetoothDisabled(
-    wireName: 'bluetooth_disabled',
-    priority: DeviceTestPriority.p2,
-    title: 'Bluetooth disabled',
   ),
   invalidWifiPassword(
     wireName: 'invalid_wifi_password',
@@ -148,8 +143,8 @@ abstract final class DeviceTestCatalog {
   /// The minimum smoke path: build through the first successful OnOff invoke.
   static const List<DeviceTestId> quickTestIds = <DeviceTestId>[
     DeviceTestId.buildInstall,
-    DeviceTestId.bleDiscovery,
-    DeviceTestId.bleCommissioning,
+    DeviceTestId.ipDiscovery,
+    DeviceTestId.ipCommissioning,
     DeviceTestId.operationalConnect,
     DeviceTestId.onoffInvoke,
   ];

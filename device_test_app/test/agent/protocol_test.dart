@@ -58,10 +58,10 @@ void main() {
       kind: 'test_completed',
       severity: AgentEventSeverity.info,
       message: 'Commissioning passed.',
-      testId: 'ble_commissioning',
+      testId: 'ip_commissioning',
       data: const <String, Object?>{'duration_ms': 1234},
     ).toJson();
-    expect(AgentEventPayload.fromJson(event).testId, 'ble_commissioning');
+    expect(AgentEventPayload.fromJson(event).testId, 'ip_commissioning');
 
     final command = AgentCommandPayload(
       name: 'start_run',
@@ -81,7 +81,7 @@ void main() {
 
     final report = AgentReportPayload(
       runId: 'run-1',
-      reportJson: const <String, Object?>{'schema_version': 1},
+      reportJson: const <String, Object?>{'schema_version': 2},
       reportMarkdown: '### Device validation summary\n',
     ).toJson();
     expect(AgentReportPayload.fromJson(report).sanitized, isTrue);
@@ -92,9 +92,9 @@ void main() {
       runId: 'run-1',
       status: AgentRunStatus.waitingForAgentAndroid,
       mode: AgentRunMode.quick,
-      currentTestId: 'ble_commissioning',
+      currentTestId: 'ip_commissioning',
       completedTests: 2,
-      totalTests: 13,
+      totalTests: 12,
       message: 'Confirm the Android Bluetooth dialog.',
       prompt: const AgentPrompt(
         promptId: 'prompt-1',
@@ -102,7 +102,7 @@ void main() {
         title: 'Bluetooth permission',
         instructions: 'Tap Allow.',
         action: 'accept_bluetooth_dialog',
-        testId: 'ble_commissioning',
+        testId: 'ip_commissioning',
       ),
     );
 

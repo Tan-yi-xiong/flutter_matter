@@ -52,11 +52,8 @@ class NodeLabelPersistenceCase implements DeviceTestCase {
         id: 'node_label_restart_commissionee',
         title: 'Restart the commissionee',
         instructions:
-            context.commissioneeActionActor == RequiredActor.agentAndroid
-            ? 'Restart the virtual commissionee without factory resetting it, '
-                  'then confirm when it is online.'
-            : 'Restart the physical commissionee without factory resetting it, '
-                  'then confirm when it is online.',
+            'Restart the physical commissionee without factory resetting it, '
+            'then confirm when it is online.',
         requiredActor: context.commissioneeActionActor,
         testId: id,
       );

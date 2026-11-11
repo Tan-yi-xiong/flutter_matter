@@ -96,7 +96,7 @@ abstract interface class DeviceTestRunPort {
 
   Future<void> stop({String reason = 'Stopped by operator.'});
 
-  Future<DeviceTestReportV1?> buildFormalReport({
+  Future<DeviceTestReportV2?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   });

@@ -142,10 +142,11 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ## Device-test App and Agent Testing
 
 - `device_test_app/` is the primary physical-device validation surface. It is not included in the required Dart CI workflow.
-- The `quick` profile is iteration-only. PR and release evidence require `full` and the schema-versioned JSON/Markdown report.
+- The `quick` profile is iteration-only but still uses real Matter hardware when a device run is performed. PR and release evidence require `full` and the schema-version 2 JSON/Markdown report.
+- Every device Run requires a qualified real Matter commissionee over Wi-Fi/IP commissioning. No Run performs BLE discovery, BLE pre-scanning, or GATT commissioning.
 - Use `$flutter-matter-device-test` for Agent-driven device runs.
 - When multiple phones are connected, the Agent must ask the user which one to use. It must not choose from connection order, platform, or previous use.
-- For a virtual commissionee, select a distinct Android phone running the Project CHIP Virtual Device App.
+- Future device runs use real Matter hardware only. Virtual commissionees are retired and are not supported, including for quick iteration.
 - Real Matter hardware and iOS system permission prompts remain human-operated unless a later workflow explicitly documents otherwise.
 - Never put setup codes, Wi-Fi credentials, full UDIDs, serial numbers, certificates, private keys, or raw logs in evidence.
 

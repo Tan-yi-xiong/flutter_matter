@@ -7,6 +7,15 @@ import 'matter_tlv.dart';
 
 enum MatterTargetPlatform { android, ios }
 
+/// Transport used to establish commissioning with a Matter device.
+enum MatterCommissioningTransport {
+  /// Commission over an already-on-network IP transport.
+  ip,
+
+  /// Commission over the Matter BLE transport.
+  ble,
+}
+
 enum MatterFailureCode {
   invalidArgument,
   notInitialized,
@@ -181,7 +190,7 @@ class MatterCommissionRequest {
     required this.hasShortDiscriminator,
     required this.nodeId,
     required this.networkCredentials,
-    this.preScanBle = true,
+    required this.commissioningTransport,
     this.bleScanTimeout = const Duration(seconds: 15),
     this.timeout,
   }) {
@@ -228,7 +237,7 @@ class MatterCommissionRequest {
   final bool hasShortDiscriminator;
   final int nodeId;
   final MatterNetworkCredentials networkCredentials;
-  final bool preScanBle;
+  final MatterCommissioningTransport commissioningTransport;
   final Duration bleScanTimeout;
   final Duration? timeout;
 }

@@ -121,8 +121,8 @@ class ReportSummary {
 ///
 /// Formal reports are always full-profile reports. Quick-profile smoke runs
 /// must not be represented by this type; use [RunSession] progress instead.
-class DeviceTestReportV1 {
-  DeviceTestReportV1({
+class DeviceTestReportV2 {
+  DeviceTestReportV2({
     required this.generatedAt,
     required this.testApp,
     required this.pluginCommit,
@@ -131,14 +131,14 @@ class DeviceTestReportV1 {
     required this.summary,
     required Map<DeviceTestId, DeviceTestResult> tests,
     required this.sanitizationReviewed,
-    this.schemaVersion = 1,
+    this.schemaVersion = 2,
     this.sanitizationPolicyVersion = 1,
   }) : _tests = _normalizeTests(tests) {
-    if (schemaVersion != 1) {
+    if (schemaVersion != 2) {
       throw ArgumentError.value(
         schemaVersion,
         'schemaVersion',
-        'Only schema version 1 is supported',
+        'Only schema version 2 is supported',
       );
     }
     if (sanitizationPolicyVersion != 1) {
@@ -163,8 +163,8 @@ class DeviceTestReportV1 {
 
   /// Formal reports are full-profile artifacts by definition.
   ///
-  /// Profile is not serialized because schema v1 deliberately has no profile
-  /// field; the presence of all 13 test IDs is the JSON-level invariant.
+  /// Profile is not serialized because schema v2 deliberately has no profile
+  /// field; the presence of every catalog test ID is the JSON-level invariant.
   TestProfile get profile => TestProfile.full;
 
   Map<DeviceTestId, DeviceTestResult> get tests =>
@@ -174,7 +174,7 @@ class DeviceTestReportV1 {
     return _tests[testId]!;
   }
 
-  factory DeviceTestReportV1.fromJson(Map<String, dynamic> json) {
+  factory DeviceTestReportV2.fromJson(Map<String, dynamic> json) {
     final rawTests = _requiredMap(json, 'tests');
     final tests = <DeviceTestId, DeviceTestResult>{};
     for (final entry in rawTests.entries) {
@@ -200,7 +200,7 @@ class DeviceTestReportV1 {
       throw const FormatException('schema_version must be an integer');
     }
 
-    return DeviceTestReportV1(
+    return DeviceTestReportV2(
       schemaVersion: schemaVersion,
       generatedAt: _requiredDateTime(json, 'generated_at'),
       testApp: TestAppMetadata.fromJson(_requiredMap(json, 'test_app')),

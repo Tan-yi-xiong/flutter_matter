@@ -233,7 +233,7 @@ class RunCoordinator {
   /// Builds formal evidence only for a completed full-profile run.
   ///
   /// Quick runs always return null and never produce a formal report.
-  Future<DeviceTestReportV1?> buildFormalReport({
+  Future<DeviceTestReportV2?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) async {
@@ -694,8 +694,8 @@ class RunCoordinator {
 
   RunPhase _phaseForTest(DeviceTestId testId) => switch (testId) {
     DeviceTestId.buildInstall => RunPhase.preparing,
-    DeviceTestId.bleDiscovery => RunPhase.discovering,
-    DeviceTestId.bleCommissioning => RunPhase.commissioning,
+    DeviceTestId.ipDiscovery => RunPhase.discovering,
+    DeviceTestId.ipCommissioning => RunPhase.commissioning,
     DeviceTestId.operationalConnect => RunPhase.connecting,
     _ => RunPhase.testing,
   };

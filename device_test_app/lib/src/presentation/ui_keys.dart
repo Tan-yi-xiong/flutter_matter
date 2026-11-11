@@ -28,16 +28,6 @@ abstract final class DeviceTestUiKeys {
     'device-test-setup-validation-summary',
   );
 
-  static const realCommissionee = ValueKey<String>(
-    'device-test-commissionee-real',
-  );
-  static const virtualCommissionee = ValueKey<String>(
-    'device-test-commissionee-virtual',
-  );
-  static const fallbackReason = ValueKey<String>('device-test-fallback-reason');
-  static const fallbackConfirmation = ValueKey<String>(
-    'device-test-fallback-confirmation',
-  );
   static const modelField = ValueKey<String>('device-test-commissionee-model');
   static const firmwareField = ValueKey<String>(
     'device-test-commissionee-firmware',
@@ -48,7 +38,6 @@ abstract final class DeviceTestUiKeys {
   static const setupCode = ValueKey<String>('device-test-setup-code');
   static const wifiSsid = ValueKey<String>('device-test-wifi-ssid');
   static const wifiPassword = ValueKey<String>('device-test-wifi-password');
-  static const threadDataset = ValueKey<String>('device-test-thread-dataset');
   static const controllerClean = ValueKey<String>(
     'device-test-clean-controller',
   );
@@ -110,9 +99,6 @@ abstract final class DeviceTestUiKeys {
 
   static ValueKey<String> resultsRow(DeviceTestId testId) =>
       ValueKey<String>('device-test-results-row-${testId.wireName}');
-
-  static ValueKey<String> networkChoice(NetworkTransport transport) =>
-      ValueKey<String>('device-test-network-${transport.wireName}');
 
   static ValueKey<String> stateChangeChoice(StateChangeMethod method) =>
       ValueKey<String>('device-test-state-change-${method.wireName}');

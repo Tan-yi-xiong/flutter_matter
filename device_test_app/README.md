@@ -2,16 +2,16 @@
 
 Dedicated physical-device validation app for `flutter_matter`.
 
-The app runs on Android and physical iOS controllers. It is not published with the plugin and is not part of the required Dart CI gate. It is designed for qualified real Matter hardware, with an Android Virtual Matter Device App available as a controlled functional fallback.
+The app runs on Android and physical iOS controllers. It is not published with the plugin and is not part of the required Dart CI gate. Every Run, including quick iteration, uses qualified real Matter hardware over Wi-Fi/IP commissioning; BLE discovery and BLE commissioning are not used in any Run.
 
 ## Test profiles
 
 | Profile | Contents | Evidence role |
 | --- | --- | --- |
-| `quick` | `build_install`, `ble_discovery`, `ble_commissioning`, `operational_connect`, `onoff_invoke` | Iteration feedback only |
-| `full` | All 13 fixed tests in [../doc/device-test-report.md](../doc/device-test-report.md) | The only formal PR/release evidence |
+| `quick` | `build_install`, `ip_discovery`, `ip_commissioning`, `operational_connect`, `onoff_invoke` | Iteration feedback only |
+| `full` | All 12 fixed tests in [../doc/device-test-report.md](../doc/device-test-report.md) | The only formal PR/release evidence |
 
-Only a completed `full` run can produce formal evidence. A P0 failure is preserved and never retried inside the same Run.
+Only a completed `full` run can produce formal evidence. A P0 failure is preserved and never retried inside the same Run. Every device run, including `quick` iteration, uses qualified real Matter hardware; virtual commissionees are not supported.
 
 ## Local checks
 
@@ -45,18 +45,18 @@ The Agent must pass `start_run` setup material through `--args-file`, not `--arg
 
 ## Physical-device roles
 
-- Prefer a qualified real Matter On/Off commissionee whenever one is available.
-- If no real Matter device is available and the controller is Android, use two Android phones: one controller running this app and a distinct commissionee running the official Project CHIP Android Virtual Matter Device App.
-- A physical iOS controller can instead test the same distinct Android virtual commissionee.
-- The controller, virtual commissionee, and Mac host must share the trusted private LAN required for Agent mode and the selected provisioning transport.
-- Do not use an isolated guest network that blocks the WebSocket connection.
+- Use a qualified real Matter On/Off commissionee for every Run, including quick iteration. Virtual commissionees are not supported.
+- The commissionee must already be connected to the same trusted Wi-Fi/LAN as the controller and Mac host.
+- Open a commissioning window on the commissionee before starting the Run.
+- BLE discovery, BLE pre-scanning, and GATT commissioning are not used in any Run.
+- Do not use an isolated guest network that blocks mDNS/IP commissioning or the Agent WebSocket connection.
 
 ## Prerequisites
 
-- Android: physical device, USB or ADB-over-Wi-Fi access, required BLE, nearby-device, location, camera, and network permissions.
-- iOS: physical iPhone, valid local signing, a Matter Extension, the matching App Group, and the required Bluetooth, Bonjour, local-network, camera, and location declarations.
+- Android: physical device, USB or ADB-over-Wi-Fi access, and local-network connectivity.
+- iOS: physical iPhone, valid local signing, a Matter Extension, the matching App Group, and the required Bonjour and local-network declarations.
 - Xcode and CocoaPods tooling are required for iOS development builds.
-- The official Project CHIP Virtual Matter Device App is required on the selected commissionee Android phone when the virtual fallback is used.
+- The real commissionee must advertise Matter commissionable service records on the LAN.
 
 ## Security and evidence hygiene
 

@@ -1,7 +1,7 @@
 import 'package:flutter_matter_device_test_app/src/application/application.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/app_restart_case.dart';
-import 'package:flutter_matter_device_test_app/src/application/cases/ble_commissioning_case.dart';
-import 'package:flutter_matter_device_test_app/src/application/cases/ble_discovery_case.dart';
+import 'package:flutter_matter_device_test_app/src/application/cases/ip_commissioning_case.dart';
+import 'package:flutter_matter_device_test_app/src/application/cases/ip_discovery_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/build_install_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/factory_reset_recommission_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/node_label_persistence_case.dart';
@@ -60,123 +60,127 @@ void main() {
     });
   });
 
-  group('ble_discovery', () {
-    test('passes with the expected target', () async {
+  group('ip_discovery', () {
+    test(
+      'passes when the setup payload supports on-network discovery',
+      () async {
+        final hardware = FakeHardware();
+        final context = TestContextHarness(
+          testId: DeviceTestId.ipDiscovery,
+          ports: hardware.ports,
+        ).build();
+
+        final outcome = await const IpDiscoveryCase().execute(context);
+
+        expect(outcome.status, DeviceTestStatus.passed);
+        expect(hardware.discovery.requests, isEmpty);
+      },
+    );
+
+    test('fails when the setup payload lacks on-network discovery', () async {
       final hardware = FakeHardware();
       final context = TestContextHarness(
-        testId: DeviceTestId.bleDiscovery,
+        testId: DeviceTestId.ipDiscovery,
         ports: hardware.ports,
+        secrets: ProvisioningSecrets(
+          onboardingPayload: 'MT:TEST-ONBOARDING-PAYLOAD',
+          setupPinCode: 20202021,
+          network: const WifiProvisioningSecret(
+            ssid: 'matter-lab',
+            password: 'correct',
+          ),
+        ),
       ).build();
 
-      final outcome = await const BleDiscoveryCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.passed);
-      expect(context.execution.target, isNotNull);
-    });
-
-    test('fails when no expected target is returned', () async {
-      final hardware = FakeHardware();
-      hardware.discovery.handler = (_) async =>
-          const BleDiscoveryResult(candidateCount: 2);
-      final context = TestContextHarness(
-        testId: DeviceTestId.bleDiscovery,
-        ports: hardware.ports,
-      ).build();
-
-      final outcome = await const BleDiscoveryCase().execute(context);
+      final outcome = await const IpDiscoveryCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('not discovered'));
+      expect(outcome.notes, contains('on-network discovery'));
     });
 
     test('returns not_run without provisioning secrets', () async {
       final hardware = FakeHardware();
       final context = TestContextHarness(
-        testId: DeviceTestId.bleDiscovery,
+        testId: DeviceTestId.ipDiscovery,
         ports: hardware.ports,
         withSecrets: false,
       ).build();
 
-      final outcome = await const BleDiscoveryCase().execute(context);
+      final outcome = await const IpDiscoveryCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.notRun);
     });
   });
 
-  group('ble_commissioning', () {
+  group('ip_commissioning', () {
     test('passes when commissioning returns error code zero', () async {
       final hardware = FakeHardware();
-      final execution = makeExecution();
-      execution.target = BleCommissionee(
-        opaqueId: 'target',
-        displayName: 'target device',
-      );
       final context = TestContextHarness(
-        testId: DeviceTestId.bleCommissioning,
+        testId: DeviceTestId.ipCommissioning,
         ports: hardware.ports,
-        execution: execution,
       ).build();
 
-      final outcome = await const BleCommissioningCase().execute(context);
+      final outcome = await const IpCommissioningCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.passed);
       expect(context.execution.nodeId, 1);
       expect(context.execution.networkTransport, NetworkTransport.wifi);
+      expect(hardware.commissioning.requests.single.target, isNull);
+      expect(
+        hardware.commissioning.requests.single.commissioningTransport,
+        CommissioningTransport.ip,
+      );
+      expect(hardware.discovery.requests, isEmpty);
     });
 
     test('fails on a non-zero commissioning result', () async {
       final hardware = FakeHardware();
       hardware.commissioning.handler = (_) async =>
           const CommissioningResult(errorCode: 17);
-      final execution = makeExecution();
-      execution.target = BleCommissionee(
-        opaqueId: 'target',
-        displayName: 'target device',
-      );
       final context = TestContextHarness(
-        testId: DeviceTestId.bleCommissioning,
+        testId: DeviceTestId.ipCommissioning,
         ports: hardware.ports,
-        execution: execution,
       ).build();
 
-      final outcome = await const BleCommissioningCase().execute(context);
+      final outcome = await const IpCommissioningCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.failed);
       expect(outcome.notes, contains('17'));
     });
 
     test(
-      'rediscovers a passed discovery after a process interruption',
+      'does not perform BLE rediscovery after a process interruption',
       () async {
         final hardware = FakeHardware();
         final session = makeSession().recordResult(
           DeviceTestResult(
-            testId: DeviceTestId.bleDiscovery,
+            testId: DeviceTestId.ipDiscovery,
             status: DeviceTestStatus.passed,
           ),
           at: testNow.add(const Duration(seconds: 1)),
         );
         final context = TestContextHarness(
-          testId: DeviceTestId.bleCommissioning,
+          testId: DeviceTestId.ipCommissioning,
           ports: hardware.ports,
           session: session,
         ).build();
 
-        final outcome = await const BleCommissioningCase().execute(context);
+        final outcome = await const IpCommissioningCase().execute(context);
 
         expect(outcome.status, DeviceTestStatus.passed);
-        expect(hardware.discovery.requests, isNotEmpty);
+        expect(hardware.discovery.requests, isEmpty);
       },
     );
 
-    test('returns not_run without a BLE target', () async {
+    test('returns not_run without provisioning secrets', () async {
       final hardware = FakeHardware();
       final context = TestContextHarness(
-        testId: DeviceTestId.bleCommissioning,
+        testId: DeviceTestId.ipCommissioning,
         ports: hardware.ports,
+        withSecrets: false,
       ).build();
 
-      final outcome = await const BleCommissioningCase().execute(context);
+      final outcome = await const IpCommissioningCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.notRun);
     });
@@ -322,7 +326,7 @@ void main() {
           testId: DeviceTestId.onoffSubscription,
           ports: hardware.ports,
           operatorHandler: (prompt) async {
-            expect(prompt.requiredActor, RequiredActor.agentAndroid);
+            expect(prompt.requiredActor, RequiredActor.human);
             expect(prompt.testId, DeviceTestId.onoffSubscription);
             hardware.onOff.pushUpdate(OnOffState.off);
             return OperatorDecision.confirmed();
@@ -505,7 +509,7 @@ void main() {
 
         expect(outcome.status, DeviceTestStatus.passed);
         expect(hardware.identity.resetCount, greaterThanOrEqualTo(1));
-        expect(hardware.discovery.requests, isNotEmpty);
+        expect(hardware.discovery.requests, isEmpty);
         expect(hardware.commissioning.requests, isNotEmpty);
         expect(hardware.onOff.invokedCommands, contains(OnOffCommand.on));
       },

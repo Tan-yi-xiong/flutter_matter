@@ -11,7 +11,7 @@ const fixturePluginCommit = 'dddd0d7d0b4ba273eaa8cd16a5d68c59e8e1b112';
 
 final fixtureGeneratedAt = DateTime.utc(2026, 11, 11, 12);
 
-DeviceTestReportV1 buildFixtureReport() {
+DeviceTestReportV2 buildFixtureReport() {
   return const DeviceTestReportBuilder().buildFormal(
     buildFixtureSession(),
     generatedAt: fixtureGeneratedAt,
@@ -21,6 +21,7 @@ DeviceTestReportV1 buildFixtureReport() {
 
 RunSession buildFixtureSession({
   Map<DeviceTestId, DeviceTestResult>? overrides,
+  CommissioneeMetadata? commissionee,
 }) {
   final results = <DeviceTestId, DeviceTestResult>{
     for (final testId in DeviceTestCatalog.all)
@@ -58,14 +59,17 @@ RunSession buildFixtureSession({
       osVersion: 'Android 15',
       appBuild: 'debug 1.0.0 (1)',
     ),
-    commissionee: const CommissioneeMetadata(
-      type: CommissioneeType.real,
-      model: 'Example Matter Plug',
-      firmware: '1.0.0',
-      networkTransport: NetworkTransport.wifi,
-      stateChangeMethod: StateChangeMethod.physicalControl,
-      stateChangeNotes: 'The plug has a local On/Off button.',
-    ),
+    commissionee:
+        commissionee ??
+        const CommissioneeMetadata(
+          type: CommissioneeType.real,
+          model: 'Example Matter Plug',
+          firmware: '1.0.0',
+          commissioningTransport: CommissioningTransport.ip,
+          networkTransport: NetworkTransport.wifi,
+          stateChangeMethod: StateChangeMethod.physicalControl,
+          stateChangeNotes: 'The plug has a local On/Off button.',
+        ),
     results: results,
   );
 }

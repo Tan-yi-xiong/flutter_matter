@@ -106,6 +106,27 @@ void main() {
         expect(outcome.errorMessage, isNot(contains('profile')));
         expect(host.calls, isEmpty);
       });
+
+      test('rejects retired virtual and Thread setup keys', () async {
+        for (final arguments in <Map<String, Object?>>[
+          <String, Object?>{
+            'mode': 'quick',
+            'virtual_fallback_confirmed': true,
+          },
+          <String, Object?>{
+            'mode': 'quick',
+            'thread_operational_dataset': '0x00112233',
+          },
+        ]) {
+          final outcome = await handler.handle(
+            _command(AgentCommandNames.startRun, arguments),
+          );
+
+          expect(outcome.status, AgentCommandStatus.failed);
+          expect(outcome.errorCode, AgentCommandErrorCodes.invalidArguments);
+          expect(host.calls, isEmpty);
+        }
+      });
     });
 
     group('resume_run and purge_secrets', () {

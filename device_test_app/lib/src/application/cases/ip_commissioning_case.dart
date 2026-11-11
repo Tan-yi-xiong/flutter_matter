@@ -6,11 +6,11 @@ import '../test_case.dart';
 import '../test_context.dart';
 import 'case_support.dart';
 
-class BleCommissioningCase implements DeviceTestCase {
-  const BleCommissioningCase();
+class IpCommissioningCase implements DeviceTestCase {
+  const IpCommissioningCase();
 
   @override
-  DeviceTestId get id => DeviceTestId.bleCommissioning;
+  DeviceTestId get id => DeviceTestId.ipCommissioning;
 
   @override
   Future<TestCaseOutcome> execute(TestContext context) async {
@@ -20,29 +20,9 @@ class BleCommissioningCase implements DeviceTestCase {
         'Provisioning secrets are unavailable for commissioning.',
       );
     }
-    var target = context.execution.target;
-    if (target == null &&
-        context.session.results[DeviceTestId.bleDiscovery]!.status ==
-            DeviceTestStatus.passed) {
-      try {
-        target = await discoverTarget(context, secrets: secrets);
-      } on BleDiscoveryException catch (error) {
-        return TestCaseOutcome.failed(
-          'BLE rediscovery after resume failed with ${error.code.wireName}.',
-        );
-      } on MissingDiscoveryTargetException {
-        return TestCaseOutcome.failed(
-          'The commissionee was not rediscovered after resume.',
-        );
-      } on TimeoutException {
-        return TestCaseOutcome.failed(
-          'BLE rediscovery after resume timed out.',
-        );
-      }
-    }
-    if (target == null) {
-      return TestCaseOutcome.notRun(
-        'A discovered BLE commissionee is required before commissioning.',
+    if (secrets.commissioningTransport != CommissioningTransport.ip) {
+      return TestCaseOutcome.failed(
+        'The Run is not configured for Wi-Fi/IP commissioning.',
       );
     }
     final identity =
@@ -53,7 +33,6 @@ class BleCommissioningCase implements DeviceTestCase {
     try {
       final result = await commissionTarget(
         context,
-        target: target,
         identity: identity,
         secrets: secrets,
         timeout: timeout,
@@ -70,7 +49,7 @@ class BleCommissioningCase implements DeviceTestCase {
         execution.networkTransport = transport;
       });
       return TestCaseOutcome.passed(
-        notes: 'Commissioning completed with error code 0 over BLE.',
+        notes: 'Commissioning completed with error code 0 over Wi-Fi/IP.',
       );
     } on CommissioningException catch (error) {
       return TestCaseOutcome.failed(

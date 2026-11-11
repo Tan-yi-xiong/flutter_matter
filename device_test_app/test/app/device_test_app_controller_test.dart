@@ -53,7 +53,7 @@ void main() {
     expect(harness.controller.state.hasStoredSecrets, isTrue);
   });
 
-  test('maps Thread credentials into secure provisioning bytes', () async {
+  test('rejects a non-wifi network transport before saving secrets', () async {
     final harness = buildHarness(schemaJson: schemaJson);
     addTearDown(harness.close);
     await harness.controller.initialize();
@@ -63,24 +63,30 @@ void main() {
     );
     await pumpEventQueue();
 
-    final network =
-        harness.secrets.saved[testRunId]!.network as ThreadProvisioningSecret;
-    expect(network.operationalDataset, <int>[
-      0x0e,
-      0x08,
-      0x00,
-      0x00,
-      0x00,
-      0x00,
-      0x00,
-      0x01,
-      0x00,
-      0x00,
-    ]);
+    expect(harness.runner.startRequest, isNull);
+    expect(harness.onboarding.parseCount, 0);
+    expect(harness.secrets.saved, isEmpty);
     expect(
-      harness.runner.startRequest?.commissionee.networkTransport,
-      NetworkTransport.thread,
+      harness.secrets.log.where((entry) => entry.startsWith('secret.save')),
+      isEmpty,
     );
+    expect(harness.controller.state.errorMessage, contains('must be wifi'));
+  });
+
+  test('rejects a virtual commissionee before saving secrets', () async {
+    final harness = buildHarness(schemaJson: schemaJson);
+    addTearDown(harness.close);
+    await harness.controller.initialize();
+
+    await harness.controller.startRun(
+      setupRequest(commissioneeType: CommissioneeType.virtual),
+    );
+    await pumpEventQueue();
+
+    expect(harness.runner.startRequest, isNull);
+    expect(harness.onboarding.parseCount, 0);
+    expect(harness.secrets.saved, isEmpty);
+    expect(harness.controller.state.errorMessage, contains('must be real'));
   });
 
   test('blocks a Run when commit preflight fails', () async {

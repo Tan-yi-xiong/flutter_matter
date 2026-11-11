@@ -67,7 +67,6 @@ abstract interface class BleDiscoveryPort {
 enum ControllerIdentityPurpose {
   main,
   invalidSetupPasscode,
-  bluetoothDisabled,
   invalidWifiPassword,
   removeFabricUi,
 }
@@ -76,7 +75,6 @@ extension ControllerIdentityPurposeWire on ControllerIdentityPurpose {
   String get wireName => switch (this) {
     ControllerIdentityPurpose.main => 'main',
     ControllerIdentityPurpose.invalidSetupPasscode => 'invalid_setup_passcode',
-    ControllerIdentityPurpose.bluetoothDisabled => 'bluetooth_disabled',
     ControllerIdentityPurpose.invalidWifiPassword => 'invalid_wifi_password',
     ControllerIdentityPurpose.removeFabricUi => 'remove_fabric_ui',
   };
@@ -84,7 +82,6 @@ extension ControllerIdentityPurposeWire on ControllerIdentityPurpose {
   static ControllerIdentityPurpose parse(Object? value) => switch (value) {
     'main' => ControllerIdentityPurpose.main,
     'invalid_setup_passcode' => ControllerIdentityPurpose.invalidSetupPasscode,
-    'bluetooth_disabled' => ControllerIdentityPurpose.bluetoothDisabled,
     'invalid_wifi_password' => ControllerIdentityPurpose.invalidWifiPassword,
     'remove_fabric_ui' => ControllerIdentityPurpose.removeFabricUi,
     _ => throw FormatException('Unknown controller identity purpose: $value'),
@@ -166,6 +163,8 @@ class ProvisioningSecrets {
     required this.onboardingPayload,
     required this.setupPinCode,
     required this.network,
+    this.commissioningTransport = CommissioningTransport.ip,
+    this.supportsOnNetworkDiscovery = false,
   }) {
     if (onboardingPayload.trim().isEmpty) {
       throw ArgumentError.value(
@@ -186,6 +185,8 @@ class ProvisioningSecrets {
   final String onboardingPayload;
   final int setupPinCode;
   final ProvisioningNetworkSecret network;
+  final CommissioningTransport commissioningTransport;
+  final bool supportsOnNetworkDiscovery;
 
   NetworkTransport get transport => network.transport;
 
@@ -206,6 +207,8 @@ class ProvisioningSecrets {
         ssid: networkSecret.ssid,
         password: '${networkSecret.password}#invalid',
       ),
+      commissioningTransport: commissioningTransport,
+      supportsOnNetworkDiscovery: supportsOnNetworkDiscovery,
     );
   }
 
@@ -221,21 +224,23 @@ abstract interface class SecretAccessPort {
 
 class CommissioningRequest {
   const CommissioningRequest({
-    required this.target,
+    this.target,
     required this.identity,
     required this.targetNodeId,
     required this.onboardingPayload,
     required this.setupPinCode,
     required this.network,
+    this.commissioningTransport = CommissioningTransport.ip,
     required this.timeout,
   });
 
-  final BleCommissionee target;
+  final BleCommissionee? target;
   final ControllerIdentity identity;
   final int targetNodeId;
   final String onboardingPayload;
   final int setupPinCode;
   final ProvisioningNetworkSecret network;
+  final CommissioningTransport commissioningTransport;
   final Duration timeout;
 }
 

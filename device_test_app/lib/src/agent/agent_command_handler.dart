@@ -306,16 +306,14 @@ class DeviceTestAgentCommandHandler {
     'commissionee_type',
     'model',
     'firmware',
+    'commissioning_transport',
     'network_transport',
     'state_change_method',
     'setup_code',
     'clean_cycle',
-    'fallback_reason',
-    'virtual_fallback_confirmed',
     'state_change_notes',
     'wifi_ssid',
     'wifi_password',
-    'thread_operational_dataset',
   };
 
   Map<String, Object?> _freezeArguments(Map<String, Object?> arguments) {

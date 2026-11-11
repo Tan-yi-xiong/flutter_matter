@@ -14,9 +14,7 @@ void main() {
         final fixture = _TestFixture(MatterTargetPlatform.ios);
         addTearDown(fixture.service.close);
 
-        final result = await fixture.service.commission(
-          _commissionRequest(preScanBle: false),
-        );
+        final result = await fixture.service.commission(_commissionRequest());
 
         expect(result.nodeId, 42);
         final pair = fixture.controller.pairRequest;
@@ -39,7 +37,7 @@ void main() {
       fixture.controller.commissionedErrorCode = 1;
 
       await expectLater(
-        fixture.service.commission(_commissionRequest(preScanBle: false)),
+        fixture.service.commission(_commissionRequest()),
         throwsA(isA<MatterException>()),
       );
 
@@ -61,7 +59,9 @@ void main() {
           pairSawDelegate = fixture.bridge.currentDelegate != null;
         };
 
-        final result = await fixture.service.commission(_commissionRequest());
+        final result = await fixture.service.commission(
+          _commissionRequest(transport: MatterCommissioningTransport.ble),
+        );
 
         expect(result.nodeId, 42);
         expect(fixture.controller.pairRequest!.connectId, 4);
@@ -70,6 +70,29 @@ void main() {
         expect(fixture.bridge.delegateHistory.first, isNotNull);
         expect(fixture.bridge.delegateHistory.last, isNull);
         expect(fixture.session.disconnected, isTrue);
+      },
+    );
+
+    test(
+      'Android IP commissioning skips the BLE transport and pairs on network',
+      () async {
+        final fixture = _TestFixture(
+          MatterTargetPlatform.android,
+          emitAdvertisement: true,
+        );
+        addTearDown(fixture.service.close);
+
+        final result = await fixture.service.commission(_commissionRequest());
+
+        expect(result.nodeId, 42);
+        expect(fixture.controller.pairRequest!.connectId, isNull);
+        expect(fixture.controller.pairRequest!.onboardingPayload, isNotEmpty);
+        expect(fixture.controller.pairRequest!.networkCredentials, isNotNull);
+        expect(fixture.blePlatform.startScanCount, 0);
+        expect(fixture.gattSessionFactory.connectCount, 0);
+        expect(fixture.bridge.currentDelegate, isNull);
+        expect(fixture.bridge.delegateHistory, isEmpty);
+        expect(fixture.session.disconnected, isFalse);
       },
     );
   });
@@ -186,7 +209,9 @@ void main() {
   });
 }
 
-MatterCommissionRequest _commissionRequest({bool preScanBle = true}) {
+MatterCommissionRequest _commissionRequest({
+  MatterCommissioningTransport transport = MatterCommissioningTransport.ip,
+}) {
   return MatterCommissionRequest(
     onboardingPayload: 'MT:TEST-PAYLOAD',
     setupPinCode: 20202021,
@@ -196,7 +221,7 @@ MatterCommissionRequest _commissionRequest({bool preScanBle = true}) {
     networkCredentials: MatterWifiNetworkCredentials(
       MatterWifiCredentials(ssid: 'Lab Wi-Fi', password: 'secret'),
     ),
-    preScanBle: preScanBle,
+    commissioningTransport: transport,
     bleScanTimeout: const Duration(milliseconds: 200),
     timeout: const Duration(milliseconds: 500),
   );
@@ -232,6 +257,7 @@ class _TestFixture {
     storage = _FakeCredentialStorage();
     blePlatform = _FakeBlePlatform(emitAdvertisement: emitAdvertisement);
     session = _FakeGattSession();
+    gattSessionFactory = _FakeGattSessionFactory(session);
     bridge = _FakeBleLayerBridge();
     final identity = MatterControllerIdentity.generate();
     final credentialsService = MatterControllerCredentialsService(
@@ -245,7 +271,7 @@ class _TestFixture {
         platform: blePlatform,
         cleanupTimeout: const Duration(milliseconds: 100),
       ),
-      gattSessionFactory: _FakeGattSessionFactory(session),
+      gattSessionFactory: gattSessionFactory,
       bleLayerBridge: bridge,
       credentialsService: credentialsService,
       controllerFactory: controllerFactory,
@@ -266,6 +292,7 @@ class _TestFixture {
   late final _FakeCredentialStorage storage;
   late final _FakeBlePlatform blePlatform;
   late final _FakeGattSession session;
+  late final _FakeGattSessionFactory gattSessionFactory;
   late final _FakeBleLayerBridge bridge;
   late final MatterControllerService service;
 }
@@ -544,6 +571,7 @@ class _FakeBlePlatform implements MatterBlePlatform {
       StreamController<MatterBleAdvertisement>.broadcast();
   final _FakeBleDevice device = _FakeBleDevice();
   bool isScanning = false;
+  int startScanCount = 0;
 
   @override
   Stream<MatterBleAdvertisement> get advertisements => _advertisements.stream;
@@ -553,6 +581,7 @@ class _FakeBlePlatform implements MatterBlePlatform {
 
   @override
   Future<void> startScan(Duration timeout) async {
+    startScanCount++;
     isScanning = true;
     if (!emitAdvertisement) {
       return;
@@ -608,9 +637,11 @@ class _FakeGattSessionFactory implements MatterBleGattSessionFactory {
   _FakeGattSessionFactory(this.session);
 
   final _FakeGattSession session;
+  int connectCount = 0;
 
   @override
   Future<MatterBleGattSession> connect(MatterBleDevice device) async {
+    connectCount++;
     return session;
   }
 }

@@ -21,8 +21,8 @@ const String _controlPath = '/control';
 const String _agentPath = '/agent';
 const List<String> _reportTestIds = <String>[
   'build_install',
-  'ble_discovery',
-  'ble_commissioning',
+  'ip_discovery',
+  'ip_commissioning',
   'operational_connect',
   'onoff_invoke',
   'onoff_subscription',
@@ -30,7 +30,6 @@ const List<String> _reportTestIds = <String>[
   'app_restart',
   'factory_reset_recommission',
   'invalid_setup_passcode',
-  'bluetooth_disabled',
   'invalid_wifi_password',
   'remove_fabric_ui',
 ];
@@ -2902,6 +2901,18 @@ int _bodySeconds(Map<String, Object?> body, String field,
   return value;
 }
 
+/// Validates a device-test report JSON document against schema v2.
+///
+/// This is a narrow, test-facing wrapper around the internal report validator.
+/// It reports field-level validation errors only; error messages and details
+/// never include report values, provisioning secrets, or device identifiers.
+void validateDeviceTestReportJson(
+  Map<String, Object?> report, {
+  required String expectedPluginCommit,
+}) {
+  _validateReportJson(report, expectedPluginCommit: expectedPluginCommit);
+}
+
 void _validateReportJson(
   Map<String, Object?> report, {
   required String expectedPluginCommit,
@@ -2918,10 +2929,10 @@ void _validateReportJson(
     'sanitization',
   };
   _requireExactKeys(report, requiredKeys, 'report');
-  if (report['schema_version'] != 1) {
+  if (report['schema_version'] != 2) {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'Report schema_version must be 1.',
+      message: 'Report schema_version must be 2.',
     );
   }
   final generatedAt =
@@ -3005,23 +3016,22 @@ void _validateReportJson(
       );
     }
   }
-  if (!const <String>{'real', 'virtual'}.contains(commissionee['type'])) {
+  if (commissionee['type'] != 'real') {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'commissionee.type must be real or virtual.',
+      message: 'commissionee.type must be real.',
     );
   }
-  if (commissionee['commissioning_transport'] != 'ble') {
+  if (commissionee['commissioning_transport'] != 'ip') {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'commissionee.commissioning_transport must be ble.',
+      message: 'commissionee.commissioning_transport must be ip.',
     );
   }
-  if (!const <String>{'wifi', 'thread', 'unknown'}
-      .contains(commissionee['network_transport'])) {
+  if (commissionee['network_transport'] != 'wifi') {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'Unsupported commissionee.network_transport.',
+      message: 'commissionee.network_transport must be wifi.',
     );
   }
   if (!const <String>{
@@ -3042,8 +3052,8 @@ void _validateReportJson(
   final p0NotRun = <String>{};
   const p0Ids = <String>{
     'build_install',
-    'ble_discovery',
-    'ble_commissioning',
+    'ip_discovery',
+    'ip_commissioning',
     'operational_connect',
     'onoff_invoke',
     'onoff_subscription',

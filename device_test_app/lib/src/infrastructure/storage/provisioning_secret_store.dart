@@ -34,6 +34,8 @@ class ProvisioningSecretStore implements SecretAccessPort {
       jsonEncode(<String, Object?>{
         'onboarding_payload': secrets.onboardingPayload,
         'setup_pin_code': secrets.setupPinCode,
+        'commissioning_transport': secrets.commissioningTransport.wireName,
+        'supports_on_network_discovery': secrets.supportsOnNetworkDiscovery,
         'network': networkJson,
       }),
     );
@@ -80,10 +82,18 @@ class ProvisioningSecretStore implements SecretAccessPort {
     if (payload is! String || pin is! int) {
       throw const FormatException('Stored setup credentials are invalid.');
     }
+    final commissioningTransportValue = decoded['commissioning_transport'];
+    final commissioningTransport = commissioningTransportValue == null
+        ? CommissioningTransport.ip
+        : CommissioningTransport.parse(commissioningTransportValue.toString());
+    final supportsOnNetworkDiscovery =
+        decoded['supports_on_network_discovery'] == true;
     return ProvisioningSecrets(
       onboardingPayload: payload,
       setupPinCode: pin,
       network: networkSecret,
+      commissioningTransport: commissioningTransport,
+      supportsOnNetworkDiscovery: supportsOnNetworkDiscovery,
     );
   }
 

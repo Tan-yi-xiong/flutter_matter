@@ -19,7 +19,7 @@ void main() {
         startedAt: startedAt,
       );
 
-      expect(session.results, hasLength(13));
+      expect(session.results, hasLength(12));
       expect(
         session.orderedResults.map((result) => result.status),
         everyElement(DeviceTestStatus.pending),
@@ -45,11 +45,12 @@ void main() {
           appBuild: 'debug 1.0.0 (1)',
         ),
         commissionee: const CommissioneeMetadata(
-          type: CommissioneeType.virtual,
-          model: 'Virtual Matter Device',
+          type: CommissioneeType.real,
+          model: 'Matter test device',
           firmware: '1.0.0',
+          commissioningTransport: CommissioningTransport.ip,
           networkTransport: NetworkTransport.wifi,
-          stateChangeMethod: StateChangeMethod.commissioneeUi,
+          stateChangeMethod: StateChangeMethod.physicalControl,
         ),
         at: startedAt.add(const Duration(seconds: 1)),
       );
@@ -72,13 +73,13 @@ void main() {
       expect(resumed.profile, TestProfile.full);
       expect(resumed.phase, progressed.phase);
       expect(resumed.controller?.deviceModel, 'Pixel 8');
-      expect(resumed.commissionee?.type, CommissioneeType.virtual);
+      expect(resumed.commissionee?.type, CommissioneeType.real);
       expect(
         resumed.results[DeviceTestId.buildInstall]?.status,
         DeviceTestStatus.passed,
       );
-      expect(resumed.nextActionableTestId, DeviceTestId.bleDiscovery);
-      expect(resumed.progress, closeTo(1 / 13, 0.0001));
+      expect(resumed.nextActionableTestId, DeviceTestId.ipDiscovery);
+      expect(resumed.progress, closeTo(1 / 12, 0.0001));
     });
 
     test('quick sessions only accept quick-profile results', () {

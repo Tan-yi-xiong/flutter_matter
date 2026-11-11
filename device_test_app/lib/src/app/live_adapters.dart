@@ -115,7 +115,7 @@ class LiveDeviceTestRunner implements DeviceTestRunPort {
       coordinator.stop(reason: reason);
 
   @override
-  Future<DeviceTestReportV1?> buildFormalReport({
+  Future<DeviceTestReportV2?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) => coordinator.buildFormalReport(

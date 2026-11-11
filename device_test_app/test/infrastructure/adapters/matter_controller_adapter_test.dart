@@ -117,7 +117,7 @@ void main() {
         expect(request.setupPinCode, 20202021);
         expect(request.discriminator, 0x0acd);
         expect(request.nodeId, 42);
-        expect(request.preScanBle, isTrue);
+        expect(request.commissioningTransport, MatterCommissioningTransport.ip);
         expect(request.bleScanTimeout, const Duration(seconds: 3));
         expect(request.networkCredentials, isA<MatterWifiNetworkCredentials>());
         expect(

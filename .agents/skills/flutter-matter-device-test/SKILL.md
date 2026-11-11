@@ -5,7 +5,7 @@ description: Execute flutter_matter device validation through the dedicated test
 
 # Flutter Matter Device Test
 
-Run `flutter_matter` device validation without guessing which phone or commissionee to use. Prefer real Matter hardware. Use the official Android Virtual Matter Device App only as a controlled functional fallback.
+Run `flutter_matter` device validation without guessing which phone or commissionee to use. Formal acceptance requires qualified real Matter hardware and Wi-Fi/IP commissioning. Every device run, including quick iteration, uses real Matter hardware; the Android Virtual Matter Device App path is retired and virtual commissionees are not supported.
 
 ## Hard rules
 
@@ -14,10 +14,10 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 3. When multiple phones are connected, show a native interactive user-choice prompt before starting `serve`. Never infer a choice from connection order, platform, model, installed packages, or previous use.
 4. Show `platform`, `model`, `os_version`, and `short_id` in user choices. Do not display the full device ID in the label; retain the full ID privately for `serve`.
 5. Always pass the selected candidate's full ID to `serve --device`.
-6. Prefer a qualified real Matter On/Off commissionee.
-7. If no real Matter device is available, ask a separate interactive question for the distinct Android phone that will run the official Project CHIP Virtual Matter Device App. It cannot be the controller.
-8. Android and physical iOS controllers may test either real Matter hardware or the distinct Android virtual commissionee.
-9. `quick` contains five iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 13 tests.
+6. Use a qualified real Matter On/Off commissionee for formal acceptance.
+7. Set `commissioning_transport` to `ip` and `network_transport` to `wifi` in every Run; never run BLE discovery, a BLE pre-scan, or GATT commissioning.
+8. Do not choose or operate a virtual commissionee in any Run, including quick iteration. Virtual commissionees are not supported. If real hardware is unavailable, stop and report that device validation is blocked.
+9. `quick` contains five iteration tests, always runs on real Matter hardware, and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 12 fixed tests.
 10. Never retry a failed P0 test in the same Run to manufacture a passing result.
 11. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
 12. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
@@ -26,7 +26,7 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 ## Preconditions
 
 - The dedicated device-test app is built and installed on the selected controller.
-- A real Matter commissionee is prepared, or a second Android phone runs the official Project CHIP Virtual Matter Device App.
+- A qualified real Matter commissionee is prepared, connected to the same trusted Wi-Fi/LAN as the controller, and in an open commissioning window.
 - The Mac and phones share a trusted private LAN that permits the WebSocket connection.
 - The app is configured with the endpoint printed by `serve`.
 - `adb` is available for Android devices; Xcode `devicectl` or libimobiledevice is available for iOS devices.
@@ -56,17 +56,9 @@ Use `short_id` only for display. Keep the full ID in your own state for the next
 
 ### Real Matter device
 
-Ask the operator which physical On/Off device will be used. The operator must be able to change its state physically, through a vendor app, or through the commissionee UI. Record the choice and fallback reason in the PR narrative without exposing provisioning secrets.
+Ask the operator which physical On/Off device will be used. The operator must be able to change its state physically, through a vendor app, or through the commissionee UI. Record the choice in the PR narrative without exposing provisioning secrets.
 
-### Virtual commissionee
-
-If no real Matter device is available, ask a second interactive question:
-
-> Select the distinct Android phone that will run the virtual Matter commissionee. It cannot be the same device as the controller.
-
-Show the same `platform / model / os_version / short_id` fields. Never reuse the controller selection automatically. Reject the selected controller if the user selects it and ask again.
-
-For either commissionee type, verify that its setup payload is available to the controller workflow, but do not paste it into logs, screenshots, reports, or PR text.
+The Agent must not select or operate a virtual commissionee in any Run. Verify that the real commissionee's setup payload advertises on-network discovery, but do not paste the payload into logs, screenshots, reports, or PR text.
 
 ## Step 3: Start the host session
 
@@ -132,6 +124,7 @@ The file must contain the full setup object. Use placeholders here and replace t
   "commissionee_type": "real",
   "model": "<commissionee-model>",
   "firmware": "<firmware-version>",
+  "commissioning_transport": "ip",
   "network_transport": "wifi",
   "state_change_method": "physical_control",
   "setup_code": "<setup-code-or-qr-payload>",
@@ -145,7 +138,7 @@ The file must contain the full setup object. Use placeholders here and replace t
 }
 ```
 
-For a virtual commissionee, use `"commissionee_type":"virtual"`, include a non-empty `fallback_reason`, and set `"virtual_fallback_confirmed": true`. For Thread, use `"network_transport":"thread"` and `thread_operational_dataset`. For `"state_change_method":"other"`, include non-empty `state_change_notes`.
+For formal evidence, keep `"commissionee_type":"real"`, `"commissioning_transport":"ip"`, and `"network_transport":"wifi"`. For `"state_change_method":"other"`, include non-empty `state_change_notes`.
 
 Quick iteration run:
 
@@ -157,7 +150,7 @@ fvm dart run tool/device_test_agent.dart command \
   --timeout-seconds 1200
 ```
 
-Formal evidence run: set `"mode":"full"` in the same local file and use a new stable command ID:
+Formal evidence run: set `"mode":"full"` in the same local file, keep `"commissioning_transport":"ip"` and `"network_transport":"wifi"`, and use a new stable command ID:
 
 ```bash
 fvm dart run tool/device_test_agent.dart command \
@@ -183,7 +176,7 @@ Read the latest state and prompt.
 
 ### `agent_android` prompt
 
-The prompt applies only to the selected Android controller. Use the installed mobile automation capability to inspect that controller screen and perform the smallest requested action, such as accepting a Bluetooth or local-network permission.
+The prompt applies only to the selected Android controller. Use the installed mobile automation capability to inspect that controller screen and perform the smallest requested action, such as accepting a local-network permission.
 
 Before acting:
 
@@ -288,7 +281,6 @@ After collecting evidence, remind the user to clean up:
 
 - Remove the test fabric from the controller.
 - Factory-reset or recommission the real commissionee as appropriate.
-- Remove credentials and app data from the virtual commissionee.
 - Clear test-only Wi-Fi or Thread credentials.
 - Purge app secrets through the command interface after the Run is no longer active:
 
@@ -328,7 +320,7 @@ Do not execute destructive purge steps without user confirmation.
 ## Completion checklist
 
 - The controller was explicitly chosen by the user whenever multiple phones were connected.
-- The virtual commissionee, when used, was selected separately and is distinct from the controller.
+- The formal run used a real Matter commissionee and did not run BLE discovery or commissioning.
 - `serve` used the explicit controller ID.
 - The app bridge connected and reported the expected controller metadata.
 - The run used a stable command ID, an `--args-file` input, and the required mode.

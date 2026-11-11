@@ -22,7 +22,7 @@ void main() {
     );
 
     expect(jsonEncode(first.toJson()), jsonEncode(second.toJson()));
-    expect(first.summary.passed, 12);
+    expect(first.summary.passed, 11);
     expect(first.summary.notRun, 1);
     expect(first.summary.result, ReportResult.passed);
     expect(first.profile, TestProfile.full);
@@ -30,7 +30,7 @@ void main() {
 
   test('typed reports survive a JSON round trip', () {
     final original = buildFixtureReport();
-    final decoded = DeviceTestReportV1.fromJson(
+    final decoded = DeviceTestReportV2.fromJson(
       jsonDecode(jsonEncode(original.toJson())) as Map<String, dynamic>,
     );
 
@@ -52,11 +52,12 @@ void main() {
         appBuild: 'debug 1.0.0 (1)',
       ),
       commissionee: const CommissioneeMetadata(
-        type: CommissioneeType.virtual,
-        model: 'Virtual Matter Device',
+        type: CommissioneeType.real,
+        model: 'Matter test device',
         firmware: '1.0.0',
+        commissioningTransport: CommissioningTransport.ip,
         networkTransport: NetworkTransport.wifi,
-        stateChangeMethod: StateChangeMethod.commissioneeUi,
+        stateChangeMethod: StateChangeMethod.physicalControl,
       ),
       results: <DeviceTestId, DeviceTestResult>{
         for (final testId in TestProfile.quick.testIds)
@@ -83,11 +84,90 @@ void main() {
     );
   });
 
+  test('rejects virtual commissionees for formal evidence', () {
+    final session = buildFixtureSession(
+      commissionee: const CommissioneeMetadata(
+        type: CommissioneeType.virtual,
+        model: 'Virtual Matter Device',
+        firmware: '1.0.0',
+        commissioningTransport: CommissioningTransport.ip,
+        networkTransport: NetworkTransport.wifi,
+        stateChangeMethod: StateChangeMethod.commissioneeUi,
+      ),
+    );
+
+    expect(
+      () => builder.buildFormal(
+        session,
+        generatedAt: fixtureGeneratedAt,
+        sanitizationReviewed: true,
+      ),
+      throwsA(
+        isA<ReportBuildException>().having(
+          (error) => error.issues.join(' '),
+          'issues',
+          contains('real Matter commissionee'),
+        ),
+      ),
+    );
+  });
+
+  test('rejects a non-wifi network transport for formal evidence', () {
+    final session = buildFixtureSession(
+      commissionee: const CommissioneeMetadata(
+        type: CommissioneeType.real,
+        model: 'Example Matter Plug',
+        firmware: '1.0.0',
+        commissioningTransport: CommissioningTransport.ip,
+        networkTransport: NetworkTransport.thread,
+        stateChangeMethod: StateChangeMethod.physicalControl,
+      ),
+    );
+
+    expect(
+      () => builder.buildFormal(
+        session,
+        generatedAt: fixtureGeneratedAt,
+        sanitizationReviewed: true,
+      ),
+      throwsA(
+        isA<ReportBuildException>().having(
+          (error) => error.issues.join(' '),
+          'issues',
+          contains('Wi-Fi network transport'),
+        ),
+      ),
+    );
+  });
+
+  test('rejects schema version 1 reports', () {
+    final legacyJson = <String, Object?>{
+      ...buildFixtureReport().toJson(),
+      'schema_version': 1,
+    };
+
+    expect(() => DeviceTestReportV2.fromJson(legacyJson), throwsArgumentError);
+    expect(
+      () => DeviceTestReportV2(
+        schemaVersion: 1,
+        generatedAt: fixtureGeneratedAt,
+        testApp: fixtureTestApp,
+        pluginCommit: fixturePluginCommit,
+        controller: buildFixtureSession().controller!,
+        commissionee: buildFixtureSession().commissionee!,
+        summary: buildFixtureReport().summary,
+        tests: buildFixtureReport().tests,
+        sanitizationReviewed: true,
+      ),
+      throwsArgumentError,
+    );
+  });
+
   test('rejects a report with a pending test', () {
     final session = buildFixtureSession(
       overrides: <DeviceTestId, DeviceTestResult>{
-        DeviceTestId.bleCommissioning: DeviceTestResult(
-          testId: DeviceTestId.bleCommissioning,
+        DeviceTestId.ipCommissioning: DeviceTestResult(
+          testId: DeviceTestId.ipCommissioning,
         ),
       },
     );

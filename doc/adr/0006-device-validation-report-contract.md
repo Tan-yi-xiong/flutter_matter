@@ -14,14 +14,14 @@ The repository also expects the example application to evolve into a dedicated d
 Device validation follows this order and contract:
 
 - Use a qualified real Matter On/Off device first.
-- Use the Project CHIP Android Virtual Device App only when a qualified real device is unavailable or does not meet the required capabilities.
+- Use the Project CHIP Android Virtual Device App only for non-formal development. It cannot satisfy formal acceptance.
 - Test both Android and physical iOS controllers against the selected commissionee when a change affects shared behavior.
 - Define a versioned JSON report schema and a Markdown summary generated from the same result data.
 - Require a device-behavior pull request to include the affected platform report and sanitized attachments.
 - Require a stable release-preparation pull request to include one clean P0 cycle for Android and one clean P0 cycle for iOS against the release candidate.
 - Keep evidence submission manual through pull request comments and attachments.
 
-The initial report schema version is `1`. Fixed P0 cases cover build/install, BLE discovery, BLE commissioning, operational connection, On/Off invocation, On/Off subscription, and NodeLabel persistence. P1 and P2 results remain in the report but do not replace the required P0 result.
+The initial report schema version is `1`. Fixed P0 cases cover build/install, Wi-Fi/IP discovery readiness, Wi-Fi/IP commissioning, operational connection, On/Off invocation, On/Off subscription, and NodeLabel persistence. P1 and P2 results remain in the report but do not replace the required P0 result.
 
 The future dedicated device-test app owns report generation and self-validation. This repository phase defines the contract and documentation only; it does not introduce a self-hosted runner, an Actions hardware job, or an executable report validator.
 
@@ -29,10 +29,14 @@ The future dedicated device-test app owns report generation and self-validation.
 
 - Contributors have one stable format for device evidence across current manual runs and the future test app.
 - Reviewers can compare Android and iOS results without interpreting unrelated free-form reports.
-- Stable releases remain manual and depend on maintainer review of real-device or virtual-device evidence.
+- Stable releases remain manual and depend on maintainer review of formal real-device evidence.
 - A stale report, missing platform result, or mismatched commit is treated as unverified.
 - Sensitive provisioning data and device identifiers must remain outside the report and public attachments.
 - Implementing the future app must conform to the schema instead of inventing a separate reporting format.
+
+## Amendment (2026-11-12): Real-device Wi-Fi/IP contract
+
+A later repository decision retired the virtual-device path recorded above. Future device validation uses a qualified real Matter commissionee only, with Wi-Fi/IP commissioning; virtual commissionees are not supported as a fallback, including for quick iteration. The report schema moved from version `1` to version `2` with 12 fixed tests that use the `ip_discovery` and `ip_commissioning` IDs instead of the former BLE test IDs. The decision text above is preserved as history; it no longer authorizes virtual-device development runs.
 
 ## Related Documents
 

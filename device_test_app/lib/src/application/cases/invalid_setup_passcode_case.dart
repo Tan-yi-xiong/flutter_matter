@@ -46,7 +46,6 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
 
     TestCaseOutcome diagnosticOutcome;
     try {
-      final target = await discoverTarget(context, secrets: secrets);
       final identityRequest = ControllerIdentityRequest(
         runId: context.runId,
         purpose: ControllerIdentityPurpose.invalidSetupPasscode,
@@ -58,7 +57,6 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
       );
       final result = await commissionTarget(
         context,
-        target: target,
         identity: identity,
         secrets: secrets,
         timeout: context.timeoutFor(id),
@@ -88,14 +86,6 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
               'Invalid setup passcode produced an unexpected '
               '${error.code.wireName} failure.',
             );
-    } on BleDiscoveryException catch (error) {
-      diagnosticOutcome = TestCaseOutcome.failed(
-        'Invalid-passcode discovery failed with ${error.code.wireName}.',
-      );
-    } on MissingDiscoveryTargetException {
-      diagnosticOutcome = TestCaseOutcome.failed(
-        'The commissionee was not rediscovered for the invalid-passcode test.',
-      );
     } on TimeoutException {
       diagnosticOutcome = TestCaseOutcome.failed(
         'The invalid-passcode commissioning test timed out.',

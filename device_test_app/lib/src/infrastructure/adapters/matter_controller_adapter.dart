@@ -109,7 +109,9 @@ class MatterControllerAdapter
           hasShortDiscriminator: onboarding.hasShortDiscriminator,
           nodeId: request.targetNodeId,
           networkCredentials: network,
-          preScanBle: _platform == ControllerPlatform.android,
+          commissioningTransport: switch (request.commissioningTransport) {
+            CommissioningTransport.ip => MatterCommissioningTransport.ip,
+          },
           bleScanTimeout: request.timeout,
           timeout: request.timeout,
         ),

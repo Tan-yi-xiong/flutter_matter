@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Tan-yi-xiong/flutter_matter/main/doc/device-test-report.schema.json",
-  "title": "flutter_matter device test report v1",
-  "description": "Sanitized device-validation result emitted by the future flutter_matter device-test app or an interim manual reporter.",
+  "title": "flutter_matter device test report v2",
+  "description": "Sanitized device-validation result emitted by the flutter_matter device-test app.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -18,7 +18,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "generated_at": {
       "type": "string",
@@ -97,10 +97,7 @@
       ],
       "properties": {
         "type": {
-          "enum": [
-            "real",
-            "virtual"
-          ]
+          "const": "real"
         },
         "model": {
           "type": "string",
@@ -113,14 +110,10 @@
           "maxLength": 160
         },
         "commissioning_transport": {
-          "const": "ble"
+          "const": "ip"
         },
         "network_transport": {
-          "enum": [
-            "wifi",
-            "thread",
-            "unknown"
-          ]
+          "const": "wifi"
         },
         "state_change_method": {
           "enum": [
@@ -156,17 +149,17 @@
         "passed": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 13
+          "maximum": 12
         },
         "failed": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 13
+          "maximum": 12
         },
         "not_run": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 13
+          "maximum": 12
         }
       }
     },
@@ -175,8 +168,8 @@
       "additionalProperties": false,
       "required": [
         "build_install",
-        "ble_discovery",
-        "ble_commissioning",
+        "ip_discovery",
+        "ip_commissioning",
         "operational_connect",
         "onoff_invoke",
         "onoff_subscription",
@@ -184,7 +177,6 @@
         "app_restart",
         "factory_reset_recommission",
         "invalid_setup_passcode",
-        "bluetooth_disabled",
         "invalid_wifi_password",
         "remove_fabric_ui"
       ],
@@ -192,10 +184,10 @@
         "build_install": {
           "$ref": "#/$defs/testResult"
         },
-        "ble_discovery": {
+        "ip_discovery": {
           "$ref": "#/$defs/testResult"
         },
-        "ble_commissioning": {
+        "ip_commissioning": {
           "$ref": "#/$defs/testResult"
         },
         "operational_connect": {
@@ -217,9 +209,6 @@
           "$ref": "#/$defs/testResult"
         },
         "invalid_setup_passcode": {
-          "$ref": "#/$defs/testResult"
-        },
-        "bluetooth_disabled": {
           "$ref": "#/$defs/testResult"
         },
         "invalid_wifi_password": {

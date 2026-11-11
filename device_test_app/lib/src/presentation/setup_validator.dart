@@ -18,15 +18,13 @@ abstract final class DeviceTestSetupValidator {
       errors[SetupField.preflight] =
           'Resolve blocking preflight checks before starting.';
     }
-    if (draft.commissioneeType == CommissioneeType.virtual) {
-      if (draft.fallbackReason.trim().isEmpty) {
-        errors[SetupField.fallbackReason] =
-            'Explain why no qualified real Matter device is available.';
-      }
-      if (!draft.virtualFallbackConfirmed) {
-        errors[SetupField.fallbackConfirmation] =
-            'Confirm that the virtual commissionee is the fallback.';
-      }
+    if (draft.commissioneeType != CommissioneeType.real) {
+      errors[SetupField.commissioneeType] =
+          'Device validation requires a real Matter commissionee.';
+    }
+    if (draft.commissioningTransport != CommissioningTransport.ip) {
+      errors[SetupField.commissioningTransport] =
+          'Device validation requires Wi-Fi/IP commissioning.';
     }
     if (draft.model.trim().isEmpty) {
       errors[SetupField.model] = 'Commissionee model is required.';
@@ -38,18 +36,11 @@ abstract final class DeviceTestSetupValidator {
       errors[SetupField.setupCode] =
           'Matter setup code or QR payload is required.';
     }
-    switch (draft.networkTransport) {
-      case NetworkTransport.wifi:
-        if (draft.wifiSsid.trim().isEmpty) {
-          errors[SetupField.networkCredentials] = 'Wi-Fi SSID is required.';
-        }
-      case NetworkTransport.thread:
-        if (draft.threadOperationalDataset.trim().isEmpty) {
-          errors[SetupField.networkCredentials] =
-              'Thread operational dataset is required.';
-        }
-      case NetworkTransport.unknown:
-        break;
+    if (draft.networkTransport != NetworkTransport.wifi) {
+      errors[SetupField.networkCredentials] =
+          'Only Wi-Fi/IP commissioning is supported.';
+    } else if (draft.wifiSsid.trim().isEmpty) {
+      errors[SetupField.networkCredentials] = 'Wi-Fi SSID is required.';
     }
     if (draft.stateChangeMethod == StateChangeMethod.other &&
         draft.stateChangeNotes.trim().isEmpty) {

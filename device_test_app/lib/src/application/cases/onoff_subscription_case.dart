@@ -57,11 +57,8 @@ class OnOffSubscriptionCase implements DeviceTestCase {
         id: 'onoff_subscription_external_change',
         title: 'Change the commissionee OnOff state',
         instructions:
-            context.commissioneeActionActor == RequiredActor.agentAndroid
-            ? 'Change the virtual commissionee OnOff state externally, '
-                  'then confirm.'
-            : 'Use the physical switch or vendor app to change the OnOff '
-                  'state externally, then confirm.',
+            'Use the physical switch or vendor app to change the OnOff state '
+            'externally, then confirm.',
         requiredActor: context.commissioneeActionActor,
         testId: id,
       );

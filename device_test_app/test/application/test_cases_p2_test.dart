@@ -1,5 +1,4 @@
 import 'package:flutter_matter_device_test_app/src/application/application.dart';
-import 'package:flutter_matter_device_test_app/src/application/cases/bluetooth_disabled_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/invalid_setup_passcode_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/invalid_wifi_password_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/remove_fabric_ui_case.dart';
@@ -26,7 +25,7 @@ void main() {
         isNot(20202021),
       );
       expect(harness.prompts.length, 2);
-      expect(harness.prompts.first.requiredActor, RequiredActor.agentAndroid);
+      expect(harness.prompts.first.requiredActor, RequiredActor.human);
     });
 
     test('uses a typed invalid-setup failure as a clear failure', () async {
@@ -90,89 +89,6 @@ void main() {
 
       expect(outcome.status, DeviceTestStatus.failed);
       expect(outcome.notes, contains('cleanup'));
-    });
-  });
-
-  group('bluetooth_disabled', () {
-    test('passes when Bluetooth unavailability is reported clearly', () async {
-      final hardware = FakeHardware();
-      final context = TestContextHarness(
-        testId: DeviceTestId.bluetoothDisabled,
-        ports: hardware.ports,
-        operatorHandler: (prompt) {
-          if (prompt.id == 'bluetooth_disabled_disable') {
-            hardware.discovery.enabled = false;
-          } else {
-            hardware.discovery.enabled = true;
-          }
-          return OperatorDecision.confirmed();
-        },
-      ).build();
-
-      final outcome = await const BluetoothDisabledCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.passed);
-      expect(hardware.discovery.enabled, isTrue);
-    });
-
-    test(
-      'fails when discovery still returns candidates with Bluetooth off',
-      () async {
-        final hardware = FakeHardware();
-        final context = TestContextHarness(
-          testId: DeviceTestId.bluetoothDisabled,
-          ports: hardware.ports,
-          operatorHandler: (prompt) {
-            if (prompt.id == 'bluetooth_disabled_disable') {
-              hardware.discovery.enabled = false;
-              hardware.discovery.handler = (_) async =>
-                  const BleDiscoveryResult(candidateCount: 1);
-            } else {
-              hardware.discovery.enabled = true;
-            }
-            return OperatorDecision.confirmed();
-          },
-        ).build();
-
-        final outcome = await const BluetoothDisabledCase().execute(context);
-
-        expect(outcome.status, DeviceTestStatus.failed);
-        expect(outcome.notes, contains('candidates'));
-      },
-    );
-
-    test('returns not_run when disabling Bluetooth is skipped', () async {
-      final hardware = FakeHardware();
-      final context = TestContextHarness(
-        testId: DeviceTestId.bluetoothDisabled,
-        ports: hardware.ports,
-        operatorHandler: (_) =>
-            OperatorDecision.skipped('Bluetooth control unavailable'),
-      ).build();
-
-      final outcome = await const BluetoothDisabledCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.notRun);
-    });
-
-    test('fails when Bluetooth cannot be restored', () async {
-      final hardware = FakeHardware();
-      final context = TestContextHarness(
-        testId: DeviceTestId.bluetoothDisabled,
-        ports: hardware.ports,
-        operatorHandler: (prompt) {
-          if (prompt.id == 'bluetooth_disabled_disable') {
-            hardware.discovery.enabled = false;
-            return OperatorDecision.confirmed();
-          }
-          return OperatorDecision.skipped('restore unavailable');
-        },
-      ).build();
-
-      final outcome = await const BluetoothDisabledCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('restored'));
     });
   });
 

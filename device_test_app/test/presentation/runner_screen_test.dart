@@ -13,7 +13,7 @@ void main() {
       final run = activeRun(
         statuses: const <DeviceTestId, DeviceTestStatus>{
           DeviceTestId.buildInstall: DeviceTestStatus.passed,
-          DeviceTestId.bleDiscovery: DeviceTestStatus.running,
+          DeviceTestId.ipDiscovery: DeviceTestStatus.running,
         },
       );
       final controller = FakeDeviceTestUiController(runnerState(run: run));

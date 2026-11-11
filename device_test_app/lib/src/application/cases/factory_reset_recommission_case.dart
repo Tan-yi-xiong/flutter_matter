@@ -61,13 +61,11 @@ class FactoryResetRecommissionCase implements DeviceTestCase {
         execution.lastOnOffState = null;
       });
 
-      final target = await discoverTarget(context, secrets: secrets);
       final commissioningTimeout = context.timeoutFor(
-        DeviceTestId.bleCommissioning,
+        DeviceTestId.ipCommissioning,
       );
       final commissioning = await commissionTarget(
         context,
-        target: target,
         identity: identity,
         secrets: secrets,
         timeout: commissioningTimeout,
@@ -106,16 +104,11 @@ class FactoryResetRecommissionCase implements DeviceTestCase {
         execution.nodeId = nodeId;
         execution.networkTransport =
             commissioning.networkTransport ?? secrets.transport;
-        execution.target = target;
         execution.connection = connection;
         execution.lastOnOffState = OnOffState.on;
       });
       return const TestCaseOutcome.passed(
-        notes: 'Factory reset and full BLE recommissioning succeeded.',
-      );
-    } on BleDiscoveryException catch (error) {
-      return TestCaseOutcome.failed(
-        'Post-reset BLE discovery failed with ${error.code.wireName}.',
+        notes: 'Factory reset and full Wi-Fi/IP recommissioning succeeded.',
       );
     } on CommissioningException catch (error) {
       return TestCaseOutcome.failed(
@@ -125,10 +118,6 @@ class FactoryResetRecommissionCase implements DeviceTestCase {
     } on OnOffException catch (error) {
       return TestCaseOutcome.failed(
         'Post-reset OnOff validation failed with ${error.code.wireName}.',
-      );
-    } on MissingDiscoveryTargetException {
-      return TestCaseOutcome.failed(
-        'The factory-reset commissionee was not rediscovered.',
       );
     } on TimeoutException {
       return TestCaseOutcome.failed('Factory reset recommissioning timed out.');

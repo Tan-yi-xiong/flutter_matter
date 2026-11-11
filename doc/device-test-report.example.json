@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "generated_at": "2026-11-11T12:00:00Z",
   "test_app": {
     "name": "flutter_matter_device_test_app",
@@ -17,14 +17,14 @@
     "type": "real",
     "model": "Example Matter Plug",
     "firmware": "1.0.0",
-    "commissioning_transport": "ble",
+    "commissioning_transport": "ip",
     "network_transport": "wifi",
     "state_change_method": "physical_control",
     "state_change_notes": "The plug has a local On/Off button used for subscription testing."
   },
   "summary": {
     "result": "passed",
-    "passed": 12,
+    "passed": 11,
     "failed": 0,
     "not_run": 1
   },
@@ -36,18 +36,18 @@
         "android-build-install.png"
       ]
     },
-    "ble_discovery": {
+    "ip_discovery": {
       "status": "passed",
       "duration_ms": 7200,
       "evidence_files": [
-        "android-ble-discovery.png"
+        "android-ip-discovery.png"
       ]
     },
-    "ble_commissioning": {
+    "ip_commissioning": {
       "status": "passed",
       "duration_ms": 61200,
       "evidence_files": [
-        "android-ble-commissioning.png"
+        "android-ip-commissioning.png"
       ]
     },
     "operational_connect": {
@@ -98,13 +98,6 @@
       "duration_ms": 6100,
       "evidence_files": [
         "android-invalid-setup-passcode.png"
-      ]
-    },
-    "bluetooth_disabled": {
-      "status": "passed",
-      "duration_ms": 2400,
-      "evidence_files": [
-        "android-bluetooth-disabled.png"
       ]
     },
     "invalid_wifi_password": {

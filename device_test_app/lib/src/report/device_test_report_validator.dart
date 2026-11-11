@@ -113,10 +113,10 @@ class DeviceTestReportValidator {
 
   /// Validates a typed report for formal evidence use.
   ///
-  /// JSON schema v1 deliberately has no profile field. The caller supplies the
+  /// JSON schema v2 deliberately has no profile field. The caller supplies the
   /// profile that produced the report, and formal evidence must be full.
   ReportValidationResult validateModel(
-    DeviceTestReportV1 report, {
+    DeviceTestReportV2 report, {
     TestProfile profile = TestProfile.full,
   }) {
     final issues = <ReportValidationIssue>[];
@@ -143,6 +143,7 @@ void _validateSemantics(
   Map<String, dynamic> report,
   List<ReportValidationIssue> issues,
 ) {
+  _validateFormalSafety(report, issues);
   final rawTests = report['tests'];
   if (rawTests is Map<String, dynamic>) {
     final actualIds = rawTests.keys.toSet();
@@ -151,7 +152,10 @@ void _validateSemantics(
         .toSet();
     final missing = expectedIds.difference(actualIds);
     final unexpected = actualIds.difference(expectedIds);
-    if (actualIds.length != 13 || missing.isNotEmpty || unexpected.isNotEmpty) {
+    final expectedCount = DeviceTestCatalog.all.length;
+    if (actualIds.length != expectedCount ||
+        missing.isNotEmpty ||
+        unexpected.isNotEmpty) {
       final details = <String>[
         if (missing.isNotEmpty) 'missing ${missing.join(', ')}',
         if (unexpected.isNotEmpty) 'unexpected ${unexpected.join(', ')}',
@@ -161,7 +165,7 @@ void _validateSemantics(
           kind: ReportValidationIssueKind.semantic,
           path: r'$.tests',
           message:
-              'All 13 fixed test IDs must appear exactly once'
+              'All $expectedCount fixed test IDs must appear exactly once'
               '${details.isEmpty ? '' : ': ${details.join('; ')}'}.',
         ),
       );
@@ -206,6 +210,53 @@ void _validateSemantics(
   }
 }
 
+/// Semantic checks for formal-report safety that stay meaningful even when
+/// a caller supplies a schema older or looser than the canonical v2 asset.
+void _validateFormalSafety(
+  Map<String, dynamic> report,
+  List<ReportValidationIssue> issues,
+) {
+  final commissionee = report['commissionee'];
+  if (commissionee is! Map<String, dynamic>) {
+    return;
+  }
+
+  final type = commissionee['type'];
+  if (type is String && type != CommissioneeType.real.wireName) {
+    issues.add(
+      const ReportValidationIssue(
+        kind: ReportValidationIssueKind.semantic,
+        path: r'$.commissionee.type',
+        message: 'Formal reports require a real Matter commissionee.',
+      ),
+    );
+  }
+
+  final commissioningTransport = commissionee['commissioning_transport'];
+  if (commissioningTransport is String &&
+      commissioningTransport != CommissioningTransport.ip.wireName) {
+    issues.add(
+      const ReportValidationIssue(
+        kind: ReportValidationIssueKind.semantic,
+        path: r'$.commissionee.commissioning_transport',
+        message: 'Formal reports require Wi-Fi/IP commissioning transport.',
+      ),
+    );
+  }
+
+  final networkTransport = commissionee['network_transport'];
+  if (networkTransport is String &&
+      networkTransport != NetworkTransport.wifi.wireName) {
+    issues.add(
+      const ReportValidationIssue(
+        kind: ReportValidationIssueKind.semantic,
+        path: r'$.commissionee.network_transport',
+        message: 'Formal reports require Wi-Fi network transport.',
+      ),
+    );
+  }
+}
+
 void _validateSummary(
   Map<String, dynamic> report,
   Map<String, dynamic> rawTests,
@@ -220,12 +271,13 @@ void _validateSummary(
   final failed = rawSummary['failed'];
   final notRun = rawSummary['not_run'];
   if (passed is int && failed is int && notRun is int) {
-    if (passed + failed + notRun != 13) {
+    final expectedCount = DeviceTestCatalog.all.length;
+    if (passed + failed + notRun != expectedCount) {
       issues.add(
-        const ReportValidationIssue(
+        ReportValidationIssue(
           kind: ReportValidationIssueKind.semantic,
           path: r'$.summary',
-          message: 'Summary counts must total 13.',
+          message: 'Summary counts must total $expectedCount.',
         ),
       );
     }
@@ -252,7 +304,7 @@ void _validateSummary(
     }
     results.add(DeviceTestResult(testId: testId, status: status));
   }
-  if (results.length != 13) {
+  if (results.length != DeviceTestCatalog.all.length) {
     return;
   }
 

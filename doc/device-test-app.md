@@ -4,20 +4,22 @@ The dedicated device-test app lives in [`device_test_app/`](../device_test_app/)
 
 The app emits versioned evidence instead of relying on ad-hoc command transcripts. Formal evidence must use the `full` profile and the report contract in [device-test-report.md](device-test-report.md). Physical-device validation has not yet been completed; this repository records that status only after a qualified run and reviewer-safe report are available.
 
+Every device Run uses real Matter hardware over Wi-Fi/IP commissioning. BLE discovery, BLE pre-scanning, and GATT commissioning are not part of any Run and must not be started.
+
 ## Test profiles
 
 | Profile | Tests | Formal evidence |
 | --- | --- | --- |
-| `quick` | `build_install`, `ble_discovery`, `ble_commissioning`, `operational_connect`, `onoff_invoke` | No |
-| `full` | All 13 fixed tests from the report contract | Yes, when all required P0 tests pass |
+| `quick` | `build_install`, `ip_discovery`, `ip_commissioning`, `operational_connect`, `onoff_invoke` | No |
+| `full` | All 12 fixed tests from the report contract | Yes, when the commissionee is real hardware, all required P0 tests pass, and the transports are `ip` / `wifi` |
 
 `quick` is intended for developer iteration and never satisfies PR or release evidence. A `full` run is the only formal evidence source.
 
 ## Full validation order
 
 1. `build_install`
-2. `ble_discovery`
-3. `ble_commissioning`
+2. `ip_discovery`
+3. `ip_commissioning`
 4. `operational_connect`
 5. `onoff_invoke`
 6. `onoff_subscription`
@@ -25,9 +27,8 @@ The app emits versioned evidence instead of relying on ad-hoc command transcript
 8. `app_restart`
 9. `factory_reset_recommission`
 10. `invalid_setup_passcode`
-11. `bluetooth_disabled`
-12. `invalid_wifi_password`
-13. `remove_fabric_ui`
+11. `invalid_wifi_password`
+12. `remove_fabric_ui`
 
 A P0 failure or skip ends the current Run. Dependent tests are recorded as `not_run` with a reason. A P0 test is never retried inside the same Run to manufacture a green result.
 
@@ -38,24 +39,21 @@ A failed `app_restart` result is recorded before recovery. A failed `factory_res
 The app separates pure domain logic from hardware and platform adapters:
 
 - **Domain:** fixed test catalog, results, resumable Run state, and the report model.
-- **Application:** `RunCoordinator`, the 13 fixed test cases, profiles, operator prompts, failure policy, and run recovery.
+- **Application:** `RunCoordinator`, the 12 fixed test cases, profiles, operator prompts, failure policy, and run recovery.
 - **Agent:** protocol v1, state and event projection, and the reconnecting bridge client.
-- **Infrastructure:** BLE, Matter controller and certificate services, adapters for application ports, `ProvisioningSecretStore`, `FileRunPersistence`, report files, platform information, and sharing.
+- **Infrastructure:** Matter controller and certificate services, on-network discovery, adapters for application ports, `ProvisioningSecretStore`, `FileRunPersistence`, report files, platform information, and sharing.
 - **Presentation:** Home, Setup, Runner, prompt dialogs, Results, and the application controller.
 
 Widgets never call hardware APIs directly. The UI controller and Agent observe the same `RunCoordinator` state and event streams, while infrastructure adapters implement the hardware-facing application ports.
 
-The app is designed for Android and physical iOS controllers. Real Matter hardware is preferred; the Android Virtual Matter Device App is a functional fallback. Physical iOS and Android controllers can both test real hardware or that virtual commissionee.
+The app is designed for Android and physical iOS controllers. Every device run requires a qualified real Matter commissionee. Virtual Matter commissionees are not supported and cannot produce evidence.
 
 ## Controller and commissionee roles
 
-- **Controller:** the Android or physical iOS phone running `device_test_app`. It creates controller identity, discovers BLE commissionees, commissions the device, connects over CASE, invokes and subscribes to OnOff, and manages fabric state.
-- **Commissionee:** a qualified real Matter On/Off device when available. It is the preferred target.
-- **Virtual fallback:** a distinct Android phone running the official Project CHIP Android Virtual Matter Device App. For an Android controller this is the canonical two-Android-phone topology; a physical iOS controller can test the same distinct Android commissionee.
+- **Controller:** the Android or physical iOS phone running `device_test_app`. It creates controller identity, discovers the real commissionee over mDNS/IP, commissions it over Wi-Fi/IP, connects over CASE, invokes and subscribes to OnOff, and manages fabric state.
+- **Commissionee:** a qualified real Matter On/Off device connected to the same trusted Wi-Fi/LAN as the controller and already in an open commissioning window.
 
-When the virtual fallback is selected, the run must record the reason that real hardware was unavailable. The controller and virtual commissionee must be separate devices; they cannot be the same phone.
-
-When multiple phones are connected, the Agent must ask the user to choose the controller. It must also ask a separate question for the virtual commissionee and reject the controller phone. The Agent never selects a phone by connection order, platform, or previous use.
+When multiple phones are connected, the Agent must ask the user to choose the controller. The Agent never selects a phone by connection order, platform, or previous use. A device Run must not ask the Agent to select or operate a virtual commissionee.
 
 ## Persistence and secrets
 
@@ -79,16 +77,15 @@ The app does not write screenshots, raw logs, or event transcripts into formal r
 ### Android
 
 - Minimum SDK 24, compile/target SDK 36, arm64 only.
-- BLE, nearby-device, camera, location, Wi-Fi, multicast, internet, and LAN cleartext access.
-- Android controllers use the custom FlutterBluePlus GATT/BTP path implemented by the app infrastructure.
-- A second Android phone can run the official Project CHIP Virtual Matter Device App as the commissionee.
+- Nearby-device, camera, location, Wi-Fi, multicast, internet, and LAN cleartext access.
+- Android controllers use the app's Matter controller path for mDNS/IP discovery and Wi-Fi/IP commissioning.
 
 ### iOS
 
 - Physical iPhone only; simulator builds are not valid evidence because the vendored Matter framework has no simulator slice.
 - Deployment target 16.1.
 - Runner and Matter Extension must share the configured App Group.
-- The app needs Matter Allow Setup Payload, Bluetooth, Bonjour, Local Network, Camera, and Location declarations.
+- The app needs Matter Allow Setup Payload, Bonjour, Local Network, Camera, and Location declarations.
 - Physical signing and provisioning are local maintainer configuration. The repository can verify `--no-codesign` builds only.
 
 ## Agent mode
@@ -128,8 +125,8 @@ The wrapper requires a clean tracked worktree and injects `PLUGIN_COMMIT` and `T
 ## Troubleshooting
 
 - **Bridge does not connect:** confirm `serve` is running, the app has the printed WebSocket endpoint, the Mac and phone are on the same trusted LAN, and the network permits the connection.
-- **No commissionee discovered:** enable Bluetooth, confirm commissionee pairing mode, verify the setup payload, and keep the phones on a non-isolated network.
-- **Commissioning fails:** verify the setup code and network credentials without recording them, then stop and preserve the failed result rather than retrying a P0 in the same Run.
-- **Report unavailable:** ensure the run was a completed `full` run and all required P0 tests have a valid result.
+- **No commissionee discovered:** confirm the controller and real commissionee are on the same non-isolated Wi-Fi/LAN, verify that the setup payload advertises on-network discovery, and verify that the commissioning window is open.
+- **Commissioning fails:** verify the setup code and network credentials without recording them, then stop and preserve the failed result rather than retrying a P0 in the same Run. Do not retry through BLE.
+- **Report unavailable:** ensure the run was a completed `full` run with real hardware, `ip` / `wifi` transports, and all required P0 tests have a valid result.
 - **Wrong commit in report:** rebuild from the PR head with the wrapper, install the new app, and start a fresh Run.
 - **Secrets or device identifiers are visible:** do not attach the report. Purge the invalid copy, correct the source, regenerate from app state, and re-review the output.

@@ -134,7 +134,7 @@ void main() {
     );
 
     test(
-      'full profile reaches 13 terminal results and sanitized state',
+      'full profile reaches 12 terminal results and sanitized state',
       () async {
         final hardware = FakeHardware();
         final persistence = MemoryRunPersistencePort();
@@ -142,10 +142,6 @@ void main() {
           handler: (prompt) {
             if (prompt.id == 'onoff_subscription_external_change') {
               hardware.onOff.pushUpdate(hardware.onOff.currentState.toggled);
-            } else if (prompt.id == 'bluetooth_disabled_disable') {
-              hardware.discovery.enabled = false;
-            } else if (prompt.id == 'bluetooth_disabled_restore') {
-              hardware.discovery.enabled = true;
             } else if (prompt.id == 'remove_fabric_ui') {
               hardware.fabric.status = const FabricStatus(present: false);
             }
@@ -172,7 +168,7 @@ void main() {
 
         expect(snapshot.status, RunnerStatus.passed);
         expect(snapshot.session!.allResultsTerminal, isTrue);
-        expect(snapshot.session!.orderedResults.length, 13);
+        expect(snapshot.session!.orderedResults.length, 12);
         expect(
           snapshot.session!.orderedResults.every(
             (result) => result.status == DeviceTestStatus.passed,
@@ -205,13 +201,13 @@ void main() {
           clock: FakeClock(),
         );
         final failing = ScriptedCase(
-          DeviceTestId.bleCommissioning,
+          DeviceTestId.ipCommissioning,
           (_) => TestCaseOutcome.failed('commissioning failed'),
         );
         final coordinator = RunCoordinator(
           ports: ports,
           registry: scriptedRegistry(
-            overrides: {DeviceTestId.bleCommissioning: failing},
+            overrides: {DeviceTestId.ipCommissioning: failing},
           ),
           timeouts: fastTimeouts,
         );
@@ -224,7 +220,7 @@ void main() {
         expect(snapshot.status, RunnerStatus.failed);
         expect(failing.calls, 1);
         expect(
-          snapshot.session!.results[DeviceTestId.bleCommissioning]!.status,
+          snapshot.session!.results[DeviceTestId.ipCommissioning]!.status,
           DeviceTestStatus.failed,
         );
         expect(
@@ -252,13 +248,13 @@ void main() {
         clock: FakeClock(),
       );
       final skipped = ScriptedCase(
-        DeviceTestId.bleDiscovery,
+        DeviceTestId.ipDiscovery,
         (_) => TestCaseOutcome.notRun('no BLE target'),
       );
       final coordinator = RunCoordinator(
         ports: ports,
         registry: scriptedRegistry(
-          overrides: {DeviceTestId.bleDiscovery: skipped},
+          overrides: {DeviceTestId.ipDiscovery: skipped},
         ),
         timeouts: fastTimeouts,
       );
@@ -268,12 +264,12 @@ void main() {
 
       expect(snapshot.status, RunnerStatus.notRun);
       expect(
-        snapshot.session!.results[DeviceTestId.bleCommissioning]!.status,
+        snapshot.session!.results[DeviceTestId.ipCommissioning]!.status,
         DeviceTestStatus.notRun,
       );
       expect(
-        snapshot.session!.results[DeviceTestId.bleCommissioning]!.notes,
-        contains('ble_discovery'),
+        snapshot.session!.results[DeviceTestId.ipCommissioning]!.notes,
+        contains('ip_discovery'),
       );
     });
 
@@ -420,8 +416,8 @@ void main() {
         ),
         timeouts: const TestTimeouts(
           buildInstall: Duration(milliseconds: 100),
-          bleDiscovery: Duration(milliseconds: 100),
-          bleCommissioning: Duration(milliseconds: 100),
+          ipDiscovery: Duration(milliseconds: 100),
+          ipCommissioning: Duration(milliseconds: 100),
           operationalConnect: Duration(milliseconds: 100),
           onOffInvoke: Duration(milliseconds: 10),
           onOffSubscription: Duration(milliseconds: 100),
@@ -429,7 +425,6 @@ void main() {
           appRestart: Duration(milliseconds: 100),
           factoryResetRecommission: Duration(milliseconds: 100),
           invalidSetupPasscode: Duration(milliseconds: 100),
-          bluetoothDisabled: Duration(milliseconds: 100),
           invalidWifiPassword: Duration(milliseconds: 100),
           removeFabricUi: Duration(milliseconds: 100),
         ),
@@ -515,18 +510,18 @@ void main() {
           clock: FakeClock(),
         );
         final discovery = ScriptedCase(
-          DeviceTestId.bleDiscovery,
+          DeviceTestId.ipDiscovery,
           (_) => const TestCaseOutcome.passed(),
         );
         final coordinator = RunCoordinator(
           ports: ports,
           registry: scriptedRegistry(
-            overrides: {DeviceTestId.bleDiscovery: discovery},
+            overrides: {DeviceTestId.ipDiscovery: discovery},
           ),
           timeouts: fastTimeouts,
         );
         addTearDown(coordinator.dispose);
-        final session = sessionWithRunningTest(DeviceTestId.bleDiscovery);
+        final session = sessionWithRunningTest(DeviceTestId.ipDiscovery);
         persistence.persisted = persistedStateFor(session: session);
 
         final snapshot = await coordinator.resume();
@@ -534,7 +529,7 @@ void main() {
         expect(snapshot, isNotNull);
         expect(discovery.calls, 1);
         expect(
-          snapshot!.session!.results[DeviceTestId.bleDiscovery]!.status,
+          snapshot!.session!.results[DeviceTestId.ipDiscovery]!.status,
           DeviceTestStatus.passed,
         );
       },

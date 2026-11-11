@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter_matter/flutter_matter.dart' show DiscoveryCapability;
 
 import '../application/application.dart';
 import '../domain/domain.dart';
@@ -86,7 +88,7 @@ class DeviceTestAppController extends ChangeNotifier
     status: ReportUiValidationStatus.unavailable,
     message: 'No formal report is available yet.',
   );
-  DeviceTestReportV1? _formalReport;
+  DeviceTestReportV2? _formalReport;
   ReportValidationResult? _validationResult;
   DeviceTestReportFiles? _reportFiles;
   String? _markdownContents;
@@ -112,7 +114,7 @@ class DeviceTestAppController extends ChangeNotifier
   /// Provided to ApplicationPorts during production wiring.
   OperatorPromptPort get operatorPromptPort => _prompts;
 
-  DeviceTestReportV1? get formalReport => _formalReport;
+  DeviceTestReportV2? get formalReport => _formalReport;
 
   ReportValidationResult? get reportValidation => _validationResult;
 
@@ -196,6 +198,15 @@ class DeviceTestAppController extends ChangeNotifier
       return;
     }
 
+    final safetyIssues = _deviceRunSafetyIssues(request);
+    if (safetyIssues.isNotEmpty) {
+      _setError(
+        'Device runs require a real Matter commissionee, IP commissioning '
+        'transport, and Wi-Fi network transport. ${safetyIssues.join(' ')}',
+      );
+      return;
+    }
+
     _setState(busy: true, errorMessage: null);
     try {
       final setupCode = request.setupCode.trim();
@@ -207,6 +218,10 @@ class DeviceTestAppController extends ChangeNotifier
         onboardingPayload: setupCode,
         setupPinCode: payload.setupPinCode,
         network: network,
+        commissioningTransport: request.commissioningTransport,
+        supportsOnNetworkDiscovery: payload.discoveryCapabilities.contains(
+          DiscoveryCapability.on_network,
+        ),
       );
 
       await _secrets.save(runId, secrets);
@@ -227,6 +242,7 @@ class DeviceTestAppController extends ChangeNotifier
           type: request.commissioneeType,
           model: request.model.trim(),
           firmware: request.firmware.trim(),
+          commissioningTransport: request.commissioningTransport,
           networkTransport: request.networkTransport,
           stateChangeMethod: request.stateChangeMethod,
           stateChangeNotes: request.stateChangeNotes.trim().isEmpty
@@ -677,6 +693,22 @@ class DeviceTestAppController extends ChangeNotifier
       issues: List<String>.unmodifiable(issues),
     );
     _publishProjection();
+  }
+
+  /// Defense-in-depth check enforced before any session state or secret is
+  /// written. Only real commissionees commissioned over Wi-Fi/IP are allowed.
+  List<String> _deviceRunSafetyIssues(DeviceTestSetupRequest request) {
+    final issues = <String>[];
+    if (request.commissioneeType != CommissioneeType.real) {
+      issues.add('The commissionee type must be real.');
+    }
+    if (request.commissioningTransport != CommissioningTransport.ip) {
+      issues.add('The commissioning transport must be ip.');
+    }
+    if (request.networkTransport != NetworkTransport.wifi) {
+      issues.add('The network transport must be wifi.');
+    }
+    return issues;
   }
 
   ProvisioningNetworkSecret _networkSecret(DeviceTestSetupRequest request) {

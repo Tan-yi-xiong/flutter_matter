@@ -84,26 +84,9 @@ Future<OperationalConnectionLease?> restoreConnection(
   return connection;
 }
 
-Future<BleCommissionee> discoverTarget(
-  TestContext context, {
-  required ProvisioningSecrets secrets,
-}) async {
-  final result = await context.ports.bleDiscovery.discover(
-    BleDiscoveryRequest(
-      timeout: context.timeoutFor(DeviceTestId.bleDiscovery),
-      onboardingPayload: secrets.onboardingPayload,
-    ),
-  );
-  final target = result.target;
-  if (target == null) {
-    throw const MissingDiscoveryTargetException();
-  }
-  return target;
-}
-
 Future<CommissioningResult> commissionTarget(
   TestContext context, {
-  required BleCommissionee target,
+  BleCommissionee? target,
   required ControllerIdentity identity,
   required ProvisioningSecrets secrets,
   required Duration timeout,
@@ -117,13 +100,10 @@ Future<CommissioningResult> commissionTarget(
       onboardingPayload: secrets.onboardingPayload,
       setupPinCode: setupPinCode ?? secrets.setupPinCode,
       network: secrets.network,
+      commissioningTransport: secrets.commissioningTransport,
       timeout: timeout,
     ),
   );
-}
-
-class MissingDiscoveryTargetException implements Exception {
-  const MissingDiscoveryTargetException();
 }
 
 String timeoutLabel(Duration timeout) {

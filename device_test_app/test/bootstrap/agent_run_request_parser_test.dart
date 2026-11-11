@@ -7,16 +7,15 @@ import '../presentation/support/presentation_fixtures.dart';
 void main() {
   const parser = AgentRunRequestParser();
 
-  test('parses a complete virtual Wi-Fi full run', () {
+  test('parses a complete real Wi-Fi full run', () {
     final state = setupState();
     final request = parser.parse(
       arguments: <String, Object?>{
         'mode': 'full',
-        'commissionee_type': 'virtual',
-        'fallback_reason': 'No qualified physical Matter device is available.',
-        'virtual_fallback_confirmed': true,
-        'model': 'Virtual OnOff Switch',
+        'commissionee_type': 'real',
+        'model': 'Matter OnOff Switch',
         'firmware': 'v1.6.1.0',
+        'commissioning_transport': 'ip',
         'network_transport': 'wifi',
         'state_change_method': 'commissionee_ui',
         'state_change_notes': 'Use the test App UI.',
@@ -33,44 +32,82 @@ void main() {
     );
 
     expect(request.profile, TestProfile.full);
-    expect(request.commissioneeType, CommissioneeType.virtual);
+    expect(request.commissioneeType, CommissioneeType.real);
+    expect(request.commissioningTransport, CommissioningTransport.ip);
     expect(request.networkTransport, NetworkTransport.wifi);
     expect(request.stateChangeMethod, StateChangeMethod.commissioneeUi);
     expect(request.controller, same(state.controllerInfo));
   });
 
-  test('parses a Thread quick run', () {
-    final request = parser.parse(
-      arguments: <String, Object?>{
-        'mode': 'quick',
-        'commissionee_type': 'real',
-        'model': 'Matter switch',
-        'firmware': '1.2.3',
-        'network_transport': 'thread',
-        'state_change_method': 'physical_control',
-        'setup_code': 'MT:PRIVATE-SETUP-CODE',
-        'thread_operational_dataset': '0x00112233',
-        'clean_cycle': <String, Object?>{
-          'controller_clean': true,
-          'commissionee_clean': true,
-          'secrets_purged': true,
-        },
-      },
-      state: setupState(),
-    );
-
-    expect(request.profile, TestProfile.quick);
-    expect(request.networkTransport, NetworkTransport.thread);
-  });
-
-  test('rejects virtual setups without fallback acknowledgement', () {
+  test('rejects Thread network transport', () {
     expect(
       () => parser.parse(
         arguments: <String, Object?>{
           'mode': 'quick',
+          'commissionee_type': 'real',
+          'model': 'Matter switch',
+          'firmware': '1.2.3',
+          'network_transport': 'thread',
+          'state_change_method': 'physical_control',
+          'setup_code': 'MT:PRIVATE-SETUP-CODE',
+          'clean_cycle': <String, Object?>{
+            'controller_clean': true,
+            'commissionee_clean': true,
+            'secrets_purged': true,
+          },
+        },
+        state: setupState(),
+      ),
+      throwsA(
+        isA<AgentRunRequestException>().having(
+          (error) => error.issues.keys,
+          'issue keys',
+          contains('network_transport'),
+        ),
+      ),
+    );
+  });
+
+  test('rejects BLE commissioning transport', () {
+    expect(
+      () => parser.parse(
+        arguments: <String, Object?>{
+          'mode': 'quick',
+          'commissionee_type': 'real',
+          'model': 'Matter switch',
+          'firmware': '1.2.3',
+          'commissioning_transport': 'ble',
+          'network_transport': 'wifi',
+          'state_change_method': 'physical_control',
+          'setup_code': 'MT:PRIVATE-SETUP-CODE',
+          'wifi_ssid': 'test-network',
+          'clean_cycle': <String, Object?>{
+            'controller_clean': true,
+            'commissionee_clean': true,
+            'secrets_purged': true,
+          },
+        },
+        state: setupState(),
+      ),
+      throwsA(
+        isA<AgentRunRequestException>().having(
+          (error) => error.issues.keys,
+          'issue keys',
+          contains('commissioning_transport'),
+        ),
+      ),
+    );
+  });
+
+  test('rejects virtual commissionees for every Run profile', () {
+    expect(
+      () => parser.parse(
+        arguments: <String, Object?>{
+          'mode': 'full',
           'commissionee_type': 'virtual',
           'model': 'Virtual switch',
           'firmware': '1.0.0',
+          'commissioning_transport': 'ip',
           'network_transport': 'wifi',
           'state_change_method': 'commissionee_ui',
           'setup_code': 'MT:PRIVATE-SETUP-CODE',
@@ -87,7 +124,7 @@ void main() {
         isA<AgentRunRequestException>().having(
           (error) => error.issues.keys,
           'issue keys',
-          containsAll(<String>['fallback_reason', 'fallback_confirmation']),
+          contains('commissionee_type'),
         ),
       ),
     );
