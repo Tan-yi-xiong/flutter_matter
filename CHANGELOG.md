@@ -1,3 +1,27 @@
+## Unreleased
+
+### Compatibility
+- **iOS 16.1 minimum support** — The podspec, Podfile, app framework metadata, and Xcode targets now use iOS 16.1 for both the plugin and the example. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
+
+### Tooling and tests
+- Added a root plugin Dart test suite covering public exports, MethodChannel contracts, models, TLV parsing, onboarding parsing, and callback routing.
+- Pinned Flutter `3.41.0` through `.fvmrc`; the Dart and Flutter pubspec lower bounds remain unchanged, while only Flutter `3.41.0` is currently validated.
+- Documented the Android build baseline as `minSdk 21`, `compileSdk 34`, JDK 17, Gradle 8.7, Android Gradle Plugin 8.6.0, and Kotlin 1.7.10 without claiming an upgrade.
+- Documented that Flutter 3.41 may auto-migrate the example Android minSdk from 21 to 24 and that this migration is outside the current compatibility decision.
+- Updated the example's `win32` override so dependency resolution remains compatible with Dart 3.11.
+- Kept the required CI gate Dart-only and limited automated tests to the plugin root `test/` suite. The example remains a build and manual demonstration target.
+
+### Bug Fixes
+- Fixed signed little-endian TLV decoding for negative integer widths.
+- Fixed context-tagged TLV boolean and non-integer type parsing.
+- Fixed nested event and event-status decoding in `ClusterState`.
+
+### Documentation
+- Added architecture, public API, platform support, and architecture decision records.
+- Added contribution and review guidance for public API, MethodChannel, JSON, platform, and testing compatibility.
+- Added the Flutter 3.41 UIScene migration for the iOS example and aligned its deployment targets to iOS 16.1.
+- Clarified that `example/**` is never an automated test target and that iOS simulator builds are unsupported by the current vendored Matter framework.
+
 ## 0.0.11
 
 ### Bug Fixes

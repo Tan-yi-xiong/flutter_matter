@@ -27,11 +27,13 @@ Use `Passed`, `Failed`, or `Not run` in the result column. Do not delete rows th
 do not apply. For `Not run`, explain the reason and the remaining risk. Include
 safe evidence links or summaries; never include credentials or private keys.
 
+Automated tests cover the plugin root `test/` suite only. `example/**` is a
+build and manual demonstration target, not an automated test target.
+
 | Check | Command or manual scenario | Platform / device | Result | Evidence | Not run reason |
 | --- | --- | --- | --- | --- | --- |
 | Dart analyze | `flutter analyze --no-fatal-infos --no-fatal-warnings` | Host |  |  |  |
-| Plugin Dart tests | `flutter test` | Host |  |  |  |
-| Example Dart tests | `cd example && flutter test` | Host |  |  |  |
+| Plugin Dart tests | `flutter test` (`test/` only) | Host |  |  |  |
 | Android debug build | `cd example && flutter build apk --debug` | Android build host |  |  |  |
 | iOS no-codesign build | `cd example && flutter build ios --debug --no-codesign` | macOS |  |  |  |
 | Manual functional test | Describe the exact scenario | Device and OS |  |  |  |
@@ -51,6 +53,7 @@ safe evidence links or summaries; never include credentials or private keys.
 - [ ] I ran every applicable check listed above and reported the actual result.
 - [ ] I did not leave any verification field blank.
 - [ ] I identified all affected platforms and native behavior.
+- [ ] I did not run or report `example/**` as an automated test target.
 - [ ] I described public API and compatibility impact.
 - [ ] I included no credentials, tokens, private keys, or unsanitized private logs.
 - [ ] I reviewed all added or modified documentation and confirmed it is English.

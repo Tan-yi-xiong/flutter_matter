@@ -2,9 +2,17 @@ import 'dart:typed_data';
 
 /// Converts bytes in a Little Endian format into Long integer.
 int byteArrayFromLittleEndianToInt(Uint8List bytes, {bool isSigned = false}) {
-  int result = 0;
+  return _fromLittleEndian(bytes, isSigned: isSigned);
+}
+
+int _fromLittleEndian(List<int> bytes, {required bool isSigned}) {
+  if (bytes.isEmpty) {
+    return 0;
+  }
+
+  int result = isSigned && (bytes.last & 0x80) != 0 ? -1 : 0;
   for (int i = bytes.length - 1; i >= 0; i--) {
-    result = (result << 8) | (isSigned && i == bytes.length - 1 ? bytes[i] : bytes[i] & 0xFF);
+    result = (result << 8) | (bytes[i] & 0xFF);
   }
   return result;
 }
@@ -91,13 +99,5 @@ extension DoubleExt on double {
 }
 
 int fromLittleEndianToLong(List<int> byteArray, {bool isSigned = false}) {
-  int result = 0;
-
-  for (int i = byteArray.length - 1; i >= 0; i--) {
-    int value = byteArray[i];
-    result = (result << 8) |
-        ((i == byteArray.length - 1 && isSigned) ? value : (value & 0xFF));
-  }
-
-  return result;
+  return _fromLittleEndian(byteArray, isSigned: isSigned);
 }

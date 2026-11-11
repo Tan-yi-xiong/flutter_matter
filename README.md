@@ -61,6 +61,25 @@ A beautiful and low-level [Matter](https://csa-iot.org/) plugin for **Flutter** 
 
 ---
 
+## Requirements and platform support
+
+| Area | Supported baseline |
+| --- | --- |
+| Flutter | Flutter `3.41.0`, pinned in `.fvmrc`; older SDKs satisfy the pubspec constraint but are not currently validated |
+| Dart | `>=3.3.3 <4.0.0`, unchanged in `pubspec.yaml` |
+| Android | `minSdkVersion 21`, `compileSdk 34`, JDK 17 |
+| Example Android build | Gradle 8.7, Android Gradle Plugin 8.6.0, Kotlin 1.7.10 |
+| iOS | iOS 16.1 minimum for the plugin and example; Xcode 16.4 or later and CocoaPods 1.17 |
+| iOS device support | Physical arm64 iPhoneOS devices only; the vendored `ZGMatter.framework` has no simulator slice |
+
+The Android values describe the current repository build configuration and do not imply that an SDK upgrade has already been completed. The iOS deployment targets are aligned to 16.1. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
+
+Automated tests cover the plugin root `test/` suite only. The `example/` application is a build and manual demonstration target, never an automated test target.
+
+See [Architecture](ARCHITECTURE.md), [Public API](docs/public-api.md), [Platform support](docs/platform-support.md), [Contributing](CONTRIBUTING.md), and the [PR review checklist](docs/pr-review-checklist.md) for details.
+
+---
+
 ## 🚀 Getting Started
 
 ## Android
@@ -197,8 +216,8 @@ No additional setup is required.
 
 ```sh
 cd example
-flutter pub get
-flutter run
+fvm flutter pub get
+fvm flutter run
 ```
 
 ---

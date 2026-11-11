@@ -5,7 +5,7 @@ PODS:
   - Flutter (1.0.0)
   - flutter_blue_plus (0.0.1):
     - Flutter
-  - flutter_matter (0.0.9):
+  - flutter_matter (0.0.11):
     - Flutter
   - fluttertoast (0.0.2):
     - Flutter
@@ -37,8 +37,6 @@ PODS:
   - GoogleUtilitiesComponents (1.1.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (3.5.0)
-  - integration_test (0.0.1):
-    - Flutter
   - MLImage (1.0.0-beta5)
   - MLKitBarcodeScanning (5.0.0):
     - MLKitCommon (~> 11.0)
@@ -90,7 +88,6 @@ DEPENDENCIES:
   - flutter_blue_plus (from `.symlinks/plugins/flutter_blue_plus/ios`)
   - flutter_matter (from `.symlinks/plugins/flutter_matter/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - mobile_scanner (from `.symlinks/plugins/mobile_scanner/ios`)
   - network_info_plus (from `.symlinks/plugins/network_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
@@ -127,8 +124,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_matter/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
-  integration_test:
-    :path: ".symlinks/plugins/integration_test/ios"
   mobile_scanner:
     :path: ".symlinks/plugins/mobile_scanner/ios"
   network_info_plus:
@@ -143,34 +138,33 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
 
 SPEC CHECKSUMS:
-  bonsoir_darwin: e3b8526c42ca46a885142df84229131dfabea842
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_blue_plus: 4837da7d00cf5d441fdd6635b3a57f936778ea96
-  flutter_matter: 032ccd34acd52cf2ec60e92e2ac8c3bc6b07dc85
-  fluttertoast: e9a18c7be5413da53898f660530c56f35edfba9c
+  bonsoir_darwin: 29c7ccf356646118844721f36e1de4b61f6cbd0e
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_blue_plus: e5808fc4e5ebc58bb911635f8fdaf5e2b4da2754
+  flutter_matter: 8cde99b875d154e3f5558b3ee338046ca39cedd0
+  fluttertoast: 76fea30fcf04176325f6864c87306927bd7d2038
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleMLKit: 97ac7af399057e99182ee8edfa8249e3226a4065
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
-  integration_test: 13825b8a9334a850581300559b8839134b124670
   MLImage: 1824212150da33ef225fbd3dc49f184cf611046c
   MLKitBarcodeScanning: 10ca0845a6d15f2f6e911f682a1998b68b973e8b
   MLKitCommon: afec63980417d29ffbb4790529a1b0a2291699e1
   MLKitVision: e858c5f125ecc288e4a31127928301eaba9ae0c1
-  mobile_scanner: 8564358885a9253c43f822435b70f9345c87224f
+  mobile_scanner: ba17a89d6a2d1847dad8cad0335856fd4b4ce1f6
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  network_info_plus: 9d930145451916919786087c4173226363616071
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  network_info_plus: 16d8832ab43b7bc22b168d76fffcad9da35486d2
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   Protobuf: 164aea2ae380c3951abdc3e195220c01d17400e0
-  reactive_ble_mobile: 856183aeda09f2a676bbaecbea8915c3cb1d33df
-  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
+  reactive_ble_mobile: ea97709e18fa6f0b0592909725d7ae7e1c595b64
+  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
   SwiftProtobuf: e02f51c8c2df5845657aee2d4de9d61bf50ef788
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
 
-PODFILE CHECKSUM: 05b5e2eb426db260d8e5cbf138215a038327096b
+PODFILE CHECKSUM: e95dfa6a9e74e7efdc0ca4a0aa4915884146842c
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0

@@ -30,7 +30,7 @@ abstract class Type {
         modifiedControlByte == UNSIGNED_INT_TYPE ||
         modifiedControlByte == UTF8_STRING_TYPE ||
         modifiedControlByte == BYTE_STRING_TYPE)) {
-      modifiedControlByte = controlByte;
+      modifiedControlByte = controlByte & ELEMENT_TYPE_MASK;
     }
 
     switch (modifiedControlByte) {
@@ -61,7 +61,8 @@ abstract class Type {
       case END_OF_CONTAINER:
         return EndOfContainerType();
       default:
-        throw StateError("Unexpected control byte ${modifiedControlByte.toRadixString(2)}");
+        throw StateError(
+            "Unexpected control byte ${modifiedControlByte.toRadixString(2)}");
     }
   }
 
@@ -179,4 +180,3 @@ class EndOfContainerType extends Type {
   @override
   int encode() => END_OF_CONTAINER;
 }
-
