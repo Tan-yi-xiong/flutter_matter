@@ -548,7 +548,7 @@ class ChipDeviceController implements MethodCallHandler {
   final ControllerParams params;
   NOCChainIssuer? _nocChainIssuer;
   CompletionListener? _completionListener;
-  late MethodChannelFlutterMatter _channelFlutterMatter;
+  late FlutterMatterPlatform _channelFlutterMatter;
   final String? _platformDeviceControllerHandle;
   DeviceAttestationDelegate? deviceAttestationDelegate;
   String? _keypairDelegateHandleId;
@@ -899,7 +899,7 @@ class ChipDeviceController implements MethodCallHandler {
   }
 
   ChipDeviceController._(this.params, this._platformDeviceControllerHandle, this._keypairDelegateHandleId) {
-    _channelFlutterMatter = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    _channelFlutterMatter = FlutterMatterPlatform.instance;
     _channelFlutterMatter.addHandler(this);
     _isRunning = true;
   }
@@ -911,7 +911,7 @@ class ChipDeviceController implements MethodCallHandler {
       return controller;
     }
 
-    final channelFlutterMatter = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channelFlutterMatter = FlutterMatterPlatform.instance;
     String? keypairDelegateHandleId;
     if (params.keypairDelegate != null) {
       keypairDelegateHandleId = _keypairDelegateCallbackHandler.addHandler(params.keypairDelegate!);
@@ -1028,7 +1028,7 @@ class ChipDeviceController implements MethodCallHandler {
   static Future<Uint8List> createRootCertificate(
     KeypairDelegate keypair, int issuerId, int? fabricId) async {
       final id = _keypairDelegateCallbackHandler.addHandler(keypair);
-      final channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+      final channel = FlutterMatterPlatform.instance;
       final result = await channel.requestPlatform(
         RequestPlatformParams(
           methodName: createRequestPlatformUrl(_hostName, 'createRootCertificate'), 
@@ -1059,7 +1059,7 @@ class ChipDeviceController implements MethodCallHandler {
       int nodeId,
       List<int>? caseAuthenticatedTags) async {
         final id = _keypairDelegateCallbackHandler.addHandler(signingKeypair);
-        final channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+        final channel = FlutterMatterPlatform.instance;
         final result = await channel.requestPlatform(
           RequestPlatformParams(
             methodName: createRequestPlatformUrl(_hostName, 'createOperationalCertificate'), 
