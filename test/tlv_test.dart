@@ -31,6 +31,22 @@ void main() {
     expect(reader.isEndOfTlv(), isTrue);
   });
 
+  test('TLV signed integers preserve sign across encoded widths', () {
+    final values = <int>[-1, -128, -129, -32768, -32769];
+    final writer = TlvWriter()..startStructure(AnonymousTag.instance);
+    for (var index = 0; index < values.length; index++) {
+      writer.put(ContextSpecificTag(index), values[index]);
+    }
+    writer.endStructure();
+
+    final reader = TlvReader(writer.getEncoded());
+    reader.enterStructure(AnonymousTag.instance);
+    for (var index = 0; index < values.length; index++) {
+      expect(reader.getLong(ContextSpecificTag(index)), values[index]);
+    }
+    reader.exitContainer();
+  });
+
   test('TLV array round-trips anonymous elements', () {
     final writer = TlvWriter();
     writer.startArray(AnonymousTag.instance);

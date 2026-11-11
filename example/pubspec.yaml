@@ -58,6 +58,12 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+# Flutter 3.41 / Dart 3.11 requires a win32 release that no longer uses
+# the removed UnmodifiableUint8ListView API. network_info_plus pulls win32
+# transitively for its Windows implementation only.
+dependency_overrides:
+  win32: ^5.15.0
+
 # The following section is specific to Flutter packages.
 flutter:
 

@@ -27,14 +27,15 @@ void main() {
         .setMockMethodCallHandler(channel, null);
   });
 
-  test('createRequestPlatformUrl preserves the protocol host and path', () {
+  test('createRequestPlatformUrl normalizes scheme and host but preserves path',
+      () {
     expect(
       createRequestPlatformUrl('devicecontroller', 'new'),
-      'zgMatter://devicecontroller/new',
+      'zgmatter://devicecontroller/new',
     );
     expect(
       createRequestPlatformUrl('BLE', 'connectDevice'),
-      'zgMatter://BLE/connectDevice',
+      'zgmatter://ble/connectDevice',
     );
   });
 

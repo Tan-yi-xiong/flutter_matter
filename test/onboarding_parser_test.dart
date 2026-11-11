@@ -41,7 +41,7 @@ void main() {
   test('QR payloads use the QR parser route and decode capabilities', () async {
     final payload = await OnboardingPayloadParser().parse('MT:mock-qr-code');
 
-    expect(calls.single.method, 'zgMatter://Onboarding/parseQrCode');
+    expect(calls.single.method, 'zgmatter://onboarding/parseQrCode');
     expect(payload.vendorId, 10);
     expect(payload.productId, 20);
     expect(payload.setupPinCode, 20202021);
@@ -54,7 +54,10 @@ void main() {
   test('manual payloads use the manual parser route', () async {
     await OnboardingPayloadParser().parse('12345678901234567890');
 
-    expect(calls.single.method, 'zgMatter://Onboarding/parseManualPairingCode');
+    expect(
+      calls.single.method,
+      'zgmatter://onboarding/parseManualPairingCode',
+    );
   });
 
   test('non-success parser responses throw', () async {
