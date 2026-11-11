@@ -12,10 +12,8 @@ import 'dart:math';
 
 const String _protocolName = 'flutter_matter.device_test_agent';
 const int _protocolVersion = 1;
-const String _defaultAndroidPackage =
-    'com.fluttermatter.flutter_matter_device_test_app';
-const String _defaultIosBundleId =
-    'com.fluttermatter.flutterMatterDeviceTestApp';
+const String defaultAndroidDeviceTestPackage = 'com.fluttermatter.devicetest';
+const String defaultIosDeviceTestBundleId = 'com.fluttermatter.devicetest';
 const int _defaultWebSocketPort = 8765;
 const String _controlPath = '/control';
 const String _agentPath = '/agent';
@@ -707,8 +705,9 @@ Future<void> _commandServe(List<String> arguments) async {
       ? _defaultWebSocketPort
       : _parsePort(options.values['port']!);
   final androidPackage =
-      options.values['android-package'] ?? _defaultAndroidPackage;
-  final iosBundleId = options.values['ios-bundle-id'] ?? _defaultIosBundleId;
+      options.values['android-package'] ?? defaultAndroidDeviceTestPackage;
+  final iosBundleId =
+      options.values['ios-bundle-id'] ?? defaultIosDeviceTestBundleId;
   final root = _repoRoot();
   final artifactDirectory = options.values['artifact-dir'] == null
       ? Directory('${root.path}/build/device-test-agent')
@@ -1098,8 +1097,10 @@ Future<void> _commandRestartApp(List<String> arguments) async {
   );
   final result = await _restartDevice(
     selected,
-    androidPackage: options.values['android-package'] ?? _defaultAndroidPackage,
-    iosBundleId: options.values['ios-bundle-id'] ?? _defaultIosBundleId,
+    androidPackage:
+        options.values['android-package'] ?? defaultAndroidDeviceTestPackage,
+    iosBundleId:
+        options.values['ios-bundle-id'] ?? defaultIosDeviceTestBundleId,
   );
   _printJson(<String, Object?>{
     'ok': true,

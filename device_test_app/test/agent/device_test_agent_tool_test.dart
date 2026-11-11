@@ -6,6 +6,27 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../tool/device_test_agent.dart';
 
 void main() {
+  test('default app identifiers match the platform manifests', () {
+    final appRoot = File('android/app/build.gradle.kts').existsSync()
+        ? ''
+        : 'device_test_app/';
+    final androidBuild = File(
+      '${appRoot}android/app/build.gradle.kts',
+    ).readAsStringSync();
+    final iosProject = File(
+      '${appRoot}ios/Runner.xcodeproj/project.pbxproj',
+    ).readAsStringSync();
+
+    expect(
+      androidBuild,
+      contains('applicationId = "$defaultAndroidDeviceTestPackage"'),
+    );
+    expect(
+      iosProject,
+      contains('PRODUCT_BUNDLE_IDENTIFIER = $defaultIosDeviceTestBundleId;'),
+    );
+  });
+
   test('parses adb devices -l rows and attributes', () {
     final rows = parseAdbDeviceLines('''
 List of devices attached
