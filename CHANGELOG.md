@@ -1,5 +1,16 @@
 ## Unreleased
 
+### Packaging and Licensing
+- Relicensed original `flutter_matter` code under the MIT License while preserving Apache-2.0 notices for Project CHIP/Matter SDK-derived source and bundled binaries.
+- Added package repository, issue tracker, topics, and a release-ready description in `pubspec.yaml`.
+- Renamed the top-level documentation directory from `docs/` to `doc/` and added `.pubignore` rules for repository-only files.
+- Removed unused `built_value`, `built_value_generator`, and `build_runner` development dependencies.
+
+### Release and Security
+- Added a tag-driven source release workflow that validates package metadata, creates a deterministic source archive with SHA256, and publishes a GitHub Release.
+- Added an internal release metadata CLI and release runbook. pub.dev publication remains a manual maintainer step.
+- Added `SECURITY.md`, third-party license notices, and GitHub Private Vulnerability Reporting.
+
 ### Compatibility
 - **iOS 16.1 minimum support** — The podspec, Podfile, app framework metadata, and Xcode targets now use iOS 16.1 for both the plugin and the example. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
 

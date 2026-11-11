@@ -8,7 +8,29 @@ A beautiful and low-level [Matter](https://csa-iot.org/) plugin for **Flutter** 
   <img src="images/demo.gif" alt="flutter_matter demo" width="320" />
 </p>
 
+<p align="center">
+  <a href="https://github.com/Tan-yi-xiong/flutter_matter/actions/workflows/dart-gate.yml"><img src="https://github.com/Tan-yi-xiong/flutter_matter/actions/workflows/dart-gate.yml/badge.svg" alt="Dart Gate"></a>
+  <a href="https://pub.dev/packages/flutter_matter"><img src="https://img.shields.io/pub/v/flutter_matter.svg" alt="pub.dev"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
+</p>
+
 </div>
+
+---
+
+## 📦 Installation
+
+Add the package:
+
+```sh
+flutter pub add flutter_matter
+```
+
+Then import it:
+
+```dart
+import 'package:flutter_matter/flutter_matter.dart';
+```
 
 ---
 
@@ -76,7 +98,7 @@ The Android values describe the current repository build configuration and do no
 
 Automated tests cover the plugin root `test/` suite only. The `example/` application is a build and manual demonstration target, never an automated test target.
 
-See [Architecture](ARCHITECTURE.md), [Public API](doc/public-api.md), [Platform support](doc/platform-support.md), [Contributing](CONTRIBUTING.md), and the [PR review checklist](doc/pr-review-checklist.md) for details.
+See [Architecture](ARCHITECTURE.md), [Public API](doc/public-api.md), [Platform support](doc/platform-support.md), [Contributing](CONTRIBUTING.md), [Security policy](SECURITY.md), [Release process](doc/releasing.md), [Third-party notices](THIRD_PARTY_NOTICES.md), and the [PR review checklist](doc/pr-review-checklist.md) for details.
 
 ---
 
@@ -227,6 +249,16 @@ fvm flutter run
 - Images are displayed using fixed widths to keep them clean and prevent stretching.
 - Centered screenshots and demo media usually make plugin documentation look much better.
 - This README keeps the setup simple while still looking polished and professional.
+
+---
+
+## 🔐 Security
+
+Report suspected vulnerabilities privately through [GitHub Private Vulnerability Reporting](https://github.com/Tan-yi-xiong/flutter_matter/security/advisories/new). Do not open a public issue for a suspected vulnerability. See [SECURITY.md](SECURITY.md) for scope, required report details, and disclosure expectations.
+
+## 📄 License
+
+Original `flutter_matter` code is licensed under the [MIT License](LICENSE). Project CHIP/Matter SDK-derived source and bundled Matter binaries retain their Apache-2.0 terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ---
 

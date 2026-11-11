@@ -68,6 +68,9 @@ flutter_matter/
 ├── android/src/main/kotlin/com/tyx/flutter_matter/
 ├── ios/Classes/                               # ObjC + some Swift
 ├── ios/frameworks/ZGMatter.framework
+├── doc/                                       # architecture, API, release, and ADR docs
+├── tool/release.dart                          # release metadata and notes CLI
+├── SECURITY.md                                # security policy
 ├── example/                                   # Android + iOS demo only
 │   └── ios/MatterExt/RequestHandler.swift
 └── test/                                      # root plugin Dart test suite
@@ -90,7 +93,7 @@ New public types and functions must be exported from `lib/flutter_matter.dart`, 
 - `subscribe()` `dataVersionFilters` is currently Android-only.
 - Keep legacy constructors (`NetworkCredentials({required WiFiCredentials ...})`) unless a breaking change is explicitly requested.
 - Known typo in code: `_findSameFarbicControl`. Do not rename it unless that is the task.
-- `built_value` / `build_runner` are in `dev_dependencies`; do not assume generated cluster code exists unless adding it.
+- Generated cluster code is not currently present, and code-generation dependencies are intentionally omitted. Add `built_value` / `build_runner` only when introducing generated code.
 
 ## Native conventions
 
