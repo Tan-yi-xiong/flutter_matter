@@ -96,9 +96,9 @@ import 'package:flutter_matter/flutter_matter.dart';
 
 The Android values describe the current repository build configuration and do not imply that an SDK upgrade has already been completed. The iOS deployment targets are aligned to 16.1. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
 
-Automated tests cover the plugin root `test/` suite only. The `example/` application is a build and manual demonstration target, never an automated test target.
+Automated tests cover the plugin root `test/` suite only. The `example/` application is a build and manual demonstration target, never an automated test target. Device-behavior changes require a versioned Android and/or iOS device-validation report; shared behavior requires both platforms. Validation prefers a real Matter device and uses the Android Virtual Device App only as a qualified fallback.
 
-See [Architecture](ARCHITECTURE.md), [Public API](doc/public-api.md), [Platform support](doc/platform-support.md), [Contributing](CONTRIBUTING.md), [Security policy](SECURITY.md), [Release process](doc/releasing.md), [Third-party notices](THIRD_PARTY_NOTICES.md), and the [PR review checklist](doc/pr-review-checklist.md) for details.
+See [Architecture](ARCHITECTURE.md), [Public API](doc/public-api.md), [Platform support](doc/platform-support.md), [Device validation](doc/device-validation.md), [Device test reports](doc/device-test-report.md), [Contributing](CONTRIBUTING.md), [Security policy](SECURITY.md), [Release process](doc/releasing.md), [Third-party notices](THIRD_PARTY_NOTICES.md), and the [PR review checklist](doc/pr-review-checklist.md) for details.
 
 ---
 

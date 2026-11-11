@@ -20,6 +20,23 @@ This repository produces source-only GitHub Releases and keeps pub.dev publicati
 5. Confirm every new or changed documentation file is written in English.
 6. Open and merge a pull request into `main`; do not tag a pull-request branch.
 
+## Device Validation Before Tagging
+
+The release-preparation pull request is also the durable record for stable-release device validation. It must include separate Android and physical iOS reports against the release-candidate commit.
+
+Each report must:
+
+- Conform to schema version `1` and provide both `device-test-report.json` and its generated Markdown summary.
+- Identify an exact `plugin_commit` equal to the candidate commit.
+- Cover one complete clean P0 cycle for the controller platform.
+- Use a qualified real Matter On/Off device first, or the Android Virtual Device App fallback with a documented reason.
+- Include sanitized screenshots or bounded evidence attached to the pull request and linked from the Device Validation section.
+- Record P1 and P2 results, including reasons for `not_run` entries and any accepted P2 failures.
+
+Both platform reports must show every required P0 case as `passed`. Do not create a stable tag when a report is missing, stale, failed, not run, mixed between real and virtual commissionees, or missing a clean-cycle statement.
+
+The repository does not run device validation in CI and does not use a self-hosted hardware runner for this process.
+
 ## Local Verification
 
 Run from the repository root:
@@ -49,6 +66,8 @@ gh run list --workflow release.yml --limit 1
 A manual dispatch stops after validation and archive generation. It does not create a GitHub Release. Inspect the `Validate release` job and its summary, and confirm the source archive checksum is present.
 
 ## Create the Release
+
+Before tagging, confirm the device-validation requirements above are satisfied in the release-preparation pull request and that the attached evidence is still accessible.
 
 Use the merge commit on `main` and create an annotated tag:
 
