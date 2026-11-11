@@ -1,0 +1,183 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  FLUTTER_SUPPRESS_ANALYTICS: "true"
+  PUB_ENVIRONMENT: flutter_matter_ci
+
+jobs:
+  validate:
+    name: Validate release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Read Flutter version
+        shell: bash
+        run: |
+          flutter_version="$(jq -r '.flutter // empty' .fvmrc)"
+          if [[ -z "${flutter_version}" ]]; then
+            echo "::error::.fvmrc does not define a Flutter version."
+            exit 1
+          fi
+          echo "FLUTTER_VERSION=${flutter_version}" >> "${GITHUB_ENV}"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2.23.0
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Resolve plugin dependencies
+        run: flutter pub get
+
+      - name: Analyze Dart code
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
+      - name: Run plugin Dart tests
+        run: flutter test
+
+      - name: Validate package contents
+        run: dart pub publish --dry-run
+
+      - name: Validate release metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            tag="${GITHUB_REF_NAME}"
+          else
+            version="$(sed -nE 's/^version:[[:space:]]*([^[:space:]#]+).*/\1/p' pubspec.yaml | head -n 1)"
+            if [[ -z "${version}" ]]; then
+              echo "::error::pubspec.yaml does not define a top-level version."
+              exit 1
+            fi
+            tag="v${version}"
+          fi
+
+          dart run tool/release.dart validate --tag "${tag}"
+          version="${tag#v}"
+
+          {
+            printf 'RELEASE_TAG=%s\n' "${tag}"
+            printf 'RELEASE_VERSION=%s\n' "${version}"
+            printf 'ARCHIVE_NAME=flutter_matter-%s.tar.gz\n' "${version}"
+            printf 'CHECKSUM_NAME=flutter_matter-%s.tar.gz.sha256\n' "${version}"
+          } >> "${GITHUB_ENV}"
+
+      - name: Extract release notes
+        shell: bash
+        run: |
+          set -euo pipefail
+          dart run tool/release.dart notes --version "${RELEASE_VERSION}" > release-notes.md
+          test -s release-notes.md
+
+      - name: Generate source archive and checksum
+        shell: bash
+        run: |
+          set -euo pipefail
+          git archive \
+            --format=tar.gz \
+            --prefix="flutter_matter-${RELEASE_VERSION}/" \
+            --output="${ARCHIVE_NAME}" \
+            HEAD
+          sha256sum "${ARCHIVE_NAME}" > "${CHECKSUM_NAME}"
+          test -s "${ARCHIVE_NAME}"
+          test -s "${CHECKSUM_NAME}"
+
+      - name: Upload release assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-assets
+          path: |
+            release-notes.md
+            ${{ env.ARCHIVE_NAME }}
+            ${{ env.CHECKSUM_NAME }}
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Write release preflight summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          checksum="$(awk '{print $1}' "${CHECKSUM_NAME}")"
+          {
+            echo "### Release preflight"
+            echo
+            echo "- Version: \`${RELEASE_VERSION}\`"
+            echo "- Source archive: \`${ARCHIVE_NAME}\`"
+            echo "- SHA256: \`${checksum}\`"
+            if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+              echo "- Manual dispatch is preflight-only; no GitHub Release will be created."
+            fi
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+  create-release:
+    name: Create GitHub Release
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Download validated release assets
+        uses: actions/download-artifact@v4
+        with:
+          name: release-assets
+          path: release-assets
+
+      - name: Create GitHub Release
+        shell: bash
+        env:
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          tag="${GITHUB_REF_NAME}"
+          version="${tag#v}"
+          archive="flutter_matter-${version}.tar.gz"
+          checksum="${archive}.sha256"
+          notes="release-notes.md"
+
+          for file in "${archive}" "${checksum}" "${notes}"; do
+            if [[ ! -s "release-assets/${file}" ]]; then
+              echo "::error::Validated release asset is missing or empty: ${file}"
+              exit 1
+            fi
+          done
+
+          if gh release view "${tag}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "::error::GitHub Release ${tag} already exists; refusing to overwrite it."
+            exit 1
+          fi
+
+          gh release create "${tag}" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --verify-tag \
+            --title "flutter_matter ${version}" \
+            --notes-file "release-assets/${notes}" \
+            "release-assets/${archive}" \
+            "release-assets/${checksum}"
