@@ -19,6 +19,12 @@ abstract final class AgentCommandNames {
   /// Stops the active run: `{}`.
   static const String stopRun = 'stop_run';
 
+  /// Resumes the persisted unfinished run: `{}`.
+  static const String resumeRun = 'resume_run';
+
+  /// Purges stored provisioning secrets: `{}`.
+  static const String purgeSecrets = 'purge_secrets';
+
   /// Confirms the current prompt: `{"prompt_id": "..."}`.
   static const String confirmPrompt = 'confirm_prompt';
 
@@ -33,6 +39,19 @@ abstract final class AgentCommandNames {
 
   /// Builds the formal report: `{"run_id": "..."}` (optional).
   static const String report = 'report';
+
+  /// Every command name advertised by the app bridge.
+  static const List<String> all = <String>[
+    startRun,
+    stopRun,
+    resumeRun,
+    purgeSecrets,
+    confirmPrompt,
+    skipPrompt,
+    failPrompt,
+    screenshot,
+    report,
+  ];
 }
 
 /// Stable error codes produced by [DeviceTestAgentCommandHandler].
@@ -76,11 +95,17 @@ class DeviceTestAgentHostException implements Exception {
 /// intentionally independent of any concrete controller so the command
 /// contract stays testable with compile-time fakes.
 abstract interface class DeviceTestAgentHost {
-  /// Starts a declarative run for [mode].
-  Future<void> startRun(AgentRunMode mode);
+  /// Starts a declarative run for [mode] with the complete setup arguments.
+  Future<void> startRun(AgentRunMode mode, Map<String, Object?> arguments);
 
   /// Stops the active run without manufacturing a passing report.
   Future<void> stopRun();
+
+  /// Resumes the persisted unfinished run.
+  Future<void> resumeRun();
+
+  /// Purges stored setup and network secrets.
+  Future<void> purgeSecrets();
 
   /// Confirms the prompt identified by [promptId].
   Future<void> confirmPrompt(String promptId);
@@ -128,6 +153,10 @@ class DeviceTestAgentCommandHandler {
           return await _startRun(command);
         case AgentCommandNames.stopRun:
           return await _stopRun(command);
+        case AgentCommandNames.resumeRun:
+          return await _resumeRun(command);
+        case AgentCommandNames.purgeSecrets:
+          return await _purgeSecrets(command);
         case AgentCommandNames.confirmPrompt:
           return await _confirmPrompt(command);
         case AgentCommandNames.skipPrompt:
@@ -160,7 +189,7 @@ class DeviceTestAgentCommandHandler {
   }
 
   Future<AgentCommandOutcome> _startRun(AgentCommand command) async {
-    final arguments = _validatedArguments(command, const <String>{'mode'});
+    final arguments = _validatedArguments(command, _startRunArgumentKeys);
     final modeText = arguments['mode'];
     if (modeText is! String) {
       throw const _InvalidArguments(
@@ -177,7 +206,7 @@ class DeviceTestAgentCommandHandler {
         "start_run requires mode to be 'quick' or 'full'.",
       );
     }
-    await host.startRun(mode);
+    await host.startRun(mode, _freezeArguments(arguments));
     return AgentCommandOutcome.completed(
       data: <String, Object?>{'mode': mode.wireName},
     );
@@ -186,6 +215,18 @@ class DeviceTestAgentCommandHandler {
   Future<AgentCommandOutcome> _stopRun(AgentCommand command) async {
     _validatedArguments(command, const <String>{});
     await host.stopRun();
+    return const AgentCommandOutcome.completed();
+  }
+
+  Future<AgentCommandOutcome> _resumeRun(AgentCommand command) async {
+    _validatedArguments(command, const <String>{});
+    await host.resumeRun();
+    return const AgentCommandOutcome.completed();
+  }
+
+  Future<AgentCommandOutcome> _purgeSecrets(AgentCommand command) async {
+    _validatedArguments(command, const <String>{});
+    await host.purgeSecrets();
     return const AgentCommandOutcome.completed();
   }
 
@@ -258,6 +299,43 @@ class DeviceTestAgentCommandHandler {
     );
     final report = await host.buildReport(runId: runId);
     return AgentCommandOutcome.completed(report: report);
+  }
+
+  static const Set<String> _startRunArgumentKeys = <String>{
+    'mode',
+    'commissionee_type',
+    'model',
+    'firmware',
+    'network_transport',
+    'state_change_method',
+    'setup_code',
+    'clean_cycle',
+    'fallback_reason',
+    'virtual_fallback_confirmed',
+    'state_change_notes',
+    'wifi_ssid',
+    'wifi_password',
+    'thread_operational_dataset',
+  };
+
+  Map<String, Object?> _freezeArguments(Map<String, Object?> arguments) {
+    return Map<String, Object?>.unmodifiable(<String, Object?>{
+      for (final entry in arguments.entries)
+        entry.key: _freezeValue(entry.value),
+    });
+  }
+
+  Object? _freezeValue(Object? value) {
+    if (value is Map) {
+      return Map<String, Object?>.unmodifiable(<String, Object?>{
+        for (final entry in value.entries)
+          entry.key.toString(): _freezeValue(entry.value),
+      });
+    }
+    if (value is List) {
+      return List<Object?>.unmodifiable(value.map(_freezeValue));
+    }
+    return value;
   }
 
   /// Returns the command arguments after rejecting unsupported keys.

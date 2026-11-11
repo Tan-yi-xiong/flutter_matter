@@ -909,12 +909,107 @@ Future<void> _commandWait(List<String> arguments) async {
   });
 }
 
+/// Resolves runner command arguments from `--args-json` or `--args-file`.
+///
+/// At most one source may be supplied. When neither is supplied, the
+/// arguments default to an empty JSON object. Arguments loaded from
+/// `--args-file` never appear in error messages or CLI output, so setup
+/// codes and network credentials cannot leak through diagnostics.
+Map<Object?, Object?> resolveCommandArguments({
+  String? argsJson,
+  String? argsFile,
+}) {
+  if (argsJson != null && argsFile != null) {
+    throw const CliFailure(
+      code: 'usage',
+      message: 'Provide only one of --args-json or --args-file.',
+      exitCode: 2,
+    );
+  }
+  if (argsFile != null) {
+    return readCommandArgumentsFile(argsFile);
+  }
+  final decoded = jsonDecode(argsJson ?? '{}');
+  if (decoded is! Map) {
+    throw const CliFailure(
+      code: 'usage',
+      message: '--args-json must be a JSON object. Use --args-file <path> '
+          'to load arguments from a UTF-8 JSON object file.',
+      exitCode: 2,
+    );
+  }
+  return decoded;
+}
+
+/// Reads runner command arguments from a UTF-8 JSON object file.
+///
+/// The path resolves relative to the current working directory. Missing
+/// paths, directories, symbolic links, pipes, invalid UTF-8, invalid JSON,
+/// and non-object JSON are rejected with stable error codes. The file
+/// contents are never included in error messages or CLI output.
+Map<Object?, Object?> readCommandArgumentsFile(String path) {
+  final entityType = FileSystemEntity.typeSync(path, followLinks: false);
+  if (entityType == FileSystemEntityType.notFound) {
+    throw CliFailure(
+      code: 'args_file_not_found',
+      message: '--args-file does not exist: $path',
+      exitCode: 2,
+    );
+  }
+  if (entityType != FileSystemEntityType.file) {
+    throw CliFailure(
+      code: 'args_file_not_regular',
+      message: '--args-file must be a regular file, not a directory, '
+          'symbolic link, pipe, or special file: $path',
+      exitCode: 2,
+    );
+  }
+  final List<int> bytes;
+  try {
+    bytes = File(path).readAsBytesSync();
+  } on FileSystemException {
+    throw CliFailure(
+      code: 'args_file_unreadable',
+      message: '--args-file could not be read: $path',
+      exitCode: 2,
+    );
+  }
+  final String contents;
+  try {
+    contents = utf8.decode(bytes);
+  } on FormatException {
+    throw CliFailure(
+      code: 'args_file_encoding',
+      message: '--args-file must contain valid UTF-8 text: $path',
+      exitCode: 2,
+    );
+  }
+  try {
+    final decoded = jsonDecode(contents);
+    if (decoded is! Map) {
+      throw CliFailure(
+        code: 'args_file_invalid_json',
+        message: '--args-file must contain a JSON object: $path',
+        exitCode: 2,
+      );
+    }
+    return decoded;
+  } on FormatException {
+    throw CliFailure(
+      code: 'args_file_invalid_json',
+      message: '--args-file must contain a JSON object: $path',
+      exitCode: 2,
+    );
+  }
+}
+
 Future<void> _commandGeneric(List<String> arguments) async {
   final options = _Options.parse(
     arguments,
     valueOptions: const <String>{
       'name',
       'args-json',
+      'args-file',
       'command-id',
       'timeout-seconds'
     },
@@ -928,15 +1023,10 @@ Future<void> _commandGeneric(List<String> arguments) async {
       exitCode: 2,
     );
   }
-  final argumentsJson = options.values['args-json'] ?? '{}';
-  final decodedArguments = jsonDecode(argumentsJson);
-  if (decodedArguments is! Map) {
-    throw const CliFailure(
-      code: 'usage',
-      message: '--args-json must be a JSON object.',
-      exitCode: 2,
-    );
-  }
+  final decodedArguments = resolveCommandArguments(
+    argsJson: options.values['args-json'],
+    argsFile: options.values['args-file'],
+  );
   final descriptor = await _requireActiveSession();
   final timeoutSeconds =
       _parseSeconds(options.values['timeout-seconds'], defaultValue: 120);

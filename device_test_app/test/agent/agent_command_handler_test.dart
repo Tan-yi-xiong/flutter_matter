@@ -20,16 +20,36 @@ void main() {
     });
 
     group('start_run', () {
-      test('starts a quick run and echoes only the validated mode', () async {
+      test('starts a quick run and forwards the complete setup', () async {
+        final arguments = <String, Object?>{
+          'mode': 'quick',
+          'commissionee_type': 'real',
+          'model': 'Matter switch',
+          'firmware': '1.2.3',
+          'network_transport': 'wifi',
+          'state_change_method': 'physical_control',
+          'setup_code': 'MT:PRIVATE-SETUP-CODE',
+          'wifi_ssid': 'private-ssid',
+          'wifi_password': 'private-password',
+          'clean_cycle': <String, Object?>{
+            'controller_clean': true,
+            'commissionee_clean': true,
+            'secrets_purged': true,
+          },
+        };
+
         final outcome = await handler.handle(
-          _command(AgentCommandNames.startRun, <String, Object?>{
-            'mode': 'quick',
-          }),
+          _command(AgentCommandNames.startRun, arguments),
         );
 
         expect(outcome.status, AgentCommandStatus.completed);
         expect(outcome.data, <String, Object?>{'mode': 'quick'});
         expect(host.calls, <Object>[(method: 'startRun', detail: 'quick')]);
+        expect(host.startArguments?['setup_code'], 'MT:PRIVATE-SETUP-CODE');
+        expect(
+          host.startArguments?['clean_cycle'],
+          containsPair('secrets_purged', true),
+        );
       });
 
       test('starts a full run', () async {
@@ -85,6 +105,29 @@ void main() {
         expect(outcome.errorCode, AgentCommandErrorCodes.invalidArguments);
         expect(outcome.errorMessage, isNot(contains('profile')));
         expect(host.calls, isEmpty);
+      });
+    });
+
+    group('resume_run and purge_secrets', () {
+      test('routes both maintenance commands', () async {
+        final resumed = await handler.handle(
+          _command(AgentCommandNames.resumeRun, const <String, Object?>{}),
+        );
+        final purged = await handler.handle(
+          _command(AgentCommandNames.purgeSecrets, const <String, Object?>{}),
+        );
+
+        expect(resumed.status, AgentCommandStatus.completed);
+        expect(purged.status, AgentCommandStatus.completed);
+        expect(host.calls, <Object>[
+          (method: 'resumeRun', detail: null),
+          (method: 'purgeSecrets', detail: null),
+        ]);
+      });
+
+      test('advertised command names include maintenance commands', () {
+        expect(AgentCommandNames.all, contains(AgentCommandNames.resumeRun));
+        expect(AgentCommandNames.all, contains(AgentCommandNames.purgeSecrets));
       });
     });
 
@@ -453,6 +496,7 @@ AgentCommand _command(
 class _RecordingHost implements DeviceTestAgentHost {
   final List<({String method, String? detail})> calls =
       <({String method, String? detail})>[];
+  Map<String, Object?>? startArguments;
   Object? failure;
 
   void failWith(Object error) => failure = error;
@@ -466,13 +510,27 @@ class _RecordingHost implements DeviceTestAgentHost {
   }
 
   @override
-  Future<void> startRun(AgentRunMode mode) async {
+  Future<void> startRun(
+    AgentRunMode mode,
+    Map<String, Object?> arguments,
+  ) async {
+    startArguments = arguments;
     await _record('startRun', mode.wireName);
   }
 
   @override
   Future<void> stopRun() async {
     await _record('stopRun', null);
+  }
+
+  @override
+  Future<void> resumeRun() async {
+    await _record('resumeRun', null);
+  }
+
+  @override
+  Future<void> purgeSecrets() async {
+    await _record('purgeSecrets', null);
   }
 
   @override
