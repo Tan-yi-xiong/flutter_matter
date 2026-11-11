@@ -53,7 +53,10 @@ jobs:
       - name: Run plugin Dart tests
         shell: bash
         run: |
-          test_file="$(find test -type f -name '*_test.dart' -print -quit)"
+          test_file=""
+          if [[ -d test ]]; then
+            test_file="$(find test -type f -name '*_test.dart' -print -quit)"
+          fi
           if [[ -z "${test_file}" ]]; then
             echo "::notice::Plugin Dart tests skipped: no test/*_test.dart files exist yet."
             exit 0
