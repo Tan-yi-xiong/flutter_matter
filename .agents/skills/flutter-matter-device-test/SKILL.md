@@ -60,6 +60,14 @@ Ask the operator which physical On/Off device will be used. The operator must be
 
 The Agent must not select or operate a virtual commissionee in any Run. Verify that the real commissionee's setup payload advertises on-network discovery, but do not paste the payload into logs, screenshots, reports, or PR text.
 
+Before starting the host session, verify that the device is advertising as commissionable on the LAN. From the Mac host, browse Matter commissionable mDNS for a bounded preflight window:
+
+```bash
+dns-sd -B _matterc._udp local.
+```
+
+A formal Run requires at least one commissionable advertiser associated with the selected real device. Existing `_matter._tcp` operational nodes are already commissioned and are not sufficient. If no `_matterc._udp` advertiser appears, ask the operator to open a commissioning window or factory-reset the selected device. Do not start `serve` or a Run in that state. Do not paste full mDNS instance names, hostnames, or discriminators into evidence.
+
 ## Step 3: Start the host session
 
 ```bash

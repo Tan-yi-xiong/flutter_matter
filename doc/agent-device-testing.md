@@ -114,6 +114,8 @@ Each public candidate contains `id`, `short_id`, `platform`, `model`, `os_versio
 
 A qualified real Matter On/Off device is required for formal acceptance. It must already be connected to the same trusted Wi-Fi/LAN as the controller and in an open commissioning window. The Android Virtual Matter Device App path is retired; the Agent must not select or operate a virtual commissionee in any Run.
 
+Before starting a Run, the Agent should perform a bounded LAN preflight for Matter commissionable mDNS (`_matterc._udp`). Operational `_matter._tcp` advertisements only prove that a node is already commissioned; they do not prove that it can be commissioned into the test fabric. If no commissionable advertiser is present, stop and ask the operator to open a commissioning window or factory-reset the selected real device. Do not put full mDNS instance names, hostnames, or discriminators in evidence.
+
 The host CLI never selects a controller by default:
 
 - `devices` only lists candidates.
