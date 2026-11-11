@@ -13,51 +13,66 @@ void main() {
     List<int>.generate(16, (index) => 0xff - index),
   );
 
-  test('GATT writes forward the write confirmation', () async {
-    final session = _FakeGattSession();
-    final bridge = _FakeBleLayerBridge();
-    final delegate = MatterGattBleDelegate(
-      session: session,
-      bridge: bridge,
-      operationTimeout: const Duration(milliseconds: 100),
-    );
-    final value = Uint8List.fromList([1, 2, 3]);
+  test(
+    'GATT writes forward the confirmation after returning to CHIP',
+    () async {
+      final session = _FakeGattSession();
+      final bridge = _FakeBleLayerBridge();
+      final delegate = MatterGattBleDelegate(
+        session: session,
+        bridge: bridge,
+        operationTimeout: const Duration(milliseconds: 100),
+      );
+      final value = Uint8List.fromList([1, 2, 3]);
 
-    final result = await delegate.sendWriteRequest(
-      4,
-      serviceId,
-      characteristicId,
-      value,
-    );
+      final result = await delegate.sendWriteRequest(
+        4,
+        serviceId,
+        characteristicId,
+        value,
+      );
 
-    expect(result, isTrue);
-    expect(session.writes, hasLength(1));
-    expect(session.writes.single.value, value);
-    expect(session.writes.single.withoutResponse, isFalse);
-    expect(bridge.writeConfirmations, hasLength(1));
-    expect(bridge.writeConfirmations.single.success, isTrue);
-  });
+      expect(result, isTrue);
+      expect(session.writes, isEmpty);
+      expect(bridge.writeConfirmations, isEmpty);
 
-  test('GATT write failures still report a negative confirmation', () async {
-    final session = _FakeGattSession(failWrites: true);
-    final bridge = _FakeBleLayerBridge();
-    final delegate = MatterGattBleDelegate(
-      session: session,
-      bridge: bridge,
-      operationTimeout: const Duration(milliseconds: 100),
-    );
+      await _flushAsyncWork();
 
-    final result = await delegate.sendWriteRequest(
-      4,
-      serviceId,
-      characteristicId,
-      Uint8List.fromList([9]),
-    );
+      expect(session.writes, hasLength(1));
+      expect(session.writes.single.value, value);
+      expect(session.writes.single.withoutResponse, isFalse);
+      expect(bridge.writeConfirmations, hasLength(1));
+      expect(bridge.writeConfirmations.single.success, isTrue);
+    },
+  );
 
-    expect(result, isFalse);
-    expect(bridge.writeConfirmations, hasLength(1));
-    expect(bridge.writeConfirmations.single.success, isFalse);
-  });
+  test(
+    'GATT write failures are reported after sendWriteRequest returns',
+    () async {
+      final session = _FakeGattSession(failWrites: true);
+      final bridge = _FakeBleLayerBridge();
+      final delegate = MatterGattBleDelegate(
+        session: session,
+        bridge: bridge,
+        operationTimeout: const Duration(milliseconds: 100),
+      );
+
+      final result = await delegate.sendWriteRequest(
+        4,
+        serviceId,
+        characteristicId,
+        Uint8List.fromList([9]),
+      );
+
+      expect(result, isTrue);
+      expect(bridge.writeConfirmations, isEmpty);
+
+      await _flushAsyncWork();
+
+      expect(bridge.writeConfirmations, hasLength(1));
+      expect(bridge.writeConfirmations.single.success, isFalse);
+    },
+  );
 
   test('subscription enables notifications and forwards indications', () async {
     final session = _FakeGattSession();
@@ -101,6 +116,11 @@ void main() {
 
     expect(await delegate.getMTU(4), 185);
   });
+}
+
+Future<void> _flushAsyncWork() async {
+  await Future<void>.delayed(Duration.zero);
+  await Future<void>.delayed(Duration.zero);
 }
 
 class _FakeGattSession implements MatterBleGattSession {

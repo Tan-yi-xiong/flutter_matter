@@ -285,31 +285,39 @@ class MatterGattBleDelegate implements BlePlatformDelegate {
     Uint8List charId,
     Uint8List pBuf,
   ) async {
-    var success = false;
-    try {
-      await _session.write(
-        serviceUuid: _uuid(svcId),
-        characteristicUuid: _uuid(charId),
-        value: pBuf,
-        withoutResponse: false,
-        timeout: operationTimeout,
-      );
-      success = true;
-    } catch (_) {
-      success = false;
-    }
-    try {
-      await _bridge.handleWriteConfirmation(
-        connection: connObj,
-        serviceId: svcId,
-        characteristicId: charId,
-        success: success,
-      );
-    } catch (_) {
-      await _reportConnectionFailure(connObj);
-      return false;
-    }
-    return success;
+    // CHIP invokes this callback synchronously and keeps its BLE endpoint
+    // locked until the boolean result returns. The write confirmation must be
+    // delivered only after that return, otherwise CHIP's subscribe callback
+    // re-enters Flutter while this method is still awaiting the write.
+    unawaited(
+      Future<void>.delayed(Duration.zero, () async {
+        var success = false;
+        try {
+          await _session.write(
+            serviceUuid: _uuid(svcId),
+            characteristicUuid: _uuid(charId),
+            value: pBuf,
+            withoutResponse: false,
+            timeout: operationTimeout,
+          );
+          success = true;
+        } catch (_) {
+          success = false;
+        }
+
+        try {
+          await _bridge.handleWriteConfirmation(
+            connection: connObj,
+            serviceId: svcId,
+            characteristicId: charId,
+            success: success,
+          );
+        } catch (_) {
+          await _reportConnectionFailure(connObj);
+        }
+      }),
+    );
+    return true;
   }
 
   @override
