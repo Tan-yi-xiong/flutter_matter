@@ -1,4 +1,8 @@
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - device_test_app/**
+
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
