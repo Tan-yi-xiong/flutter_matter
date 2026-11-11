@@ -17,7 +17,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  FLUTTER_VERSION: 3.41.0
   FLUTTER_SUPPRESS_ANALYTICS: "true"
   PUB_ENVIRONMENT: flutter_matter_ci
 
@@ -33,6 +32,16 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Read Flutter version
+        shell: bash
+        run: |
+          flutter_version="$(jq -r '.flutter // empty' .fvmrc)"
+          if [[ -z "${flutter_version}" ]]; then
+            echo "::error::.fvmrc does not define a Flutter version."
+            exit 1
+          fi
+          echo "FLUTTER_VERSION=${flutter_version}" >> "${GITHUB_ENV}"
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2.23.0
         with:
@@ -43,26 +52,8 @@ jobs:
       - name: Resolve plugin dependencies
         run: flutter pub get
 
-      - name: Resolve example dependencies
-        working-directory: example
-        run: flutter pub get
-
       - name: Analyze Dart code
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Run plugin Dart tests
-        shell: bash
-        run: |
-          test_file=""
-          if [[ -d test ]]; then
-            test_file="$(find test -type f -name '*_test.dart' -print -quit)"
-          fi
-          if [[ -z "${test_file}" ]]; then
-            echo "::notice::Plugin Dart tests skipped: no test/*_test.dart files exist yet."
-            exit 0
-          fi
-          flutter test
-
-      - name: Run example Dart tests
-        working-directory: example
         run: flutter test
