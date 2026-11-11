@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_matter_device_test_app/src/application/ports.dart';
 import 'package:flutter_matter_device_test_app/src/domain/domain.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/adapters/adapters.dart';
@@ -276,6 +278,114 @@ void main() {
       },
     );
 
+    test('shares concurrent subscription cancellation cleanup', () async {
+      final identity = await _identity(adapter);
+      final lease = await adapter.connect(
+        identity: identity,
+        nodeId: 42,
+        timeout: const Duration(seconds: 2),
+      );
+      final controller = runtimeProvider.controllerFor(
+        ControllerIdentityPurpose.main,
+      );
+      final subscription = FakeMatterSubscription();
+      controller.readHandler = (request) async {
+        return matterBoolValue(request, true);
+      };
+      controller.subscribeHandler = () async => subscription;
+
+      final active = await adapter.subscribe(
+        connection: lease,
+        timeout: const Duration(seconds: 2),
+      );
+      final closeGate = Completer<void>();
+      subscription.closeDelay = () => closeGate.future;
+      final firstCancel = active.cancel();
+      var secondCancelCompleted = false;
+      final secondCancel = active.cancel().then((_) {
+        secondCancelCompleted = true;
+      });
+
+      await Future<void>.delayed(Duration.zero);
+      expect(secondCancelCompleted, isFalse);
+
+      closeGate.complete();
+      await secondCancel;
+      expect(secondCancelCompleted, isTrue);
+      expect(subscription.closeCount, 1);
+      expect(subscription.closeCompletionCount, 1);
+      await firstCancel;
+      expect(subscription.closeCount, 1);
+    });
+
+    test('disconnect cancels active subscriptions before release', () async {
+      final identity = await _identity(adapter);
+      final lease = await adapter.connect(
+        identity: identity,
+        nodeId: 42,
+        timeout: const Duration(seconds: 2),
+      );
+      final controller = runtimeProvider.controllerFor(
+        ControllerIdentityPurpose.main,
+      );
+      final subscription = FakeMatterSubscription();
+      controller.readHandler = (request) async {
+        return matterBoolValue(request, true);
+      };
+      controller.subscribeHandler = () async => subscription;
+
+      final active = await adapter.subscribe(
+        connection: lease,
+        timeout: const Duration(seconds: 2),
+      );
+      await adapter.disconnect(lease);
+
+      expect(subscription.closeCount, 1);
+      expect(subscription.closeCompletionCount, 1);
+      expect(controller.releasedConnections, hasLength(1));
+      await expectLater(active.updates, emitsDone);
+      await active.cancel();
+      expect(subscription.closeCount, 1);
+    });
+
+    test(
+      'reconnect cancels subscriptions for the replaced connection',
+      () async {
+        final identity = await _identity(adapter);
+        final lease = await adapter.connect(
+          identity: identity,
+          nodeId: 42,
+          timeout: const Duration(seconds: 2),
+        );
+        final controller = runtimeProvider.controllerFor(
+          ControllerIdentityPurpose.main,
+        );
+        final subscription = FakeMatterSubscription();
+        controller.readHandler = (request) async {
+          return matterBoolValue(request, true);
+        };
+        controller.subscribeHandler = () async => subscription;
+
+        final active = await adapter.subscribe(
+          connection: lease,
+          timeout: const Duration(seconds: 2),
+        );
+        final replacement = await adapter.reconnect(
+          identity: identity,
+          nodeId: 42,
+          timeout: const Duration(seconds: 2),
+        );
+
+        expect(subscription.closeCount, 1);
+        expect(subscription.closeCompletionCount, 1);
+        expect(controller.connectRequests, hasLength(2));
+        expect(controller.releasedConnections, hasLength(1));
+        expect(replacement.opaqueId, isNot(lease.opaqueId));
+        await active.cancel();
+        expect(subscription.closeCount, 1);
+      },
+    );
+
     test('maps a stale connection to an OnOff connection failure', () async {
       await _identity(adapter);
       final stale = OperationalConnectionLease(
@@ -398,30 +508,41 @@ void main() {
       );
     });
 
-    test('treats a missing CurrentFabricIndex as an absent fabric', () async {
-      final identity = await _identity(adapter);
-      final lease = await adapter.connect(
-        identity: identity,
-        nodeId: 42,
-        timeout: const Duration(seconds: 2),
-      );
-      runtimeProvider
-          .controllerFor(ControllerIdentityPurpose.main)
-          .readHandler = (_) async {
-        throw MatterException(
-          MatterFailureCode.readFailed,
-          'CurrentFabricIndex is unavailable',
+    test(
+      'maps a CurrentFabricIndex read failure to an inspection failure',
+      () async {
+        final identity = await _identity(adapter);
+        final lease = await adapter.connect(
+          identity: identity,
+          nodeId: 42,
+          timeout: const Duration(seconds: 2),
         );
-      };
+        runtimeProvider
+            .controllerFor(ControllerIdentityPurpose.main)
+            .readHandler = (_) async {
+          throw MatterException(
+            MatterFailureCode.readFailed,
+            'CurrentFabricIndex is unavailable',
+          );
+        };
 
-      final status = await adapter.inspect(
-        identity: identity,
-        nodeId: 42,
-        connection: lease,
-        timeout: const Duration(seconds: 2),
-      );
-      expect(status.present, isFalse);
-    });
+        await expectLater(
+          adapter.inspect(
+            identity: identity,
+            nodeId: 42,
+            connection: lease,
+            timeout: const Duration(seconds: 2),
+          ),
+          throwsA(
+            isA<FabricException>().having(
+              (error) => error.code,
+              'code',
+              FabricFailureCode.inspectFailed,
+            ),
+          ),
+        );
+      },
+    );
   });
 }
 

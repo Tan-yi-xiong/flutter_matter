@@ -351,6 +351,8 @@ class FakeMatterSubscription implements MatterSubscription {
   final StreamController<MatterException> _errors =
       StreamController<MatterException>.broadcast();
   int closeCount = 0;
+  int closeCompletionCount = 0;
+  Future<void> Function()? closeDelay;
 
   @override
   Stream<MatterAttributeValue> get reports => _reports.stream;
@@ -383,12 +385,14 @@ class FakeMatterSubscription implements MatterSubscription {
   @override
   Future<bool> close({Duration timeout = const Duration(seconds: 10)}) async {
     closeCount++;
+    await closeDelay?.call();
     if (!_reports.isClosed) {
       await _reports.close();
     }
     if (!_errors.isClosed) {
       await _errors.close();
     }
+    closeCompletionCount++;
     return closed;
   }
 }

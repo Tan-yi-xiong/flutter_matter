@@ -39,6 +39,8 @@ class MatterControllerAdapter
       <String, MatterControllerRuntime>{};
   final Map<String, _ConnectionHandle> _connections =
       <String, _ConnectionHandle>{};
+  final List<_SubscriptionCancellation> _activeSubscriptions =
+      <_SubscriptionCancellation>[];
 
   @override
   Future<ControllerIdentity> loadOrCreate(
@@ -69,6 +71,11 @@ class MatterControllerAdapter
 
   @override
   Future<void> reset(ControllerIdentityRequest request) async {
+    final removedIdentities = _runtimesByIdentity.entries
+        .where((entry) => entry.value.purpose == request.purpose)
+        .map((entry) => entry.key)
+        .toSet();
+    await _cancelSubscriptionsForIdentities(removedIdentities);
     try {
       await _runtimeProvider.reset(request);
     } finally {
@@ -188,6 +195,7 @@ class MatterControllerAdapter
 
   @override
   Future<void> disconnect(OperationalConnectionLease connection) async {
+    await _cancelSubscriptionsForConnection(connection.opaqueId);
     final handle = _connections[connection.opaqueId];
     if (handle == null) {
       return;
@@ -314,6 +322,8 @@ class MatterControllerAdapter
     final updates = StreamController<OnOffState>.broadcast();
     var current = initial;
     var firstReport = true;
+    _SubscriptionCancellation? activeCancellation;
+    Future<void>? cancellationFuture;
     final reportSubscription = subscription.reports.listen(
       (value) {
         try {
@@ -347,6 +357,11 @@ class MatterControllerAdapter
         }
       },
       onDone: () {
+        final cancellation = activeCancellation;
+        if (cancellation != null) {
+          _activeSubscriptions.remove(cancellation);
+        }
+        cancellationFuture ??= Future<void>.value();
         if (!updates.isClosed) {
           unawaited(updates.close());
         }
@@ -368,34 +383,36 @@ class MatterControllerAdapter
       },
     );
 
-    var cancelled = false;
-    Future<void> cancel() async {
-      if (cancelled) {
-        return;
+    Future<void> cancelSubscription() {
+      final existing = cancellationFuture;
+      if (existing != null) {
+        return existing;
       }
-      cancelled = true;
-      await reportSubscription.cancel();
-      await errorSubscription.cancel();
-      try {
-        final closed = await subscription.close();
-        if (!closed) {
-          throw OnOffException(OnOffFailureCode.subscribeFailed);
-        }
-      } on MatterException catch (error) {
-        throw OnOffException(_mapOnOffMatter(error));
-      } on TimeoutException {
-        throw OnOffException(OnOffFailureCode.timeout);
-      } finally {
-        if (!updates.isClosed) {
-          await updates.close();
-        }
-      }
+      final pending = _cancelSubscription(
+        reportSubscription: reportSubscription,
+        errorSubscription: errorSubscription,
+        subscription: subscription,
+        updates: updates,
+      );
+      cancellationFuture = pending;
+      return pending;
     }
+
+    final cancellation = _SubscriptionCancellation(
+      identityOpaqueId: handle.identityOpaqueId,
+      connectionOpaqueId: connection.opaqueId,
+      cancel: cancelSubscription,
+    );
+    activeCancellation = cancellation;
+    _activeSubscriptions.add(cancellation);
 
     return OnOffSubscription(
       initialState: initial,
       updates: updates.stream,
-      cancel: cancel,
+      cancel: () {
+        _activeSubscriptions.remove(cancellation);
+        return cancelSubscription();
+      },
     );
   }
 
@@ -487,12 +504,6 @@ class MatterControllerAdapter
       );
       return FabricStatus(present: true, fabricIndex: value.decodeUnsigned());
     } on MatterException catch (error) {
-      if (error.code == MatterFailureCode.readFailed) {
-        // A removed fabric cannot expose CurrentFabricIndex through the
-        // controller that just removed it. Treat that specific read failure as
-        // an absent fabric; transport failures still surface as failures.
-        return const FabricStatus(present: false);
-      }
       throw FabricException(_mapFabricMatter(error, removing: false));
     } on MatterTlvException {
       throw FabricException(FabricFailureCode.inspectFailed);
@@ -540,6 +551,7 @@ class MatterControllerAdapter
   }
 
   Future<void> close() async {
+    await _cancelAllSubscriptions();
     for (final handle in _connections.values.toList(growable: false)) {
       try {
         await handle.runtime.controller.releaseConnection(
@@ -607,6 +619,9 @@ class MatterControllerAdapter
               handle.lease.nodeId == nodeId,
         )
         .toList(growable: false);
+    await _cancelSubscriptionsForConnections(
+      matching.map((handle) => handle.lease.opaqueId).toSet(),
+    );
     for (final handle in matching) {
       try {
         await handle.runtime.controller.releaseConnection(
@@ -618,6 +633,75 @@ class MatterControllerAdapter
         }
       } finally {
         _connections.remove(handle.lease.opaqueId);
+      }
+    }
+  }
+
+  Future<void> _cancelSubscriptionsForConnection(
+    String connectionOpaqueId,
+  ) async {
+    final matching = _activeSubscriptions
+        .where(
+          (cancellation) =>
+              cancellation.connectionOpaqueId == connectionOpaqueId,
+        )
+        .toList(growable: false);
+    _activeSubscriptions.removeWhere(
+      (cancellation) => matching.contains(cancellation),
+    );
+    await _cancelSubscriptions(matching);
+  }
+
+  Future<void> _cancelSubscriptionsForConnections(
+    Set<String> connectionOpaqueIds,
+  ) async {
+    if (connectionOpaqueIds.isEmpty) {
+      return;
+    }
+    final matching = _activeSubscriptions
+        .where(
+          (cancellation) =>
+              connectionOpaqueIds.contains(cancellation.connectionOpaqueId),
+        )
+        .toList(growable: false);
+    _activeSubscriptions.removeWhere(
+      (cancellation) => matching.contains(cancellation),
+    );
+    await _cancelSubscriptions(matching);
+  }
+
+  Future<void> _cancelSubscriptionsForIdentities(
+    Set<String> identityOpaqueIds,
+  ) async {
+    if (identityOpaqueIds.isEmpty) {
+      return;
+    }
+    final matching = _activeSubscriptions
+        .where(
+          (cancellation) =>
+              identityOpaqueIds.contains(cancellation.identityOpaqueId),
+        )
+        .toList(growable: false);
+    _activeSubscriptions.removeWhere(
+      (cancellation) => matching.contains(cancellation),
+    );
+    await _cancelSubscriptions(matching);
+  }
+
+  Future<void> _cancelAllSubscriptions() async {
+    final matching = _activeSubscriptions.toList(growable: false);
+    _activeSubscriptions.clear();
+    await _cancelSubscriptions(matching);
+  }
+
+  Future<void> _cancelSubscriptions(
+    List<_SubscriptionCancellation> cancellations,
+  ) async {
+    for (final cancellation in cancellations) {
+      try {
+        await cancellation.cancel();
+      } on Object {
+        // Adapter teardown must continue cleaning up remaining subscriptions.
       }
     }
   }
@@ -642,6 +726,48 @@ class _ConnectionHandle {
   final String identityOpaqueId;
   final MatterControllerRuntime runtime;
   final MatterConnection matterConnection;
+}
+
+class _SubscriptionCancellation {
+  const _SubscriptionCancellation({
+    required this.identityOpaqueId,
+    required this.connectionOpaqueId,
+    required this.cancel,
+  });
+
+  final String identityOpaqueId;
+  final String connectionOpaqueId;
+  final Future<void> Function() cancel;
+}
+
+Future<void> _cancelSubscription({
+  required StreamSubscription<MatterAttributeValue> reportSubscription,
+  required StreamSubscription<MatterException> errorSubscription,
+  required MatterSubscription subscription,
+  required StreamController<OnOffState> updates,
+}) async {
+  try {
+    await reportSubscription.cancel();
+  } finally {
+    try {
+      await errorSubscription.cancel();
+    } finally {
+      try {
+        final closed = await subscription.close();
+        if (!closed) {
+          throw OnOffException(OnOffFailureCode.subscribeFailed);
+        }
+      } on MatterException catch (error) {
+        throw OnOffException(_mapOnOffMatter(error));
+      } on TimeoutException {
+        throw OnOffException(OnOffFailureCode.timeout);
+      } finally {
+        if (!updates.isClosed) {
+          await updates.close();
+        }
+      }
+    }
+  }
 }
 
 OnOffState _decodeOnOff(MatterAttributeValue value) {
