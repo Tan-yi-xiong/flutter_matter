@@ -2,16 +2,30 @@
 
 Dedicated physical-device validation app for `flutter_matter`.
 
-The app runs on Android and physical iOS controllers. It is not published with the plugin and is not part of the required Dart CI gate. Every Run, including quick iteration, uses qualified real Matter hardware over Wi-Fi/IP commissioning; BLE discovery and BLE commissioning are not used in any Run.
+The app runs on Android and physical iOS controllers. It is not published with the plugin and is not part of the required Dart CI gate. Every Run uses qualified real Matter hardware. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP, selects the first matching transport, and records that path as the actual commissioning transport. A commissioning failure is preserved and never retried through the other transport in the same Run.
 
 ## Test profiles
 
 | Profile | Contents | Evidence role |
 | --- | --- | --- |
-| `quick` | `build_install`, `ip_discovery`, `ip_commissioning`, `operational_connect`, `onoff_invoke` | Iteration feedback only |
+| `quick` | `build_install`, `commissioning_discovery`, `commissioning`, `operational_connect`, `onoff_invoke` | Iteration feedback only |
 | `full` | All 12 fixed tests in [../doc/device-test-report.md](../doc/device-test-report.md) | The only formal PR/release evidence |
 
 Only a completed `full` run can produce formal evidence. A P0 failure is preserved and never retried inside the same Run. Every device run, including `quick` iteration, uses qualified real Matter hardware; virtual commissionees are not supported.
+
+## Setup
+
+The setup flow requires only:
+
+- Run mode: `quick` or `full`.
+- Setup code or QR setup payload.
+- Target Wi-Fi SSID.
+- Wi-Fi password, or an empty value for an open network.
+- Confirmation that the commissionee is factory-reset and in an open commissioning window.
+
+The app does not ask for model, firmware, state-change method, transport, controller-clean state, or secrets-purged state. It parses vendor and product identity from the commissionee payload automatically.
+
+Before a Run starts, the app purges old run secrets and resets controller identities for the current platform. Cleanup failure blocks the Run. The app may cache the latest Wi-Fi SSID and password in secure storage and offers an explicit clear action; cached credentials never appear in state, reports, logs, or screenshots.
 
 ## Local checks
 
@@ -41,28 +55,28 @@ fvm dart run tool/device_test_app.dart run \
   -- --dart-define=AGENT_WS_URL=<websocket_endpoint>
 ```
 
-The Agent must pass `start_run` setup material through `--args-file`, not `--args-json`, and must never print or commit that file.
+The Agent must collect the minimal setup data with Codex interactive prompts, pass `start_run` material through `--args-file`, not `--args-json`, and must never print or commit that file.
 
 ## Physical-device roles
 
 - Use a qualified real Matter On/Off commissionee for every Run, including quick iteration. Virtual commissionees are not supported.
-- The commissionee must already be connected to the same trusted Wi-Fi/LAN as the controller and Mac host.
-- Open a commissioning window on the commissionee before starting the Run.
-- BLE discovery, BLE pre-scanning, and GATT commissioning are not used in any Run.
-- Do not use an isolated guest network that blocks mDNS/IP commissioning or the Agent WebSocket connection.
+- Confirm that the commissionee supports BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
+- Confirm that the commissionee is factory-reset and has an open commissioning window before starting the Run.
+- Do not add a host-side mDNS-only readiness gate: either BLE or Wi-Fi/IP discovery may lead to a valid Run.
+- Do not use an isolated guest network that blocks BLE setup, Wi-Fi/IP commissioning, CASE, or the Agent WebSocket connection.
 
 ## Prerequisites
 
 - Android: physical device, USB or ADB-over-Wi-Fi access, and local-network connectivity.
-- iOS: physical iPhone, valid local signing, a Matter Extension, the matching App Group, and the required Bonjour and local-network declarations.
+- iOS: physical iPhone, valid local signing, a Matter Extension, the matching App Group, and the required Bonjour, Bluetooth, and local-network declarations.
 - Xcode and CocoaPods tooling are required for iOS development builds.
-- The real commissionee must advertise Matter commissionable service records on the LAN.
+- The controller must be able to reach the target Wi-Fi network for provisioning and CASE/control.
 
 ## Security and evidence hygiene
 
-Never put setup codes, onboarding payloads, Wi-Fi SSIDs or passwords, Thread operational datasets, full UDIDs, serial numbers, certificates, private keys, or raw logs in reports or PR text. Use the in-app purge action before handing a device to another user. Purge is required because iOS Keychain items can survive app uninstallation.
+Never put setup codes, onboarding payloads, Wi-Fi SSIDs or passwords, full UDIDs, serial numbers, certificates, private keys, or raw logs in reports or PR text. Use the in-app purge action before handing a device to another user. Purge is required because iOS Keychain items can survive app uninstallation.
 
-Real-device CI is intentionally out of scope. Attach full-run JSON and Markdown reports to the PR manually and verify that the report plugin commit matches the PR head. All app UI, protocol strings, and repository documentation are English.
+Real-device CI is intentionally out of scope. Attach full-run JSON and Markdown reports to the PR manually and verify that the report plugin commit matches the PR head. Reports must use schema v3. All app UI, protocol strings, and repository documentation are English.
 
 ## Further documentation
 

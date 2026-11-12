@@ -50,7 +50,7 @@ app checks are local and are not part of required CI.
 
 - [ ] Not applicable; explain why in the field below
 - [ ] Qualified real Matter device used
-- [ ] Wi-Fi/IP commissioning used; no BLE discovery or GATT commissioning
+- [ ] Concurrent BLE and Wi-Fi/IP discovery used; the report records the actual `ble` or `ip` transport and `wifi` network transport
 
 **Applicability or not-applicable reason:**
 
@@ -58,7 +58,7 @@ app checks are local and are not part of required CI.
 
 **Test app version and commit, or interim manual report:**
 
-**Commissionee model, firmware, and state-change method:**
+**Commissionee vendor/product ID and actual commissioning transport from the report:**
 
 **Commissioning transport and network transport:** `<ip / wifi>`
 
@@ -117,5 +117,5 @@ Paste `device-test-report.md` here.
 - [ ] A green CI result was not treated as proof of native compilation or device behavior.
 - [ ] Device-behavior evidence uses the versioned report contract, matches the PR head, and covers every affected platform.
 - [ ] No P0 failure was retried in the same Run to manufacture a green result.
-- [ ] Formal evidence used a qualified real Matter device over Wi-Fi/IP commissioning without BLE discovery or GATT commissioning.
+- [ ] Formal evidence used a qualified real Matter device, recorded concurrent BLE and Wi-Fi/IP discovery with the actual first-match `ble` or `ip` transport, and did not retry commissioning through the other transport.
 - [ ] Attached reports and screenshots contain no credentials, device identifiers, provisioning secrets, certificates, keys, or raw logs.

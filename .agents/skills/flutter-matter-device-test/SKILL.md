@@ -5,7 +5,7 @@ description: Execute flutter_matter device validation through the dedicated test
 
 # Flutter Matter Device Test
 
-Run `flutter_matter` device validation without guessing which phone or commissionee to use. Formal acceptance requires qualified real Matter hardware and Wi-Fi/IP commissioning. Every device run, including quick iteration, uses real Matter hardware; the Android Virtual Matter Device App path is retired and virtual commissionees are not supported.
+Run `flutter_matter` device validation without guessing which phone or commissionee to use. The device-test app is the authoritative runner for qualified real Matter hardware. It discovers the commissionee concurrently over BLE and Wi-Fi/IP, uses the first matching transport, and records the actual transport in schema v3 evidence.
 
 ## Hard rules
 
@@ -14,22 +14,27 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 3. When multiple phones are connected, show a native interactive user-choice prompt before starting `serve`. Never infer a choice from connection order, platform, model, installed packages, or previous use.
 4. Show `platform`, `model`, `os_version`, and `short_id` in user choices. Do not display the full device ID in the label; retain the full ID privately for `serve`.
 5. Always pass the selected candidate's full ID to `serve --device`.
-6. Use a qualified real Matter On/Off commissionee for formal acceptance.
-7. Set `commissioning_transport` to `ip` and `network_transport` to `wifi` in every Run; never run BLE discovery, a BLE pre-scan, or GATT commissioning.
-8. Do not choose or operate a virtual commissionee in any Run, including quick iteration. Virtual commissionees are not supported. If real hardware is unavailable, stop and report that device validation is blocked.
-9. `quick` contains five iteration tests, always runs on real Matter hardware, and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 12 fixed tests.
-10. Never retry a failed P0 test in the same Run to manufacture a passing result.
-11. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
-12. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
-13. Real-device CI is out of scope. Reports are manually attached to the PR and must match its head commit.
+6. Use a qualified real Matter On/Off commissionee for every device Run. Virtual commissionees and virtual-device evidence are not supported.
+7. Never select, force, or describe a commissioning transport in `start_run`. The app starts BLE and Wi-Fi/IP discovery concurrently and uses the first matching transport.
+8. If commissioning fails on the selected transport, preserve the failure and stop the Run. Do not retry or fall back to the other transport in the same Run.
+9. Do not send Thread commissioning material or Thread-specific setup fields.
+10. `quick` contains five iteration tests, always runs on real Matter hardware, and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 12 fixed tests.
+11. Never retry a failed P0 test in the same Run to manufacture a passing result.
+12. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
+13. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
+14. Real-device CI is out of scope. Reports are manually attached to the PR and must match its head commit.
 
 ## Preconditions
 
 - The dedicated device-test app is built and installed on the selected controller.
-- A qualified real Matter commissionee is prepared, connected to the same trusted Wi-Fi/LAN as the controller, and in an open commissioning window.
+- A qualified real Matter On/Off commissionee is available and in an open commissioning window after a factory reset.
+- The commissionee supports BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
+- The controller has connectivity to the target Wi-Fi network for provisioning and the CASE/control stage.
 - The Mac and phones share a trusted private LAN that permits the WebSocket connection.
 - The app is configured with the endpoint printed by `serve`.
 - `adb` is available for Android devices; Xcode `devicectl` or libimobiledevice is available for iOS devices.
+
+Do not run a host-side `_matterc._udp` preflight gate before the Run. A valid Run may be led by either BLE or Wi-Fi/IP discovery; absence of an mDNS advertisement alone does not block the Run.
 
 ## Step 1: Discover devices
 
@@ -54,19 +59,9 @@ Use `short_id` only for display. Keep the full ID in your own state for the next
 
 ## Step 2: Select the commissionee
 
-### Real Matter device
+Ask the operator which physical On/Off device will be used. The operator must be able to confirm that it is factory-reset and currently has an open commissioning window. Record the choice in the PR narrative without exposing provisioning secrets.
 
-Ask the operator which physical On/Off device will be used. The operator must be able to change its state physically, through a vendor app, or through the commissionee UI. Record the choice in the PR narrative without exposing provisioning secrets.
-
-The Agent must not select or operate a virtual commissionee in any Run. Verify that the real commissionee's setup payload advertises on-network discovery, but do not paste the payload into logs, screenshots, reports, or PR text.
-
-Before starting the host session, verify that the device is advertising as commissionable on the LAN. From the Mac host, browse Matter commissionable mDNS for a bounded preflight window:
-
-```bash
-dns-sd -B _matterc._udp local.
-```
-
-A formal Run requires at least one commissionable advertiser associated with the selected real device. Existing `_matter._tcp` operational nodes are already commissioned and are not sufficient. If no `_matterc._udp` advertiser appears, ask the operator to open a commissioning window or factory-reset the selected device. Do not start `serve` or a Run in that state. Do not paste full mDNS instance names, hostnames, or discriminators into evidence.
+The Agent must not select or operate a virtual commissionee in any Run. Do not paste the setup payload, mDNS instance names, hostnames, discriminators, BLE addresses, or any discovery identifiers into evidence.
 
 ## Step 3: Start the host session
 
@@ -76,20 +71,11 @@ fvm dart run tool/device_test_agent.dart serve \
   --port 8765
 ```
 
-Start `serve` as a long-lived process. It prints one JSON object with:
+Start `serve` as a long-lived process. It prints one JSON object with `websocket_endpoint`, `selected_device`, `control_port`, and `artifact_directory`, then continues running.
 
-- `websocket_endpoint`
-- `selected_device`
-- `control_port`
-- `artifact_directory`
+## Step 4: Build or connect the app
 
-If it returns `session_already_running`, run `status`. Reuse only the same explicitly selected controller; otherwise ask the user before stopping the old session.
-
-If it returns `device_selection_required` or `device_not_found`, return to the device-choice step. Do not infer a device.
-
-## Step 4: Launch the app and wait for the bridge
-
-Read `websocket_endpoint` from the `serve` startup JSON. Treat it as operational data, not as a provisioning secret. Build, install, and launch the app with the endpoint and explicit controller ID:
+Build and launch the app through the wrapper with the printed endpoint:
 
 ```bash
 fvm dart run tool/device_test_app.dart run \
@@ -97,7 +83,7 @@ fvm dart run tool/device_test_app.dart run \
   -- --dart-define=AGENT_WS_URL=<websocket_endpoint>
 ```
 
-Run this as a long-lived development process. The wrapper injects the current Git commit metadata and the app reads `AGENT_WS_URL` at compile time. If the app is already installed with the same endpoint, launch it directly instead.
+The wrapper injects the current Git commit metadata and the app reads `AGENT_WS_URL` at compile time. If the app is already installed with the same endpoint, launch it directly instead.
 
 ```bash
 fvm dart run tool/device_test_agent.dart wait --for connected --timeout-seconds 120
@@ -115,6 +101,29 @@ If the wait times out:
 
 Do not switch the selected device without asking the user again.
 
+## Step 4A: Collect setup information interactively
+
+Use Codex interactive prompts to collect every required setup decision. Do not infer setup data from chat history, command flags, connection order, or previous runs.
+
+Ask for, at minimum:
+
+1. Run mode: `quick` or `full`.
+2. Setup code or QR setup payload for the selected commissionee.
+3. Wi-Fi SSID.
+4. Wi-Fi password. Treat an empty password as valid only for an open network.
+5. Explicit confirmation that the selected commissionee is factory-reset and has an open commissioning window.
+
+Never ask for or accept:
+
+- Commissionee model or firmware.
+- A state-change method or state-change notes.
+- Commissioning transport.
+- Network transport.
+- Controller-clean status.
+- Secrets-purged status.
+
+When the answers arrive, immediately write them only into the transient `start_run` argument file. Do not repeat secret values in chat, logs, screenshots, reports, or PR text.
+
 ## Step 5: Start the run
 
 Use a stable command ID and reuse the same ID only when retrying the same logical command after a transport failure. Because `start_run` includes provisioning material, put its arguments in a temporary JSON file under the ignored build directory. Never print the file, paste its contents into chat, or commit it.
@@ -124,29 +133,21 @@ mkdir -p build/device-test-agent
 chmod 700 build/device-test-agent
 ```
 
-The file must contain the full setup object. Use placeholders here and replace them only in the local file:
+Use exactly this minimal structure, replacing values only in the local file:
 
 ```json
 {
   "mode": "quick",
-  "commissionee_type": "real",
-  "model": "<commissionee-model>",
-  "firmware": "<firmware-version>",
-  "commissioning_transport": "ip",
-  "network_transport": "wifi",
-  "state_change_method": "physical_control",
   "setup_code": "<setup-code-or-qr-payload>",
   "wifi_ssid": "<ssid>",
-  "wifi_password": "<password>",
+  "wifi_password": "<password-or-empty-for-open-network>",
   "clean_cycle": {
-    "controller_clean": true,
-    "commissionee_clean": true,
-    "secrets_purged": true
+    "commissionee_clean": true
   }
 }
 ```
 
-For formal evidence, keep `"commissionee_type":"real"`, `"commissioning_transport":"ip"`, and `"network_transport":"wifi"`. For `"state_change_method":"other"`, include non-empty `state_change_notes`.
+For formal evidence, set `"mode": "full"` in the same local file and use a new stable command ID. Do not add retired fields such as `commissionee_type`, `commissioning_transport`, `network_transport`, `model`, `firmware`, `state_change_method`, `state_change_notes`, `thread_operational_dataset`, controller-clean, or secrets-purged keys. The app contract must reject retired fields instead of silently ignoring them.
 
 Quick iteration run:
 
@@ -158,7 +159,7 @@ fvm dart run tool/device_test_agent.dart command \
   --timeout-seconds 1200
 ```
 
-Formal evidence run: set `"mode":"full"` in the same local file, keep `"commissioning_transport":"ip"` and `"network_transport":"wifi"`, and use a new stable command ID:
+Formal evidence run:
 
 ```bash
 fvm dart run tool/device_test_agent.dart command \
@@ -168,7 +169,9 @@ fvm dart run tool/device_test_agent.dart command \
   --timeout-seconds 3600
 ```
 
-Only `mode: full` produces formal PR or release evidence. A quick run is development feedback and must not be attached as acceptance evidence. Keep the argument file until the terminal result is known; delete it afterward without printing its contents.
+Only `mode: full` produces formal PR or release evidence. Keep the argument file until the terminal result is known; delete it afterward without printing its contents.
+
+Before the Run starts, the app automatically purges old run provisioning secrets and resets controller identities for the current platform. The user does not certify those cleanup steps. If automatic cleanup fails, the app must block the new Run before creating secrets or starting a test.
 
 ## Step 6: Process prompts
 
@@ -267,17 +270,22 @@ Verify:
 
 1. `plugin_commit` equals `git rev-parse HEAD` for the tested PR.
 2. The run mode is `full`.
-3. All P0 test IDs are `passed`.
-4. Non-P0 statuses and `not_run` reasons are reviewed.
-5. The Markdown and JSON describe the same run.
-6. Sanitization is confirmed.
-7. The report contains no full device identifiers or provisioning secrets.
+3. The report schema version is `3`.
+4. `commissionee.type` is `real`, `vendor_id` and `product_id` are present, and `network_transport` is `wifi`.
+5. `commissioning_transport` records the actual selected path, `ble` or `ip`.
+6. All P0 test IDs are `passed`.
+7. Non-P0 statuses and `not_run` reasons are reviewed.
+8. The Markdown and JSON describe the same run.
+9. Sanitization is confirmed.
+10. The report contains no full device identifiers or provisioning secrets.
 
 Attach the JSON and Markdown to the PR manually. If the commit does not match the PR head, rebuild from the PR head, reinstall, and start a fresh Run; do not attach the stale report.
 
-## No-P0-retry policy
+## No-P0-retry and no-transport-fallback policy
 
 A P0 `failed`, error, timeout, or crash is evidence. Do not rerun that P0 merely to obtain a green result.
+
+After discovery selects a transport and commissioning fails, do not retry through BLE or Wi-Fi/IP in the same Run. Preserve the failure, report it to the user, and require a new Run only as an explicit new validation decision.
 
 You may retry a command when the failure is clearly a transport failure and the app never executed it. Reuse the same command ID for that transport retry. If the app executed the test and reported `failed`, preserve the report and report the failure to the user.
 
@@ -289,7 +297,7 @@ After collecting evidence, remind the user to clean up:
 
 - Remove the test fabric from the controller.
 - Factory-reset or recommission the real commissionee as appropriate.
-- Clear test-only Wi-Fi or Thread credentials.
+- Clear test-only Wi-Fi credentials through the app's explicit cache-clear action when they are no longer needed.
 - Purge app secrets through the command interface after the Run is no longer active:
 
 ```bash
@@ -318,7 +326,9 @@ Do not execute destructive purge steps without user confirmation.
 | `command_in_progress` | Wait for the existing command outcome before sending another. |
 | `command_timeout` | Inspect status, state, and events. Do not send a different command ID for the same logical test. |
 | `args_file_*` | Correct the local argument file or path. Never print its contents; reuse the same command ID only for a retry of the same unexecuted command. |
-| `invalid_arguments` | Re-read the `start_run` schema and correct the local argument file without exposing secrets in chat. |
+| `invalid_arguments` | Re-read the minimal `start_run` schema and correct the local argument file without exposing secrets in chat. |
+| `cleanup_failed` | Do not start the Run. Preserve the local state and report the cleanup failure. |
+| `commissioning_failed` | Preserve the failure. Do not retry through the other transport in the same Run. |
 | `report_not_ready` | Wait for the Report validation state to become valid, then retry `report`. |
 | `screenshot_unavailable` | Use the host platform screenshot fallback and inspect the current state. |
 | `plugin_commit_mismatch` | Rebuild/reinstall from the PR head and start a fresh Run; do not attach the report. |
@@ -328,13 +338,17 @@ Do not execute destructive purge steps without user confirmation.
 ## Completion checklist
 
 - The controller was explicitly chosen by the user whenever multiple phones were connected.
-- The formal run used a real Matter commissionee and did not run BLE discovery or commissioning.
+- The run used a real Matter commissionee; no virtual device was used.
+- The app performed concurrent BLE and Wi-Fi/IP discovery and selected the first matching transport.
+- No commissioning failure was retried through the other transport in the same Run.
+- Setup data was collected through Codex interactive prompts using only the minimal required fields.
 - `serve` used the explicit controller ID.
 - The app bridge connected and reported the expected controller metadata.
 - The run used a stable command ID, an `--args-file` input, and the required mode.
 - The temporary Run argument file was deleted without printing its contents.
+- Automatic cleanup ran or a cleanup failure blocked the Run before persistence.
 - Android prompts were handled only on the selected controller and verified through semantic state.
 - Human prompts were explicitly handed to the operator.
-- The formal report is from a `full` run and matches the PR head.
+- The formal report is schema v3, from a `full` run, and matches the PR head.
 - Sanitization was verified and no P0 failure was retried to hide a result.
 - The user received the fabric, commissionee, credential, and app-data purge reminder.

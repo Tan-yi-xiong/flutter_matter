@@ -27,10 +27,10 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 ## Device validation reports
 
 - Require the Device Validation section for every commissioning, BLE, networking, controller lifecycle, attribute, command, subscription, callback, MethodChannel, or native Matter change.
-- Verify the report uses schema version `2`, contains all 12 fixed test IDs exactly once, and includes both the generated Markdown summary and sanitized JSON attachment.
+- Verify the report uses schema version `3`, contains all 12 fixed test IDs exactly once, and includes both the generated Markdown summary and sanitized JSON attachment.
 - Verify `plugin_commit` matches the current pull request head; reject stale reports after relevant code changes.
 - Verify every affected platform has a report. Shared behavior requires Android and physical iOS reports; a platform exception must be explicit and technically justified.
-- Verify formal evidence used a qualified real Matter device over Wi-Fi/IP commissioning. Reject BLE discovery, BLE pre-scanning, or GATT commissioning in any Run.
+- Verify formal evidence used a qualified real Matter device whose report records concurrent BLE and Wi-Fi/IP discovery, the first matching actual transport (`ble` or `ip`), and `wifi` network transport. Reject a transport fallback after commissioning failure.
 - Verify all required P0 results are `passed`. P1 results are stability evidence; P2 failures require an explicit maintainer risk decision.
 - Verify the report describes one real commissionee and one controller cycle. Virtual commissionees are not supported; a virtual-device result is invalid evidence.
 - Verify the report includes a clean-cycle statement and that Android and iOS were treated as independent commissioned cycles.
@@ -103,7 +103,7 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - A successful example Dart test used as native or functional evidence.
 - A device-behavior change with no schema-based report for an affected platform.
 - A report whose `plugin_commit` does not match the pull request head.
-- Any Run that uses BLE discovery, BLE pre-scanning, or GATT commissioning.
+- Any report that does not record the actual selected `ble` or `ip` commissioning transport.
 - Any virtual-device result.
 - `Not run` with no explanation.
 - A screenshot that hides the relevant error or device state.

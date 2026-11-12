@@ -1,6 +1,6 @@
 # Agent-Driven Device Testing
 
-This document defines the operational interface between the flutter_matter device-test app, a Mac-hosted CLI, and an Agent. The app owns the declarative Matter runner and state projection; the host owns discovery, explicit controller selection, transport, command serialization, and report retrieval.
+This document defines the operational interface between the flutter_matter device-test app, a Mac-hosted CLI, and an Agent. The app owns declarative Matter runner state, dual-path commissionee discovery, report construction, and state projection; the host owns controller discovery, explicit controller selection, transport, command serialization, and report retrieval.
 
 ## Goals
 
@@ -8,8 +8,8 @@ This document defines the operational interface between the flutter_matter devic
 - Let the Agent send one idempotent command at a time to the test app.
 - Keep the app as the WebSocket client so Android and physical iOS controllers can connect to a Mac-hosted server.
 - Expose every operation through a JSON CLI that an Agent can call from a shell.
+- Use qualified real Matter hardware and concurrent BLE and Wi-Fi/IP commissionee discovery.
 - Keep all evidence free of device identifiers, provisioning secrets, certificates, private keys, and raw logs.
-- Use Wi-Fi/IP commissioning with real Matter hardware for every device run; do not run BLE discovery/commissioning or submit virtual-device evidence.
 
 ## Topology
 
@@ -25,6 +25,7 @@ tool/device_test_agent.dart
   +---- LAN WebSocket server -------- device_test_app AgentBridgeClient
                                       |
                                       +---- RunCoordinator and test cases
+                                      +---- concurrent discovery and commissioning
                                       +---- semantic state and events
                                       +---- prompt projection
                                       +---- screenshot and report payloads
@@ -74,7 +75,7 @@ Every message is a UTF-8 JSON object with this envelope:
 | `command` | Host to app | A named command with JSON arguments and an idempotency key. |
 | `command_result` | App to host | Terminal command status and sanitized result data. |
 | `screenshot` | App to host | Base64 image bytes correlated with a command. |
-| `report` | App to host | Sanitized schema v2 JSON and the matching Markdown summary. |
+| `report` | App to host | Sanitized schema v3 JSON and the matching Markdown summary. |
 | `error` | Both | Protocol or command failure that does not necessarily close the socket. |
 
 ### Sequence rules
@@ -83,38 +84,9 @@ Every message is a UTF-8 JSON object with this envelope:
 - The host rejects a non-increasing sequence within one WebSocket connection.
 - The app continues its sequence across reconnects.
 - `hello.instance_id` identifies one app process. A new app process may reset to sequence one; the host resets its acceptance baseline when the instance ID changes.
-- The app records the last host sequence per connection. A new socket resets that host-input baseline because the CLI process may have restarted.
+- The app reconnects without resetting its outbound sequence unless the instance ID changes.
 
-### Command idempotency
-
-Reuse a command ID only when retrying the same logical operation. The app keeps a bounded cache of terminal outcomes. A duplicate command ID does not execute the handler again; the app resends cached artifacts and a `command_result` with status `duplicate`.
-
-The host allows one outstanding command per controller session. The app executes received commands serially even if a non-conforming host sends more than one.
-
-### Reconnect behavior
-
-`AgentBridgeClient`:
-
-- Reconnects with capped exponential backoff.
-- Resends `hello` and the latest semantic state after each reconnect.
-- Buffers bounded state and event messages while disconnected and drops the oldest messages if the buffer limit is exceeded.
-- Reports `stopped`, `connecting`, `connected`, or `waitingToReconnect`.
-
-If the socket closes while a command is waiting, the command fails with `app_disconnected`. The Agent may retry the same command ID after the app reconnects.
-
-## Device discovery and controller selection
-
-`devices` discovers:
-
-- Android devices through `adb devices -l` and `adb shell getprop`.
-- iOS devices through `xcrun devicectl list devices --json-output`.
-- iOS fallback devices through `idevice_id` and `ideviceinfo` when CoreDevice returns no usable candidate.
-
-Each public candidate contains `id`, `short_id`, `platform`, `model`, `os_version`, `name`, `state`, `connection`, and `usable`. Public JSON does not include the internal iOS UDID used by screenshot tooling.
-
-A qualified real Matter On/Off device is required for formal acceptance. It must already be connected to the same trusted Wi-Fi/LAN as the controller and in an open commissioning window. The Android Virtual Matter Device App path is retired; the Agent must not select or operate a virtual commissionee in any Run.
-
-Before starting a Run, the Agent should perform a bounded LAN preflight for Matter commissionable mDNS (`_matterc._udp`). Operational `_matter._tcp` advertisements only prove that a node is already commissioned; they do not prove that it can be commissioned into the test fabric. If no commissionable advertiser is present, stop and ask the operator to open a commissioning window or factory-reset the selected real device. Do not put full mDNS instance names, hostnames, or discriminators in evidence.
+## Device selection
 
 The host CLI never selects a controller by default:
 
@@ -128,6 +100,31 @@ The host CLI never selects a controller by default:
 When more than one phone is connected, the Agent must show an interactive user prompt with `platform`, `model`, `os_version`, and `short_id`, then pass the selected full ID to `serve --device`. The full ID is retained for the command but is not shown as the choice label. Never choose the first, only, previous, or remembered candidate automatically.
 
 The Agent must not choose or operate a virtual commissionee in any Run, including quick iteration. If the operator cannot provide real Matter hardware, stop before starting any device Run and report that validation is blocked.
+
+## Commissionee preparation
+
+A qualified real Matter On/Off commissionee is required for every Run. Before setup:
+
+1. The operator factory-resets the commissionee.
+2. The operator opens its commissioning window.
+3. The operator supplies a setup code or QR setup payload.
+4. The controller has access to the target Wi-Fi SSID and password; an empty password is valid only for an open network.
+
+The commissionee may advertise BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both. The Agent must not run a separate mandatory host-side `_matterc._udp` preflight and must not block solely because mDNS is absent.
+
+## Interactive setup prompt contract
+
+Use Codex interactive prompts for the required setup decisions. Do not infer values from prose, connection state, previous runs, or command history.
+
+Ask for:
+
+1. `mode`: `quick` or `full`.
+2. `setup_code`: the setup code or QR setup payload.
+3. `wifi_ssid`: the target Wi-Fi SSID.
+4. `wifi_password`: the target Wi-Fi password, or an empty value for an open network.
+5. `commissionee_clean`: explicit confirmation that the selected commissionee is factory-reset and in an open commissioning window.
+
+Never ask for, accept, or repeat model, firmware, state-change method, state-change notes, commissioning transport, network transport, controller-clean, or secrets-purged fields. After answers arrive, write them only to the transient `start_run` argument file. Secret values must not appear in logs, screenshots, reports, or chat.
 
 ## CLI commands
 
@@ -181,29 +178,21 @@ mkdir -p build/device-test-agent
 chmod 700 build/device-test-agent
 ```
 
-Example structure for a real Wi-Fi/IP commissionee:
+The minimal `start_run` request is:
 
 ```json
 {
   "mode": "quick",
-  "commissionee_type": "real",
-  "model": "<commissionee-model>",
-  "firmware": "<firmware-version>",
-  "commissioning_transport": "ip",
-  "network_transport": "wifi",
-  "state_change_method": "physical_control",
   "setup_code": "<setup-code-or-qr-payload>",
   "wifi_ssid": "<ssid>",
-  "wifi_password": "<password>",
+  "wifi_password": "<password-or-empty-for-open-network>",
   "clean_cycle": {
-    "controller_clean": true,
-    "commissionee_clean": true,
-    "secrets_purged": true
+    "commissionee_clean": true
   }
 }
 ```
 
-For formal evidence, keep `"commissionee_type": "real"`, `"commissioning_transport": "ip"`, and `"network_transport": "wifi"`. Thread is outside the current formal acceptance contract. When `state_change_method` is `other`, include non-empty `state_change_notes`.
+Set `"mode": "full"` for formal evidence. The request must not include `commissionee_type`, `commissioning_transport`, `network_transport`, `model`, `firmware`, `state_change_method`, `state_change_notes`, `thread_operational_dataset`, `controller_clean`, `secrets_purged`, virtual-device aliases, or any other retired field. The app contract rejects retired fields; it does not silently ignore them.
 
 Start a run with a stable command ID and the argument file:
 
@@ -215,35 +204,31 @@ fvm dart run tool/device_test_agent.dart command \
   --timeout-seconds 1200
 ```
 
-Use `"mode":"full"` and an appropriate timeout for formal evidence. Retain the file until the command outcome is terminal, then delete it without printing its contents. Every Run, including `quick`, must include `"commissioning_transport":"ip"` and `"network_transport":"wifi"`; it must not run BLE discovery or commissioning.
+Use `"mode": "full"` and an appropriate timeout for formal evidence. Retain the file until the command outcome is terminal, then delete it without printing its contents.
 
-```bash
-fvm dart run tool/device_test_agent.dart screenshot \
-  --output build/device-test-agent/screenshots/current.png
-```
+## Run behavior
 
-The screenshot command requests an app screenshot through the bridge. If the app is disconnected or the bridge command fails, the host falls back to `adb exec-out screencap -p` or `idevicescreenshot`.
+Before a Run starts, the app automatically purges old run provisioning secrets and resets controller identities for the current platform. The caller does not certify cleanup. If automatic cleanup fails, the app blocks the new Run before persisting new secrets or starting a test.
 
-```bash
-fvm dart run tool/device_test_agent.dart report \
-  --output-dir build/device-test-agent/reports/<run-id>
-```
+After `start_run` is accepted, the app starts BLE and Wi-Fi/IP discovery concurrently. The first matching commissionee transport is selected. The app records that path as the actual commissioning transport in the report.
 
-The command verifies the report and writes `device-test-report.json` and `device-test-report.md` under the requested directory.
+If commissioning fails after a transport is selected, the Run preserves the failure and stops. It must not retry or fall back to the other transport inside the same Run.
 
-```bash
-fvm dart run tool/device_test_agent.dart restart-app
-fvm dart run tool/device_test_agent.dart stop
-```
+The fixed profiles are:
 
-`restart-app` uses the active session's selected device by default and requires `--device` without an active session. Android uses an ADB force-stop and launcher start; iOS uses `xcrun devicectl device process launch --device <id> --terminate-existing <bundle-id>`.
+| Profile | Tests | Formal evidence |
+| --- | --- | --- |
+| `quick` | `build_install`, `commissioning_discovery`, `commissioning`, `operational_connect`, `onoff_invoke` | No |
+| `full` | All 12 fixed tests from the report contract | Yes, when required P0 tests pass and the schema v3 report is valid |
+
+A P0 failure or skip ends the current Run. Dependent tests are recorded as `not_run` with a reason. A P0 test is never retried in the same Run to manufacture a green result.
 
 ## Command payload contract
 
 A command payload contains:
 
 - `name`: the runner command name.
-- `arguments`: a JSON object, for example `{"mode":"full"}`.
+- `arguments`: a JSON object.
 
 The envelope supplies the required non-empty `command_id`. A command result contains `status` (`completed`, `failed`, or `duplicate`), `data`, and optional `error_code` and `error_message`. Artifacts are delivered as separate `screenshot` and `report` messages before the terminal `command_result`.
 
@@ -253,17 +238,17 @@ The app routes the following commands. Prompt commands require the current `prom
 
 | Name | Arguments | Meaning |
 | --- | --- | --- |
-| `start_run` | Full setup object with `mode` | Validate and start a `quick` or `full` Run. |
+| `start_run` | Minimal setup object with `mode` | Validate, auto-clean, and start a `quick` or `full` Run. |
 | `stop_run` | `{}` | Stop the current Run without manufacturing a passing report. |
 | `resume_run` | `{}` | Resume the persisted unfinished Run. |
-| `purge_secrets` | `{}` | Purge stored setup and network secrets after the Run is no longer active. |
+| `purge_secrets` | `{}` | Purge stored provisioning secrets after the Run is no longer active. |
 | `confirm_prompt` | `{"prompt_id":"<id>"}` | Confirm the referenced active prompt after the requested action was verified. |
 | `skip_prompt` | `{"prompt_id":"<id>","reason":"<reason>"}` | Skip the referenced prompt when skipping is allowed. |
 | `fail_prompt` | `{"prompt_id":"<id>","reason":"<reason>"}` | Fail the referenced active test with an operator-provided reason. |
 | `screenshot` | `{"label":"<optional>"}` | Return an app screenshot payload. |
 | `report` | `{"run_id":"<optional>"}` | Return the validated sanitized report payload when ready. |
 
-Requiring `setup_code`, Wi-Fi credentials, or Thread material in `start_run` is deliberate: it keeps the Agent workflow deterministic. Use `--args-file`, never `--args-json`, for that command. Secret values are transient command input and must not appear in state, events, command results, reports, screenshots, logs, or chat.
+Requiring `setup_code`, Wi-Fi credentials, and the commissionee reset confirmation in `start_run` is deliberate: it keeps the Agent workflow deterministic. Use `--args-file`, never `--args-json`, for that command. Secret values are transient command input and must not appear in state, events, command results, reports, screenshots, logs, or chat.
 
 Every command must preserve command-ID idempotency and one-outstanding-command semantics. The repository Skill identifies the current prompt from semantic state and resolves it only after verifying the requested action.
 
@@ -308,16 +293,17 @@ The repository Skill enforces this sequence:
 
 1. Run `devices` and inspect every candidate.
 2. Ask the user to select the controller; never auto-select.
-3. Confirm the operator has prepared the selected real Matter device on the same trusted Wi-Fi/LAN with its commissioning window open.
-4. Start `serve` with the explicit controller ID.
-5. Launch or connect the app and wait for the bridge connection.
-6. Start `quick` for iteration or `full` for formal evidence with a stable command ID.
-7. Resolve `agent_android` prompts on the selected Android controller only.
-8. Route `human` prompts to the operator and verify the semantic state transition.
-9. Use structured status, state, and events first; use screenshots only when visual confirmation is needed.
-10. Pull and verify the full report.
-11. Preserve P0 failures; never retry a P0 in the same Run to obtain a green result.
-12. Remind the operator to purge fabrics, credentials, commissionee data, and app secrets.
+3. Ask the operator which qualified real Matter device will be used.
+4. Collect the minimal setup data with Codex interactive prompts.
+5. Start `serve` with the explicit controller ID.
+6. Launch or connect the app and wait for the bridge connection.
+7. Start `quick` for iteration or `full` for formal evidence with a stable command ID.
+8. Let the app perform concurrent BLE and Wi-Fi/IP discovery and select the first matching transport.
+9. Resolve `agent_android` prompts on the selected Android controller only.
+10. Route `human` prompts to the operator and verify the semantic state transition.
+11. Preserve commissioning and P0 failures; never retry a failed commissioning through the other transport or retry a P0 in the same Run.
+12. Pull and verify the schema v3 report.
+13. Remind the operator to purge fabrics, credentials, commissionee data, and app secrets.
 
 ## Report verification
 
@@ -328,7 +314,10 @@ The host performs structural checks before writing report files:
 - Test statuses and durations have valid types.
 - Summary counts match the `tests` object.
 - Overall result is consistent with P0 and failure rules.
-- Formal evidence records a real commissionee, `commissioning_transport: ip`, and `network_transport: wifi`.
+- Evidence uses schema v3.
+- Commissionee `type` is `real`; `vendor_id` and `product_id` are present.
+- `network_transport` is `wifi`.
+- `commissioning_transport` is the actual selected path, `ble` or `ip`.
 - `plugin_commit` matches the current repository HEAD.
 - Test-app commit is a 40-character lowercase Git SHA.
 - Sanitization is explicitly confirmed.
@@ -357,11 +346,13 @@ build/device-test-agent/
 - TLS, authentication, or public-network exposure.
 - An MCP server.
 - Automatic device selection.
+- Manual transport selection by the Agent or caller.
+- Fallback between BLE and Wi-Fi/IP after commissioning fails.
 - Automated control of physical Matter hardware.
 - Automated iOS system-dialog interaction.
 - Real-device CI or automatic evidence upload.
-- BLE discovery or commissioning in formal acceptance.
-- Submitting a virtual-commissionee report as formal evidence.
+- Virtual-device testing.
+- Thread commissioning in the active device-test workflow.
 
 ## Verification coverage
 
