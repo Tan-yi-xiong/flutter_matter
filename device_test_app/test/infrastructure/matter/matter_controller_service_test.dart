@@ -74,6 +74,40 @@ void main() {
     );
 
     test(
+      'Android reuses a previously discovered BLE device without scanning again',
+      () async {
+        final fixture = _TestFixture(
+          MatterTargetPlatform.android,
+          emitAdvertisement: false,
+        );
+        addTearDown(fixture.service.close);
+        final device = _FakeBleDevice();
+        final discovered = MatterBleDiscoveredDevice(
+          advertisement: MatterBleAdvertisement(
+            device: device,
+            serviceData: <String, Uint8List>{
+              matterGattServiceUuid: Uint8List.fromList(<int>[0, 0xcd, 0x0a]),
+            },
+            rssi: -45,
+          ),
+          matterServiceData: Uint8List.fromList(<int>[0, 0xcd, 0x0a]),
+          discriminator: 0x0acd,
+        );
+
+        await fixture.service.commission(
+          _commissionRequest(
+            transport: MatterCommissioningTransport.ble,
+            discoveredBleDevice: discovered,
+          ),
+        );
+
+        expect(fixture.blePlatform.startScanCount, 0);
+        expect(fixture.controller.pairRequest!.connectId, 4);
+        expect(fixture.gattSessionFactory.connectCount, 1);
+      },
+    );
+
+    test(
       'Android IP commissioning skips the BLE transport and pairs on network',
       () async {
         final fixture = _TestFixture(
@@ -211,6 +245,7 @@ void main() {
 
 MatterCommissionRequest _commissionRequest({
   MatterCommissioningTransport transport = MatterCommissioningTransport.ip,
+  MatterBleDiscoveredDevice? discoveredBleDevice,
 }) {
   return MatterCommissionRequest(
     onboardingPayload: 'MT:TEST-PAYLOAD',
@@ -222,6 +257,7 @@ MatterCommissionRequest _commissionRequest({
       MatterWifiCredentials(ssid: 'Lab Wi-Fi', password: 'secret'),
     ),
     commissioningTransport: transport,
+    discoveredBleDevice: discoveredBleDevice,
     bleScanTimeout: const Duration(milliseconds: 200),
     timeout: const Duration(milliseconds: 500),
   );

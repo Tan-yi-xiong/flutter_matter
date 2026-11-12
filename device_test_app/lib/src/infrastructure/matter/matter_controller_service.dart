@@ -143,7 +143,7 @@ class MatterControllerService {
 
     final usesBle =
         request.commissioningTransport == MatterCommissioningTransport.ble;
-    MatterBleDiscoveredDevice? discovered;
+    MatterBleDiscoveredDevice? discovered = request.discoveredBleDevice;
     MatterBleGattSession? gattSession;
     MatterGattBleDelegate? delegate;
     StreamSubscription<MatterCommissioningStage>? stageSubscription;
@@ -151,7 +151,7 @@ class MatterControllerService {
     var commissioningCompleted = false;
 
     try {
-      if (usesBle) {
+      if (usesBle && discovered == null) {
         try {
           discovered = await _bleScanner.scan(
             MatterBleDiscoveryRequest(

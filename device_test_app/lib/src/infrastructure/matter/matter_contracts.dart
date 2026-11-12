@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_matter/flutter_matter.dart';
 
+import '../ble/matter_ble_contracts.dart';
 import 'matter_tlv.dart';
 
 enum MatterTargetPlatform { android, ios }
@@ -191,6 +192,7 @@ class MatterCommissionRequest {
     required this.nodeId,
     required this.networkCredentials,
     required this.commissioningTransport,
+    this.discoveredBleDevice,
     this.bleScanTimeout = const Duration(seconds: 15),
     this.timeout,
   }) {
@@ -238,6 +240,7 @@ class MatterCommissionRequest {
   final int nodeId;
   final MatterNetworkCredentials networkCredentials;
   final MatterCommissioningTransport commissioningTransport;
+  final MatterBleDiscoveredDevice? discoveredBleDevice;
   final Duration bleScanTimeout;
   final Duration? timeout;
 }
