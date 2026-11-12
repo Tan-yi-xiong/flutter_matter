@@ -27,7 +27,7 @@ The required `Dart check and tests` workflow verifies:
 - Dart static analysis errors using non-fatal info and warning classification.
 - Plugin Dart tests in the root `test/` suite.
 
-The workflow does not run example tests, compile Android or iOS native code, run native unit tests, run integration or device tests, validate package publication, or enforce formatting. Passing CI therefore means that Dart analysis and root Dart tests passed; it does not prove native builds or real-device behavior. Native builds, device validation, and package publication are reviewed separately from the required Dart gate.
+The workflow does not run example tests, compile Android or iOS native code, run native unit tests, run integration or device tests, validate package publication, or enforce formatting. Passing CI therefore means that Dart analysis and root Dart tests passed; it does not prove native builds or device behavior. Native builds, device validation, and package publication are reviewed separately from the required Dart gate.
 
 Automated tests cover `test/**/*_test.dart` at the plugin root only. `example/**` is a build and manual demonstration target and is never an automated test target. `device_test_app/**` has local unit tests but is not part of the required CI workflow.
 
@@ -128,7 +128,7 @@ Shared behavior requires Android and physical iOS reports. An explicitly platfor
 
 Attach reports and evidence in pull request comments and link them from the Device Validation section. All repository attachments are public. Do not include device serial numbers, iOS UDIDs, Wi-Fi credentials, setup codes, onboarding payloads, BLE addresses, certificates, private keys, or complete raw logs.
 
-Stable release-preparation pull requests must include separate Android and iOS clean-cycle P0 reports for the candidate commit. Use a qualified real Matter device first; use the Android Virtual Device App only when the real device is unavailable or does not meet the documented capability requirements, and record the fallback reason.
+Stable release-preparation pull requests must include separate Android and iOS clean-cycle P0 reports for the candidate commit. Use a Matter commissionee that satisfies the documented capability requirements; the report contract does not record device provenance.
 
 ## Platform expectations
 

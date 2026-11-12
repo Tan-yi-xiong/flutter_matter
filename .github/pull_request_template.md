@@ -49,7 +49,7 @@ app checks are local and are not part of required CI.
 <!-- Required for changes affecting commissioning, BLE, networking, controller lifecycle, attributes, commands, subscriptions, callbacks, MethodChannel behavior, or native Matter code. Follow doc/device-validation.md and doc/device-test-report.md. Mark Not applicable only for changes that cannot affect device behavior. -->
 
 - [ ] Not applicable; explain why in the field below
-- [ ] Qualified real Matter device used
+- [ ] Matter commissionee used
 - [ ] Concurrent BLE and Wi-Fi/IP discovery used; the report records the actual `ble` or `ip` transport and `wifi` network transport
 
 **Applicability or not-applicable reason:**
@@ -67,8 +67,6 @@ app checks are local and are not part of required CI.
 **Android result:** `<Passed|Failed|Not run>` — `<report and attachment links>`
 
 **iOS result:** `<Passed|Failed|Not run>` — `<report and attachment links>`
-
-**Virtual commissionee use:** `Not used` — virtual commissionees are not supported; every device run, including quick iteration, uses real Matter hardware.
 
 <details>
 <summary>Generated Markdown device-test-report summary</summary>
@@ -117,5 +115,5 @@ Paste `device-test-report.md` here.
 - [ ] A green CI result was not treated as proof of native compilation or device behavior.
 - [ ] Device-behavior evidence uses the versioned report contract, matches the PR head, and covers every affected platform.
 - [ ] No P0 failure was retried in the same Run to manufacture a green result.
-- [ ] Formal evidence used a qualified real Matter device, recorded concurrent BLE and Wi-Fi/IP discovery with the actual first-match `ble` or `ip` transport, and did not retry commissioning through the other transport.
+- [ ] Formal evidence used a Matter commissionee, recorded concurrent BLE and Wi-Fi/IP discovery with the actual first-match `ble` or `ip` transport, and did not retry commissioning through the other transport.
 - [ ] Attached reports and screenshots contain no credentials, device identifiers, provisioning secrets, certificates, keys, or raw logs.

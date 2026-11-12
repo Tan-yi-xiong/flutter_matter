@@ -501,22 +501,6 @@ USB123    unauthorized usb:1-1 transport_id:2
       }
     });
 
-    test('rejects virtual commissionees', () {
-      final report = _validReport(pluginCommit: pluginCommit);
-      final commissionee = _mutableCommissionee(report);
-      commissionee['type'] = 'virtual';
-
-      final failure = _captureFailure(
-        () => validateDeviceTestReportJson(
-          report,
-          expectedPluginCommit: pluginCommit,
-        ),
-      );
-
-      expect(failure.code, 'invalid_report');
-      expect(failure.message, contains('commissionee.type must be real.'));
-    });
-
     test('rejects the old BLE test ID set', () {
       const legacyIds = <String>[
         'build_install',
@@ -621,7 +605,6 @@ Map<String, Object?> _validReport({required String pluginCommit}) {
       'app_build': 'debug',
     },
     'commissionee': <String, Object?>{
-      'type': 'real',
       'vendor_id': 1,
       'product_id': 2,
       'commissioning_transport': 'ip',

@@ -13,7 +13,7 @@
 
 ### Device Test App and Agent Automation
 - Added a dedicated Android/iOS device-test app with quick and full validation profiles, resumable Run state, secure credential storage, and schema-validated JSON/Markdown reports.
-- Added a Mac-hosted WebSocket Agent bridge, JSON CLI, and repository Skill for guided real-device validation. Multiple connected phones require an explicit user choice.
+- Added a Mac-hosted WebSocket Agent bridge, JSON CLI, and repository Skill for guided device validation. Multiple connected phones require an explicit user choice.
 - The device-test app remains outside the required CI workflow; its local checks and Agent workflows are documented for contributors.
 
 ### Compatibility
@@ -35,7 +35,7 @@
 ### Documentation
 - Added architecture, public API, platform support, and architecture decision records.
 - Added contribution and review guidance for public API, MethodChannel, JSON, platform, and testing compatibility.
-- Added a device-validation process and schema-versioned JSON/Markdown report contract for Android and physical iOS controllers, preferring qualified real Matter devices with the Android Virtual Device App as fallback.
+- Added a device-validation process and schema-versioned JSON/Markdown report contract for Android and physical iOS controllers using Matter commissionees with dual-path discovery.
 - Added the Flutter 3.41 UIScene migration for the iOS example and aligned its deployment targets to iOS 16.1.
 - Clarified that `example/**` is never an automated test target and that iOS simulator builds are unsupported by the current vendored Matter framework.
 

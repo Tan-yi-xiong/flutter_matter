@@ -221,17 +221,6 @@ void _validateFormalSafety(
     return;
   }
 
-  final type = commissionee['type'];
-  if (type is String && type != CommissioneeType.real.wireName) {
-    issues.add(
-      const ReportValidationIssue(
-        kind: ReportValidationIssueKind.semantic,
-        path: r'$.commissionee.type',
-        message: 'Formal reports require a real Matter commissionee.',
-      ),
-    );
-  }
-
   final commissioningTransport = commissionee['commissioning_transport'];
   if (commissioningTransport == null) {
     issues.add(

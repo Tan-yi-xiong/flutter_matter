@@ -96,7 +96,7 @@ import 'package:flutter_matter/flutter_matter.dart';
 
 The Android values describe the current repository build configuration and do not imply that an SDK upgrade has already been completed. The iOS deployment targets are aligned to 16.1. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
 
-Automated tests cover the plugin root `test/` suite only. The `example/` application is a build and manual demonstration target, never an automated test target. Device-behavior changes require a versioned Android and/or iOS device-validation report; shared behavior requires both platforms. Formal reports require real Matter hardware and schema v3 evidence. The device-test app discovers real commissionees concurrently over BLE and Wi-Fi/IP and records the actual selected transport. Device runs use real Matter hardware only; virtual-device results are not supported and are never valid evidence.
+Automated tests cover the plugin root `test/` suite only. The `example/` application is a build and manual demonstration target, never an automated test target. Device-behavior changes require a versioned Android and/or iOS device-validation report; shared behavior requires both platforms. Formal reports use schema v3 evidence. The device-test app discovers the Matter commissionee concurrently over BLE and Wi-Fi/IP and records the actual selected transport. Device provenance is not part of the report contract.
 
 See [Architecture](ARCHITECTURE.md), [Public API](doc/public-api.md), [Platform support](doc/platform-support.md), [Device validation](doc/device-validation.md), [Device test reports](doc/device-test-report.md), [Contributing](CONTRIBUTING.md), [Security policy](SECURITY.md), [Release process](doc/releasing.md), [Third-party notices](THIRD_PARTY_NOTICES.md), and the [PR review checklist](doc/pr-review-checklist.md) for details.
 
@@ -247,7 +247,7 @@ fvm flutter run
 
 ## Device test app
 
-The dedicated validation app lives in `device_test_app/`. It supports Android and physical iOS controllers and requires qualified real Matter hardware for formal evidence. Every device run uses concurrent BLE and Wi-Fi/IP discovery and the first matching transport, without fallback after a commissioning failure. It can run a quick five-test commissioning/control profile during development or the full 12-test validation matrix for formal evidence. Every device run, including quick iteration, uses qualified real Matter hardware; virtual commissionees are not supported.
+The dedicated validation app lives in `device_test_app/`. It supports Android and physical iOS controllers and requires a Matter commissionee for formal evidence. Every device run uses concurrent BLE and Wi-Fi/IP discovery and the first matching transport, without fallback after a commissioning failure. It can run a quick five-test commissioning/control profile during development or the full 12-test validation matrix for formal evidence. The app does not inspect or record device provenance.
 
 ```bash
 cd device_test_app

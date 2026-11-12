@@ -34,9 +34,6 @@ class DeviceTestReportBuilder {
     if (session.commissionee == null) {
       issues.add('Commissionee metadata is required.');
     } else {
-      if (session.commissionee!.type != CommissioneeType.real) {
-        issues.add('Formal reports require a real Matter commissionee.');
-      }
       if (session.commissionee!.commissioningTransport == null) {
         issues.add(
           'Formal reports require a selected commissioning transport.',

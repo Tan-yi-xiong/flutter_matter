@@ -30,9 +30,9 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - Verify the report uses schema version `3`, contains all 12 fixed test IDs exactly once, and includes both the generated Markdown summary and sanitized JSON attachment.
 - Verify `plugin_commit` matches the current pull request head; reject stale reports after relevant code changes.
 - Verify every affected platform has a report. Shared behavior requires Android and physical iOS reports; a platform exception must be explicit and technically justified.
-- Verify formal evidence used a qualified real Matter device whose report records concurrent BLE and Wi-Fi/IP discovery, the first matching actual transport (`ble` or `ip`), and `wifi` network transport. Reject a transport fallback after commissioning failure.
+- Verify formal evidence used a Matter commissionee whose report records concurrent BLE and Wi-Fi/IP discovery, the first matching actual transport (`ble` or `ip`), and `wifi` network transport. Reject a transport fallback after commissioning failure.
 - Verify all required P0 results are `passed`. P1 results are stability evidence; P2 failures require an explicit maintainer risk decision.
-- Verify the report describes one real commissionee and one controller cycle. Virtual commissionees are not supported; a virtual-device result is invalid evidence.
+- Verify the report describes one commissionee and one controller cycle. Device provenance is not part of the report contract.
 - Verify the report includes a clean-cycle statement and that Android and iOS were treated as independent commissioned cycles.
 - Reject reports with device serial numbers, iOS UDIDs, Wi-Fi credentials, setup codes, onboarding payloads, BLE addresses, certificates, private keys, or complete raw logs.
 - Confirm attached JSON and Markdown are accessible and sanitized. Any screenshots are optional manual evidence and must also be sanitized. Public attachments must be treated as public content.
@@ -104,7 +104,6 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 - A device-behavior change with no schema-based report for an affected platform.
 - A report whose `plugin_commit` does not match the pull request head.
 - Any report that does not record the actual selected `ble` or `ip` commissioning transport.
-- Any virtual-device result.
 - `Not run` with no explanation.
 - A screenshot that hides the relevant error or device state.
 - A public API change without a compatibility section.

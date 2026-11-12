@@ -71,7 +71,6 @@ void main() {
       expect(resumed.profile, TestProfile.full);
       expect(resumed.phase, progressed.phase);
       expect(resumed.controller?.deviceModel, 'Pixel 8');
-      expect(resumed.commissionee?.type, CommissioneeType.real);
       expect(
         resumed.results[DeviceTestId.buildInstall]?.status,
         DeviceTestStatus.passed,

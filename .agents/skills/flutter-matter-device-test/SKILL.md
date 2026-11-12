@@ -5,7 +5,7 @@ description: Execute flutter_matter device validation through the dedicated test
 
 # Flutter Matter Device Test
 
-Run `flutter_matter` device validation without guessing which phone or commissionee to use. The device-test app is the authoritative runner for qualified real Matter hardware. It discovers the commissionee concurrently over BLE and Wi-Fi/IP, uses the first matching transport, and records the actual transport in schema v3 evidence.
+Run `flutter_matter` device validation without guessing which phone or commissionee to use. The device-test app is the authoritative runner for Matter commissionees and does not inspect device provenance. It discovers the commissionee concurrently over BLE and Wi-Fi/IP, uses the first matching transport, and records the actual transport in schema v3 evidence.
 
 ## Hard rules
 
@@ -14,20 +14,20 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 3. When multiple phones are connected, show a native interactive user-choice prompt before starting `serve`. Never infer a choice from connection order, platform, model, installed packages, or previous use.
 4. Show `platform`, `model`, `os_version`, and `short_id` in user choices. Do not display the full device ID in the label; retain the full ID privately for `serve`.
 5. Always pass the selected candidate's full ID to `serve --device`.
-6. Use a qualified real Matter On/Off commissionee for every device Run. Virtual commissionees and virtual-device evidence are not supported.
+6. Use a Matter On/Off commissionee for every device Run. Do not infer or record device provenance.
 7. Never select, force, or describe a commissioning transport in `start_run`. The app starts BLE and Wi-Fi/IP discovery concurrently and uses the first matching transport.
 8. If commissioning fails on the selected transport, preserve the failure and stop the Run. Do not retry or fall back to the other transport in the same Run.
 9. Do not send Thread commissioning material or Thread-specific setup fields.
-10. `quick` contains five iteration tests, always runs on real Matter hardware, and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 12 fixed tests.
+10. `quick` contains five iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 12 fixed tests.
 11. Never retry a failed P0 test in the same Run to manufacture a passing result.
 12. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
 13. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
-14. Real-device CI is out of scope. Reports are manually attached to the PR and must match its head commit.
+14. Hardware-in-the-loop CI is out of scope. Reports are manually attached to the PR and must match its head commit.
 
 ## Preconditions
 
 - The dedicated device-test app is built and installed on the selected controller.
-- A qualified real Matter On/Off commissionee is available and in an open commissioning window after a factory reset.
+- A Matter On/Off commissionee is available and in an open commissioning window after a factory reset.
 - The commissionee supports BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
 - The controller has connectivity to the target Wi-Fi network for provisioning and the CASE/control stage.
 - The Mac and phones share a trusted private LAN that permits the WebSocket connection.
@@ -61,7 +61,7 @@ Use `short_id` only for display. Keep the full ID in your own state for the next
 
 Ask the operator which physical On/Off device will be used. The operator must be able to confirm that it is factory-reset and currently has an open commissioning window. Record the choice in the PR narrative without exposing provisioning secrets.
 
-The Agent must not select or operate a virtual commissionee in any Run. Do not paste the setup payload, mDNS instance names, hostnames, discriminators, BLE addresses, or any discovery identifiers into evidence.
+Do not paste the setup payload, mDNS instance names, hostnames, discriminators, BLE addresses, or any discovery identifiers into evidence.
 
 ## Step 3: Start the host session
 
@@ -147,7 +147,7 @@ Use exactly this minimal structure, replacing values only in the local file:
 }
 ```
 
-For formal evidence, set `"mode": "full"` in the same local file and use a new stable command ID. Do not add retired fields such as `commissionee_type`, `commissioning_transport`, `network_transport`, `model`, `firmware`, `state_change_method`, `state_change_notes`, `thread_operational_dataset`, controller-clean, or secrets-purged keys. The app contract must reject retired fields instead of silently ignoring them.
+For formal evidence, set `"mode": "full"` in the same local file and use a new stable command ID. Only `mode`, `setup_code`, `wifi_ssid`, `wifi_password`, and `clean_cycle` are accepted. Any extra field must be rejected instead of silently ignored.
 
 Quick iteration run:
 
@@ -271,7 +271,7 @@ Verify:
 1. `plugin_commit` equals `git rev-parse HEAD` for the tested PR.
 2. The run mode is `full`.
 3. The report schema version is `3`.
-4. `commissionee.type` is `real`, `vendor_id` and `product_id` are present, and `network_transport` is `wifi`.
+4. `vendor_id` and `product_id` are present, and `network_transport` is `wifi`.
 5. `commissioning_transport` records the actual selected path, `ble` or `ip`.
 6. All P0 test IDs are `passed`.
 7. Non-P0 statuses and `not_run` reasons are reviewed.
@@ -296,7 +296,7 @@ P1 and P2 results may be `not_run` with a concrete reason. P2 failures require e
 After collecting evidence, remind the user to clean up:
 
 - Remove the test fabric from the controller.
-- Factory-reset or recommission the real commissionee as appropriate.
+- Factory-reset or recommission the commissionee as appropriate.
 - Clear test-only Wi-Fi credentials through the app's explicit cache-clear action when they are no longer needed.
 - Purge app secrets through the command interface after the Run is no longer active:
 
@@ -338,7 +338,7 @@ Do not execute destructive purge steps without user confirmation.
 ## Completion checklist
 
 - The controller was explicitly chosen by the user whenever multiple phones were connected.
-- The run used a real Matter commissionee; no virtual device was used.
+- The run used a Matter commissionee selected by the operator.
 - The app performed concurrent BLE and Wi-Fi/IP discovery and selected the first matching transport.
 - No commissioning failure was retried through the other transport in the same Run.
 - Setup data was collected through Codex interactive prompts using only the minimal required fields.

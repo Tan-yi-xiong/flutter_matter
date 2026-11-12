@@ -29,11 +29,11 @@ Each report must:
 - Conform to schema version `3` and provide both `device-test-report.json` and its generated Markdown summary.
 - Identify an exact `plugin_commit` equal to the candidate commit.
 - Cover one complete clean P0 cycle for the controller platform.
-- Use a qualified real Matter On/Off device. The app starts BLE and Wi-Fi/IP commissionable discovery concurrently, records the first matching `ble` or `ip` commissioning transport, and reports `wifi` as the network transport. A commissioning failure is preserved without transport fallback; virtual commissionees are not supported in any device run.
+- Use a Matter On/Off commissionee. The app starts BLE and Wi-Fi/IP commissionable discovery concurrently, records the first matching `ble` or `ip` commissioning transport, and reports `wifi` as the network transport. A commissioning failure is preserved without transport fallback. Device provenance is not part of the report contract.
 - Include optional sanitized screenshots or other manually captured bounded evidence; the app itself emits JSON and Markdown only.
 - Record P1 and P2 results, including reasons for `not_run` entries and any accepted P2 failures.
 
-Both platform reports must show every required P0 case as `passed`. Do not create a stable tag when a report is missing, stale, failed, not run, uses a virtual commissionee, or missing a clean-cycle statement.
+Both platform reports must show every required P0 case as `passed`. Do not create a stable tag when a report is missing, stale, failed, not run, or missing a clean-cycle statement.
 
 The repository does not run device validation in CI and does not use a self-hosted hardware runner for this process.
 

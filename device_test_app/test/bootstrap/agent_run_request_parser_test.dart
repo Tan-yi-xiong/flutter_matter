@@ -114,9 +114,8 @@ void main() {
     );
   });
 
-  test('rejects every retired top-level field', () {
-    const retiredFields = <String>[
-      'commissionee_type',
+  test('rejects every unsupported top-level field', () {
+    const unsupportedFields = <String>[
       'commissioning_transport',
       'network_transport',
       'model',
@@ -126,13 +125,11 @@ void main() {
       'thread_operational_dataset',
       'controller_clean',
       'secrets_purged',
-      'virtual_device',
       'fallback_transport',
     ];
 
-    for (final field in retiredFields) {
-      final arguments = _minimalArguments()
-        ..[field] = field == 'commissionee_type' ? 'virtual' : 'unused';
+    for (final field in unsupportedFields) {
+      final arguments = _minimalArguments()..[field] = 'unused';
       try {
         parser.parse(arguments: arguments, state: _setupState());
         fail('Expected $field to be rejected.');
@@ -145,7 +142,7 @@ void main() {
         expect(
           error.toString(),
           isNot(contains('unused')),
-          reason: 'Retired field values must not appear in the message.',
+          reason: 'Unsupported field values must not appear in the message.',
         );
       }
     }

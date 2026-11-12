@@ -2996,7 +2996,6 @@ void _validateReportJson(
 
   final commissionee = _requiredMap(report, 'commissionee');
   const commissioneeRequired = <String>{
-    'type',
     'vendor_id',
     'product_id',
     'commissioning_transport',
@@ -3010,12 +3009,6 @@ void _validateReportJson(
         message: 'commissionee.$key is required.',
       );
     }
-  }
-  if (commissionee['type'] != 'real') {
-    throw const CliFailure(
-      code: 'invalid_report',
-      message: 'commissionee.type must be real.',
-    );
   }
   final vendorId = commissionee['vendor_id'];
   final productId = commissionee['product_id'];

@@ -88,16 +88,12 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "type",
         "vendor_id",
         "product_id",
         "commissioning_transport",
         "network_transport"
       ],
       "properties": {
-        "type": {
-          "const": "real"
-        },
         "vendor_id": {
           "type": "integer"
         },

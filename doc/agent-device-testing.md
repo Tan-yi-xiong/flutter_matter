@@ -8,7 +8,7 @@ This document defines the operational interface between the flutter_matter devic
 - Let the Agent send one idempotent command at a time to the test app.
 - Keep the app as the WebSocket client so Android and physical iOS controllers can connect to a Mac-hosted server.
 - Expose every operation through a JSON CLI that an Agent can call from a shell.
-- Use qualified real Matter hardware and concurrent BLE and Wi-Fi/IP commissionee discovery.
+- Use a Matter commissionee and concurrent BLE and Wi-Fi/IP commissionee discovery.
 - Keep all evidence free of device identifiers, provisioning secrets, certificates, private keys, and raw logs.
 
 ## Topology
@@ -99,11 +99,11 @@ The host CLI never selects a controller by default:
 
 When more than one phone is connected, the Agent must show an interactive user prompt with `platform`, `model`, `os_version`, and `short_id`, then pass the selected full ID to `serve --device`. The full ID is retained for the command but is not shown as the choice label. Never choose the first, only, previous, or remembered candidate automatically.
 
-The Agent must not choose or operate a virtual commissionee in any Run, including quick iteration. If the operator cannot provide real Matter hardware, stop before starting any device Run and report that validation is blocked.
+If the operator cannot provide a commissionee in an open commissioning window, stop before starting any device Run and report that validation is blocked.
 
 ## Commissionee preparation
 
-A qualified real Matter On/Off commissionee is required for every Run. Before setup:
+A Matter On/Off commissionee is required for every Run. Before setup:
 
 1. The operator factory-resets the commissionee.
 2. The operator opens its commissioning window.
@@ -192,7 +192,7 @@ The minimal `start_run` request is:
 }
 ```
 
-Set `"mode": "full"` for formal evidence. The request must not include `commissionee_type`, `commissioning_transport`, `network_transport`, `model`, `firmware`, `state_change_method`, `state_change_notes`, `thread_operational_dataset`, `controller_clean`, `secrets_purged`, virtual-device aliases, or any other retired field. The app contract rejects retired fields; it does not silently ignore them.
+Set `"mode": "full"` for formal evidence. The request accepts only `mode`, `setup_code`, `wifi_ssid`, `wifi_password`, and `clean_cycle`. Any extra field is rejected; it is not silently ignored.
 
 Start a run with a stable command ID and the argument file:
 
@@ -293,7 +293,7 @@ The repository Skill enforces this sequence:
 
 1. Run `devices` and inspect every candidate.
 2. Ask the user to select the controller; never auto-select.
-3. Ask the operator which qualified real Matter device will be used.
+3. Ask the operator which Matter commissionee will be used.
 4. Collect the minimal setup data with Codex interactive prompts.
 5. Start `serve` with the explicit controller ID.
 6. Launch or connect the app and wait for the bridge connection.
@@ -315,7 +315,7 @@ The host performs structural checks before writing report files:
 - Summary counts match the `tests` object.
 - Overall result is consistent with P0 and failure rules.
 - Evidence uses schema v3.
-- Commissionee `type` is `real`; `vendor_id` and `product_id` are present.
+- `vendor_id` and `product_id` are present.
 - `network_transport` is `wifi`.
 - `commissioning_transport` is the actual selected path, `ble` or `ip`.
 - `plugin_commit` matches the current repository HEAD.
@@ -350,8 +350,7 @@ build/device-test-agent/
 - Fallback between BLE and Wi-Fi/IP after commissioning fails.
 - Automated control of physical Matter hardware.
 - Automated iOS system-dialog interaction.
-- Real-device CI or automatic evidence upload.
-- Virtual-device testing.
+- Hardware-in-the-loop CI or automatic evidence upload.
 - Thread commissioning in the active device-test workflow.
 
 ## Verification coverage

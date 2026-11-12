@@ -20,7 +20,7 @@ class DeviceTestReportMarkdownRenderer {
         '`${report.controller.osVersion}`',
       )
       ..writeln(
-        '- Commissionee: `${report.commissionee.type.wireName}` / '
+        '- Commissionee: '
         'vendor `${report.commissionee.vendorId}` / '
         'product `${report.commissionee.productId}`',
       )

@@ -4,7 +4,7 @@ The device-test report is the reviewable evidence produced by a physical-device 
 
 The dedicated app implements this contract and includes a local report validator. The app and its tests are outside the required CI gate.
 
-Formal acceptance requires a qualified real Matter commissionee. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP, uses the first matching transport, and records that path as the actual commissioning transport. Virtual-commissionee reports are not supported; every device run uses qualified real Matter hardware.
+Formal acceptance requires a Matter commissionee. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP, uses the first matching transport, and records that path as the actual commissioning transport. Device provenance is not part of the report contract.
 
 ## Output files
 
@@ -29,12 +29,12 @@ Old v2 reports and old Run snapshots are not migrated.
 | --- | --- |
 | Run identity | `generated_at`, test-app name/version/commit, and the exact `plugin_commit` under test |
 | Controller | `android` or `ios`, device model, OS version, and app build identifier |
-| Commissionee | `type: "real"`, automatically parsed integer `vendor_id` and `product_id`, actual `ble` or `ip` commissioning transport, and `wifi` network transport |
+| Commissionee | Automatically parsed integer `vendor_id` and `product_id`, actual `ble` or `ip` commissioning transport, and `wifi` network transport |
 | Summary | Overall `passed`, `failed`, or `not_run`; counts for each status |
 | Tests | A `tests` object keyed by every fixed P0, P1, and P2 test ID, each with result, duration, optional notes, and optional relative evidence filenames |
 | Sanitization | Explicit confirmation that the report and attachments were reviewed for sensitive data |
 
-The report must not include commissionee model, firmware, external state-change method, external state-change notes, user-entered identity fields, or transport declarations. Device model and OS version refer to the controller and are sufficient for controller traceability.
+The report must not include commissionee model, firmware, external state-change method, external state-change notes, or user-entered identity fields. Commissioning and network transports are derived by the runner. Device model and OS version refer to the controller and are sufficient for controller traceability.
 
 Do not add serial numbers, iOS UDIDs, Wi-Fi SSIDs, Wi-Fi passwords, setup codes, onboarding payloads, BLE addresses, certificates, or private keys to any field.
 
@@ -43,7 +43,7 @@ Do not add serial numbers, iOS UDIDs, Wi-Fi SSIDs, Wi-Fi passwords, setup codes,
 | Priority | Test ID | Requirement |
 | --- | --- | --- |
 | P0 | `build_install` | Android APK or signed iOS app installs and launches |
-| P0 | `commissioning_discovery` | Concurrent BLE and Wi-Fi/IP discovery identifies the selected real commissionee and selects the first matching transport |
+| P0 | `commissioning_discovery` | Concurrent BLE and Wi-Fi/IP discovery identifies the selected commissionee and selects the first matching transport |
 | P0 | `commissioning` | PASE/commissioning completes on the selected transport with `errorCode == 0` within 120 seconds |
 | P0 | `operational_connect` | CASE connection returns a valid connect context within 30 seconds |
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
@@ -67,7 +67,7 @@ All 12 IDs must appear exactly once as keys in the `tests` object. The priority 
 
 ## Summary rules
 
-- The overall result is `passed` only when the commissionee is real hardware, `commissioning_transport` is `ble` or `ip`, `network_transport` is `wifi`, every P0 test is `passed`, and every non-P0 test is either `passed` or `not_run` with a reason.
+- The overall result is `passed` only when `commissioning_transport` is `ble` or `ip`, `network_transport` is `wifi`, every P0 test is `passed`, and every non-P0 test is either `passed` or `not_run` with a reason.
 - The overall result is `failed` when any test is `failed`, especially any P0 test.
 - The overall result is `not_run` when any P0 test is `not_run`.
 - Counts must be calculated from the `tests` object and must total 12.
@@ -83,7 +83,7 @@ The generated Markdown should follow this structure:
 - Plugin commit: `<40-character SHA>`
 - Test app: `<name> <version> (<commit>)`
 - Controller: `<android|ios>` / `<device model>` / `<OS version>`
-- Commissionee: `real` / vendor `<vendor_id>` / product `<product_id>`
+- Commissionee: vendor `<vendor_id>` / product `<product_id>`
 - Commissioning transport: `<ble|ip>`
 - Network transport: `wifi`
 - Overall result: `<passed|failed|not_run>`
@@ -112,9 +112,9 @@ The dedicated app may render the table automatically. Manual interim reports mus
 
 The dedicated app must:
 
-1. Use the selected controller and qualified real Matter commissionee from [`device-validation.md`](device-validation.md).
-2. Enforce real-hardware, concurrent-discovery, first-match, and no-transport-fallback rules.
-3. Reject retired `start_run` fields and schema v2 report fields instead of silently ignoring them.
+1. Use the selected controller and commissionee from [`device-validation.md`](device-validation.md).
+2. Enforce concurrent-discovery, first-match, and no-transport-fallback rules.
+3. Reject unsupported `start_run` fields and schema v2 report fields instead of silently ignoring them.
 4. Automatically purge old Run secrets and controller identities before a Run, and block the Run if cleanup fails.
 5. Keep cached Wi-Fi credentials in secure storage and exclude them from all state, logs, screenshots, and reports.
 6. Emit both output files atomically only after the run is complete.
@@ -137,13 +137,13 @@ For a device-behavior pull request:
 4. Confirm that the report commit matches the PR head.
 5. Update the report after any code change that could affect device behavior.
 
-For a stable release-preparation pull request, provide separate Android and iOS reports against the candidate commit. Both reports must use a qualified real Matter commissionee and schema v3. Virtual-device reports do not satisfy this requirement.
+For a stable release-preparation pull request, provide separate Android and iOS reports against the candidate commit. Both reports must use a Matter commissionee and schema v3. Device provenance is not part of the report contract.
 
 ## Failure handling
 
 - If the report or attachment is missing, reviewers must treat the change as unverified.
 - If the report commit is stale, request a new report against the current PR head.
-- If the schema is not v3, the commissionee is virtual, `commissioning_transport` is not `ble` or `ip`, or `network_transport` is not `wifi`, reviewers must reject the report as formal evidence.
+- If the schema is not v3, `commissioning_transport` is not `ble` or `ip`, or `network_transport` is not `wifi`, reviewers must reject the report as formal evidence.
 - If a report contains retired commissionee model, firmware, or state-change fields, reject it and regenerate from a schema v3 source.
 - If an attached file contains sensitive data, remove the attachment, regenerate the report, and rotate any exposed credential.
 - If the test app cannot emit a valid report, keep the run result local and record the blocker; do not hand-edit sensitive data into an attachment.

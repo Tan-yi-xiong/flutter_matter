@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'support/presentation_fixtures.dart';
 
 void main() {
-  test('accepts a minimal real-device Wi-Fi setup', () {
+  test('accepts a minimal Wi-Fi setup', () {
     final result = DeviceTestSetupValidator.validate(
       draft: _draft(),
       controller: controllerInfo,

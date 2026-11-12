@@ -2,7 +2,7 @@
 
 Dedicated physical-device validation app for `flutter_matter`.
 
-The app runs on Android and physical iOS controllers. It is not published with the plugin and is not part of the required Dart CI gate. Every Run uses qualified real Matter hardware. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP, selects the first matching transport, and records that path as the actual commissioning transport. A commissioning failure is preserved and never retried through the other transport in the same Run.
+The app runs on Android and physical iOS controllers. It is not published with the plugin and is not part of the required Dart CI gate. Every Run uses a Matter commissionee. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP, selects the first matching transport, and records that path as the actual commissioning transport. Device provenance is not part of the report contract. A commissioning failure is preserved and never retried through the other transport in the same Run.
 
 ## Test profiles
 
@@ -11,7 +11,7 @@ The app runs on Android and physical iOS controllers. It is not published with t
 | `quick` | `build_install`, `commissioning_discovery`, `commissioning`, `operational_connect`, `onoff_invoke` | Iteration feedback only |
 | `full` | All 12 fixed tests in [../doc/device-test-report.md](../doc/device-test-report.md) | The only formal PR/release evidence |
 
-Only a completed `full` run can produce formal evidence. A P0 failure is preserved and never retried inside the same Run. Every device run, including `quick` iteration, uses qualified real Matter hardware; virtual commissionees are not supported.
+Only a completed `full` run can produce formal evidence. A P0 failure is preserved and never retried inside the same Run. Every device run, including `quick` iteration, uses a Matter commissionee.
 
 ## Setup
 
@@ -59,7 +59,7 @@ The Agent must collect the minimal setup data with Codex interactive prompts, pa
 
 ## Physical-device roles
 
-- Use a qualified real Matter On/Off commissionee for every Run, including quick iteration. Virtual commissionees are not supported.
+- Use a Matter On/Off commissionee for every Run, including quick iteration. The app does not inspect or record device provenance.
 - Confirm that the commissionee supports BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
 - Confirm that the commissionee is factory-reset and has an open commissioning window before starting the Run.
 - Do not add a host-side mDNS-only readiness gate: either BLE or Wi-Fi/IP discovery may lead to a valid Run.
@@ -76,7 +76,7 @@ The Agent must collect the minimal setup data with Codex interactive prompts, pa
 
 Never put setup codes, onboarding payloads, Wi-Fi SSIDs or passwords, full UDIDs, serial numbers, certificates, private keys, or raw logs in reports or PR text. Use the in-app purge action before handing a device to another user. Purge is required because iOS Keychain items can survive app uninstallation.
 
-Real-device CI is intentionally out of scope. Attach full-run JSON and Markdown reports to the PR manually and verify that the report plugin commit matches the PR head. Reports must use schema v3. All app UI, protocol strings, and repository documentation are English.
+Hardware-in-the-loop CI is intentionally out of scope. Attach full-run JSON and Markdown reports to the PR manually and verify that the report plugin commit matches the PR head. Reports must use schema v3. All app UI, protocol strings, and repository documentation are English.
 
 ## Further documentation
 

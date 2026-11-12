@@ -9,33 +9,29 @@ import '../presentation/presentation.dart';
 class AgentRunRequestParser {
   const AgentRunRequestParser();
 
-  static const Set<String> retiredFields = <String>{
-    'commissionee_type',
-    'commissioning_transport',
-    'network_transport',
-    'model',
-    'firmware',
-    'state_change_method',
-    'state_change_notes',
-    'thread_operational_dataset',
-    'controller_clean',
-    'secrets_purged',
-    'virtual_device',
-    'fallback_transport',
+  static const Set<String> _allowedFields = <String>{
+    'mode',
+    'setup_code',
+    'wifi_ssid',
+    'wifi_password',
+    'clean_cycle',
   };
 
   DeviceTestSetupRequest parse({
     required Map<String, Object?> arguments,
     required DeviceTestUiState state,
   }) {
-    final retired =
-        arguments.keys.where(retiredFields.contains).toList(growable: false)
+    final unsupported =
+        arguments.keys
+            .where((key) => !_allowedFields.contains(key))
+            .toList(growable: false)
           ..sort();
-    if (retired.isNotEmpty) {
+    if (unsupported.isNotEmpty) {
       throw AgentRunRequestException(
-        'The Run request contains retired fields: ${retired.join(', ')}.',
+        'The Run request contains unsupported fields: ${unsupported.join(', ')}.',
         issues: <String, String>{
-          for (final field in retired) field: 'This field is not supported.',
+          for (final field in unsupported)
+            field: 'This field is not supported.',
         },
       );
     }

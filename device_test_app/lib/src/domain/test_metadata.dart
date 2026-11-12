@@ -46,23 +46,6 @@ class ControllerMetadata {
   };
 }
 
-enum CommissioneeType {
-  real('real');
-
-  const CommissioneeType(this.wireName);
-
-  final String wireName;
-
-  static CommissioneeType parse(String value) {
-    for (final type in values) {
-      if (type.wireName == value) {
-        return type;
-      }
-    }
-    throw FormatException('Unknown commissionee type: $value');
-  }
-}
-
 enum CommissioningTransport {
   ble('ble'),
   ip('ip');
@@ -106,10 +89,8 @@ class CommissioneeMetadata {
     required this.productId,
     required this.networkTransport,
     this.commissioningTransport,
-    this.type = CommissioneeType.real,
   });
 
-  final CommissioneeType type;
   final int vendorId;
   final int productId;
 
@@ -119,7 +100,6 @@ class CommissioneeMetadata {
 
   factory CommissioneeMetadata.fromJson(Map<String, dynamic> json) {
     return CommissioneeMetadata(
-      type: CommissioneeType.parse(_requiredString(json, 'type')),
       vendorId: _requiredInt(json, 'vendor_id'),
       productId: _requiredInt(json, 'product_id'),
       commissioningTransport: json['commissioning_transport'] == null
@@ -137,7 +117,6 @@ class CommissioneeMetadata {
     CommissioningTransport transport,
   ) {
     return CommissioneeMetadata(
-      type: type,
       vendorId: vendorId,
       productId: productId,
       commissioningTransport: transport,
@@ -146,7 +125,6 @@ class CommissioneeMetadata {
   }
 
   Map<String, Object?> toJson() => <String, Object?>{
-    'type': type.wireName,
     'vendor_id': vendorId,
     'product_id': productId,
     if (commissioningTransport != null)

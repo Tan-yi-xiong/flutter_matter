@@ -108,8 +108,8 @@ class _SetupScreenState extends State<SetupScreen> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'The app searches for the real Matter commissionee over BLE '
-                  'and Wi-Fi/IP at the same time. The first matching path is '
+                  'The app searches for the Matter commissionee over BLE and '
+                  'Wi-Fi/IP at the same time. The first matching path is '
                   'used for this Run.',
                   style: theme.textTheme.bodyMedium,
                 ),

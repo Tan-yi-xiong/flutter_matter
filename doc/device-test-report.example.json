@@ -14,7 +14,6 @@
     "app_build": "debug 1.0.0 (1)"
   },
   "commissionee": {
-    "type": "real",
     "vendor_id": 4660,
     "product_id": 22136,
     "commissioning_transport": "ip",

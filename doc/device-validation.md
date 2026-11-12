@@ -4,18 +4,18 @@ This document defines the manual device-validation process for `flutter_matter`.
 
 The process is manual by design. It does not require or define a self-hosted runner, an Actions hardware workflow, or an automated cross-device UI test.
 
-Every device Run uses qualified real Matter hardware. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP and uses the first matching transport. It records `ble` or `ip` as the actual commissioning transport. A commissioning failure is preserved and is never retried through the other transport in the same Run.
+Every device Run uses a Matter commissionee. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP and uses the first matching transport. It records `ble` or `ip` as the actual commissioning transport. A commissioning failure is preserved and is never retried through the other transport in the same Run.
 
 ## Definitions
 
 - **Controller**: the Android or physical iOS app that discovers, commissions, connects to, and controls a Matter device.
-- **Commissionee**: a qualified real Matter On/Off device used for validation.
+- **Commissionee**: a Matter On/Off device used for validation.
 - **Clean cycle**: a complete validation run that starts with a factory-reset commissionee and an open commissioning window.
 - **Device-behavior change**: a change that affects commissioning, network discovery, Wi-Fi provisioning, controller lifecycle, attributes, commands, subscriptions, callbacks, MethodChannel contracts, or native Matter behavior.
 
 ## Commissionee selection
 
-A qualified real Matter device is required for every device Run, including quick iteration. It is qualified when all of the following are true:
+A suitable Matter commissionee is required for every device Run, including quick iteration. It is suitable when all of the following are true:
 
 - It can be restored to factory state and commissioned again with a valid setup code or setup payload.
 - It can be discovered through BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
@@ -23,7 +23,7 @@ A qualified real Matter device is required for every device Run, including quick
 - It supports Basic Information `NodeLabel` on endpoint `0`, cluster `0x0028`, attribute `0x0005`.
 - Its state can be changed independently through a physical control, a vendor app, or another local controller.
 
-If a qualified real device is unavailable, stop validation. Do not substitute a virtual commissionee in any Run, including quick iteration, and do not mark results as passed from virtual-device evidence.
+If no suitable commissionee is available, stop validation and record the blocker. Do not mark results as passed without executing the Run.
 
 ## Hardware layout
 
@@ -32,7 +32,7 @@ Formal validation requires:
 | Role | Requirement |
 | --- | --- |
 | Controller | An Android phone or physical iPhone running `device_test_app` |
-| Commissionee | A qualified real Matter On/Off device |
+| Commissionee | A Matter On/Off device |
 | Network | A non-isolated trusted Wi-Fi network for provisioning and CASE/control |
 
 The controller must be able to reach the target Wi-Fi network. The commissionee may be discovered over BLE before Wi-Fi provisioning or over Wi-Fi/IP before commissioning. Disable VPNs and private DNS behavior that could block local Matter discovery. Use a temporary test network rather than personal or production credentials whenever possible.
@@ -54,7 +54,7 @@ Use `device_test_app/` as the primary validation surface. A manual interim repor
 
 For each controller platform that the change requires:
 
-1. Restore the real Matter commissionee to factory state.
+1. Restore the Matter commissionee to factory state.
 2. Open the commissioning window.
 3. Restart both devices and confirm Bluetooth, camera, local-network, and commissioning prerequisites are ready.
 4. Provide the target Wi-Fi SSID and password. An empty password is valid only for an open network.
@@ -72,7 +72,7 @@ The user does not certify controller cleanup or secret purge. If automatic clean
 | Priority | Test ID | Requirement |
 | --- | --- | --- |
 | P0 | `build_install` | Android APK or signed iOS app installs and launches |
-| P0 | `commissioning_discovery` | Concurrent BLE and Wi-Fi/IP discovery identifies the selected real commissionee and selects the first matching transport |
+| P0 | `commissioning_discovery` | Concurrent BLE and Wi-Fi/IP discovery identifies the selected commissionee and selects the first matching transport |
 | P0 | `commissioning` | PASE/commissioning completes on the selected transport with `errorCode == 0` within 120 seconds |
 | P0 | `operational_connect` | CASE connection returns a valid connect context within 30 seconds |
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
@@ -105,7 +105,6 @@ The dedicated device-test app, or an interim manual reporter, must produce both:
 
 A valid report records:
 
-- `commissionee.type: "real"`.
 - Automatically parsed `vendor_id` and `product_id`.
 - The actual commissioning transport: `ble` or `ip`.
 - `network_transport: "wifi"`.
@@ -133,15 +132,15 @@ Device-behavior pull requests must include reports for every affected platform:
 For a stable release, the release-preparation pull request must contain:
 
 - One clean Android P0 report and one clean iOS P0 report for the candidate commit.
-- A qualified real-device schema v3 report for each platform.
+- A schema v3 report for each platform.
 - Sanitized JSON attachments for both reports; screenshots are optional manual evidence.
 - A maintainer confirmation that all required P0 results passed and that P1/P2 results were reviewed.
 
-The stable version tag must not be created when any required P0 result is `Failed` or `Not run`, when the report commit does not match the candidate, when `network_transport` is not `wifi`, when `commissioning_transport` is neither `ble` nor `ip`, or when the commissionee is not real hardware.
+The stable version tag must not be created when any required P0 result is `Failed` or `Not run`, when the report commit does not match the candidate, when `network_transport` is not `wifi`, when `commissioning_transport` is neither `ble` nor `ip`, or when the required transport fields are invalid.
 
 ## Known limits
 
 - The repository has no supported public `unPairDevice` method; only the existing UI delete path can be evaluated.
 - iOS simulator results are not valid evidence.
-- Real-device CI and fully automated iOS external-app control remain outside formal acceptance.
+- Hardware-in-the-loop CI and fully automated iOS external-app control remain outside formal acceptance.
 - The device-test workflow has no Thread commissioning path.

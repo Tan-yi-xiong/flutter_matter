@@ -4,7 +4,7 @@ The dedicated device-test app lives in [`device_test_app/`](../device_test_app/)
 
 The app emits versioned evidence instead of relying on ad-hoc command transcripts. Formal evidence must use the `full` profile and the schema v3 report contract in [device-test-report.md](device-test-report.md). Physical-device validation has not yet been completed; this repository records that status only after a qualified run and reviewer-safe report are available.
 
-Every device Run uses real Matter hardware. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP, selects the first matching transport, and records the actual transport in the report. A commissioning failure is preserved and never retried through the other transport in the same Run.
+Every device Run uses a Matter commissionee. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP, selects the first matching transport, and records the actual transport in the report. Device provenance is not part of the report contract. A commissioning failure is preserved and never retried through the other transport in the same Run.
 
 ## Setup contract
 
@@ -62,14 +62,14 @@ The app separates pure domain logic from hardware and platform adapters:
 
 Widgets never call hardware APIs directly. The UI controller and Agent observe the same `RunCoordinator` state and event streams, while infrastructure adapters implement the hardware-facing application ports.
 
-The app is designed for Android and physical iOS controllers. Every device run requires a qualified real Matter commissionee. Virtual Matter commissionees are not supported and cannot produce evidence.
+The app is designed for Android and physical iOS controllers. Every device run uses a Matter commissionee, and the report contract does not record device provenance.
 
 ## Controller and commissionee roles
 
 - **Controller:** the Android or physical iOS phone running `device_test_app`. It creates controller identity, performs concurrent discovery, commissions through the selected transport, provisions Wi-Fi credentials, connects over CASE, invokes and subscribes to OnOff, and manages fabric state.
-- **Commissionee:** a qualified real Matter On/Off device that supports BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
+- **Commissionee:** a Matter On/Off device that supports BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
 
-When multiple phones are connected, the Agent must ask the user to choose the controller. The Agent never selects a phone by connection order, platform, or previous use. A device Run must not ask the Agent to select or operate a virtual commissionee.
+When multiple phones are connected, the Agent must ask the user to choose the controller. The Agent never selects a phone by connection order, platform, or previous use. A device Run uses the commissionee selected by the operator.
 
 ## Persistence and secrets
 
@@ -86,7 +86,7 @@ runs/<run_id>/
 
 Setup codes, onboarding payloads, Wi-Fi credentials, controller private key material, and certificates are kept in platform secure storage, not in `run_state.json` or report files. Run secrets are automatically purged before a new Run and can also be purged after evidence collection. The separate Wi-Fi credential cache is removed only by the explicit clear action. iOS Keychain entries can survive app uninstallation, so uninstall is not a substitute for purge.
 
-The app does not write screenshots, raw logs, or event transcripts into formal reports. Real-device CI is intentionally out of scope: attach the full-run JSON and Markdown report to the PR manually and require the report plugin commit to match the PR head.
+The app does not write screenshots, raw logs, or event transcripts into formal reports. Hardware-in-the-loop CI is intentionally out of scope: attach the full-run JSON and Markdown report to the PR manually and require the report plugin commit to match the PR head.
 
 ## Platform requirements
 
@@ -141,8 +141,8 @@ The wrapper requires a clean tracked worktree and injects `PLUGIN_COMMIT` and `T
 ## Troubleshooting
 
 - **Bridge does not connect:** confirm `serve` is running, the app has the printed WebSocket endpoint, the Mac and phone are on the same trusted LAN, and the network permits the connection.
-- **No commissionee discovered:** confirm the real commissionee supports BLE or Wi-Fi/IP commissionable discovery and that its commissioning window is open.
+- **No commissionee discovered:** confirm the commissionee supports BLE or Wi-Fi/IP commissionable discovery and that its commissioning window is open.
 - **Commissioning fails:** verify the setup code and network credentials without recording them, then stop and preserve the failed result rather than retrying a P0 or switching transport in the same Run.
-- **Report unavailable:** ensure the run was a completed `full` run with real hardware, a valid actual transport, and all required P0 tests have a valid result.
+- **Report unavailable:** ensure the run was a completed `full` run with a valid actual transport and all required P0 tests have a valid result.
 - **Wrong commit in report:** rebuild from the PR head with the wrapper, install the new app, and start a fresh Run.
 - **Secrets or device identifiers are visible:** do not attach the report. Purge the invalid copy, correct the source, regenerate from app state, and re-review the output.
