@@ -14,6 +14,8 @@ void main() {
       final harness = TestContextHarness(
         testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
+        execution: makeExecution()
+          ..commissioningTransport = CommissioningTransport.ip,
       );
       final context = harness.build();
 
@@ -36,6 +38,8 @@ void main() {
       final context = TestContextHarness(
         testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
+        execution: makeExecution()
+          ..commissioningTransport = CommissioningTransport.ip,
       ).build();
 
       final outcome = await const InvalidSetupPasscodeCase().execute(context);
@@ -50,6 +54,8 @@ void main() {
       final context = TestContextHarness(
         testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
+        execution: makeExecution()
+          ..commissioningTransport = CommissioningTransport.ip,
       ).build();
 
       final outcome = await const InvalidSetupPasscodeCase().execute(context);
@@ -77,6 +83,8 @@ void main() {
       final context = TestContextHarness(
         testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
+        execution: makeExecution()
+          ..commissioningTransport = CommissioningTransport.ip,
         operatorHandler: (_) {
           promptCount++;
           return promptCount == 1
@@ -98,6 +106,8 @@ void main() {
       final harness = TestContextHarness(
         testId: DeviceTestId.invalidWifiPassword,
         ports: hardware.ports,
+        execution: makeExecution()
+          ..commissioningTransport = CommissioningTransport.ip,
       );
       final context = harness.build();
 
@@ -120,6 +130,8 @@ void main() {
       final context = TestContextHarness(
         testId: DeviceTestId.invalidWifiPassword,
         ports: hardware.ports,
+        execution: makeExecution()
+          ..commissioningTransport = CommissioningTransport.ip,
       ).build();
 
       final outcome = await const InvalidWifiPasswordCase().execute(context);
@@ -131,11 +143,9 @@ void main() {
     test('returns not_run for a Thread commissionee', () async {
       final hardware = FakeHardware();
       const threadCommissionee = CommissioneeMetadata(
-        type: CommissioneeType.real,
-        model: 'Thread device',
-        firmware: '1.0.0',
+        vendorId: 4660,
+        productId: 258,
         networkTransport: NetworkTransport.thread,
-        stateChangeMethod: StateChangeMethod.physicalControl,
       );
       final context = TestContextHarness(
         testId: DeviceTestId.invalidWifiPassword,

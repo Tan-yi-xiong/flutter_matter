@@ -28,7 +28,10 @@ void main() {
       expect(payload.status, AgentRunStatus.running);
       expect(payload.mode, AgentRunMode.full);
       expect(payload.runId, 'run-fixture');
-      expect(payload.currentTestId, DeviceTestId.ipDiscovery.wireName);
+      expect(
+        payload.currentTestId,
+        DeviceTestId.commissioningDiscovery.wireName,
+      );
       expect(payload.details['phase'], RunPhase.testing.wireName);
       expect(payload.details['screen'], DeviceTestScreen.runner.name);
     });

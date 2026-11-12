@@ -201,13 +201,13 @@ void main() {
           clock: FakeClock(),
         );
         final failing = ScriptedCase(
-          DeviceTestId.ipCommissioning,
+          DeviceTestId.commissioning,
           (_) => TestCaseOutcome.failed('commissioning failed'),
         );
         final coordinator = RunCoordinator(
           ports: ports,
           registry: scriptedRegistry(
-            overrides: {DeviceTestId.ipCommissioning: failing},
+            overrides: {DeviceTestId.commissioning: failing},
           ),
           timeouts: fastTimeouts,
         );
@@ -220,7 +220,7 @@ void main() {
         expect(snapshot.status, RunnerStatus.failed);
         expect(failing.calls, 1);
         expect(
-          snapshot.session!.results[DeviceTestId.ipCommissioning]!.status,
+          snapshot.session!.results[DeviceTestId.commissioning]!.status,
           DeviceTestStatus.failed,
         );
         expect(
@@ -248,13 +248,13 @@ void main() {
         clock: FakeClock(),
       );
       final skipped = ScriptedCase(
-        DeviceTestId.ipDiscovery,
+        DeviceTestId.commissioningDiscovery,
         (_) => TestCaseOutcome.notRun('no BLE target'),
       );
       final coordinator = RunCoordinator(
         ports: ports,
         registry: scriptedRegistry(
-          overrides: {DeviceTestId.ipDiscovery: skipped},
+          overrides: {DeviceTestId.commissioningDiscovery: skipped},
         ),
         timeouts: fastTimeouts,
       );
@@ -264,12 +264,12 @@ void main() {
 
       expect(snapshot.status, RunnerStatus.notRun);
       expect(
-        snapshot.session!.results[DeviceTestId.ipCommissioning]!.status,
+        snapshot.session!.results[DeviceTestId.commissioning]!.status,
         DeviceTestStatus.notRun,
       );
       expect(
-        snapshot.session!.results[DeviceTestId.ipCommissioning]!.notes,
-        contains('ip_discovery'),
+        snapshot.session!.results[DeviceTestId.commissioning]!.notes,
+        contains('commissioning_discovery'),
       );
     });
 
@@ -416,8 +416,8 @@ void main() {
         ),
         timeouts: const TestTimeouts(
           buildInstall: Duration(milliseconds: 100),
-          ipDiscovery: Duration(milliseconds: 100),
-          ipCommissioning: Duration(milliseconds: 100),
+          commissioningDiscovery: Duration(milliseconds: 100),
+          commissioning: Duration(milliseconds: 100),
           operationalConnect: Duration(milliseconds: 100),
           onOffInvoke: Duration(milliseconds: 10),
           onOffSubscription: Duration(milliseconds: 100),
@@ -510,18 +510,20 @@ void main() {
           clock: FakeClock(),
         );
         final discovery = ScriptedCase(
-          DeviceTestId.ipDiscovery,
+          DeviceTestId.commissioningDiscovery,
           (_) => const TestCaseOutcome.passed(),
         );
         final coordinator = RunCoordinator(
           ports: ports,
           registry: scriptedRegistry(
-            overrides: {DeviceTestId.ipDiscovery: discovery},
+            overrides: {DeviceTestId.commissioningDiscovery: discovery},
           ),
           timeouts: fastTimeouts,
         );
         addTearDown(coordinator.dispose);
-        final session = sessionWithRunningTest(DeviceTestId.ipDiscovery);
+        final session = sessionWithRunningTest(
+          DeviceTestId.commissioningDiscovery,
+        );
         persistence.persisted = persistedStateFor(session: session);
 
         final snapshot = await coordinator.resume();
@@ -529,7 +531,10 @@ void main() {
         expect(snapshot, isNotNull);
         expect(discovery.calls, 1);
         expect(
-          snapshot!.session!.results[DeviceTestId.ipDiscovery]!.status,
+          snapshot!
+              .session!
+              .results[DeviceTestId.commissioningDiscovery]!
+              .status,
           DeviceTestStatus.passed,
         );
       },

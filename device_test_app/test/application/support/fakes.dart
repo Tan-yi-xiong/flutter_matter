@@ -82,30 +82,45 @@ class FakeOperatorPromptPort implements OperatorPromptPort {
   }
 }
 
-class FakeBleDiscoveryPort implements BleDiscoveryPort {
-  FakeBleDiscoveryPort({BleCommissionee? commissionee, this.handler})
-    : commissionee =
-          commissionee ??
-          const BleCommissionee(
-            opaqueId: 'commissionee-opaque',
-            displayName: 'Test commissionee',
-          );
+class FakeCommissioningDiscoveryPort implements CommissioningDiscoveryPort {
+  FakeCommissioningDiscoveryPort({
+    CommissioningTransport transport = CommissioningTransport.ip,
+    BleCommissionee? bleTarget,
+    this.failureCode,
+    this.handler,
+  }) : result = CommissioningDiscoveryResult(
+         transport: transport,
+         bleTarget: transport == CommissioningTransport.ble
+             ? bleTarget ??
+                   const BleCommissionee(
+                     opaqueId: 'commissionee-opaque',
+                     displayName: 'Test commissionee',
+                   )
+             : null,
+       );
 
-  BleCommissionee? commissionee;
-  Future<BleDiscoveryResult> Function(BleDiscoveryRequest request)? handler;
-  bool enabled = true;
-  final List<BleDiscoveryRequest> requests = <BleDiscoveryRequest>[];
+  CommissioningDiscoveryResult result;
+  CommissioningDiscoveryFailureCode? failureCode;
+  Future<CommissioningDiscoveryResult> Function(
+    CommissioningDiscoveryRequest request,
+  )?
+  handler;
+  final List<CommissioningDiscoveryRequest> requests =
+      <CommissioningDiscoveryRequest>[];
 
   @override
-  Future<BleDiscoveryResult> discover(BleDiscoveryRequest request) async {
+  Future<CommissioningDiscoveryResult> discover(
+    CommissioningDiscoveryRequest request,
+  ) async {
     requests.add(request);
     if (handler != null) {
       return handler!(request);
     }
-    if (!enabled) {
-      throw BleDiscoveryException(BleDiscoveryFailureCode.bluetoothUnavailable);
+    final code = failureCode;
+    if (code != null) {
+      throw CommissioningDiscoveryException(code);
     }
-    return BleDiscoveryResult(candidateCount: 1, target: commissionee);
+    return result;
   }
 }
 
@@ -418,7 +433,11 @@ class RecordingHooksPort extends RunnerHooksPort {
 }
 
 class FakeHardware {
-  final FakeBleDiscoveryPort discovery = FakeBleDiscoveryPort();
+  FakeHardware({FakeCommissioningDiscoveryPort? commissioningDiscovery})
+    : commissioningDiscovery =
+          commissioningDiscovery ?? FakeCommissioningDiscoveryPort();
+
+  final FakeCommissioningDiscoveryPort commissioningDiscovery;
   final FakeCommissioningPort commissioning = FakeCommissioningPort();
   final FakeOperationalConnectionPort operational =
       FakeOperationalConnectionPort();
@@ -428,7 +447,7 @@ class FakeHardware {
   final FakeControllerIdentityPort identity = FakeControllerIdentityPort();
 
   TestPorts get ports => TestPorts(
-    bleDiscovery: discovery,
+    commissioningDiscovery: commissioningDiscovery,
     commissioning: commissioning,
     operationalConnection: operational,
     onOff: onOff,
@@ -464,14 +483,12 @@ ProvisioningSecrets makeSecrets({ProvisioningNetworkSecret? network}) =>
       network:
           network ??
           const WifiProvisioningSecret(ssid: 'matter-lab', password: 'correct'),
-      commissioningTransport: CommissioningTransport.ip,
-      supportsOnNetworkDiscovery: true,
     );
 
 const TestTimeouts fastTimeouts = TestTimeouts(
   buildInstall: Duration(milliseconds: 100),
-  ipDiscovery: Duration(milliseconds: 100),
-  ipCommissioning: Duration(milliseconds: 100),
+  commissioningDiscovery: Duration(milliseconds: 100),
+  commissioning: Duration(milliseconds: 100),
   operationalConnect: Duration(milliseconds: 100),
   onOffInvoke: Duration(milliseconds: 100),
   onOffSubscription: Duration(milliseconds: 100),
@@ -495,12 +512,9 @@ RunSession makeSession({
     appBuild: '1.0.0+1',
   );
   const commissioneeMetadata = CommissioneeMetadata(
-    type: CommissioneeType.real,
-    model: 'Matter test device',
-    firmware: '1.0.0',
-    commissioningTransport: CommissioningTransport.ip,
+    vendorId: 4660,
+    productId: 258,
     networkTransport: NetworkTransport.wifi,
-    stateChangeMethod: StateChangeMethod.commissioneeUi,
   );
   final now = testNow;
   return RunSession.start(
