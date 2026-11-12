@@ -170,7 +170,7 @@ void main() {
     final json = _clone(buildFixtureReport().toJson());
     final tests = json['tests']! as Map<String, dynamic>;
     final commissioning =
-        tests[DeviceTestId.ipCommissioning.wireName]! as Map<String, dynamic>;
+        tests[DeviceTestId.commissioning.wireName]! as Map<String, dynamic>;
     commissioning['notes'] = 'Used setup code: 12345678901 for the retry.';
 
     final result = validator.validateMap(json);

@@ -76,7 +76,7 @@ void main() {
         resumed.results[DeviceTestId.buildInstall]?.status,
         DeviceTestStatus.passed,
       );
-      expect(resumed.nextActionableTestId, DeviceTestId.ipDiscovery);
+      expect(resumed.nextActionableTestId, DeviceTestId.commissioningDiscovery);
       expect(resumed.progress, closeTo(1 / 12, 0.0001));
     });
 

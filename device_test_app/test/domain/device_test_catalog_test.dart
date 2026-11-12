@@ -6,8 +6,8 @@ void main() {
     test('keeps the contract order and priorities', () {
       expect(DeviceTestCatalog.all.map((testId) => testId.wireName), <String>[
         'build_install',
-        'ip_discovery',
-        'ip_commissioning',
+        'commissioning_discovery',
+        'commissioning',
         'operational_connect',
         'onoff_invoke',
         'onoff_subscription',
@@ -40,8 +40,8 @@ void main() {
     test('quick is the five-step minimum operational path', () {
       expect(TestProfile.quick.testIds, <DeviceTestId>[
         DeviceTestId.buildInstall,
-        DeviceTestId.ipDiscovery,
-        DeviceTestId.ipCommissioning,
+        DeviceTestId.commissioningDiscovery,
+        DeviceTestId.commissioning,
         DeviceTestId.operationalConnect,
         DeviceTestId.onoffInvoke,
       ]);

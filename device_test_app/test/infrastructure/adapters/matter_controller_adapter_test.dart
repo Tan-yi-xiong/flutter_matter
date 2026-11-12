@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_matter_device_test_app/src/application/ports.dart';
 import 'package:flutter_matter_device_test_app/src/domain/domain.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/adapters/adapters.dart';
+import 'package:flutter_matter_device_test_app/src/infrastructure/ble/matter_ble.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/matter/matter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,15 +12,21 @@ import 'support/fakes.dart';
 void main() {
   late FakeRuntimeProvider runtimeProvider;
   late FakeOnboardingPayloadResolver payloadResolver;
+  late FakeMatterBleScanner bleScanner;
+  late FakeMatterMdnsScanner mdnsScanner;
   late MatterControllerAdapter adapter;
 
   setUp(() {
     runtimeProvider = FakeRuntimeProvider();
     payloadResolver = FakeOnboardingPayloadResolver();
+    bleScanner = FakeMatterBleScanner();
+    mdnsScanner = FakeMatterMdnsScanner();
     adapter = MatterControllerAdapter(
       runtimeProvider: runtimeProvider,
       payloadResolver: payloadResolver,
       platform: ControllerPlatform.android,
+      bleScanner: bleScanner,
+      mdnsScanner: mdnsScanner,
     );
   });
 
@@ -84,6 +91,82 @@ void main() {
       },
     );
 
+    test('selects BLE when its discovery result arrives first', () async {
+      mdnsScanner.matched = false;
+
+      final discovery = await adapter.discover(
+        const CommissioningDiscoveryRequest(
+          onboardingPayload: 'MT:PAYLOAD',
+          timeout: Duration(seconds: 1),
+        ),
+      );
+
+      expect(discovery.transport, CommissioningTransport.ble);
+      expect(discovery.bleTarget, isNotNull);
+      expect(bleScanner.requests, hasLength(1));
+
+      final identity = await _identity(adapter);
+      await adapter.commission(
+        CommissioningRequest(
+          target: discovery.bleTarget,
+          identity: identity,
+          targetNodeId: 42,
+          onboardingPayload: 'MT:PAYLOAD',
+          setupPinCode: 20202021,
+          network: const WifiProvisioningSecret(
+            ssid: 'Lab Wi-Fi',
+            password: 'secret',
+          ),
+          commissioningTransport: discovery.transport,
+          timeout: const Duration(seconds: 3),
+        ),
+      );
+
+      final request = runtimeProvider
+          .controllerFor(ControllerIdentityPurpose.main)
+          .commissionRequests
+          .single;
+      expect(request.commissioningTransport, MatterCommissioningTransport.ble);
+      expect(request.discoveredBleDevice, bleScanner.discovered);
+    });
+
+    test('selects IP when BLE discovery fails', () async {
+      bleScanner.error = MatterBleException(
+        MatterBleFailureCode.adapterUnavailable,
+        'Bluetooth is unavailable',
+      );
+      mdnsScanner.matched = true;
+
+      final discovery = await adapter.discover(
+        const CommissioningDiscoveryRequest(
+          onboardingPayload: 'MT:PAYLOAD',
+          timeout: Duration(seconds: 1),
+        ),
+      );
+
+      expect(discovery.transport, CommissioningTransport.ip);
+      expect(discovery.bleTarget, isNull);
+      expect(mdnsScanner.requests, hasLength(1));
+    });
+
+    test('fails discovery when BLE and IP both fail', () async {
+      bleScanner.error = MatterBleException(
+        MatterBleFailureCode.adapterUnavailable,
+        'Bluetooth is unavailable',
+      );
+      mdnsScanner.matched = false;
+
+      await expectLater(
+        adapter.discover(
+          const CommissioningDiscoveryRequest(
+            onboardingPayload: 'MT:PAYLOAD',
+            timeout: Duration(seconds: 1),
+          ),
+        ),
+        throwsA(isA<CommissioningDiscoveryException>()),
+      );
+    });
+
     test(
       'maps Wi-Fi commissioning request to the Matter service request',
       () async {
@@ -102,6 +185,7 @@ void main() {
               ssid: 'Lab Wi-Fi',
               password: 'secret',
             ),
+            commissioningTransport: CommissioningTransport.ip,
             timeout: const Duration(seconds: 3),
           ),
         );
@@ -156,6 +240,7 @@ void main() {
               ssid: 'Lab Wi-Fi',
               password: 'secret',
             ),
+            commissioningTransport: CommissioningTransport.ip,
             timeout: const Duration(seconds: 3),
           ),
         ),

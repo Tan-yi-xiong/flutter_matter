@@ -44,6 +44,13 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
       return prepareOutcome;
     }
 
+    final transport = context.execution.commissioningTransport;
+    if (transport == null) {
+      return TestCaseOutcome.notRun(
+        'Commissioning discovery did not select a transport.',
+      );
+    }
+
     TestCaseOutcome diagnosticOutcome;
     try {
       final identityRequest = ControllerIdentityRequest(
@@ -59,6 +66,7 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
         context,
         identity: identity,
         secrets: secrets,
+        commissioningTransport: transport,
         timeout: context.timeoutFor(id),
         setupPinCode: secrets.invalidSetupPinCode,
       );

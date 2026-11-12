@@ -1,17 +1,45 @@
 import '../domain/domain.dart';
 import '../presentation/presentation.dart';
 
-/// Parses bridge command arguments into the same setup request used by the UI.
+/// Parses bridge command arguments into the same minimal setup request used by
+/// the UI.
 ///
 /// Argument values, especially setup codes and network credentials, are never
 /// included in thrown messages. Validation errors contain field names only.
 class AgentRunRequestParser {
   const AgentRunRequestParser();
 
+  static const Set<String> retiredFields = <String>{
+    'commissionee_type',
+    'commissioning_transport',
+    'network_transport',
+    'model',
+    'firmware',
+    'state_change_method',
+    'state_change_notes',
+    'thread_operational_dataset',
+    'controller_clean',
+    'secrets_purged',
+    'virtual_device',
+    'fallback_transport',
+  };
+
   DeviceTestSetupRequest parse({
     required Map<String, Object?> arguments,
     required DeviceTestUiState state,
   }) {
+    final retired =
+        arguments.keys.where(retiredFields.contains).toList(growable: false)
+          ..sort();
+    if (retired.isNotEmpty) {
+      throw AgentRunRequestException(
+        'The Run request contains retired fields: ${retired.join(', ')}.',
+        issues: <String, String>{
+          for (final field in retired) field: 'This field is not supported.',
+        },
+      );
+    }
+
     final mode = _requiredString(arguments, 'mode');
     final profile = switch (mode) {
       'quick' => TestProfile.quick,
@@ -21,90 +49,49 @@ class AgentRunRequestParser {
         issues: const <String, String>{'mode': 'Expected quick or full.'},
       ),
     };
-    final commissioneeType = _enumValue(
-      arguments,
-      'commissionee_type',
-      CommissioneeType.parse,
-    );
-    if (commissioneeType != CommissioneeType.real) {
-      throw const AgentRunRequestException(
-        'commissionee_type must be real.',
-        issues: <String, String>{
-          'commissionee_type':
-              'Device validation requires real Matter hardware.',
-        },
-      );
-    }
-    final commissioningTransport = _enumValueOrDefault(
-      arguments,
-      'commissioning_transport',
-      CommissioningTransport.parse,
-      defaultValue: CommissioningTransport.ip.wireName,
-    );
-    if (commissioningTransport != CommissioningTransport.ip) {
-      throw const AgentRunRequestException(
-        'commissioning_transport must be ip.',
-        issues: <String, String>{
-          'commissioning_transport':
-              'Only Wi-Fi/IP commissioning is supported.',
-        },
-      );
-    }
-    final networkTransport = _enumValue(
-      arguments,
-      'network_transport',
-      NetworkTransport.parse,
-    );
-    if (networkTransport != NetworkTransport.wifi) {
-      throw const AgentRunRequestException(
-        'network_transport must be wifi.',
-        issues: <String, String>{
-          'network_transport': 'Only Wi-Fi/IP commissioning is supported.',
-        },
-      );
-    }
-    final stateChangeMethod = _enumValue(
-      arguments,
-      'state_change_method',
-      StateChangeMethod.parse,
-    );
     final cleanCycle = _requiredMap(arguments, 'clean_cycle');
+    final unexpectedCleanCycleFields =
+        cleanCycle.keys
+            .where((key) => key != 'commissionee_clean')
+            .toList(growable: false)
+          ..sort();
+    if (unexpectedCleanCycleFields.isNotEmpty) {
+      throw AgentRunRequestException(
+        'The Run request contains unsupported clean_cycle fields: '
+        '${unexpectedCleanCycleFields.join(', ')}.',
+        issues: <String, String>{
+          for (final field in unexpectedCleanCycleFields)
+            'clean_cycle.$field': 'This field is not supported.',
+        },
+      );
+    }
+    final commissioneeClean = _requiredBool(
+      cleanCycle,
+      'commissionee_clean',
+      parent: 'clean_cycle',
+    );
+    if (!commissioneeClean) {
+      throw const AgentRunRequestException(
+        'The commissionee must be factory-reset and in a commissioning window.',
+        issues: <String, String>{
+          'clean_cycle.commissionee_clean':
+              'Confirm the commissionee is ready for commissioning.',
+        },
+      );
+    }
+
     final controller = state.controllerInfo;
     final draft = DeviceTestSetupDraft(
-      commissioneeType: commissioneeType,
-      model: _requiredString(arguments, 'model'),
-      firmware: _requiredString(arguments, 'firmware'),
-      commissioningTransport: commissioningTransport,
-      networkTransport: networkTransport,
-      stateChangeMethod: stateChangeMethod,
-      stateChangeNotes: _optionalString(arguments, 'state_change_notes') ?? '',
       setupCode: _requiredString(arguments, 'setup_code'),
-      wifiSsid: _optionalString(arguments, 'wifi_ssid') ?? '',
+      wifiSsid: _requiredString(arguments, 'wifi_ssid'),
       wifiPassword: _optionalString(arguments, 'wifi_password') ?? '',
       profile: profile,
-      cleanCycle: CleanCycleConfirmations(
-        controllerClean: _requiredBool(
-          cleanCycle,
-          'controller_clean',
-          parent: 'clean_cycle',
-        ),
-        commissioneeClean: _requiredBool(
-          cleanCycle,
-          'commissionee_clean',
-          parent: 'clean_cycle',
-        ),
-        secretsPurged: _requiredBool(
-          cleanCycle,
-          'secrets_purged',
-          parent: 'clean_cycle',
-        ),
-      ),
+      cleanCycle: const CleanCycleConfirmations(commissioneeClean: true),
     );
     final validation = DeviceTestSetupValidator.validate(
       draft: draft,
       controller: controller,
       preflightChecks: state.preflightChecks,
-      hasStoredSecrets: state.hasStoredSecrets,
     );
     if (!validation.isValid) {
       throw AgentRunRequestException(
@@ -118,17 +105,9 @@ class AgentRunRequestParser {
 
     return DeviceTestSetupRequest(
       controller: controller!,
-      commissioneeType: draft.commissioneeType,
-      model: draft.model,
-      firmware: draft.firmware,
-      commissioningTransport: draft.commissioningTransport,
-      networkTransport: draft.networkTransport,
-      stateChangeMethod: draft.stateChangeMethod,
-      stateChangeNotes: draft.stateChangeNotes,
-      setupCode: draft.setupCode,
-      wifiSsid: draft.wifiSsid,
+      setupCode: draft.setupCode.trim(),
+      wifiSsid: draft.wifiSsid.trim(),
       wifiPassword: draft.wifiPassword,
-      threadOperationalDataset: draft.threadOperationalDataset,
       profile: draft.profile,
       cleanCycle: draft.cleanCycle,
     );
@@ -141,93 +120,61 @@ class AgentRunRequestParser {
     );
   }
 
-  T _enumValue<T>(
-    Map<String, Object?> arguments,
-    String key,
-    T Function(String value) parse,
-  ) {
-    return _parseEnumValue(key, _requiredString(arguments, key), parse);
-  }
-
-  T _enumValueOrDefault<T>(
-    Map<String, Object?> arguments,
-    String key,
-    T Function(String value) parse, {
-    required String defaultValue,
-  }) {
-    return _parseEnumValue(
-      key,
-      _optionalString(arguments, key) ?? defaultValue,
-      parse,
-    );
-  }
-
-  T _parseEnumValue<T>(String key, String value, T Function(String) parse) {
-    try {
-      return parse(value.trim());
-    } on FormatException {
-      throw AgentRunRequestException(
-        '$key has an unsupported value.',
-        issues: <String, String>{key: 'Unsupported value.'},
-      );
-    }
-  }
-
-  String _requiredString(Map<String, Object?> values, String key) {
-    final value = values[key];
+  String _requiredString(Map<String, Object?> arguments, String key) {
+    final value = arguments[key];
     if (value is! String || value.trim().isEmpty) {
       throw AgentRunRequestException(
-        'Missing required string argument: $key.',
-        issues: <String, String>{key: 'Required non-empty string.'},
+        '$key is required.',
+        issues: <String, String>{key: 'A non-empty string is required.'},
       );
     }
-    return value.trim();
+    return value;
   }
 
-  String? _optionalString(Map<String, Object?> values, String key) {
-    final value = values[key];
+  String? _optionalString(Map<String, Object?> arguments, String key) {
+    final value = arguments[key];
     if (value == null) {
       return null;
     }
     if (value is! String) {
       throw AgentRunRequestException(
         '$key must be a string.',
-        issues: <String, String>{key: 'Expected string.'},
+        issues: <String, String>{key: 'Expected a string.'},
+      );
+    }
+    return value;
+  }
+
+  Map<String, Object?> _requiredMap(
+    Map<String, Object?> arguments,
+    String key,
+  ) {
+    final value = arguments[key];
+    if (value is! Map<String, Object?>) {
+      throw AgentRunRequestException(
+        '$key is required.',
+        issues: <String, String>{key: 'An object is required.'},
       );
     }
     return value;
   }
 
   bool _requiredBool(
-    Map<String, Object?> values,
+    Map<String, Object?> arguments,
     String key, {
     required String parent,
   }) {
-    final value = values[key];
+    final value = arguments[key];
     if (value is! bool) {
       throw AgentRunRequestException(
-        '$parent.$key must be a boolean.',
-        issues: <String, String>{'$parent.$key': 'Expected boolean.'},
+        '$parent.$key is required.',
+        issues: <String, String>{'$parent.$key': 'A boolean is required.'},
       );
     }
     return value;
   }
-
-  Map<String, Object?> _requiredMap(Map<String, Object?> values, String key) {
-    final value = values[key];
-    if (value is! Map) {
-      throw AgentRunRequestException(
-        '$key must be an object.',
-        issues: <String, String>{key: 'Expected object.'},
-      );
-    }
-    return <String, Object?>{
-      for (final entry in value.entries) entry.key.toString(): entry.value,
-    };
-  }
 }
 
-/// A safe, structured setup parsing failure for an Agent command result.
 class AgentRunRequestException implements Exception {
   const AgentRunRequestException(this.message, {required this.issues});
 

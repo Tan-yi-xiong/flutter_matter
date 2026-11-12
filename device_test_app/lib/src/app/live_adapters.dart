@@ -7,6 +7,9 @@ import '../infrastructure/platform/build_metadata.dart';
 import '../infrastructure/platform/platform_info_service.dart';
 import '../infrastructure/reporting/report_file_repository.dart';
 import '../infrastructure/storage/provisioning_secret_store.dart';
+import '../infrastructure/storage/run_directory.dart';
+import '../infrastructure/storage/wifi_credential_cache.dart';
+import '../infrastructure/wifi/wifi.dart';
 import '../presentation/ui_models.dart';
 import '../report/report.dart';
 import 'app_ports.dart';
@@ -115,7 +118,7 @@ class LiveDeviceTestRunner implements DeviceTestRunPort {
       coordinator.stop(reason: reason);
 
   @override
-  Future<DeviceTestReportV2?> buildFormalReport({
+  Future<DeviceTestReportV3?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) => coordinator.buildFormalReport(
@@ -129,9 +132,10 @@ class LiveDeviceTestRunner implements DeviceTestRunPort {
 
 /// Adapts the secure provisioning store to the app-facing port.
 class LiveProvisioningSecrets implements ProvisioningSecretsPort {
-  const LiveProvisioningSecrets(this.store);
+  const LiveProvisioningSecrets(this.store, this.runDirectory);
 
   final ProvisioningSecretStore store;
+  final RunDirectory runDirectory;
 
   @override
   Future<void> save(String runId, ProvisioningSecrets secrets) =>
@@ -142,6 +146,82 @@ class LiveProvisioningSecrets implements ProvisioningSecretsPort {
 
   @override
   Future<void> purge(String runId) => store.purge(runId);
+
+  @override
+  Future<void> purgeAll() async {
+    final runIds = await runDirectory.listRunIds();
+    for (final runId in runIds) {
+      await store.purge(runId);
+    }
+  }
+}
+
+/// Combines current-SSID detection with the latest secure Wi-Fi cache.
+class LiveWifiSetup implements WifiSetupPort {
+  const LiveWifiSetup({
+    required WifiSsidReader ssidReader,
+    required WifiCredentialCache cache,
+  }) : _ssidReader = ssidReader,
+       _cache = cache;
+
+  final WifiSsidReader _ssidReader;
+  final WifiCredentialCache _cache;
+
+  @override
+  Future<WifiSetupPrefill> loadPrefill() async {
+    final currentSsid = await _ssidReader.read();
+    if (currentSsid == null) {
+      return const WifiSetupPrefill(manualSsidRequired: true);
+    }
+    final cached = await _cache.load();
+    return WifiSetupPrefill(
+      currentSsid: currentSsid,
+      password: cached?.ssid == currentSsid ? cached!.password : '',
+      manualSsidRequired: false,
+    );
+  }
+
+  @override
+  Future<void> remember({required String ssid, required String password}) {
+    return _cache.save(ssid: ssid, password: password);
+  }
+
+  @override
+  Future<void> clear() => _cache.clear();
+}
+
+/// Resets durable Run state, old provisioning secrets, and controller
+/// identities before a new test Run.
+class LiveRunMaintenance implements DeviceRunMaintenancePort {
+  const LiveRunMaintenance({
+    required ProvisioningSecretsPort secrets,
+    required ControllerIdentityPort controllerIdentities,
+    required RunPersistencePort persistence,
+    required ControllerPlatform platform,
+  }) : _secrets = secrets,
+       _controllerIdentities = controllerIdentities,
+       _persistence = persistence,
+       _platform = platform;
+
+  final ProvisioningSecretsPort _secrets;
+  final ControllerIdentityPort _controllerIdentities;
+  final RunPersistencePort _persistence;
+  final ControllerPlatform _platform;
+
+  @override
+  Future<void> prepareForNewRun() async {
+    await _persistence.clearUnfinished();
+    await _secrets.purgeAll();
+    for (final purpose in ControllerIdentityPurpose.values) {
+      await _controllerIdentities.reset(
+        ControllerIdentityRequest(
+          runId: 'cleanup-${purpose.wireName}',
+          purpose: purpose,
+          platform: _platform,
+        ),
+      );
+    }
+  }
 }
 
 /// Uses the plugin's native onboarding parser.

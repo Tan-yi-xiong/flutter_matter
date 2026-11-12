@@ -27,28 +27,17 @@ class LiveDeviceTestAgentHost implements DeviceTestAgentHost {
     Map<String, Object?> arguments,
   ) async {
     try {
-      if (_controller.state.busy) {
-        throw const DeviceTestAgentHostException(
-          code: 'command_in_progress',
-          message: 'Another application operation is in progress.',
-        );
-      }
       final activeRun = _controller.state.activeRun;
-      if ((activeRun != null && !activeRun.isTerminal) ||
-          (activeRun == null && _controller.state.hasStoredSecrets)) {
+      if (activeRun != null && !activeRun.isTerminal) {
         throw const DeviceTestAgentHostException(
           code: 'run_already_active',
           message: 'An unfinished Run must be resumed or stopped first.',
         );
       }
-      final cleanCycle = arguments['clean_cycle'];
-      final requestsSecretPurge =
-          cleanCycle is Map && cleanCycle['secrets_purged'] == true;
-      if (requestsSecretPurge) {
-        await _controller.purgeSecrets();
-        _throwIfControllerError(
-          code: 'secrets_purge_failed',
-          message: 'Stored provisioning secrets could not be purged.',
+      if (_controller.state.busy) {
+        throw const DeviceTestAgentHostException(
+          code: 'command_in_progress',
+          message: 'Another application operation is in progress.',
         );
       }
 

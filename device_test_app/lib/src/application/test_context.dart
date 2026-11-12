@@ -12,6 +12,7 @@ class RunExecutionContext {
 
   ControllerIdentity? identity;
   int? nodeId;
+  CommissioningTransport? commissioningTransport;
   NetworkTransport? networkTransport;
   BleCommissionee? target;
   OperationalConnectionLease? connection;
@@ -21,6 +22,7 @@ class RunExecutionContext {
     identityOpaqueId: identity?.opaqueId,
     identityPurpose: identity?.purpose,
     nodeId: nodeId,
+    commissioningTransport: commissioningTransport,
     networkTransport: networkTransport,
     lastOnOffState: lastOnOffState,
   );
@@ -30,6 +32,7 @@ class RunExecutionContext {
   ) {
     final execution = RunExecutionContext()
       ..nodeId = snapshot.nodeId
+      ..commissioningTransport = snapshot.commissioningTransport
       ..networkTransport = snapshot.networkTransport
       ..lastOnOffState = snapshot.lastOnOffState;
     final identityOpaqueId = snapshot.identityOpaqueId;

@@ -10,6 +10,12 @@ class FakeDeviceTestUiController extends DeviceTestUiController {
   int purgeCalls = 0;
   int shareJsonCalls = 0;
   int shareMarkdownCalls = 0;
+  int clearWifiCalls = 0;
+  WifiSetupPrefill wifiPrefill = const WifiSetupPrefill(
+    currentSsid: 'matter-test-network',
+    password: 'cached-password',
+    manualSsidRequired: false,
+  );
   String? lastSkipReason;
   String? lastFailReason;
   DeviceTestSetupRequest? submittedRequest;
@@ -42,6 +48,18 @@ class FakeDeviceTestUiController extends DeviceTestUiController {
     submittedRequest = request;
     _state = _copy(screen: DeviceTestScreen.runner);
     notifyListeners();
+  }
+
+  @override
+  Future<WifiSetupPrefill> loadWifiSetupPrefill() async => wifiPrefill;
+
+  @override
+  Future<void> clearWifiCredentials() async {
+    clearWifiCalls++;
+    wifiPrefill = WifiSetupPrefill(
+      currentSsid: wifiPrefill.currentSsid,
+      manualSsidRequired: wifiPrefill.manualSsidRequired,
+    );
   }
 
   @override

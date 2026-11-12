@@ -55,6 +55,57 @@ class FakeProvisioningSecrets implements ProvisioningSecretsPort {
     log.add('secret.save:$runId');
     saved[runId] = secrets;
   }
+
+  @override
+  Future<void> purgeAll() async {
+    log.add('secret.purgeAll');
+    saved.clear();
+  }
+}
+
+class FakeRunMaintenance implements DeviceRunMaintenancePort {
+  int prepareCount = 0;
+  Object? error;
+
+  @override
+  Future<void> prepareForNewRun() async {
+    prepareCount++;
+    if (error != null) {
+      throw error!;
+    }
+  }
+}
+
+class FakeWifiSetup implements WifiSetupPort {
+  WifiSetupPrefill prefill = const WifiSetupPrefill(
+    currentSsid: 'Test Wi-Fi',
+    password: 'cached-secret',
+    manualSsidRequired: false,
+  );
+  int clearCount = 0;
+  String? rememberedSsid;
+  String? rememberedPassword;
+
+  @override
+  Future<WifiSetupPrefill> loadPrefill() async => prefill;
+
+  @override
+  Future<void> remember({
+    required String ssid,
+    required String password,
+  }) async {
+    rememberedSsid = ssid;
+    rememberedPassword = password;
+  }
+
+  @override
+  Future<void> clear() async {
+    clearCount++;
+    prefill = WifiSetupPrefill(
+      currentSsid: prefill.currentSsid,
+      manualSsidRequired: prefill.manualSsidRequired,
+    );
+  }
 }
 
 class FakeOnboardingPayloadReader implements OnboardingPayloadReader {
@@ -130,7 +181,7 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
   RunnerStateSnapshot? _snapshot;
   PersistedRunState? unfinished;
   RunnerStateSnapshot? resumeSnapshot;
-  DeviceTestReportV2? reportToBuild;
+  DeviceTestReportV3? reportToBuild;
   int buildReportCount = 0;
   int resumeCount = 0;
   RunStartRequest? startRequest;
@@ -193,7 +244,7 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
   Future<void> stop({String reason = 'Stopped by operator.'}) async {}
 
   @override
-  Future<DeviceTestReportV2?> buildFormalReport({
+  Future<DeviceTestReportV3?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) async {
@@ -243,9 +294,10 @@ DeviceTestAppBootstrap bootstrap({
 
 DeviceTestSetupRequest setupRequest({
   TestProfile profile = TestProfile.full,
-  NetworkTransport networkTransport = NetworkTransport.wifi,
-  CommissioneeType commissioneeType = CommissioneeType.real,
-  CommissioningTransport commissioningTransport = CommissioningTransport.ip,
+  String setupCode = 'MT:TEST-SETUP-CODE',
+  String wifiSsid = 'Test Wi-Fi',
+  String wifiPassword = 'secret',
+  bool commissioneeClean = true,
 }) {
   return DeviceTestSetupRequest(
     controller: const ControllerInfoViewModel(
@@ -254,24 +306,11 @@ DeviceTestSetupRequest setupRequest({
       osVersion: 'Android 16',
       appBuild: '1.0.0 (1)',
     ),
-    commissioneeType: commissioneeType,
-    commissioningTransport: commissioningTransport,
-    model: 'Matter test plug',
-    firmware: '1.2.3',
-    networkTransport: networkTransport,
-    stateChangeMethod: StateChangeMethod.physicalControl,
-    setupCode: 'MT:TEST-SETUP-CODE',
-    wifiSsid: networkTransport == NetworkTransport.wifi ? 'Test Wi-Fi' : '',
-    wifiPassword: networkTransport == NetworkTransport.wifi ? 'secret' : '',
-    threadOperationalDataset: networkTransport == NetworkTransport.thread
-        ? '0E080000000000010000'
-        : '',
+    setupCode: setupCode,
+    wifiSsid: wifiSsid,
+    wifiPassword: wifiPassword,
     profile: profile,
-    cleanCycle: const CleanCycleConfirmations(
-      controllerClean: true,
-      commissioneeClean: true,
-      secretsPurged: true,
-    ),
+    cleanCycle: CleanCycleConfirmations(commissioneeClean: commissioneeClean),
   );
 }
 
@@ -306,11 +345,10 @@ RunSession terminalSession({
       appBuild: '1.0.0 (1)',
     ),
     commissionee: const CommissioneeMetadata(
-      type: CommissioneeType.real,
-      model: 'Matter test plug',
-      firmware: '1.2.3',
+      vendorId: 1,
+      productId: 2,
+      commissioningTransport: CommissioningTransport.ip,
       networkTransport: NetworkTransport.wifi,
-      stateChangeMethod: StateChangeMethod.physicalControl,
     ),
     results: results,
   );
@@ -338,6 +376,8 @@ class ControllerHarness {
     required this.prompts,
     required this.bootstrapPort,
     required this.secrets,
+    required this.maintenance,
+    required this.wifiSetup,
     required this.onboarding,
     required this.artifacts,
     required this.sharing,
@@ -348,6 +388,8 @@ class ControllerHarness {
   final OperatorPromptBroker prompts;
   final FakeDeviceTestBootstrap bootstrapPort;
   final FakeProvisioningSecrets secrets;
+  final FakeRunMaintenance maintenance;
+  final FakeWifiSetup wifiSetup;
   final FakeOnboardingPayloadReader onboarding;
   final FakeReportArtifacts artifacts;
   final FakeReportSharing sharing;
@@ -360,10 +402,14 @@ ControllerHarness buildHarness({
   DeviceTestAppBootstrap? appBootstrap,
   FakeDeviceTestRunner? runner,
   FakeProvisioningSecrets? secrets,
+  FakeRunMaintenance? maintenance,
+  FakeWifiSetup? wifiSetup,
 }) {
   final fakeRunner = runner ?? FakeDeviceTestRunner();
   final fakeBootstrap = FakeDeviceTestBootstrap(appBootstrap ?? bootstrap());
   final fakeSecrets = secrets ?? FakeProvisioningSecrets();
+  final fakeMaintenance = maintenance ?? FakeRunMaintenance();
+  final fakeWifiSetup = wifiSetup ?? FakeWifiSetup();
   final fakeOnboarding = FakeOnboardingPayloadReader();
   final fakeArtifacts = FakeReportArtifacts(schemaJson);
   final fakeSharing = FakeReportSharing();
@@ -373,6 +419,8 @@ ControllerHarness buildHarness({
     prompts: prompts,
     bootstrap: fakeBootstrap,
     secrets: fakeSecrets,
+    maintenance: fakeMaintenance,
+    wifiSetup: fakeWifiSetup,
     onboardingPayloads: fakeOnboarding,
     reportArtifacts: fakeArtifacts,
     reportSharing: fakeSharing,
@@ -386,6 +434,8 @@ ControllerHarness buildHarness({
     prompts: prompts,
     bootstrapPort: fakeBootstrap,
     secrets: fakeSecrets,
+    maintenance: fakeMaintenance,
+    wifiSetup: fakeWifiSetup,
     onboarding: fakeOnboarding,
     artifacts: fakeArtifacts,
     sharing: fakeSharing,

@@ -90,6 +90,10 @@ class MatterBleAdvertisement {
   }
 }
 
+abstract interface class MatterBleScannerApi {
+  Future<MatterBleDiscoveredDevice> scan(MatterBleDiscoveryRequest request);
+}
+
 class MatterBleDiscoveredDevice {
   MatterBleDiscoveredDevice({
     required this.advertisement,

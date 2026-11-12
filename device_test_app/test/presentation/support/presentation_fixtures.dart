@@ -41,7 +41,7 @@ ActiveRunViewModel activeRun({
   TestProfile profile = TestProfile.full,
   RunPhase phase = RunPhase.testing,
   Map<DeviceTestId, DeviceTestStatus> statuses = const {},
-  DeviceTestId? currentTestId = DeviceTestId.ipDiscovery,
+  DeviceTestId? currentTestId = DeviceTestId.commissioningDiscovery,
   String? currentInstruction = 'Confirm the commissionee is advertising.',
   bool awaitingAppRestart = false,
 }) {

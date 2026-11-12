@@ -18,9 +18,6 @@ abstract final class DeviceTestUiKeys {
   static const confirmPurgeSecrets = ValueKey<String>(
     'device-test-confirm-purge-secrets',
   );
-  static const setupPurgeSecrets = ValueKey<String>(
-    'device-test-setup-purge-secrets',
-  );
   static const startRun = ValueKey<String>('device-test-start-run');
   static const controllerInfo = ValueKey<String>('device-test-controller-info');
   static const preflightList = ValueKey<String>('device-test-preflight-list');
@@ -28,23 +25,24 @@ abstract final class DeviceTestUiKeys {
     'device-test-setup-validation-summary',
   );
 
-  static const modelField = ValueKey<String>('device-test-commissionee-model');
-  static const firmwareField = ValueKey<String>(
-    'device-test-commissionee-firmware',
-  );
-  static const stateChangeNotes = ValueKey<String>(
-    'device-test-state-change-notes',
-  );
   static const setupCode = ValueKey<String>('device-test-setup-code');
   static const wifiSsid = ValueKey<String>('device-test-wifi-ssid');
-  static const wifiPassword = ValueKey<String>('device-test-wifi-password');
-  static const controllerClean = ValueKey<String>(
-    'device-test-clean-controller',
+  static const wifiSsidDisplay = ValueKey<String>(
+    'device-test-wifi-ssid-display',
   );
+  static const wifiSsidManual = ValueKey<String>(
+    'device-test-wifi-ssid-manual',
+  );
+  static const wifiSsidChange = ValueKey<String>(
+    'device-test-wifi-ssid-change',
+  );
+  static const wifiClearCredentials = ValueKey<String>(
+    'device-test-wifi-clear-credentials',
+  );
+  static const wifiPassword = ValueKey<String>('device-test-wifi-password');
   static const commissioneeClean = ValueKey<String>(
     'device-test-clean-commissionee',
   );
-  static const secretsPurged = ValueKey<String>('device-test-secrets-purged');
   static const quickProfile = ValueKey<String>('device-test-profile-quick');
   static const fullProfile = ValueKey<String>('device-test-profile-full');
 
@@ -99,7 +97,4 @@ abstract final class DeviceTestUiKeys {
 
   static ValueKey<String> resultsRow(DeviceTestId testId) =>
       ValueKey<String>('device-test-results-row-${testId.wireName}');
-
-  static ValueKey<String> stateChangeChoice(StateChangeMethod method) =>
-      ValueKey<String>('device-test-state-change-${method.wireName}');
 }

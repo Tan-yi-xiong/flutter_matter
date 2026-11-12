@@ -89,6 +89,7 @@ Future<CommissioningResult> commissionTarget(
   BleCommissionee? target,
   required ControllerIdentity identity,
   required ProvisioningSecrets secrets,
+  required CommissioningTransport commissioningTransport,
   required Duration timeout,
   int? setupPinCode,
 }) {
@@ -100,7 +101,7 @@ Future<CommissioningResult> commissionTarget(
       onboardingPayload: secrets.onboardingPayload,
       setupPinCode: setupPinCode ?? secrets.setupPinCode,
       network: secrets.network,
-      commissioningTransport: secrets.commissioningTransport,
+      commissioningTransport: commissioningTransport,
       timeout: timeout,
     ),
   );

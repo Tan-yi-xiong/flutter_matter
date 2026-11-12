@@ -233,7 +233,7 @@ class RunCoordinator {
   /// Builds formal evidence only for a completed full-profile run.
   ///
   /// Quick runs always return null and never produce a formal report.
-  Future<DeviceTestReportV2?> buildFormalReport({
+  Future<DeviceTestReportV3?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) async {
@@ -599,10 +599,18 @@ class RunCoordinator {
   }
 
   Future<void> _persistCurrent() async {
-    final session = _session;
-    if (session == null) {
+    final currentSession = _session;
+    if (currentSession == null) {
       return;
     }
+    final discoveredTransport = _execution.commissioningTransport;
+    final session = discoveredTransport == null
+        ? currentSession
+        : currentSession.withCommissioningTransport(
+            discoveredTransport,
+            at: ports.clock.now(),
+          );
+    _session = session;
     final state = PersistedRunState(
       session: session,
       execution: _execution.toSnapshot(),
@@ -694,8 +702,8 @@ class RunCoordinator {
 
   RunPhase _phaseForTest(DeviceTestId testId) => switch (testId) {
     DeviceTestId.buildInstall => RunPhase.preparing,
-    DeviceTestId.ipDiscovery => RunPhase.discovering,
-    DeviceTestId.ipCommissioning => RunPhase.commissioning,
+    DeviceTestId.commissioningDiscovery => RunPhase.discovering,
+    DeviceTestId.commissioning => RunPhase.commissioning,
     DeviceTestId.operationalConnect => RunPhase.connecting,
     _ => RunPhase.testing,
   };

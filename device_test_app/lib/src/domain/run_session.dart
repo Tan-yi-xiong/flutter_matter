@@ -150,6 +150,20 @@ class RunSession {
     );
   }
 
+  RunSession withCommissioningTransport(
+    CommissioningTransport transport, {
+    required DateTime at,
+  }) {
+    final current = commissionee;
+    if (current == null || current.commissioningTransport == transport) {
+      return this;
+    }
+    return _copy(
+      commissionee: current.withCommissioningTransport(transport),
+      updatedAt: at,
+    );
+  }
+
   RunSession startTest(DeviceTestId testId, {required DateTime at}) {
     final current = _resultForExpectedTest(testId);
     if (current.isTerminal) {

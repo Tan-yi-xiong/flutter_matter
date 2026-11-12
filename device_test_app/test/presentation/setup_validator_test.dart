@@ -5,72 +5,56 @@ import 'package:flutter_test/flutter_test.dart';
 import 'support/presentation_fixtures.dart';
 
 void main() {
-  test('accepts a real Matter Wi-Fi/IP setup', () {
+  test('accepts a minimal real-device Wi-Fi setup', () {
     final result = DeviceTestSetupValidator.validate(
       draft: _draft(),
       controller: controllerInfo,
       preflightChecks: readyPreflight,
-      hasStoredSecrets: false,
     );
 
     expect(result.isValid, isTrue, reason: result.errors.toString());
   });
 
-  test('rejects virtual commissionees for quick and full profiles', () {
-    for (final profile in TestProfile.values) {
-      final result = DeviceTestSetupValidator.validate(
-        draft: _draft(
-          profile: profile,
-          commissioneeType: CommissioneeType.virtual,
-        ),
-        controller: controllerInfo,
-        preflightChecks: readyPreflight,
-        hasStoredSecrets: false,
-      );
-
-      expect(
-        result.errors[SetupField.commissioneeType],
-        'Device validation requires a real Matter commissionee.',
-        reason: profile.name,
-      );
-    }
-  });
-
-  test('rejects non-Wi-Fi network transports', () {
+  test('requires a setup code, SSID, and commissionee confirmation', () {
     final result = DeviceTestSetupValidator.validate(
-      draft: _draft(networkTransport: NetworkTransport.thread),
+      draft: _draft(setupCode: '', wifiSsid: '', commissioneeClean: false),
       controller: controllerInfo,
       preflightChecks: readyPreflight,
-      hasStoredSecrets: false,
     );
 
-    expect(
-      result.errors[SetupField.networkCredentials],
-      'Only Wi-Fi/IP commissioning is supported.',
+    expect(result[SetupField.setupCode], isNotNull);
+    expect(result[SetupField.networkCredentials], isNotNull);
+    expect(result[SetupField.commissioneeClean], isNotNull);
+  });
+
+  test('requires blocking preflight checks to pass', () {
+    final result = DeviceTestSetupValidator.validate(
+      draft: _draft(),
+      controller: controllerInfo,
+      preflightChecks: const <PreflightCheckViewModel>[
+        PreflightCheckViewModel(
+          id: 'build',
+          label: 'Build metadata',
+          status: PreflightStatus.failed,
+        ),
+      ],
     );
+
+    expect(result[SetupField.preflight], isNotNull);
   });
 }
 
 DeviceTestSetupDraft _draft({
+  String setupCode = 'MT:TEST-SETUP-CODE',
+  String wifiSsid = 'test-network',
+  bool commissioneeClean = true,
   TestProfile profile = TestProfile.full,
-  CommissioneeType commissioneeType = CommissioneeType.real,
-  NetworkTransport networkTransport = NetworkTransport.wifi,
 }) {
   return DeviceTestSetupDraft(
-    commissioneeType: commissioneeType,
-    model: 'Matter On/Off Plug',
-    firmware: '1.0.0',
-    commissioningTransport: CommissioningTransport.ip,
-    networkTransport: networkTransport,
-    stateChangeMethod: StateChangeMethod.physicalControl,
-    setupCode: 'MT:TEST-SETUP-CODE',
-    wifiSsid: 'test-network',
+    setupCode: setupCode,
+    wifiSsid: wifiSsid,
     wifiPassword: 'test-password',
     profile: profile,
-    cleanCycle: const CleanCycleConfirmations(
-      controllerClean: true,
-      commissioneeClean: true,
-      secretsPurged: true,
-    ),
+    cleanCycle: CleanCycleConfirmations(commissioneeClean: commissioneeClean),
   );
 }

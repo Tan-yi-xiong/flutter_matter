@@ -15,6 +15,10 @@ abstract class DeviceTestUiController extends ChangeNotifier {
 
   Future<void> startRun(DeviceTestSetupRequest request);
 
+  Future<WifiSetupPrefill> loadWifiSetupPrefill();
+
+  Future<void> clearWifiCredentials();
+
   Future<void> confirmPrompt();
 
   Future<void> skipPrompt(String reason);

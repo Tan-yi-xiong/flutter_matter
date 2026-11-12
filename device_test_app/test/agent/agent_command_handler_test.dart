@@ -23,19 +23,10 @@ void main() {
       test('starts a quick run and forwards the complete setup', () async {
         final arguments = <String, Object?>{
           'mode': 'quick',
-          'commissionee_type': 'real',
-          'model': 'Matter switch',
-          'firmware': '1.2.3',
-          'network_transport': 'wifi',
-          'state_change_method': 'physical_control',
           'setup_code': 'MT:PRIVATE-SETUP-CODE',
           'wifi_ssid': 'private-ssid',
           'wifi_password': 'private-password',
-          'clean_cycle': <String, Object?>{
-            'controller_clean': true,
-            'commissionee_clean': true,
-            'secrets_purged': true,
-          },
+          'clean_cycle': <String, Object?>{'commissionee_clean': true},
         };
 
         final outcome = await handler.handle(
@@ -48,7 +39,7 @@ void main() {
         expect(host.startArguments?['setup_code'], 'MT:PRIVATE-SETUP-CODE');
         expect(
           host.startArguments?['clean_cycle'],
-          containsPair('secrets_purged', true),
+          containsPair('commissionee_clean', true),
         );
       });
 
@@ -107,16 +98,14 @@ void main() {
         expect(host.calls, isEmpty);
       });
 
-      test('rejects retired virtual and Thread setup keys', () async {
+      test('rejects retired setup keys', () async {
         for (final arguments in <Map<String, Object?>>[
-          <String, Object?>{
-            'mode': 'quick',
-            'virtual_fallback_confirmed': true,
-          },
+          <String, Object?>{'mode': 'quick', 'model': 'retired'},
           <String, Object?>{
             'mode': 'quick',
             'thread_operational_dataset': '0x00112233',
           },
+          <String, Object?>{'mode': 'quick', 'commissioning_transport': 'ip'},
         ]) {
           final outcome = await handler.handle(
             _command(AgentCommandNames.startRun, arguments),

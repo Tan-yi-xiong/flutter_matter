@@ -24,6 +24,23 @@ class RunDirectory {
     return directory;
   }
 
+  Future<List<String>> listRunIds() async {
+    final root = await runsRoot();
+    final ids = <String>[];
+    await for (final entity in root.list(followLinks: false)) {
+      if (entity is Directory) {
+        final segments = entity.uri.pathSegments.where(
+          (segment) => segment.isNotEmpty,
+        );
+        if (segments.isNotEmpty) {
+          ids.add(segments.last);
+        }
+      }
+    }
+    ids.sort();
+    return List<String>.unmodifiable(ids);
+  }
+
   Future<Directory?> find(String runId) async {
     _validateRunId(runId);
     final root = await runsRoot();

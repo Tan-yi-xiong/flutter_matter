@@ -162,7 +162,7 @@ void main() {
       );
       final report = AgentReportPayload(
         runId: 'run-1',
-        reportJson: const <String, Object?>{'schema_version': 2},
+        reportJson: const <String, Object?>{'schema_version': 3},
         reportMarkdown: '### Device validation summary\n',
       );
       final client = AgentBridgeClient(

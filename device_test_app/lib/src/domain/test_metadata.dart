@@ -133,6 +133,18 @@ class CommissioneeMetadata {
     );
   }
 
+  CommissioneeMetadata withCommissioningTransport(
+    CommissioningTransport transport,
+  ) {
+    return CommissioneeMetadata(
+      type: type,
+      vendorId: vendorId,
+      productId: productId,
+      commissioningTransport: transport,
+      networkTransport: networkTransport,
+    );
+  }
+
   Map<String, Object?> toJson() => <String, Object?>{
     'type': type.wireName,
     'vendor_id': vendorId,

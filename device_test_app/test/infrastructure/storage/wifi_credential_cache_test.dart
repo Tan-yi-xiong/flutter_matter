@@ -1,5 +1,4 @@
 import 'package:flutter_matter_device_test_app/src/application/ports.dart';
-import 'package:flutter_matter_device_test_app/src/domain/domain.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/storage/key_value_store.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/storage/provisioning_secret_store.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/storage/secret_keys.dart';
@@ -130,8 +129,6 @@ void main() {
             ssid: 'run-net',
             password: 'run-secret',
           ),
-          commissioningTransport: CommissioningTransport.ip,
-          supportsOnNetworkDiscovery: true,
         ),
       );
       await cache.save(ssid: 'cache-net', password: 'cache-secret');

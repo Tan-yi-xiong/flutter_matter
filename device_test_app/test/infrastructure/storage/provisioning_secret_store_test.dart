@@ -1,5 +1,4 @@
 import 'package:flutter_matter_device_test_app/src/application/ports.dart';
-import 'package:flutter_matter_device_test_app/src/domain/domain.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/storage/key_value_store.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/storage/provisioning_secret_store.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,8 +14,6 @@ void main() {
         ssid: 'test-network',
         password: 'test-password',
       ),
-      commissioningTransport: CommissioningTransport.ip,
-      supportsOnNetworkDiscovery: true,
     );
 
     await store.save('run-1', secrets);
@@ -24,8 +21,6 @@ void main() {
 
     expect(loaded?.onboardingPayload, secrets.onboardingPayload);
     expect(loaded?.setupPinCode, secrets.setupPinCode);
-    expect(loaded?.commissioningTransport, CommissioningTransport.ip);
-    expect(loaded?.supportsOnNetworkDiscovery, isTrue);
     expect(loaded?.network, isA<WifiProvisioningSecret>());
     final network = loaded!.network as WifiProvisioningSecret;
     expect(network.ssid, 'test-network');

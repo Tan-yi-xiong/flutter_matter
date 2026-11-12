@@ -79,7 +79,16 @@ class BonsoirMatterMdnsBrowser implements MatterMdnsBrowser {
   }
 }
 
-class MatterMdnsCommissioningScanner {
+abstract interface class MatterMdnsCommissioningScannerApi {
+  Future<bool> waitForMatch({
+    required int discriminator,
+    required bool hasShortDiscriminator,
+    required Duration timeout,
+  });
+}
+
+class MatterMdnsCommissioningScanner
+    implements MatterMdnsCommissioningScannerApi {
   MatterMdnsCommissioningScanner({
     required MatterMdnsBrowser Function() browserFactory,
     this.serviceType = matterCommissionableServiceType,
@@ -88,6 +97,7 @@ class MatterMdnsCommissioningScanner {
   final MatterMdnsBrowser Function() _browserFactory;
   final String serviceType;
 
+  @override
   Future<bool> waitForMatch({
     required int discriminator,
     required bool hasShortDiscriminator,

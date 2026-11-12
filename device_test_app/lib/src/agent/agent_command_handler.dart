@@ -13,7 +13,8 @@ import 'protocol.dart';
 
 /// Reserved command names accepted by [DeviceTestAgentCommandHandler].
 abstract final class AgentCommandNames {
-  /// Starts a run: `{"mode": "quick" | "full"}`.
+  /// Starts a run with the minimal setup request: `mode`, `setup_code`,
+  /// `wifi_ssid`, optional `wifi_password`, and `clean_cycle`.
   static const String startRun = 'start_run';
 
   /// Stops the active run: `{}`.
@@ -303,17 +304,10 @@ class DeviceTestAgentCommandHandler {
 
   static const Set<String> _startRunArgumentKeys = <String>{
     'mode',
-    'commissionee_type',
-    'model',
-    'firmware',
-    'commissioning_transport',
-    'network_transport',
-    'state_change_method',
     'setup_code',
-    'clean_cycle',
-    'state_change_notes',
     'wifi_ssid',
     'wifi_password',
+    'clean_cycle',
   };
 
   Map<String, Object?> _freezeArguments(Map<String, Object?> arguments) {

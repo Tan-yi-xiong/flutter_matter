@@ -206,8 +206,8 @@ void main() {
   test('rejects a report with a pending test', () {
     final session = buildFixtureSession(
       overrides: <DeviceTestId, DeviceTestResult>{
-        DeviceTestId.ipCommissioning: DeviceTestResult(
-          testId: DeviceTestId.ipCommissioning,
+        DeviceTestId.commissioning: DeviceTestResult(
+          testId: DeviceTestId.commissioning,
         ),
       },
     );

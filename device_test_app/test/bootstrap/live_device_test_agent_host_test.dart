@@ -37,9 +37,11 @@ void main() {
       expect(harness.controller.state.screen, DeviceTestScreen.runner);
       expect(harness.controller.state.hasStoredSecrets, isTrue);
       expect(harness.runner.startRequest?.profile, TestProfile.full);
+      expect(harness.runner.startRequest?.commissionee.vendorId, 1);
+      expect(harness.runner.startRequest?.commissionee.productId, 1);
       expect(
-        harness.runner.startRequest?.commissionee.model,
-        'Matter test plug',
+        harness.runner.startRequest?.commissionee.commissioningTransport,
+        isNull,
       );
     },
   );
@@ -102,14 +104,18 @@ void main() {
       runner: harness.runner,
       screenshotCapture: WidgetScreenshotCapture(boundaryKey: GlobalKey()),
     );
-    final arguments = _runArguments('quick')..remove('model');
+    final arguments = _runArguments('quick')..remove('setup_code');
 
     await expectLater(
       host.startRun(AgentRunMode.quick, arguments),
       throwsA(
         isA<DeviceTestAgentHostException>()
             .having((error) => error.code, 'code', 'invalid_arguments')
-            .having((error) => error.message, 'message', contains('model')),
+            .having(
+              (error) => error.message,
+              'message',
+              contains('setup_code'),
+            ),
       ),
     );
     expect(harness.runner.startRequest, isNull);
@@ -184,19 +190,10 @@ void main() {
 Map<String, Object?> _runArguments(String mode) {
   return <String, Object?>{
     'mode': mode,
-    'commissionee_type': 'real',
-    'model': 'Matter test plug',
-    'firmware': '1.2.3',
-    'network_transport': 'wifi',
-    'state_change_method': 'physical_control',
     'setup_code': 'MT:TEST-SETUP-CODE',
     'wifi_ssid': 'Test Wi-Fi',
     'wifi_password': 'secret',
-    'clean_cycle': <String, Object?>{
-      'controller_clean': true,
-      'commissionee_clean': true,
-      'secrets_purged': true,
-    },
+    'clean_cycle': <String, Object?>{'commissionee_clean': true},
   };
 }
 

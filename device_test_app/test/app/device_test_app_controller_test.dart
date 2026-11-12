@@ -32,13 +32,13 @@ void main() {
     expect(request.testApp.commit, testAppCommit);
     expect(request.targetNodeId, testTargetNodeId);
     expect(request.controller.platform, ControllerPlatform.android);
-    expect(request.commissionee.model, 'Matter test plug');
-    expect(request.commissionee.firmware, '1.2.3');
+    expect(request.commissionee.vendorId, 1);
+    expect(request.commissionee.productId, 1);
     expect(request.commissionee.networkTransport, NetworkTransport.wifi);
-    expect(
-      request.commissionee.stateChangeMethod,
-      StateChangeMethod.physicalControl,
-    );
+    expect(request.commissionee.commissioningTransport, isNull);
+    expect(harness.maintenance.prepareCount, 1);
+    expect(harness.wifiSetup.rememberedSsid, 'Test Wi-Fi');
+    expect(harness.wifiSetup.rememberedPassword, 'secret');
 
     final secrets = harness.secrets.saved[testRunId];
     expect(secrets, isNotNull);
@@ -53,40 +53,43 @@ void main() {
     expect(harness.controller.state.hasStoredSecrets, isTrue);
   });
 
-  test('rejects a non-wifi network transport before saving secrets', () async {
+  test('blocks a Run when automatic cleanup fails', () async {
     final harness = buildHarness(schemaJson: schemaJson);
     addTearDown(harness.close);
+    harness.maintenance.error = StateError('cleanup failed');
     await harness.controller.initialize();
 
-    await harness.controller.startRun(
-      setupRequest(networkTransport: NetworkTransport.thread),
-    );
+    await harness.controller.startRun(setupRequest());
     await pumpEventQueue();
 
+    expect(harness.maintenance.prepareCount, 1);
     expect(harness.runner.startRequest, isNull);
-    expect(harness.onboarding.parseCount, 0);
+    expect(harness.onboarding.parseCount, 1);
     expect(harness.secrets.saved, isEmpty);
-    expect(
-      harness.secrets.log.where((entry) => entry.startsWith('secret.save')),
-      isEmpty,
-    );
-    expect(harness.controller.state.errorMessage, contains('must be wifi'));
+    expect(harness.controller.state.errorMessage, contains('cleanup'));
   });
 
-  test('rejects a virtual commissionee before saving secrets', () async {
+  test('loads Wi-Fi prefill without projecting it into UI state', () async {
     final harness = buildHarness(schemaJson: schemaJson);
     addTearDown(harness.close);
     await harness.controller.initialize();
 
-    await harness.controller.startRun(
-      setupRequest(commissioneeType: CommissioneeType.virtual),
-    );
-    await pumpEventQueue();
+    final prefill = await harness.controller.loadWifiSetupPrefill();
 
-    expect(harness.runner.startRequest, isNull);
-    expect(harness.onboarding.parseCount, 0);
-    expect(harness.secrets.saved, isEmpty);
-    expect(harness.controller.state.errorMessage, contains('must be real'));
+    expect(prefill.currentSsid, 'Test Wi-Fi');
+    expect(prefill.password, 'cached-secret');
+    expect(prefill.manualSsidRequired, isFalse);
+    expect(harness.controller.state.hasStoredSecrets, isFalse);
+  });
+
+  test('clears the Wi-Fi credential cache explicitly', () async {
+    final harness = buildHarness(schemaJson: schemaJson);
+    addTearDown(harness.close);
+    await harness.controller.initialize();
+
+    await harness.controller.clearWifiCredentials();
+
+    expect(harness.wifiSetup.clearCount, 1);
   });
 
   test('blocks a Run when commit preflight fails', () async {
@@ -124,11 +127,10 @@ void main() {
         appBuild: '1.0.0 (1)',
       ),
       commissionee: const CommissioneeMetadata(
-        type: CommissioneeType.real,
-        model: 'Matter test plug',
-        firmware: '1.2.3',
+        vendorId: 1,
+        productId: 2,
+        commissioningTransport: CommissioningTransport.ip,
         networkTransport: NetworkTransport.wifi,
-        stateChangeMethod: StateChangeMethod.physicalControl,
       ),
     ).withPhase(RunPhase.testing, at: testNow);
     final harness = buildHarness(schemaJson: schemaJson);

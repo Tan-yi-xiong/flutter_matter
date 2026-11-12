@@ -154,8 +154,8 @@
       "additionalProperties": false,
       "required": [
         "build_install",
-        "ip_discovery",
-        "ip_commissioning",
+        "commissioning_discovery",
+        "commissioning",
         "operational_connect",
         "onoff_invoke",
         "onoff_subscription",
@@ -170,10 +170,10 @@
         "build_install": {
           "$ref": "#/$defs/testResult"
         },
-        "ip_discovery": {
+        "commissioning_discovery": {
           "$ref": "#/$defs/testResult"
         },
-        "ip_commissioning": {
+        "commissioning": {
           "$ref": "#/$defs/testResult"
         },
         "operational_connect": {

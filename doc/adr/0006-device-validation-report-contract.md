@@ -38,6 +38,10 @@ The future dedicated device-test app owns report generation and self-validation.
 
 A later repository decision retired the virtual-device path recorded above. Future device validation uses a qualified real Matter commissionee only, with Wi-Fi/IP commissioning; virtual commissionees are not supported as a fallback, including for quick iteration. The report schema moved from version `1` to version `2` with 12 fixed tests that use the `ip_discovery` and `ip_commissioning` IDs instead of the former BLE test IDs. The decision text above is preserved as history; it no longer authorizes virtual-device development runs.
 
+## Amendment (2026-11-12): Schema v3 and dual-path commissioning discovery
+
+The active device-validation contract moved from schema version `2` to version `3`. The former `ip_discovery` and `ip_commissioning` cases are replaced by `commissioning_discovery` and `commissioning`. The app now starts BLE and Wi-Fi/IP commissionable discovery concurrently, records the first matching transport as `commissioning_transport`, and does not retry commissioning through the other transport after a failure. The report still requires a real commissionee and a Wi-Fi `network_transport`. Thread models and secure-storage branches remain in the codebase for future adaptation but are not part of the active validation flow. The earlier amendments remain as historical decisions.
+
 ## Related Documents
 
 - [Device Validation](../device-validation.md)

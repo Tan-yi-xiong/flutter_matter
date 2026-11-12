@@ -151,6 +151,30 @@ void main() {
     }
   });
 
+  test('rejects retired or unknown clean_cycle fields', () {
+    for (final field in const <String>[
+      'controller_clean',
+      'secrets_purged',
+      'unknown',
+    ]) {
+      final arguments = _minimalArguments();
+      final cleanCycle = arguments['clean_cycle']! as Map<String, Object?>;
+      cleanCycle[field] = true;
+
+      expect(
+        () => parser.parse(arguments: arguments, state: _setupState()),
+        throwsA(
+          isA<AgentRunRequestException>().having(
+            (error) => error.issues,
+            'issues',
+            containsPair('clean_cycle.$field', 'This field is not supported.'),
+          ),
+        ),
+        reason: field,
+      );
+    }
+  });
+
   test('rejects a Run while stored secrets have not been purged', () {
     final arguments = _minimalArguments(mode: 'full')
       ..['secrets_purged'] = false;

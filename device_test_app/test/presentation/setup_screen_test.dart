@@ -7,7 +7,7 @@ import 'support/fake_device_test_ui_controller.dart';
 import 'support/presentation_fixtures.dart';
 
 void main() {
-  testWidgets('setup validation reports missing required fields', (
+  testWidgets('setup validation only reports remaining required fields', (
     tester,
   ) async {
     final controller = FakeDeviceTestUiController(setupState());
@@ -24,23 +24,51 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(controller.submittedRequest, isNull);
-    expect(find.text('Commissionee model is required.'), findsOneWidget);
-    expect(find.text('Firmware version is required.'), findsOneWidget);
     expect(
       find.text('Matter setup code or QR payload is required.'),
       findsOneWidget,
     );
-    expect(find.text('Wi-Fi SSID is required.'), findsOneWidget);
     expect(
       find.text(
-        'Confirm the controller starts from a clean fabric and app state.',
+        'Confirm the commissionee was factory-reset and is in a '
+        'commissioning window.',
       ),
       findsOneWidget,
     );
+    expect(find.text('Commissionee model is required.'), findsNothing);
+    expect(find.text('Firmware version is required.'), findsNothing);
     expect(find.byKey(DeviceTestUiKeys.setupValidationSummary), findsOneWidget);
   });
 
-  testWidgets('setup is fixed to real hardware and Wi-Fi/IP', (tester) async {
+  testWidgets(
+    'removed setup fields are absent and passed preflight is hidden',
+    (tester) async {
+      final controller = FakeDeviceTestUiController(setupState());
+      await tester.pumpWidget(
+        DeviceTestAppShell(
+          controller: controller,
+          initialScreen: DeviceTestScreen.setup,
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(DeviceTestUiKeys.wifiSsidDisplay), findsOneWidget);
+      expect(find.byKey(DeviceTestUiKeys.wifiSsidManual), findsNothing);
+      expect(find.byKey(DeviceTestUiKeys.preflightList), findsNothing);
+      expect(find.text('Thread operational dataset'), findsNothing);
+      expect(find.text('Controller model'), findsNothing);
+      expect(find.text('Manufacturer model'), findsNothing);
+      expect(find.text('Firmware version'), findsNothing);
+      expect(find.text('State change notes'), findsNothing);
+      expect(find.text('Purge Secrets Now'), findsNothing);
+      expect(
+        find.textContaining('BLE and Wi-Fi/IP at the same time'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets('cached matching Wi-Fi values prefill the form', (tester) async {
     final controller = FakeDeviceTestUiController(setupState());
     await tester.pumpWidget(
       DeviceTestAppShell(
@@ -50,24 +78,34 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(
-      find.text(
-        'Device validation requires qualified real Matter hardware. '
-        'Every Run uses Wi-Fi/IP commissioning.',
-      ),
-      findsOneWidget,
+    expect(find.text('matter-test-network'), findsOneWidget);
+    final password = tester.widget<TextField>(
+      find.byKey(DeviceTestUiKeys.wifiPassword),
     );
-    expect(
-      find.text('A qualified real Matter On/Off device is required.'),
-      findsOneWidget,
-    );
-    expect(find.byKey(DeviceTestUiKeys.wifiSsid), findsOneWidget);
-    expect(find.text('Thread operational dataset'), findsNothing);
+    expect(password.controller!.text, 'cached-password');
   });
 
-  testWidgets('valid setup submits a request and enters the runner', (
+  testWidgets('manual SSID fallback and cache clear are available', (
     tester,
   ) async {
+    final controller = FakeDeviceTestUiController(setupState())
+      ..wifiPrefill = const WifiSetupPrefill(manualSsidRequired: true);
+    await tester.pumpWidget(
+      DeviceTestAppShell(
+        controller: controller,
+        initialScreen: DeviceTestScreen.setup,
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(DeviceTestUiKeys.wifiSsidManual), findsOneWidget);
+    await _center(tester, find.byKey(DeviceTestUiKeys.wifiClearCredentials));
+    await tester.tap(find.byKey(DeviceTestUiKeys.wifiClearCredentials));
+    await tester.pumpAndSettle();
+    expect(controller.clearWifiCalls, 1);
+  });
+
+  testWidgets('valid setup submits only the minimal request', (tester) async {
     final controller = FakeDeviceTestUiController(setupState());
     await tester.pumpWidget(
       DeviceTestAppShell(
@@ -77,30 +115,15 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await tester.enterText(
-      find.byKey(DeviceTestUiKeys.modelField),
-      'Example Matter Plug',
-    );
-    await tester.enterText(find.byKey(DeviceTestUiKeys.firmwareField), '1.2.3');
     await tester.enterText(
       find.byKey(DeviceTestUiKeys.setupCode),
       'MT:TEST-SETUP-CODE',
     );
-    await tester.enterText(
-      find.byKey(DeviceTestUiKeys.wifiSsid),
-      'matter-test-network',
+    final tile = tester.widget<CheckboxListTile>(
+      find.byKey(DeviceTestUiKeys.commissioneeClean),
     );
-
-    for (final key in <Key>[
-      DeviceTestUiKeys.controllerClean,
-      DeviceTestUiKeys.commissioneeClean,
-      DeviceTestUiKeys.secretsPurged,
-    ]) {
-      final tile = tester.widget<CheckboxListTile>(find.byKey(key));
-      tile.onChanged!(true);
-      await tester.pump();
-      expect(tester.widget<CheckboxListTile>(find.byKey(key)).value, isTrue);
-    }
+    tile.onChanged!(true);
+    await tester.pump();
 
     await _center(tester, find.byKey(DeviceTestUiKeys.startRun));
     await tester.tap(find.byKey(DeviceTestUiKeys.startRun));
@@ -108,12 +131,11 @@ void main() {
 
     final request = controller.submittedRequest;
     expect(request, isNotNull);
-    expect(request!.commissioneeType, CommissioneeType.real);
-    expect(request.model, 'Example Matter Plug');
-    expect(request.firmware, '1.2.3');
-    expect(request.networkTransport, NetworkTransport.wifi);
+    expect(request!.setupCode, 'MT:TEST-SETUP-CODE');
     expect(request.wifiSsid, 'matter-test-network');
+    expect(request.wifiPassword, 'cached-password');
     expect(request.profile, TestProfile.full);
+    expect(request.cleanCycle.commissioneeClean, isTrue);
     expect(controller.state.screen, DeviceTestScreen.runner);
   });
 }

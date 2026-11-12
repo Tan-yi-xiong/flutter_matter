@@ -1,7 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../domain/domain.dart';
-import '../dialogs.dart';
 import '../setup_validator.dart';
 import '../ui_controller.dart';
 import '../ui_keys.dart';
@@ -19,35 +20,56 @@ class SetupScreen extends StatefulWidget {
 }
 
 class _SetupScreenState extends State<SetupScreen> {
-  final TextEditingController _modelController = TextEditingController();
-  final TextEditingController _firmwareController = TextEditingController();
-  final TextEditingController _stateChangeNotesController =
-      TextEditingController();
   final TextEditingController _setupCodeController = TextEditingController();
   final TextEditingController _wifiSsidController = TextEditingController();
   final TextEditingController _wifiPasswordController = TextEditingController();
 
-  StateChangeMethod _stateChangeMethod = StateChangeMethod.physicalControl;
   TestProfile _profile = TestProfile.full;
-  bool _controllerClean = false;
   bool _commissioneeClean = false;
-  bool _secretsPurged = false;
   bool _hideSetupCode = true;
   bool _hideWifiPassword = true;
-  bool _submitted = false;
+  bool _manualSsidRequired = true;
+  bool _prefillLoaded = false;
   bool _submitting = false;
+  bool _submitted = false;
   String? _actionError;
   Map<SetupField, String> _errors = const <SetupField, String>{};
 
   @override
+  void initState() {
+    super.initState();
+    unawaited(_loadWifiPrefill());
+  }
+
+  @override
   void dispose() {
-    _modelController.dispose();
-    _firmwareController.dispose();
-    _stateChangeNotesController.dispose();
     _setupCodeController.dispose();
     _wifiSsidController.dispose();
     _wifiPasswordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _loadWifiPrefill() async {
+    try {
+      final prefill = await widget.controller.loadWifiSetupPrefill();
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _prefillLoaded = true;
+        _manualSsidRequired = prefill.manualSsidRequired;
+        _wifiSsidController.text = prefill.currentSsid ?? '';
+        _wifiPasswordController.text = prefill.password;
+      });
+    } on Object {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _prefillLoaded = true;
+        _manualSsidRequired = true;
+      });
+    }
   }
 
   @override
@@ -55,6 +77,9 @@ class _SetupScreenState extends State<SetupScreen> {
     final theme = Theme.of(context);
     final busy = widget.state.busy || _submitting;
     final controllerInfo = widget.state.controllerInfo;
+    final visiblePreflight = widget.state.preflightChecks
+        .where((check) => check.status != PreflightStatus.passed)
+        .toList(growable: false);
 
     return DeviceTestPage(
       screenKey: DeviceTestUiKeys.setupScreen,
@@ -77,14 +102,15 @@ class _SetupScreenState extends State<SetupScreen> {
                 Semantics(
                   header: true,
                   child: Text(
-                    'Prepare a clean validation Run',
+                    'Prepare a device validation Run',
                     style: theme.textTheme.headlineSmall,
                   ),
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Device validation requires qualified real Matter hardware. '
-                  'Every Run uses Wi-Fi/IP commissioning.',
+                  'The app searches for the real Matter commissionee over BLE '
+                  'and Wi-Fi/IP at the same time. The first matching path is '
+                  'used for this Run.',
                   style: theme.textTheme.bodyMedium,
                 ),
                 if (_actionError != null ||
@@ -111,76 +137,106 @@ class _SetupScreenState extends State<SetupScreen> {
                 ],
                 const SizedBox(height: 20),
                 _buildControllerCard(context, controllerInfo),
+                if (visiblePreflight.isNotEmpty) ...<Widget>[
+                  const SizedBox(height: 16),
+                  PresentationCard(
+                    key: DeviceTestUiKeys.preflightList,
+                    title: 'Preflight',
+                    subtitle: 'Only warnings and blocking checks are shown.',
+                    child: Column(
+                      children: <Widget>[
+                        for (final check in visiblePreflight) ...<Widget>[
+                          PreflightRow(check: check),
+                          if (check != visiblePreflight.last)
+                            const Divider(height: 20),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 16),
                 PresentationCard(
-                  title: 'Commissionee',
-                  subtitle: 'Use qualified real Matter hardware only.',
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const InfoBanner(
-                        icon: Icons.devices,
-                        message:
-                            'A qualified real Matter On/Off device is required.',
-                      ),
-                      const SizedBox(height: 16),
-                      TextField(
-                        key: DeviceTestUiKeys.modelField,
-                        controller: _modelController,
-                        enabled: !busy,
-                        textInputAction: TextInputAction.next,
-                        decoration: _fieldDecoration(
-                          label: 'Commissionee model',
-                          hint: 'Example: Example Matter Plug',
-                          field: SetupField.model,
+                  title: 'Matter Setup Code',
+                  subtitle: 'Paste a QR payload or manual pairing code.',
+                  child: TextField(
+                    key: DeviceTestUiKeys.setupCode,
+                    controller: _setupCodeController,
+                    enabled: !busy,
+                    obscureText: _hideSetupCode,
+                    autocorrect: false,
+                    enableSuggestions: false,
+                    decoration: _fieldDecoration(
+                      label: 'Setup code or QR payload',
+                      field: SetupField.setupCode,
+                      suffixIcon: IconButton(
+                        tooltip: _hideSetupCode
+                            ? 'Show setup code'
+                            : 'Hide setup code',
+                        onPressed: busy
+                            ? null
+                            : () => setState(
+                                () => _hideSetupCode = !_hideSetupCode,
+                              ),
+                        icon: Icon(
+                          _hideSetupCode
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
                         ),
-                        onChanged: (_) => _clearError(SetupField.model),
                       ),
-                      const SizedBox(height: 12),
-                      TextField(
-                        key: DeviceTestUiKeys.firmwareField,
-                        controller: _firmwareController,
-                        enabled: !busy,
-                        textInputAction: TextInputAction.next,
-                        decoration: _fieldDecoration(
-                          label: 'Firmware version',
-                          hint: 'Example: 1.0.0',
-                          field: SetupField.firmware,
-                        ),
-                        onChanged: (_) => _clearError(SetupField.firmware),
-                      ),
-                    ],
+                    ),
+                    onChanged: (_) => _clearError(SetupField.setupCode),
                   ),
                 ),
                 const SizedBox(height: 16),
                 PresentationCard(
-                  title: 'Network and State Changes',
+                  title: 'Wi-Fi',
                   subtitle:
-                      'Describe how the commissionee reaches the network and '
-                      'how its On/Off state can be changed.',
+                      'Used when the commissionee joins the local network over '
+                      'Wi-Fi. Leave the password empty for an open network.',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      const InfoBanner(
-                        icon: Icons.lan_outlined,
-                        message:
-                            'Device validation uses Wi-Fi/IP commissioning. '
-                            'The commissionee must already be reachable on the '
-                            'same trusted LAN.',
-                      ),
-                      const SizedBox(height: 16),
-                      TextField(
-                        key: DeviceTestUiKeys.wifiSsid,
-                        controller: _wifiSsidController,
-                        enabled: !busy,
-                        textInputAction: TextInputAction.next,
-                        decoration: _fieldDecoration(
-                          label: 'Wi-Fi SSID',
-                          field: SetupField.networkCredentials,
+                      if (!_prefillLoaded)
+                        const LinearProgressIndicator()
+                      else if (_manualSsidRequired)
+                        TextField(
+                          key: DeviceTestUiKeys.wifiSsidManual,
+                          controller: _wifiSsidController,
+                          enabled: !busy,
+                          textInputAction: TextInputAction.next,
+                          decoration: _fieldDecoration(
+                            label: 'Wi-Fi SSID',
+                            field: SetupField.networkCredentials,
+                          ),
+                          onChanged: (_) =>
+                              _clearError(SetupField.networkCredentials),
+                        )
+                      else
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Semantics(
+                                key: DeviceTestUiKeys.wifiSsidDisplay,
+                                label:
+                                    'Current Wi-Fi network '
+                                    '${_wifiSsidController.text}',
+                                child: DeviceTestStatusLine(
+                                  label: 'Current Wi-Fi',
+                                  value: _wifiSsidController.text,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              key: DeviceTestUiKeys.wifiSsidChange,
+                              onPressed: busy
+                                  ? null
+                                  : () => setState(
+                                      () => _manualSsidRequired = true,
+                                    ),
+                              child: const Text('Change'),
+                            ),
+                          ],
                         ),
-                        onChanged: (_) =>
-                            _clearError(SetupField.networkCredentials),
-                      ),
                       const SizedBox(height: 12),
                       TextField(
                         key: DeviceTestUiKeys.wifiPassword,
@@ -189,171 +245,62 @@ class _SetupScreenState extends State<SetupScreen> {
                         obscureText: _hideWifiPassword,
                         autocorrect: false,
                         enableSuggestions: false,
-                        decoration:
-                            _fieldDecoration(
-                              label:
-                                  'Wi-Fi password (optional for open networks)',
-                              field: null,
-                            ).copyWith(
-                              suffixIcon: IconButton(
-                                tooltip: _hideWifiPassword
-                                    ? 'Show Wi-Fi password'
-                                    : 'Hide Wi-Fi password',
-                                onPressed: busy
-                                    ? null
-                                    : () => setState(() {
-                                        _hideWifiPassword = !_hideWifiPassword;
-                                      }),
-                                icon: Icon(
-                                  _hideWifiPassword
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off_outlined,
-                                ),
-                              ),
+                        decoration: _fieldDecoration(
+                          label: 'Wi-Fi password',
+                          hint: 'Optional for open networks',
+                          field: SetupField.networkCredentials,
+                          suffixIcon: IconButton(
+                            tooltip: _hideWifiPassword
+                                ? 'Show Wi-Fi password'
+                                : 'Hide Wi-Fi password',
+                            onPressed: busy
+                                ? null
+                                : () => setState(
+                                    () =>
+                                        _hideWifiPassword = !_hideWifiPassword,
+                                  ),
+                            icon: Icon(
+                              _hideWifiPassword
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
                             ),
+                          ),
+                        ),
                         onChanged: (_) =>
                             _clearError(SetupField.networkCredentials),
                       ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'State-change method',
-                        style: theme.textTheme.labelLarge,
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton.icon(
+                          key: DeviceTestUiKeys.wifiClearCredentials,
+                          onPressed: busy ? null : _clearWifiCredentials,
+                          icon: const Icon(Icons.delete_outline),
+                          label: const Text('Clear Wi-Fi Credentials'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                PresentationCard(
+                  title: 'Clean Cycle',
+                  subtitle: 'Controller cleanup runs automatically.',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      const InfoBanner(
+                        icon: Icons.restart_alt,
+                        message:
+                            'Before every Run the app purges old Run secrets '
+                            'and resets controller identities for this platform.',
                       ),
                       const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: <Widget>[
-                          for (final method in StateChangeMethod.values)
-                            _selectionChip(
-                              key: DeviceTestUiKeys.stateChangeChoice(method),
-                              label: method.label,
-                              semanticsLabel:
-                                  'Select ${method.label} state-change method',
-                              selected: _stateChangeMethod == method,
-                              enabled: !busy,
-                              onSelected: () => _setStateChangeMethod(method),
-                            ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      TextField(
-                        key: DeviceTestUiKeys.stateChangeNotes,
-                        controller: _stateChangeNotesController,
-                        enabled: !busy,
-                        minLines: 2,
-                        maxLines: 4,
-                        decoration: _fieldDecoration(
-                          label: 'State-change notes',
-                          hint:
-                              'Identify the physical control, vendor app, or '
-                              'commissionee UI without including secrets.',
-                          field: SetupField.stateChangeNotes,
-                        ),
-                        onChanged: (_) =>
-                            _clearError(SetupField.stateChangeNotes),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                PresentationCard(
-                  title: 'Provisioning Inputs',
-                  subtitle:
-                      'Secrets remain transient inputs and are never copied '
-                      'into visible Run state.',
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      TextField(
-                        key: DeviceTestUiKeys.setupCode,
-                        controller: _setupCodeController,
-                        enabled: !busy,
-                        obscureText: _hideSetupCode,
-                        autocorrect: false,
-                        enableSuggestions: false,
-                        decoration:
-                            _fieldDecoration(
-                              label: 'Matter setup code or QR payload',
-                              field: SetupField.setupCode,
-                            ).copyWith(
-                              suffixIcon: IconButton(
-                                tooltip: _hideSetupCode
-                                    ? 'Show setup code'
-                                    : 'Hide setup code',
-                                onPressed: busy
-                                    ? null
-                                    : () => setState(() {
-                                        _hideSetupCode = !_hideSetupCode;
-                                      }),
-                                icon: Icon(
-                                  _hideSetupCode
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off_outlined,
-                                ),
-                              ),
-                            ),
-                        onChanged: (_) => _clearError(SetupField.setupCode),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                PresentationCard(
-                  title: 'Preflight',
-                  subtitle:
-                      'Local-network access and controller connectivity must '
-                      'be ready before the Run starts.',
-                  child: Container(
-                    key: DeviceTestUiKeys.preflightList,
-                    child: widget.state.preflightChecks.isEmpty
-                        ? const InfoBanner(
-                            message: 'No preflight checks were reported.',
-                            icon: Icons.pending_outlined,
-                          )
-                        : Column(
-                            children: <Widget>[
-                              for (final check in widget.state.preflightChecks)
-                                PreflightRow(check: check),
-                            ],
-                          ),
-                  ),
-                ),
-                if (_errorText(SetupField.preflight) != null) ...<Widget>[
-                  const SizedBox(height: 8),
-                  _InlineError(error: _errors[SetupField.preflight]!),
-                ],
-                const SizedBox(height: 16),
-                PresentationCard(
-                  title: 'Clean-cycle Confirmations',
-                  subtitle:
-                      'The controller and real commissionee must begin from a '
-                      'clean test state.',
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      CheckboxListTile(
-                        key: DeviceTestUiKeys.controllerClean,
-                        value: _controllerClean,
-                        onChanged: busy
-                            ? null
-                            : (value) => setState(() {
-                                _controllerClean = value ?? false;
-                                _errors = _without(
-                                  _errors,
-                                  SetupField.controllerClean,
-                                );
-                              }),
-                        controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.zero,
-                        title: const Text(
-                          'Controller has a clean fabric and app state.',
-                        ),
-                        subtitle: _errorText(SetupField.controllerClean),
-                      ),
                       CheckboxListTile(
                         key: DeviceTestUiKeys.commissioneeClean,
                         value: _commissioneeClean,
+                        contentPadding: EdgeInsets.zero,
+                        controlAffinity: ListTileControlAffinity.leading,
                         onChanged: busy
                             ? null
                             : (value) => setState(() {
@@ -363,57 +310,15 @@ class _SetupScreenState extends State<SetupScreen> {
                                   SetupField.commissioneeClean,
                                 );
                               }),
-                        controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.zero,
                         title: const Text(
-                          'Commissionee was factory-reset for this Run.',
+                          'The commissionee was factory-reset and is in an '
+                          'open commissioning window.',
                         ),
-                        subtitle: _errorText(SetupField.commissioneeClean),
                       ),
-                      CheckboxListTile(
-                        key: DeviceTestUiKeys.secretsPurged,
-                        value: _secretsPurged,
-                        onChanged: busy
-                            ? null
-                            : (value) => setState(() {
-                                _secretsPurged = value ?? false;
-                                _errors = _without(
-                                  _errors,
-                                  SetupField.secretsPurged,
-                                );
-                              }),
-                        controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.zero,
-                        title: const Text(
-                          'Previous test secrets and controller identity were purged.',
+                      if (_errors.containsKey(SetupField.commissioneeClean))
+                        _InlineError(
+                          error: _errors[SetupField.commissioneeClean]!,
                         ),
-                        subtitle: _errorText(SetupField.secretsPurged),
-                      ),
-                      if (widget.state.hasStoredSecrets) ...<Widget>[
-                        const SizedBox(height: 8),
-                        const InfoBanner(
-                          icon: Icons.lock_outline,
-                          message:
-                              'Stored secrets are still present. Purge them '
-                              'before starting this Run.',
-                        ),
-                        const SizedBox(height: 8),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Semantics(
-                            label: 'Purge stored controller secrets from setup',
-                            button: true,
-                            enabled: !busy,
-                            excludeSemantics: true,
-                            child: OutlinedButton.icon(
-                              key: DeviceTestUiKeys.setupPurgeSecrets,
-                              onPressed: busy ? null : _purgeSecrets,
-                              icon: const Icon(Icons.delete_forever_outlined),
-                              label: const Text('Purge Secrets Now'),
-                            ),
-                          ),
-                        ),
-                      ],
                     ],
                   ),
                 ),
@@ -545,25 +450,15 @@ class _SetupScreenState extends State<SetupScreen> {
     required String label,
     SetupField? field,
     String? hint,
+    Widget? suffixIcon,
   }) {
     return InputDecoration(
       labelText: label,
       hintText: hint,
       errorText: field == null ? null : _errors[field],
+      suffixIcon: suffixIcon,
       border: const OutlineInputBorder(),
     );
-  }
-
-  Widget? _errorText(SetupField field) {
-    final error = _errors[field];
-    return error == null ? null : _InlineError(error: error);
-  }
-
-  void _setStateChangeMethod(StateChangeMethod method) {
-    setState(() {
-      _stateChangeMethod = method;
-      _errors = _without(_errors, SetupField.stateChangeNotes);
-    });
   }
 
   void _clearError(SetupField field) {
@@ -575,17 +470,20 @@ class _SetupScreenState extends State<SetupScreen> {
     });
   }
 
-  Future<void> _purgeSecrets() async {
-    final confirmed = await showPurgeSecretsDialog(context);
-    if (!confirmed || !mounted) {
-      return;
-    }
+  Future<void> _clearWifiCredentials() async {
     try {
-      await widget.controller.purgeSecrets();
+      await widget.controller.clearWifiCredentials();
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _wifiPasswordController.clear();
+        _actionError = null;
+      });
     } on Object {
       if (mounted) {
         setState(() {
-          _actionError = 'Secrets could not be purged.';
+          _actionError = 'Stored Wi-Fi credentials could not be cleared.';
         });
       }
     }
@@ -594,31 +492,20 @@ class _SetupScreenState extends State<SetupScreen> {
   Future<void> _submit() async {
     FocusManager.instance.primaryFocus?.unfocus();
     final controllerInfo = widget.state.controllerInfo;
-    final cleanCycle = CleanCycleConfirmations(
-      controllerClean: _controllerClean,
-      commissioneeClean: _commissioneeClean,
-      secretsPurged: _secretsPurged,
-    );
     final draft = DeviceTestSetupDraft(
-      commissioneeType: CommissioneeType.real,
-      model: _modelController.text,
-      firmware: _firmwareController.text,
-      commissioningTransport: CommissioningTransport.ip,
-      networkTransport: NetworkTransport.wifi,
-      stateChangeMethod: _stateChangeMethod,
-      stateChangeNotes: _stateChangeNotesController.text,
       setupCode: _setupCodeController.text,
       wifiSsid: _wifiSsidController.text,
       wifiPassword: _wifiPasswordController.text,
       profile: _profile,
-      cleanCycle: cleanCycle,
+      cleanCycle: CleanCycleConfirmations(
+        commissioneeClean: _commissioneeClean,
+      ),
     );
 
     final validation = DeviceTestSetupValidator.validate(
       draft: draft,
       controller: controllerInfo,
       preflightChecks: widget.state.preflightChecks,
-      hasStoredSecrets: widget.state.hasStoredSecrets,
     );
     setState(() {
       _submitted = true;
@@ -631,13 +518,6 @@ class _SetupScreenState extends State<SetupScreen> {
 
     final request = DeviceTestSetupRequest(
       controller: controllerInfo,
-      commissioneeType: draft.commissioneeType,
-      model: draft.model.trim(),
-      firmware: draft.firmware.trim(),
-      commissioningTransport: draft.commissioningTransport,
-      networkTransport: draft.networkTransport,
-      stateChangeMethod: draft.stateChangeMethod,
-      stateChangeNotes: draft.stateChangeNotes.trim(),
       setupCode: draft.setupCode.trim(),
       wifiSsid: draft.wifiSsid.trim(),
       wifiPassword: draft.wifiPassword,

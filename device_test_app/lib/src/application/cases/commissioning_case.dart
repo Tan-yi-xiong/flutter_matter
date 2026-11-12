@@ -6,11 +6,11 @@ import '../test_case.dart';
 import '../test_context.dart';
 import 'case_support.dart';
 
-class IpCommissioningCase implements DeviceTestCase {
-  const IpCommissioningCase();
+class CommissioningCase implements DeviceTestCase {
+  const CommissioningCase();
 
   @override
-  DeviceTestId get id => DeviceTestId.ipCommissioning;
+  DeviceTestId get id => DeviceTestId.commissioning;
 
   @override
   Future<TestCaseOutcome> execute(TestContext context) async {
@@ -20,9 +20,10 @@ class IpCommissioningCase implements DeviceTestCase {
         'Provisioning secrets are unavailable for commissioning.',
       );
     }
-    if (secrets.commissioningTransport != CommissioningTransport.ip) {
+    final transport = context.execution.commissioningTransport;
+    if (transport == null) {
       return TestCaseOutcome.failed(
-        'The Run is not configured for Wi-Fi/IP commissioning.',
+        'Commissioning discovery did not select a transport.',
       );
     }
     final identity =
@@ -33,8 +34,10 @@ class IpCommissioningCase implements DeviceTestCase {
     try {
       final result = await commissionTarget(
         context,
+        target: context.execution.target,
         identity: identity,
         secrets: secrets,
+        commissioningTransport: transport,
         timeout: timeout,
       );
       if (!result.succeeded) {
@@ -43,13 +46,15 @@ class IpCommissioningCase implements DeviceTestCase {
         );
       }
       final nodeId = result.nodeId ?? context.targetNodeId;
-      final transport = result.networkTransport ?? secrets.transport;
+      final networkTransport = result.networkTransport ?? secrets.transport;
       await context.updateExecution((execution) {
         execution.nodeId = nodeId;
-        execution.networkTransport = transport;
+        execution.networkTransport = networkTransport;
       });
       return TestCaseOutcome.passed(
-        notes: 'Commissioning completed with error code 0 over Wi-Fi/IP.',
+        notes:
+            'Commissioning completed with error code 0 over '
+            '${transport.wireName}.',
       );
     } on CommissioningException catch (error) {
       return TestCaseOutcome.failed(

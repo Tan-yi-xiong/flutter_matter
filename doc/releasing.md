@@ -26,10 +26,10 @@ The release-preparation pull request is also the durable record for stable-relea
 
 Each report must:
 
-- Conform to schema version `2` and provide both `device-test-report.json` and its generated Markdown summary.
+- Conform to schema version `3` and provide both `device-test-report.json` and its generated Markdown summary.
 - Identify an exact `plugin_commit` equal to the candidate commit.
 - Cover one complete clean P0 cycle for the controller platform.
-- Use a qualified real Matter On/Off device over Wi-Fi/IP commissioning. Virtual commissionees are not supported in any device run.
+- Use a qualified real Matter On/Off device. The app starts BLE and Wi-Fi/IP commissionable discovery concurrently, records the first matching `ble` or `ip` commissioning transport, and reports `wifi` as the network transport. A commissioning failure is preserved without transport fallback; virtual commissionees are not supported in any device run.
 - Include optional sanitized screenshots or other manually captured bounded evidence; the app itself emits JSON and Markdown only.
 - Record P1 and P2 results, including reasons for `not_run` entries and any accepted P2 failures.
 

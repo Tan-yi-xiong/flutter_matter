@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_matter/flutter_matter.dart' show DiscoveryCapability;
 
 import '../application/application.dart';
 import '../domain/domain.dart';
@@ -26,6 +25,8 @@ class DeviceTestAppController extends ChangeNotifier
     required OperatorPromptBroker prompts,
     required DeviceTestBootstrapPort bootstrap,
     required ProvisioningSecretsPort secrets,
+    required DeviceRunMaintenancePort maintenance,
+    required WifiSetupPort wifiSetup,
     required OnboardingPayloadReader onboardingPayloads,
     required DeviceTestReportArtifactPort reportArtifacts,
     required DeviceTestReportSharePort reportSharing,
@@ -37,6 +38,8 @@ class DeviceTestAppController extends ChangeNotifier
        _prompts = prompts,
        _bootstrapPort = bootstrap,
        _secrets = secrets,
+       _maintenance = maintenance,
+       _wifiSetup = wifiSetup,
        _onboardingPayloads = onboardingPayloads,
        _reportArtifacts = reportArtifacts,
        _reportSharing = reportSharing,
@@ -62,6 +65,8 @@ class DeviceTestAppController extends ChangeNotifier
   final OperatorPromptBroker _prompts;
   final DeviceTestBootstrapPort _bootstrapPort;
   final ProvisioningSecretsPort _secrets;
+  final DeviceRunMaintenancePort _maintenance;
+  final WifiSetupPort _wifiSetup;
   final OnboardingPayloadReader _onboardingPayloads;
   final DeviceTestReportArtifactPort _reportArtifacts;
   final DeviceTestReportSharePort _reportSharing;
@@ -88,7 +93,7 @@ class DeviceTestAppController extends ChangeNotifier
     status: ReportUiValidationStatus.unavailable,
     message: 'No formal report is available yet.',
   );
-  DeviceTestReportV2? _formalReport;
+  DeviceTestReportV3? _formalReport;
   ReportValidationResult? _validationResult;
   DeviceTestReportFiles? _reportFiles;
   String? _markdownContents;
@@ -114,7 +119,7 @@ class DeviceTestAppController extends ChangeNotifier
   /// Provided to ApplicationPorts during production wiring.
   OperatorPromptPort get operatorPromptPort => _prompts;
 
-  DeviceTestReportV2? get formalReport => _formalReport;
+  DeviceTestReportV3? get formalReport => _formalReport;
 
   ReportValidationResult? get reportValidation => _validationResult;
 
@@ -198,29 +203,29 @@ class DeviceTestAppController extends ChangeNotifier
       return;
     }
 
-    final safetyIssues = _deviceRunSafetyIssues(request);
-    if (safetyIssues.isNotEmpty) {
-      _setError(
-        'Device runs require a real Matter commissionee, IP commissioning '
-        'transport, and Wi-Fi network transport. ${safetyIssues.join(' ')}',
-      );
-      return;
-    }
-
     _setState(busy: true, errorMessage: null);
     try {
       final setupCode = request.setupCode.trim();
       final payload = await _onboardingPayloads.parse(setupCode);
-      final network = _networkSecret(request);
+
+      await _maintenance.prepareForNewRun();
+      try {
+        await _wifiSetup.remember(
+          ssid: request.wifiSsid.trim(),
+          password: request.wifiPassword,
+        );
+      } on Object {
+        // Wi-Fi prefill is a convenience and must not block a clean Run.
+      }
+
       final runId = _runIdFactory();
       final targetNodeId = _targetNodeIdFactory(runId);
       final secrets = ProvisioningSecrets(
         onboardingPayload: setupCode,
         setupPinCode: payload.setupPinCode,
-        network: network,
-        commissioningTransport: request.commissioningTransport,
-        supportsOnNetworkDiscovery: payload.discoveryCapabilities.contains(
-          DiscoveryCapability.on_network,
+        network: WifiProvisioningSecret(
+          ssid: request.wifiSsid.trim(),
+          password: request.wifiPassword,
         ),
       );
 
@@ -239,15 +244,9 @@ class DeviceTestAppController extends ChangeNotifier
           appBuild: request.controller.appBuild,
         ),
         commissionee: CommissioneeMetadata(
-          type: request.commissioneeType,
-          model: request.model.trim(),
-          firmware: request.firmware.trim(),
-          commissioningTransport: request.commissioningTransport,
-          networkTransport: request.networkTransport,
-          stateChangeMethod: request.stateChangeMethod,
-          stateChangeNotes: request.stateChangeNotes.trim().isEmpty
-              ? null
-              : request.stateChangeNotes.trim(),
+          vendorId: payload.vendorId,
+          productId: payload.productId,
+          networkTransport: NetworkTransport.wifi,
         ),
         targetNodeId: targetNodeId,
       );
@@ -266,7 +265,7 @@ class DeviceTestAppController extends ChangeNotifier
       );
       _setState(
         screen: DeviceTestScreen.runner,
-        busy: false,
+        busy: true,
         errorMessage: null,
         activeRun: null,
         prompt: null,
@@ -288,10 +287,16 @@ class DeviceTestAppController extends ChangeNotifier
     } on Object {
       _setState(
         busy: false,
-        errorMessage: 'Provisioning secrets could not be prepared.',
+        errorMessage: 'Automatic cleanup or provisioning storage failed.',
       );
     }
   }
+
+  @override
+  Future<WifiSetupPrefill> loadWifiSetupPrefill() => _wifiSetup.loadPrefill();
+
+  @override
+  Future<void> clearWifiCredentials() => _wifiSetup.clear();
 
   Future<void> _launchRun(RunStartRequest request) async {
     try {
@@ -693,58 +698,6 @@ class DeviceTestAppController extends ChangeNotifier
       issues: List<String>.unmodifiable(issues),
     );
     _publishProjection();
-  }
-
-  /// Defense-in-depth check enforced before any session state or secret is
-  /// written. Only real commissionees commissioned over Wi-Fi/IP are allowed.
-  List<String> _deviceRunSafetyIssues(DeviceTestSetupRequest request) {
-    final issues = <String>[];
-    if (request.commissioneeType != CommissioneeType.real) {
-      issues.add('The commissionee type must be real.');
-    }
-    if (request.commissioningTransport != CommissioningTransport.ip) {
-      issues.add('The commissioning transport must be ip.');
-    }
-    if (request.networkTransport != NetworkTransport.wifi) {
-      issues.add('The network transport must be wifi.');
-    }
-    return issues;
-  }
-
-  ProvisioningNetworkSecret _networkSecret(DeviceTestSetupRequest request) {
-    return switch (request.networkTransport) {
-      NetworkTransport.wifi => WifiProvisioningSecret(
-        ssid: request.wifiSsid.trim(),
-        password: request.wifiPassword,
-      ),
-      NetworkTransport.thread => ThreadProvisioningSecret(
-        operationalDataset: _parseThreadDataset(
-          request.threadOperationalDataset,
-        ),
-      ),
-      NetworkTransport.unknown => throw const FormatException(
-        'A network transport is required.',
-      ),
-    };
-  }
-
-  Uint8List _parseThreadDataset(String value) {
-    var normalized = value.trim();
-    if (normalized.toLowerCase().startsWith('0x')) {
-      normalized = normalized.substring(2);
-    }
-    normalized = normalized.replaceAll(RegExp(r'[\s:_-]'), '');
-    if (normalized.isEmpty ||
-        normalized.length.isOdd ||
-        !RegExp(r'^[0-9a-fA-F]+$').hasMatch(normalized)) {
-      throw const FormatException(
-        'Thread operational dataset must be hexadecimal.',
-      );
-    }
-    return Uint8List.fromList(<int>[
-      for (var index = 0; index < normalized.length; index += 2)
-        int.parse(normalized.substring(index, index + 2), radix: 16),
-    ]);
   }
 
   void _setError(String message, {DeviceTestScreen? screen}) {

@@ -117,8 +117,8 @@ class HomeScreen extends StatelessWidget {
                   PresentationCard(
                     title: 'New Run',
                     subtitle:
-                        'The setup screen collects controller, commissionee, '
-                        'network, lifecycle, and profile information.',
+                        'The setup screen collects the setup code, Wi-Fi details, clean-cycle '
+                        'confirmation, and profile.',
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Semantics(

@@ -8,15 +8,15 @@ enum DeviceTestId {
     priority: DeviceTestPriority.p0,
     title: 'Build and install',
   ),
-  ipDiscovery(
-    wireName: 'ip_discovery',
+  commissioningDiscovery(
+    wireName: 'commissioning_discovery',
     priority: DeviceTestPriority.p0,
-    title: 'Wi-Fi/IP discovery readiness',
+    title: 'Matter commissioning discovery',
   ),
-  ipCommissioning(
-    wireName: 'ip_commissioning',
+  commissioning(
+    wireName: 'commissioning',
     priority: DeviceTestPriority.p0,
-    title: 'Wi-Fi/IP commissioning',
+    title: 'Matter commissioning',
   ),
   operationalConnect(
     wireName: 'operational_connect',
@@ -143,8 +143,8 @@ abstract final class DeviceTestCatalog {
   /// The minimum smoke path: build through the first successful OnOff invoke.
   static const List<DeviceTestId> quickTestIds = <DeviceTestId>[
     DeviceTestId.buildInstall,
-    DeviceTestId.ipDiscovery,
-    DeviceTestId.ipCommissioning,
+    DeviceTestId.commissioningDiscovery,
+    DeviceTestId.commissioning,
     DeviceTestId.operationalConnect,
     DeviceTestId.onoffInvoke,
   ];

@@ -202,50 +202,44 @@ class DeviceTestUiState {
   final bool hasStoredSecrets;
 }
 
-/// Clean-cycle acknowledgements required before a Run can start.
+/// Explicit operator confirmation required before a Run can start.
 class CleanCycleConfirmations {
-  const CleanCycleConfirmations({
-    required this.controllerClean,
-    required this.commissioneeClean,
-    required this.secretsPurged,
-  });
+  const CleanCycleConfirmations({required this.commissioneeClean});
 
-  final bool controllerClean;
   final bool commissioneeClean;
-  final bool secretsPurged;
 }
 
 /// Editable setup values kept only in the setup screen.
 class DeviceTestSetupDraft {
   const DeviceTestSetupDraft({
-    required this.commissioneeType,
-    required this.model,
-    required this.firmware,
-    required this.networkTransport,
-    required this.stateChangeMethod,
     required this.setupCode,
     required this.profile,
     required this.cleanCycle,
-    this.commissioningTransport = CommissioningTransport.ip,
-    this.stateChangeNotes = '',
     this.wifiSsid = '',
     this.wifiPassword = '',
-    this.threadOperationalDataset = '',
   });
 
-  final CommissioneeType commissioneeType;
-  final String model;
-  final String firmware;
-  final NetworkTransport networkTransport;
-  final StateChangeMethod stateChangeMethod;
-  final CommissioningTransport commissioningTransport;
-  final String stateChangeNotes;
   final String setupCode;
   final String wifiSsid;
   final String wifiPassword;
-  final String threadOperationalDataset;
   final TestProfile profile;
   final CleanCycleConfirmations cleanCycle;
+}
+
+/// Transient Wi-Fi values loaded for the setup form.
+///
+/// This object is never copied into [DeviceTestUiState], Agent state, logs, or
+/// reports.
+class WifiSetupPrefill {
+  const WifiSetupPrefill({
+    this.currentSsid,
+    this.password = '',
+    this.manualSsidRequired = true,
+  });
+
+  final String? currentSsid;
+  final String password;
+  final bool manualSsidRequired;
 }
 
 /// Validated setup request handed to the application coordinator.
@@ -255,33 +249,17 @@ class DeviceTestSetupDraft {
 class DeviceTestSetupRequest {
   const DeviceTestSetupRequest({
     required this.controller,
-    required this.commissioneeType,
-    required this.model,
-    required this.firmware,
-    required this.networkTransport,
-    required this.stateChangeMethod,
     required this.setupCode,
     required this.profile,
     required this.cleanCycle,
-    this.commissioningTransport = CommissioningTransport.ip,
-    this.stateChangeNotes = '',
     this.wifiSsid = '',
     this.wifiPassword = '',
-    this.threadOperationalDataset = '',
   });
 
   final ControllerInfoViewModel controller;
-  final CommissioneeType commissioneeType;
-  final String model;
-  final String firmware;
-  final NetworkTransport networkTransport;
-  final StateChangeMethod stateChangeMethod;
-  final CommissioningTransport commissioningTransport;
-  final String stateChangeNotes;
   final String setupCode;
   final String wifiSsid;
   final String wifiPassword;
-  final String threadOperationalDataset;
   final TestProfile profile;
   final CleanCycleConfirmations cleanCycle;
 }
@@ -290,16 +268,9 @@ class DeviceTestSetupRequest {
 enum SetupField {
   controller,
   preflight,
-  commissioneeType,
-  commissioningTransport,
-  model,
-  firmware,
   networkCredentials,
-  stateChangeNotes,
   setupCode,
-  controllerClean,
   commissioneeClean,
-  secretsPurged,
 }
 
 class SetupValidationResult {
@@ -377,14 +348,5 @@ extension NetworkTransportPresentation on NetworkTransport {
     NetworkTransport.wifi => 'Wi-Fi',
     NetworkTransport.thread => 'Thread',
     NetworkTransport.unknown => 'Unknown',
-  };
-}
-
-extension StateChangeMethodPresentation on StateChangeMethod {
-  String get label => switch (this) {
-    StateChangeMethod.physicalControl => 'Physical control',
-    StateChangeMethod.vendorApp => 'Vendor app',
-    StateChangeMethod.commissioneeUi => 'Commissionee UI',
-    StateChangeMethod.other => 'Other',
   };
 }

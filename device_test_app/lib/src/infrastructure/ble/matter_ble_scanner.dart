@@ -36,7 +36,7 @@ class MatterDiscriminatorMatcher {
   }
 }
 
-class MatterBleScanner {
+class MatterBleScanner implements MatterBleScannerApi {
   MatterBleScanner({
     required MatterBlePlatform platform,
     Duration cleanupTimeout = const Duration(seconds: 5),
@@ -46,6 +46,7 @@ class MatterBleScanner {
   final MatterBlePlatform _platform;
   final Duration _cleanupTimeout;
 
+  @override
   Future<MatterBleDiscoveredDevice> scan(
     MatterBleDiscoveryRequest request,
   ) async {

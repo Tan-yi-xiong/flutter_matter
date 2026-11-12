@@ -34,14 +34,14 @@
         "android-build-install.png"
       ]
     },
-    "ip_discovery": {
+    "commissioning_discovery": {
       "status": "passed",
       "duration_ms": 7200,
       "evidence_files": [
         "android-ip-discovery.png"
       ]
     },
-    "ip_commissioning": {
+    "commissioning": {
       "status": "passed",
       "duration_ms": 61200,
       "evidence_files": [

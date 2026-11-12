@@ -1,3 +1,5 @@
+import 'package:flutter_matter/flutter_matter.dart';
+
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -5,8 +7,9 @@ import 'package:flutter/services.dart';
 import '../../application/ports.dart';
 import '../../domain/domain.dart';
 import '../ble/matter_ble.dart';
+import '../discovery/discovery.dart';
 import '../matter/matter.dart';
-import 'matter_ble_discovery_adapter.dart';
+import 'matter_onboarding_payload_resolver.dart';
 import 'matter_controller_api.dart';
 import 'opaque_handle_factory.dart';
 import 'purpose_scoped_runtime.dart';
@@ -16,6 +19,7 @@ import 'purpose_scoped_runtime.dart';
 class MatterControllerAdapter
     implements
         ControllerIdentityPort,
+        CommissioningDiscoveryPort,
         CommissioningPort,
         OperationalConnectionPort,
         OnOffPort,
@@ -26,17 +30,31 @@ class MatterControllerAdapter
     required MatterOnboardingPayloadResolver payloadResolver,
     required ControllerPlatform platform,
     OpaqueHandleFactory? handleFactory,
+    MatterBleScannerApi? bleScanner,
+    MatterMdnsCommissioningScannerApi? mdnsScanner,
   }) : _runtimeProvider = runtimeProvider,
        _payloadResolver = payloadResolver,
        _platform = platform,
-       _handles = handleFactory ?? OpaqueHandleFactory();
+       _handles = handleFactory ?? OpaqueHandleFactory(),
+       _bleScanner =
+           bleScanner ??
+           MatterBleScanner(platform: FlutterBluePlusMatterBlePlatform()),
+       _mdnsScanner =
+           mdnsScanner ??
+           MatterMdnsCommissioningScanner(
+             browserFactory: BonsoirMatterMdnsBrowser.new,
+           );
 
   final MatterControllerRuntimeProvider _runtimeProvider;
   final MatterOnboardingPayloadResolver _payloadResolver;
   final ControllerPlatform _platform;
   final OpaqueHandleFactory _handles;
+  final MatterBleScannerApi _bleScanner;
+  final MatterMdnsCommissioningScannerApi _mdnsScanner;
   final Map<String, MatterControllerRuntime> _runtimesByIdentity =
       <String, MatterControllerRuntime>{};
+  final Map<String, MatterBleDiscoveredDevice> _discoveredBleByIdentity =
+      <String, MatterBleDiscoveredDevice>{};
   final Map<String, _ConnectionHandle> _connections =
       <String, _ConnectionHandle>{};
   final List<_SubscriptionCancellation> _activeSubscriptions =
@@ -90,7 +108,154 @@ class MatterControllerAdapter
       _connections.removeWhere(
         (_, connection) => removed.contains(connection.identityOpaqueId),
       );
+      _discoveredBleByIdentity.clear();
     }
+  }
+
+  @override
+  Future<CommissioningDiscoveryResult> discover(
+    CommissioningDiscoveryRequest request,
+  ) async {
+    try {
+      final onboarding = await _payloadResolver
+          .resolve(request.onboardingPayload)
+          .timeout(request.timeout);
+      final ble = _discoverBle(onboarding, request.timeout);
+      final mdns = _discoverMdns(onboarding, request.timeout);
+
+      return await _firstDiscoverySuccess(
+        ble: ble,
+        mdns: mdns,
+        timeout: request.timeout,
+      );
+    } on TimeoutException {
+      throw CommissioningDiscoveryException(
+        CommissioningDiscoveryFailureCode.timeout,
+      );
+    } on FormatException {
+      throw CommissioningDiscoveryException(
+        CommissioningDiscoveryFailureCode.other,
+      );
+    } on CommissioningDiscoveryException {
+      rethrow;
+    } on Object {
+      throw CommissioningDiscoveryException(
+        CommissioningDiscoveryFailureCode.other,
+      );
+    }
+  }
+
+  Future<CommissioningDiscoveryResult> _discoverBle(
+    OnboardingPayload onboarding,
+    Duration timeout,
+  ) async {
+    final discovered = await _bleScanner.scan(
+      MatterBleDiscoveryRequest(
+        discriminator: onboarding.discriminator,
+        hasShortDiscriminator: onboarding.hasShortDiscriminator,
+        timeout: timeout,
+      ),
+    );
+    final opaqueId = _handles.next('ble-target');
+    _discoveredBleByIdentity[opaqueId] = discovered;
+    final advertisedName = discovered.advertisement.advertisedName?.trim();
+    return CommissioningDiscoveryResult(
+      transport: CommissioningTransport.ble,
+      bleTarget: BleCommissionee(
+        opaqueId: opaqueId,
+        displayName: advertisedName == null || advertisedName.isEmpty
+            ? 'Matter BLE commissionee'
+            : advertisedName,
+      ),
+    );
+  }
+
+  Future<CommissioningDiscoveryResult> _discoverMdns(
+    OnboardingPayload onboarding,
+    Duration timeout,
+  ) async {
+    final matched = await _mdnsScanner.waitForMatch(
+      discriminator: onboarding.discriminator,
+      hasShortDiscriminator: onboarding.hasShortDiscriminator,
+      timeout: timeout,
+    );
+    if (!matched) {
+      throw CommissioningDiscoveryException(
+        CommissioningDiscoveryFailureCode.noCommissionableDevice,
+      );
+    }
+    return const CommissioningDiscoveryResult(
+      transport: CommissioningTransport.ip,
+    );
+  }
+
+  Future<CommissioningDiscoveryResult> _firstDiscoverySuccess({
+    required Future<CommissioningDiscoveryResult> ble,
+    required Future<CommissioningDiscoveryResult> mdns,
+    required Duration timeout,
+  }) async {
+    final completer = Completer<CommissioningDiscoveryResult>();
+    final failures = <Object>[];
+    var pending = 2;
+
+    void recordFailure(Object error) {
+      failures.add(error);
+      pending--;
+      if (pending == 0 && !completer.isCompleted) {
+        completer.completeError(
+          CommissioningDiscoveryException(_discoveryFailureCode(failures)),
+        );
+      }
+    }
+
+    unawaited(
+      ble.then(
+        (result) {
+          if (!completer.isCompleted) {
+            completer.complete(result);
+          }
+        },
+        onError: (Object error, StackTrace stackTrace) {
+          recordFailure(error);
+        },
+      ),
+    );
+    unawaited(
+      mdns.then(
+        (result) {
+          if (!completer.isCompleted) {
+            completer.complete(result);
+          }
+        },
+        onError: (Object error, StackTrace stackTrace) {
+          recordFailure(error);
+        },
+      ),
+    );
+
+    return completer.future.timeout(timeout);
+  }
+
+  CommissioningDiscoveryFailureCode _discoveryFailureCode(
+    List<Object> failures,
+  ) {
+    for (final failure in failures) {
+      if (failure is MatterBleException) {
+        return switch (failure.code) {
+          MatterBleFailureCode.adapterUnavailable =>
+            CommissioningDiscoveryFailureCode.adapterUnavailable,
+          MatterBleFailureCode.discoveryTimeout ||
+          MatterBleFailureCode.operationTimeout =>
+            CommissioningDiscoveryFailureCode.timeout,
+          _ => CommissioningDiscoveryFailureCode.bluetoothUnavailable,
+        };
+      }
+      final platform = _findCause<PlatformException>(failure);
+      if (platform?.code.contains('permission') == true) {
+        return CommissioningDiscoveryFailureCode.permissionDenied;
+      }
+    }
+    return CommissioningDiscoveryFailureCode.noCommissionableDevice;
   }
 
   @override
@@ -110,8 +275,12 @@ class MatterControllerAdapter
           nodeId: request.targetNodeId,
           networkCredentials: network,
           commissioningTransport: switch (request.commissioningTransport) {
+            CommissioningTransport.ble => MatterCommissioningTransport.ble,
             CommissioningTransport.ip => MatterCommissioningTransport.ip,
           },
+          discoveredBleDevice: request.target == null
+              ? null
+              : _discoveredBleByIdentity[request.target!.opaqueId],
           bleScanTimeout: request.timeout,
           timeout: request.timeout,
         ),
@@ -119,6 +288,7 @@ class MatterControllerAdapter
       return CommissioningResult(
         errorCode: 0,
         nodeId: result.nodeId,
+        commissioningTransport: request.commissioningTransport,
         networkTransport: request.network.transport,
       );
     } on CommissioningException {

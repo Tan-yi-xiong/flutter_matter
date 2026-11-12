@@ -19,8 +19,8 @@ const String _controlPath = '/control';
 const String _agentPath = '/agent';
 const List<String> _reportTestIds = <String>[
   'build_install',
-  'ip_discovery',
-  'ip_commissioning',
+  'commissioning_discovery',
+  'commissioning',
   'operational_connect',
   'onoff_invoke',
   'onoff_subscription',
@@ -2902,7 +2902,7 @@ int _bodySeconds(Map<String, Object?> body, String field,
   return value;
 }
 
-/// Validates a device-test report JSON document against schema v2.
+/// Validates a device-test report JSON document against schema v3.
 ///
 /// This is a narrow, test-facing wrapper around the internal report validator.
 /// It reports field-level validation errors only; error messages and details
@@ -2930,18 +2930,17 @@ void _validateReportJson(
     'sanitization',
   };
   _requireExactKeys(report, requiredKeys, 'report');
-  if (report['schema_version'] != 2) {
+  if (report['schema_version'] != 3) {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'Report schema_version must be 2.',
+      message: 'Report schema_version must be 3.',
     );
   }
-  final generatedAt =
-      DateTime.tryParse(report['generated_at']?.toString() ?? '');
-  if (generatedAt == null) {
+  final generatedAt = report['generated_at'];
+  if (generatedAt is! String || !_isRfc3339DateTime(generatedAt)) {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'Report generated_at must be an ISO-8601 timestamp.',
+      message: 'Report generated_at must be an RFC 3339 timestamp.',
     );
   }
   final testApp = _requiredMap(report, 'test_app');
@@ -2998,17 +2997,12 @@ void _validateReportJson(
   final commissionee = _requiredMap(report, 'commissionee');
   const commissioneeRequired = <String>{
     'type',
-    'model',
-    'firmware',
+    'vendor_id',
+    'product_id',
     'commissioning_transport',
     'network_transport',
-    'state_change_method',
   };
-  _requireAllowedKeys(
-    commissionee,
-    <String>{...commissioneeRequired, 'state_change_notes'},
-    'commissionee',
-  );
+  _requireExactKeys(commissionee, commissioneeRequired, 'commissionee');
   for (final key in commissioneeRequired) {
     if (!commissionee.containsKey(key)) {
       throw CliFailure(
@@ -3023,27 +3017,31 @@ void _validateReportJson(
       message: 'commissionee.type must be real.',
     );
   }
-  if (commissionee['commissioning_transport'] != 'ip') {
+  final vendorId = commissionee['vendor_id'];
+  final productId = commissionee['product_id'];
+  if (vendorId is! int || vendorId < 0) {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'commissionee.commissioning_transport must be ip.',
+      message: 'commissionee.vendor_id must be a non-negative integer.',
+    );
+  }
+  if (productId is! int || productId < 0) {
+    throw const CliFailure(
+      code: 'invalid_report',
+      message: 'commissionee.product_id must be a non-negative integer.',
+    );
+  }
+  if (!const <String>{'ble', 'ip'}
+      .contains(commissionee['commissioning_transport'])) {
+    throw const CliFailure(
+      code: 'invalid_report',
+      message: 'commissionee.commissioning_transport must be ble or ip.',
     );
   }
   if (commissionee['network_transport'] != 'wifi') {
     throw const CliFailure(
       code: 'invalid_report',
       message: 'commissionee.network_transport must be wifi.',
-    );
-  }
-  if (!const <String>{
-    'physical_control',
-    'vendor_app',
-    'commissionee_ui',
-    'other'
-  }.contains(commissionee['state_change_method'])) {
-    throw const CliFailure(
-      code: 'invalid_report',
-      message: 'Unsupported commissionee.state_change_method.',
     );
   }
 
@@ -3053,8 +3051,8 @@ void _validateReportJson(
   final p0NotRun = <String>{};
   const p0Ids = <String>{
     'build_install',
-    'ip_discovery',
-    'ip_commissioning',
+    'commissioning_discovery',
+    'commissioning',
     'operational_connect',
     'onoff_invoke',
     'onoff_subscription',
@@ -3080,6 +3078,48 @@ void _validateReportJson(
         code: 'invalid_report',
         message: 'tests.$testId.duration_ms must be a non-negative integer.',
       );
+    }
+    final notes = test['notes'];
+    if (notes != null && (notes is! String || notes.length > 2000)) {
+      throw CliFailure(
+        code: 'invalid_report',
+        message: 'tests.$testId.notes must be a string of at most 2000 chars.',
+      );
+    }
+    if (status == 'not_run' && (notes is! String || notes.trim().isEmpty)) {
+      throw CliFailure(
+        code: 'invalid_report',
+        message: 'tests.$testId.not_run requires a non-empty reason in notes.',
+      );
+    }
+    final evidenceFiles = test['evidence_files'];
+    if (evidenceFiles != null) {
+      if (evidenceFiles is! List || evidenceFiles.length > 8) {
+        throw CliFailure(
+          code: 'invalid_report',
+          message: 'tests.$testId.evidence_files must be an array of up to 8.',
+        );
+      }
+      final seen = <String>{};
+      for (final evidenceFile in evidenceFiles) {
+        if (evidenceFile is! String ||
+            evidenceFile.isEmpty ||
+            evidenceFile.length > 200 ||
+            !_evidenceFilePattern.hasMatch(evidenceFile) ||
+            _evidenceDotSegmentPattern.hasMatch(evidenceFile)) {
+          throw CliFailure(
+            code: 'invalid_report',
+            message:
+                'tests.$testId.evidence_files contains an invalid relative path.',
+          );
+        }
+        if (!seen.add(evidenceFile)) {
+          throw CliFailure(
+            code: 'invalid_report',
+            message: 'tests.$testId.evidence_files must be unique.',
+          );
+        }
+      }
     }
     counts[status! as String] = counts[status]! + 1;
     if (p0Ids.contains(testId) && status == 'not_run') {
@@ -3171,6 +3211,37 @@ void _requireCommit(Object? value, String field) {
       message: '$field must be a 40-character lowercase Git SHA.',
     );
   }
+}
+
+final RegExp _rfc3339DateTimePattern = RegExp(
+  r'^(\d{4})-(\d{2})-(\d{2})T'
+  r'(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?'
+  r'(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$',
+);
+final RegExp _evidenceFilePattern = RegExp(r'^[A-Za-z0-9][A-Za-z0-9._/-]*$');
+final RegExp _evidenceDotSegmentPattern = RegExp(r'(^|/)\.\.?(/|$)');
+
+bool _isRfc3339DateTime(String value) {
+  final match = _rfc3339DateTimePattern.firstMatch(value);
+  if (match == null) {
+    return false;
+  }
+  final year = int.parse(match.group(1)!);
+  final month = int.parse(match.group(2)!);
+  final day = int.parse(match.group(3)!);
+  final hour = int.parse(match.group(4)!);
+  final minute = int.parse(match.group(5)!);
+  final second = int.parse(match.group(6)!);
+  if (hour > 23 || minute > 59 || second > 59) {
+    return false;
+  }
+  final date = DateTime.utc(year, month, day, hour, minute, second);
+  return date.year == year &&
+      date.month == month &&
+      date.day == day &&
+      date.hour == hour &&
+      date.minute == minute &&
+      date.second == second;
 }
 
 void _scanForSensitiveData(Object? value, String path) {

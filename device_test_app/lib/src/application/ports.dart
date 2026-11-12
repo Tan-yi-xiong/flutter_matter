@@ -6,11 +6,17 @@ import 'operator_prompt.dart';
 import 'runner_state.dart';
 
 /// A hardware-independent request to discover the configured commissionee.
-class BleDiscoveryRequest {
-  const BleDiscoveryRequest({required this.timeout, this.onboardingPayload});
+///
+/// Implementations race BLE and Wi-Fi/IP discovery. The first matching path is
+/// returned and no fallback is attempted after commissioning starts.
+class CommissioningDiscoveryRequest {
+  const CommissioningDiscoveryRequest({
+    required this.onboardingPayload,
+    required this.timeout,
+  });
 
+  final String onboardingPayload;
   final Duration timeout;
-  final String? onboardingPayload;
 }
 
 class BleCommissionee {
@@ -23,43 +29,50 @@ class BleCommissionee {
   final String displayName;
 }
 
-class BleDiscoveryResult {
-  const BleDiscoveryResult({required this.candidateCount, this.target})
-    : assert(candidateCount >= 0);
+class CommissioningDiscoveryResult {
+  const CommissioningDiscoveryResult({required this.transport, this.bleTarget});
 
-  final int candidateCount;
-  final BleCommissionee? target;
+  final CommissioningTransport transport;
+  final BleCommissionee? bleTarget;
 }
 
-enum BleDiscoveryFailureCode {
+enum CommissioningDiscoveryFailureCode {
   bluetoothUnavailable,
   permissionDenied,
   adapterUnavailable,
   timeout,
+  noCommissionableDevice,
   other,
 }
 
-extension BleDiscoveryFailureCodeWire on BleDiscoveryFailureCode {
+extension CommissioningDiscoveryFailureCodeWire
+    on CommissioningDiscoveryFailureCode {
   String get wireName => switch (this) {
-    BleDiscoveryFailureCode.bluetoothUnavailable => 'bluetooth_unavailable',
-    BleDiscoveryFailureCode.permissionDenied => 'permission_denied',
-    BleDiscoveryFailureCode.adapterUnavailable => 'adapter_unavailable',
-    BleDiscoveryFailureCode.timeout => 'timeout',
-    BleDiscoveryFailureCode.other => 'other',
+    CommissioningDiscoveryFailureCode.bluetoothUnavailable =>
+      'bluetooth_unavailable',
+    CommissioningDiscoveryFailureCode.permissionDenied => 'permission_denied',
+    CommissioningDiscoveryFailureCode.adapterUnavailable =>
+      'adapter_unavailable',
+    CommissioningDiscoveryFailureCode.timeout => 'timeout',
+    CommissioningDiscoveryFailureCode.noCommissionableDevice =>
+      'no_commissionable_device',
+    CommissioningDiscoveryFailureCode.other => 'other',
   };
 }
 
-class BleDiscoveryException implements Exception {
-  BleDiscoveryException(this.code);
+class CommissioningDiscoveryException implements Exception {
+  CommissioningDiscoveryException(this.code);
 
-  final BleDiscoveryFailureCode code;
+  final CommissioningDiscoveryFailureCode code;
 
   @override
-  String toString() => 'BleDiscoveryException(${code.wireName})';
+  String toString() => 'CommissioningDiscoveryException(${code.wireName})';
 }
 
-abstract interface class BleDiscoveryPort {
-  Future<BleDiscoveryResult> discover(BleDiscoveryRequest request);
+abstract interface class CommissioningDiscoveryPort {
+  Future<CommissioningDiscoveryResult> discover(
+    CommissioningDiscoveryRequest request,
+  );
 }
 
 /// Controller identity material stays behind the adapter. The application only
@@ -163,8 +176,6 @@ class ProvisioningSecrets {
     required this.onboardingPayload,
     required this.setupPinCode,
     required this.network,
-    this.commissioningTransport = CommissioningTransport.ip,
-    this.supportsOnNetworkDiscovery = false,
   }) {
     if (onboardingPayload.trim().isEmpty) {
       throw ArgumentError.value(
@@ -185,8 +196,6 @@ class ProvisioningSecrets {
   final String onboardingPayload;
   final int setupPinCode;
   final ProvisioningNetworkSecret network;
-  final CommissioningTransport commissioningTransport;
-  final bool supportsOnNetworkDiscovery;
 
   NetworkTransport get transport => network.transport;
 
@@ -207,8 +216,6 @@ class ProvisioningSecrets {
         ssid: networkSecret.ssid,
         password: '${networkSecret.password}#invalid',
       ),
-      commissioningTransport: commissioningTransport,
-      supportsOnNetworkDiscovery: supportsOnNetworkDiscovery,
     );
   }
 
@@ -230,7 +237,7 @@ class CommissioningRequest {
     required this.onboardingPayload,
     required this.setupPinCode,
     required this.network,
-    this.commissioningTransport = CommissioningTransport.ip,
+    required this.commissioningTransport,
     required this.timeout,
   });
 
@@ -248,11 +255,13 @@ class CommissioningResult {
   const CommissioningResult({
     required this.errorCode,
     this.nodeId,
+    this.commissioningTransport,
     this.networkTransport,
   });
 
   final int errorCode;
   final int? nodeId;
+  final CommissioningTransport? commissioningTransport;
   final NetworkTransport? networkTransport;
 
   bool get succeeded => errorCode == 0;
@@ -604,6 +613,7 @@ class RunExecutionContextSnapshot {
     this.identityOpaqueId,
     this.identityPurpose,
     this.nodeId,
+    this.commissioningTransport,
     this.networkTransport,
     this.lastOnOffState,
   });
@@ -611,6 +621,7 @@ class RunExecutionContextSnapshot {
   final String? identityOpaqueId;
   final ControllerIdentityPurpose? identityPurpose;
   final int? nodeId;
+  final CommissioningTransport? commissioningTransport;
   final NetworkTransport? networkTransport;
   final OnOffState? lastOnOffState;
 
@@ -618,6 +629,8 @@ class RunExecutionContextSnapshot {
     if (identityOpaqueId != null) 'identity_opaque_id': identityOpaqueId,
     if (identityPurpose != null) 'identity_purpose': identityPurpose!.wireName,
     if (nodeId != null) 'node_id': nodeId,
+    if (commissioningTransport != null)
+      'commissioning_transport': commissioningTransport!.wireName,
     if (networkTransport != null)
       'network_transport': networkTransport!.wireName,
     if (lastOnOffState != null) 'last_onoff_state': lastOnOffState!.wireName,
@@ -627,6 +640,7 @@ class RunExecutionContextSnapshot {
     final identityOpaqueId = json['identity_opaque_id'];
     final identityPurpose = json['identity_purpose'];
     final nodeId = json['node_id'];
+    final commissioningTransport = json['commissioning_transport'];
     final networkTransport = json['network_transport'];
     final lastOnOffState = json['last_onoff_state'];
     if (identityOpaqueId != null && identityOpaqueId is! String) {
@@ -637,6 +651,9 @@ class RunExecutionContextSnapshot {
     }
     if (nodeId != null && nodeId is! int) {
       throw const FormatException('node_id must be an integer');
+    }
+    if (commissioningTransport != null && commissioningTransport is! String) {
+      throw const FormatException('commissioning_transport must be a string');
     }
     if (networkTransport != null && networkTransport is! String) {
       throw const FormatException('network_transport must be a string');
@@ -650,6 +667,9 @@ class RunExecutionContextSnapshot {
           ? null
           : ControllerIdentityPurposeWire.parse(identityPurpose),
       nodeId: nodeId as int?,
+      commissioningTransport: commissioningTransport == null
+          ? null
+          : CommissioningTransport.parse(commissioningTransport as String),
       networkTransport: networkTransport == null
           ? null
           : NetworkTransport.parse(networkTransport as String),
@@ -722,7 +742,7 @@ class PersistedRunState {
   }
 
   Map<String, Object?> toJson() => <String, Object?>{
-    'snapshot_version': 1,
+    'snapshot_version': 2,
     'session': session.toJson(),
     'execution': execution.toJson(),
     'target_node_id': targetNodeId,
@@ -733,7 +753,7 @@ class PersistedRunState {
 
   factory PersistedRunState.fromJson(Map<String, dynamic> json) {
     final version = json['snapshot_version'];
-    if (version != 1) {
+    if (version != 2) {
       throw FormatException('Unsupported persisted run version: $version');
     }
     final checkpointJson = json['app_restart_checkpoint'];
@@ -769,7 +789,7 @@ abstract interface class RunPersistencePort {
 /// Hardware-facing ports used directly by test cases.
 class TestPorts {
   const TestPorts({
-    required this.bleDiscovery,
+    required this.commissioningDiscovery,
     required this.commissioning,
     required this.operationalConnection,
     required this.onOff,
@@ -778,7 +798,7 @@ class TestPorts {
     required this.controllerIdentity,
   });
 
-  final BleDiscoveryPort bleDiscovery;
+  final CommissioningDiscoveryPort commissioningDiscovery;
   final CommissioningPort commissioning;
   final OperationalConnectionPort operationalConnection;
   final OnOffPort onOff;

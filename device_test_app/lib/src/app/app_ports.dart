@@ -41,6 +41,22 @@ abstract interface class ProvisioningSecretsPort {
   Future<ProvisioningSecrets?> load(String runId);
 
   Future<void> purge(String runId);
+
+  Future<void> purgeAll();
+}
+
+/// Coordinates the automatic clean cycle before a new Run.
+abstract interface class DeviceRunMaintenancePort {
+  Future<void> prepareForNewRun();
+}
+
+/// Loads and clears the secure setup-form Wi-Fi prefill.
+abstract interface class WifiSetupPort {
+  Future<WifiSetupPrefill> loadPrefill();
+
+  Future<void> remember({required String ssid, required String password});
+
+  Future<void> clear();
 }
 
 /// Parses QR or manual Matter setup payloads.
@@ -96,7 +112,7 @@ abstract interface class DeviceTestRunPort {
 
   Future<void> stop({String reason = 'Stopped by operator.'});
 
-  Future<DeviceTestReportV2?> buildFormalReport({
+  Future<DeviceTestReportV3?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   });

@@ -4,6 +4,7 @@ import 'package:flutter_matter/flutter_matter.dart';
 import 'package:flutter_matter_device_test_app/src/application/ports.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/adapters/adapters.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/ble/matter_ble.dart';
+import 'package:flutter_matter_device_test_app/src/infrastructure/discovery/discovery.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/matter/matter.dart';
 
 typedef CommissionHandler =
@@ -306,6 +307,35 @@ class FakeMatterBleScanner implements MatterBleScannerApi {
       throw failure;
     }
     return discovered;
+  }
+}
+
+class FakeMatterMdnsScanner implements MatterMdnsCommissioningScannerApi {
+  FakeMatterMdnsScanner({this.matched = false, this.error});
+
+  bool matched;
+  Object? error;
+  final List<MatterBleDiscoveryRequest> requests =
+      <MatterBleDiscoveryRequest>[];
+
+  @override
+  Future<bool> waitForMatch({
+    required int discriminator,
+    required bool hasShortDiscriminator,
+    required Duration timeout,
+  }) async {
+    requests.add(
+      MatterBleDiscoveryRequest(
+        discriminator: discriminator,
+        hasShortDiscriminator: hasShortDiscriminator,
+        timeout: timeout,
+      ),
+    );
+    final failure = error;
+    if (failure != null) {
+      throw failure;
+    }
+    return matched;
   }
 }
 

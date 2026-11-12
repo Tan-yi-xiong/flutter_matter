@@ -15,6 +15,8 @@ import '../infrastructure/storage/file_run_persistence.dart';
 import '../infrastructure/storage/provisioning_secret_store.dart';
 import '../infrastructure/storage/run_directory.dart';
 import '../infrastructure/storage/secure_secret_store.dart';
+import '../infrastructure/storage/wifi_credential_cache.dart';
+import '../infrastructure/wifi/wifi.dart';
 import '../presentation/presentation.dart';
 import 'agent_bridge_projection.dart';
 import 'live_device_test_agent_host.dart';
@@ -68,13 +70,24 @@ class DeviceTestAppRuntime {
       payloadResolver: payloadResolver,
       platform: controllerPlatform,
     );
-    final bleDiscovery = MatterBleDiscoveryAdapter.flutter(
-      payloadResolver: payloadResolver,
+    final provisioningSecrets = LiveProvisioningSecrets(
+      secureSecrets,
+      runDirectory,
+    );
+    final wifiSetup = LiveWifiSetup(
+      ssidReader: WifiSsidReader(source: NetworkInfoWifiSsidSource()),
+      cache: WifiCredentialCache(secureStore: SecureSecretStore()),
+    );
+    final maintenance = LiveRunMaintenance(
+      secrets: provisioningSecrets,
+      controllerIdentities: matterAdapter,
+      persistence: FileRunPersistence(runDirectory: runDirectory),
+      platform: controllerPlatform,
     );
     final coordinator = RunCoordinator(
       ports: ApplicationPorts(
         testPorts: TestPorts(
-          bleDiscovery: bleDiscovery,
+          commissioningDiscovery: matterAdapter,
           commissioning: matterAdapter,
           operationalConnection: matterAdapter,
           onOff: matterAdapter,
@@ -96,7 +109,9 @@ class DeviceTestAppRuntime {
         platformInfo: PlatformInfoService(),
         buildMetadata: BuildMetadata.current,
       ),
-      secrets: LiveProvisioningSecrets(secureSecrets),
+      secrets: provisioningSecrets,
+      maintenance: maintenance,
+      wifiSetup: wifiSetup,
       onboardingPayloads: MethodChannelOnboardingPayloadReader(),
       reportArtifacts: LiveDeviceTestReportArtifacts(
         ReportFileRepository(runDirectory: runDirectory),
