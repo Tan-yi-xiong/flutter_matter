@@ -113,16 +113,58 @@ void main() {
     );
   });
 
-  test('rejects schema-valid sensitive strings outside notes', () {
+  test('rejects retired commissionee fields', () {
     final json = _clone(buildFixtureReport().toJson());
     final commissionee = json['commissionee']! as Map<String, dynamic>;
-    commissionee['firmware'] = 'device AA:BB:CC:DD:EE:FF';
+    commissionee['model'] = 'Example Matter Plug';
+    commissionee['firmware'] = '1.0.0';
+    commissionee['state_change_method'] = 'physical_control';
+    commissionee['state_change_notes'] = 'The plug has a local On/Off button.';
 
     final result = validator.validateMap(json);
 
     expect(result.isValid, isFalse);
-    expect(result.contains(ReportValidationIssueKind.sensitive), isTrue);
+    expect(
+      result.issues.map((issue) => issue.path),
+      containsAll(<String>[
+        r'$.commissionee.model',
+        r'$.commissionee.firmware',
+        r'$.commissionee.state_change_method',
+        r'$.commissionee.state_change_notes',
+      ]),
+    );
   });
+
+  test('accepts a selected BLE commissioning route', () {
+    final json = _clone(buildFixtureReport().toJson());
+    final commissionee = json['commissionee']! as Map<String, dynamic>;
+    commissionee['commissioning_transport'] = 'ble';
+
+    final result = validator.validateMap(json);
+
+    expect(result.isValid, isTrue, reason: result.toString());
+  });
+
+  test(
+    'rejects a missing commissioning route through schema and semantics',
+    () {
+      final json = _clone(buildFixtureReport().toJson());
+      final commissionee = json['commissionee']! as Map<String, dynamic>;
+      commissionee.remove('commissioning_transport');
+
+      final result = validator.validateMap(json);
+
+      expect(result.isValid, isFalse);
+      expect(
+        result.issues.map((issue) => issue.path),
+        contains(r'$.commissionee.commissioning_transport'),
+      );
+      expect(
+        result.issues.map((issue) => issue.message).join(' '),
+        contains('selected commissioning transport'),
+      );
+    },
+  );
 
   test('rejects setup credentials even when they appear in a note', () {
     final json = _clone(buildFixtureReport().toJson());

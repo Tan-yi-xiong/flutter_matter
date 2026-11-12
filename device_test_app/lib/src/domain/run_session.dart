@@ -175,7 +175,7 @@ class RunSession {
 
   Map<String, Object?> toJson() {
     return <String, Object?>{
-      'snapshot_version': 1,
+      'snapshot_version': 2,
       'id': id,
       'profile': profile.wireName,
       'test_app': testApp.toJson(),
@@ -195,7 +195,7 @@ class RunSession {
 
   factory RunSession.fromJson(Map<String, dynamic> json) {
     final version = json['snapshot_version'];
-    if (version != 1) {
+    if (version != 2) {
       throw FormatException('Unsupported run snapshot version: $version');
     }
 

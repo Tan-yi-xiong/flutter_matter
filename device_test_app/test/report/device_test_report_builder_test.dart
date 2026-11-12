@@ -26,15 +26,87 @@ void main() {
     expect(first.summary.notRun, 1);
     expect(first.summary.result, ReportResult.passed);
     expect(first.profile, TestProfile.full);
+    expect(
+      first.commissionee.commissioningTransport,
+      CommissioningTransport.ip,
+    );
+    expect(first.commissionee.vendorId, 4660);
+    expect(first.commissionee.productId, 22136);
   });
 
   test('typed reports survive a JSON round trip', () {
     final original = buildFixtureReport();
-    final decoded = DeviceTestReportV2.fromJson(
+    final decoded = DeviceTestReportV3.fromJson(
       jsonDecode(jsonEncode(original.toJson())) as Map<String, dynamic>,
     );
 
     expect(jsonEncode(decoded.toJson()), jsonEncode(original.toJson()));
+  });
+
+  test('accepts a selected BLE commissioning route', () {
+    final report = builder.buildFormal(
+      buildFixtureSession(
+        commissionee: const CommissioneeMetadata(
+          vendorId: 4660,
+          productId: 22136,
+          commissioningTransport: CommissioningTransport.ble,
+          networkTransport: NetworkTransport.wifi,
+        ),
+      ),
+      generatedAt: fixtureGeneratedAt,
+      sanitizationReviewed: true,
+    );
+
+    expect(
+      report.commissionee.commissioningTransport,
+      CommissioningTransport.ble,
+    );
+    expect(report.commissionee.networkTransport, NetworkTransport.wifi);
+  });
+
+  test('accepts a selected IP commissioning route', () {
+    final report = builder.buildFormal(
+      buildFixtureSession(
+        commissionee: const CommissioneeMetadata(
+          vendorId: 4660,
+          productId: 22136,
+          commissioningTransport: CommissioningTransport.ip,
+          networkTransport: NetworkTransport.wifi,
+        ),
+      ),
+      generatedAt: fixtureGeneratedAt,
+      sanitizationReviewed: true,
+    );
+
+    expect(
+      report.commissionee.commissioningTransport,
+      CommissioningTransport.ip,
+    );
+  });
+
+  test('rejects a missing commissioning route', () {
+    final session = buildFixtureSession(
+      commissionee: const CommissioneeMetadata(
+        vendorId: 4660,
+        productId: 22136,
+        networkTransport: NetworkTransport.wifi,
+      ),
+    );
+
+    expect(
+      () => builder.buildFormal(
+        session,
+        generatedAt: fixtureGeneratedAt,
+        sanitizationReviewed: true,
+      ),
+      throwsA(
+        isA<ReportBuildException>().having(
+          (error) => error.issues.join(' '),
+          'issues',
+          contains('selected commissioning transport'),
+        ),
+      ),
+    );
   });
 
   test('rejects quick-profile sessions', () {
@@ -52,12 +124,10 @@ void main() {
         appBuild: 'debug 1.0.0 (1)',
       ),
       commissionee: const CommissioneeMetadata(
-        type: CommissioneeType.real,
-        model: 'Matter test device',
-        firmware: '1.0.0',
+        vendorId: 4660,
+        productId: 22136,
         commissioningTransport: CommissioningTransport.ip,
         networkTransport: NetworkTransport.wifi,
-        stateChangeMethod: StateChangeMethod.physicalControl,
       ),
       results: <DeviceTestId, DeviceTestResult>{
         for (final testId in TestProfile.quick.testIds)
@@ -84,43 +154,13 @@ void main() {
     );
   });
 
-  test('rejects virtual commissionees for formal evidence', () {
-    final session = buildFixtureSession(
-      commissionee: const CommissioneeMetadata(
-        type: CommissioneeType.virtual,
-        model: 'Virtual Matter Device',
-        firmware: '1.0.0',
-        commissioningTransport: CommissioningTransport.ip,
-        networkTransport: NetworkTransport.wifi,
-        stateChangeMethod: StateChangeMethod.commissioneeUi,
-      ),
-    );
-
-    expect(
-      () => builder.buildFormal(
-        session,
-        generatedAt: fixtureGeneratedAt,
-        sanitizationReviewed: true,
-      ),
-      throwsA(
-        isA<ReportBuildException>().having(
-          (error) => error.issues.join(' '),
-          'issues',
-          contains('real Matter commissionee'),
-        ),
-      ),
-    );
-  });
-
   test('rejects a non-wifi network transport for formal evidence', () {
     final session = buildFixtureSession(
       commissionee: const CommissioneeMetadata(
-        type: CommissioneeType.real,
-        model: 'Example Matter Plug',
-        firmware: '1.0.0',
+        vendorId: 4660,
+        productId: 22136,
         commissioningTransport: CommissioningTransport.ip,
         networkTransport: NetworkTransport.thread,
-        stateChangeMethod: StateChangeMethod.physicalControl,
       ),
     );
 
@@ -146,9 +186,9 @@ void main() {
       'schema_version': 1,
     };
 
-    expect(() => DeviceTestReportV2.fromJson(legacyJson), throwsArgumentError);
+    expect(() => DeviceTestReportV3.fromJson(legacyJson), throwsArgumentError);
     expect(
-      () => DeviceTestReportV2(
+      () => DeviceTestReportV3(
         schemaVersion: 1,
         generatedAt: fixtureGeneratedAt,
         testApp: fixtureTestApp,
@@ -209,40 +249,6 @@ void main() {
           (error) => error.issues.join(' '),
           'issues',
           contains('requires a not_run reason'),
-        ),
-      ),
-    );
-  });
-
-  test('rejects sensitive metadata before writing report data', () {
-    final session = buildFixtureSession().withOperatorMetadata(
-      controller: const ControllerMetadata(
-        platform: ControllerPlatform.android,
-        deviceModel: 'Pixel 8',
-        osVersion: 'Android 15',
-        appBuild: 'debug 1.0.0 (1)',
-      ),
-      commissionee: const CommissioneeMetadata(
-        type: CommissioneeType.real,
-        model: 'Example Matter Plug',
-        firmware: 'AA:BB:CC:DD:EE:FF',
-        networkTransport: NetworkTransport.wifi,
-        stateChangeMethod: StateChangeMethod.physicalControl,
-      ),
-      at: fixtureGeneratedAt,
-    );
-
-    expect(
-      () => builder.buildFormal(
-        session,
-        generatedAt: fixtureGeneratedAt,
-        sanitizationReviewed: true,
-      ),
-      throwsA(
-        isA<ReportBuildException>().having(
-          (error) => error.issues.join(' '),
-          'issues',
-          contains('device address'),
         ),
       ),
     );

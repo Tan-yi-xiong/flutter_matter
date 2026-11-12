@@ -47,8 +47,7 @@ class ControllerMetadata {
 }
 
 enum CommissioneeType {
-  real('real'),
-  virtual('virtual');
+  real('real');
 
   const CommissioneeType(this.wireName);
 
@@ -65,6 +64,7 @@ enum CommissioneeType {
 }
 
 enum CommissioningTransport {
+  ble('ble'),
   ip('ip');
 
   const CommissioningTransport(this.wireName);
@@ -100,76 +100,46 @@ enum NetworkTransport {
   }
 }
 
-enum StateChangeMethod {
-  physicalControl('physical_control'),
-  vendorApp('vendor_app'),
-  commissioneeUi('commissionee_ui'),
-  other('other');
-
-  const StateChangeMethod(this.wireName);
-
-  final String wireName;
-
-  static StateChangeMethod parse(String value) {
-    for (final method in values) {
-      if (method.wireName == value) {
-        return method;
-      }
-    }
-    throw FormatException('Unknown state change method: $value');
-  }
-}
-
 class CommissioneeMetadata {
   const CommissioneeMetadata({
-    required this.type,
-    required this.model,
-    required this.firmware,
+    required this.vendorId,
+    required this.productId,
     required this.networkTransport,
-    required this.stateChangeMethod,
-    this.commissioningTransport = CommissioningTransport.ip,
-    this.stateChangeNotes,
+    this.commissioningTransport,
+    this.type = CommissioneeType.real,
   });
 
   final CommissioneeType type;
-  final String model;
-  final String firmware;
-  final CommissioningTransport commissioningTransport;
+  final int vendorId;
+  final int productId;
+
+  /// The path selected by discovery; null until discovery has completed.
+  final CommissioningTransport? commissioningTransport;
   final NetworkTransport networkTransport;
-  final StateChangeMethod stateChangeMethod;
-  final String? stateChangeNotes;
 
   factory CommissioneeMetadata.fromJson(Map<String, dynamic> json) {
-    final transport = _requiredString(json, 'commissioning_transport');
-
-    final rawNotes = json['state_change_notes'];
-    if (rawNotes != null && rawNotes is! String) {
-      throw const FormatException('state_change_notes must be a string');
-    }
-
     return CommissioneeMetadata(
       type: CommissioneeType.parse(_requiredString(json, 'type')),
-      model: _requiredString(json, 'model'),
-      firmware: _requiredString(json, 'firmware'),
-      commissioningTransport: CommissioningTransport.parse(transport),
+      vendorId: _requiredInt(json, 'vendor_id'),
+      productId: _requiredInt(json, 'product_id'),
+      commissioningTransport: json['commissioning_transport'] == null
+          ? null
+          : CommissioningTransport.parse(
+              _requiredString(json, 'commissioning_transport'),
+            ),
       networkTransport: NetworkTransport.parse(
         _requiredString(json, 'network_transport'),
       ),
-      stateChangeMethod: StateChangeMethod.parse(
-        _requiredString(json, 'state_change_method'),
-      ),
-      stateChangeNotes: rawNotes as String?,
     );
   }
 
   Map<String, Object?> toJson() => <String, Object?>{
     'type': type.wireName,
-    'model': model,
-    'firmware': firmware,
-    'commissioning_transport': commissioningTransport.wireName,
+    'vendor_id': vendorId,
+    'product_id': productId,
+    if (commissioningTransport != null)
+      'commissioning_transport': commissioningTransport!.wireName,
     'network_transport': networkTransport.wireName,
-    'state_change_method': stateChangeMethod.wireName,
-    if (stateChangeNotes != null) 'state_change_notes': stateChangeNotes,
   };
 }
 
@@ -203,6 +173,14 @@ String _requiredString(Map<String, dynamic> json, String key) {
   final value = json[key];
   if (value is! String) {
     throw FormatException('$key must be a string');
+  }
+  return value;
+}
+
+int _requiredInt(Map<String, dynamic> json, String key) {
+  final value = json[key];
+  if (value is! int) {
+    throw FormatException('$key must be an integer');
   }
   return value;
 }

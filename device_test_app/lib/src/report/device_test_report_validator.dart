@@ -113,10 +113,10 @@ class DeviceTestReportValidator {
 
   /// Validates a typed report for formal evidence use.
   ///
-  /// JSON schema v2 deliberately has no profile field. The caller supplies the
+  /// JSON schema v3 deliberately has no profile field. The caller supplies the
   /// profile that produced the report, and formal evidence must be full.
   ReportValidationResult validateModel(
-    DeviceTestReportV2 report, {
+    DeviceTestReportV3 report, {
     TestProfile profile = TestProfile.full,
   }) {
     final issues = <ReportValidationIssue>[];
@@ -211,7 +211,7 @@ void _validateSemantics(
 }
 
 /// Semantic checks for formal-report safety that stay meaningful even when
-/// a caller supplies a schema older or looser than the canonical v2 asset.
+/// a caller supplies a schema older or looser than the canonical v3 asset.
 void _validateFormalSafety(
   Map<String, dynamic> report,
   List<ReportValidationIssue> issues,
@@ -233,13 +233,12 @@ void _validateFormalSafety(
   }
 
   final commissioningTransport = commissionee['commissioning_transport'];
-  if (commissioningTransport is String &&
-      commissioningTransport != CommissioningTransport.ip.wireName) {
+  if (commissioningTransport == null) {
     issues.add(
       const ReportValidationIssue(
         kind: ReportValidationIssueKind.semantic,
         path: r'$.commissionee.commissioning_transport',
-        message: 'Formal reports require Wi-Fi/IP commissioning transport.',
+        message: 'Formal reports require a selected commissioning transport.',
       ),
     );
   }

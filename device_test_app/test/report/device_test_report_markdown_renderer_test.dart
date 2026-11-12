@@ -20,7 +20,8 @@ void main() {
     expect(markdown, contains('flutter_matter_device_test_app 1.0.0'));
     expect(markdown, contains('Pixel 8'));
     expect(markdown, contains('Android 15'));
-    expect(markdown, contains('Example Matter Plug'));
+    expect(markdown, contains('vendor `4660`'));
+    expect(markdown, contains('product `22136`'));
     expect(markdown, contains('android-build-install.png'));
     expect(markdown, contains('The optional UI path was unavailable'));
 

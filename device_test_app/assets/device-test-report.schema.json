@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Tan-yi-xiong/flutter_matter/main/doc/device-test-report.schema.json",
-  "title": "flutter_matter device test report v2",
+  "title": "flutter_matter device test report v3",
   "description": "Sanitized device-validation result emitted by the flutter_matter device-test app.",
   "type": "object",
   "additionalProperties": false,
@@ -18,7 +18,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": 2
+      "const": 3
     },
     "generated_at": {
       "type": "string",
@@ -89,43 +89,29 @@
       "additionalProperties": false,
       "required": [
         "type",
-        "model",
-        "firmware",
+        "vendor_id",
+        "product_id",
         "commissioning_transport",
-        "network_transport",
-        "state_change_method"
+        "network_transport"
       ],
       "properties": {
         "type": {
           "const": "real"
         },
-        "model": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 160
+        "vendor_id": {
+          "type": "integer"
         },
-        "firmware": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 160
+        "product_id": {
+          "type": "integer"
         },
         "commissioning_transport": {
-          "const": "ip"
+          "enum": [
+            "ble",
+            "ip"
+          ]
         },
         "network_transport": {
           "const": "wifi"
-        },
-        "state_change_method": {
-          "enum": [
-            "physical_control",
-            "vendor_app",
-            "commissionee_ui",
-            "other"
-          ]
-        },
-        "state_change_notes": {
-          "type": "string",
-          "maxLength": 500
         }
       }
     },

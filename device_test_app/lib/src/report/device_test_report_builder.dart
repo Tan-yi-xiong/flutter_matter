@@ -19,7 +19,7 @@ class ReportBuildException implements Exception {
 class DeviceTestReportBuilder {
   const DeviceTestReportBuilder();
 
-  DeviceTestReportV2 buildFormal(
+  DeviceTestReportV3 buildFormal(
     RunSession session, {
     required DateTime generatedAt,
     required bool sanitizationReviewed,
@@ -37,9 +37,10 @@ class DeviceTestReportBuilder {
       if (session.commissionee!.type != CommissioneeType.real) {
         issues.add('Formal reports require a real Matter commissionee.');
       }
-      if (session.commissionee!.commissioningTransport !=
-          CommissioningTransport.ip) {
-        issues.add('Formal reports require Wi-Fi/IP commissioning transport.');
+      if (session.commissionee!.commissioningTransport == null) {
+        issues.add(
+          'Formal reports require a selected commissioning transport.',
+        );
       }
       if (session.commissionee!.networkTransport != NetworkTransport.wifi) {
         issues.add('Formal reports require Wi-Fi network transport.');
@@ -73,7 +74,7 @@ class DeviceTestReportBuilder {
       for (final testId in DeviceTestCatalog.all)
         testId: session.results[testId]!,
     };
-    final report = DeviceTestReportV2(
+    final report = DeviceTestReportV3(
       generatedAt: generatedAt,
       testApp: session.testApp,
       pluginCommit: session.pluginCommit,

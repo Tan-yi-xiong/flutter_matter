@@ -45,12 +45,10 @@ void main() {
           appBuild: 'debug 1.0.0 (1)',
         ),
         commissionee: const CommissioneeMetadata(
-          type: CommissioneeType.real,
-          model: 'Matter test device',
-          firmware: '1.0.0',
+          vendorId: 4660,
+          productId: 22136,
           commissioningTransport: CommissioningTransport.ip,
           networkTransport: NetworkTransport.wifi,
-          stateChangeMethod: StateChangeMethod.physicalControl,
         ),
         at: startedAt.add(const Duration(seconds: 1)),
       );
@@ -80,6 +78,52 @@ void main() {
       );
       expect(resumed.nextActionableTestId, DeviceTestId.ipDiscovery);
       expect(resumed.progress, closeTo(1 / 12, 0.0001));
+    });
+
+    test('serializes and restores schema-version 2 snapshots', () {
+      final started = RunSession.start(
+        id: 'run-002a',
+        profile: TestProfile.quick,
+        testApp: testApp,
+        pluginCommit: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+        startedAt: startedAt,
+      );
+      final withMetadata = started.withOperatorMetadata(
+        controller: const ControllerMetadata(
+          platform: ControllerPlatform.android,
+          deviceModel: 'Pixel 8',
+          osVersion: 'Android 15',
+          appBuild: 'debug 1.0.0 (1)',
+        ),
+        commissionee: const CommissioneeMetadata(
+          vendorId: 4660,
+          productId: 22136,
+          networkTransport: NetworkTransport.wifi,
+        ),
+        at: startedAt.add(const Duration(seconds: 1)),
+      );
+      final json = withMetadata.toJson();
+
+      expect(json['snapshot_version'], 2);
+      expect(json['commissionee'], isNot(contains('commissioning_transport')));
+      final resumed = RunSession.fromJson(json);
+
+      expect(resumed.commissionee?.commissioningTransport, isNull);
+      expect(resumed.commissionee?.vendorId, 4660);
+      expect(resumed.commissionee?.productId, 22136);
+    });
+
+    test('rejects schema-version 1 snapshots', () {
+      final json = RunSession.start(
+        id: 'run-002b',
+        profile: TestProfile.quick,
+        testApp: testApp,
+        pluginCommit: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+        startedAt: startedAt,
+      ).toJson();
+      json['snapshot_version'] = 1;
+
+      expect(() => RunSession.fromJson(json), throwsFormatException);
     });
 
     test('quick sessions only accept quick-profile results', () {

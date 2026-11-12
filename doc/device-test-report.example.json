@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "generated_at": "2026-11-11T12:00:00Z",
   "test_app": {
     "name": "flutter_matter_device_test_app",
@@ -15,12 +15,10 @@
   },
   "commissionee": {
     "type": "real",
-    "model": "Example Matter Plug",
-    "firmware": "1.0.0",
+    "vendor_id": 4660,
+    "product_id": 22136,
     "commissioning_transport": "ip",
-    "network_transport": "wifi",
-    "state_change_method": "physical_control",
-    "state_change_notes": "The plug has a local On/Off button used for subscription testing."
+    "network_transport": "wifi"
   },
   "summary": {
     "result": "passed",

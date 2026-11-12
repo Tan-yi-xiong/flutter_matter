@@ -11,7 +11,7 @@ const fixturePluginCommit = 'dddd0d7d0b4ba273eaa8cd16a5d68c59e8e1b112';
 
 final fixtureGeneratedAt = DateTime.utc(2026, 11, 11, 12);
 
-DeviceTestReportV2 buildFixtureReport() {
+DeviceTestReportV3 buildFixtureReport() {
   return const DeviceTestReportBuilder().buildFormal(
     buildFixtureSession(),
     generatedAt: fixtureGeneratedAt,
@@ -62,13 +62,10 @@ RunSession buildFixtureSession({
     commissionee:
         commissionee ??
         const CommissioneeMetadata(
-          type: CommissioneeType.real,
-          model: 'Example Matter Plug',
-          firmware: '1.0.0',
+          vendorId: 4660,
+          productId: 22136,
           commissioningTransport: CommissioningTransport.ip,
           networkTransport: NetworkTransport.wifi,
-          stateChangeMethod: StateChangeMethod.physicalControl,
-          stateChangeNotes: 'The plug has a local On/Off button.',
         ),
     results: results,
   );
