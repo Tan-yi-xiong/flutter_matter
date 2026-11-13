@@ -47,7 +47,7 @@ The app may cache the most recent Wi-Fi SSID and password in platform secure sto
 
 A P0 failure or skip ends the current Run. Dependent tests are recorded as `not_run` with a reason. A P0 test is never retried inside the same Run to manufacture a green result.
 
-A failed `app_restart` result is recorded before recovery. A failed `factory_reset_recommission` stops the remaining destructible sequence. P2 failures are recorded and require explicit maintainer risk acceptance.
+`app_restart` restarts the controller runtime from persisted credentials and reconnects without recommissioning; it never prompts. A failed `factory_reset_recommission` stops the remaining destructible sequence. P2 failures are recorded and require explicit maintainer risk acceptance.
 
 ## Runtime architecture
 
@@ -81,7 +81,9 @@ runs/<run_id>/
   device-test-report.md
 ```
 
-`run_state.json` is written atomically and stores the complete recoverable state, including the session, execution state, target node ID, app-restart checkpoint, and active prompt. Terminal and corrupt run-state files are ignored when selecting an unfinished run for recovery. Incompatible old snapshots are discarded; there is no migration path for retired fields.
+Runs are intentionally one-shot and are never resumed. `run_state.json` is not produced anymore; `FileRunPersistence` only deletes stale state files left by interrupted Runs during startup cleanup and before each new Run. Report artifacts stay available for evidence.
+
+After a Run reaches a terminal phase, the Runner screen offers an optional Commissionee cleanup card: the operator factory-resets the commissionee, confirms in the dialog, and the app purges that Run's provisioning secrets and emits a `commissioneeResetConfirmed` event over the bridge. Commissionee devices accumulate one fabric per Run, so this optional reset keeps fabric slots available.
 
 Setup codes, onboarding payloads, Wi-Fi credentials, controller private key material, and certificates are kept in platform secure storage, not in `run_state.json` or report files. Run secrets are automatically purged before a new Run and can also be purged after evidence collection. The separate Wi-Fi credential cache is removed only by the explicit clear action. iOS Keychain entries can survive app uninstallation, so uninstall is not a substitute for purge.
 

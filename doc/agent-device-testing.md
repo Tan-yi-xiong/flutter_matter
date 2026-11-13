@@ -122,7 +122,6 @@ Ask for:
 2. `setup_code`: the setup code or QR setup payload.
 3. `wifi_ssid`: the target Wi-Fi SSID.
 4. `wifi_password`: the target Wi-Fi password, or an empty value for an open network.
-5. `commissionee_clean`: explicit confirmation that the selected commissionee is factory-reset and in an open commissioning window.
 
 Never ask for, accept, or repeat model, firmware, state-change method, state-change notes, commissioning transport, controller-clean, or secrets-purged fields. After answers arrive, write them only to the transient `start_run` argument file. Secret values must not appear in logs, screenshots, reports, or chat.
 
@@ -186,13 +185,10 @@ The minimal `start_run` request is:
   "setup_code": "<setup-code-or-qr-payload>",
   "wifi_ssid": "<ssid>",
   "wifi_password": "<password-or-empty-for-open-network>",
-  "clean_cycle": {
-    "commissionee_clean": true
-  }
 }
 ```
 
-Set `"mode": "full"` for formal evidence. The request accepts only `mode`, `setup_code`, `wifi_ssid`, `wifi_password`, and `clean_cycle`. Any extra field is rejected; it is not silently ignored.
+Set `"mode": "full"` for formal evidence. The request accepts only `mode`, `setup_code`, `wifi_ssid`, and `wifi_password`. Any extra field is rejected, including the retired `clean_cycle`; nothing is silently ignored.
 
 Start a run with a stable command ID and the argument file:
 
@@ -240,7 +236,6 @@ The app routes the following commands. Prompt commands require the current `prom
 | --- | --- | --- |
 | `start_run` | Minimal setup object with `mode` | Validate, auto-clean, and start a `quick` or `full` Run. |
 | `stop_run` | `{}` | Stop the current Run without manufacturing a passing report. |
-| `resume_run` | `{}` | Resume the persisted unfinished Run. |
 | `purge_secrets` | `{}` | Purge stored provisioning secrets after the Run is no longer active. |
 | `confirm_prompt` | `{"prompt_id":"<id>"}` | Confirm the referenced active prompt after the requested action was verified. |
 | `skip_prompt` | `{"prompt_id":"<id>","reason":"<reason>"}` | Skip the referenced prompt when skipping is allowed. |
@@ -258,7 +253,7 @@ Every command must preserve command-ID idempotency and one-outstanding-command s
 
 - `instance_id`, `app_name`, `app_version`, `app_build`, `app_commit`
 - `plugin_commit`, `controller_platform`, `device_model`, `os_version`
-- `capabilities`, including `state`, `event`, `command`, `screenshot`, `report`, `start_run`, `resume_run`, prompt commands, and `purge_secrets`
+- `capabilities`, including `state`, `event`, `command`, `screenshot`, `report`, `start_run`, prompt commands, and `purge_secrets`
 
 It must not contain serial numbers, UDIDs, BLE addresses, SSIDs, passwords, setup codes, onboarding payloads, certificates, or private keys.
 
@@ -279,7 +274,7 @@ A prompt contains `prompt_id`, `channel`, `title`, `instructions`, optional `act
 
 ## Semantic state and prompts
 
-Typical state values are `idle`, `running`, `waiting_for_app`, `waiting_for_agent_android`, `waiting_for_human`, `passed`, `failed`, `not_run`, and `stopped`. State includes run ID, mode, current test ID, completed and total counts, and sanitized details.
+Typical state values are `idle`, `running`, `waiting_for_agent_android`, `waiting_for_human`, `passed`, `failed`, `not_run`, and `stopped`. State includes run ID, mode, current test ID, completed and total counts, and sanitized details.
 
 A prompt with channel `agent_android` applies only to Android system or permission UI on the selected controller. The Agent must verify its mobile automation target matches the selected controller, perform the smallest requested action, and re-read app state before reporting success.
 

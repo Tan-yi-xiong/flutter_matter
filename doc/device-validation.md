@@ -84,7 +84,7 @@ A P0 `failed`, timeout, error, crash, or skipped result must be preserved. A fai
 
 P1 results provide stability evidence and do not independently block a stable release:
 
-- `app_restart`: restart the controller without recommissioning and reconnect to the saved node.
+- `app_restart`: rebuild the controller runtime from persisted credentials and reconnect to the saved node without recommissioning.
 - `factory_reset_recommission`: confirm that a subsequent factory reset and commissioning cycle succeeds without relying on old fabric state.
 
 P2 results record defects and must be included in the report:

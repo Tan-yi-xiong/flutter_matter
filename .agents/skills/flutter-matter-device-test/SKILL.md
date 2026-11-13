@@ -27,7 +27,7 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 ## Preconditions
 
 - The dedicated device-test app is built and installed on the selected controller.
-- A Matter On/Off commissionee is available and in an open commissioning window after a factory reset.
+- A Matter On/Off commissionee is available with an open commissioning window. A factory reset is no longer required before a Run; devices accumulate one fabric per Run, so prefer resetting the commissionee after a finished Run (the app offers an optional post-Run reset action).
 - The commissionee is discoverable by the Matter SDK through its supported commissioning transports.
 - The controller has connectivity to the target Wi-Fi network for provisioning and the CASE/control stage.
 - The Mac and phones share a trusted private LAN that permits the WebSocket connection.
@@ -59,7 +59,9 @@ Use `short_id` only for display. Keep the full ID in your own state for the next
 
 ## Step 2: Select the commissionee
 
-Ask the operator which physical On/Off device will be used. The operator must be able to confirm that it is factory-reset and currently has an open commissioning window. Record the choice in the PR narrative without exposing provisioning secrets.
+Ask the operator which physical On/Off device will be used. The operator must confirm that the device currently has an open commissioning window. A factory reset is optional before a Run: each Run adds one fabric, and accumulated fabrics reduce the available slots, so the operator may reset the device after a finished Run instead. Record the choice in the PR narrative without exposing provisioning secrets.
+
+For the Android virtual-device app, note the restart quirk: the first Start can show the QR page without an mDNS advertisement. Pressing BACK, confirming the factory-reset dialog, reopening the app, and starting the device again makes the advertisement appear. Always verify the advertisement with `dns-sd -B _matterc._udp` before starting the Run when the operator asks for it.
 
 Do not paste the setup payload, mDNS instance names, hostnames, discriminators, BLE addresses, or any discovery identifiers into evidence.
 
@@ -111,7 +113,6 @@ Ask for, at minimum:
 2. Setup code or QR setup payload for the selected commissionee.
 3. Wi-Fi SSID.
 4. Wi-Fi password. Treat an empty password as valid only for an open network.
-5. Explicit confirmation that the selected commissionee is factory-reset and has an open commissioning window.
 
 Never ask for or accept:
 
@@ -139,14 +140,11 @@ Use exactly this minimal structure, replacing values only in the local file:
   "mode": "quick",
   "setup_code": "<setup-code-or-qr-payload>",
   "wifi_ssid": "<ssid>",
-  "wifi_password": "<password-or-empty-for-open-network>",
-  "clean_cycle": {
-    "commissionee_clean": true
-  }
+  "wifi_password": "<password-or-empty-for-open-network>"
 }
 ```
 
-For formal evidence, set `"mode": "full"` in the same local file and use a new stable command ID. Only `mode`, `setup_code`, `wifi_ssid`, `wifi_password`, and `clean_cycle` are accepted. Any extra field must be rejected instead of silently ignored.
+For formal evidence, set `"mode": "full"` in the same local file and use a new stable command ID. Only `mode`, `setup_code`, `wifi_ssid`, and `wifi_password` are accepted. `clean_cycle` is retired and must be rejected instead of silently ignored.
 
 Quick iteration run:
 
@@ -217,19 +215,9 @@ fvm dart run tool/device_test_agent.dart command \
 
 If the prompt allows skipping or must be failed, use `skip_prompt` or `fail_prompt` with the current `prompt_id` and a concrete reason. Do not claim a human action succeeded until the app reports the next semantic state or the operator explicitly confirms it.
 
-### App restart checkpoint
+### `app_restart` behavior
 
-When state becomes `waiting_for_app`, the `app_restart` case requires a controller app process restart. Use the host restart command or the selected device's mobile automation, wait for the bridge to reconnect, then resume the persisted Run:
-
-```bash
-fvm dart run tool/device_test_agent.dart restart-app
-fvm dart run tool/device_test_agent.dart wait --for connected --timeout-seconds 120
-fvm dart run tool/device_test_agent.dart command \
-  --name resume_run \
-  --command-id <stable-resume-command-id>
-```
-
-Verify that state leaves `waiting_for_app` and the interrupted test resumes at its saved checkpoint. Do not start a new Run.
+The `app_restart` case restarts the controller runtime in place: it disposes the live controller, rebuilds it from the persisted credentials, and verifies CASE reconnection without recommissioning. It is fully automatic and never prompts or waits for an app restart; there is no checkpoint and no resume path. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
 
 ## Step 7: Verify progress
 
@@ -289,6 +277,10 @@ After the Matter SDK attempts commissioning and it fails, do not retry commissio
 You may retry a command when the failure is clearly a command-delivery failure and the app never executed it. Reuse the same command ID for that retry. If the app executed the test and reported `failed`, preserve the report and report the failure to the user.
 
 P1 and P2 results may be `not_run` with a concrete reason. P2 failures require explicit maintainer risk acceptance.
+
+### Post-Run commissionee reset (optional)
+
+After a Run reaches a terminal phase, the Runner screen offers a Commissionee cleanup card. The operator factory-resets the commissionee (or resets the virtual device), confirms through the in-app dialog, and the app purges that Run's provisioning secrets and emits a `commissioneeResetConfirmed` bridge event. This is optional and never blocks evidence collection; it keeps fabric slots available for the next Run.
 
 ## Step 9: Purge reminder
 
