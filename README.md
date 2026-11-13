@@ -301,14 +301,6 @@ Agent-driven runs use the Mac WebSocket bridge and the repository Skill `flutter
 
 ---
 
-## 📌 Notes
-
-- Images are displayed using fixed widths to keep them clean and prevent stretching.
-- Centered screenshots and demo media usually make plugin documentation look much better.
-- This README keeps the setup simple while still looking polished and professional.
-
----
-
 ## 🔐 Security
 
 Report suspected vulnerabilities privately through [GitHub Private Vulnerability Reporting](https://github.com/Tan-yi-xiong/flutter_matter/security/advisories/new). Do not open a public issue for a suspected vulnerability. See [SECURITY.md](SECURITY.md) for scope, required report details, and disclosure expectations.
