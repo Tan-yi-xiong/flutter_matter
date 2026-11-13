@@ -105,12 +105,11 @@ If the operator cannot provide a commissionee in an open commissioning window, s
 
 A Matter On/Off commissionee is required for every Run. Before setup:
 
-1. The operator factory-resets the commissionee.
-2. The operator opens its commissioning window.
-3. The operator supplies a setup code or QR setup payload.
-4. The controller has access to the target Wi-Fi SSID and password; an empty password is valid only for an open network.
+1. The operator opens the commissionee's commissioning window. A factory reset is optional; every Run adds one fabric, so resetting after a finished Run is preferred.
+2. The operator supplies a setup code or QR setup payload.
+3. The controller has access to the target Wi-Fi SSID and password; an empty password is valid only for an open network.
 
-The Agent must not run a separate host-side BLE/mDNS scan or mandatory `_matterc._udp` preflight. The app delegates commissionee discovery and commissioning to the Matter SDK.
+The Agent must not run a host-side BLE/mDNS scan or mandatory `_matterc._udp` preflight as a commissioning gate. The app delegates commissionee discovery and commissioning to the Matter SDK. The one exception is the Android virtual device: when the operator asks, `dns-sd -B _matterc._udp` may confirm that the VDA really started, because its QR page can appear without an advertisement. See the virtual commissionee section in `doc/device-validation.md` for the startup steps, the restart quirk, and the fabric-reset flow.
 
 ## Interactive setup prompt contract
 

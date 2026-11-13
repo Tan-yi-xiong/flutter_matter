@@ -25,6 +25,42 @@ A suitable Matter commissionee is required for every device Run, including quick
 
 If no suitable commissionee is available, stop validation and record the blocker. Do not mark results as passed without executing the Run.
 
+## Virtual commissionee (Android VDA)
+
+The Matter Virtual Device App (VDA) is a supported commissionee for iteration and validation on Android. It can run on the controller phone itself or on a separate Android device on the same Wi-Fi network.
+
+### Starting a virtual device
+
+1. Open the VDA and pick `Matter OnOff Switch` from the device list.
+2. Review the setup form (device name, discriminator, transport). Keep the discriminator and setup PIN consistent with the onboarding payload passed to `start_run`.
+3. Tap `SAVE`, then `Start` on the confirmation page. The app shows the QR payload and manual pairing code.
+
+A started device is ready when `dns-sd -B _matterc._udp` shows an advertisement. The QR page alone does not prove the commissioning window is open.
+
+### Restart quirk
+
+The first `Start` after the app launches can show the QR page without an mDNS advertisement. To recover:
+
+1. Press BACK on the QR page.
+2. Confirm the `Factory Reset` dialog.
+3. Reopen the VDA, pick the OnOff device again, `SAVE`, and `Start`.
+
+The advertisement appears after this second start. Verify with `dns-sd -B _matterc._udp` before starting the Run.
+
+### Same-phone caveats
+
+- Keep both phones (or the single phone) unlocked during the Run: a locked screen can hide the commissionee's mDNS advertisements from the network.
+- Force-stopping the test app also removes the reverse/forward state on the phone; relaunch the app and re-establish the bridge if needed.
+
+### Fabric accumulation
+
+Every commissioned Run adds one fabric to the virtual device, and fabric slots are limited. After a finished Run, reset the device through either of:
+
+- the test app's optional post-Run `Commissionee cleanup` card (purges Run secrets and records a bridge event), or
+- the VDA itself: BACK on the QR page and confirm the `Factory Reset` dialog.
+
+The next Run then starts from a clean fabric table.
+
 ## Hardware layout
 
 Formal validation requires:
@@ -54,16 +90,15 @@ Use `device_test_app/` as the primary validation surface. A manual interim repor
 
 For each controller platform that the change requires:
 
-1. Restore the Matter commissionee to factory state.
-2. Open the commissioning window.
-3. Restart both devices and confirm Bluetooth, camera, local-network, and commissioning prerequisites are ready.
-4. Provide the target Wi-Fi SSID and password. An empty password is valid only for an open network.
-5. Confirm the commissionee reset and commissioning-window state through the setup prompt.
-6. Let the app automatically purge old run secrets and reset controller identities for the current platform before the Run.
-7. Start the Run and let the Matter SDK perform discovery and commissioning from the raw onboarding payload.
-8. Run every P0 scenario in the order below without replacing a failed result with a later retry.
-9. Save the generated JSON and Markdown reports. Add manually captured screenshots only when they are bounded and sanitized.
-10. Verify the report schema version and commit before attaching evidence.
+1. Make sure the commissionee has an open commissioning window. A factory reset is optional: every Run adds one fabric, so prefer resetting the commissionee after a finished Run instead of before each one.
+2. Provide the target Wi-Fi SSID and password. An empty password is valid only for an open network.
+3. Let the app automatically purge old run secrets, purge orphaned provisioning keys, and reset controller identities for the current platform before the Run.
+4. Start the Run and let the Matter SDK perform discovery and commissioning from the raw onboarding payload.
+5. Run every P0 scenario in the order below without replacing a failed result with a later retry.
+6. Save the generated JSON and Markdown reports. Add manually captured screenshots only when they are bounded and sanitized.
+7. Verify the report schema version and commit before attaching evidence.
+
+The user does not certify controller cleanup or secret purge. If automatic cleanup fails, the Run is blocked before new provisioning state is persisted. Interrupted Runs are discarded at startup; never resume them.
 
 The user does not certify controller cleanup or secret purge. If automatic cleanup fails, the Run is blocked before new provisioning state is persisted.
 
