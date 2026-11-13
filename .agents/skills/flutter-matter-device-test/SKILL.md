@@ -219,6 +219,8 @@ fvm dart run tool/device_test_agent.dart command \
 
 If the prompt allows skipping or must be failed, use `skip_prompt` or `fail_prompt` with the current `prompt_id` and a concrete reason. Do not claim a human action succeeded until the app reports the next semantic state or the operator explicitly confirms it.
 
+**Wait bound:** poll the prompt for at most three minutes. If neither the operator nor a mobile-automated action resolves it, `skip_prompt` with the concrete reason (for example `operator unavailable`) and let the Run record the result truthfully — never leave a `human` prompt waiting indefinitely, and never fabricate a confirmation.
+
 ### `app_restart` behavior
 
 The `app_restart` case restarts the controller runtime in place: it disposes the live controller, rebuilds it from the persisted credentials, and verifies CASE reconnection without recommissioning. It is fully automatic and never prompts or waits for an app restart; there is no checkpoint and no resume path. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
