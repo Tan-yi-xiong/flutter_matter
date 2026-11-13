@@ -217,7 +217,7 @@ RequestHandler.swift
 
 ## ▶️ Run the Example
 
-## iOS
+### iOS
 
 Open the following workspace in Xcode:
 
@@ -230,11 +230,11 @@ Then:
 1. Fill in your signing information
 2. Complete the iOS setup steps above
 
-## Android
+### Android
 
 No additional setup is required.
 
-## Start the example
+### Start the example
 
 ```sh
 cd example
@@ -245,15 +245,11 @@ fvm flutter run
 
 ---
 
-## Device test app
-
-The dedicated validation app lives in `device_test_app/`. It runs a quick four-test commissioning/control profile during development or the full 11-test validation matrix for formal evidence, delegating commissionee discovery and commissioning to the Matter SDK. It supports Android and physical iOS controllers and does not inspect or record device provenance.
-
-Agent-driven runs use the Mac WebSocket bridge and the repository Skill `flutter-matter-device-test`. Development commands and the validation gates are in [Development](#%EF%B8%8F-development) below; details live in [Device test app](doc/device-test-app.md) and [Agent device testing](doc/agent-device-testing.md).
-
----
-
 ## 🛠️ Development
+
+### Validation app
+
+`device_test_app/` is the dedicated validation surface: a quick four-test commissioning/control profile for iteration, or the full 11-test validation matrix for formal evidence, on Android and physical iOS. Every run delegates commissionee discovery and commissioning to the Matter SDK and does not inspect or record device provenance. Agent-driven runs use the Mac WebSocket bridge and the repository Skill `flutter-matter-device-test`; see [Device test app](doc/device-test-app.md) and [Agent device testing](doc/agent-device-testing.md).
 
 ### Environment
 
