@@ -249,7 +249,16 @@ fvm flutter run
 
 ### Validation app
 
-`device_test_app/` is the dedicated validation surface: a quick four-test commissioning/control profile for iteration, or the full 11-test validation matrix for formal evidence, on Android and physical iOS. Every run delegates commissionee discovery and commissioning to the Matter SDK and does not inspect or record device provenance. Agent-driven runs use the Mac WebSocket bridge and the repository Skill `flutter-matter-device-test`; see [Device test app](doc/device-test-app.md) and [Agent device testing](doc/agent-device-testing.md).
+`device_test_app/` is the dedicated validation surface: a quick four-test commissioning/control profile for iteration, or the full 11-test validation matrix for formal evidence, on Android and physical iOS. Every run delegates commissionee discovery and commissioning to the Matter SDK.
+
+> [!TIP]
+> **Using Codex or another coding Agent?** Just tell it:
+>
+> ```text
+> Run a device validation for my change with the flutter-matter-device-test skill.
+> ```
+>
+> It drives the bridge, the run, Android permission prompts, and the report pull — you only pick the phone and provide the setup payload. Details: [Agent device testing](doc/agent-device-testing.md).
 
 ### Environment
 
