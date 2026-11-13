@@ -21,7 +21,8 @@ The setup flow requires only:
 - Setup code or QR setup payload.
 - Target Wi-Fi SSID.
 - Wi-Fi password, or an empty value for an open network.
-- Confirmation that the commissionee is factory-reset and in an open commissioning window.
+
+A commissionee factory reset is optional and happens after a finished Run (every Run adds one fabric); the Runner screen offers an optional post-Run cleanup action.
 
 The app does not ask for model, firmware, state-change method, commissioning transport, controller-clean state, or secrets-purged state. It parses vendor and product identity from the commissionee payload automatically.
 
@@ -61,7 +62,7 @@ The Agent must collect the minimal setup data with Codex interactive prompts, pa
 
 - Use a Matter On/Off commissionee for every Run, including quick iteration. The app does not inspect or record device provenance.
 - Confirm that the commissionee is discoverable by the Matter SDK through its supported commissioning transports.
-- Confirm that the commissionee is factory-reset and has an open commissioning window before starting the Run.
+- Confirm that the commissionee has an open commissioning window before starting the Run; a factory reset is optional and preferred after a finished Run.
 - Do not add a host-side BLE/mDNS scan or readiness gate: commissionee discovery is delegated to the Matter SDK.
 - Do not use an isolated guest network that blocks BLE setup, Wi-Fi/IP commissioning, CASE, or the Agent WebSocket connection.
 
