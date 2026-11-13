@@ -61,7 +61,7 @@ Use `short_id` only for display. Keep the full ID in your own state for the next
 
 Ask the operator which physical On/Off device will be used. The operator must confirm that the device currently has an open commissioning window. A factory reset is optional before a Run: each Run adds one fabric, and accumulated fabrics reduce the available slots, so the operator may reset the device after a finished Run instead. Record the choice in the PR narrative without exposing provisioning secrets.
 
-For the Android virtual-device app, note the restart quirk: the first Start can show the QR page without an mDNS advertisement. Pressing BACK, confirming the factory-reset dialog, reopening the app, and starting the device again makes the advertisement appear. Always verify the advertisement with `dns-sd -B _matterc._udp` before starting the Run when the operator asks for it.
+For the Android virtual-device app, note the restart quirk: the first Start can show the QR page without an mDNS advertisement. Pressing BACK, confirming the factory-reset dialog, reopening the app, and starting the device again makes the advertisement appear. Always verify the advertisement with `dns-sd -B _matterc._udp` before starting the Run when the operator asks for it. Full VDA guidance lives in the virtual commissionee section of `doc/device-validation.md`.
 
 Do not paste the setup payload, mDNS instance names, hostnames, discriminators, BLE addresses, or any discovery identifiers into evidence.
 

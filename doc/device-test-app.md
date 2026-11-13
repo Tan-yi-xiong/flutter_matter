@@ -66,7 +66,7 @@ The app is designed for Android and physical iOS controllers. Every device run u
 ## Controller and commissionee roles
 
 - **Controller:** the Android or physical iOS phone running `device_test_app`. It creates controller identity, delegates commissionee discovery and commissioning to the Matter SDK, provisions Wi-Fi credentials, connects over CASE, invokes and subscribes to OnOff, and manages fabric state.
-- **Commissionee:** a Matter On/Off device discoverable by the Matter SDK through its supported commissioning transports.
+- **Commissionee:** a Matter On/Off device discoverable by the Matter SDK through its supported commissioning transports. A physical device or the Android Matter Virtual Device App (VDA) both work; see the virtual commissionee section in `doc/device-validation.md` for VDA startup steps, the mDNS success criterion, the restart quirk, and fabric-reset options.
 
 When multiple phones are connected, the Agent must ask the user to choose the controller. The Agent never selects a phone by connection order, platform, or previous use. A device Run uses the commissionee selected by the operator.
 
@@ -76,7 +76,6 @@ A Run is stored under the app Documents directory:
 
 ```text
 runs/<run_id>/
-  run_state.json
   device-test-report.json
   device-test-report.md
 ```
