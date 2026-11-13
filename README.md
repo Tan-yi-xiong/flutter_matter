@@ -247,16 +247,9 @@ fvm flutter run
 
 ## Device test app
 
-The dedicated validation app lives in `device_test_app/`. It supports Android and physical iOS controllers and requires a Matter commissionee for formal evidence. Every device run delegates commissionee discovery and commissioning to the Matter SDK without app-side BLE/mDNS scanning or commissioning retry. It can run a quick four-test commissioning/control profile during development or the full 11-test validation matrix for formal evidence. The app does not inspect or record device provenance.
+The dedicated validation app lives in `device_test_app/`. It runs a quick four-test commissioning/control profile during development or the full 11-test validation matrix for formal evidence, delegating commissionee discovery and commissioning to the Matter SDK. It supports Android and physical iOS controllers and does not inspect or record device provenance.
 
-```bash
-cd device_test_app
-fvm flutter pub get
-fvm flutter test
-fvm flutter run
-```
-
-Agent-driven runs use the Mac WebSocket bridge and the repository Skill `flutter-matter-device-test`. When more than one phone is connected, the Agent must ask the user which phone to use. See [Device test app](doc/device-test-app.md) and [Agent device testing](doc/agent-device-testing.md).
+Agent-driven runs use the Mac WebSocket bridge and the repository Skill `flutter-matter-device-test`. Development commands and the validation gates are in [Development](#%EF%B8%8F-development) below; details live in [Device test app](doc/device-test-app.md) and [Agent device testing](doc/agent-device-testing.md).
 
 ---
 
