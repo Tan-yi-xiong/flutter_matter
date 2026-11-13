@@ -46,7 +46,6 @@ class AgentBridgeProjection {
     final prompt = state.prompt;
     if (prompt != null) {
       return switch (prompt.requiredActor) {
-        RequiredActor.app => AgentRunStatus.waitingForApp,
         RequiredActor.agentAndroid => AgentRunStatus.waitingForAgentAndroid,
         RequiredActor.human => AgentRunStatus.waitingForHuman,
       };
@@ -91,7 +90,7 @@ class AgentBridgeProjection {
   };
 
   AgentPrompt? _projectPrompt(RunnerPromptViewModel? prompt) {
-    if (prompt == null || prompt.requiredActor == RequiredActor.app) {
+    if (prompt == null) {
       return null;
     }
     return AgentPrompt(
@@ -99,7 +98,6 @@ class AgentBridgeProjection {
       channel: switch (prompt.requiredActor) {
         RequiredActor.agentAndroid => AgentPromptChannel.agentAndroid,
         RequiredActor.human => AgentPromptChannel.human,
-        RequiredActor.app => throw StateError('App prompts are not bridged.'),
       },
       title: prompt.title,
       instructions: prompt.instructions,

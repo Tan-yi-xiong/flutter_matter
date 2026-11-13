@@ -14,8 +14,8 @@ The setup flow is deliberately minimal. The user or Agent provides only:
 - Setup code or QR setup payload.
 - Target Wi-Fi SSID.
 - Wi-Fi password; an empty value is valid only for an open network.
-- Confirmation that the commissionee is factory-reset and has an open commissioning window.
 
+A commissionee factory reset is optional and has moved after the Run: every Run adds one fabric to the commissionee, so the post-Run `Commissionee cleanup` card (or a manual reset) frees the slots for the next Run.
 The app does not ask for commissionee model, firmware, external state-change method, commissioning transport, controller-clean state, or secrets-purged state. It accepts `vendor_id` and `product_id` from the commissionee payload automatically for report metadata.
 
 Before a Run starts, the app purges old run provisioning secrets and resets controller identities for the current platform. Cleanup failure blocks the Run before new secrets are persisted.
@@ -141,7 +141,7 @@ The wrapper requires a clean tracked worktree and injects `PLUGIN_COMMIT` and `T
 ## Troubleshooting
 
 - **Bridge does not connect:** confirm `serve` is running, the app has the printed WebSocket endpoint, the Mac and phone are on the same trusted LAN, and the network permits the connection.
-- **No commissionee discovered:** confirm the commissionee is discoverable by the Matter SDK and that its commissioning window is open.
+- **No commissionee discovered:** confirm the commissionee is discoverable by the Matter SDK and that its commissioning window is open. For the Android virtual device, verify the advertisement with `dns-sd -B _matterc._udp`; if the QR page appears without one, use the restart quirk documented in `doc/device-validation.md`.
 - **Commissioning fails:** verify the setup code and network credentials without recording them, then stop and preserve the failed result rather than retrying a P0 in the same Run.
 - **Report unavailable:** ensure the run was a completed `full` run with a valid schema v4 report and all required P0 tests have a valid result.
 - **Wrong commit in report:** rebuild from the PR head with the wrapper, install the new app, and start a fresh Run.

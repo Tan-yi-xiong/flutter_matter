@@ -57,8 +57,6 @@ class TestContext {
       ? RequiredActor.agentAndroid
       : RequiredActor.human;
 
-  RequiredActor get appUiActor => RequiredActor.app;
-
   /// Applies an execution update. The returned future resolves immediately;
   /// keeping the async shape preserves call-site compatibility across cases.
   Future<void> updateExecution(

@@ -287,11 +287,6 @@ class RequiredActorBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final (Color background, Color foreground, IconData icon) = switch (actor) {
-      RequiredActor.app => (
-        colors.secondaryContainer,
-        colors.onSecondaryContainer,
-        Icons.smart_toy_outlined,
-      ),
       RequiredActor.agentAndroid => (
         colors.primaryContainer,
         colors.onPrimaryContainer,

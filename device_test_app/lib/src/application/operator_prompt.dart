@@ -2,20 +2,18 @@ import '../domain/domain.dart';
 
 /// The actor expected to resolve an operator prompt.
 ///
-/// The app UI may handle [app] prompts directly. [agentAndroid] prompts are
-/// intended for an Agent with Android device-control capability, while
-/// [human] prompts require the person operating the physical setup.
-enum RequiredActor { app, agentAndroid, human }
+/// [agentAndroid] prompts are intended for an Agent with Android
+/// device-control capability, while [human] prompts require the person
+/// operating the physical setup.
+enum RequiredActor { agentAndroid, human }
 
 extension RequiredActorWire on RequiredActor {
   String get wireName => switch (this) {
-    RequiredActor.app => 'app',
     RequiredActor.agentAndroid => 'agent_android',
     RequiredActor.human => 'human',
   };
 
   static RequiredActor parse(Object? value) => switch (value) {
-    'app' => RequiredActor.app,
     'agent_android' => RequiredActor.agentAndroid,
     'human' => RequiredActor.human,
     _ => throw FormatException('Unknown required actor: $value'),

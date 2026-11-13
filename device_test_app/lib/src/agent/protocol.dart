@@ -64,7 +64,6 @@ AgentMessageType agentMessageTypeFromWire(Object? value) {
 enum AgentRunStatus {
   idle,
   running,
-  waitingForApp,
   waitingForAgentAndroid,
   waitingForHuman,
   passed,
@@ -77,7 +76,6 @@ extension AgentRunStatusWire on AgentRunStatus {
   String get wireName => switch (this) {
     AgentRunStatus.idle => 'idle',
     AgentRunStatus.running => 'running',
-    AgentRunStatus.waitingForApp => 'waiting_for_app',
     AgentRunStatus.waitingForAgentAndroid => 'waiting_for_agent_android',
     AgentRunStatus.waitingForHuman => 'waiting_for_human',
     AgentRunStatus.passed => 'passed',
@@ -89,7 +87,6 @@ extension AgentRunStatusWire on AgentRunStatus {
   static AgentRunStatus parse(Object? value) => switch (value) {
     'idle' => AgentRunStatus.idle,
     'running' => AgentRunStatus.running,
-    'waiting_for_app' => AgentRunStatus.waitingForApp,
     'waiting_for_agent_android' => AgentRunStatus.waitingForAgentAndroid,
     'waiting_for_human' => AgentRunStatus.waitingForHuman,
     'passed' => AgentRunStatus.passed,

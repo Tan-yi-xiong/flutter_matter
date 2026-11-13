@@ -270,7 +270,6 @@ class SetupValidationResult {
 
 extension RequiredActorPresentation on RequiredActor {
   String get shortLabel => switch (this) {
-    RequiredActor.app => 'App',
     RequiredActor.agentAndroid => 'Agent (Android)',
     RequiredActor.human => 'Human',
   };

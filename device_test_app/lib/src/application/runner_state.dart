@@ -5,7 +5,6 @@ import 'operator_prompt.dart';
 enum RunnerStatus {
   idle,
   running,
-  waitingForApp,
   waitingForAgentAndroid,
   waitingForHuman,
   passed,
@@ -16,7 +15,6 @@ enum RunnerStatus {
   String get wireName => switch (this) {
     RunnerStatus.idle => 'idle',
     RunnerStatus.running => 'running',
-    RunnerStatus.waitingForApp => 'waiting_for_app',
     RunnerStatus.waitingForAgentAndroid => 'waiting_for_agent_android',
     RunnerStatus.waitingForHuman => 'waiting_for_human',
     RunnerStatus.passed => 'passed',
@@ -151,7 +149,6 @@ class RunnerStateSnapshot {
 RunnerStatus _deriveStatus(RunSession session, OperatorPrompt? prompt) {
   if (prompt != null) {
     return switch (prompt.requiredActor) {
-      RequiredActor.app => RunnerStatus.waitingForApp,
       RequiredActor.agentAndroid => RunnerStatus.waitingForAgentAndroid,
       RequiredActor.human => RunnerStatus.waitingForHuman,
     };

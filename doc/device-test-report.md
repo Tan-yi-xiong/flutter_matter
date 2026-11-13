@@ -48,7 +48,7 @@ Do not add serial numbers, iOS UDIDs, Wi-Fi SSIDs, Wi-Fi passwords, setup codes,
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
 | P0 | `onoff_subscription` | Initial state and an external update arrive within 15 seconds |
 | P0 | `node_label_persistence` | NodeLabel write/read succeeds and survives a commissionee restart |
-| P1 | `app_restart` | Controller restart reconnects without recommissioning |
+| P1 | `app_restart` | Controller runtime rebuilds from persisted credentials and reconnects without recommissioning |
 | P1 | `factory_reset_recommission` | A later factory reset and commissioning cycle succeeds |
 | P2 | `invalid_setup_passcode` | A well-formed setup payload with a deliberately incorrect, same-discriminator setup passcode produces a clear non-zero failure without a crash |
 | P2 | `invalid_wifi_password` | Provisioning fails clearly without reporting false success |
