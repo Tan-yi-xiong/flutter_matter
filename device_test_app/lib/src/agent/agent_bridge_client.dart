@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -213,7 +214,11 @@ class AgentBridgeClient {
     try {
       channel = _connector(endpoint);
       await channel.ready.timeout(connectTimeout);
-    } on Object {
+    } on Object catch (error) {
+      debugPrint(
+        'Agent bridge connection failed: ${error.runtimeType} '
+        '(${endpoint.host}:${endpoint.port})',
+      );
       await channel?.sink.close();
       if (generation == _connectionGeneration && _started) {
         _scheduleReconnect();

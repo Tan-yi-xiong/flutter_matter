@@ -19,27 +19,11 @@ class FakeClock implements ClockPort {
 }
 
 class MemoryRunPersistencePort implements RunPersistencePort {
-  PersistedRunState? persisted;
-  bool cleared = false;
-  int saveCount = 0;
-  final List<PersistedRunState> savedStates = <PersistedRunState>[];
+  int cleanupCount = 0;
 
   @override
-  Future<void> clearUnfinished() async {
-    cleared = true;
-    persisted = null;
-  }
-
-  @override
-  Future<PersistedRunState?> loadUnfinished() async =>
-      cleared ? null : persisted;
-
-  @override
-  Future<void> save(PersistedRunState state) async {
-    persisted = state;
-    cleared = false;
-    saveCount++;
-    savedStates.add(state);
+  Future<void> cleanupUnfinished() async {
+    cleanupCount++;
   }
 }
 
@@ -79,48 +63,6 @@ class FakeOperatorPromptPort implements OperatorPromptPort {
   Future<OperatorDecision> request(OperatorPrompt prompt) async {
     prompts.add(prompt);
     return handler(prompt);
-  }
-}
-
-class FakeCommissioningDiscoveryPort implements CommissioningDiscoveryPort {
-  FakeCommissioningDiscoveryPort({
-    CommissioningTransport transport = CommissioningTransport.ip,
-    BleCommissionee? bleTarget,
-    this.failureCode,
-    this.handler,
-  }) : result = CommissioningDiscoveryResult(
-         transport: transport,
-         bleTarget: transport == CommissioningTransport.ble
-             ? bleTarget ??
-                   const BleCommissionee(
-                     opaqueId: 'commissionee-opaque',
-                     displayName: 'Test commissionee',
-                   )
-             : null,
-       );
-
-  CommissioningDiscoveryResult result;
-  CommissioningDiscoveryFailureCode? failureCode;
-  Future<CommissioningDiscoveryResult> Function(
-    CommissioningDiscoveryRequest request,
-  )?
-  handler;
-  final List<CommissioningDiscoveryRequest> requests =
-      <CommissioningDiscoveryRequest>[];
-
-  @override
-  Future<CommissioningDiscoveryResult> discover(
-    CommissioningDiscoveryRequest request,
-  ) async {
-    requests.add(request);
-    if (handler != null) {
-      return handler!(request);
-    }
-    final code = failureCode;
-    if (code != null) {
-      throw CommissioningDiscoveryException(code);
-    }
-    return result;
   }
 }
 
@@ -381,13 +323,30 @@ class FakeControllerIdentityPort implements ControllerIdentityPort {
   final List<ControllerIdentityRequest> requests =
       <ControllerIdentityRequest>[];
   int resetCount = 0;
+  int restartCount = 0;
   String opaquePrefix = 'identity';
+  String restartOpaquePrefix = 'identity';
 
   @override
   Future<ControllerIdentity> loadOrCreate(
     ControllerIdentityRequest request,
   ) async {
     requests.add(request);
+    return identities.putIfAbsent(
+      request.purpose,
+      () => ControllerIdentity(
+        opaqueId: '$opaquePrefix-${request.purpose.wireName}',
+        purpose: request.purpose,
+      ),
+    );
+  }
+
+  @override
+  Future<ControllerIdentity> restart(ControllerIdentityRequest request) async {
+    restartCount++;
+    requests.add(request);
+    // Stored credentials always rebuild the identity, so the opaque id is
+    // stable across the restart.
     return identities.putIfAbsent(
       request.purpose,
       () => ControllerIdentity(
@@ -433,11 +392,6 @@ class RecordingHooksPort extends RunnerHooksPort {
 }
 
 class FakeHardware {
-  FakeHardware({FakeCommissioningDiscoveryPort? commissioningDiscovery})
-    : commissioningDiscovery =
-          commissioningDiscovery ?? FakeCommissioningDiscoveryPort();
-
-  final FakeCommissioningDiscoveryPort commissioningDiscovery;
   final FakeCommissioningPort commissioning = FakeCommissioningPort();
   final FakeOperationalConnectionPort operational =
       FakeOperationalConnectionPort();
@@ -447,7 +401,6 @@ class FakeHardware {
   final FakeControllerIdentityPort identity = FakeControllerIdentityPort();
 
   TestPorts get ports => TestPorts(
-    commissioningDiscovery: commissioningDiscovery,
     commissioning: commissioning,
     operationalConnection: operational,
     onOff: onOff,
@@ -479,6 +432,7 @@ class FakeHardware {
 ProvisioningSecrets makeSecrets({ProvisioningNetworkSecret? network}) =>
     ProvisioningSecrets(
       onboardingPayload: 'MT:TEST-ONBOARDING-PAYLOAD',
+      invalidSetupOnboardingPayload: '12345678901',
       setupPinCode: 20202021,
       network:
           network ??
@@ -487,7 +441,6 @@ ProvisioningSecrets makeSecrets({ProvisioningNetworkSecret? network}) =>
 
 const TestTimeouts fastTimeouts = TestTimeouts(
   buildInstall: Duration(milliseconds: 100),
-  commissioningDiscovery: Duration(milliseconds: 100),
   commissioning: Duration(milliseconds: 100),
   operationalConnect: Duration(milliseconds: 100),
   onOffInvoke: Duration(milliseconds: 100),
@@ -565,7 +518,6 @@ class TestContextHarness {
     bool withSecrets = true,
     RunExecutionContext? execution,
     RunSession? session,
-    this.resumeCheckpoint,
     this.operatorHandler,
     TestTimeouts? timeouts,
   }) : ports = ports ?? FakeHardware().ports,
@@ -579,13 +531,9 @@ class TestContextHarness {
   final ProvisioningSecrets? secrets;
   final RunExecutionContext? execution;
   final RunSession? session;
-  final AppRestartCheckpoint? resumeCheckpoint;
   final PromptHandler? operatorHandler;
   final TestTimeouts timeouts;
   final List<OperatorPrompt> prompts = <OperatorPrompt>[];
-  final List<AppRestartCheckpoint> savedCheckpoints = <AppRestartCheckpoint>[];
-  AppRestartCheckpoint? clearedCheckpoint;
-  int executionPersistCount = 0;
 
   TestContext build() {
     final handler = operatorHandler ?? ((_) => OperatorDecision.confirmed());
@@ -597,19 +545,9 @@ class TestContextHarness {
       timeouts: timeouts,
       targetNodeId: 1,
       secrets: secrets,
-      resumeCheckpoint: resumeCheckpoint,
-      onExecutionChanged: () async {
-        executionPersistCount++;
-      },
       onPrompt: (prompt) async {
         prompts.add(prompt);
         return handler(prompt);
-      },
-      onSaveAppRestartCheckpoint: (checkpoint) async {
-        savedCheckpoints.add(checkpoint);
-      },
-      onClearAppRestartCheckpoint: () async {
-        clearedCheckpoint = resumeCheckpoint;
       },
     );
   }

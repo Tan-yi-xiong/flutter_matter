@@ -41,9 +41,8 @@ ActiveRunViewModel activeRun({
   TestProfile profile = TestProfile.full,
   RunPhase phase = RunPhase.testing,
   Map<DeviceTestId, DeviceTestStatus> statuses = const {},
-  DeviceTestId? currentTestId = DeviceTestId.commissioningDiscovery,
-  String? currentInstruction = 'Confirm the commissionee is advertising.',
-  bool awaitingAppRestart = false,
+  DeviceTestId? currentTestId = DeviceTestId.commissioning,
+  String? currentInstruction = 'Commissioning the Matter device.',
 }) {
   return ActiveRunViewModel(
     runId: 'run-fixture',
@@ -54,7 +53,6 @@ ActiveRunViewModel activeRun({
     currentInstruction: currentInstruction,
     currentElapsed: const Duration(seconds: 30),
     currentTimeout: const Duration(minutes: 5),
-    awaitingAppRestart: awaitingAppRestart,
   );
 }
 

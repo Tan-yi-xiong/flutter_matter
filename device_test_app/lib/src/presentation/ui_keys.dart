@@ -9,10 +9,12 @@ abstract final class DeviceTestUiKeys {
   static const runnerScreen = ValueKey<String>('device-test-runner-screen');
   static const resultsScreen = ValueKey<String>('device-test-results-screen');
 
-  static const resumeRun = ValueKey<String>('device-test-resume-run');
   static const newRun = ValueKey<String>('device-test-new-run');
   static const homeViewResults = ValueKey<String>(
     'device-test-home-view-results',
+  );
+  static const commissioneeReset = ValueKey<String>(
+    'device_test.commissionee_reset',
   );
   static const purgeSecrets = ValueKey<String>('device-test-purge-secrets');
   static const confirmPurgeSecrets = ValueKey<String>(
@@ -40,18 +42,12 @@ abstract final class DeviceTestUiKeys {
     'device-test-wifi-clear-credentials',
   );
   static const wifiPassword = ValueKey<String>('device-test-wifi-password');
-  static const commissioneeClean = ValueKey<String>(
-    'device-test-clean-commissionee',
-  );
   static const quickProfile = ValueKey<String>('device-test-profile-quick');
   static const fullProfile = ValueKey<String>('device-test-profile-full');
 
   static const runProgress = ValueKey<String>('device-test-run-progress');
   static const currentTestTimeout = ValueKey<String>(
     'device-test-current-test-timeout',
-  );
-  static const waitingForAppRestart = ValueKey<String>(
-    'device-test-waiting-for-app-restart',
   );
   static const currentInstruction = ValueKey<String>(
     'device-test-current-instruction',

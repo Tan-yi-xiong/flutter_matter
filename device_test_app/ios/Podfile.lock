@@ -2,8 +2,6 @@ PODS:
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
-  - flutter_blue_plus (0.0.1):
-    - Flutter
   - flutter_matter (0.0.11):
     - Flutter
   - flutter_secure_storage_darwin (10.0.0):
@@ -24,7 +22,6 @@ PODS:
 DEPENDENCIES:
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
-  - flutter_blue_plus (from `.symlinks/plugins/flutter_blue_plus/ios`)
   - flutter_matter (from `.symlinks/plugins/flutter_matter/ios`)
   - flutter_secure_storage_darwin (from `.symlinks/plugins/flutter_secure_storage_darwin/darwin`)
   - mobile_scanner (from `.symlinks/plugins/mobile_scanner/darwin`)
@@ -38,8 +35,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
-  flutter_blue_plus:
-    :path: ".symlinks/plugins/flutter_blue_plus/ios"
   flutter_matter:
     :path: ".symlinks/plugins/flutter_matter/ios"
   flutter_secure_storage_darwin:
@@ -58,7 +53,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   device_info_plus: 21fcca2080fbcd348be798aa36c3e5ed849eefbe
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  flutter_blue_plus: e5808fc4e5ebc58bb911635f8fdaf5e2b4da2754
   flutter_matter: 8cde99b875d154e3f5558b3ee338046ca39cedd0
   flutter_secure_storage_darwin: 46e401699982ee74142909676535e0f6a7321e58
   mobile_scanner: 9157936403f5a0644ca3779a38ff8404c5434a93

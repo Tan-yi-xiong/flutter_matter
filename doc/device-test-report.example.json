@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "generated_at": "2026-11-11T12:00:00Z",
   "test_app": {
     "name": "flutter_matter_device_test_app",
@@ -16,12 +16,11 @@
   "commissionee": {
     "vendor_id": 4660,
     "product_id": 22136,
-    "commissioning_transport": "ip",
     "network_transport": "wifi"
   },
   "summary": {
     "result": "passed",
-    "passed": 11,
+    "passed": 10,
     "failed": 0,
     "not_run": 1
   },
@@ -33,18 +32,11 @@
         "android-build-install.png"
       ]
     },
-    "commissioning_discovery": {
-      "status": "passed",
-      "duration_ms": 7200,
-      "evidence_files": [
-        "android-ip-discovery.png"
-      ]
-    },
     "commissioning": {
       "status": "passed",
       "duration_ms": 61200,
       "evidence_files": [
-        "android-ip-commissioning.png"
+        "android-sdk-commissioning.png"
       ]
     },
     "operational_connect": {

@@ -130,24 +130,6 @@ class RunnerScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  if (activeRun.awaitingAppRestart) ...<Widget>[
-                    Semantics(
-                      key: DeviceTestUiKeys.waitingForAppRestart,
-                      container: true,
-                      liveRegion: true,
-                      label:
-                          'Waiting for the controller app to restart. '
-                          'The next test continues after relaunch.',
-                      excludeSemantics: true,
-                      child: const InfoBanner(
-                        icon: Icons.restart_alt,
-                        message:
-                            'Waiting for the controller app to restart. '
-                            'The next test continues after relaunch.',
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                  ],
                   PresentationCard(
                     title: 'Current Test',
                     subtitle:
@@ -265,6 +247,39 @@ class RunnerScreen extends StatelessWidget {
                       ),
                     ),
                   ],
+                  if (activeRun.isTerminal) ...<Widget>[
+                    const SizedBox(height: 16),
+                    PresentationCard(
+                      key: DeviceTestUiKeys.commissioneeReset,
+                      title: 'Commissionee cleanup',
+                      subtitle:
+                          'Optional. Reset the device after a finished Run to '
+                          'free its fabric slots for the next Run.',
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          const InfoBanner(
+                            icon: Icons.restore,
+                            message:
+                                'Factory reset the commissionee (or reset the '
+                                'virtual device) so it starts the next Run '
+                                'without accumulated fabrics.',
+                          ),
+                          const SizedBox(height: 8),
+                          FilledButton.tonalIcon(
+                            onPressed: state.busy
+                                ? null
+                                : () => _confirmCommissioneeReset(
+                                    context,
+                                    controller,
+                                  ),
+                            icon: const Icon(Icons.restart_alt),
+                            label: const Text('I reset the device'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 24),
                 ],
               ),
@@ -273,6 +288,27 @@ class RunnerScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _confirmCommissioneeReset(
+    BuildContext context,
+    DeviceTestUiController controller,
+  ) async {
+    final confirmed = await showCommissioneeResetDialog(context);
+    if (!confirmed || !context.mounted) {
+      return;
+    }
+    try {
+      await controller.confirmCommissioneeReset();
+    } on Object {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('The commissionee cleanup could not be recorded.'),
+          ),
+        );
+      }
+    }
   }
 
   static DeviceTestStatus _statusFor(

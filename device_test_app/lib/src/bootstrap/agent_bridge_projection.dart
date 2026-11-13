@@ -75,7 +75,6 @@ class AgentBridgeProjection {
         return AgentRunStatus.passed;
       case RunPhase.idle:
       case RunPhase.preparing:
-      case RunPhase.discovering:
       case RunPhase.commissioning:
       case RunPhase.connecting:
       case RunPhase.testing:
@@ -118,7 +117,6 @@ class AgentBridgeProjection {
       'screen': state.screen.name,
       'busy': state.busy,
       if (run != null) 'phase': run.phase.wireName,
-      if (run != null) 'awaiting_app_restart': run.awaitingAppRestart,
       if (state.results != null)
         'report_validation': state.results!.validation.status.name,
       if (state.controllerInfo case final controller?)
@@ -154,16 +152,13 @@ class AgentBridgeProjection {
       RunnerEventType.testNotRun ||
       RunnerEventType.testBlocked ||
       RunnerEventType.promptResolved => AgentEventSeverity.warning,
-      RunnerEventType.screenshotCaptured ||
-      RunnerEventType.checkpointSaved ||
-      RunnerEventType.checkpointCleared => AgentEventSeverity.debug,
+      RunnerEventType.screenshotCaptured => AgentEventSeverity.debug,
       RunnerEventType.runStarted ||
-      RunnerEventType.runResumed ||
       RunnerEventType.testStarted ||
-      RunnerEventType.testResumed ||
       RunnerEventType.testPassed ||
       RunnerEventType.promptRequested ||
-      RunnerEventType.runCompleted => AgentEventSeverity.info,
+      RunnerEventType.runCompleted ||
+      RunnerEventType.commissioneeResetConfirmed => AgentEventSeverity.info,
     };
   }
 

@@ -43,6 +43,11 @@ abstract interface class ProvisioningSecretsPort {
   Future<void> purge(String runId);
 
   Future<void> purgeAll();
+
+  /// Deletes every stored per-Run provisioning key, including orphans whose
+  /// run directory no longer exists. Run-scoped only: the global Wi-Fi
+  /// prefill cache is intentionally untouched.
+  Future<void> purgeAllStored();
 }
 
 /// Coordinates the automatic clean cycle before a new Run.
@@ -104,15 +109,13 @@ abstract interface class DeviceTestRunPort {
 
   Stream<RunnerEvent> get eventStream;
 
-  Future<PersistedRunState?> loadUnfinished();
-
   Future<RunnerStateSnapshot> start(RunStartRequest request);
 
-  Future<RunnerStateSnapshot?> resume();
+  Future<void> cleanupUnfinished();
 
   Future<void> stop({String reason = 'Stopped by operator.'});
 
-  Future<DeviceTestReportV3?> buildFormalReport({
+  Future<DeviceTestReportV4?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   });

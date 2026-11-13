@@ -1,4 +1,5 @@
 import '../application/operator_prompt.dart';
+import '../application/ports.dart';
 import '../domain/domain.dart';
 import '../report/report.dart';
 
@@ -82,7 +83,6 @@ class ActiveRunViewModel {
     this.currentInstruction,
     this.currentElapsed,
     this.currentTimeout,
-    this.awaitingAppRestart = false,
   });
 
   final String runId;
@@ -93,14 +93,12 @@ class ActiveRunViewModel {
   final String? currentInstruction;
   final Duration? currentElapsed;
   final Duration? currentTimeout;
-  final bool awaitingAppRestart;
 
   int get completedCount =>
       tests.where((test) => test.status.isTerminal).length;
   int get totalCount => tests.length;
   double get progress => tests.isEmpty ? 0 : completedCount / tests.length;
   bool get isTerminal => phase.isTerminal;
-  bool get canResume => !isTerminal && !awaitingAppRestart;
 }
 
 /// A prompt that needs an explicit human, Agent, or app decision.
@@ -202,28 +200,21 @@ class DeviceTestUiState {
   final bool hasStoredSecrets;
 }
 
-/// Explicit operator confirmation required before a Run can start.
-class CleanCycleConfirmations {
-  const CleanCycleConfirmations({required this.commissioneeClean});
-
-  final bool commissioneeClean;
-}
-
 /// Editable setup values kept only in the setup screen.
 class DeviceTestSetupDraft {
   const DeviceTestSetupDraft({
     required this.setupCode,
     required this.profile,
-    required this.cleanCycle,
     this.wifiSsid = '',
     this.wifiPassword = '',
+    this.onNetworkEndpoint,
   });
 
   final String setupCode;
   final String wifiSsid;
   final String wifiPassword;
   final TestProfile profile;
-  final CleanCycleConfirmations cleanCycle;
+  final OnNetworkCommissioningEndpoint? onNetworkEndpoint;
 }
 
 /// Transient Wi-Fi values loaded for the setup form.
@@ -251,9 +242,9 @@ class DeviceTestSetupRequest {
     required this.controller,
     required this.setupCode,
     required this.profile,
-    required this.cleanCycle,
     this.wifiSsid = '',
     this.wifiPassword = '',
+    this.onNetworkEndpoint,
   });
 
   final ControllerInfoViewModel controller;
@@ -261,17 +252,11 @@ class DeviceTestSetupRequest {
   final String wifiSsid;
   final String wifiPassword;
   final TestProfile profile;
-  final CleanCycleConfirmations cleanCycle;
+  final OnNetworkCommissioningEndpoint? onNetworkEndpoint;
 }
 
 /// Field identifiers used by setup validation messages.
-enum SetupField {
-  controller,
-  preflight,
-  networkCredentials,
-  setupCode,
-  commissioneeClean,
-}
+enum SetupField { controller, preflight, networkCredentials, setupCode }
 
 class SetupValidationResult {
   SetupValidationResult(Map<SetupField, String> errors)
@@ -323,7 +308,6 @@ extension RunPhasePresentation on RunPhase {
   String get label => switch (this) {
     RunPhase.idle => 'Idle',
     RunPhase.preparing => 'Preparing',
-    RunPhase.discovering => 'Discovering commissionee',
     RunPhase.commissioning => 'Commissioning',
     RunPhase.connecting => 'Connecting',
     RunPhase.testing => 'Testing',

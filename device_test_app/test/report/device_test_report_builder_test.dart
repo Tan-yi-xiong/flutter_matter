@@ -22,80 +22,90 @@ void main() {
     );
 
     expect(jsonEncode(first.toJson()), jsonEncode(second.toJson()));
-    expect(first.summary.passed, 11);
+    expect(first.summary.passed, 10);
     expect(first.summary.notRun, 1);
     expect(first.summary.result, ReportResult.passed);
     expect(first.profile, TestProfile.full);
-    expect(
-      first.commissionee.commissioningTransport,
-      CommissioningTransport.ip,
-    );
     expect(first.commissionee.vendorId, 4660);
     expect(first.commissionee.productId, 22136);
+    expect(first.commissionee.networkTransport, NetworkTransport.wifi);
+  });
+
+  test('emits schema version 4 without any transport route field', () {
+    final report = buildFixtureReport();
+    final json = report.toJson();
+
+    expect(report.schemaVersion, 4);
+    expect(json['schema_version'], 4);
+    expect(
+      (json['commissionee']! as Map<String, dynamic>).containsKey(
+        'commissioning_transport',
+      ),
+      isFalse,
+    );
+    expect(
+      jsonEncode(report.toJson()),
+      isNot(contains('commissioning_transport')),
+    );
   });
 
   test('typed reports survive a JSON round trip', () {
     final original = buildFixtureReport();
-    final decoded = DeviceTestReportV3.fromJson(
+    final decoded = DeviceTestReportV4.fromJson(
       jsonDecode(jsonEncode(original.toJson())) as Map<String, dynamic>,
     );
 
     expect(jsonEncode(decoded.toJson()), jsonEncode(original.toJson()));
   });
 
-  test('accepts a selected BLE commissioning route', () {
-    final report = builder.buildFormal(
-      buildFixtureSession(
-        commissionee: const CommissioneeMetadata(
-          vendorId: 4660,
-          productId: 22136,
-          commissioningTransport: CommissioningTransport.ble,
-          networkTransport: NetworkTransport.wifi,
-        ),
-      ),
-      generatedAt: fixtureGeneratedAt,
-      sanitizationReviewed: true,
-    );
+  test('rejects legacy v2 and v3 schema versions', () {
+    final v3Json = <String, Object?>{
+      ...buildFixtureReport().toJson(),
+      'schema_version': 3,
+    };
+    final v2Json = <String, Object?>{
+      ...buildFixtureReport().toJson(),
+      'schema_version': 2,
+    };
 
-    expect(
-      report.commissionee.commissioningTransport,
-      CommissioningTransport.ble,
-    );
-    expect(report.commissionee.networkTransport, NetworkTransport.wifi);
+    expect(() => DeviceTestReportV4.fromJson(v3Json), throwsArgumentError);
+    expect(() => DeviceTestReportV4.fromJson(v2Json), throwsArgumentError);
   });
 
-  test('accepts a selected IP commissioning route', () {
-    final report = builder.buildFormal(
-      buildFixtureSession(
-        commissionee: const CommissioneeMetadata(
-          vendorId: 4660,
-          productId: 22136,
-          commissioningTransport: CommissioningTransport.ip,
-          networkTransport: NetworkTransport.wifi,
-        ),
-      ),
-      generatedAt: fixtureGeneratedAt,
-      sanitizationReviewed: true,
-    );
-
+  test('rejects constructing a typed report with a retired schema version', () {
     expect(
-      report.commissionee.commissioningTransport,
-      CommissioningTransport.ip,
+      () => DeviceTestReportV4(
+        schemaVersion: 3,
+        generatedAt: fixtureGeneratedAt,
+        testApp: fixtureTestApp,
+        pluginCommit: fixturePluginCommit,
+        controller: buildFixtureSession().controller!,
+        commissionee: buildFixtureSession().commissionee!,
+        summary: buildFixtureReport().summary,
+        tests: buildFixtureReport().tests,
+        sanitizationReviewed: true,
+      ),
+      throwsArgumentError,
     );
   });
 
-  test('rejects a missing commissioning route', () {
-    final session = buildFixtureSession(
-      commissionee: const CommissioneeMetadata(
-        vendorId: 4660,
-        productId: 22136,
-        networkTransport: NetworkTransport.wifi,
-      ),
-    );
+  test('rejects sessions without commissionee metadata', () {
+    final session = buildFixtureSession();
 
     expect(
       () => builder.buildFormal(
-        session,
+        RunSession(
+          id: session.id,
+          profile: session.profile,
+          testApp: session.testApp,
+          pluginCommit: session.pluginCommit,
+          createdAt: session.createdAt,
+          updatedAt: session.updatedAt,
+          phase: session.phase,
+          controller: session.controller,
+          commissionee: null,
+          results: session.results,
+        ),
         generatedAt: fixtureGeneratedAt,
         sanitizationReviewed: true,
       ),
@@ -103,7 +113,7 @@ void main() {
         isA<ReportBuildException>().having(
           (error) => error.issues.join(' '),
           'issues',
-          contains('selected commissioning transport'),
+          contains('Commissionee metadata is required'),
         ),
       ),
     );
@@ -126,7 +136,6 @@ void main() {
       commissionee: const CommissioneeMetadata(
         vendorId: 4660,
         productId: 22136,
-        commissioningTransport: CommissioningTransport.ip,
         networkTransport: NetworkTransport.wifi,
       ),
       results: <DeviceTestId, DeviceTestResult>{
@@ -159,7 +168,6 @@ void main() {
       commissionee: const CommissioneeMetadata(
         vendorId: 4660,
         productId: 22136,
-        commissioningTransport: CommissioningTransport.ip,
         networkTransport: NetworkTransport.thread,
       ),
     );
@@ -177,29 +185,6 @@ void main() {
           contains('Wi-Fi network transport'),
         ),
       ),
-    );
-  });
-
-  test('rejects schema version 1 reports', () {
-    final legacyJson = <String, Object?>{
-      ...buildFixtureReport().toJson(),
-      'schema_version': 1,
-    };
-
-    expect(() => DeviceTestReportV3.fromJson(legacyJson), throwsArgumentError);
-    expect(
-      () => DeviceTestReportV3(
-        schemaVersion: 1,
-        generatedAt: fixtureGeneratedAt,
-        testApp: fixtureTestApp,
-        pluginCommit: fixturePluginCommit,
-        controller: buildFixtureSession().controller!,
-        commissionee: buildFixtureSession().commissionee!,
-        summary: buildFixtureReport().summary,
-        tests: buildFixtureReport().tests,
-        sanitizationReviewed: true,
-      ),
-      throwsArgumentError,
     );
   });
 

@@ -15,16 +15,16 @@ class _FakeCase implements DeviceTestCase {
 
 void main() {
   group('TestCaseRegistry', () {
-    test('contains all 12 fixed cases in canonical order', () {
+    test('contains all 11 fixed cases in canonical order', () {
       final registry = TestCaseRegistry.canonical();
-      expect(registry.allCases.length, 12);
+      expect(registry.allCases.length, 11);
       expect(
         registry.allCases.map((testCase) => testCase.id).toList(),
         DeviceTestCatalog.all,
       );
     });
 
-    test('quick profile has exactly the five quick cases', () {
+    test('quick profile has exactly the four quick cases', () {
       final registry = TestCaseRegistry.canonical();
       expect(
         registry.forProfile(TestProfile.quick).map((testCase) => testCase.id),
@@ -37,7 +37,7 @@ void main() {
         for (final id in DeviceTestCatalog.all) _FakeCase(id),
       ];
       expect(
-        () => TestCaseRegistry(cases.sublist(0, 11)),
+        () => TestCaseRegistry(cases.sublist(0, 10)),
         throwsA(isA<TestCaseRegistryException>()),
       );
       expect(

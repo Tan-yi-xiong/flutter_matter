@@ -9,6 +9,10 @@ class _MemoryStore implements KeyValueStore {
   final Map<String, String> values = <String, String>{};
 
   @override
+  Future<Map<String, String>> readAll() async =>
+      Map<String, String>.from(values);
+
+  @override
   Future<String?> read(String key) async => values[key];
 
   @override
@@ -124,6 +128,7 @@ void main() {
         'run-1',
         ProvisioningSecrets(
           onboardingPayload: 'MT:TEST-PAYLOAD',
+          invalidSetupOnboardingPayload: '24129507534',
           setupPinCode: 20202021,
           network: const WifiProvisioningSecret(
             ssid: 'run-net',

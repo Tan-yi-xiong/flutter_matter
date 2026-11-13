@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter_matter_device_test_app/src/application/ports.dart';
 import 'package:flutter_matter_device_test_app/src/domain/domain.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/adapters/adapters.dart';
-import 'package:flutter_matter_device_test_app/src/infrastructure/ble/matter_ble.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/matter/matter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,26 +10,17 @@ import 'support/fakes.dart';
 
 void main() {
   late FakeRuntimeProvider runtimeProvider;
-  late FakeOnboardingPayloadResolver payloadResolver;
-  late FakeMatterBleScanner bleScanner;
-  late FakeMatterMdnsScanner mdnsScanner;
   late MatterControllerAdapter adapter;
 
   setUp(() {
     runtimeProvider = FakeRuntimeProvider();
-    payloadResolver = FakeOnboardingPayloadResolver();
-    bleScanner = FakeMatterBleScanner();
-    mdnsScanner = FakeMatterMdnsScanner();
     adapter = MatterControllerAdapter(
       runtimeProvider: runtimeProvider,
-      payloadResolver: payloadResolver,
       platform: ControllerPlatform.android,
-      bleScanner: bleScanner,
-      mdnsScanner: mdnsScanner,
     );
   });
 
-  group('identity and commissioning', () {
+  group('identity and direct commissioning', () {
     test(
       'keeps an identity stable across loads and separated by purpose',
       () async {
@@ -91,92 +81,12 @@ void main() {
       },
     );
 
-    test('selects BLE when its discovery result arrives first', () async {
-      mdnsScanner.matched = false;
-
-      final discovery = await adapter.discover(
-        const CommissioningDiscoveryRequest(
-          onboardingPayload: 'MT:PAYLOAD',
-          timeout: Duration(seconds: 1),
-        ),
-      );
-
-      expect(discovery.transport, CommissioningTransport.ble);
-      expect(discovery.bleTarget, isNotNull);
-      expect(bleScanner.requests, hasLength(1));
-
-      final identity = await _identity(adapter);
-      await adapter.commission(
-        CommissioningRequest(
-          target: discovery.bleTarget,
-          identity: identity,
-          targetNodeId: 42,
-          onboardingPayload: 'MT:PAYLOAD',
-          setupPinCode: 20202021,
-          network: const WifiProvisioningSecret(
-            ssid: 'Lab Wi-Fi',
-            password: 'secret',
-          ),
-          commissioningTransport: discovery.transport,
-          timeout: const Duration(seconds: 3),
-        ),
-      );
-
-      final request = runtimeProvider
-          .controllerFor(ControllerIdentityPurpose.main)
-          .commissionRequests
-          .single;
-      expect(request.commissioningTransport, MatterCommissioningTransport.ble);
-      expect(request.discoveredBleDevice, bleScanner.discovered);
-    });
-
-    test('selects IP when BLE discovery fails', () async {
-      bleScanner.error = MatterBleException(
-        MatterBleFailureCode.adapterUnavailable,
-        'Bluetooth is unavailable',
-      );
-      mdnsScanner.matched = true;
-
-      final discovery = await adapter.discover(
-        const CommissioningDiscoveryRequest(
-          onboardingPayload: 'MT:PAYLOAD',
-          timeout: Duration(seconds: 1),
-        ),
-      );
-
-      expect(discovery.transport, CommissioningTransport.ip);
-      expect(discovery.bleTarget, isNull);
-      expect(mdnsScanner.requests, hasLength(1));
-    });
-
-    test('fails discovery when BLE and IP both fail', () async {
-      bleScanner.error = MatterBleException(
-        MatterBleFailureCode.adapterUnavailable,
-        'Bluetooth is unavailable',
-      );
-      mdnsScanner.matched = false;
-
-      await expectLater(
-        adapter.discover(
-          const CommissioningDiscoveryRequest(
-            onboardingPayload: 'MT:PAYLOAD',
-            timeout: Duration(seconds: 1),
-          ),
-        ),
-        throwsA(isA<CommissioningDiscoveryException>()),
-      );
-    });
-
     test(
-      'maps Wi-Fi commissioning request to the Matter service request',
+      'maps a Wi-Fi commissioning request to the direct Matter SDK request',
       () async {
         final identity = await _identity(adapter);
         final result = await adapter.commission(
           CommissioningRequest(
-            target: const BleCommissionee(
-              opaqueId: 'target-1',
-              displayName: 'Target',
-            ),
             identity: identity,
             targetNodeId: 42,
             onboardingPayload: 'MT:PAYLOAD',
@@ -185,7 +95,6 @@ void main() {
               ssid: 'Lab Wi-Fi',
               password: 'secret',
             ),
-            commissioningTransport: CommissioningTransport.ip,
             timeout: const Duration(seconds: 3),
           ),
         );
@@ -199,10 +108,8 @@ void main() {
         expect(result.networkTransport, NetworkTransport.wifi);
         expect(request.onboardingPayload, 'MT:PAYLOAD');
         expect(request.setupPinCode, 20202021);
-        expect(request.discriminator, 0x0acd);
         expect(request.nodeId, 42);
-        expect(request.commissioningTransport, MatterCommissioningTransport.ip);
-        expect(request.bleScanTimeout, const Duration(seconds: 3));
+        expect(request.timeout, const Duration(seconds: 3));
         expect(request.networkCredentials, isA<MatterWifiNetworkCredentials>());
         expect(
           (request.networkCredentials as MatterWifiNetworkCredentials)
@@ -210,6 +117,45 @@ void main() {
               .ssid,
           'Lab Wi-Fi',
         );
+        expect(
+          (request.networkCredentials as MatterWifiNetworkCredentials)
+              .credentials
+              .password,
+          'secret',
+        );
+      },
+    );
+
+    test(
+      'maps Thread credentials for direct commissioning without discovery',
+      () async {
+        final identity = await _identity(adapter);
+        final result = await adapter.commission(
+          CommissioningRequest(
+            identity: identity,
+            targetNodeId: 7,
+            onboardingPayload: 'MT:THREAD',
+            setupPinCode: 20202021,
+            network: ThreadProvisioningSecret(
+              operationalDataset: <int>[1, 2, 3, 4],
+            ),
+            timeout: const Duration(seconds: 5),
+          ),
+        );
+
+        final request = runtimeProvider
+            .controllerFor(ControllerIdentityPurpose.main)
+            .commissionRequests
+            .single;
+        expect(result.succeeded, isTrue);
+        expect(result.networkTransport, NetworkTransport.thread);
+        expect(request.onboardingPayload, 'MT:THREAD');
+        expect(request.setupPinCode, 20202021);
+        expect(request.nodeId, 7);
+        expect(request.timeout, const Duration(seconds: 5));
+        final credentials =
+            request.networkCredentials as MatterThreadNetworkCredentials;
+        expect(credentials.credentials.operationalDataset, <int>[1, 2, 3, 4]);
       },
     );
 
@@ -226,24 +172,7 @@ void main() {
       };
 
       await expectLater(
-        adapter.commission(
-          CommissioningRequest(
-            target: const BleCommissionee(
-              opaqueId: 'target-1',
-              displayName: 'Target',
-            ),
-            identity: identity,
-            targetNodeId: 42,
-            onboardingPayload: 'MT:PAYLOAD',
-            setupPinCode: 20202021,
-            network: const WifiProvisioningSecret(
-              ssid: 'Lab Wi-Fi',
-              password: 'secret',
-            ),
-            commissioningTransport: CommissioningTransport.ip,
-            timeout: const Duration(seconds: 3),
-          ),
-        ),
+        adapter.commission(_commissionRequest(identity)),
         throwsA(
           isA<CommissioningException>()
               .having(
@@ -252,6 +181,70 @@ void main() {
                 CommissioningFailureCode.commissioningFailed,
               )
               .having((error) => error.errorCode, 'errorCode', 17),
+        ),
+      );
+    });
+
+    test('maps a commissioning timeout to the timeout failure code', () async {
+      final identity = await _identity(adapter);
+      runtimeProvider
+          .controllerFor(ControllerIdentityPurpose.main)
+          .commissionHandler = (_) async {
+        throw MatterTimeoutException('Matter commissioning');
+      };
+
+      await expectLater(
+        adapter.commission(_commissionRequest(identity)),
+        throwsA(
+          isA<CommissioningException>().having(
+            (error) => error.code,
+            'code',
+            CommissioningFailureCode.timeout,
+          ),
+        ),
+      );
+    });
+
+    test('maps a platform permission error to permission denied', () async {
+      final identity = await _identity(adapter);
+      runtimeProvider
+          .controllerFor(ControllerIdentityPurpose.main)
+          .commissionHandler = (_) async {
+        throw MatterException(
+          MatterFailureCode.pairingFailed,
+          'Pairing failed',
+          permissionPlatformException(),
+        );
+      };
+
+      await expectLater(
+        adapter.commission(_commissionRequest(identity)),
+        throwsA(
+          isA<CommissioningException>().having(
+            (error) => error.code,
+            'code',
+            CommissioningFailureCode.permissionDenied,
+          ),
+        ),
+      );
+    });
+
+    test('maps an invalid setup payload to the invalid setup code', () async {
+      final identity = await _identity(adapter);
+      runtimeProvider
+          .controllerFor(ControllerIdentityPurpose.main)
+          .commissionHandler = (_) async {
+        throw const FormatException('Unrecognized onboarding payload');
+      };
+
+      await expectLater(
+        adapter.commission(_commissionRequest(identity)),
+        throwsA(
+          isA<CommissioningException>().having(
+            (error) => error.code,
+            'code',
+            CommissioningFailureCode.invalidSetupCode,
+          ),
         ),
       );
     });
@@ -629,6 +622,20 @@ void main() {
       },
     );
   });
+}
+
+CommissioningRequest _commissionRequest(ControllerIdentity identity) {
+  return CommissioningRequest(
+    identity: identity,
+    targetNodeId: 42,
+    onboardingPayload: 'MT:PAYLOAD',
+    setupPinCode: 20202021,
+    network: const WifiProvisioningSecret(
+      ssid: 'Lab Wi-Fi',
+      password: 'secret',
+    ),
+    timeout: const Duration(seconds: 3),
+  );
 }
 
 Future<ControllerIdentity> _identity(MatterControllerAdapter adapter) {

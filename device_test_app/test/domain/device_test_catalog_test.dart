@@ -6,7 +6,6 @@ void main() {
     test('keeps the contract order and priorities', () {
       expect(DeviceTestCatalog.all.map((testId) => testId.wireName), <String>[
         'build_install',
-        'commissioning_discovery',
         'commissioning',
         'operational_connect',
         'onoff_invoke',
@@ -27,7 +26,6 @@ void main() {
           DeviceTestPriority.p0,
           DeviceTestPriority.p0,
           DeviceTestPriority.p0,
-          DeviceTestPriority.p0,
           DeviceTestPriority.p1,
           DeviceTestPriority.p1,
           DeviceTestPriority.p2,
@@ -37,10 +35,9 @@ void main() {
       );
     });
 
-    test('quick is the five-step minimum operational path', () {
+    test('quick is the four-step minimum operational path', () {
       expect(TestProfile.quick.testIds, <DeviceTestId>[
         DeviceTestId.buildInstall,
-        DeviceTestId.commissioningDiscovery,
         DeviceTestId.commissioning,
         DeviceTestId.operationalConnect,
         DeviceTestId.onoffInvoke,
@@ -53,7 +50,7 @@ void main() {
 
     test('full contains every fixed test in canonical order', () {
       expect(TestProfile.full.testIds, DeviceTestCatalog.all);
-      expect(TestProfile.full.testIds.toSet(), hasLength(12));
+      expect(TestProfile.full.testIds.toSet(), hasLength(11));
     });
 
     test('wire names round trip and unknown names fail', () {

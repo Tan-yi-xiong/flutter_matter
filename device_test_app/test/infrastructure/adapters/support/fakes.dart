@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_matter/flutter_matter.dart';
 import 'package:flutter_matter_device_test_app/src/application/ports.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/adapters/adapters.dart';
-import 'package:flutter_matter_device_test_app/src/infrastructure/ble/matter_ble.dart';
-import 'package:flutter_matter_device_test_app/src/infrastructure/discovery/discovery.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/matter/matter.dart';
 
 typedef CommissionHandler =
@@ -217,6 +215,23 @@ class FakeRuntimeProvider implements MatterControllerRuntimeProvider {
   }
 
   @override
+  Future<MatterControllerRuntime> restart(
+    ControllerIdentityRequest request,
+  ) async {
+    final stale = _entries.remove(request.purpose);
+    if (stale != null) {
+      await stale.controller.close();
+    }
+    final entry = _entry(request.purpose);
+    return MatterControllerRuntime(
+      purpose: request.purpose,
+      config: config,
+      controller: entry.controller,
+      identityStore: entry.identity,
+    );
+  }
+
+  @override
   Future<void> reset(ControllerIdentityRequest request) async {
     final entry = _entries.remove(request.purpose);
     if (entry == null) {
@@ -252,123 +267,6 @@ class _RuntimeEntry {
 
   final FakeMatterControllerApi controller;
   final FakeMatterIdentityStore identity;
-}
-
-class FakeOnboardingPayloadResolver implements MatterOnboardingPayloadResolver {
-  FakeOnboardingPayloadResolver({
-    this.discriminator = 0x0acd,
-    this.hasShortDiscriminator = false,
-    this.setupPinCode = 20202021,
-    this.error,
-  });
-
-  final int discriminator;
-  final bool hasShortDiscriminator;
-  final int setupPinCode;
-  final Object? error;
-  final List<String> requests = <String>[];
-
-  @override
-  Future<OnboardingPayload> resolve(String payload) async {
-    requests.add(payload);
-    final failure = error;
-    if (failure != null) {
-      throw failure;
-    }
-    return OnboardingPayload(
-      version: 0,
-      vendorId: 0xfff1,
-      productId: 0x8000,
-      commissioningFlow: 0,
-      discoveryCapabilities: <DiscoveryCapability>{DiscoveryCapability.ble},
-      discriminator: discriminator,
-      hasShortDiscriminator: hasShortDiscriminator,
-      setupPinCode: setupPinCode,
-    );
-  }
-}
-
-class FakeMatterBleScanner implements MatterBleScannerApi {
-  FakeMatterBleScanner({MatterBleDiscoveredDevice? discovered, this.error})
-    : discovered = discovered ?? makeDiscoveredDevice();
-
-  MatterBleDiscoveredDevice discovered;
-  Object? error;
-  final List<MatterBleDiscoveryRequest> requests =
-      <MatterBleDiscoveryRequest>[];
-
-  @override
-  Future<MatterBleDiscoveredDevice> scan(
-    MatterBleDiscoveryRequest request,
-  ) async {
-    requests.add(request);
-    final failure = error;
-    if (failure != null) {
-      throw failure;
-    }
-    return discovered;
-  }
-}
-
-class FakeMatterMdnsScanner implements MatterMdnsCommissioningScannerApi {
-  FakeMatterMdnsScanner({this.matched = false, this.error});
-
-  bool matched;
-  Object? error;
-  final List<MatterBleDiscoveryRequest> requests =
-      <MatterBleDiscoveryRequest>[];
-
-  @override
-  Future<bool> waitForMatch({
-    required int discriminator,
-    required bool hasShortDiscriminator,
-    required Duration timeout,
-  }) async {
-    requests.add(
-      MatterBleDiscoveryRequest(
-        discriminator: discriminator,
-        hasShortDiscriminator: hasShortDiscriminator,
-        timeout: timeout,
-      ),
-    );
-    final failure = error;
-    if (failure != null) {
-      throw failure;
-    }
-    return matched;
-  }
-}
-
-class FakeMatterBlePlatform implements MatterBlePlatform {
-  FakeMatterBlePlatform({this.error});
-
-  Object? error;
-  bool ensureAdapterCalled = false;
-  bool scanning = false;
-  final StreamController<MatterBleAdvertisement> _advertisements =
-      StreamController<MatterBleAdvertisement>.broadcast();
-
-  @override
-  Stream<MatterBleAdvertisement> get advertisements => _advertisements.stream;
-
-  @override
-  Future<void> ensureAdapterIsOn(Duration timeout) async {
-    ensureAdapterCalled = true;
-    final failure = error;
-    if (failure != null) {
-      throw failure;
-    }
-  }
-
-  @override
-  Future<void> startScan(Duration timeout) async {
-    scanning = true;
-  }
-
-  @override
-  Future<void> stopScan() async {
-    scanning = false;
-  }
 }
 
 class FakeMatterSubscription implements MatterSubscription {
@@ -425,45 +323,6 @@ class FakeMatterSubscription implements MatterSubscription {
     closeCompletionCount++;
     return closed;
   }
-}
-
-class FakeMatterBleDevice implements MatterBleDevice {
-  @override
-  bool get isConnected => false;
-
-  @override
-  int get mtu => 247;
-
-  @override
-  String get deviceId => 'fake-device-id';
-
-  @override
-  Future<void> connect(Duration timeout) async {}
-
-  @override
-  Future<void> disconnect() async {}
-
-  @override
-  Future<List<MatterBleGattService>> discoverServices(Duration timeout) async {
-    return const <MatterBleGattService>[];
-  }
-}
-
-MatterBleDiscoveredDevice makeDiscoveredDevice({
-  String? name = 'Fake Matter device',
-  int discriminator = 0x0acd,
-}) {
-  final advertisement = MatterBleAdvertisement(
-    device: FakeMatterBleDevice(),
-    serviceData: <String, Uint8List>{},
-    rssi: -40,
-    advertisedName: name,
-  );
-  return MatterBleDiscoveredDevice(
-    advertisement: advertisement,
-    matterServiceData: Uint8List(0),
-    discriminator: discriminator,
-  );
 }
 
 MatterAttributeValue matterBoolValue(

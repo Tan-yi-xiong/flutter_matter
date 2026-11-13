@@ -103,22 +103,19 @@ class LiveDeviceTestRunner implements DeviceTestRunPort {
   Stream<RunnerEvent> get eventStream => coordinator.eventStream;
 
   @override
-  Future<PersistedRunState?> loadUnfinished() =>
-      coordinator.ports.persistence.loadUnfinished();
-
-  @override
   Future<RunnerStateSnapshot> start(RunStartRequest request) =>
       coordinator.start(request);
 
   @override
-  Future<RunnerStateSnapshot?> resume() => coordinator.resume();
+  Future<void> cleanupUnfinished() =>
+      coordinator.ports.persistence.cleanupUnfinished();
 
   @override
   Future<void> stop({String reason = 'Stopped by operator.'}) =>
       coordinator.stop(reason: reason);
 
   @override
-  Future<DeviceTestReportV3?> buildFormalReport({
+  Future<DeviceTestReportV4?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) => coordinator.buildFormalReport(
@@ -154,6 +151,9 @@ class LiveProvisioningSecrets implements ProvisioningSecretsPort {
       await store.purge(runId);
     }
   }
+
+  @override
+  Future<void> purgeAllStored() => store.purgeAllStored();
 }
 
 /// Combines current-SSID detection with the latest secure Wi-Fi cache.
@@ -210,7 +210,7 @@ class LiveRunMaintenance implements DeviceRunMaintenancePort {
 
   @override
   Future<void> prepareForNewRun() async {
-    await _persistence.clearUnfinished();
+    await _persistence.cleanupUnfinished();
     await _secrets.purgeAll();
     for (final purpose in ControllerIdentityPurpose.values) {
       await _controllerIdentities.reset(

@@ -1,8 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../application/ports.dart';
-import '../../domain/domain.dart';
-import '../ble/matter_ble.dart';
 import '../matter/matter.dart';
 import 'matter_controller_api.dart';
 
@@ -23,6 +21,10 @@ class MatterControllerRuntime {
 
 abstract interface class MatterControllerRuntimeProvider {
   Future<MatterControllerRuntime> load(ControllerIdentityRequest request);
+
+  /// Disposes the live controller for [request.purpose] while keeping the
+  /// persisted credentials, then rebuilds the runtime from those credentials.
+  Future<MatterControllerRuntime> restart(ControllerIdentityRequest request);
 
   Future<void> reset(ControllerIdentityRequest request);
 
@@ -74,16 +76,7 @@ class FlutterMatterControllerRuntimeProvider
     final identityStore = MatterControllerCredentialsStoreApi(
       credentialsService,
     );
-    final platform = switch (request.platform) {
-      ControllerPlatform.android => MatterTargetPlatform.android,
-      ControllerPlatform.ios => MatterTargetPlatform.ios,
-    };
-    final blePlatform = FlutterBluePlusMatterBlePlatform();
     final service = MatterControllerService(
-      targetPlatform: platform,
-      bleScanner: MatterBleScanner(platform: blePlatform),
-      gattSessionFactory: DefaultMatterBleGattSessionFactory(),
-      bleLayerBridge: FlutterMatterBleLayerBridge(),
       credentialsService: credentialsService,
       controllerFactory: const FlutterMatterControllerFactory(),
       certificateIssuer: issuer,
@@ -97,6 +90,22 @@ class FlutterMatterControllerRuntimeProvider
     );
     _runtimes[key] = runtime;
     return runtime;
+  }
+
+  @override
+  Future<MatterControllerRuntime> restart(
+    ControllerIdentityRequest request,
+  ) async {
+    final key = _keyFor(request);
+    final existing = _runtimes[key];
+    if (existing != null) {
+      // Dispose the live controller only; stored credentials survive.
+      await existing.controller.close();
+      _runtimes.remove(key);
+    }
+    // load() restores credentials from secure storage and builds a brand-new
+    // controller, so the CASE session state does not survive the restart.
+    return load(request);
   }
 
   @override

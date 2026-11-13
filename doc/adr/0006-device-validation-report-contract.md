@@ -41,6 +41,12 @@ A later repository decision moved active validation to Wi-Fi/IP commissioning wi
 
 The active device-validation contract moved from schema version `2` to version `3`. The former `ip_discovery` and `ip_commissioning` cases are replaced by `commissioning_discovery` and `commissioning`. The app now starts BLE and Wi-Fi/IP commissionable discovery concurrently, records the first matching transport as `commissioning_transport`, and does not retry commissioning through the other transport after a failure. The report requires a Wi-Fi `network_transport` and does not record device provenance. Thread models and secure-storage branches remain in the codebase for future adaptation but are not part of the active validation flow. The earlier amendments remain as historical decisions.
 
+## Amendment (2026-11-12): Schema v4 and direct-SDK commissioning
+
+The active device-validation contract moved from schema version `3` to version `4`. The retired `commissioning_discovery` case and `commissioning_transport` report field are removed. The app no longer performs its own BLE or mDNS commissionee scan; it passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning. A commissioning failure is preserved and is not retried in the same Run.
+
+The fixed matrix is now 11 tests, and the quick profile is a four-test iteration path. The report still requires a Wi-Fi `network_transport`, does not record device provenance, and describes the invalid-setup-passcode negative test as using a well-formed setup payload with a deliberately incorrect setup passcode and the same discriminator. The test app derives that negative-test payload locally and keeps it only in platform-secure storage. The earlier amendments remain as historical decisions.
+
 ## Related Documents
 
 - [Device Validation](../device-validation.md)

@@ -210,6 +210,9 @@ fun onDeviceControlCall(path: String, params: String, result: MethodChannel.Resu
                 "/pairDevice" -> {
                     callResultSuccess(pairDevice(params))
                 }
+                "/pairDeviceWithAddress" -> {
+                    callResultSuccess(pairDeviceWithAddress(params))
+                }
                 "/stopDevicePairing" -> {
                     callResultSuccess(stopDevicePairing(params))
                 }
@@ -738,6 +741,64 @@ fun pairDevice(params: String): String {
             .build()
         control.pairDeviceWithCode(deviceId, onboardingPayload.toString(), false, false, commissionParams)
     }
+    return createFlutterRequestResult(0, JSONObject())
+}
+
+fun pairDeviceWithAddress(params: String): String {
+    val jsonObject = JSONObject(params)
+    val handle = jsonObject.optNotNull(jsonKeyHandle).toString()
+    val control = Objects.requireNonNull(getDeviceController(handle), "Not found control")!!
+    val deviceId = jsonObject.optNotNull("deviceId").toString().toLong()
+    val address = jsonObject.optNotNull("address").toString()
+    val port = jsonObject.optNotNull("port").toString().toInt()
+    val discriminator = jsonObject.optNotNull("discriminator").toString().toInt()
+    val setupPincode = jsonObject.optNotNull("setupPincode").toString().toLong()
+    val csrNonce = jsonObject.optJSONArray("csrNonce")?.toByteArray()
+    val attestationDelegate = jsonObject.optString("attestationDelegate")
+    val completionListenerHandle = jsonObject.optString("completionListener")
+
+    if (attestationDelegate != JSONObject.NULL && !attestationDelegate.isNullOrEmpty()) {
+        val failSafeExpiryTimeoutSecs =
+            jsonObject.opt("failSafeExpiryTimeoutSecs").toString().toIntOrNull() ?: 60
+        control.setDeviceAttestationDelegate(failSafeExpiryTimeoutSecs) { devicePtr, attestationInfo, errorCode ->
+            thread {
+                val p = createFlutterCallPath(
+                    deviceControllerHost,
+                    "DeviceAttestationDelegate/onDeviceAttestationCompleted"
+                )
+                val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
+                    p,
+                    JSONObject(
+                        mapOf(
+                            jsonKeyHandle to handle,
+                            "devicePtr" to devicePtr,
+                            "attestationInfo" to attestationInfo?.toJSONObject(),
+                            "errorCode" to errorCode
+                        )
+                    ).toString()
+                )
+                Objects.requireNonNull(
+                    flutterResult,
+                    createCallFlutterExceptionMessage("onDeviceAttestationCompleted")
+                )
+            }
+        }
+    }
+    if (completionListenerHandle != JSONObject.NULL) {
+        setCompletionListener(params)
+    }
+
+    val commissionParams = CommissionParameters.Builder()
+        .setCsrNonce(csrNonce)
+        .build()
+    control.pairDeviceWithAddress(
+        deviceId,
+        address,
+        port,
+        discriminator,
+        setupPincode,
+        commissionParams
+    )
     return createFlutterRequestResult(0, JSONObject())
 }
 

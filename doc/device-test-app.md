@@ -2,9 +2,9 @@
 
 The dedicated device-test app lives in [`device_test_app/`](../device_test_app/). It is the primary manual and Agent-driven validation surface for `flutter_matter`. It is not published with the plugin and is not covered by the required Dart CI gate.
 
-The app emits versioned evidence instead of relying on ad-hoc command transcripts. Formal evidence must use the `full` profile and the schema v3 report contract in [device-test-report.md](device-test-report.md). Physical-device validation has not yet been completed; this repository records that status only after a qualified run and reviewer-safe report are available.
+The app emits versioned evidence instead of relying on ad-hoc command transcripts. Formal evidence must use the `full` profile and the schema v4 report contract in [device-test-report.md](device-test-report.md). Physical-device validation has not yet been completed; this repository records that status only after a qualified run and reviewer-safe report are available.
 
-Every device Run uses a Matter commissionee. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP, selects the first matching transport, and records the actual transport in the report. Device provenance is not part of the report contract. A commissioning failure is preserved and never retried through the other transport in the same Run.
+Every device Run uses a Matter commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning. Device provenance is not part of the report contract. A commissioning failure is preserved and never retried in the same Run.
 
 ## Setup contract
 
@@ -16,7 +16,7 @@ The setup flow is deliberately minimal. The user or Agent provides only:
 - Wi-Fi password; an empty value is valid only for an open network.
 - Confirmation that the commissionee is factory-reset and has an open commissioning window.
 
-The app does not ask for commissionee model, firmware, external state-change method, commissioning transport, network transport, controller-clean state, or secrets-purged state. It accepts `vendor_id` and `product_id` from the commissionee payload automatically for report metadata.
+The app does not ask for commissionee model, firmware, external state-change method, commissioning transport, controller-clean state, or secrets-purged state. It accepts `vendor_id` and `product_id` from the commissionee payload automatically for report metadata.
 
 Before a Run starts, the app purges old run provisioning secrets and resets controller identities for the current platform. Cleanup failure blocks the Run before new secrets are persisted.
 
@@ -26,25 +26,24 @@ The app may cache the most recent Wi-Fi SSID and password in platform secure sto
 
 | Profile | Tests | Formal evidence |
 | --- | --- | --- |
-| `quick` | `build_install`, `commissioning_discovery`, `commissioning`, `operational_connect`, `onoff_invoke` | No |
-| `full` | All 12 fixed tests from the report contract | Yes, when all required P0 tests pass and the schema v3 report is valid |
+| `quick` | `build_install`, `commissioning`, `operational_connect`, `onoff_invoke` | No |
+| `full` | All 11 fixed tests from the report contract | Yes, when all required P0 tests pass and the schema v4 report is valid |
 
 `quick` is intended for developer iteration and never satisfies PR or release evidence. A `full` run is the only formal evidence source.
 
 ## Full validation order
 
 1. `build_install`
-2. `commissioning_discovery`
-3. `commissioning`
-4. `operational_connect`
-5. `onoff_invoke`
-6. `onoff_subscription`
-7. `node_label_persistence`
-8. `app_restart`
-9. `factory_reset_recommission`
-10. `invalid_setup_passcode`
-11. `invalid_wifi_password`
-12. `remove_fabric_ui`
+2. `commissioning`
+3. `operational_connect`
+4. `onoff_invoke`
+5. `onoff_subscription`
+6. `node_label_persistence`
+7. `app_restart`
+8. `factory_reset_recommission`
+9. `invalid_setup_passcode`
+10. `invalid_wifi_password`
+11. `remove_fabric_ui`
 
 A P0 failure or skip ends the current Run. Dependent tests are recorded as `not_run` with a reason. A P0 test is never retried inside the same Run to manufacture a green result.
 
@@ -54,10 +53,10 @@ A failed `app_restart` result is recorded before recovery. A failed `factory_res
 
 The app separates pure domain logic from hardware and platform adapters:
 
-- **Domain:** fixed test catalog, actual commissioning transport, results, resumable Run state, and the report model.
-- **Application:** `RunCoordinator`, the 12 fixed test cases, profiles, operator prompts, automatic cleanup, failure policy, and run recovery.
+- **Domain:** fixed test catalog, results, resumable Run state, and the report model.
+- **Application:** `RunCoordinator`, the 11 fixed test cases, profiles, operator prompts, automatic cleanup, failure policy, and run recovery.
 - **Agent:** protocol v1, state and event projection, and the reconnecting bridge client.
-- **Infrastructure:** Matter controller and certificate services, BLE and Wi-Fi/IP discovery, adapters for application ports, provisioning-secret and controller-identity storage, secure Wi-Fi credential cache, `FileRunPersistence`, report files, platform information, and sharing.
+- **Infrastructure:** Matter controller and certificate services, SDK-managed commissioning, adapters for application ports, provisioning-secret and controller-identity storage, secure Wi-Fi credential cache, `FileRunPersistence`, report files, platform information, and sharing.
 - **Presentation:** Home, Setup, Runner, prompt dialogs, Results, and the application controller.
 
 Widgets never call hardware APIs directly. The UI controller and Agent observe the same `RunCoordinator` state and event streams, while infrastructure adapters implement the hardware-facing application ports.
@@ -66,8 +65,8 @@ The app is designed for Android and physical iOS controllers. Every device run u
 
 ## Controller and commissionee roles
 
-- **Controller:** the Android or physical iOS phone running `device_test_app`. It creates controller identity, performs concurrent discovery, commissions through the selected transport, provisions Wi-Fi credentials, connects over CASE, invokes and subscribes to OnOff, and manages fabric state.
-- **Commissionee:** a Matter On/Off device that supports BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
+- **Controller:** the Android or physical iOS phone running `device_test_app`. It creates controller identity, delegates commissionee discovery and commissioning to the Matter SDK, provisions Wi-Fi credentials, connects over CASE, invokes and subscribes to OnOff, and manages fabric state.
+- **Commissionee:** a Matter On/Off device discoverable by the Matter SDK through its supported commissioning transports.
 
 When multiple phones are connected, the Agent must ask the user to choose the controller. The Agent never selects a phone by connection order, platform, or previous use. A device Run uses the commissionee selected by the operator.
 
@@ -82,7 +81,7 @@ runs/<run_id>/
   device-test-report.md
 ```
 
-`run_state.json` is written atomically and stores the complete recoverable state, including the session, execution state, selected transport, target node ID, app-restart checkpoint, and active prompt. Terminal and corrupt run-state files are ignored when selecting an unfinished run for recovery. Incompatible old snapshots are discarded; there is no migration path for retired fields.
+`run_state.json` is written atomically and stores the complete recoverable state, including the session, execution state, target node ID, app-restart checkpoint, and active prompt. Terminal and corrupt run-state files are ignored when selecting an unfinished run for recovery. Incompatible old snapshots are discarded; there is no migration path for retired fields.
 
 Setup codes, onboarding payloads, Wi-Fi credentials, controller private key material, and certificates are kept in platform secure storage, not in `run_state.json` or report files. Run secrets are automatically purged before a new Run and can also be purged after evidence collection. The separate Wi-Fi credential cache is removed only by the explicit clear action. iOS Keychain entries can survive app uninstallation, so uninstall is not a substitute for purge.
 
@@ -94,7 +93,7 @@ The app does not write screenshots, raw logs, or event transcripts into formal r
 
 - Minimum SDK 24, compile/target SDK 36, arm64 only.
 - Nearby-device, camera, location, Wi-Fi, Bluetooth, multicast, internet, and LAN cleartext access.
-- Android controllers use the app's Matter controller path for BLE and Wi-Fi/IP commissioning.
+- Android controllers delegate commissionee discovery and commissioning to the Matter SDK.
 
 ### iOS
 
@@ -141,8 +140,8 @@ The wrapper requires a clean tracked worktree and injects `PLUGIN_COMMIT` and `T
 ## Troubleshooting
 
 - **Bridge does not connect:** confirm `serve` is running, the app has the printed WebSocket endpoint, the Mac and phone are on the same trusted LAN, and the network permits the connection.
-- **No commissionee discovered:** confirm the commissionee supports BLE or Wi-Fi/IP commissionable discovery and that its commissioning window is open.
-- **Commissioning fails:** verify the setup code and network credentials without recording them, then stop and preserve the failed result rather than retrying a P0 or switching transport in the same Run.
-- **Report unavailable:** ensure the run was a completed `full` run with a valid actual transport and all required P0 tests have a valid result.
+- **No commissionee discovered:** confirm the commissionee is discoverable by the Matter SDK and that its commissioning window is open.
+- **Commissioning fails:** verify the setup code and network credentials without recording them, then stop and preserve the failed result rather than retrying a P0 in the same Run.
+- **Report unavailable:** ensure the run was a completed `full` run with a valid schema v4 report and all required P0 tests have a valid result.
 - **Wrong commit in report:** rebuild from the PR head with the wrapper, install the new app, and start a fresh Run.
 - **Secrets or device identifiers are visible:** do not attach the report. Purge the invalid copy, correct the source, regenerate from app state, and re-review the output.

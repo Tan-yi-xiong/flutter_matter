@@ -15,6 +15,9 @@ class SecureSecretStore implements KeyValueStore {
   Future<void> deleteAll() => _storage.deleteAll();
 
   @override
+  Future<Map<String, String>> readAll() => _storage.readAll();
+
+  @override
   Future<String?> read(String key) => _storage.read(key: key);
 
   @override

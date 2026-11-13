@@ -1,6 +1,6 @@
 # Agent-Driven Device Testing
 
-This document defines the operational interface between the flutter_matter device-test app, a Mac-hosted CLI, and an Agent. The app owns declarative Matter runner state, dual-path commissionee discovery, report construction, and state projection; the host owns controller discovery, explicit controller selection, transport, command serialization, and report retrieval.
+This document defines the operational interface between the flutter_matter device-test app, a Mac-hosted CLI, and an Agent. The app owns declarative Matter runner state, SDK-managed commissioning, report construction, and state projection; the host owns controller discovery, explicit controller selection, WebSocket transport, command serialization, and report retrieval.
 
 ## Goals
 
@@ -8,7 +8,7 @@ This document defines the operational interface between the flutter_matter devic
 - Let the Agent send one idempotent command at a time to the test app.
 - Keep the app as the WebSocket client so Android and physical iOS controllers can connect to a Mac-hosted server.
 - Expose every operation through a JSON CLI that an Agent can call from a shell.
-- Use a Matter commissionee and concurrent BLE and Wi-Fi/IP commissionee discovery.
+- Use a Matter commissionee and delegate commissionee discovery and commissioning to the Matter SDK.
 - Keep all evidence free of device identifiers, provisioning secrets, certificates, private keys, and raw logs.
 
 ## Topology
@@ -25,7 +25,7 @@ tool/device_test_agent.dart
   +---- LAN WebSocket server -------- device_test_app AgentBridgeClient
                                       |
                                       +---- RunCoordinator and test cases
-                                      +---- concurrent discovery and commissioning
+                                      +---- SDK-managed commissioning
                                       +---- semantic state and events
                                       +---- prompt projection
                                       +---- screenshot and report payloads
@@ -75,7 +75,7 @@ Every message is a UTF-8 JSON object with this envelope:
 | `command` | Host to app | A named command with JSON arguments and an idempotency key. |
 | `command_result` | App to host | Terminal command status and sanitized result data. |
 | `screenshot` | App to host | Base64 image bytes correlated with a command. |
-| `report` | App to host | Sanitized schema v3 JSON and the matching Markdown summary. |
+| `report` | App to host | Sanitized schema v4 JSON and the matching Markdown summary. |
 | `error` | Both | Protocol or command failure that does not necessarily close the socket. |
 
 ### Sequence rules
@@ -110,7 +110,7 @@ A Matter On/Off commissionee is required for every Run. Before setup:
 3. The operator supplies a setup code or QR setup payload.
 4. The controller has access to the target Wi-Fi SSID and password; an empty password is valid only for an open network.
 
-The commissionee may advertise BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both. The Agent must not run a separate mandatory host-side `_matterc._udp` preflight and must not block solely because mDNS is absent.
+The Agent must not run a separate host-side BLE/mDNS scan or mandatory `_matterc._udp` preflight. The app delegates commissionee discovery and commissioning to the Matter SDK.
 
 ## Interactive setup prompt contract
 
@@ -124,7 +124,7 @@ Ask for:
 4. `wifi_password`: the target Wi-Fi password, or an empty value for an open network.
 5. `commissionee_clean`: explicit confirmation that the selected commissionee is factory-reset and in an open commissioning window.
 
-Never ask for, accept, or repeat model, firmware, state-change method, state-change notes, commissioning transport, network transport, controller-clean, or secrets-purged fields. After answers arrive, write them only to the transient `start_run` argument file. Secret values must not appear in logs, screenshots, reports, or chat.
+Never ask for, accept, or repeat model, firmware, state-change method, state-change notes, commissioning transport, controller-clean, or secrets-purged fields. After answers arrive, write them only to the transient `start_run` argument file. Secret values must not appear in logs, screenshots, reports, or chat.
 
 ## CLI commands
 
@@ -210,16 +210,16 @@ Use `"mode": "full"` and an appropriate timeout for formal evidence. Retain the 
 
 Before a Run starts, the app automatically purges old run provisioning secrets and resets controller identities for the current platform. The caller does not certify cleanup. If automatic cleanup fails, the app blocks the new Run before persisting new secrets or starting a test.
 
-After `start_run` is accepted, the app starts BLE and Wi-Fi/IP discovery concurrently. The first matching commissionee transport is selected. The app records that path as the actual commissioning transport in the report.
+After `start_run` is accepted, the app supplies the raw onboarding payload to the Matter SDK. The SDK performs commissionee discovery and commissioning; the app does not scan for BLE or mDNS commissionees itself and does not report a commissioning transport.
 
-If commissioning fails after a transport is selected, the Run preserves the failure and stops. It must not retry or fall back to the other transport inside the same Run.
+If commissioning fails, the Run preserves the failure and stops. It must not retry commissioning inside the same Run.
 
 The fixed profiles are:
 
 | Profile | Tests | Formal evidence |
 | --- | --- | --- |
-| `quick` | `build_install`, `commissioning_discovery`, `commissioning`, `operational_connect`, `onoff_invoke` | No |
-| `full` | All 12 fixed tests from the report contract | Yes, when required P0 tests pass and the schema v3 report is valid |
+| `quick` | `build_install`, `commissioning`, `operational_connect`, `onoff_invoke` | No |
+| `full` | All 11 fixed tests from the report contract | Yes, when required P0 tests pass and the schema v4 report is valid |
 
 A P0 failure or skip ends the current Run. Dependent tests are recorded as `not_run` with a reason. A P0 test is never retried in the same Run to manufacture a green result.
 
@@ -298,11 +298,11 @@ The repository Skill enforces this sequence:
 5. Start `serve` with the explicit controller ID.
 6. Launch or connect the app and wait for the bridge connection.
 7. Start `quick` for iteration or `full` for formal evidence with a stable command ID.
-8. Let the app perform concurrent BLE and Wi-Fi/IP discovery and select the first matching transport.
+8. Let the Matter SDK discover and commission the commissionee.
 9. Resolve `agent_android` prompts on the selected Android controller only.
 10. Route `human` prompts to the operator and verify the semantic state transition.
-11. Preserve commissioning and P0 failures; never retry a failed commissioning through the other transport or retry a P0 in the same Run.
-12. Pull and verify the schema v3 report.
+11. Preserve commissioning and P0 failures; never retry a failed commissioning or retry a P0 in the same Run.
+12. Pull and verify the schema v4 report.
 13. Remind the operator to purge fabrics, credentials, commissionee data, and app secrets.
 
 ## Report verification
@@ -310,14 +310,14 @@ The repository Skill enforces this sequence:
 The host performs structural checks before writing report files:
 
 - Envelope and report schema versions are supported.
-- All 12 fixed test IDs occur exactly once.
+- All 11 fixed test IDs occur exactly once.
 - Test statuses and durations have valid types.
 - Summary counts match the `tests` object.
 - Overall result is consistent with P0 and failure rules.
-- Evidence uses schema v3.
+- Evidence uses schema v4.
 - `vendor_id` and `product_id` are present.
 - `network_transport` is `wifi`.
-- `commissioning_transport` is the actual selected path, `ble` or `ip`.
+- No commissioning-transport field is present.
 - `plugin_commit` matches the current repository HEAD.
 - Test-app commit is a 40-character lowercase Git SHA.
 - Sanitization is explicitly confirmed.
@@ -346,8 +346,8 @@ build/device-test-agent/
 - TLS, authentication, or public-network exposure.
 - An MCP server.
 - Automatic device selection.
-- Manual transport selection by the Agent or caller.
-- Fallback between BLE and Wi-Fi/IP after commissioning fails.
+- Host-side commissionee scanning or readiness gating.
+- Commissioning-transport selection, reporting, or fallback.
 - Automated control of physical Matter hardware.
 - Automated iOS system-dialog interaction.
 - Hardware-in-the-loop CI or automatic evidence upload.

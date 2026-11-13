@@ -15,16 +15,15 @@ void main() {
     expect(result.isValid, isTrue, reason: result.errors.toString());
   });
 
-  test('requires a setup code, SSID, and commissionee confirmation', () {
+  test('requires a setup code and SSID', () {
     final result = DeviceTestSetupValidator.validate(
-      draft: _draft(setupCode: '', wifiSsid: '', commissioneeClean: false),
+      draft: _draft(setupCode: '', wifiSsid: ''),
       controller: controllerInfo,
       preflightChecks: readyPreflight,
     );
 
     expect(result[SetupField.setupCode], isNotNull);
     expect(result[SetupField.networkCredentials], isNotNull);
-    expect(result[SetupField.commissioneeClean], isNotNull);
   });
 
   test('requires blocking preflight checks to pass', () {
@@ -47,7 +46,6 @@ void main() {
 DeviceTestSetupDraft _draft({
   String setupCode = 'MT:TEST-SETUP-CODE',
   String wifiSsid = 'test-network',
-  bool commissioneeClean = true,
   TestProfile profile = TestProfile.full,
 }) {
   return DeviceTestSetupDraft(
@@ -55,6 +53,5 @@ DeviceTestSetupDraft _draft({
     wifiSsid: wifiSsid,
     wifiPassword: 'test-password',
     profile: profile,
-    cleanCycle: CleanCycleConfirmations(commissioneeClean: commissioneeClean),
   );
 }

@@ -333,7 +333,7 @@ USB123    unauthorized usb:1-1 transport_id:2
   group('device test report validator', () {
     const pluginCommit = 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0';
 
-    test('accepts a minimal valid schema 3 report', () {
+    test('accepts a minimal valid schema 4 report', () {
       final report = _validReport(pluginCommit: pluginCommit);
 
       expect(
@@ -345,9 +345,9 @@ USB123    unauthorized usb:1-1 transport_id:2
       );
     });
 
-    test('rejects schema 2 reports', () {
+    test('rejects schema 3 reports', () {
       final report = _validReport(pluginCommit: pluginCommit)
-        ..['schema_version'] = 2;
+        ..['schema_version'] = 3;
 
       final failure = _captureFailure(
         () => validateDeviceTestReportJson(
@@ -357,7 +357,7 @@ USB123    unauthorized usb:1-1 transport_id:2
       );
 
       expect(failure.code, 'invalid_report');
-      expect(failure.message, contains('schema_version must be 3.'));
+      expect(failure.message, contains('schema_version must be 4.'));
     });
 
     test('rejects a generated_at that is not RFC 3339', () {
@@ -428,42 +428,13 @@ USB123    unauthorized usb:1-1 transport_id:2
       expect(failure.message, contains('requires a non-empty reason'));
     });
 
-    test('accepts BLE and IP actual commissioning transports', () {
-      for (final transport in const ['ble', 'ip']) {
-        final report = _validReport(pluginCommit: pluginCommit);
-        _mutableCommissionee(report)['commissioning_transport'] = transport;
-
-        expect(
-          () => validateDeviceTestReportJson(
-            report,
-            expectedPluginCommit: pluginCommit,
-          ),
-          returnsNormally,
-          reason: transport,
-        );
-      }
-    });
-
-    test('rejects unknown commissioning transports', () {
-      final report = _validReport(pluginCommit: pluginCommit);
-      _mutableCommissionee(report)['commissioning_transport'] = 'thread';
-
-      final failure = _captureFailure(
-        () => validateDeviceTestReportJson(
-          report,
-          expectedPluginCommit: pluginCommit,
-        ),
-      );
-
-      expect(failure.code, 'invalid_report');
-      expect(
-        failure.message,
-        contains('commissioning_transport must be ble or ip.'),
-      );
-    });
-
     test('rejects retired commissionee metadata', () {
-      for (final field in const ['model', 'firmware', 'state_change_method']) {
+      for (final field in const [
+        'commissioning_transport',
+        'model',
+        'firmware',
+        'state_change_method',
+      ]) {
         final report = _validReport(pluginCommit: pluginCommit);
         _mutableCommissionee(report)[field] = 'retired';
 
@@ -537,7 +508,6 @@ USB123    unauthorized usb:1-1 transport_id:2
         contains('tests has unexpected or missing keys.'),
       );
       final expected = failure.details['expected']! as List<dynamic>;
-      expect(expected, contains('commissioning_discovery'));
       expect(expected, contains('commissioning'));
     });
   });
@@ -575,7 +545,6 @@ void _expectNoSentinel(CliFailure failure, String sentinel) {
 
 const List<String> _validReportTestIds = <String>[
   'build_install',
-  'commissioning_discovery',
   'commissioning',
   'operational_connect',
   'onoff_invoke',
@@ -590,7 +559,7 @@ const List<String> _validReportTestIds = <String>[
 
 Map<String, Object?> _validReport({required String pluginCommit}) {
   return <String, Object?>{
-    'schema_version': 3,
+    'schema_version': 4,
     'generated_at': '2026-01-01T00:00:00.000Z',
     'test_app': <String, Object?>{
       'name': 'flutter_matter_device_test_app',
@@ -607,7 +576,6 @@ Map<String, Object?> _validReport({required String pluginCommit}) {
     'commissionee': <String, Object?>{
       'vendor_id': 1,
       'product_id': 2,
-      'commissioning_transport': 'ip',
       'network_transport': 'wifi',
     },
     'summary': <String, Object?>{

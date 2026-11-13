@@ -93,15 +93,15 @@ class DeviceTestAppController extends ChangeNotifier
     status: ReportUiValidationStatus.unavailable,
     message: 'No formal report is available yet.',
   );
-  DeviceTestReportV3? _formalReport;
+  DeviceTestReportV4? _formalReport;
   ReportValidationResult? _validationResult;
   DeviceTestReportFiles? _reportFiles;
   String? _markdownContents;
   String? _secretRunId;
+  int _operatorEventSequence = 0;
   String? _reportAttemptedRunId;
   Future<void>? _initialization;
   bool _runInFlight = false;
-  bool _awaitingAppRestart = false;
   bool _closed = false;
 
   @override
@@ -119,7 +119,7 @@ class DeviceTestAppController extends ChangeNotifier
   /// Provided to ApplicationPorts during production wiring.
   OperatorPromptPort get operatorPromptPort => _prompts;
 
-  DeviceTestReportV3? get formalReport => _formalReport;
+  DeviceTestReportV4? get formalReport => _formalReport;
 
   ReportValidationResult? get reportValidation => _validationResult;
 
@@ -140,26 +140,17 @@ class DeviceTestAppController extends ChangeNotifier
       final bootstrap = await _bootstrapPort.load();
       _bootstrap = bootstrap;
 
-      final unfinished = await _runner.loadUnfinished();
-      if (unfinished != null && !unfinished.session.phase.isTerminal) {
-        _activeSession = unfinished.session;
-        _awaitingAppRestart =
-            unfinished.appRestartCheckpoint?.stage ==
-            AppRestartCheckpointStage.awaitingRestart;
-        _lastRunnerSnapshot = RunnerStateSnapshot.forSession(
-          session: unfinished.session,
-          at: _clock.now(),
-          message: 'An unfinished Run is ready to resume.',
-        );
-        final storedSecrets = await _secrets.load(unfinished.session.id);
-        _secretRunId = storedSecrets == null ? null : unfinished.session.id;
-      }
+      // Runs are one-shot: leftover state files from interrupted Runs are
+      // discarded at startup, never resumed.
+      await _runner.cleanupUnfinished();
+      await _secrets.purgeAllStored();
+      _secretRunId = null;
 
       _setState(
         busy: false,
         controllerInfo: bootstrap.controller,
         preflightChecks: bootstrap.preflightChecks,
-        hasStoredSecrets: _secretRunId != null,
+        hasStoredSecrets: false,
       );
       _publishProjection();
     } on Object {
@@ -220,9 +211,22 @@ class DeviceTestAppController extends ChangeNotifier
 
       final runId = _runIdFactory();
       final targetNodeId = _targetNodeIdFactory(runId);
+      final invalidSetupPinCode = invalidMatterSetupPinCodeFor(
+        payload.setupPinCode,
+      );
       final secrets = ProvisioningSecrets(
         onboardingPayload: setupCode,
+        invalidSetupOnboardingPayload: buildMatterManualPairingCode(
+          discriminator: payload.discriminator,
+          hasShortDiscriminator: payload.hasShortDiscriminator,
+          setupPinCode: invalidSetupPinCode,
+          commissioningFlow: payload.commissioningFlow,
+          vendorId: payload.vendorId,
+          productId: payload.productId,
+        ),
         setupPinCode: payload.setupPinCode,
+        setupDiscriminator: payload.discriminator,
+        onNetworkEndpoint: request.onNetworkEndpoint,
         network: WifiProvisioningSecret(
           ssid: request.wifiSsid.trim(),
           password: request.wifiPassword,
@@ -253,7 +257,6 @@ class DeviceTestAppController extends ChangeNotifier
 
       _activeSession = null;
       _lastRunnerSnapshot = null;
-      _awaitingAppRestart = false;
       _formalReport = null;
       _validationResult = null;
       _reportFiles = null;
@@ -322,59 +325,6 @@ class DeviceTestAppController extends ChangeNotifier
   }
 
   @override
-  Future<void> resumeActiveRun() async {
-    if (_runInFlight) {
-      _setError('A Run operation is already in progress.');
-      return;
-    }
-    if (_activeSession == null) {
-      _setError('No unfinished Run is available to resume.');
-      return;
-    }
-    final bootstrap = _bootstrap;
-    if (bootstrap == null || bootstrap.hasBlockingChecks) {
-      _setError('Resolve blocking preflight checks before resuming the Run.');
-      return;
-    }
-
-    _setState(screen: DeviceTestScreen.runner, busy: true, errorMessage: null);
-    _runInFlight = true;
-    unawaited(_launchResume());
-  }
-
-  Future<void> _launchResume() async {
-    try {
-      final finalState = await _runner.resume();
-      if (finalState == null) {
-        _activeSession = null;
-        _lastRunnerSnapshot = null;
-        _publishProjection();
-        _setState(
-          busy: false,
-          errorMessage: 'No unfinished Run is available to resume.',
-          activeRun: null,
-          prompt: null,
-          results: null,
-        );
-        return;
-      }
-      _setState(busy: false);
-      if (_activeSession?.id != finalState.runId) {
-        _applyRunnerSnapshot(finalState);
-      }
-    } on RunCoordinatorException catch (error) {
-      _setState(busy: false, errorMessage: error.message);
-    } on Object {
-      _setState(
-        busy: false,
-        errorMessage: 'The unfinished device test Run could not be resumed.',
-      );
-    } finally {
-      _runInFlight = false;
-    }
-  }
-
-  @override
   Future<void> confirmPrompt() async {
     try {
       _prompts.confirmActive();
@@ -416,10 +366,7 @@ class DeviceTestAppController extends ChangeNotifier
       return;
     }
     final session = _activeSession;
-    if (_runInFlight &&
-        session != null &&
-        !session.phase.isTerminal &&
-        !_awaitingAppRestart) {
+    if (_runInFlight && session != null && !session.phase.isTerminal) {
       _setError('Secrets cannot be purged while the Run is active.');
       return;
     }
@@ -433,6 +380,32 @@ class DeviceTestAppController extends ChangeNotifier
         busy: false,
         errorMessage: 'Stored provisioning secrets could not be purged.',
       );
+    }
+  }
+
+  /// Operator-confirmed commissionee cleanup after a finished Run.
+  ///
+  /// The physical (or virtual) device reset stays a human action; this only
+  /// purges the Run's stored provisioning secrets and records the event so
+  /// the Agent bridge can observe that cleanup happened.
+  @override
+  Future<void> confirmCommissioneeReset() async {
+    final session = _activeSession;
+    if (session == null || !session.phase.isTerminal) {
+      _setError('A commissionee reset is only available after a finished Run.');
+      return;
+    }
+    await purgeSecrets();
+    final event = RunnerEvent(
+      sequence: _operatorEventSequence++,
+      type: RunnerEventType.commissioneeResetConfirmed,
+      timestamp: _clock.now(),
+      message: 'Operator confirmed the commissionee factory reset.',
+      runId: session.id,
+      testId: null,
+    );
+    if (!_eventController.isClosed) {
+      _eventController.add(event);
     }
   }
 
@@ -468,11 +441,10 @@ class DeviceTestAppController extends ChangeNotifier
       return;
     }
     _activeSession = session;
-    if (session.phase.isTerminal) {
-      _awaitingAppRestart = false;
-    }
     _publishProjection();
     if (session.phase.isTerminal) {
+      // The Run is complete: release the UI so navigation and results work.
+      _setState(busy: false);
       unawaited(_ensureFormalReport(session));
     }
   }
@@ -483,18 +455,6 @@ class DeviceTestAppController extends ChangeNotifier
     }
     if (!_eventController.isClosed) {
       _eventController.add(event);
-    }
-    if (event.type == RunnerEventType.checkpointSaved &&
-        event.testId == DeviceTestId.appRestart) {
-      _awaitingAppRestart = event.data['stage'] != 'awaiting_reconnect';
-    } else if (event.type == RunnerEventType.checkpointCleared ||
-        (event.testId == DeviceTestId.appRestart &&
-            (event.type == RunnerEventType.testPassed ||
-                event.type == RunnerEventType.testFailed ||
-                event.type == RunnerEventType.testNotRun))) {
-      _awaitingAppRestart = false;
-    } else {
-      return;
     }
     _publishProjection();
   }
@@ -543,7 +503,6 @@ class DeviceTestAppController extends ChangeNotifier
       currentTimeout: currentTestId == null
           ? null
           : _timeouts.forTest(currentTestId),
-      awaitingAppRestart: _awaitingAppRestart,
     );
   }
 

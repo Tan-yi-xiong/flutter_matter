@@ -56,17 +56,10 @@ class FactoryResetRecommissionCase implements DeviceTestCase {
         execution.identity = identity;
         execution.nodeId = null;
         execution.networkTransport = null;
-        execution.target = null;
         execution.connection = null;
         execution.lastOnOffState = null;
       });
 
-      final transport = context.execution.commissioningTransport;
-      if (transport == null) {
-        return TestCaseOutcome.notRun(
-          'Commissioning discovery did not select a transport.',
-        );
-      }
       final commissioningTimeout = context.timeoutFor(
         DeviceTestId.commissioning,
       );
@@ -74,7 +67,6 @@ class FactoryResetRecommissionCase implements DeviceTestCase {
         context,
         identity: identity,
         secrets: secrets,
-        commissioningTransport: transport,
         timeout: commissioningTimeout,
       );
       if (!commissioning.succeeded) {

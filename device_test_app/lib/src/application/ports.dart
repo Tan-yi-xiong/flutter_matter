@@ -2,78 +2,9 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import '../domain/domain.dart';
+import 'matter_manual_pairing_code.dart';
 import 'operator_prompt.dart';
 import 'runner_state.dart';
-
-/// A hardware-independent request to discover the configured commissionee.
-///
-/// Implementations race BLE and Wi-Fi/IP discovery. The first matching path is
-/// returned and no fallback is attempted after commissioning starts.
-class CommissioningDiscoveryRequest {
-  const CommissioningDiscoveryRequest({
-    required this.onboardingPayload,
-    required this.timeout,
-  });
-
-  final String onboardingPayload;
-  final Duration timeout;
-}
-
-class BleCommissionee {
-  const BleCommissionee({required this.opaqueId, required this.displayName})
-    : assert(opaqueId != ''),
-      assert(displayName != '');
-
-  /// An adapter-owned identifier. It must not be logged as a BLE address.
-  final String opaqueId;
-  final String displayName;
-}
-
-class CommissioningDiscoveryResult {
-  const CommissioningDiscoveryResult({required this.transport, this.bleTarget});
-
-  final CommissioningTransport transport;
-  final BleCommissionee? bleTarget;
-}
-
-enum CommissioningDiscoveryFailureCode {
-  bluetoothUnavailable,
-  permissionDenied,
-  adapterUnavailable,
-  timeout,
-  noCommissionableDevice,
-  other,
-}
-
-extension CommissioningDiscoveryFailureCodeWire
-    on CommissioningDiscoveryFailureCode {
-  String get wireName => switch (this) {
-    CommissioningDiscoveryFailureCode.bluetoothUnavailable =>
-      'bluetooth_unavailable',
-    CommissioningDiscoveryFailureCode.permissionDenied => 'permission_denied',
-    CommissioningDiscoveryFailureCode.adapterUnavailable =>
-      'adapter_unavailable',
-    CommissioningDiscoveryFailureCode.timeout => 'timeout',
-    CommissioningDiscoveryFailureCode.noCommissionableDevice =>
-      'no_commissionable_device',
-    CommissioningDiscoveryFailureCode.other => 'other',
-  };
-}
-
-class CommissioningDiscoveryException implements Exception {
-  CommissioningDiscoveryException(this.code);
-
-  final CommissioningDiscoveryFailureCode code;
-
-  @override
-  String toString() => 'CommissioningDiscoveryException(${code.wireName})';
-}
-
-abstract interface class CommissioningDiscoveryPort {
-  Future<CommissioningDiscoveryResult> discover(
-    CommissioningDiscoveryRequest request,
-  );
-}
 
 /// Controller identity material stays behind the adapter. The application only
 /// sees an opaque identity handle.
@@ -127,6 +58,11 @@ class ControllerIdentityRequest {
 abstract interface class ControllerIdentityPort {
   Future<ControllerIdentity> loadOrCreate(ControllerIdentityRequest request);
 
+  /// Disposes the live controller runtime for [request.purpose] while keeping
+  /// the persisted credentials, then rebuilds the runtime from those stored
+  /// credentials. Returns the restored identity.
+  Future<ControllerIdentity> restart(ControllerIdentityRequest request);
+
   Future<void> reset(ControllerIdentityRequest request);
 }
 
@@ -170,17 +106,27 @@ class ThreadProvisioningSecret extends ProvisioningNetworkSecret {
   String toString() => 'ThreadProvisioningSecret(redacted)';
 }
 
-/// Secrets used by a run. This object is never persisted or serialized.
+/// Secrets used by a run. Persist them only in platform-secure storage.
 class ProvisioningSecrets {
   ProvisioningSecrets({
     required this.onboardingPayload,
+    required this.invalidSetupOnboardingPayload,
     required this.setupPinCode,
     required this.network,
+    this.setupDiscriminator,
+    this.onNetworkEndpoint,
   }) {
     if (onboardingPayload.trim().isEmpty) {
       throw ArgumentError.value(
         onboardingPayload,
         'onboardingPayload',
+        'Must not be empty',
+      );
+    }
+    if (invalidSetupOnboardingPayload.trim().isEmpty) {
+      throw ArgumentError.value(
+        invalidSetupOnboardingPayload,
+        'invalidSetupOnboardingPayload',
         'Must not be empty',
       );
     }
@@ -191,18 +137,27 @@ class ProvisioningSecrets {
         'Must be a valid Matter setup passcode',
       );
     }
+    final discriminator = setupDiscriminator;
+    if (discriminator != null &&
+        (discriminator < 0 || discriminator > 0x0fff)) {
+      throw ArgumentError.value(
+        discriminator,
+        'setupDiscriminator',
+        'Must be between 0 and 4095',
+      );
+    }
   }
 
   final String onboardingPayload;
+  final String invalidSetupOnboardingPayload;
   final int setupPinCode;
   final ProvisioningNetworkSecret network;
+  final int? setupDiscriminator;
+  final OnNetworkCommissioningEndpoint? onNetworkEndpoint;
 
   NetworkTransport get transport => network.transport;
 
-  int get invalidSetupPinCode {
-    final candidate = setupPinCode + 1;
-    return candidate > 99999998 ? 1 : candidate;
-  }
+  int get invalidSetupPinCode => invalidMatterSetupPinCodeFor(setupPinCode);
 
   ProvisioningSecrets withInvalidWifiPassword() {
     final networkSecret = network;
@@ -211,7 +166,10 @@ class ProvisioningSecrets {
     }
     return ProvisioningSecrets(
       onboardingPayload: onboardingPayload,
+      invalidSetupOnboardingPayload: invalidSetupOnboardingPayload,
       setupPinCode: setupPinCode,
+      setupDiscriminator: setupDiscriminator,
+      onNetworkEndpoint: onNetworkEndpoint,
       network: WifiProvisioningSecret(
         ssid: networkSecret.ssid,
         password: '${networkSecret.password}#invalid',
@@ -223,6 +181,21 @@ class ProvisioningSecrets {
   String toString() => 'ProvisioningSecrets(redacted)';
 }
 
+/// An already reachable commissionee endpoint used for on-network PASE.
+class OnNetworkCommissioningEndpoint {
+  OnNetworkCommissioningEndpoint({required this.address, required this.port}) {
+    if (address.trim().isEmpty) {
+      throw ArgumentError.value(address, 'address', 'Must not be empty');
+    }
+    if (port < 1 || port > 65535) {
+      throw ArgumentError.value(port, 'port', 'Must be between 1 and 65535');
+    }
+  }
+
+  final String address;
+  final int port;
+}
+
 abstract interface class SecretAccessPort {
   Future<ProvisioningSecrets?> load(String runId);
 
@@ -231,23 +204,23 @@ abstract interface class SecretAccessPort {
 
 class CommissioningRequest {
   const CommissioningRequest({
-    this.target,
     required this.identity,
     required this.targetNodeId,
     required this.onboardingPayload,
     required this.setupPinCode,
     required this.network,
-    required this.commissioningTransport,
+    this.setupDiscriminator,
+    this.onNetworkEndpoint,
     required this.timeout,
   });
 
-  final BleCommissionee? target;
   final ControllerIdentity identity;
   final int targetNodeId;
   final String onboardingPayload;
   final int setupPinCode;
   final ProvisioningNetworkSecret network;
-  final CommissioningTransport commissioningTransport;
+  final int? setupDiscriminator;
+  final OnNetworkCommissioningEndpoint? onNetworkEndpoint;
   final Duration timeout;
 }
 
@@ -255,13 +228,11 @@ class CommissioningResult {
   const CommissioningResult({
     required this.errorCode,
     this.nodeId,
-    this.commissioningTransport,
     this.networkTransport,
   });
 
   final int errorCode;
   final int? nodeId;
-  final CommissioningTransport? commissioningTransport;
   final NetworkTransport? networkTransport;
 
   bool get succeeded => errorCode == 0;
@@ -568,228 +539,17 @@ abstract interface class OperatorPromptPort {
   Future<OperatorDecision> request(OperatorPrompt prompt);
 }
 
-enum AppRestartCheckpointStage { awaitingRestart, awaitingReconnect }
-
-extension AppRestartCheckpointStageWire on AppRestartCheckpointStage {
-  String get wireName => switch (this) {
-    AppRestartCheckpointStage.awaitingRestart => 'awaiting_restart',
-    AppRestartCheckpointStage.awaitingReconnect => 'awaiting_reconnect',
-  };
-
-  static AppRestartCheckpointStage parse(Object? value) => switch (value) {
-    'awaiting_restart' => AppRestartCheckpointStage.awaitingRestart,
-    'awaiting_reconnect' => AppRestartCheckpointStage.awaitingReconnect,
-    _ => throw FormatException('Unknown app restart checkpoint stage: $value'),
-  };
-}
-
-class AppRestartCheckpoint {
-  const AppRestartCheckpoint({
-    required this.stage,
-    required this.identityOpaqueId,
-    required this.nodeId,
-  });
-
-  final AppRestartCheckpointStage stage;
-  final String identityOpaqueId;
-  final int nodeId;
-
-  Map<String, Object?> toJson() => <String, Object?>{
-    'stage': stage.wireName,
-    'identity_opaque_id': identityOpaqueId,
-    'node_id': nodeId,
-  };
-
-  factory AppRestartCheckpoint.fromJson(Map<String, dynamic> json) =>
-      AppRestartCheckpoint(
-        stage: AppRestartCheckpointStageWire.parse(json['stage']),
-        identityOpaqueId: _requiredString(json, 'identity_opaque_id'),
-        nodeId: _requiredInt(json, 'node_id'),
-      );
-}
-
-class RunExecutionContextSnapshot {
-  const RunExecutionContextSnapshot({
-    this.identityOpaqueId,
-    this.identityPurpose,
-    this.nodeId,
-    this.commissioningTransport,
-    this.networkTransport,
-    this.lastOnOffState,
-  });
-
-  final String? identityOpaqueId;
-  final ControllerIdentityPurpose? identityPurpose;
-  final int? nodeId;
-  final CommissioningTransport? commissioningTransport;
-  final NetworkTransport? networkTransport;
-  final OnOffState? lastOnOffState;
-
-  Map<String, Object?> toJson() => <String, Object?>{
-    if (identityOpaqueId != null) 'identity_opaque_id': identityOpaqueId,
-    if (identityPurpose != null) 'identity_purpose': identityPurpose!.wireName,
-    if (nodeId != null) 'node_id': nodeId,
-    if (commissioningTransport != null)
-      'commissioning_transport': commissioningTransport!.wireName,
-    if (networkTransport != null)
-      'network_transport': networkTransport!.wireName,
-    if (lastOnOffState != null) 'last_onoff_state': lastOnOffState!.wireName,
-  };
-
-  factory RunExecutionContextSnapshot.fromJson(Map<String, dynamic> json) {
-    final identityOpaqueId = json['identity_opaque_id'];
-    final identityPurpose = json['identity_purpose'];
-    final nodeId = json['node_id'];
-    final commissioningTransport = json['commissioning_transport'];
-    final networkTransport = json['network_transport'];
-    final lastOnOffState = json['last_onoff_state'];
-    if (identityOpaqueId != null && identityOpaqueId is! String) {
-      throw const FormatException('identity_opaque_id must be a string');
-    }
-    if (identityPurpose != null && identityPurpose is! String) {
-      throw const FormatException('identity_purpose must be a string');
-    }
-    if (nodeId != null && nodeId is! int) {
-      throw const FormatException('node_id must be an integer');
-    }
-    if (commissioningTransport != null && commissioningTransport is! String) {
-      throw const FormatException('commissioning_transport must be a string');
-    }
-    if (networkTransport != null && networkTransport is! String) {
-      throw const FormatException('network_transport must be a string');
-    }
-    if (lastOnOffState != null && lastOnOffState is! String) {
-      throw const FormatException('last_onoff_state must be a string');
-    }
-    return RunExecutionContextSnapshot(
-      identityOpaqueId: identityOpaqueId as String?,
-      identityPurpose: identityPurpose == null
-          ? null
-          : ControllerIdentityPurposeWire.parse(identityPurpose),
-      nodeId: nodeId as int?,
-      commissioningTransport: commissioningTransport == null
-          ? null
-          : CommissioningTransport.parse(commissioningTransport as String),
-      networkTransport: networkTransport == null
-          ? null
-          : NetworkTransport.parse(networkTransport as String),
-      lastOnOffState: lastOnOffState == null
-          ? null
-          : OnOffState.parse(lastOnOffState),
-    );
-  }
-}
-
-class ActiveOperatorPromptSnapshot {
-  const ActiveOperatorPromptSnapshot({
-    required this.testId,
-    required this.prompt,
-  });
-
-  final DeviceTestId testId;
-  final OperatorPrompt prompt;
-
-  Map<String, Object?> toJson() => <String, Object?>{
-    'test_id': testId.wireName,
-    'prompt': prompt.toJson(),
-  };
-
-  factory ActiveOperatorPromptSnapshot.fromJson(Map<String, dynamic> json) =>
-      ActiveOperatorPromptSnapshot(
-        testId: DeviceTestId.parse(_requiredString(json, 'test_id')),
-        prompt: OperatorPrompt.fromJson(
-          _asMap(json['prompt'], 'active_prompt.prompt'),
-        ),
-      );
-}
-
-/// Durable application state. Secrets and live connection handles are absent.
-class PersistedRunState {
-  const PersistedRunState({
-    required this.session,
-    required this.execution,
-    required this.targetNodeId,
-    this.appRestartCheckpoint,
-    this.activePrompt,
-  });
-
-  final RunSession session;
-  final RunExecutionContextSnapshot execution;
-  final int targetNodeId;
-  final AppRestartCheckpoint? appRestartCheckpoint;
-  final ActiveOperatorPromptSnapshot? activePrompt;
-
-  PersistedRunState copyWith({
-    RunSession? session,
-    RunExecutionContextSnapshot? execution,
-    int? targetNodeId,
-    AppRestartCheckpoint? appRestartCheckpoint,
-    bool clearAppRestartCheckpoint = false,
-    ActiveOperatorPromptSnapshot? activePrompt,
-    bool clearActivePrompt = false,
-  }) {
-    return PersistedRunState(
-      session: session ?? this.session,
-      execution: execution ?? this.execution,
-      targetNodeId: targetNodeId ?? this.targetNodeId,
-      appRestartCheckpoint: clearAppRestartCheckpoint
-          ? null
-          : appRestartCheckpoint ?? this.appRestartCheckpoint,
-      activePrompt: clearActivePrompt
-          ? null
-          : activePrompt ?? this.activePrompt,
-    );
-  }
-
-  Map<String, Object?> toJson() => <String, Object?>{
-    'snapshot_version': 2,
-    'session': session.toJson(),
-    'execution': execution.toJson(),
-    'target_node_id': targetNodeId,
-    if (appRestartCheckpoint != null)
-      'app_restart_checkpoint': appRestartCheckpoint!.toJson(),
-    if (activePrompt != null) 'active_prompt': activePrompt!.toJson(),
-  };
-
-  factory PersistedRunState.fromJson(Map<String, dynamic> json) {
-    final version = json['snapshot_version'];
-    if (version != 2) {
-      throw FormatException('Unsupported persisted run version: $version');
-    }
-    final checkpointJson = json['app_restart_checkpoint'];
-    final promptJson = json['active_prompt'];
-    return PersistedRunState(
-      session: RunSession.fromJson(_asMap(json['session'], 'session')),
-      execution: RunExecutionContextSnapshot.fromJson(
-        _asMap(json['execution'], 'execution'),
-      ),
-      targetNodeId: _requiredInt(json, 'target_node_id'),
-      appRestartCheckpoint: checkpointJson == null
-          ? null
-          : AppRestartCheckpoint.fromJson(
-              _asMap(checkpointJson, 'app_restart_checkpoint'),
-            ),
-      activePrompt: promptJson == null
-          ? null
-          : ActiveOperatorPromptSnapshot.fromJson(
-              _asMap(promptJson, 'active_prompt'),
-            ),
-    );
-  }
-}
-
+/// Cleans up leftover run state files from interrupted Runs.
+///
+/// Runs are intentionally one-shot: an interrupted Run is discarded, never
+/// resumed, so persistence only exists to remove stale artifacts.
 abstract interface class RunPersistencePort {
-  Future<PersistedRunState?> loadUnfinished();
-
-  Future<void> save(PersistedRunState state);
-
-  Future<void> clearUnfinished();
+  Future<void> cleanupUnfinished();
 }
 
 /// Hardware-facing ports used directly by test cases.
 class TestPorts {
   const TestPorts({
-    required this.commissioningDiscovery,
     required this.commissioning,
     required this.operationalConnection,
     required this.onOff,
@@ -798,7 +558,6 @@ class TestPorts {
     required this.controllerIdentity,
   });
 
-  final CommissioningDiscoveryPort commissioningDiscovery;
   final CommissioningPort commissioning;
   final OperationalConnectionPort operationalConnection;
   final OnOffPort onOff;
@@ -826,27 +585,4 @@ class ApplicationPorts {
   final ClockPort clock;
   final ScreenshotPort screenshot;
   final RunnerHooksPort hooks;
-}
-
-Map<String, dynamic> _asMap(Object? value, String name) {
-  if (value is! Map<String, dynamic>) {
-    throw FormatException('$name must be an object');
-  }
-  return value;
-}
-
-String _requiredString(Map<String, dynamic> json, String key) {
-  final value = json[key];
-  if (value is! String) {
-    throw FormatException('$key must be a string');
-  }
-  return value;
-}
-
-int _requiredInt(Map<String, dynamic> json, String key) {
-  final value = json[key];
-  if (value is! int) {
-    throw FormatException('$key must be an integer');
-  }
-  return value;
 }

@@ -1,3 +1,4 @@
+export 'matter_manual_pairing_code.dart';
 export 'operator_prompt.dart';
 export 'ports.dart';
 export 'run_coordinator.dart';

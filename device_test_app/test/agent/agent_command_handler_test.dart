@@ -26,7 +26,6 @@ void main() {
           'setup_code': 'MT:PRIVATE-SETUP-CODE',
           'wifi_ssid': 'private-ssid',
           'wifi_password': 'private-password',
-          'clean_cycle': <String, Object?>{'commissionee_clean': true},
         };
 
         final outcome = await handler.handle(
@@ -37,10 +36,6 @@ void main() {
         expect(outcome.data, <String, Object?>{'mode': 'quick'});
         expect(host.calls, <Object>[(method: 'startRun', detail: 'quick')]);
         expect(host.startArguments?['setup_code'], 'MT:PRIVATE-SETUP-CODE');
-        expect(
-          host.startArguments?['clean_cycle'],
-          containsPair('commissionee_clean', true),
-        );
       });
 
       test('starts a full run', () async {
@@ -118,25 +113,17 @@ void main() {
       });
     });
 
-    group('resume_run and purge_secrets', () {
-      test('routes both maintenance commands', () async {
-        final resumed = await handler.handle(
-          _command(AgentCommandNames.resumeRun, const <String, Object?>{}),
-        );
+    group('purge_secrets', () {
+      test('routes the maintenance command', () async {
         final purged = await handler.handle(
           _command(AgentCommandNames.purgeSecrets, const <String, Object?>{}),
         );
 
-        expect(resumed.status, AgentCommandStatus.completed);
         expect(purged.status, AgentCommandStatus.completed);
-        expect(host.calls, <Object>[
-          (method: 'resumeRun', detail: null),
-          (method: 'purgeSecrets', detail: null),
-        ]);
+        expect(host.calls, <Object>[(method: 'purgeSecrets', detail: null)]);
       });
 
-      test('advertised command names include maintenance commands', () {
-        expect(AgentCommandNames.all, contains(AgentCommandNames.resumeRun));
+      test('advertised command names include the maintenance command', () {
         expect(AgentCommandNames.all, contains(AgentCommandNames.purgeSecrets));
       });
     });
@@ -531,11 +518,6 @@ class _RecordingHost implements DeviceTestAgentHost {
   @override
   Future<void> stopRun() async {
     await _record('stopRun', null);
-  }
-
-  @override
-  Future<void> resumeRun() async {
-    await _record('resumeRun', null);
   }
 
   @override

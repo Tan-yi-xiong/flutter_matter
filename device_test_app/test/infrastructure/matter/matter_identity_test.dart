@@ -39,6 +39,19 @@ void main() {
     expect(restored.getPublicKey(), identity.getPublicKey());
   });
 
+  test('certificate signing copy keeps key material and changes handle', () {
+    final identity = MatterControllerIdentity.generate();
+    final signingIdentity = identity.copyForCertificateSigning();
+
+    expect(signingIdentity, isNot(same(identity)));
+    expect(signingIdentity.hashCode, isNot(identity.hashCode));
+    expect(signingIdentity.getPublicKey(), identity.getPublicKey());
+    expect(
+      signingIdentity.exportPrivateScalar(),
+      identity.exportPrivateScalar(),
+    );
+  });
+
   test('identity emits a structurally valid PKCS#10 request', () {
     final identity = MatterControllerIdentity.generate();
 

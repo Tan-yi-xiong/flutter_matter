@@ -61,6 +61,12 @@ class FakeProvisioningSecrets implements ProvisioningSecretsPort {
     log.add('secret.purgeAll');
     saved.clear();
   }
+
+  @override
+  Future<void> purgeAllStored() async {
+    log.add('secret.purgeAllStored');
+    saved.clear();
+  }
 }
 
 class FakeRunMaintenance implements DeviceRunMaintenancePort {
@@ -122,9 +128,7 @@ class FakeOnboardingPayloadReader implements OnboardingPayloadReader {
       vendorId: 1,
       productId: 1,
       commissioningFlow: 0,
-      discoveryCapabilities: const <DiscoveryCapability>{
-        DiscoveryCapability.ble,
-      },
+      discoveryCapabilities: const <DiscoveryCapability>{},
       discriminator: 1,
       hasShortDiscriminator: false,
       setupPinCode: setupPinCode,
@@ -179,11 +183,9 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
       StreamController<RunnerEvent>.broadcast();
 
   RunnerStateSnapshot? _snapshot;
-  PersistedRunState? unfinished;
-  RunnerStateSnapshot? resumeSnapshot;
-  DeviceTestReportV3? reportToBuild;
+  DeviceTestReportV4? reportToBuild;
   int buildReportCount = 0;
-  int resumeCount = 0;
+  int cleanupCount = 0;
   RunStartRequest? startRequest;
   bool disposed = false;
 
@@ -207,9 +209,6 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
   }
 
   @override
-  Future<PersistedRunState?> loadUnfinished() async => unfinished;
-
-  @override
   Future<RunnerStateSnapshot> start(RunStartRequest request) async {
     startRequest = request;
     final session = RunSession.start(
@@ -231,20 +230,15 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
   }
 
   @override
-  Future<RunnerStateSnapshot?> resume() async {
-    resumeCount++;
-    final snapshot = resumeSnapshot;
-    if (snapshot != null) {
-      emit(snapshot);
-    }
-    return snapshot;
+  Future<void> cleanupUnfinished() async {
+    cleanupCount++;
   }
 
   @override
   Future<void> stop({String reason = 'Stopped by operator.'}) async {}
 
   @override
-  Future<DeviceTestReportV3?> buildFormalReport({
+  Future<DeviceTestReportV4?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) async {
@@ -297,7 +291,6 @@ DeviceTestSetupRequest setupRequest({
   String setupCode = 'MT:TEST-SETUP-CODE',
   String wifiSsid = 'Test Wi-Fi',
   String wifiPassword = 'secret',
-  bool commissioneeClean = true,
 }) {
   return DeviceTestSetupRequest(
     controller: const ControllerInfoViewModel(
@@ -310,7 +303,6 @@ DeviceTestSetupRequest setupRequest({
     wifiSsid: wifiSsid,
     wifiPassword: wifiPassword,
     profile: profile,
-    cleanCycle: CleanCycleConfirmations(commissioneeClean: commissioneeClean),
   );
 }
 
@@ -347,7 +339,6 @@ RunSession terminalSession({
     commissionee: const CommissioneeMetadata(
       vendorId: 1,
       productId: 2,
-      commissioningTransport: CommissioningTransport.ip,
       networkTransport: NetworkTransport.wifi,
     ),
     results: results,

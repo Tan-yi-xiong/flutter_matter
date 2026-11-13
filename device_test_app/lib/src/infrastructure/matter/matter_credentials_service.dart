@@ -210,14 +210,15 @@ class MatterControllerCredentialsService {
       );
     }
 
+    final certificateIdentity = identity.copyForCertificateSigning();
     final rootCertificate = await _certificateIssuer.createRootCertificate(
-      keypair: identity,
+      keypair: certificateIdentity,
       issuerId: config.issuerId,
       fabricId: config.fabricId,
     );
     final operationalCertificate = await _certificateIssuer
         .createOperationalCertificate(
-          signingKeypair: identity,
+          signingKeypair: certificateIdentity,
           signingCertificate: rootCertificate,
           operationalPublicKey: identity.publicKeyBytes,
           fabricId: config.fabricId,

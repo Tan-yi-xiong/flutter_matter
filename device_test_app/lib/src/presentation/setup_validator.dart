@@ -23,11 +23,6 @@ abstract final class DeviceTestSetupValidator {
     if (draft.wifiSsid.trim().isEmpty) {
       errors[SetupField.networkCredentials] = 'Wi-Fi SSID is required.';
     }
-    if (!draft.cleanCycle.commissioneeClean) {
-      errors[SetupField.commissioneeClean] =
-          'Confirm the commissionee was factory-reset and is in a '
-          'commissioning window.';
-    }
 
     return SetupValidationResult(errors);
   }

@@ -11,9 +11,10 @@ abstract class DeviceTestUiController extends ChangeNotifier {
 
   void navigate(DeviceTestScreen screen);
 
-  Future<void> resumeActiveRun();
-
   Future<void> startRun(DeviceTestSetupRequest request);
+
+  /// Records an operator-confirmed commissionee reset after a finished Run.
+  Future<void> confirmCommissioneeReset();
 
   Future<WifiSetupPrefill> loadWifiSetupPrefill();
 

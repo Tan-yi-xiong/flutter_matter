@@ -86,22 +86,21 @@ Future<OperationalConnectionLease?> restoreConnection(
 
 Future<CommissioningResult> commissionTarget(
   TestContext context, {
-  BleCommissionee? target,
   required ControllerIdentity identity,
   required ProvisioningSecrets secrets,
-  required CommissioningTransport commissioningTransport,
   required Duration timeout,
+  String? onboardingPayload,
   int? setupPinCode,
 }) {
   return context.ports.commissioning.commission(
     CommissioningRequest(
-      target: target,
       identity: identity,
       targetNodeId: context.targetNodeId,
-      onboardingPayload: secrets.onboardingPayload,
+      onboardingPayload: onboardingPayload ?? secrets.onboardingPayload,
       setupPinCode: setupPinCode ?? secrets.setupPinCode,
       network: secrets.network,
-      commissioningTransport: commissioningTransport,
+      setupDiscriminator: secrets.setupDiscriminator,
+      onNetworkEndpoint: secrets.onNetworkEndpoint,
       timeout: timeout,
     ),
   );

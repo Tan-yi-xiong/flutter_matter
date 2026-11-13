@@ -35,7 +35,6 @@ void main() {
     expect(request.commissionee.vendorId, 1);
     expect(request.commissionee.productId, 1);
     expect(request.commissionee.networkTransport, NetworkTransport.wifi);
-    expect(request.commissionee.commissioningTransport, isNull);
     expect(harness.maintenance.prepareCount, 1);
     expect(harness.wifiSetup.rememberedSsid, 'Test Wi-Fi');
     expect(harness.wifiSetup.rememberedPassword, 'secret');
@@ -44,6 +43,17 @@ void main() {
     expect(secrets, isNotNull);
     expect(secrets!.setupPinCode, 20202021);
     expect(secrets.onboardingPayload, 'MT:TEST-SETUP-CODE');
+    expect(
+      secrets.invalidSetupOnboardingPayload,
+      buildMatterManualPairingCode(
+        discriminator: 1,
+        hasShortDiscriminator: false,
+        setupPinCode: invalidMatterSetupPinCodeFor(20202021),
+        commissioningFlow: 0,
+        vendorId: 1,
+        productId: 1,
+      ),
+    );
     final network = secrets.network as WifiProvisioningSecret;
     expect(network.ssid, 'Test Wi-Fi');
     expect(network.password, 'secret');
@@ -109,63 +119,16 @@ void main() {
     expect(harness.controller.state.errorMessage, contains('preflight'));
   });
 
-  test('loads and resumes an unfinished Run', () async {
-    final session = RunSession.start(
-      id: testRunId,
-      profile: TestProfile.full,
-      testApp: const TestAppMetadata(
-        name: 'flutter_matter_device_test_app',
-        version: '1.0.0',
-        commit: testAppCommit,
-      ),
-      pluginCommit: testPluginCommit,
-      startedAt: testNow,
-      controller: const ControllerMetadata(
-        platform: ControllerPlatform.android,
-        deviceModel: 'Pixel test controller',
-        osVersion: 'Android 16',
-        appBuild: '1.0.0 (1)',
-      ),
-      commissionee: const CommissioneeMetadata(
-        vendorId: 1,
-        productId: 2,
-        commissioningTransport: CommissioningTransport.ip,
-        networkTransport: NetworkTransport.wifi,
-      ),
-    ).withPhase(RunPhase.testing, at: testNow);
+  test('startup cleanup removes stale run state and stored secrets', () async {
     final harness = buildHarness(schemaJson: schemaJson);
     addTearDown(harness.close);
-    harness.runner.unfinished = PersistedRunState(
-      session: session,
-      execution: const RunExecutionContextSnapshot(),
-      targetNodeId: 99,
-    );
-    harness.runner.resumeSnapshot = RunnerStateSnapshot.forSession(
-      session: session,
-      at: testNow,
-      message: 'Resuming the device test Run.',
-    );
-    harness.secrets.saved[testRunId] = ProvisioningSecrets(
-      onboardingPayload: 'MT:TEST-SETUP-CODE',
-      setupPinCode: 20202021,
-      network: const WifiProvisioningSecret(
-        ssid: 'Test Wi-Fi',
-        password: 'secret',
-      ),
-    );
-
     await harness.controller.initialize();
 
-    expect(harness.controller.state.activeRun?.runId, testRunId);
-    expect(harness.controller.state.activeRun?.canResume, isTrue);
-    expect(harness.controller.state.hasStoredSecrets, isTrue);
-
-    await harness.controller.resumeActiveRun();
-    await pumpEventQueue();
-
-    expect(harness.runner.resumeCount, 1);
-    expect(harness.controller.state.screen, DeviceTestScreen.runner);
-    expect(harness.controller.state.activeRun?.runId, testRunId);
+    expect(harness.runner.cleanupCount, 1);
+    expect(harness.secrets.log, contains('secret.purgeAllStored'));
+    expect(harness.controller.state.screen, DeviceTestScreen.home);
+    expect(harness.controller.state.activeRun, isNull);
+    expect(harness.controller.state.hasStoredSecrets, isFalse);
   });
 
   test('quick Runs show not-applicable report status', () async {
@@ -186,6 +149,25 @@ void main() {
     expect(harness.controller.state.results?.jsonAvailable, isFalse);
     expect(harness.controller.state.results?.markdownAvailable, isFalse);
     expect(harness.controller.state.recentRun?.formalEvidence, isFalse);
+  });
+
+  test('releases busy and allows navigation when the Run completes', () async {
+    final harness = buildHarness(schemaJson: schemaJson);
+    addTearDown(harness.close);
+    await harness.controller.initialize();
+
+    await harness.controller.startRun(setupRequest());
+    await pumpEventQueue();
+    expect(harness.controller.state.busy, isTrue);
+
+    harness.runner.emit(terminalSnapshot(profile: TestProfile.quick));
+    await pumpEventQueue();
+
+    expect(harness.controller.state.busy, isFalse);
+    expect(harness.controller.state.screen, DeviceTestScreen.runner);
+
+    harness.controller.navigate(DeviceTestScreen.home);
+    expect(harness.controller.state.screen, DeviceTestScreen.home);
   });
 
   test('full Runs validate, write, share, and purge from one report', () async {

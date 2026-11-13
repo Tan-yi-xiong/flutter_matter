@@ -15,6 +15,17 @@ abstract interface class MatterControllerPort {
     required CompletionListener completionListener,
   });
 
+  Future<void> pairDeviceWithAddress({
+    required int nodeId,
+    required String address,
+    required int port,
+    required int discriminator,
+    required int setupPincode,
+    Uint8List? csrNonce,
+    required DeviceAttestationDelegate? attestationDelegate,
+    required CompletionListener completionListener,
+  });
+
   Future<void> stopDevicePairing(int nodeId);
 
   Future<Uint8List> publicKeyFromCSR(Uint8List csr);
@@ -132,6 +143,29 @@ class FlutterMatterControllerPort implements MatterControllerPort {
       onboardingPayload,
       null,
       networkCredentials,
+      attestationDelegate: attestationDelegate,
+      completionListener: completionListener,
+    );
+  }
+
+  @override
+  Future<void> pairDeviceWithAddress({
+    required int nodeId,
+    required String address,
+    required int port,
+    required int discriminator,
+    required int setupPincode,
+    Uint8List? csrNonce,
+    required DeviceAttestationDelegate? attestationDelegate,
+    required CompletionListener completionListener,
+  }) {
+    return _controller.pairDeviceWithAddress(
+      deviceId: nodeId,
+      address: address,
+      port: port,
+      discriminator: discriminator,
+      setupPincode: setupPincode,
+      csrNonce: csrNonce,
       attestationDelegate: attestationDelegate,
       completionListener: completionListener,
     );

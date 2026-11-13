@@ -5,7 +5,6 @@ import 'cases/factory_reset_recommission_case.dart';
 import 'cases/invalid_setup_passcode_case.dart';
 import 'cases/invalid_wifi_password_case.dart';
 import 'cases/commissioning_case.dart';
-import 'cases/commissioning_discovery_case.dart';
 import 'cases/node_label_persistence_case.dart';
 import 'cases/onoff_invoke_case.dart';
 import 'cases/onoff_subscription_case.dart';
@@ -46,7 +45,6 @@ class TestCaseRegistry {
 
   factory TestCaseRegistry.canonical() => TestCaseRegistry(<DeviceTestCase>[
     const BuildInstallCase(),
-    const CommissioningDiscoveryCase(),
     const CommissioningCase(),
     const OperationalConnectCase(),
     const OnOffInvokeCase(),

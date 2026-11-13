@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import 'package:flutter_matter/flutter_matter.dart';
 
-import '../ble/matter_ble.dart';
 import 'matter_callback_wrappers.dart';
 import 'matter_certificate_service.dart';
 import 'matter_contracts.dart';
@@ -14,35 +13,18 @@ import 'matter_tlv.dart';
 
 class MatterControllerService {
   MatterControllerService({
-    required MatterTargetPlatform targetPlatform,
-    required MatterBleScanner bleScanner,
-    required MatterBleGattSessionFactory gattSessionFactory,
-    required MatterBleLayerBridge bleLayerBridge,
     required MatterControllerCredentialsService credentialsService,
     required MatterControllerFactory controllerFactory,
     required MatterCertificateIssuer certificateIssuer,
     MatterControllerConfig? config,
-  }) : _targetPlatform = targetPlatform,
-       _bleScanner = bleScanner,
-       _gattSessionFactory = gattSessionFactory,
-       _bleLayerBridge = bleLayerBridge,
-       _credentialsService = credentialsService,
+  }) : _credentialsService = credentialsService,
        _controllerFactory = controllerFactory,
        _certificateIssuer = certificateIssuer,
        _config = config ?? MatterControllerConfig();
 
-  factory MatterControllerService.flutter({
-    required MatterTargetPlatform targetPlatform,
-    MatterControllerConfig? config,
-  }) {
+  factory MatterControllerService.flutter({MatterControllerConfig? config}) {
     final certificateIssuer = const FlutterMatterCertificateIssuer();
     return MatterControllerService(
-      targetPlatform: targetPlatform,
-      bleScanner: MatterBleScanner(
-        platform: FlutterBluePlusMatterBlePlatform(),
-      ),
-      gattSessionFactory: DefaultMatterBleGattSessionFactory(),
-      bleLayerBridge: FlutterMatterBleLayerBridge(),
       credentialsService: MatterControllerCredentialsService(
         storage: FlutterSecureMatterCredentialStorage(),
         certificateIssuer: certificateIssuer,
@@ -53,10 +35,6 @@ class MatterControllerService {
     );
   }
 
-  final MatterTargetPlatform _targetPlatform;
-  final MatterBleScanner _bleScanner;
-  final MatterBleGattSessionFactory _gattSessionFactory;
-  final MatterBleLayerBridge _bleLayerBridge;
   final MatterControllerCredentialsService _credentialsService;
   final MatterControllerFactory _controllerFactory;
   final MatterCertificateIssuer _certificateIssuer;
@@ -141,57 +119,11 @@ class MatterControllerService {
     final credentials = _requireCredentials();
     final timeout = request.timeout ?? _config.commissioningTimeout;
 
-    final usesBle =
-        request.commissioningTransport == MatterCommissioningTransport.ble;
-    MatterBleDiscoveredDevice? discovered = request.discoveredBleDevice;
-    MatterBleGattSession? gattSession;
-    MatterGattBleDelegate? delegate;
     StreamSubscription<MatterCommissioningStage>? stageSubscription;
     var pairingStarted = false;
     var commissioningCompleted = false;
 
     try {
-      if (usesBle && discovered == null) {
-        try {
-          discovered = await _bleScanner.scan(
-            MatterBleDiscoveryRequest(
-              discriminator: request.discriminator,
-              hasShortDiscriminator: request.hasShortDiscriminator,
-              timeout: request.bleScanTimeout,
-            ),
-          );
-        } catch (error) {
-          throw MatterException(
-            MatterFailureCode.bleDiscoveryFailed,
-            'Matter BLE discovery failed',
-            error,
-          );
-        }
-      }
-
-      if (usesBle && _targetPlatform == MatterTargetPlatform.android) {
-        if (discovered == null) {
-          throw MatterException(
-            MatterFailureCode.bleConnectionFailed,
-            'Android commissioning requires a successful BLE pre-scan',
-          );
-        }
-        try {
-          gattSession = await _gattSessionFactory.connect(discovered.device);
-          delegate = MatterGattBleDelegate(
-            session: gattSession,
-            bridge: _bleLayerBridge,
-          );
-          await _bleLayerBridge.setDelegate(delegate);
-        } catch (error) {
-          throw MatterException(
-            MatterFailureCode.bleConnectionFailed,
-            'Unable to prepare the Android Matter BLE transport',
-            error,
-          );
-        }
-      }
-
       final listener = MatterCommissioningListener(
         fallbackNodeId: request.nodeId,
       );
@@ -217,13 +149,10 @@ class MatterControllerService {
         operation: 'Configure NOC chain issuer',
       );
 
+      pairingStarted = true;
       final networkCredentials = request.networkCredentials
           .toPluginCredentials();
-      final connectId =
-          usesBle && _targetPlatform == MatterTargetPlatform.android
-          ? androidMatterBleConnectionId
-          : null;
-      pairingStarted = true;
+      const connectId = null;
       await withMatterTimeout<void>(
         future: controller.pairDevice(
           nodeId: request.nodeId,
@@ -263,20 +192,6 @@ class MatterControllerService {
         }
       }
       await stageSubscription?.cancel();
-      if (delegate != null) {
-        try {
-          await _bleLayerBridge.setDelegate(null);
-        } catch (_) {
-          // Preserve the primary commissioning result during cleanup.
-        }
-      }
-      if (gattSession != null) {
-        try {
-          await gattSession.disconnect(_config.operationTimeout);
-        } catch (_) {
-          // The native layer may already have closed the BLE connection.
-        }
-      }
     }
   }
 
@@ -697,7 +612,7 @@ class _MatterNocChainIssuer implements NOCChainIssuer {
       );
       final operationalCertificate = await withMatterTimeout<Uint8List>(
         future: certificateIssuer.createOperationalCertificate(
-          signingKeypair: credentials.identity,
+          signingKeypair: credentials.identity.copyForCertificateSigning(),
           signingCertificate: credentials.rootCertificate,
           operationalPublicKey: operationalPublicKey,
           fabricId: config.fabricId,

@@ -33,13 +33,12 @@ void main() {
     }
   });
 
-  test('renders summary states and escapes Markdown table content', () {
+  test('renders summary states without a commissioning transport line', () {
     final report = buildFixtureReport();
     final markdown = renderer.render(report);
 
-    expect(markdown, contains('- Commissioning transport: `ip`'));
     expect(markdown, contains('- Network transport: `wifi`'));
-    expect(markdown, isNot(contains('- Commissioning transport: `ble`')));
+    expect(markdown, isNot(contains('Commissioning transport')));
     expect(markdown, contains('- Overall result: `passed`'));
     expect(markdown, contains('#### P1 and P2 notes'));
     expect(markdown, contains('#### Evidence files'));

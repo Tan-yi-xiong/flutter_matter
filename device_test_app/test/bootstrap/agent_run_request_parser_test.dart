@@ -32,16 +32,12 @@ DeviceTestUiState _setupState({bool hasStoredSecrets = false}) {
   );
 }
 
-Map<String, Object?> _minimalArguments({
-  String mode = 'quick',
-  bool commissioneeClean = true,
-}) {
+Map<String, Object?> _minimalArguments({String mode = 'quick'}) {
   return <String, Object?>{
     'mode': mode,
     'setup_code': 'MT:PRIVATE-SETUP-CODE',
     'wifi_ssid': 'test-network',
     'wifi_password': 'test-password',
-    'clean_cycle': <String, Object?>{'commissionee_clean': commissioneeClean},
   };
 }
 
@@ -60,7 +56,6 @@ void main() {
     expect(request.setupCode, 'MT:PRIVATE-SETUP-CODE');
     expect(request.wifiSsid, 'test-network');
     expect(request.wifiPassword, 'test-password');
-    expect(request.cleanCycle.commissioneeClean, isTrue);
   });
 
   test('parses the minimal quick Run request', () {
@@ -70,7 +65,6 @@ void main() {
     );
 
     expect(request.profile, TestProfile.quick);
-    expect(request.cleanCycle.commissioneeClean, isTrue);
   });
 
   test('supports an empty password for an open Wi-Fi network', () {
@@ -91,24 +85,6 @@ void main() {
           (error) => error.issues,
           'issues',
           containsPair('mode', 'Expected quick or full.'),
-        ),
-      ),
-    );
-  });
-
-  test('requires the commissionee reset confirmation', () {
-    final arguments = _minimalArguments(commissioneeClean: false);
-
-    expect(
-      () => parser.parse(arguments: arguments, state: _setupState()),
-      throwsA(
-        isA<AgentRunRequestException>().having(
-          (error) => error.issues,
-          'issues',
-          containsPair(
-            'clean_cycle.commissionee_clean',
-            'Confirm the commissionee is ready for commissioning.',
-          ),
         ),
       ),
     );
@@ -148,15 +124,13 @@ void main() {
     }
   });
 
-  test('rejects retired or unknown clean_cycle fields', () {
+  test('rejects unknown top-level fields', () {
     for (final field in const <String>[
       'controller_clean',
       'secrets_purged',
       'unknown',
     ]) {
-      final arguments = _minimalArguments();
-      final cleanCycle = arguments['clean_cycle']! as Map<String, Object?>;
-      cleanCycle[field] = true;
+      final arguments = _minimalArguments()..[field] = true;
 
       expect(
         () => parser.parse(arguments: arguments, state: _setupState()),
@@ -164,7 +138,7 @@ void main() {
           isA<AgentRunRequestException>().having(
             (error) => error.issues,
             'issues',
-            containsPair('clean_cycle.$field', 'This field is not supported.'),
+            containsPair(field, 'This field is not supported.'),
           ),
         ),
         reason: field,
@@ -194,7 +168,7 @@ void main() {
   test('never includes supplied secret values in an error', () {
     final arguments = <String, Object?>{
       'mode': 'full',
-      'setup_code': 'MT:VERY-PRIVATE-SETUP-CODE',
+      'setup_code': '',
       'wifi_ssid': 'private-ssid',
       'wifi_password': 'private-password',
     };

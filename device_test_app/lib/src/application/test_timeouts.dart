@@ -4,7 +4,6 @@ import '../domain/domain.dart';
 class TestTimeouts {
   const TestTimeouts({
     this.buildInstall = const Duration(seconds: 60),
-    this.commissioningDiscovery = const Duration(seconds: 15),
     this.commissioning = const Duration(seconds: 120),
     this.operationalConnect = const Duration(seconds: 30),
     this.onOffInvoke = const Duration(seconds: 10),
@@ -18,7 +17,6 @@ class TestTimeouts {
   });
 
   final Duration buildInstall;
-  final Duration commissioningDiscovery;
   final Duration commissioning;
   final Duration operationalConnect;
   final Duration onOffInvoke;
@@ -32,7 +30,6 @@ class TestTimeouts {
 
   Duration forTest(DeviceTestId testId) => switch (testId) {
     DeviceTestId.buildInstall => buildInstall,
-    DeviceTestId.commissioningDiscovery => commissioningDiscovery,
     DeviceTestId.commissioning => commissioning,
     DeviceTestId.operationalConnect => operationalConnect,
     DeviceTestId.onoffInvoke => onOffInvoke,

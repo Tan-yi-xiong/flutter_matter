@@ -11,7 +11,7 @@ const fixturePluginCommit = 'dddd0d7d0b4ba273eaa8cd16a5d68c59e8e1b112';
 
 final fixtureGeneratedAt = DateTime.utc(2026, 11, 11, 12);
 
-DeviceTestReportV3 buildFixtureReport() {
+DeviceTestReportV4 buildFixtureReport() {
   return const DeviceTestReportBuilder().buildFormal(
     buildFixtureSession(),
     generatedAt: fixtureGeneratedAt,
@@ -64,7 +64,6 @@ RunSession buildFixtureSession({
         const CommissioneeMetadata(
           vendorId: 4660,
           productId: 22136,
-          commissioningTransport: CommissioningTransport.ip,
           networkTransport: NetworkTransport.wifi,
         ),
     results: results,

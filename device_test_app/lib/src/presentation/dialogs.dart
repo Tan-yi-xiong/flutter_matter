@@ -118,3 +118,31 @@ class _ReasonDialogState extends State<_ReasonDialog> {
     );
   }
 }
+
+/// Explains the post-Run commissionee cleanup and asks the operator to
+/// confirm once the device has actually been factory-reset.
+Future<bool> showCommissioneeResetDialog(BuildContext context) {
+  return showDialog<bool>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Reset the commissionee?'),
+        content: const Text(
+          'Factory reset the commissionee (or reset the virtual device) so '
+          'the next Run starts without accumulated fabrics. Confirm only '
+          'after the device is factory-reset and commissionable again.',
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('I reset the device'),
+          ),
+        ],
+      );
+    },
+  ).then((value) => value ?? false);
+}

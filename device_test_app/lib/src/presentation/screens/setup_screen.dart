@@ -25,7 +25,6 @@ class _SetupScreenState extends State<SetupScreen> {
   final TextEditingController _wifiPasswordController = TextEditingController();
 
   TestProfile _profile = TestProfile.full;
-  bool _commissioneeClean = false;
   bool _hideSetupCode = true;
   bool _hideWifiPassword = true;
   bool _manualSsidRequired = true;
@@ -108,9 +107,8 @@ class _SetupScreenState extends State<SetupScreen> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'The app searches for the Matter commissionee over BLE and '
-                  'Wi-Fi/IP at the same time. The first matching path is '
-                  'used for this Run.',
+                  'Matter SDK discovery uses BLE and Wi-Fi/IP concurrently. '
+                  'The SDK selects the first matching path for this Run.',
                   style: theme.textTheme.bodyMedium,
                 ),
                 if (_actionError != null ||
@@ -284,41 +282,17 @@ class _SetupScreenState extends State<SetupScreen> {
                 ),
                 const SizedBox(height: 16),
                 PresentationCard(
-                  title: 'Clean Cycle',
-                  subtitle: 'Controller cleanup runs automatically.',
-                  child: Column(
+                  title: 'Cleanup',
+                  subtitle: 'Cleanup runs automatically before every Run.',
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      const InfoBanner(
+                      InfoBanner(
                         icon: Icons.restart_alt,
                         message:
                             'Before every Run the app purges old Run secrets '
                             'and resets controller identities for this platform.',
                       ),
-                      const SizedBox(height: 8),
-                      CheckboxListTile(
-                        key: DeviceTestUiKeys.commissioneeClean,
-                        value: _commissioneeClean,
-                        contentPadding: EdgeInsets.zero,
-                        controlAffinity: ListTileControlAffinity.leading,
-                        onChanged: busy
-                            ? null
-                            : (value) => setState(() {
-                                _commissioneeClean = value ?? false;
-                                _errors = _without(
-                                  _errors,
-                                  SetupField.commissioneeClean,
-                                );
-                              }),
-                        title: const Text(
-                          'The commissionee was factory-reset and is in an '
-                          'open commissioning window.',
-                        ),
-                      ),
-                      if (_errors.containsKey(SetupField.commissioneeClean))
-                        _InlineError(
-                          error: _errors[SetupField.commissioneeClean]!,
-                        ),
                     ],
                   ),
                 ),
@@ -497,9 +471,6 @@ class _SetupScreenState extends State<SetupScreen> {
       wifiSsid: _wifiSsidController.text,
       wifiPassword: _wifiPasswordController.text,
       profile: _profile,
-      cleanCycle: CleanCycleConfirmations(
-        commissioneeClean: _commissioneeClean,
-      ),
     );
 
     final validation = DeviceTestSetupValidator.validate(
@@ -522,7 +493,6 @@ class _SetupScreenState extends State<SetupScreen> {
       wifiSsid: draft.wifiSsid.trim(),
       wifiPassword: draft.wifiPassword,
       profile: draft.profile,
-      cleanCycle: draft.cleanCycle,
     );
 
     setState(() {
@@ -545,27 +515,6 @@ class _SetupScreenState extends State<SetupScreen> {
         });
       }
     }
-  }
-}
-
-class _InlineError extends StatelessWidget {
-  const _InlineError({required this.error});
-
-  final String error;
-
-  @override
-  Widget build(BuildContext context) {
-    return Semantics(
-      container: true,
-      liveRegion: true,
-      label: error,
-      child: Text(
-        error,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: Theme.of(context).colorScheme.error,
-        ),
-      ),
-    );
   }
 }
 

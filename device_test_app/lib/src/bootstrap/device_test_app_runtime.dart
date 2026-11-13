@@ -64,10 +64,8 @@ class DeviceTestAppRuntime {
     );
     final promptBroker = OperatorPromptBroker();
     final runtimeProvider = FlutterMatterControllerRuntimeProvider();
-    final payloadResolver = FlutterMatterOnboardingPayloadResolver();
     final matterAdapter = MatterControllerAdapter(
       runtimeProvider: runtimeProvider,
-      payloadResolver: payloadResolver,
       platform: controllerPlatform,
     );
     final provisioningSecrets = LiveProvisioningSecrets(
@@ -87,7 +85,6 @@ class DeviceTestAppRuntime {
     final coordinator = RunCoordinator(
       ports: ApplicationPorts(
         testPorts: TestPorts(
-          commissioningDiscovery: matterAdapter,
           commissioning: matterAdapter,
           operationalConnection: matterAdapter,
           onOff: matterAdapter,
@@ -157,6 +154,8 @@ class DeviceTestAppRuntime {
         endpoint.host.isEmpty) {
       throw StateError('AGENT_WS_URL must be a valid ws:// or wss:// URL.');
     }
+
+    debugPrint('Agent bridge connecting to ${endpoint.host}:${endpoint.port}.');
 
     final host = LiveDeviceTestAgentHost(
       controller: controller,

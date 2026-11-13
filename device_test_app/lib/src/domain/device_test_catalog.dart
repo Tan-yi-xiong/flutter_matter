@@ -8,11 +8,6 @@ enum DeviceTestId {
     priority: DeviceTestPriority.p0,
     title: 'Build and install',
   ),
-  commissioningDiscovery(
-    wireName: 'commissioning_discovery',
-    priority: DeviceTestPriority.p0,
-    title: 'Matter commissioning discovery',
-  ),
   commissioning(
     wireName: 'commissioning',
     priority: DeviceTestPriority.p0,
@@ -143,7 +138,6 @@ abstract final class DeviceTestCatalog {
   /// The minimum smoke path: build through the first successful OnOff invoke.
   static const List<DeviceTestId> quickTestIds = <DeviceTestId>[
     DeviceTestId.buildInstall,
-    DeviceTestId.commissioningDiscovery,
     DeviceTestId.commissioning,
     DeviceTestId.operationalConnect,
     DeviceTestId.onoffInvoke,

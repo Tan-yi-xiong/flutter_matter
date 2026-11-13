@@ -14,14 +14,11 @@ import 'protocol.dart';
 /// Reserved command names accepted by [DeviceTestAgentCommandHandler].
 abstract final class AgentCommandNames {
   /// Starts a run with the minimal setup request: `mode`, `setup_code`,
-  /// `wifi_ssid`, optional `wifi_password`, and `clean_cycle`.
+  /// `wifi_ssid` and an optional `wifi_password`.
   static const String startRun = 'start_run';
 
   /// Stops the active run: `{}`.
   static const String stopRun = 'stop_run';
-
-  /// Resumes the persisted unfinished run: `{}`.
-  static const String resumeRun = 'resume_run';
 
   /// Purges stored provisioning secrets: `{}`.
   static const String purgeSecrets = 'purge_secrets';
@@ -45,7 +42,6 @@ abstract final class AgentCommandNames {
   static const List<String> all = <String>[
     startRun,
     stopRun,
-    resumeRun,
     purgeSecrets,
     confirmPrompt,
     skipPrompt,
@@ -102,9 +98,6 @@ abstract interface class DeviceTestAgentHost {
   /// Stops the active run without manufacturing a passing report.
   Future<void> stopRun();
 
-  /// Resumes the persisted unfinished run.
-  Future<void> resumeRun();
-
   /// Purges stored setup and network secrets.
   Future<void> purgeSecrets();
 
@@ -154,8 +147,6 @@ class DeviceTestAgentCommandHandler {
           return await _startRun(command);
         case AgentCommandNames.stopRun:
           return await _stopRun(command);
-        case AgentCommandNames.resumeRun:
-          return await _resumeRun(command);
         case AgentCommandNames.purgeSecrets:
           return await _purgeSecrets(command);
         case AgentCommandNames.confirmPrompt:
@@ -216,12 +207,6 @@ class DeviceTestAgentCommandHandler {
   Future<AgentCommandOutcome> _stopRun(AgentCommand command) async {
     _validatedArguments(command, const <String>{});
     await host.stopRun();
-    return const AgentCommandOutcome.completed();
-  }
-
-  Future<AgentCommandOutcome> _resumeRun(AgentCommand command) async {
-    _validatedArguments(command, const <String>{});
-    await host.resumeRun();
     return const AgentCommandOutcome.completed();
   }
 
@@ -307,7 +292,8 @@ class DeviceTestAgentCommandHandler {
     'setup_code',
     'wifi_ssid',
     'wifi_password',
-    'clean_cycle',
+    'commissionee_ip',
+    'commissionee_port',
   };
 
   Map<String, Object?> _freezeArguments(Map<String, Object?> arguments) {

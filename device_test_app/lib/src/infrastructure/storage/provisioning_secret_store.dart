@@ -33,7 +33,17 @@ class ProvisioningSecretStore implements SecretAccessPort {
       SecretKeys.secretsBundle(runId),
       jsonEncode(<String, Object?>{
         'onboarding_payload': secrets.onboardingPayload,
+        'invalid_setup_onboarding_payload':
+            secrets.invalidSetupOnboardingPayload,
         'setup_pin_code': secrets.setupPinCode,
+        'setup_discriminator': secrets.setupDiscriminator,
+        'on_network_endpoint': switch (secrets.onNetworkEndpoint) {
+          null => null,
+          final endpoint => <String, Object?>{
+            'address': endpoint.address,
+            'port': endpoint.port,
+          },
+        },
         'network': networkJson,
       }),
     );
@@ -76,15 +86,52 @@ class ProvisioningSecretStore implements SecretAccessPort {
     }
 
     final payload = decoded['onboarding_payload'];
+    final invalidPayload = decoded['invalid_setup_onboarding_payload'];
     final pin = decoded['setup_pin_code'];
-    if (payload is! String || pin is! int) {
+    if (payload is! String || invalidPayload is! String || pin is! int) {
       throw const FormatException('Stored setup credentials are invalid.');
+    }
+    final discriminator = decoded['setup_discriminator'];
+    if (discriminator != null && discriminator is! int) {
+      throw const FormatException('Stored setup discriminator is invalid.');
+    }
+    final endpointJson = decoded['on_network_endpoint'];
+    OnNetworkCommissioningEndpoint? endpoint;
+    if (endpointJson != null) {
+      if (endpointJson is! Map<String, dynamic>) {
+        throw const FormatException('Stored on-network endpoint is invalid.');
+      }
+      final address = endpointJson['address'];
+      final port = endpointJson['port'];
+      if (address is! String || port is! int) {
+        throw const FormatException('Stored on-network endpoint is invalid.');
+      }
+      endpoint = OnNetworkCommissioningEndpoint(address: address, port: port);
     }
     return ProvisioningSecrets(
       onboardingPayload: payload,
+      invalidSetupOnboardingPayload: invalidPayload,
       setupPinCode: pin,
+      setupDiscriminator: discriminator as int?,
+      onNetworkEndpoint: endpoint,
       network: networkSecret,
     );
+  }
+
+  /// Deletes every stored per-Run provisioning key, including orphans whose
+  /// run directory no longer exists. The global Wi-Fi prefill cache uses a
+  /// dedicated prefix and is intentionally preserved.
+  Future<void> purgeAllStored() async {
+    final all = await _secureStore.readAll();
+    for (final key in all.keys) {
+      if (!key.startsWith('device_test.')) {
+        continue;
+      }
+      if (key.startsWith(SecretKeys.latestWifiPrefix)) {
+        continue;
+      }
+      await _secureStore.delete(key);
+    }
   }
 
   @override

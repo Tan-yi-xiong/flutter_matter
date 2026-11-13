@@ -39,10 +39,6 @@ void main() {
       expect(harness.runner.startRequest?.profile, TestProfile.full);
       expect(harness.runner.startRequest?.commissionee.vendorId, 1);
       expect(harness.runner.startRequest?.commissionee.productId, 1);
-      expect(
-        harness.runner.startRequest?.commissionee.commissioningTransport,
-        isNull,
-      );
     },
   );
 
@@ -193,7 +189,6 @@ Map<String, Object?> _runArguments(String mode) {
     'setup_code': 'MT:TEST-SETUP-CODE',
     'wifi_ssid': 'Test Wi-Fi',
     'wifi_password': 'secret',
-    'clean_cycle': <String, Object?>{'commissionee_clean': true},
   };
 }
 

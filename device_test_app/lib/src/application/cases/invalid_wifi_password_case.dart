@@ -50,13 +50,6 @@ class InvalidWifiPasswordCase implements DeviceTestCase {
       return prepareOutcome;
     }
 
-    final transport = context.execution.commissioningTransport;
-    if (transport == null) {
-      return TestCaseOutcome.notRun(
-        'Commissioning discovery did not select a transport.',
-      );
-    }
-
     TestCaseOutcome diagnosticOutcome;
     try {
       final identityRequest = ControllerIdentityRequest(
@@ -73,7 +66,6 @@ class InvalidWifiPasswordCase implements DeviceTestCase {
         context,
         identity: identity,
         secrets: invalidSecrets,
-        commissioningTransport: transport,
         timeout: context.timeoutFor(id),
       );
       diagnosticOutcome = result.succeeded

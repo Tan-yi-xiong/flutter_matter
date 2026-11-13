@@ -28,13 +28,6 @@ void main() {
       find.text('Matter setup code or QR payload is required.'),
       findsOneWidget,
     );
-    expect(
-      find.text(
-        'Confirm the commissionee was factory-reset and is in a '
-        'commissioning window.',
-      ),
-      findsOneWidget,
-    );
     expect(find.text('Commissionee model is required.'), findsNothing);
     expect(find.text('Firmware version is required.'), findsNothing);
     expect(find.byKey(DeviceTestUiKeys.setupValidationSummary), findsOneWidget);
@@ -62,7 +55,7 @@ void main() {
       expect(find.text('State change notes'), findsNothing);
       expect(find.text('Purge Secrets Now'), findsNothing);
       expect(
-        find.textContaining('BLE and Wi-Fi/IP at the same time'),
+        find.textContaining('Matter SDK discovery uses BLE and Wi-Fi/IP'),
         findsOneWidget,
       );
     },
@@ -119,12 +112,8 @@ void main() {
       find.byKey(DeviceTestUiKeys.setupCode),
       'MT:TEST-SETUP-CODE',
     );
-    final tile = tester.widget<CheckboxListTile>(
-      find.byKey(DeviceTestUiKeys.commissioneeClean),
-    );
-    tile.onChanged!(true);
-    await tester.pump();
-
+    tester.testTextInput.hide();
+    await tester.pumpAndSettle();
     await _center(tester, find.byKey(DeviceTestUiKeys.startRun));
     await tester.tap(find.byKey(DeviceTestUiKeys.startRun));
     await tester.pumpAndSettle();
@@ -135,7 +124,6 @@ void main() {
     expect(request.wifiSsid, 'matter-test-network');
     expect(request.wifiPassword, 'cached-password');
     expect(request.profile, TestProfile.full);
-    expect(request.cleanCycle.commissioneeClean, isTrue);
     expect(controller.state.screen, DeviceTestScreen.runner);
   });
 }

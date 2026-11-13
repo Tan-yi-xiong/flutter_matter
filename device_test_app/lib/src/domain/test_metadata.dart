@@ -46,24 +46,6 @@ class ControllerMetadata {
   };
 }
 
-enum CommissioningTransport {
-  ble('ble'),
-  ip('ip');
-
-  const CommissioningTransport(this.wireName);
-
-  final String wireName;
-
-  static CommissioningTransport parse(String value) {
-    for (final transport in values) {
-      if (transport.wireName == value) {
-        return transport;
-      }
-    }
-    throw FormatException('Unknown commissioning transport: $value');
-  }
-}
-
 enum NetworkTransport {
   wifi('wifi'),
   thread('thread'),
@@ -88,47 +70,26 @@ class CommissioneeMetadata {
     required this.vendorId,
     required this.productId,
     required this.networkTransport,
-    this.commissioningTransport,
   });
 
   final int vendorId;
   final int productId;
 
-  /// The path selected by discovery; null until discovery has completed.
-  final CommissioningTransport? commissioningTransport;
   final NetworkTransport networkTransport;
 
   factory CommissioneeMetadata.fromJson(Map<String, dynamic> json) {
     return CommissioneeMetadata(
       vendorId: _requiredInt(json, 'vendor_id'),
       productId: _requiredInt(json, 'product_id'),
-      commissioningTransport: json['commissioning_transport'] == null
-          ? null
-          : CommissioningTransport.parse(
-              _requiredString(json, 'commissioning_transport'),
-            ),
       networkTransport: NetworkTransport.parse(
         _requiredString(json, 'network_transport'),
       ),
     );
   }
 
-  CommissioneeMetadata withCommissioningTransport(
-    CommissioningTransport transport,
-  ) {
-    return CommissioneeMetadata(
-      vendorId: vendorId,
-      productId: productId,
-      commissioningTransport: transport,
-      networkTransport: networkTransport,
-    );
-  }
-
   Map<String, Object?> toJson() => <String, Object?>{
     'vendor_id': vendorId,
     'product_id': productId,
-    if (commissioningTransport != null)
-      'commissioning_transport': commissioningTransport!.wireName,
     'network_transport': networkTransport.wireName,
   };
 }

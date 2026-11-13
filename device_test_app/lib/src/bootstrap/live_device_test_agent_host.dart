@@ -103,21 +103,6 @@ class LiveDeviceTestAgentHost implements DeviceTestAgentHost {
   }
 
   @override
-  Future<void> resumeRun() async {
-    await _controller.resumeActiveRun();
-    _throwIfControllerError(
-      code: 'run_not_resumable',
-      message: 'The unfinished Run could not be resumed.',
-    );
-    if (_controller.state.screen != DeviceTestScreen.runner) {
-      throw const DeviceTestAgentHostException(
-        code: 'run_not_resumable',
-        message: 'The unfinished Run could not be resumed.',
-      );
-    }
-  }
-
-  @override
   Future<void> purgeSecrets() async {
     await _controller.purgeSecrets();
     _throwIfControllerError(

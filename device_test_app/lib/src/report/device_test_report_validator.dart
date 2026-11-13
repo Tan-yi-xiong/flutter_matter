@@ -113,10 +113,10 @@ class DeviceTestReportValidator {
 
   /// Validates a typed report for formal evidence use.
   ///
-  /// JSON schema v3 deliberately has no profile field. The caller supplies the
+  /// JSON schema v4 deliberately has no profile field. The caller supplies the
   /// profile that produced the report, and formal evidence must be full.
   ReportValidationResult validateModel(
-    DeviceTestReportV3 report, {
+    DeviceTestReportV4 report, {
     TestProfile profile = TestProfile.full,
   }) {
     final issues = <ReportValidationIssue>[];
@@ -211,7 +211,7 @@ void _validateSemantics(
 }
 
 /// Semantic checks for formal-report safety that stay meaningful even when
-/// a caller supplies a schema older or looser than the canonical v3 asset.
+/// a caller supplies a schema older or looser than the canonical v4 asset.
 void _validateFormalSafety(
   Map<String, dynamic> report,
   List<ReportValidationIssue> issues,
@@ -219,17 +219,6 @@ void _validateFormalSafety(
   final commissionee = report['commissionee'];
   if (commissionee is! Map<String, dynamic>) {
     return;
-  }
-
-  final commissioningTransport = commissionee['commissioning_transport'];
-  if (commissioningTransport == null) {
-    issues.add(
-      const ReportValidationIssue(
-        kind: ReportValidationIssueKind.semantic,
-        path: r'$.commissionee.commissioning_transport',
-        message: 'Formal reports require a selected commissioning transport.',
-      ),
-    );
   }
 
   final networkTransport = commissionee['network_transport'];

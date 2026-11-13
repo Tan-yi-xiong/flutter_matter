@@ -8,49 +8,42 @@ import 'support/fake_device_test_ui_controller.dart';
 import 'support/presentation_fixtures.dart';
 
 void main() {
-  testWidgets(
-    'home exposes resume, new Run, recent result, and purge actions',
-    (tester) async {
-      final summary = ReportSummary.calculate(
-        testProgress(
-          TestProfile.full,
-          statuses: <DeviceTestId, DeviceTestStatus>{
-            for (final testId in DeviceTestCatalog.all)
-              testId: DeviceTestStatus.passed,
-          },
-        ).map(
-          (test) => DeviceTestResult(testId: test.testId, status: test.status),
+  testWidgets('home exposes new Run, recent result, and purge actions', (
+    tester,
+  ) async {
+    final summary = ReportSummary.calculate(
+      testProgress(
+        TestProfile.full,
+        statuses: <DeviceTestId, DeviceTestStatus>{
+          for (final testId in DeviceTestCatalog.all)
+            testId: DeviceTestStatus.passed,
+        },
+      ).map(
+        (test) => DeviceTestResult(testId: test.testId, status: test.status),
+      ),
+    );
+    final controller = FakeDeviceTestUiController(
+      DeviceTestUiState(
+        controllerInfo: controllerInfo,
+        preflightChecks: readyPreflight,
+        activeRun: activeRun(),
+        recentRun: RecentRunViewModel(
+          profile: TestProfile.full,
+          summary: summary,
+          completedAt: DateTime.utc(2026, 11, 11, 12),
+          formalEvidence: true,
         ),
-      );
-      final controller = FakeDeviceTestUiController(
-        DeviceTestUiState(
-          controllerInfo: controllerInfo,
-          preflightChecks: readyPreflight,
-          activeRun: activeRun(),
-          recentRun: RecentRunViewModel(
-            profile: TestProfile.full,
-            summary: summary,
-            completedAt: DateTime.utc(2026, 11, 11, 12),
-            formalEvidence: true,
-          ),
-          hasStoredSecrets: true,
-        ),
-      );
+        hasStoredSecrets: true,
+      ),
+    );
 
-      await tester.pumpWidget(DeviceTestAppShell(controller: controller));
-      await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpWidget(DeviceTestAppShell(controller: controller));
+    await tester.pump(const Duration(milliseconds: 200));
 
-      expect(find.byKey(DeviceTestUiKeys.resumeRun), findsOneWidget);
-      expect(find.byKey(DeviceTestUiKeys.newRun), findsOneWidget);
-      expect(find.byKey(DeviceTestUiKeys.homeViewResults), findsOneWidget);
-      expect(find.byKey(DeviceTestUiKeys.purgeSecrets), findsOneWidget);
-
-      await tester.ensureVisible(find.byKey(DeviceTestUiKeys.resumeRun));
-      await tester.tap(find.byKey(DeviceTestUiKeys.resumeRun));
-      await tester.pump(const Duration(milliseconds: 200));
-      expect(controller.resumeCalls, 1);
-    },
-  );
+    expect(find.byKey(DeviceTestUiKeys.newRun), findsOneWidget);
+    expect(find.byKey(DeviceTestUiKeys.homeViewResults), findsOneWidget);
+    expect(find.byKey(DeviceTestUiKeys.purgeSecrets), findsOneWidget);
+  });
 
   testWidgets('results renders summary, table, validation, and share actions', (
     tester,

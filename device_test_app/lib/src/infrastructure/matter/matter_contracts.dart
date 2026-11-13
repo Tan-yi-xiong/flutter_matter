@@ -3,26 +3,12 @@ import 'dart:typed_data';
 
 import 'package:flutter_matter/flutter_matter.dart';
 
-import '../ble/matter_ble_contracts.dart';
 import 'matter_tlv.dart';
-
-enum MatterTargetPlatform { android, ios }
-
-/// Transport used to establish commissioning with a Matter device.
-enum MatterCommissioningTransport {
-  /// Commission over an already-on-network IP transport.
-  ip,
-
-  /// Commission over the Matter BLE transport.
-  ble,
-}
 
 enum MatterFailureCode {
   invalidArgument,
   notInitialized,
   initializationFailed,
-  bleDiscoveryFailed,
-  bleConnectionFailed,
   pairingFailed,
   commissioningFailed,
   callbackTimeout,
@@ -187,13 +173,11 @@ class MatterCommissionRequest {
   MatterCommissionRequest({
     required this.onboardingPayload,
     required this.setupPinCode,
-    required this.discriminator,
-    required this.hasShortDiscriminator,
     required this.nodeId,
     required this.networkCredentials,
-    required this.commissioningTransport,
-    this.discoveredBleDevice,
-    this.bleScanTimeout = const Duration(seconds: 15),
+    this.discriminator,
+    this.onNetworkAddress,
+    this.onNetworkPort,
     this.timeout,
   }) {
     if (onboardingPayload.isEmpty) {
@@ -210,38 +194,53 @@ class MatterCommissionRequest {
         'Must be positive',
       );
     }
-    final maximumDiscriminator = hasShortDiscriminator ? 0x0f : 0x0fff;
-    if (discriminator < 0 || discriminator > maximumDiscriminator) {
-      throw ArgumentError.value(
-        discriminator,
-        'discriminator',
-        'Must be between 0 and $maximumDiscriminator',
-      );
-    }
     if (nodeId < 1) {
       throw ArgumentError.value(nodeId, 'nodeId', 'Must be positive');
     }
-    if (bleScanTimeout <= Duration.zero) {
-      throw ArgumentError.value(
-        bleScanTimeout,
-        'bleScanTimeout',
-        'Must be positive',
-      );
-    }
     if (timeout != null && timeout! <= Duration.zero) {
       throw ArgumentError.value(timeout, 'timeout', 'Must be positive');
+    }
+    final hasAddress = onNetworkAddress != null;
+    final hasPort = onNetworkPort != null;
+    if (hasAddress != hasPort) {
+      throw ArgumentError(
+        'onNetworkAddress and onNetworkPort must be provided together',
+      );
+    }
+    if (hasAddress) {
+      if (onNetworkAddress!.trim().isEmpty) {
+        throw ArgumentError.value(
+          onNetworkAddress,
+          'onNetworkAddress',
+          'Must not be empty',
+        );
+      }
+      if (onNetworkPort! < 1 || onNetworkPort! > 65535) {
+        throw ArgumentError.value(
+          onNetworkPort,
+          'onNetworkPort',
+          'Must be between 1 and 65535',
+        );
+      }
+      if (discriminator == null ||
+          discriminator! < 0 ||
+          discriminator! > 0x0fff) {
+        throw ArgumentError.value(
+          discriminator,
+          'discriminator',
+          'Must be between 0 and 4095 for address commissioning',
+        );
+      }
     }
   }
 
   final String onboardingPayload;
   final int setupPinCode;
-  final int discriminator;
-  final bool hasShortDiscriminator;
   final int nodeId;
   final MatterNetworkCredentials networkCredentials;
-  final MatterCommissioningTransport commissioningTransport;
-  final MatterBleDiscoveredDevice? discoveredBleDevice;
-  final Duration bleScanTimeout;
+  final int? discriminator;
+  final String? onNetworkAddress;
+  final int? onNetworkPort;
   final Duration? timeout;
 }
 

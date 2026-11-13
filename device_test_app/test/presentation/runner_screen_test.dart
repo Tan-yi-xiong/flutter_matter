@@ -13,7 +13,7 @@ void main() {
       final run = activeRun(
         statuses: const <DeviceTestId, DeviceTestStatus>{
           DeviceTestId.buildInstall: DeviceTestStatus.passed,
-          DeviceTestId.commissioningDiscovery: DeviceTestStatus.running,
+          DeviceTestId.commissioning: DeviceTestStatus.running,
         },
       );
       final controller = FakeDeviceTestUiController(runnerState(run: run));
@@ -42,11 +42,17 @@ void main() {
     },
   );
 
-  testWidgets('runner shows the app restart waiting state', (tester) async {
+  testWidgets('runner offers commissionee cleanup after a terminal Run', (
+    tester,
+  ) async {
     final run = activeRun(
-      currentTestId: DeviceTestId.appRestart,
-      currentInstruction: 'Reopen the controller app and resume the Run.',
-      awaitingAppRestart: true,
+      phase: RunPhase.completed,
+      statuses: {
+        for (final testId in DeviceTestCatalog.all)
+          testId: DeviceTestStatus.passed,
+      },
+      currentTestId: null,
+      currentInstruction: null,
     );
     final controller = FakeDeviceTestUiController(runnerState(run: run));
     await tester.pumpWidget(
@@ -57,10 +63,22 @@ void main() {
     );
     await tester.pump(const Duration(milliseconds: 500));
 
-    expect(find.byKey(DeviceTestUiKeys.waitingForAppRestart), findsOneWidget);
-    expect(
-      find.textContaining('Waiting for the controller app to restart'),
-      findsOneWidget,
+    expect(find.byKey(DeviceTestUiKeys.commissioneeReset), findsOneWidget);
+    expect(find.text('I reset the device'), findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      find.text('I reset the device'),
+      200,
+      scrollable: find.byType(Scrollable).first,
     );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('I reset the device'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Reset the commissionee?'), findsOneWidget);
+    await tester.tap(find.text('I reset the device').last);
+    await tester.pumpAndSettle();
+
+    expect(controller.commissioneeResetCalls, 1);
   });
 }

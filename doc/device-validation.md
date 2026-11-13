@@ -4,7 +4,7 @@ This document defines the manual device-validation process for `flutter_matter`.
 
 The process is manual by design. It does not require or define a self-hosted runner, an Actions hardware workflow, or an automated cross-device UI test.
 
-Every device Run uses a Matter commissionee. The app discovers the commissionee concurrently over BLE and Wi-Fi/IP and uses the first matching transport. It records `ble` or `ip` as the actual commissioning transport. A commissioning failure is preserved and is never retried through the other transport in the same Run.
+Every device Run uses a Matter commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning. A commissioning failure is preserved and is never retried in the same Run.
 
 ## Definitions
 
@@ -18,7 +18,7 @@ Every device Run uses a Matter commissionee. The app discovers the commissionee 
 A suitable Matter commissionee is required for every device Run, including quick iteration. It is suitable when all of the following are true:
 
 - It can be restored to factory state and commissioned again with a valid setup code or setup payload.
-- It can be discovered through BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
+- It can be discovered by the Matter SDK through its supported commissioning transports.
 - It exposes an On/Off server on endpoint `1`, cluster `0x0006`.
 - It supports Basic Information `NodeLabel` on endpoint `0`, cluster `0x0028`, attribute `0x0005`.
 - Its state can be changed independently through a physical control, a vendor app, or another local controller.
@@ -35,7 +35,7 @@ Formal validation requires:
 | Commissionee | A Matter On/Off device |
 | Network | A non-isolated trusted Wi-Fi network for provisioning and CASE/control |
 
-The controller must be able to reach the target Wi-Fi network. The commissionee may be discovered over BLE before Wi-Fi provisioning or over Wi-Fi/IP before commissioning. Disable VPNs and private DNS behavior that could block local Matter discovery. Use a temporary test network rather than personal or production credentials whenever possible.
+The controller must be able to reach the target Wi-Fi network. Commissionee discovery is delegated to the Matter SDK. Disable VPNs and private DNS behavior that could block local Matter discovery. Use a temporary test network rather than personal or production credentials whenever possible.
 
 The iOS controller must run on a physical iPhone. The vendored `ZGMatter.framework` has no simulator slice, so simulator results are not valid evidence.
 
@@ -60,7 +60,7 @@ For each controller platform that the change requires:
 4. Provide the target Wi-Fi SSID and password. An empty password is valid only for an open network.
 5. Confirm the commissionee reset and commissioning-window state through the setup prompt.
 6. Let the app automatically purge old run secrets and reset controller identities for the current platform before the Run.
-7. Let the app perform concurrent BLE and Wi-Fi/IP discovery and select the first matching transport.
+7. Start the Run and let the Matter SDK perform discovery and commissioning from the raw onboarding payload.
 8. Run every P0 scenario in the order below without replacing a failed result with a later retry.
 9. Save the generated JSON and Markdown reports. Add manually captured screenshots only when they are bounded and sanitized.
 10. Verify the report schema version and commit before attaching evidence.
@@ -72,8 +72,7 @@ The user does not certify controller cleanup or secret purge. If automatic clean
 | Priority | Test ID | Requirement |
 | --- | --- | --- |
 | P0 | `build_install` | Android APK or signed iOS app installs and launches |
-| P0 | `commissioning_discovery` | Concurrent BLE and Wi-Fi/IP discovery identifies the selected commissionee and selects the first matching transport |
-| P0 | `commissioning` | PASE/commissioning completes on the selected transport with `errorCode == 0` within 120 seconds |
+| P0 | `commissioning` | PASE/commissioning completes through SDK-managed discovery with `errorCode == 0` within 120 seconds |
 | P0 | `operational_connect` | CASE connection returns a valid connect context within 30 seconds |
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
 | P0 | `onoff_subscription` | Initial state and an external update arrive within 15 seconds |
@@ -90,7 +89,7 @@ P1 results provide stability evidence and do not independently block a stable re
 
 P2 results record defects and must be included in the report:
 
-- `invalid_setup_passcode`: an invalid passcode returns a clear non-zero failure without a crash.
+- `invalid_setup_passcode`: a negative validation run uses a well-formed setup payload with a deliberately incorrect setup passcode and the same discriminator, and must return a clear non-zero failure without a crash.
 - `invalid_wifi_password`: provisioning fails clearly without reporting false success.
 - `remove_fabric_ui`: existing remove/delete-device UI behavior is recorded accurately.
 
@@ -100,14 +99,14 @@ A P2 failure does not block by default. The maintainer must record the failure a
 
 The dedicated device-test app, or an interim manual reporter, must produce both:
 
-- `device-test-report.json` conforming to schema v3.
+- `device-test-report.json` conforming to schema v4.
 - `device-test-report.md` generated from the same test data for direct use in a pull request.
 
 A valid report records:
 
 - Automatically parsed `vendor_id` and `product_id`.
-- The actual commissioning transport: `ble` or `ip`.
 - `network_transport: "wifi"`.
+- No commissioning-transport field.
 - No commissionee model, firmware, or external state-change fields.
 
 A report cannot be reused after relevant code changes. Record the test app version and commit separately from the plugin commit.
@@ -132,11 +131,11 @@ Device-behavior pull requests must include reports for every affected platform:
 For a stable release, the release-preparation pull request must contain:
 
 - One clean Android P0 report and one clean iOS P0 report for the candidate commit.
-- A schema v3 report for each platform.
+- A schema v4 report for each platform.
 - Sanitized JSON attachments for both reports; screenshots are optional manual evidence.
 - A maintainer confirmation that all required P0 results passed and that P1/P2 results were reviewed.
 
-The stable version tag must not be created when any required P0 result is `Failed` or `Not run`, when the report commit does not match the candidate, when `network_transport` is not `wifi`, when `commissioning_transport` is neither `ble` nor `ip`, or when the required transport fields are invalid.
+The stable version tag must not be created when any required P0 result is `Failed` or `Not run`, when the report commit does not match the candidate, when `network_transport` is not `wifi`, or when any required report field is invalid.
 
 ## Known limits
 

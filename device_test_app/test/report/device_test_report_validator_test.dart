@@ -48,7 +48,7 @@ void main() {
     expect(result.contains(ReportValidationIssueKind.semantic), isTrue);
     expect(
       result.issues.map((issue) => issue.message).join(' '),
-      contains('All 12 fixed test IDs'),
+      contains('All 11 fixed test IDs'),
     );
   });
 
@@ -83,7 +83,7 @@ void main() {
   test('rejects summary counts or results that do not match tests', () {
     final json = _clone(buildFixtureReport().toJson());
     final summary = json['summary']! as Map<String, dynamic>;
-    summary['passed'] = 10;
+    summary['passed'] = 9;
     summary['result'] = 'failed';
 
     final result = validator.validateMap(json);
@@ -135,36 +135,37 @@ void main() {
     );
   });
 
-  test('accepts a selected BLE commissioning route', () {
+  test('rejects the retired commissioning transport field', () {
     final json = _clone(buildFixtureReport().toJson());
     final commissionee = json['commissionee']! as Map<String, dynamic>;
-    commissionee['commissioning_transport'] = 'ble';
+    commissionee['commissioning_transport'] = 'ip';
 
     final result = validator.validateMap(json);
 
-    expect(result.isValid, isTrue, reason: result.toString());
+    expect(result.isValid, isFalse);
+    expect(result.contains(ReportValidationIssueKind.schema), isTrue);
+    expect(
+      result.issues.map((issue) => issue.path),
+      contains(r'$.commissionee.commissioning_transport'),
+    );
   });
 
-  test(
-    'rejects a missing commissioning route through schema and semantics',
-    () {
-      final json = _clone(buildFixtureReport().toJson());
-      final commissionee = json['commissionee']! as Map<String, dynamic>;
-      commissionee.remove('commissioning_transport');
+  test('rejects retired commissioning discovery test results', () {
+    final json = _clone(buildFixtureReport().toJson());
+    final tests = json['tests']! as Map<String, dynamic>;
+    tests['commissioning_discovery'] = <String, Object?>{
+      'status': 'passed',
+      'duration_ms': 1,
+    };
 
-      final result = validator.validateMap(json);
+    final result = validator.validateMap(json);
 
-      expect(result.isValid, isFalse);
-      expect(
-        result.issues.map((issue) => issue.path),
-        contains(r'$.commissionee.commissioning_transport'),
-      );
-      expect(
-        result.issues.map((issue) => issue.message).join(' '),
-        contains('selected commissioning transport'),
-      );
-    },
-  );
+    expect(result.isValid, isFalse);
+    expect(
+      result.issues.map((issue) => issue.message).join(' '),
+      contains('commissioning_discovery'),
+    );
+  });
 
   test('rejects setup credentials even when they appear in a note', () {
     final json = _clone(buildFixtureReport().toJson());
@@ -179,17 +180,19 @@ void main() {
     expect(result.contains(ReportValidationIssueKind.sensitive), isTrue);
   });
 
-  test('rejects schema version 1 reports', () {
-    final json = _clone(buildFixtureReport().toJson());
-    json['schema_version'] = 1;
+  test('rejects schema v1, v2, and v3 reports', () {
+    for (final legacyVersion in <int>[1, 2, 3]) {
+      final json = _clone(buildFixtureReport().toJson());
+      json['schema_version'] = legacyVersion;
 
-    final result = validator.validateMap(json);
+      final result = validator.validateMap(json);
 
-    expect(result.isValid, isFalse);
-    expect(
-      result.issues.map((issue) => issue.path),
-      contains(r'$.schema_version'),
-    );
+      expect(result.isValid, isFalse, reason: 'schema_version $legacyVersion');
+      expect(
+        result.issues.map((issue) => issue.path),
+        contains(r'$.schema_version'),
+      );
+    }
   });
 
   test('rejects a non-wifi network transport', () {

@@ -50,7 +50,7 @@ app checks are local and are not part of required CI.
 
 - [ ] Not applicable; explain why in the field below
 - [ ] Matter commissionee used
-- [ ] Concurrent BLE and Wi-Fi/IP discovery used; the report records the actual `ble` or `ip` transport and `wifi` network transport
+- [ ] Matter SDK discovery and commissioning used; the report records `wifi` network transport
 
 **Applicability or not-applicable reason:**
 
@@ -58,9 +58,9 @@ app checks are local and are not part of required CI.
 
 **Test app version and commit, or interim manual report:**
 
-**Commissionee vendor/product ID and actual commissioning transport from the report:**
+**Commissionee vendor/product ID from the report:**
 
-**Commissioning transport and network transport:** `<ip / wifi>`
+**Network transport:** `<wifi>`
 
 **Controller and commissionee confirmed on the same trusted LAN:** `<Yes|No>`
 
@@ -115,5 +115,5 @@ Paste `device-test-report.md` here.
 - [ ] A green CI result was not treated as proof of native compilation or device behavior.
 - [ ] Device-behavior evidence uses the versioned report contract, matches the PR head, and covers every affected platform.
 - [ ] No P0 failure was retried in the same Run to manufacture a green result.
-- [ ] Formal evidence used a Matter commissionee, recorded concurrent BLE and Wi-Fi/IP discovery with the actual first-match `ble` or `ip` transport, and did not retry commissioning through the other transport.
+- [ ] Formal evidence used a Matter commissionee, delegated discovery and commissioning to the Matter SDK, and did not retry commissioning in the same Run.
 - [ ] Attached reports and screenshots contain no credentials, device identifiers, provisioning secrets, certificates, keys, or raw logs.

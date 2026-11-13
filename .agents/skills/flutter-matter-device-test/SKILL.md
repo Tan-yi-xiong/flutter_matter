@@ -5,7 +5,7 @@ description: Execute flutter_matter device validation through the dedicated test
 
 # Flutter Matter Device Test
 
-Run `flutter_matter` device validation without guessing which phone or commissionee to use. The device-test app is the authoritative runner for Matter commissionees and does not inspect device provenance. It discovers the commissionee concurrently over BLE and Wi-Fi/IP, uses the first matching transport, and records the actual transport in schema v3 evidence.
+Run `flutter_matter` device validation without guessing which phone or commissionee to use. The device-test app is the authoritative runner for Matter commissionees and does not inspect device provenance. It passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning, and emits schema v4 evidence.
 
 ## Hard rules
 
@@ -15,10 +15,10 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 4. Show `platform`, `model`, `os_version`, and `short_id` in user choices. Do not display the full device ID in the label; retain the full ID privately for `serve`.
 5. Always pass the selected candidate's full ID to `serve --device`.
 6. Use a Matter On/Off commissionee for every device Run. Do not infer or record device provenance.
-7. Never select, force, or describe a commissioning transport in `start_run`. The app starts BLE and Wi-Fi/IP discovery concurrently and uses the first matching transport.
-8. If commissioning fails on the selected transport, preserve the failure and stop the Run. Do not retry or fall back to the other transport in the same Run.
+7. Do not add commissioning-transport selection, host-side scanning, or readiness gating. The app passes the raw onboarding payload to the Matter SDK, which performs discovery and commissioning.
+8. If commissioning fails, preserve the failure and stop the Run. Do not retry commissioning in the same Run.
 9. Do not send Thread commissioning material or Thread-specific setup fields.
-10. `quick` contains five iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 12 fixed tests.
+10. `quick` contains four iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 11 fixed tests.
 11. Never retry a failed P0 test in the same Run to manufacture a passing result.
 12. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
 13. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
@@ -28,13 +28,13 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 
 - The dedicated device-test app is built and installed on the selected controller.
 - A Matter On/Off commissionee is available and in an open commissioning window after a factory reset.
-- The commissionee supports BLE commissionable discovery, Wi-Fi/IP commissionable discovery, or both.
+- The commissionee is discoverable by the Matter SDK through its supported commissioning transports.
 - The controller has connectivity to the target Wi-Fi network for provisioning and the CASE/control stage.
 - The Mac and phones share a trusted private LAN that permits the WebSocket connection.
 - The app is configured with the endpoint printed by `serve`.
 - `adb` is available for Android devices; Xcode `devicectl` or libimobiledevice is available for iOS devices.
 
-Do not run a host-side `_matterc._udp` preflight gate before the Run. A valid Run may be led by either BLE or Wi-Fi/IP discovery; absence of an mDNS advertisement alone does not block the Run.
+Do not run a host-side BLE/mDNS scan or `_matterc._udp` readiness gate before the Run. Commissionee discovery is delegated to the Matter SDK.
 
 ## Step 1: Discover devices
 
@@ -118,7 +118,6 @@ Never ask for or accept:
 - Commissionee model or firmware.
 - A state-change method or state-change notes.
 - Commissioning transport.
-- Network transport.
 - Controller-clean status.
 - Secrets-purged status.
 
@@ -126,7 +125,7 @@ When the answers arrive, immediately write them only into the transient `start_r
 
 ## Step 5: Start the run
 
-Use a stable command ID and reuse the same ID only when retrying the same logical command after a transport failure. Because `start_run` includes provisioning material, put its arguments in a temporary JSON file under the ignored build directory. Never print the file, paste its contents into chat, or commit it.
+Use a stable command ID and reuse the same ID only when retrying the same logical command after a command-delivery failure. Because `start_run` includes provisioning material, put its arguments in a temporary JSON file under the ignored build directory. Never print the file, paste its contents into chat, or commit it.
 
 ```bash
 mkdir -p build/device-test-agent
@@ -270,9 +269,9 @@ Verify:
 
 1. `plugin_commit` equals `git rev-parse HEAD` for the tested PR.
 2. The run mode is `full`.
-3. The report schema version is `3`.
+3. The report schema version is `4`.
 4. `vendor_id` and `product_id` are present, and `network_transport` is `wifi`.
-5. `commissioning_transport` records the actual selected path, `ble` or `ip`.
+5. No commissioning-transport field is present.
 6. All P0 test IDs are `passed`.
 7. Non-P0 statuses and `not_run` reasons are reviewed.
 8. The Markdown and JSON describe the same run.
@@ -281,13 +280,13 @@ Verify:
 
 Attach the JSON and Markdown to the PR manually. If the commit does not match the PR head, rebuild from the PR head, reinstall, and start a fresh Run; do not attach the stale report.
 
-## No-P0-retry and no-transport-fallback policy
+## No-P0-retry and no-commissioning-retry policy
 
 A P0 `failed`, error, timeout, or crash is evidence. Do not rerun that P0 merely to obtain a green result.
 
-After discovery selects a transport and commissioning fails, do not retry through BLE or Wi-Fi/IP in the same Run. Preserve the failure, report it to the user, and require a new Run only as an explicit new validation decision.
+After the Matter SDK attempts commissioning and it fails, do not retry commissioning in the same Run. Preserve the failure, report it to the user, and require a new Run only as an explicit new validation decision.
 
-You may retry a command when the failure is clearly a transport failure and the app never executed it. Reuse the same command ID for that transport retry. If the app executed the test and reported `failed`, preserve the report and report the failure to the user.
+You may retry a command when the failure is clearly a command-delivery failure and the app never executed it. Reuse the same command ID for that retry. If the app executed the test and reported `failed`, preserve the report and report the failure to the user.
 
 P1 and P2 results may be `not_run` with a concrete reason. P2 failures require explicit maintainer risk acceptance.
 
@@ -328,7 +327,7 @@ Do not execute destructive purge steps without user confirmation.
 | `args_file_*` | Correct the local argument file or path. Never print its contents; reuse the same command ID only for a retry of the same unexecuted command. |
 | `invalid_arguments` | Re-read the minimal `start_run` schema and correct the local argument file without exposing secrets in chat. |
 | `cleanup_failed` | Do not start the Run. Preserve the local state and report the cleanup failure. |
-| `commissioning_failed` | Preserve the failure. Do not retry through the other transport in the same Run. |
+| `commissioning_failed` | Preserve the failure. Do not retry commissioning in the same Run. |
 | `report_not_ready` | Wait for the Report validation state to become valid, then retry `report`. |
 | `screenshot_unavailable` | Use the host platform screenshot fallback and inspect the current state. |
 | `plugin_commit_mismatch` | Rebuild/reinstall from the PR head and start a fresh Run; do not attach the report. |
@@ -339,8 +338,8 @@ Do not execute destructive purge steps without user confirmation.
 
 - The controller was explicitly chosen by the user whenever multiple phones were connected.
 - The run used a Matter commissionee selected by the operator.
-- The app performed concurrent BLE and Wi-Fi/IP discovery and selected the first matching transport.
-- No commissioning failure was retried through the other transport in the same Run.
+- Commissionee discovery and commissioning were delegated to the Matter SDK without host-side scanning.
+- No commissioning failure was retried in the same Run.
 - Setup data was collected through Codex interactive prompts using only the minimal required fields.
 - `serve` used the explicit controller ID.
 - The app bridge connected and reported the expected controller metadata.
@@ -349,6 +348,6 @@ Do not execute destructive purge steps without user confirmation.
 - Automatic cleanup ran or a cleanup failure blocked the Run before persistence.
 - Android prompts were handled only on the selected controller and verified through semantic state.
 - Human prompts were explicitly handed to the operator.
-- The formal report is schema v3, from a `full` run, and matches the PR head.
+- The formal report is schema v4, from a `full` run, and matches the PR head.
 - Sanitization was verified and no P0 failure was retried to hide a result.
 - The user received the fabric, commissionee, credential, and app-data purge reminder.

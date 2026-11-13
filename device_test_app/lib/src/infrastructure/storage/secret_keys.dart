@@ -10,6 +10,10 @@ class SecretKeys {
   static String secretsBundle(String runId) =>
       'device_test.$runId.provisioning_secrets';
 
+  /// Prefix of the global Wi-Fi prefill keys. Not scoped by runId and never
+  /// removed by run-secret purges.
+  static const String latestWifiPrefix = 'device_test.latest_wifi.';
+
   /// Global key for the latest remembered Wi-Fi SSID. Not scoped by runId and
   /// never removed by run-secret purges.
   static const String latestWifiSsid = 'device_test.latest_wifi.ssid';

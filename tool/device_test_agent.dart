@@ -19,7 +19,6 @@ const String _controlPath = '/control';
 const String _agentPath = '/agent';
 const List<String> _reportTestIds = <String>[
   'build_install',
-  'commissioning_discovery',
   'commissioning',
   'operational_connect',
   'onoff_invoke',
@@ -2902,7 +2901,7 @@ int _bodySeconds(Map<String, Object?> body, String field,
   return value;
 }
 
-/// Validates a device-test report JSON document against schema v3.
+/// Validates a device-test report JSON document against schema v4.
 ///
 /// This is a narrow, test-facing wrapper around the internal report validator.
 /// It reports field-level validation errors only; error messages and details
@@ -2930,10 +2929,10 @@ void _validateReportJson(
     'sanitization',
   };
   _requireExactKeys(report, requiredKeys, 'report');
-  if (report['schema_version'] != 3) {
+  if (report['schema_version'] != 4) {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'Report schema_version must be 3.',
+      message: 'Report schema_version must be 4.',
     );
   }
   final generatedAt = report['generated_at'];
@@ -2998,7 +2997,6 @@ void _validateReportJson(
   const commissioneeRequired = <String>{
     'vendor_id',
     'product_id',
-    'commissioning_transport',
     'network_transport',
   };
   _requireExactKeys(commissionee, commissioneeRequired, 'commissionee');
@@ -3024,13 +3022,6 @@ void _validateReportJson(
       message: 'commissionee.product_id must be a non-negative integer.',
     );
   }
-  if (!const <String>{'ble', 'ip'}
-      .contains(commissionee['commissioning_transport'])) {
-    throw const CliFailure(
-      code: 'invalid_report',
-      message: 'commissionee.commissioning_transport must be ble or ip.',
-    );
-  }
   if (commissionee['network_transport'] != 'wifi') {
     throw const CliFailure(
       code: 'invalid_report',
@@ -3044,7 +3035,6 @@ void _validateReportJson(
   final p0NotRun = <String>{};
   const p0Ids = <String>{
     'build_install',
-    'commissioning_discovery',
     'commissioning',
     'operational_connect',
     'onoff_invoke',

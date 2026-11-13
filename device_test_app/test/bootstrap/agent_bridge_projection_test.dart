@@ -28,10 +28,7 @@ void main() {
       expect(payload.status, AgentRunStatus.running);
       expect(payload.mode, AgentRunMode.full);
       expect(payload.runId, 'run-fixture');
-      expect(
-        payload.currentTestId,
-        DeviceTestId.commissioningDiscovery.wireName,
-      );
+      expect(payload.currentTestId, DeviceTestId.commissioning.wireName);
       expect(payload.details['phase'], RunPhase.testing.wireName);
       expect(payload.details['screen'], DeviceTestScreen.runner.name);
     });
@@ -64,8 +61,8 @@ void main() {
       );
 
       expect(payload.status, AgentRunStatus.passed);
-      expect(payload.completedTests, 12);
-      expect(payload.totalTests, 12);
+      expect(payload.completedTests, 11);
+      expect(payload.totalTests, 11);
     });
 
     test('keeps a P0 not-run result out of the passed state', () {

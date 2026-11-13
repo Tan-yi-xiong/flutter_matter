@@ -14,14 +14,17 @@ void main() {
       final harness = TestContextHarness(
         testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
-        execution: makeExecution()
-          ..commissioningTransport = CommissioningTransport.ip,
+        execution: makeExecution(),
       );
       final context = harness.build();
 
       final outcome = await const InvalidSetupPasscodeCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.passed);
+      expect(
+        hardware.commissioning.requests.single.onboardingPayload,
+        harness.secrets!.invalidSetupOnboardingPayload,
+      );
       expect(
         hardware.commissioning.requests.single.setupPinCode,
         isNot(20202021),
@@ -38,8 +41,7 @@ void main() {
       final context = TestContextHarness(
         testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
-        execution: makeExecution()
-          ..commissioningTransport = CommissioningTransport.ip,
+        execution: makeExecution(),
       ).build();
 
       final outcome = await const InvalidSetupPasscodeCase().execute(context);
@@ -54,8 +56,7 @@ void main() {
       final context = TestContextHarness(
         testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
-        execution: makeExecution()
-          ..commissioningTransport = CommissioningTransport.ip,
+        execution: makeExecution(),
       ).build();
 
       final outcome = await const InvalidSetupPasscodeCase().execute(context);
@@ -83,8 +84,7 @@ void main() {
       final context = TestContextHarness(
         testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
-        execution: makeExecution()
-          ..commissioningTransport = CommissioningTransport.ip,
+        execution: makeExecution(),
         operatorHandler: (_) {
           promptCount++;
           return promptCount == 1
@@ -106,8 +106,7 @@ void main() {
       final harness = TestContextHarness(
         testId: DeviceTestId.invalidWifiPassword,
         ports: hardware.ports,
-        execution: makeExecution()
-          ..commissioningTransport = CommissioningTransport.ip,
+        execution: makeExecution(),
       );
       final context = harness.build();
 
@@ -130,8 +129,7 @@ void main() {
       final context = TestContextHarness(
         testId: DeviceTestId.invalidWifiPassword,
         ports: hardware.ports,
-        execution: makeExecution()
-          ..commissioningTransport = CommissioningTransport.ip,
+        execution: makeExecution(),
       ).build();
 
       final outcome = await const InvalidWifiPasswordCase().execute(context);

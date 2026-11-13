@@ -2,16 +2,15 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter_matter/flutter_matter.dart';
-import 'package:flutter_matter_device_test_app/src/infrastructure/ble/matter_ble.dart';
 import 'package:flutter_matter_device_test_app/src/infrastructure/matter/matter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('commissioning request construction', () {
+  group('direct commissioning', () {
     test(
-      'iOS uses the native onboarding path and no GATT connect id',
+      'hands the onboarding payload to the Matter SDK with no connect id',
       () async {
-        final fixture = _TestFixture(MatterTargetPlatform.ios);
+        final fixture = _TestFixture();
         addTearDown(fixture.service.close);
 
         final result = await fixture.service.commission(_commissionRequest());
@@ -20,9 +19,11 @@ void main() {
         final pair = fixture.controller.pairRequest;
         expect(pair, isNotNull);
         expect(pair!.connectId, isNull);
+        expect(pair.nodeId, 42);
         expect(pair.onboardingPayload, 'MT:TEST-PAYLOAD');
         expect(pair.setupPinCode, 20202021);
         expect(pair.networkCredentials.wifiCredentials!.ssid, 'Lab Wi-Fi');
+        expect(pair.networkCredentials.wifiCredentials!.password, 'secret');
         expect(fixture.controllerFactory.params!.fabricId, 709394);
         expect(
           fixture.controllerFactory.params!.rootCertificate,
@@ -32,7 +33,7 @@ void main() {
     );
 
     test('failed commissioning stops the native pairing attempt', () async {
-      final fixture = _TestFixture(MatterTargetPlatform.ios);
+      final fixture = _TestFixture();
       addTearDown(fixture.service.close);
       fixture.controller.commissionedErrorCode = 1;
 
@@ -44,96 +45,104 @@ void main() {
       expect(fixture.controller.stoppedPairingNodeIds, [42]);
     });
 
-    test(
-      'Android scans, wires the GATT delegate, and uses conn id 4',
-      () async {
-        final fixture = _TestFixture(
-          MatterTargetPlatform.android,
-          emitAdvertisement: true,
-        );
-        addTearDown(fixture.service.close);
-        var pairSawScanning = true;
-        var pairSawDelegate = false;
-        fixture.controller.onPair = () {
-          pairSawScanning = fixture.blePlatform.isScanning;
-          pairSawDelegate = fixture.bridge.currentDelegate != null;
-        };
+    test('commissioning failure codes surface as MatterException', () async {
+      final fixture = _TestFixture();
+      addTearDown(fixture.service.close);
+      fixture.controller.commissionedErrorCode = 17;
 
-        final result = await fixture.service.commission(
-          _commissionRequest(transport: MatterCommissioningTransport.ble),
-        );
-
-        expect(result.nodeId, 42);
-        expect(fixture.controller.pairRequest!.connectId, 4);
-        expect(pairSawScanning, isFalse);
-        expect(pairSawDelegate, isTrue);
-        expect(fixture.bridge.delegateHistory.first, isNotNull);
-        expect(fixture.bridge.delegateHistory.last, isNull);
-        expect(fixture.session.disconnected, isTrue);
-      },
-    );
-
-    test(
-      'Android reuses a previously discovered BLE device without scanning again',
-      () async {
-        final fixture = _TestFixture(
-          MatterTargetPlatform.android,
-          emitAdvertisement: false,
-        );
-        addTearDown(fixture.service.close);
-        final device = _FakeBleDevice();
-        final discovered = MatterBleDiscoveredDevice(
-          advertisement: MatterBleAdvertisement(
-            device: device,
-            serviceData: <String, Uint8List>{
-              matterGattServiceUuid: Uint8List.fromList(<int>[0, 0xcd, 0x0a]),
-            },
-            rssi: -45,
+      await expectLater(
+        fixture.service.commission(_commissionRequest()),
+        throwsA(
+          isA<MatterException>().having(
+            (error) => error.code,
+            'code',
+            MatterFailureCode.commissioningFailed,
           ),
-          matterServiceData: Uint8List.fromList(<int>[0, 0xcd, 0x0a]),
-          discriminator: 0x0acd,
-        );
+        ),
+      );
+
+      expect(fixture.controller.stoppedPairingNodeIds, [42]);
+    });
+
+    test('certificate helpers use a separate callback identity', () async {
+      final fixture = _TestFixture();
+      addTearDown(fixture.service.close);
+
+      await fixture.service.commission(_commissionRequest());
+      final controllerIdentity =
+          fixture.controllerFactory.params!.keypairDelegate!;
+
+      expect(
+        fixture.certificateIssuer.rootSigningKeypair,
+        isNot(same(controllerIdentity)),
+      );
+
+      final operationalCertificateCreated = Completer<void>();
+      fixture.certificateIssuer.operationalCertificateCreated =
+          operationalCertificateCreated;
+      fixture.controller.nocChainIssuer!.onNOCChainGenerationNeeded(
+        'completion-handle',
+        CSRInfo(
+          nonce: Uint8List(0),
+          elements: Uint8List(0),
+          elementsSignature: Uint8List(0),
+          csr: Uint8List(0),
+        ),
+        AttestationInfo(
+          challenge: Uint8List(0),
+          nonce: Uint8List(0),
+          elements: Uint8List(0),
+          elementsSignature: Uint8List(0),
+          dac: Uint8List(0),
+          pai: Uint8List(0),
+          certificationDeclaration: Uint8List(0),
+          firmwareInfo: Uint8List(0),
+          vendorId: 0,
+          productId: 0,
+        ),
+      );
+      await operationalCertificateCreated.future;
+
+      expect(
+        fixture.certificateIssuer.operationalSigningKeypair,
+        isNot(same(controllerIdentity)),
+      );
+    });
+
+    test(
+      'keeps SDK discovery when an on-network endpoint is present',
+      () async {
+        final fixture = _TestFixture();
+        addTearDown(fixture.service.close);
 
         await fixture.service.commission(
-          _commissionRequest(
-            transport: MatterCommissioningTransport.ble,
-            discoveredBleDevice: discovered,
+          MatterCommissionRequest(
+            onboardingPayload: 'MT:TEST-PAYLOAD',
+            setupPinCode: 20202021,
+            nodeId: 42,
+            networkCredentials: MatterWifiNetworkCredentials(
+              MatterWifiCredentials(ssid: 'Lab Wi-Fi', password: 'secret'),
+            ),
+            discriminator: 3841,
+            onNetworkAddress: '192.0.2.10',
+            onNetworkPort: 5540,
+            timeout: const Duration(milliseconds: 500),
           ),
         );
 
-        expect(fixture.blePlatform.startScanCount, 0);
-        expect(fixture.controller.pairRequest!.connectId, 4);
-        expect(fixture.gattSessionFactory.connectCount, 1);
-      },
-    );
-
-    test(
-      'Android IP commissioning skips the BLE transport and pairs on network',
-      () async {
-        final fixture = _TestFixture(
-          MatterTargetPlatform.android,
-          emitAdvertisement: true,
-        );
-        addTearDown(fixture.service.close);
-
-        final result = await fixture.service.commission(_commissionRequest());
-
-        expect(result.nodeId, 42);
-        expect(fixture.controller.pairRequest!.connectId, isNull);
-        expect(fixture.controller.pairRequest!.onboardingPayload, isNotEmpty);
-        expect(fixture.controller.pairRequest!.networkCredentials, isNotNull);
-        expect(fixture.blePlatform.startScanCount, 0);
-        expect(fixture.gattSessionFactory.connectCount, 0);
-        expect(fixture.bridge.currentDelegate, isNull);
-        expect(fixture.bridge.delegateHistory, isEmpty);
-        expect(fixture.session.disconnected, isFalse);
+        final pair = fixture.controller.pairRequest;
+        expect(pair, isNotNull);
+        expect(pair!.connectId, isNull);
+        expect(pair.nodeId, 42);
+        expect(pair.onboardingPayload, 'MT:TEST-PAYLOAD');
+        expect(fixture.controller.pairWithAddressRequest, isNull);
       },
     );
   });
 
   group('controller operations', () {
     test('connect returns a reusable operational context', () async {
-      final fixture = _TestFixture(MatterTargetPlatform.ios);
+      final fixture = _TestFixture();
       addTearDown(fixture.service.close);
 
       final connection = await fixture.service.connect(
@@ -146,7 +155,7 @@ void main() {
     });
 
     test('OnOff command is sent to endpoint 1 cluster 0x0006', () async {
-      final fixture = _TestFixture(MatterTargetPlatform.ios);
+      final fixture = _TestFixture();
       addTearDown(fixture.service.close);
 
       final result = await fixture.service.invokeOnOff(
@@ -167,7 +176,7 @@ void main() {
     test(
       'readNodeLabel decodes the reported Basic Information value',
       () async {
-        final fixture = _TestFixture(MatterTargetPlatform.ios);
+        final fixture = _TestFixture();
         addTearDown(fixture.service.close);
         fixture.controller.readState = _nodeStateWithAttribute(
           clusterId: 0x0028,
@@ -184,7 +193,7 @@ void main() {
     );
 
     test('writeNodeLabel sends the expected path and UTF-8 TLV', () async {
-      final fixture = _TestFixture(MatterTargetPlatform.ios);
+      final fixture = _TestFixture();
       addTearDown(fixture.service.close);
 
       final result = await fixture.service.writeNodeLabel(
@@ -200,7 +209,7 @@ void main() {
     });
 
     test('OnOff subscription reports are forwarded to the caller', () async {
-      final fixture = _TestFixture(MatterTargetPlatform.ios);
+      final fixture = _TestFixture();
       addTearDown(fixture.service.close);
       fixture.controller.subscriptionState = _nodeStateWithAttribute(
         clusterId: 0x0006,
@@ -226,7 +235,7 @@ void main() {
     });
 
     test('RemoveFabric sends cluster 0x003e command 0x0a', () async {
-      final fixture = _TestFixture(MatterTargetPlatform.ios);
+      final fixture = _TestFixture();
       addTearDown(fixture.service.close);
 
       final result = await fixture.service.removeFabric(
@@ -243,22 +252,14 @@ void main() {
   });
 }
 
-MatterCommissionRequest _commissionRequest({
-  MatterCommissioningTransport transport = MatterCommissioningTransport.ip,
-  MatterBleDiscoveredDevice? discoveredBleDevice,
-}) {
+MatterCommissionRequest _commissionRequest() {
   return MatterCommissionRequest(
     onboardingPayload: 'MT:TEST-PAYLOAD',
     setupPinCode: 20202021,
-    discriminator: 0x0acd,
-    hasShortDiscriminator: false,
     nodeId: 42,
     networkCredentials: MatterWifiNetworkCredentials(
       MatterWifiCredentials(ssid: 'Lab Wi-Fi', password: 'secret'),
     ),
-    commissioningTransport: transport,
-    discoveredBleDevice: discoveredBleDevice,
-    bleScanTimeout: const Duration(milliseconds: 200),
     timeout: const Duration(milliseconds: 500),
   );
 }
@@ -286,15 +287,11 @@ NodeState _nodeStateWithAttribute({
 }
 
 class _TestFixture {
-  _TestFixture(this.platform, {bool emitAdvertisement = true}) {
+  _TestFixture() {
     controller = _FakeMatterControllerPort();
     controllerFactory = _FakeMatterControllerFactory(controller);
     certificateIssuer = _FakeCertificateIssuer();
     storage = _FakeCredentialStorage();
-    blePlatform = _FakeBlePlatform(emitAdvertisement: emitAdvertisement);
-    session = _FakeGattSession();
-    gattSessionFactory = _FakeGattSessionFactory(session);
-    bridge = _FakeBleLayerBridge();
     final identity = MatterControllerIdentity.generate();
     final credentialsService = MatterControllerCredentialsService(
       storage: storage,
@@ -302,13 +299,6 @@ class _TestFixture {
       identityGenerator: () => identity,
     );
     service = MatterControllerService(
-      targetPlatform: platform,
-      bleScanner: MatterBleScanner(
-        platform: blePlatform,
-        cleanupTimeout: const Duration(milliseconds: 100),
-      ),
-      gattSessionFactory: gattSessionFactory,
-      bleLayerBridge: bridge,
       credentialsService: credentialsService,
       controllerFactory: controllerFactory,
       certificateIssuer: certificateIssuer,
@@ -321,15 +311,10 @@ class _TestFixture {
     );
   }
 
-  final MatterTargetPlatform platform;
   late final _FakeMatterControllerPort controller;
   late final _FakeMatterControllerFactory controllerFactory;
   late final _FakeCertificateIssuer certificateIssuer;
   late final _FakeCredentialStorage storage;
-  late final _FakeBlePlatform blePlatform;
-  late final _FakeGattSession session;
-  late final _FakeGattSessionFactory gattSessionFactory;
-  late final _FakeBleLayerBridge bridge;
   late final MatterControllerService service;
 }
 
@@ -346,8 +331,9 @@ class _FakeMatterControllerFactory implements MatterControllerFactory {
   }
 }
 
-class _PairRequest {
-  _PairRequest({
+/// Captures the pairing request the service finally hands to the Matter SDK.
+class MatterPairDeviceRequest {
+  MatterPairDeviceRequest({
     required this.nodeId,
     required this.connectId,
     required this.setupPinCode,
@@ -366,8 +352,29 @@ class _PairRequest {
   final CompletionListener completionListener;
 }
 
+class MatterPairDeviceWithAddressRequest {
+  MatterPairDeviceWithAddressRequest({
+    required this.nodeId,
+    required this.address,
+    required this.port,
+    required this.discriminator,
+    required this.setupPincode,
+    required this.attestationDelegate,
+    required this.completionListener,
+  });
+
+  final int nodeId;
+  final String address;
+  final int port;
+  final int discriminator;
+  final int setupPincode;
+  final DeviceAttestationDelegate? attestationDelegate;
+  final CompletionListener completionListener;
+}
+
 class _FakeMatterControllerPort implements MatterControllerPort {
-  _PairRequest? pairRequest;
+  MatterPairDeviceRequest? pairRequest;
+  MatterPairDeviceWithAddressRequest? pairWithAddressRequest;
   NOCChainIssuer? nocChainIssuer;
   InvokeElement? lastInvokeElement;
   InvokeCallback? lastInvokeCallback;
@@ -382,7 +389,6 @@ class _FakeMatterControllerPort implements MatterControllerPort {
   final List<Object> releasedContexts = [];
   final List<List<int>> unsubscriptions = [];
   final List<int> stoppedPairingNodeIds = [];
-  VoidCallback? onPair;
 
   @override
   Future<void> setNocChainIssuer(NOCChainIssuer issuer) async {
@@ -399,13 +405,37 @@ class _FakeMatterControllerPort implements MatterControllerPort {
     required DeviceAttestationDelegate? attestationDelegate,
     required CompletionListener completionListener,
   }) async {
-    onPair?.call();
-    pairRequest = _PairRequest(
+    pairRequest = MatterPairDeviceRequest(
       nodeId: nodeId,
       connectId: connectId,
       setupPinCode: setupPinCode,
       onboardingPayload: onboardingPayload,
       networkCredentials: networkCredentials,
+      attestationDelegate: attestationDelegate,
+      completionListener: completionListener,
+    );
+    scheduleMicrotask(() {
+      completionListener.onCommissioningComplete(nodeId, commissionedErrorCode);
+    });
+  }
+
+  @override
+  Future<void> pairDeviceWithAddress({
+    required int nodeId,
+    required String address,
+    required int port,
+    required int discriminator,
+    required int setupPincode,
+    Uint8List? csrNonce,
+    required DeviceAttestationDelegate? attestationDelegate,
+    required CompletionListener completionListener,
+  }) async {
+    pairWithAddressRequest = MatterPairDeviceWithAddressRequest(
+      nodeId: nodeId,
+      address: address,
+      port: port,
+      discriminator: discriminator,
+      setupPincode: setupPincode,
       attestationDelegate: attestationDelegate,
       completionListener: completionListener,
     );
@@ -559,6 +589,9 @@ class _FakeMatterControllerPort implements MatterControllerPort {
 class _FakeCertificateIssuer implements MatterCertificateIssuer {
   final Uint8List rootCertificate = Uint8List.fromList([0x30, 0x01]);
   final Uint8List operationalCertificate = Uint8List.fromList([0x30, 0x02]);
+  KeypairDelegate? rootSigningKeypair;
+  KeypairDelegate? operationalSigningKeypair;
+  Completer<void>? operationalCertificateCreated;
 
   @override
   Future<Uint8List> createRootCertificate({
@@ -566,6 +599,7 @@ class _FakeCertificateIssuer implements MatterCertificateIssuer {
     required int issuerId,
     required int fabricId,
   }) async {
+    rootSigningKeypair = keypair;
     return rootCertificate;
   }
 
@@ -578,6 +612,8 @@ class _FakeCertificateIssuer implements MatterCertificateIssuer {
     required int nodeId,
     List<int>? caseAuthenticatedTags,
   }) async {
+    operationalSigningKeypair = signingKeypair;
+    operationalCertificateCreated?.complete();
     return operationalCertificate;
   }
 }
@@ -598,177 +634,3 @@ class _FakeCredentialStorage implements MatterSecureCredentialStorage {
     this.value = value;
   }
 }
-
-class _FakeBlePlatform implements MatterBlePlatform {
-  _FakeBlePlatform({required this.emitAdvertisement});
-
-  final bool emitAdvertisement;
-  final StreamController<MatterBleAdvertisement> _advertisements =
-      StreamController<MatterBleAdvertisement>.broadcast();
-  final _FakeBleDevice device = _FakeBleDevice();
-  bool isScanning = false;
-  int startScanCount = 0;
-
-  @override
-  Stream<MatterBleAdvertisement> get advertisements => _advertisements.stream;
-
-  @override
-  Future<void> ensureAdapterIsOn(Duration timeout) async {}
-
-  @override
-  Future<void> startScan(Duration timeout) async {
-    startScanCount++;
-    isScanning = true;
-    if (!emitAdvertisement) {
-      return;
-    }
-    scheduleMicrotask(() {
-      _advertisements.add(
-        MatterBleAdvertisement(
-          device: device,
-          serviceData: <String, Uint8List>{
-            matterGattServiceUuid: Uint8List.fromList([
-              0x00,
-              0xcd,
-              0x0a,
-              0xaa,
-              0xbb,
-            ]),
-          },
-          rssi: -45,
-        ),
-      );
-    });
-  }
-
-  @override
-  Future<void> stopScan() async {
-    isScanning = false;
-  }
-}
-
-class _FakeBleDevice implements MatterBleDevice {
-  @override
-  String get deviceId => 'android-commissionee';
-
-  @override
-  bool get isConnected => false;
-
-  @override
-  int get mtu => 185;
-
-  @override
-  Future<void> connect(Duration timeout) async {}
-
-  @override
-  Future<void> disconnect() async {}
-
-  @override
-  Future<List<MatterBleGattService>> discoverServices(Duration timeout) async {
-    return const [];
-  }
-}
-
-class _FakeGattSessionFactory implements MatterBleGattSessionFactory {
-  _FakeGattSessionFactory(this.session);
-
-  final _FakeGattSession session;
-  int connectCount = 0;
-
-  @override
-  Future<MatterBleGattSession> connect(MatterBleDevice device) async {
-    connectCount++;
-    return session;
-  }
-}
-
-class _FakeGattSession implements MatterBleGattSession {
-  bool disconnected = false;
-
-  @override
-  String get deviceId => 'android-commissionee';
-
-  @override
-  int get mtu => 185;
-
-  @override
-  Future<void> setNotify({
-    required String serviceUuid,
-    required String characteristicUuid,
-    required bool enabled,
-    required Duration timeout,
-  }) async {}
-
-  @override
-  Future<void> write({
-    required String serviceUuid,
-    required String characteristicUuid,
-    required Uint8List value,
-    required bool withoutResponse,
-    required Duration timeout,
-  }) async {}
-
-  @override
-  Stream<Uint8List> notifications({
-    required String serviceUuid,
-    required String characteristicUuid,
-  }) {
-    return const Stream<Uint8List>.empty();
-  }
-
-  @override
-  Future<void> disconnect(Duration timeout) async {
-    disconnected = true;
-  }
-}
-
-class _FakeBleLayerBridge implements MatterBleLayerBridge {
-  final List<BlePlatformDelegate?> delegateHistory = [];
-  BlePlatformDelegate? currentDelegate;
-
-  @override
-  Future<void> setDelegate(BlePlatformDelegate? delegate) async {
-    currentDelegate = delegate;
-    delegateHistory.add(delegate);
-  }
-
-  @override
-  Future<void> handleSubscribeComplete({
-    required Object? connection,
-    required Uint8List serviceId,
-    required Uint8List characteristicId,
-    required bool success,
-  }) async {}
-
-  @override
-  Future<void> handleUnsubscribeComplete({
-    required Object? connection,
-    required Uint8List serviceId,
-    required Uint8List characteristicId,
-    required bool success,
-  }) async {}
-
-  @override
-  Future<void> handleIndicationReceived({
-    required Object? connection,
-    required Uint8List serviceId,
-    required Uint8List characteristicId,
-    required Uint8List value,
-  }) async {}
-
-  @override
-  Future<void> handleWriteConfirmation({
-    required Object? connection,
-    required Uint8List serviceId,
-    required Uint8List characteristicId,
-    required bool success,
-  }) async {}
-
-  @override
-  Future<void> handleConnectionError({
-    required Object? connection,
-    required int errorCode,
-  }) async {}
-}
-
-typedef VoidCallback = void Function();

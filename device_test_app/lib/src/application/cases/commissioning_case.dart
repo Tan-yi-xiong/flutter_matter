@@ -20,12 +20,6 @@ class CommissioningCase implements DeviceTestCase {
         'Provisioning secrets are unavailable for commissioning.',
       );
     }
-    final transport = context.execution.commissioningTransport;
-    if (transport == null) {
-      return TestCaseOutcome.failed(
-        'Commissioning discovery did not select a transport.',
-      );
-    }
     final identity =
         context.execution.identity ??
         await ensureIdentity(context, purpose: ControllerIdentityPurpose.main);
@@ -34,10 +28,8 @@ class CommissioningCase implements DeviceTestCase {
     try {
       final result = await commissionTarget(
         context,
-        target: context.execution.target,
         identity: identity,
         secrets: secrets,
-        commissioningTransport: transport,
         timeout: timeout,
       );
       if (!result.succeeded) {
@@ -51,10 +43,8 @@ class CommissioningCase implements DeviceTestCase {
         execution.nodeId = nodeId;
         execution.networkTransport = networkTransport;
       });
-      return TestCaseOutcome.passed(
-        notes:
-            'Commissioning completed with error code 0 over '
-            '${transport.wireName}.',
+      return const TestCaseOutcome.passed(
+        notes: 'Commissioning completed with error code 0.',
       );
     } on CommissioningException catch (error) {
       return TestCaseOutcome.failed(

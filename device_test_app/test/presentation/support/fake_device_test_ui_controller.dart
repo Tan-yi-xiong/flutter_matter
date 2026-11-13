@@ -5,8 +5,8 @@ class FakeDeviceTestUiController extends DeviceTestUiController {
 
   DeviceTestUiState _state;
 
-  int resumeCalls = 0;
   int confirmCalls = 0;
+  int commissioneeResetCalls = 0;
   int purgeCalls = 0;
   int shareJsonCalls = 0;
   int shareMarkdownCalls = 0;
@@ -37,10 +37,8 @@ class FakeDeviceTestUiController extends DeviceTestUiController {
   }
 
   @override
-  Future<void> resumeActiveRun() async {
-    resumeCalls++;
-    _state = _copy(screen: DeviceTestScreen.runner);
-    notifyListeners();
+  Future<void> confirmCommissioneeReset() async {
+    commissioneeResetCalls++;
   }
 
   @override

@@ -5,7 +5,7 @@ import 'device_test_report.dart';
 class DeviceTestReportMarkdownRenderer {
   const DeviceTestReportMarkdownRenderer();
 
-  String render(DeviceTestReportV3 report) {
+  String render(DeviceTestReportV4 report) {
     final buffer = StringBuffer()
       ..writeln('### Device validation summary')
       ..writeln()
@@ -23,10 +23,6 @@ class DeviceTestReportMarkdownRenderer {
         '- Commissionee: '
         'vendor `${report.commissionee.vendorId}` / '
         'product `${report.commissionee.productId}`',
-      )
-      ..writeln(
-        '- Commissioning transport: '
-        '`${report.commissionee.commissioningTransport!.wireName}`',
       )
       ..writeln(
         '- Network transport: '

@@ -28,20 +28,17 @@ enum RunnerStatus {
 
 enum RunnerEventType {
   runStarted,
-  runResumed,
   testStarted,
-  testResumed,
   testPassed,
   testFailed,
   testNotRun,
   testBlocked,
   promptRequested,
   promptResolved,
-  checkpointSaved,
-  checkpointCleared,
   screenshotCaptured,
   runCompleted,
   runStopped,
+  commissioneeResetConfirmed,
   persistenceFailed,
 }
 

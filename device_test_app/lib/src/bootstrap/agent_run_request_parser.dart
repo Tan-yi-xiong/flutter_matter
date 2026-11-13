@@ -1,3 +1,4 @@
+import '../application/ports.dart';
 import '../domain/domain.dart';
 import '../presentation/presentation.dart';
 
@@ -14,13 +15,28 @@ class AgentRunRequestParser {
     'setup_code',
     'wifi_ssid',
     'wifi_password',
-    'clean_cycle',
+    'commissionee_ip',
+    'commissionee_port',
   };
+
+  static const Set<String> _retiredFields = <String>{'clean_cycle'};
 
   DeviceTestSetupRequest parse({
     required Map<String, Object?> arguments,
     required DeviceTestUiState state,
   }) {
+    for (final retired in _retiredFields) {
+      if (arguments.containsKey(retired)) {
+        throw AgentRunRequestException(
+          'The Run request contains retired fields: $retired.',
+          issues: <String, String>{
+            retired:
+                'This field was retired. The commissionee reset is now an '
+                'operator action after the Run finishes.',
+          },
+        );
+      }
+    }
     final unsupported =
         arguments.keys
             .where((key) => !_allowedFields.contains(key))
@@ -45,44 +61,12 @@ class AgentRunRequestParser {
         issues: const <String, String>{'mode': 'Expected quick or full.'},
       ),
     };
-    final cleanCycle = _requiredMap(arguments, 'clean_cycle');
-    final unexpectedCleanCycleFields =
-        cleanCycle.keys
-            .where((key) => key != 'commissionee_clean')
-            .toList(growable: false)
-          ..sort();
-    if (unexpectedCleanCycleFields.isNotEmpty) {
-      throw AgentRunRequestException(
-        'The Run request contains unsupported clean_cycle fields: '
-        '${unexpectedCleanCycleFields.join(', ')}.',
-        issues: <String, String>{
-          for (final field in unexpectedCleanCycleFields)
-            'clean_cycle.$field': 'This field is not supported.',
-        },
-      );
-    }
-    final commissioneeClean = _requiredBool(
-      cleanCycle,
-      'commissionee_clean',
-      parent: 'clean_cycle',
-    );
-    if (!commissioneeClean) {
-      throw const AgentRunRequestException(
-        'The commissionee must be factory-reset and in a commissioning window.',
-        issues: <String, String>{
-          'clean_cycle.commissionee_clean':
-              'Confirm the commissionee is ready for commissioning.',
-        },
-      );
-    }
-
     final controller = state.controllerInfo;
     final draft = DeviceTestSetupDraft(
       setupCode: _requiredString(arguments, 'setup_code'),
       wifiSsid: _requiredString(arguments, 'wifi_ssid'),
       wifiPassword: _optionalString(arguments, 'wifi_password') ?? '',
       profile: profile,
-      cleanCycle: const CleanCycleConfirmations(commissioneeClean: true),
     );
     final validation = DeviceTestSetupValidator.validate(
       draft: draft,
@@ -105,7 +89,37 @@ class AgentRunRequestParser {
       wifiSsid: draft.wifiSsid.trim(),
       wifiPassword: draft.wifiPassword,
       profile: draft.profile,
-      cleanCycle: draft.cleanCycle,
+      onNetworkEndpoint: _optionalOnNetworkEndpoint(arguments),
+    );
+  }
+
+  OnNetworkCommissioningEndpoint? _optionalOnNetworkEndpoint(
+    Map<String, Object?> arguments,
+  ) {
+    final addressValue = arguments['commissionee_ip'];
+    final portValue = arguments['commissionee_port'];
+    if (addressValue == null && portValue == null) {
+      return null;
+    }
+    if (addressValue is! String || addressValue.trim().isEmpty) {
+      throw const AgentRunRequestException(
+        'commissionee_ip and commissionee_port must be provided together.',
+        issues: <String, String>{
+          'commissionee_ip': 'A non-empty string is required.',
+        },
+      );
+    }
+    if (portValue is! int || portValue < 1 || portValue > 65535) {
+      throw const AgentRunRequestException(
+        'commissionee_port must be a valid TCP/UDP port.',
+        issues: <String, String>{
+          'commissionee_port': 'An integer from 1 to 65535 is required.',
+        },
+      );
+    }
+    return OnNetworkCommissioningEndpoint(
+      address: addressValue.trim(),
+      port: portValue,
     );
   }
 
@@ -136,35 +150,6 @@ class AgentRunRequestParser {
       throw AgentRunRequestException(
         '$key must be a string.',
         issues: <String, String>{key: 'Expected a string.'},
-      );
-    }
-    return value;
-  }
-
-  Map<String, Object?> _requiredMap(
-    Map<String, Object?> arguments,
-    String key,
-  ) {
-    final value = arguments[key];
-    if (value is! Map<String, Object?>) {
-      throw AgentRunRequestException(
-        '$key is required.',
-        issues: <String, String>{key: 'An object is required.'},
-      );
-    }
-    return value;
-  }
-
-  bool _requiredBool(
-    Map<String, Object?> arguments,
-    String key, {
-    required String parent,
-  }) {
-    final value = arguments[key];
-    if (value is! bool) {
-      throw AgentRunRequestException(
-        '$parent.$key is required.',
-        issues: <String, String>{'$parent.$key': 'A boolean is required.'},
       );
     }
     return value;

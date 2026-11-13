@@ -63,28 +63,10 @@ RunSession sessionWithRunningTest(DeviceTestId runningTest) {
   return session;
 }
 
-PersistedRunState persistedStateFor({
-  required RunSession session,
-  AppRestartCheckpoint? checkpoint,
-}) {
-  return PersistedRunState(
-    session: session,
-    execution: const RunExecutionContextSnapshot(
-      identityOpaqueId: 'identity-main',
-      identityPurpose: ControllerIdentityPurpose.main,
-      nodeId: 1,
-      networkTransport: NetworkTransport.wifi,
-      lastOnOffState: OnOffState.on,
-    ),
-    targetNodeId: 1,
-    appRestartCheckpoint: checkpoint,
-  );
-}
-
 void main() {
   group('RunCoordinator happy path', () {
     test(
-      'quick profile executes five cases and never builds formal evidence',
+      'quick profile executes four cases and never builds formal evidence',
       () async {
         final hardware = FakeHardware();
         final persistence = MemoryRunPersistencePort();
@@ -124,7 +106,7 @@ void main() {
           ),
           isNull,
         );
-        expect(persistence.saveCount, greaterThan(5));
+        expect(hooks.states.length, greaterThan(5));
         expect(hooks.states, isNotEmpty);
         expect(
           hooks.events.map((event) => event.type),
@@ -134,7 +116,7 @@ void main() {
     );
 
     test(
-      'full profile reaches 12 terminal results and sanitized state',
+      'full profile reaches 11 terminal results and sanitized state',
       () async {
         final hardware = FakeHardware();
         final persistence = MemoryRunPersistencePort();
@@ -168,7 +150,7 @@ void main() {
 
         expect(snapshot.status, RunnerStatus.passed);
         expect(snapshot.session!.allResultsTerminal, isTrue);
-        expect(snapshot.session!.orderedResults.length, 12);
+        expect(snapshot.session!.orderedResults.length, 11);
         expect(
           snapshot.session!.orderedResults.every(
             (result) => result.status == DeviceTestStatus.passed,
@@ -176,7 +158,7 @@ void main() {
           isTrue,
         );
         expect('${snapshot.toJson()}', isNot(contains('correct')));
-        expect(await persistence.loadUnfinished(), isNull);
+        expect(persistence.cleanupCount, 2); // start + finalize
 
         final report = await coordinator.buildFormalReport(
           generatedAt: testNow,
@@ -248,13 +230,13 @@ void main() {
         clock: FakeClock(),
       );
       final skipped = ScriptedCase(
-        DeviceTestId.commissioningDiscovery,
-        (_) => TestCaseOutcome.notRun('no BLE target'),
+        DeviceTestId.commissioning,
+        (_) => TestCaseOutcome.notRun('commissioning unavailable'),
       );
       final coordinator = RunCoordinator(
         ports: ports,
         registry: scriptedRegistry(
-          overrides: {DeviceTestId.commissioningDiscovery: skipped},
+          overrides: {DeviceTestId.commissioning: skipped},
         ),
         timeouts: fastTimeouts,
       );
@@ -264,12 +246,12 @@ void main() {
 
       expect(snapshot.status, RunnerStatus.notRun);
       expect(
-        snapshot.session!.results[DeviceTestId.commissioning]!.status,
+        snapshot.session!.results[DeviceTestId.operationalConnect]!.status,
         DeviceTestStatus.notRun,
       );
       expect(
-        snapshot.session!.results[DeviceTestId.commissioning]!.notes,
-        contains('commissioning_discovery'),
+        snapshot.session!.results[DeviceTestId.operationalConnect]!.notes,
+        contains('commissioning not_run'),
       );
     });
 
@@ -416,7 +398,6 @@ void main() {
         ),
         timeouts: const TestTimeouts(
           buildInstall: Duration(milliseconds: 100),
-          commissioningDiscovery: Duration(milliseconds: 100),
           commissioning: Duration(milliseconds: 100),
           operationalConnect: Duration(milliseconds: 100),
           onOffInvoke: Duration(milliseconds: 10),
@@ -440,106 +421,7 @@ void main() {
     });
   });
 
-  group('RunCoordinator resume and prompt routing', () {
-    test(
-      'resumes an app-restart checkpoint without issuing the restart prompt',
-      () async {
-        final hardware = FakeHardware();
-        final persistence = MemoryRunPersistencePort();
-        final prompts = FakeOperatorPromptPort();
-        final clock = FakeClock();
-        final ports = hardware.applicationPorts(
-          persistence: persistence,
-          secrets: FakeSecretAccessPort(makeSecrets()),
-          prompts: prompts,
-          clock: clock,
-        );
-        var sawCheckpoint = false;
-        final appRestartResume = ScriptedCase(DeviceTestId.appRestart, (
-          context,
-        ) {
-          sawCheckpoint =
-              context.resumeCheckpoint?.stage ==
-              AppRestartCheckpointStage.awaitingReconnect;
-          return const TestCaseOutcome.passed();
-        });
-        final coordinator = RunCoordinator(
-          ports: ports,
-          registry: scriptedRegistry(
-            overrides: {DeviceTestId.appRestart: appRestartResume},
-          ),
-          timeouts: fastTimeouts,
-        );
-        addTearDown(coordinator.dispose);
-        final session = sessionWithRunningTest(DeviceTestId.appRestart);
-        persistence.persisted = persistedStateFor(
-          session: session,
-          checkpoint: AppRestartCheckpoint(
-            stage: AppRestartCheckpointStage.awaitingReconnect,
-            identityOpaqueId: 'identity-main',
-            nodeId: 1,
-          ),
-        );
-
-        final snapshot = await coordinator.resume();
-
-        expect(snapshot, isNotNull);
-        expect(sawCheckpoint, isTrue);
-        expect(
-          snapshot!.session!.results[DeviceTestId.appRestart]!.status,
-          DeviceTestStatus.passed,
-        );
-        expect(
-          prompts.prompts.where(
-            (prompt) => prompt.id == 'app_restart_controller',
-          ),
-          isEmpty,
-        );
-      },
-    );
-
-    test(
-      'resets an interrupted non-app-restart case before resuming',
-      () async {
-        final hardware = FakeHardware();
-        final persistence = MemoryRunPersistencePort();
-        final ports = hardware.applicationPorts(
-          persistence: persistence,
-          secrets: FakeSecretAccessPort(makeSecrets()),
-          prompts: FakeOperatorPromptPort(),
-          clock: FakeClock(),
-        );
-        final discovery = ScriptedCase(
-          DeviceTestId.commissioningDiscovery,
-          (_) => const TestCaseOutcome.passed(),
-        );
-        final coordinator = RunCoordinator(
-          ports: ports,
-          registry: scriptedRegistry(
-            overrides: {DeviceTestId.commissioningDiscovery: discovery},
-          ),
-          timeouts: fastTimeouts,
-        );
-        addTearDown(coordinator.dispose);
-        final session = sessionWithRunningTest(
-          DeviceTestId.commissioningDiscovery,
-        );
-        persistence.persisted = persistedStateFor(session: session);
-
-        final snapshot = await coordinator.resume();
-
-        expect(snapshot, isNotNull);
-        expect(discovery.calls, 1);
-        expect(
-          snapshot!
-              .session!
-              .results[DeviceTestId.commissioningDiscovery]!
-              .status,
-          DeviceTestStatus.passed,
-        );
-      },
-    );
-
+  group('RunCoordinator prompt routing', () {
     test('exposes waiting state and persists an active human prompt', () async {
       final hardware = FakeHardware();
       final persistence = MemoryRunPersistencePort();
@@ -581,11 +463,6 @@ void main() {
       final runFuture = coordinator.start(startRequest(TestProfile.quick));
       await Future<void>.delayed(Duration.zero);
       expect(coordinator.snapshot.status, RunnerStatus.waitingForHuman);
-      expect(persistence.persisted!.activePrompt, isNotNull);
-      expect(
-        persistence.persisted!.activePrompt!.prompt.requiredActor,
-        RequiredActor.human,
-      );
 
       promptCompleter.complete(OperatorDecision.confirmed());
       final snapshot = await runFuture;

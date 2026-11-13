@@ -78,7 +78,6 @@ class RunCoordinator {
   RunSession? _session;
   RunExecutionContext _execution = RunExecutionContext();
   ProvisioningSecrets? _secrets;
-  AppRestartCheckpoint? _checkpoint;
   OperatorPrompt? _activePrompt;
   RunnerStateSnapshot _snapshot;
   bool _runLoopActive = false;
@@ -96,15 +95,8 @@ class RunCoordinator {
     if (_runLoopActive) {
       throw RunCoordinatorException('A run is already active.');
     }
-    final unfinished = await ports.persistence.loadUnfinished();
-    if (unfinished != null && !unfinished.session.phase.isTerminal) {
-      throw RunCoordinatorException(
-        'An unfinished run must be resumed before starting a new run.',
-      );
-    }
-    if (unfinished != null) {
-      await ports.persistence.clearUnfinished();
-    }
+    // A new Run is a fresh Run: remove stale state files from old Runs.
+    await ports.persistence.cleanupUnfinished();
 
     final startedAt = ports.clock.now();
     var session = RunSession.start(
@@ -125,13 +117,12 @@ class RunCoordinator {
 
     _session = session;
     _execution = RunExecutionContext();
-    _checkpoint = null;
     _activePrompt = null;
     _stopRequested = false;
     _secrets = await _loadSecrets(request.runId);
     _targetNodeId = request.targetNodeId;
     _message = 'Preparing the device test run.';
-    await _persistCurrent();
+    _publishSnapshot();
     await _emitEvent(
       RunnerEventType.runStarted,
       'Started ${request.profile.wireName} device test run.',
@@ -147,71 +138,9 @@ class RunCoordinator {
     return _snapshot;
   }
 
-  /// Resumes the persisted unfinished run, if one exists.
-  Future<RunnerStateSnapshot?> resume() async {
-    if (_runLoopActive) {
-      throw RunCoordinatorException('A run is already active.');
-    }
-    final state = await ports.persistence.loadUnfinished();
-    if (state == null) {
-      return null;
-    }
-    if (state.session.phase.isTerminal) {
-      await ports.persistence.clearUnfinished();
-      return null;
-    }
-
-    _session = state.session;
-    _execution = RunExecutionContext.fromSnapshot(state.execution);
-    _secrets = await _loadSecrets(state.session.id);
-    _checkpoint = state.appRestartCheckpoint;
-    _activePrompt = null;
-    _stopRequested = false;
-    _targetNodeId = state.targetNodeId;
-
-    final actionableId = state.session.nextActionableTestId;
-    if (actionableId == null) {
-      _message = 'Finalizing the resumed device test run.';
-      await _persistCurrent();
-      await _finalizeRun();
-      return _snapshot;
-    }
-
-    if (state.session.results[actionableId]!.status ==
-        DeviceTestStatus.running) {
-      final canResumeAppRestart =
-          actionableId == DeviceTestId.appRestart && _checkpoint != null;
-      if (!canResumeAppRestart) {
-        await _resetRunningTestToPending(actionableId);
-      }
-    } else if (_checkpoint != null) {
-      _checkpoint = null;
-    }
-
-    final phase = _phaseForTest(actionableId);
-    if (_session!.phase == RunPhase.awaitingOperator ||
-        _session!.phase == RunPhase.failed) {
-      _session = _replaceSession(
-        _session!,
-        phase: phase,
-        updatedAt: ports.clock.now(),
-      );
-    }
-    _message = 'Resuming the device test run.';
-    await _persistCurrent();
-    await _emitEvent(
-      RunnerEventType.runResumed,
-      'Resumed the unfinished ${_session!.profile.wireName} run.',
-      data: <String, Object?>{'completed_tests': _session!.terminalResultCount},
-    );
-
-    _runLoopActive = true;
-    try {
-      await _runToTerminal();
-    } finally {
-      _runLoopActive = false;
-    }
-    return _snapshot;
+  /// Removes stale run-state files left by interrupted Runs.
+  Future<void> discardUnfinished() async {
+    await ports.persistence.cleanupUnfinished();
   }
 
   /// Requests a cooperative stop. The active case is allowed to finish or
@@ -222,7 +151,7 @@ class RunCoordinator {
     }
     _stopRequested = true;
     _message = reason;
-    await _persistCurrent();
+    _publishSnapshot();
     await _emitEvent(
       RunnerEventType.runStopped,
       reason,
@@ -233,7 +162,7 @@ class RunCoordinator {
   /// Builds formal evidence only for a completed full-profile run.
   ///
   /// Quick runs always return null and never produce a formal report.
-  Future<DeviceTestReportV3?> buildFormalReport({
+  Future<DeviceTestReportV4?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) async {
@@ -302,26 +231,15 @@ class RunCoordinator {
       _message = 'Running ${testId.title}.';
       await _setPhase(_phaseForTest(testId));
       _session = _session!.startTest(testId, at: ports.clock.now());
-      await _persistCurrent();
+      _publishSnapshot();
       await _emitEvent(
         RunnerEventType.testStarted,
         'Started ${testId.wireName}.',
         testId: testId,
       );
-    } else {
-      _message = 'Resuming ${testId.title}.';
-      await _setPhase(_phaseForTest(testId));
-      await _emitEvent(
-        RunnerEventType.testResumed,
-        'Resumed ${testId.wireName}.',
-        testId: testId,
-      );
     }
 
     final start = ports.clock.now();
-    final resumeCheckpoint = testId == DeviceTestId.appRestart
-        ? _checkpoint
-        : null;
     final context = TestContext(
       session: _session!,
       testId: testId,
@@ -330,11 +248,7 @@ class RunCoordinator {
       timeouts: timeouts,
       targetNodeId: _targetNodeId,
       secrets: _secrets,
-      resumeCheckpoint: resumeCheckpoint,
-      onExecutionChanged: _persistCurrent,
       onPrompt: (prompt) => _handlePrompt(prompt),
-      onSaveAppRestartCheckpoint: _saveAppRestartCheckpoint,
-      onClearAppRestartCheckpoint: _clearAppRestartCheckpoint,
     );
 
     TestCaseOutcome outcome;
@@ -370,12 +284,9 @@ class RunCoordinator {
     );
 
     _activePrompt = null;
-    if (_checkpoint != null) {
-      _checkpoint = null;
-    }
     _session = _replaceResultDirect(_session!, result, updatedAt: finishedAt);
     _message = _resultMessage(testId, outcome);
-    await _persistCurrent();
+    _publishSnapshot();
     await _emitEvent(
       _eventTypeForOutcome(outcome),
       _resultMessage(testId, outcome),
@@ -416,7 +327,7 @@ class RunCoordinator {
         updatedAt: ports.clock.now(),
       );
       _message = '${testId.title} marked not run.';
-      await _persistCurrent();
+      _publishSnapshot();
       await _emitEvent(
         RunnerEventType.testBlocked,
         'Marked ${testId.wireName} not run.',
@@ -437,7 +348,7 @@ class RunCoordinator {
         updatedAt: ports.clock.now(),
       );
     }
-    await _persistCurrent();
+    _publishSnapshot();
   }
 
   Future<void> _finalizeRun() async {
@@ -469,7 +380,7 @@ class RunCoordinator {
         : hasP0NotRun
         ? 'Run finished with a required P0 test not run.'
         : 'Run completed successfully.';
-    await _persistCurrent();
+    _publishSnapshot();
     await _emitEvent(
       _stopRequested
           ? RunnerEventType.runStopped
@@ -480,26 +391,7 @@ class RunCoordinator {
         'status': _snapshot.status.wireName,
       },
     );
-    await ports.persistence.clearUnfinished();
-  }
-
-  Future<void> _resetRunningTestToPending(DeviceTestId testId) async {
-    final session = _session!;
-    final result = session.results[testId]!;
-    _session = _replaceResultDirect(
-      session,
-      DeviceTestResult(testId: testId),
-      updatedAt: ports.clock.now(),
-    );
-    _message = 'Resetting interrupted ${testId.wireName} before resume.';
-    await _persistCurrent();
-    if (result.status == DeviceTestStatus.running) {
-      await _emitEvent(
-        RunnerEventType.testResumed,
-        'Reset interrupted ${testId.wireName} for a safe resume.',
-        testId: testId,
-      );
-    }
+    await ports.persistence.cleanupUnfinished();
   }
 
   Future<void> _setPhase(RunPhase phase) async {
@@ -508,38 +400,7 @@ class RunCoordinator {
       phase: phase,
       updatedAt: ports.clock.now(),
     );
-    await _persistCurrent();
-  }
-
-  Future<void> _saveAppRestartCheckpoint(
-    AppRestartCheckpoint checkpoint,
-  ) async {
-    if (_session == null) {
-      throw RunCoordinatorException('No active run for checkpoint.');
-    }
-    _checkpoint = checkpoint;
-    _message = 'App restart checkpoint saved.';
-    await _persistCurrent();
-    await _emitEvent(
-      RunnerEventType.checkpointSaved,
-      'Saved app restart checkpoint.',
-      testId: DeviceTestId.appRestart,
-      data: <String, Object?>{'stage': checkpoint.stage.wireName},
-    );
-  }
-
-  Future<void> _clearAppRestartCheckpoint() async {
-    if (_checkpoint == null) {
-      return;
-    }
-    _checkpoint = null;
-    _message = 'App restart checkpoint cleared.';
-    await _persistCurrent();
-    await _emitEvent(
-      RunnerEventType.checkpointCleared,
-      'Cleared app restart checkpoint.',
-      testId: DeviceTestId.appRestart,
-    );
+    _publishSnapshot();
   }
 
   Future<OperatorDecision> _handlePrompt(OperatorPrompt prompt) async {
@@ -598,32 +459,11 @@ class RunCoordinator {
     }
   }
 
-  Future<void> _persistCurrent() async {
-    final currentSession = _session;
-    if (currentSession == null) {
+  void _publishSnapshot() {
+    final session = _session;
+    if (session == null) {
       return;
     }
-    final discoveredTransport = _execution.commissioningTransport;
-    final session = discoveredTransport == null
-        ? currentSession
-        : currentSession.withCommissioningTransport(
-            discoveredTransport,
-            at: ports.clock.now(),
-          );
-    _session = session;
-    final state = PersistedRunState(
-      session: session,
-      execution: _execution.toSnapshot(),
-      targetNodeId: _targetNodeId,
-      appRestartCheckpoint: _checkpoint,
-      activePrompt: _activePrompt == null
-          ? null
-          : ActiveOperatorPromptSnapshot(
-              testId: _activePrompt!.testId ?? session.nextActionableTestId!,
-              prompt: _activePrompt!,
-            ),
-    );
-    await ports.persistence.save(state);
     _snapshot = RunnerStateSnapshot.forSession(
       session: session,
       activePrompt: _activePrompt,
@@ -631,6 +471,10 @@ class RunCoordinator {
       message: _message,
     );
     _stateController.add(_snapshot);
+    unawaited(_notifyStateChangedHooks());
+  }
+
+  Future<void> _notifyStateChangedHooks() async {
     try {
       await ports.hooks.onStateChanged(_snapshot);
     } on Object {
@@ -702,7 +546,6 @@ class RunCoordinator {
 
   RunPhase _phaseForTest(DeviceTestId testId) => switch (testId) {
     DeviceTestId.buildInstall => RunPhase.preparing,
-    DeviceTestId.commissioningDiscovery => RunPhase.discovering,
     DeviceTestId.commissioning => RunPhase.commissioning,
     DeviceTestId.operationalConnect => RunPhase.connecting,
     _ => RunPhase.testing,

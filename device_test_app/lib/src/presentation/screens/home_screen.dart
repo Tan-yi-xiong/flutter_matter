@@ -85,31 +85,6 @@ class HomeScreen extends StatelessWidget {
                                 '${(activeRun.progress * 100).round()}% complete',
                                 style: theme.textTheme.bodySmall,
                               ),
-                              const SizedBox(height: 16),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Semantics(
-                                  label: activeRun.awaitingAppRestart
-                                      ? 'Active Run is waiting for the app restart'
-                                      : 'Resume active device test run',
-                                  button: true,
-                                  enabled: activeRun.canResume && !state.busy,
-                                  excludeSemantics: true,
-                                  child: FilledButton.icon(
-                                    key: DeviceTestUiKeys.resumeRun,
-                                    onPressed:
-                                        activeRun.canResume && !state.busy
-                                        ? controller.resumeActiveRun
-                                        : null,
-                                    icon: const Icon(Icons.play_arrow),
-                                    label: Text(
-                                      activeRun.awaitingAppRestart
-                                          ? 'Waiting for app restart'
-                                          : 'Resume Run',
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                   ),

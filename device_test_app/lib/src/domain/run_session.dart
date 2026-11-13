@@ -7,7 +7,6 @@ import 'test_metadata.dart';
 enum RunPhase {
   idle('idle'),
   preparing('preparing'),
-  discovering('discovering'),
   commissioning('commissioning'),
   connecting('connecting'),
   testing('testing'),
@@ -146,20 +145,6 @@ class RunSession {
     return _copy(
       controller: controller,
       commissionee: commissionee,
-      updatedAt: at,
-    );
-  }
-
-  RunSession withCommissioningTransport(
-    CommissioningTransport transport, {
-    required DateTime at,
-  }) {
-    final current = commissionee;
-    if (current == null || current.commissioningTransport == transport) {
-      return this;
-    }
-    return _copy(
-      commissionee: current.withCommissioningTransport(transport),
       updatedAt: at,
     );
   }

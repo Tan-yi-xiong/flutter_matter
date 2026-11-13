@@ -99,6 +99,19 @@ class MatterControllerIdentity implements KeypairDelegate {
     return _encodeFixed(_privateKey.d!, 32);
   }
 
+  /// Returns an equivalent identity with a distinct callback handle.
+  ///
+  /// Certificate helpers temporarily register a [KeypairDelegate] by its
+  /// identity hash. Reusing the controller identity for those helpers would
+  /// remove the controller's registration when the helper completes, leaving
+  /// the native CASE signing path without a delegate.
+  MatterControllerIdentity copyForCertificateSigning() {
+    return MatterControllerIdentity.fromPrivateScalar(
+      exportPrivateScalar(),
+      secureRandom: _secureRandom,
+    );
+  }
+
   Uint8List get publicKeyBytes => getPublicKey();
 
   @override

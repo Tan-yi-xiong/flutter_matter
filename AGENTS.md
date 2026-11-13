@@ -142,8 +142,8 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ## Device-test App and Agent Testing
 
 - `device_test_app/` is the primary physical-device validation surface. It is not included in the required Dart CI workflow.
-- The `quick` profile is iteration-only and is never formal evidence. PR and release evidence require `full` and the schema-version 3 JSON/Markdown report.
-- Every device Run requires a Matter commissionee. The app starts BLE and Wi-Fi/IP commissionable discovery concurrently, uses the first matching transport, and records that actual transport. A commissioning failure is preserved without transport fallback. Device provenance is not part of the contract.
+- The `quick` profile is iteration-only and is never formal evidence. PR and release evidence require `full` and the schema-version 4 JSON/Markdown report.
+- Every device Run requires a Matter commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning. A commissioning failure is preserved without retrying commissioning in the same Run. Device provenance is not part of the contract.
 - Use `$flutter-matter-device-test` for Agent-driven device runs.
 - When multiple phones are connected, the Agent must ask the user which one to use. It must not choose from connection order, platform, or previous use.
 - Commissionee actions and iOS system permission prompts remain human-operated unless a later workflow explicitly documents otherwise.

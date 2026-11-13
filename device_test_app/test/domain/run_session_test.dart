@@ -19,7 +19,7 @@ void main() {
         startedAt: startedAt,
       );
 
-      expect(session.results, hasLength(12));
+      expect(session.results, hasLength(11));
       expect(
         session.orderedResults.map((result) => result.status),
         everyElement(DeviceTestStatus.pending),
@@ -47,7 +47,6 @@ void main() {
         commissionee: const CommissioneeMetadata(
           vendorId: 4660,
           productId: 22136,
-          commissioningTransport: CommissioningTransport.ip,
           networkTransport: NetworkTransport.wifi,
         ),
         at: startedAt.add(const Duration(seconds: 1)),
@@ -75,8 +74,8 @@ void main() {
         resumed.results[DeviceTestId.buildInstall]?.status,
         DeviceTestStatus.passed,
       );
-      expect(resumed.nextActionableTestId, DeviceTestId.commissioningDiscovery);
-      expect(resumed.progress, closeTo(1 / 12, 0.0001));
+      expect(resumed.nextActionableTestId, DeviceTestId.commissioning);
+      expect(resumed.progress, closeTo(1 / 11, 0.0001));
     });
 
     test('serializes and restores schema-version 2 snapshots', () {
@@ -107,7 +106,6 @@ void main() {
       expect(json['commissionee'], isNot(contains('commissioning_transport')));
       final resumed = RunSession.fromJson(json);
 
-      expect(resumed.commissionee?.commissioningTransport, isNull);
       expect(resumed.commissionee?.vendorId, 4660);
       expect(resumed.commissionee?.productId, 22136);
     });
@@ -134,7 +132,7 @@ void main() {
         startedAt: startedAt,
       );
 
-      expect(session.results, hasLength(5));
+      expect(session.results, hasLength(4));
       expect(
         () => session.recordResult(
           DeviceTestResult(
