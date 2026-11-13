@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import '../../domain/domain.dart';
-import '../operator_prompt.dart';
 import '../ports.dart';
 import '../test_case.dart';
 import '../test_context.dart';
 import 'case_support.dart';
 
+/// Verifies that the commissionee pushes OnOff updates over an active
+/// subscription. The case triggers the state change itself with an OnOff
+/// command, so the full push path (command execution, attribute change,
+/// subscription report) is validated without operator interaction.
 class OnOffSubscriptionCase implements DeviceTestCase {
   const OnOffSubscriptionCase();
 
@@ -53,19 +56,18 @@ class OnOffSubscriptionCase implements DeviceTestCase {
         },
       );
 
-      final prompt = OperatorPrompt(
-        id: 'onoff_subscription_external_change',
-        title: 'Change the commissionee OnOff state',
-        instructions:
-            'Use the physical switch or vendor app to change the OnOff state '
-            'externally, then confirm.',
-        requiredActor: context.commissioneeActionActor,
-        testId: id,
+      // Trigger the state change through the same controller: the device
+      // executes the command, the attribute changes, and the subscription
+      // must deliver the update.
+      final trigger = await context.ports.onOff.invoke(
+        connection: connection,
+        command: OnOffCommand.toggle,
+        timeout: timeout,
       );
-      final decision = await context.prompt(prompt);
-      final promptOutcome = outcomeForPromptDecision(prompt, decision);
-      if (promptOutcome != null) {
-        return promptOutcome;
+      if (!trigger.changed) {
+        return TestCaseOutcome.failed(
+          'The OnOff trigger command did not change the commissionee state.',
+        );
       }
 
       final updated = await changedState.future.timeout(timeout);
@@ -73,7 +75,9 @@ class OnOffSubscriptionCase implements DeviceTestCase {
         execution.lastOnOffState = updated;
       });
       return const TestCaseOutcome.passed(
-        notes: 'Initial state and an external OnOff update were observed.',
+        notes:
+            'Initial state and a command-triggered OnOff update were '
+            'observed on the subscription.',
       );
     } on OnOffException catch (error) {
       return TestCaseOutcome.failed(
@@ -81,11 +85,11 @@ class OnOffSubscriptionCase implements DeviceTestCase {
       );
     } on TimeoutException {
       return TestCaseOutcome.failed(
-        'No external OnOff update arrived within ${timeoutLabel(timeout)}.',
+        'No OnOff subscription update arrived within ${timeoutLabel(timeout)}.',
       );
     } on StateError {
       return TestCaseOutcome.failed(
-        'The OnOff subscription ended before an external update arrived.',
+        'The OnOff subscription ended before an update arrived.',
       );
     } finally {
       await updateSubscription?.cancel();

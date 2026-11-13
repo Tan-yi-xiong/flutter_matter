@@ -213,6 +213,11 @@ class FakeOnOffPort extends OnOffPort {
       OnOffCommand.on => OnOffState.on,
       OnOffCommand.toggle => currentState.toggled,
     };
+    // A real commissionee pushes the attribute change to active
+    // subscriptions after executing the command.
+    if (currentState != previous) {
+      _updates.add(currentState);
+    }
     return OnOffInvocation(previousState: previous, currentState: currentState);
   }
 

@@ -122,7 +122,7 @@ The user does not certify controller cleanup or secret purge. If automatic clean
 | P0 | `commissioning` | PASE/commissioning completes through SDK-managed discovery with `errorCode == 0` within 120 seconds |
 | P0 | `operational_connect` | CASE connection returns a valid connect context within 30 seconds |
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
-| P0 | `onoff_subscription` | Initial state and an external update arrive within 15 seconds |
+| P0 | `onoff_subscription` | An OnOff command triggers a state change and the subscription reports it within the timeout |
 | P0 | `node_label_persistence` | NodeLabel write/read succeeds and survives a commissionee restart |
 
 A P0 `failed`, timeout, error, crash, or skipped result must be preserved. A failed P0 test must not be retried inside the same Run to manufacture a passing result.
@@ -188,5 +188,6 @@ The stable version tag must not be created when any required P0 result is `Faile
 
 - The repository has no supported public `unPairDevice` method; only the existing UI delete path can be evaluated.
 - iOS simulator results are not valid evidence.
-- Hardware-in-the-loop CI and fully automated iOS external-app control remain outside formal acceptance.
+- Android validation uses the virtual device app on the controller phone, so commissionee-side actions (factory reset, device restart, invalid-input preparation) are performed by the Agent through mobile automation. Physical commissionee actions and iOS external-app control remain operator tasks and stay outside formal acceptance.
+- Hardware-in-the-loop CI remains outside formal acceptance.
 - The device-test workflow has no Thread commissioning path.

@@ -205,7 +205,7 @@ Use `"mode": "full"` and an appropriate timeout for formal evidence. Retain the 
 
 Before a Run starts, the app automatically purges old run provisioning secrets and resets controller identities for the current platform. The caller does not certify cleanup. If automatic cleanup fails, the app blocks the new Run before persisting new secrets or starting a test.
 
-After `start_run` is accepted, the app supplies the raw onboarding payload to the Matter SDK. The SDK performs commissionee discovery and commissioning; the app does not scan for BLE or mDNS commissionees itself and does not report a commissioning transport.
+After `start_run` is accepted, the app supplies the raw onboarding payload to the Matter SDK. The SDK performs commissionee discovery and commissioning; the app does not scan for BLE or mDNS commissionees itself and does not report a commissioning transport. Commissionee-side prompts (factory reset, restart, invalid-input preparation) are routed to the Agent as `agent_android` prompts on Android validation because the virtual device runs on the controller phone; physical commissionees keep `human` prompts.
 
 If commissioning fails, the Run preserves the failure and stops. It must not retry commissioning inside the same Run.
 

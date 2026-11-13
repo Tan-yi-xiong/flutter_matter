@@ -282,59 +282,62 @@ void main() {
 
   group('onoff_subscription', () {
     test(
-      'passes when an external update arrives and routes the prompt',
-      () async {
-        final hardware = FakeHardware();
-        final harness = TestContextHarness(
-          testId: DeviceTestId.onoffSubscription,
-          ports: hardware.ports,
-          operatorHandler: (prompt) async {
-            expect(prompt.requiredActor, RequiredActor.human);
-            expect(prompt.testId, DeviceTestId.onoffSubscription);
-            hardware.onOff.pushUpdate(OnOffState.off);
-            return OperatorDecision.confirmed();
-          },
-        );
-        final context = harness.build();
-
-        final outcome = await const OnOffSubscriptionCase().execute(context);
-
-        expect(outcome.status, DeviceTestStatus.passed);
-        expect(harness.prompts.single.id, 'onoff_subscription_external_change');
-        expect(hardware.onOff.cancelCount, 1);
-      },
-    );
-
-    test(
-      'returns not_run when the operator skips the external action',
+      'passes by triggering the state change and observing the update',
       () async {
         final hardware = FakeHardware();
         final context = TestContextHarness(
           testId: DeviceTestId.onoffSubscription,
           ports: hardware.ports,
-          operatorHandler: (_) =>
-              OperatorDecision.skipped('external update unavailable'),
         ).build();
 
         final outcome = await const OnOffSubscriptionCase().execute(context);
 
-        expect(outcome.status, DeviceTestStatus.notRun);
-        expect(outcome.notes, contains('external update unavailable'));
+        expect(outcome.status, DeviceTestStatus.passed);
+        expect(hardware.onOff.invokedCommands, [OnOffCommand.toggle]);
+        expect(hardware.onOff.cancelCount, 1);
       },
     );
 
-    test('fails when no external update arrives before the timeout', () async {
+    test('fails when the trigger command does not change state', () async {
       final hardware = FakeHardware();
+      hardware.onOff.handler = (connection, command, timeout) async {
+        return OnOffInvocation(
+          previousState: hardware.onOff.currentState,
+          currentState: hardware.onOff.currentState,
+        );
+      };
       final context = TestContextHarness(
         testId: DeviceTestId.onoffSubscription,
         ports: hardware.ports,
-        operatorHandler: (_) => OperatorDecision.confirmed(),
       ).build();
 
       final outcome = await const OnOffSubscriptionCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('external OnOff update'));
+      expect(
+        outcome.notes,
+        contains('trigger command did not change the commissionee state'),
+      );
+    });
+
+    test('fails when no subscription update arrives before the timeout', () async {
+      final hardware = FakeHardware();
+      hardware.onOff.handler = (connection, command, timeout) async {
+        // Report a state change without pushing it to the subscription.
+        return const OnOffInvocation(
+          previousState: OnOffState.on,
+          currentState: OnOffState.off,
+        );
+      };
+      final context = TestContextHarness(
+        testId: DeviceTestId.onoffSubscription,
+        ports: hardware.ports,
+      ).build();
+
+      final outcome = await const OnOffSubscriptionCase().execute(context);
+
+      expect(outcome.status, DeviceTestStatus.failed);
+      expect(outcome.notes, contains('No OnOff subscription update arrived'));
     });
   });
 

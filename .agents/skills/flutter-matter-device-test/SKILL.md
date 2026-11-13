@@ -184,7 +184,11 @@ Read the latest state and prompt.
 
 ### `agent_android` prompt
 
-The prompt applies only to the selected Android controller. Use the installed mobile automation capability to inspect that controller screen and perform the smallest requested action, such as accepting a local-network permission.
+The prompt applies only to the selected Android controller. Use the installed mobile automation capability to inspect that controller screen and perform the smallest requested action. Android prompts cover both app surfaces and commissionee surfaces:
+
+- Accepting system permission dialogs (local network, Bluetooth).
+- Operating the virtual device app on the same phone when the prompt asks for a commissionee action (factory reset, restart, commissioning-window preparation): restart the app or drive its UI (BACK -> confirm factory reset -> start the device again) with adb taps.
+- These actions are always bounded to the selected controller phone; a physical Matter commissionee is never driven through mobile automation.
 
 Before acting:
 
@@ -200,7 +204,7 @@ fvm dart run tool/device_test_agent.dart command \
   --command-id <stable-prompt-command-id>
 ```
 
-Do not use mobile automation to operate physical Matter state changes or iOS system surfaces.
+Do not use mobile automation to operate physical Matter devices or iOS system surfaces. Commissionee automation is limited to the virtual device app on the selected Android controller.
 
 ### `human` prompt
 

@@ -30,7 +30,7 @@ void main() {
         isNot(20202021),
       );
       expect(harness.prompts.length, 2);
-      expect(harness.prompts.first.requiredActor, RequiredActor.human);
+      expect(harness.prompts.first.requiredActor, RequiredActor.agentAndroid);
     });
 
     test('uses a typed invalid-setup failure as a clear failure', () async {

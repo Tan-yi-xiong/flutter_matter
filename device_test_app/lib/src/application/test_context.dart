@@ -50,7 +50,16 @@ class TestContext {
 
   Duration timeoutFor(DeviceTestId id) => timeouts.forTest(id);
 
-  RequiredActor get commissioneeActionActor => RequiredActor.human;
+  /// Actor for commissionee-side actions (factory reset, device restart).
+  ///
+  /// Android validation runs the virtual device app on the controller phone
+  /// itself, so an Agent with Android device-control capability performs
+  /// these actions automatically through mobile automation. Physical iOS
+  /// validation keeps the person operating the physical setup in the loop.
+  RequiredActor get commissioneeActionActor =>
+      controller?.platform == ControllerPlatform.android
+      ? RequiredActor.agentAndroid
+      : RequiredActor.human;
 
   RequiredActor get controllerSystemActor =>
       controller?.platform == ControllerPlatform.android
