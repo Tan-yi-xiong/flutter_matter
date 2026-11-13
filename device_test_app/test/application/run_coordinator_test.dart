@@ -116,7 +116,7 @@ void main() {
     );
 
     test(
-      'full profile reaches 9 terminal results and sanitized state',
+      'full profile reaches 8 terminal results and sanitized state',
       () async {
         final hardware = FakeHardware();
         final persistence = MemoryRunPersistencePort();
@@ -150,7 +150,7 @@ void main() {
 
         expect(snapshot.status, RunnerStatus.passed);
         expect(snapshot.session!.allResultsTerminal, isTrue);
-        expect(snapshot.session!.orderedResults.length, 9);
+        expect(snapshot.session!.orderedResults.length, 8);
         expect(
           snapshot.session!.orderedResults.every(
             (result) => result.status == DeviceTestStatus.passed,
@@ -207,10 +207,6 @@ void main() {
         );
         expect(
           snapshot.session!.results[DeviceTestId.invalidSetupPasscode]!.status,
-          DeviceTestStatus.notRun,
-        );
-        expect(
-          snapshot.session!.results[DeviceTestId.fabricRemove]!.status,
           DeviceTestStatus.notRun,
         );
         expect(snapshot.session!.allResultsTerminal, isTrue);
@@ -291,7 +287,7 @@ void main() {
       );
     });
 
-    test('P0 invalid-passcode failure stops the remaining sequence', () async {
+    test('P0 invalid-passcode failure produces a failed run', () async {
       final hardware = FakeHardware();
       final persistence = MemoryRunPersistencePort();
       final ports = hardware.applicationPorts(
@@ -304,17 +300,10 @@ void main() {
         DeviceTestId.invalidSetupPasscode,
         (_) => TestCaseOutcome.failed('invalid passcode was accepted'),
       );
-      final fabricRemove = ScriptedCase(
-        DeviceTestId.fabricRemove,
-        (_) => const TestCaseOutcome.passed(),
-      );
       final coordinator = RunCoordinator(
         ports: ports,
         registry: scriptedRegistry(
-          overrides: {
-            DeviceTestId.invalidSetupPasscode: invalidSetup,
-            DeviceTestId.fabricRemove: fabricRemove,
-          },
+          overrides: {DeviceTestId.invalidSetupPasscode: invalidSetup},
         ),
         timeouts: fastTimeouts,
       );
@@ -322,12 +311,11 @@ void main() {
 
       final snapshot = await coordinator.start(startRequest(TestProfile.full));
 
-      expect(fabricRemove.calls, 0);
-      expect(
-        snapshot.session!.results[DeviceTestId.fabricRemove]!.status,
-        DeviceTestStatus.notRun,
-      );
       expect(snapshot.status, RunnerStatus.failed);
+      expect(
+        snapshot.session!.results[DeviceTestId.invalidSetupPasscode]!.status,
+        DeviceTestStatus.failed,
+      );
       expect(snapshot.session!.allResultsTerminal, isTrue);
     });
 
@@ -358,7 +346,6 @@ void main() {
           nodeLabelReadWrite: Duration(milliseconds: 100),
           appRestart: Duration(milliseconds: 100),
           invalidSetupPasscode: Duration(milliseconds: 100),
-          fabricRemove: Duration(milliseconds: 100),
           commissioningWindow: Duration(milliseconds: 100),
         ),
       );

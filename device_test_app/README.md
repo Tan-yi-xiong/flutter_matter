@@ -9,7 +9,7 @@ The app runs on Android and physical iOS controllers. It is not published with t
 | Profile | Contents | Evidence role |
 | --- | --- | --- |
 | `quick` | `build_install`, `commissioning`, `operational_connect`, `onoff_invoke` | Iteration feedback only |
-| `full` | All 9 fixed tests in [../doc/device-test-report.md](../doc/device-test-report.md) | The only formal PR/release evidence |
+| `full` | All 8 fixed tests in [../doc/device-test-report.md](../doc/device-test-report.md) | The only formal PR/release evidence |
 
 Only a completed `full` run can produce formal evidence. A P0 failure is preserved and never retried inside the same Run. Every device run, including `quick` iteration, uses a Matter commissionee.
 

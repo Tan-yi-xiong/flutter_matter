@@ -27,15 +27,8 @@ RunSession buildFixtureSession({
     for (final testId in DeviceTestCatalog.all)
       testId: DeviceTestResult(
         testId: testId,
-        status: testId == DeviceTestId.fabricRemove
-            ? DeviceTestStatus.notRun
-            : DeviceTestStatus.passed,
-        duration: testId == DeviceTestId.fabricRemove
-            ? Duration.zero
-            : Duration(milliseconds: 1000 + testId.index),
-        notes: testId == DeviceTestId.fabricRemove
-            ? 'The fabric removal could not be verified in this fixture.'
-            : null,
+        status: DeviceTestStatus.passed,
+        duration: Duration(milliseconds: 1000 + testId.index),
         evidenceFiles: testId == DeviceTestId.buildInstall
             ? const <String>['android-build-install.png']
             : const <String>[],

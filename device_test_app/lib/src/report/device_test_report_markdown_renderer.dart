@@ -45,7 +45,7 @@ class DeviceTestReportMarkdownRenderer {
 
     buffer
       ..writeln()
-      ..writeln('#### P1 and P2 notes');
+      ..writeln('#### P1 notes');
 
     final noteworthy = <DeviceTestResult>[];
     for (final testId in DeviceTestCatalog.all) {

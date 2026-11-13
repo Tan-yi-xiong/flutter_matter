@@ -66,7 +66,7 @@ The advertisement appears after this second start. Verify with `dns-sd -B _matte
 
 ### Fabric accumulation
 
-A completed `full` Run ends with `fabric_remove`, so the commissionee returns to its uncommissioned state and no fabric slot is consumed. Only a Run that ends early (failed or stopped before `fabric_remove`) leaves its fabric on the commissionee. After such a Run, reset the device through either of:
+Every commissioned Run adds one fabric to the virtual device, and fabric slots are limited. After a finished Run, reset the device through either of:
 
 - the test app's optional post-Run `Commissionee cleanup` card (purges Run secrets and records a bridge event), or
 - the VDA itself: BACK on the QR page and confirm the `Factory Reset` dialog.
@@ -132,7 +132,6 @@ A P0 `failed`, timeout, error, crash, or skipped result must be preserved. A fai
 P1 results provide stability evidence and do not independently block a stable release:
 
 - `app_restart`: rebuild the controller runtime from persisted credentials and reconnect to the saved node without recommissioning.
-- `fabric_remove`: the fabric-removal command is accepted over CASE and the commissionee no longer accepts CASE afterwards. Device reset is expressed as a library command, not as a manual factory-reset step.
 
 ## P0 negative scenario
 
@@ -182,7 +181,7 @@ The stable version tag must not be created when any required P0 result is `Faile
 
 ## Known limits
 
-- The repository has no supported public `unPairDevice` method; the `fabric_remove` CASE command is the supported removal path.
+- The repository has no supported public `unPairDevice` method; commissionee cleanup stays a post-Run operator action through the app's cleanup card or the VDA reset dialog.
 - iOS simulator results are not valid evidence.
 - Android validation uses the virtual device app on the controller phone. The 9-item `full` matrix performs every test action through library APIs with no operator prompts; only VDA recovery (the documented restart quirk) and post-Run cleanup remain device-side actions.
 - Hardware-in-the-loop CI remains outside formal acceptance.

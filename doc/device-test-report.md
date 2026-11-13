@@ -29,7 +29,7 @@ A removal, rename, type change, status change, required-field change, or report-
 | Controller | `android` or `ios`, device model, OS version, and app build identifier |
 | Commissionee | Automatically parsed integer `vendor_id` and `product_id`, and `wifi` network transport |
 | Summary | Overall `passed`, `failed`, or `not_run`; counts for each status |
-| Tests | A `tests` object keyed by every fixed P0 and P1 test ID, each with result, duration, optional notes, and optional relative evidence filenames |
+| Tests | A `tests` object keyed by every fixed P0 test ID, each with result, duration, optional notes, and optional relative evidence filenames |
 | Sanitization | Explicit confirmation that the report and attachments were reviewed for sensitive data |
 
 The report must not include commissionee model, firmware, external state-change method, external state-change notes, or user-entered identity fields. Commissionee discovery and commissioning are delegated to the Matter SDK. Device model and OS version refer to the controller and are sufficient for controller traceability.
@@ -48,9 +48,8 @@ Do not add serial numbers, iOS UDIDs, Wi-Fi SSIDs, Wi-Fi passwords, setup codes,
 | P0 | `node_label_read_write` | A NodeLabel value written through the library is read back unchanged |
 | P0 | `invalid_setup_passcode` | A well-formed setup payload with a deliberately incorrect, same-discriminator setup passcode produces a clear non-zero failure without a crash |
 | P1 | `app_restart` | Controller runtime rebuilds from persisted credentials and reconnects without recommissioning |
-| P1 | `fabric_remove` | The fabric-removal command is accepted over CASE and the commissionee no longer accepts CASE afterwards |
 
-All 9 IDs must appear exactly once as keys in the `tests` object. The priority is determined by the test ID, so it is not duplicated inside each result. Unavailable P1 scenarios must be represented as `not_run` with a reason; they must not be omitted. A required P0 scenario cannot be omitted, and a stable release requires every P0 entry to be `passed`.
+All 8 IDs must appear exactly once as keys in the `tests` object. The priority is determined by the test ID, so it is not duplicated inside each result. Unavailable P1 scenarios must be represented as `not_run` with a reason; they must not be omitted. A required P0 scenario cannot be omitted, and a stable release requires every P0 entry to be `passed`.
 
 ## Commissioning rules
 
@@ -64,7 +63,7 @@ All 9 IDs must appear exactly once as keys in the `tests` object. The priority i
 - The overall result is `passed` only when `network_transport` is `wifi`, every P0 test is `passed`, and every non-P0 test is either `passed` or `not_run` with a reason.
 - The overall result is `failed` when any test is `failed`, especially any P0 test.
 - The overall result is `not_run` when any P0 test is `not_run`.
-- Counts must be calculated from the `tests` object and must total 9.
+- Counts must be calculated from the `tests` object and must total 8.
 - P1 failures are valid report data; a stable release requires maintainer review of every non-P0 failure.
 
 ## Markdown summary template

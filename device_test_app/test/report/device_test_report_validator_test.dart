@@ -39,7 +39,7 @@ void main() {
   test('rejects a missing fixed test ID', () {
     final json = _clone(buildFixtureReport().toJson());
     final tests = json['tests']! as Map<String, dynamic>;
-    tests.remove(DeviceTestId.fabricRemove.wireName);
+    tests.remove(DeviceTestId.appRestart.wireName);
 
     final result = validator.validateMap(json);
 
@@ -48,7 +48,7 @@ void main() {
     expect(result.contains(ReportValidationIssueKind.semantic), isTrue);
     expect(
       result.issues.map((issue) => issue.message).join(' '),
-      contains('All 9 fixed test IDs'),
+      contains('All 8 fixed test IDs'),
     );
   });
 
@@ -99,9 +99,10 @@ void main() {
   test('requires a non-empty notes reason for every not_run result', () {
     final json = _clone(buildFixtureReport().toJson());
     final tests = json['tests']! as Map<String, dynamic>;
-    final removeFabric =
-        tests[DeviceTestId.fabricRemove.wireName]! as Map<String, dynamic>;
-    removeFabric['notes'] = '   ';
+    final appRestart =
+        tests[DeviceTestId.appRestart.wireName]! as Map<String, dynamic>;
+    appRestart['status'] = 'not_run';
+    appRestart['notes'] = '   ';
 
     final result = validator.validateMap(json);
 

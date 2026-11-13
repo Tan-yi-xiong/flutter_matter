@@ -486,7 +486,6 @@ const TestTimeouts fastTimeouts = TestTimeouts(
   nodeLabelReadWrite: Duration(milliseconds: 100),
   appRestart: Duration(milliseconds: 100),
   invalidSetupPasscode: Duration(milliseconds: 100),
-  fabricRemove: Duration(milliseconds: 100),
   commissioningWindow: Duration(milliseconds: 100),
 );
 

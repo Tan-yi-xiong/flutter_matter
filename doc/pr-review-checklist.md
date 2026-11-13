@@ -27,7 +27,7 @@ This checklist applies to every pull request targeting `main`. The `Dart check a
 ## Device validation reports
 
 - Require the Device Validation section for every commissioning, BLE, networking, controller lifecycle, attribute, command, subscription, callback, MethodChannel, or native Matter change.
-- Verify the report uses schema version `4`, contains all 9 fixed test IDs exactly once, and includes both the generated Markdown summary and sanitized JSON attachment.
+- Verify the report uses schema version `4`, contains all 8 fixed test IDs exactly once, and includes both the generated Markdown summary and sanitized JSON attachment.
 - Verify `plugin_commit` matches the current pull request head; reject stale reports after relevant code changes.
 - Verify every affected platform has a report. Shared behavior requires Android and physical iOS reports; a platform exception must be explicit and technically justified.
 - Verify formal evidence used a Matter commissionee whose report records `wifi` network transport and delegates discovery and commissioning to the Matter SDK. Reject a report that contains a commissioning-transport field.

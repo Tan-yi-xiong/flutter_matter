@@ -27,7 +27,7 @@ The app may cache the most recent Wi-Fi SSID and password in platform secure sto
 | Profile | Tests | Formal evidence |
 | --- | --- | --- |
 | `quick` | `build_install`, `commissioning`, `operational_connect`, `onoff_invoke` | No |
-| `full` | All 9 fixed tests from the report contract | Yes, when all required P0 tests pass and the schema v4 report is valid |
+| `full` | All 8 fixed tests from the report contract | Yes, when all required P0 tests pass and the schema v4 report is valid |
 
 `quick` is intended for developer iteration and never satisfies PR or release evidence. A `full` run is the only formal evidence source.
 
@@ -41,18 +41,17 @@ The app may cache the most recent Wi-Fi SSID and password in platform secure sto
 6. `onoff_subscription`
 7. `node_label_read_write`
 8. `invalid_setup_passcode`
-9. `fabric_remove`
 
 A P0 failure or skip ends the current Run. Dependent tests are recorded as `not_run` with a reason. A P0 test is never retried inside the same Run to manufacture a green result.
 
-`app_restart` restarts the controller runtime from persisted credentials and reconnects without recommissioning; it never prompts. `invalid_setup_passcode` re-opens a commissioning window with the original discriminator and passcode (revoke-then-open, mirroring the worked example) before the wrong-passcode attempt; it never prompts either. `fabric_remove` runs last and removes the fabric by library command, leaving the commissionee in its natural uncommissioned state for the next clean cycle. P1 failures are recorded without blocking the remaining sequence.
+`app_restart` restarts the controller runtime from persisted credentials and reconnects without recommissioning; it never prompts. `invalid_setup_passcode` re-opens a commissioning window with the original discriminator and passcode (revoke-then-open, mirroring the worked example) and commissions the wrong-passcode attempt directly to the on-phone VDA loopback endpoint, so discovery cannot stall; it never prompts either. A finished Run leaves the test fabric on the commissionee; the post-Run cleanup card (or the VDA factory-reset dialog) hands the reset back to the operator. P1 failures are recorded without blocking the remaining sequence.
 
 ## Runtime architecture
 
 The app separates pure domain logic from hardware and platform adapters:
 
 - **Domain:** fixed test catalog, results, resumable Run state, and the report model.
-- **Application:** `RunCoordinator`, the 9 fixed test cases, profiles, operator prompts, automatic cleanup, failure policy, and run recovery.
+- **Application:** `RunCoordinator`, the 8 fixed test cases, profiles, operator prompts, automatic cleanup, failure policy, and run recovery.
 - **Agent:** protocol v1, state and event projection, and the reconnecting bridge client.
 - **Infrastructure:** Matter controller and certificate services, SDK-managed commissioning, adapters for application ports, provisioning-secret and controller-identity storage, secure Wi-Fi credential cache, `FileRunPersistence`, report files, platform information, and sharing.
 - **Presentation:** Home, Setup, Runner, prompt dialogs, Results, and the application controller.

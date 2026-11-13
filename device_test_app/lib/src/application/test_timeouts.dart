@@ -11,7 +11,6 @@ class TestTimeouts {
     this.nodeLabelReadWrite = const Duration(seconds: 45),
     this.appRestart = const Duration(seconds: 60),
     this.invalidSetupPasscode = const Duration(seconds: 120),
-    this.fabricRemove = const Duration(seconds: 60),
     this.commissioningWindow = const Duration(seconds: 30),
   });
 
@@ -23,7 +22,6 @@ class TestTimeouts {
   final Duration nodeLabelReadWrite;
   final Duration appRestart;
   final Duration invalidSetupPasscode;
-  final Duration fabricRemove;
 
   /// Budget for re-opening a commissioning window as a case sub-step.
   final Duration commissioningWindow;
@@ -37,6 +35,5 @@ class TestTimeouts {
     DeviceTestId.nodeLabelReadWrite => nodeLabelReadWrite,
     DeviceTestId.appRestart => appRestart,
     DeviceTestId.invalidSetupPasscode => invalidSetupPasscode,
-    DeviceTestId.fabricRemove => fabricRemove,
   };
 }

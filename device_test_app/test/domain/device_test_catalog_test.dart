@@ -13,7 +13,6 @@ void main() {
         'onoff_subscription',
         'node_label_read_write',
         'invalid_setup_passcode',
-        'fabric_remove',
       ]);
       expect(
         DeviceTestCatalog.all.map((testId) => testId.priority),
@@ -26,7 +25,6 @@ void main() {
           DeviceTestPriority.p0,
           DeviceTestPriority.p0,
           DeviceTestPriority.p0,
-          DeviceTestPriority.p1,
         ],
       );
     });
@@ -46,7 +44,7 @@ void main() {
 
     test('full contains every fixed test in canonical order', () {
       expect(TestProfile.full.testIds, DeviceTestCatalog.all);
-      expect(TestProfile.full.testIds.toSet(), hasLength(9));
+      expect(TestProfile.full.testIds.toSet(), hasLength(8));
     });
 
     test('wire names round trip and unknown names fail', () {

@@ -149,8 +149,7 @@
         "onoff_invoke",
         "onoff_subscription",
         "node_label_read_write",
-        "invalid_setup_passcode",
-        "fabric_remove"
+        "invalid_setup_passcode"
       ],
       "properties": {
         "build_install": {
@@ -175,9 +174,6 @@
           "$ref": "#/$defs/testResult"
         },
         "invalid_setup_passcode": {
-          "$ref": "#/$defs/testResult"
-        },
-        "fabric_remove": {
           "$ref": "#/$defs/testResult"
         }
       }

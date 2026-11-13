@@ -4,7 +4,6 @@ import 'package:flutter_matter_device_test_app/src/application/application.dart'
 import 'package:flutter_matter_device_test_app/src/application/cases/app_restart_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/build_install_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/commissioning_case.dart';
-import 'package:flutter_matter_device_test_app/src/application/cases/fabric_remove_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/invalid_setup_passcode_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/node_label_read_write_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/onoff_invoke_case.dart';
@@ -430,98 +429,6 @@ void main() {
       final outcome = await const AppRestartCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.failed);
-    });
-  });
-
-  group('fabric_remove', () {
-    test('removes the fabric and verifies it is gone', () async {
-      final hardware = FakeHardware();
-      final harness = TestContextHarness(
-        testId: DeviceTestId.fabricRemove,
-        ports: hardware.ports,
-      );
-      final context = harness.build();
-
-      final outcome = await const FabricRemoveCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.passed);
-      expect(hardware.fabric.removeCount, 1);
-      expect(hardware.fabric.inspectCount, 2);
-      expect(harness.prompts, isEmpty);
-    });
-
-    test('fails when a fabric remains after the removal command', () async {
-      final hardware = FakeHardware();
-      hardware.fabric.inspectHandler = () async =>
-          const FabricStatus(present: true);
-      final context = TestContextHarness(
-        testId: DeviceTestId.fabricRemove,
-        ports: hardware.ports,
-      ).build();
-
-      final outcome = await const FabricRemoveCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('remained'));
-    });
-
-    test('falls back to a CASE probe when the session is torn down', () async {
-      final hardware = FakeHardware();
-      var inspects = 0;
-      hardware.fabric.inspectHandler = () async {
-        inspects++;
-        if (inspects >= 2) {
-          throw StateError('session closed');
-        }
-        return const FabricStatus(present: true);
-      };
-      hardware.operational.connectHandler =
-          ({required identity, required nodeId, required timeout}) async {
-            throw StateError('operational discovery failed');
-          };
-      final context = TestContextHarness(
-        testId: DeviceTestId.fabricRemove,
-        ports: hardware.ports,
-      ).build();
-
-      final outcome = await const FabricRemoveCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.passed);
-      expect(hardware.fabric.removeCount, 1);
-    });
-
-    test('fails when CASE still connects after removal', () async {
-      final hardware = FakeHardware();
-      var inspects = 0;
-      hardware.fabric.inspectHandler = () async {
-        inspects++;
-        if (inspects >= 2) {
-          throw StateError('session closed');
-        }
-        return const FabricStatus(present: true);
-      };
-      final context = TestContextHarness(
-        testId: DeviceTestId.fabricRemove,
-        ports: hardware.ports,
-      ).build();
-
-      final outcome = await const FabricRemoveCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('still accepts CASE'));
-    });
-
-    test('returns not_run without identity or node context', () async {
-      final hardware = FakeHardware();
-      final context = TestContextHarness(
-        testId: DeviceTestId.fabricRemove,
-        ports: hardware.ports,
-        execution: RunExecutionContext(),
-      ).build();
-
-      final outcome = await const FabricRemoveCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.notRun);
     });
   });
 

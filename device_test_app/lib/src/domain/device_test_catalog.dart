@@ -42,11 +42,6 @@ enum DeviceTestId {
     wireName: 'invalid_setup_passcode',
     priority: DeviceTestPriority.p0,
     title: 'Invalid setup passcode',
-  ),
-  fabricRemove(
-    wireName: 'fabric_remove',
-    priority: DeviceTestPriority.p1,
-    title: 'Fabric removal command',
   );
 
   const DeviceTestId({

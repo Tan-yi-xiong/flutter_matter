@@ -214,7 +214,7 @@ The fixed profiles are:
 | Profile | Tests | Formal evidence |
 | --- | --- | --- |
 | `quick` | `build_install`, `commissioning`, `operational_connect`, `onoff_invoke` | No |
-| `full` | All 9 fixed tests from the report contract | Yes, when required P0 tests pass and the schema v4 report is valid |
+| `full` | All 8 fixed tests from the report contract | Yes, when required P0 tests pass and the schema v4 report is valid |
 
 A P0 failure or skip ends the current Run. Dependent tests are recorded as `not_run` with a reason. A P0 test is never retried in the same Run to manufacture a green result.
 
@@ -304,7 +304,7 @@ The repository Skill enforces this sequence:
 The host performs structural checks before writing report files:
 
 - Envelope and report schema versions are supported.
-- All 9 fixed test IDs occur exactly once.
+- All 8 fixed test IDs occur exactly once.
 - Test statuses and durations have valid types.
 - Summary counts match the `tests` object.
 - Overall result is consistent with P0 and failure rules.
