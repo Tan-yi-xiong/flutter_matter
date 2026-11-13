@@ -1,5 +1,8 @@
 # Repository-only instructions and release tooling.
 AGENTS.md
+HANDOFF.md
+.agents/
+device_test_app/
 tool/
 test/release_tool_test.dart
 

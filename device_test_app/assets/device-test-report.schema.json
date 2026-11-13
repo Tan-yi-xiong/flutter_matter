@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Tan-yi-xiong/flutter_matter/main/doc/device-test-report.schema.json",
+  "title": "flutter_matter device test report v4",
+  "description": "Sanitized device-validation result emitted by the flutter_matter device-test app.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "test_app",
+    "plugin_commit",
+    "controller",
+    "commissionee",
+    "summary",
+    "tests",
+    "sanitization"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 4
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "test_app": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "commit"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "commit": {
+          "$ref": "#/$defs/gitCommit"
+        }
+      }
+    },
+    "plugin_commit": {
+      "$ref": "#/$defs/gitCommit"
+    },
+    "controller": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "platform",
+        "device_model",
+        "os_version",
+        "app_build"
+      ],
+      "properties": {
+        "platform": {
+          "enum": [
+            "android",
+            "ios"
+          ]
+        },
+        "device_model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "os_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "app_build": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      }
+    },
+    "commissionee": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vendor_id",
+        "product_id",
+        "network_transport"
+      ],
+      "properties": {
+        "vendor_id": {
+          "type": "integer"
+        },
+        "product_id": {
+          "type": "integer"
+        },
+        "network_transport": {
+          "const": "wifi"
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result",
+        "passed",
+        "failed",
+        "not_run"
+      ],
+      "properties": {
+        "result": {
+          "enum": [
+            "passed",
+            "failed",
+            "not_run"
+          ]
+        },
+        "passed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 11
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 11
+        },
+        "not_run": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 11
+        }
+      }
+    },
+    "tests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "build_install",
+        "commissioning",
+        "operational_connect",
+        "onoff_invoke",
+        "onoff_subscription",
+        "node_label_persistence",
+        "app_restart",
+        "factory_reset_recommission",
+        "invalid_setup_passcode",
+        "invalid_wifi_password",
+        "remove_fabric_ui"
+      ],
+      "properties": {
+        "build_install": {
+          "$ref": "#/$defs/testResult"
+        },
+        "commissioning": {
+          "$ref": "#/$defs/testResult"
+        },
+        "operational_connect": {
+          "$ref": "#/$defs/testResult"
+        },
+        "onoff_invoke": {
+          "$ref": "#/$defs/testResult"
+        },
+        "onoff_subscription": {
+          "$ref": "#/$defs/testResult"
+        },
+        "node_label_persistence": {
+          "$ref": "#/$defs/testResult"
+        },
+        "app_restart": {
+          "$ref": "#/$defs/testResult"
+        },
+        "factory_reset_recommission": {
+          "$ref": "#/$defs/testResult"
+        },
+        "invalid_setup_passcode": {
+          "$ref": "#/$defs/testResult"
+        },
+        "invalid_wifi_password": {
+          "$ref": "#/$defs/testResult"
+        },
+        "remove_fabric_ui": {
+          "$ref": "#/$defs/testResult"
+        }
+      }
+    },
+    "sanitization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewed",
+        "policy_version"
+      ],
+      "properties": {
+        "reviewed": {
+          "const": true
+        },
+        "policy_version": {
+          "const": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "gitCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "testResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "duration_ms"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "not_run"
+          ]
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 2000,
+          "not": {
+            "pattern": "(-----BEGIN [A-Z ]+PRIVATE KEY-----|(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}|\\b[Mm][Tt]:[A-Za-z0-9]+\\b|\\b(?:[Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd]|[Pp][Aa][Ss][Ss][Ww][Dd]|[Ss][Ss][Ii][Dd]|[Ss][Ee][Rr][Ii][Aa][Ll]|[Uu][Dd][Ii][Dd])=)"
+          }
+        },
+        "evidence_files": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$",
+            "not": {
+              "pattern": "(^|/)\\.\\.?(/|$)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

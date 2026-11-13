@@ -1,0 +1,38 @@
+name: flutter_matter_device_test_app
+description: Dedicated physical-device validation app for flutter_matter.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_matter:
+    path: ../
+  collection: ^1.18.0
+  device_info_plus: ^13.3.0
+  flutter_secure_storage: 11.1.1
+  hex: ^0.2.0
+  mobile_scanner: 7.5.0
+  network_info_plus: 8.2.1
+  package_info_plus: ^10.2.2
+  path_provider: ^2.1.4
+  pem: ^2.0.5
+  permission_handler: ^11.3.1
+  pointycastle: ^3.0.1
+  share_plus: 13.3.1
+  uuid: ^4.5.1
+  web_socket_channel: ^3.0.3
+
+dev_dependencies:
+  path_provider_platform_interface: ^2.0.0
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/device-test-report.schema.json

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Tan-yi-xiong/flutter_matter/main/doc/device-test-report.schema.json",
-  "title": "flutter_matter device test report v1",
-  "description": "Sanitized device-validation result emitted by the future flutter_matter device-test app or an interim manual reporter.",
+  "title": "flutter_matter device test report v4",
+  "description": "Sanitized device-validation result emitted by the flutter_matter device-test app.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -18,7 +18,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 4
     },
     "generated_at": {
       "type": "string",
@@ -88,51 +88,19 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "type",
-        "model",
-        "firmware",
-        "commissioning_transport",
-        "network_transport",
-        "state_change_method"
+        "vendor_id",
+        "product_id",
+        "network_transport"
       ],
       "properties": {
-        "type": {
-          "enum": [
-            "real",
-            "virtual"
-          ]
+        "vendor_id": {
+          "type": "integer"
         },
-        "model": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 160
-        },
-        "firmware": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 160
-        },
-        "commissioning_transport": {
-          "const": "ble"
+        "product_id": {
+          "type": "integer"
         },
         "network_transport": {
-          "enum": [
-            "wifi",
-            "thread",
-            "unknown"
-          ]
-        },
-        "state_change_method": {
-          "enum": [
-            "physical_control",
-            "vendor_app",
-            "commissionee_ui",
-            "other"
-          ]
-        },
-        "state_change_notes": {
-          "type": "string",
-          "maxLength": 500
+          "const": "wifi"
         }
       }
     },
@@ -156,17 +124,17 @@
         "passed": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 13
+          "maximum": 11
         },
         "failed": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 13
+          "maximum": 11
         },
         "not_run": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 13
+          "maximum": 11
         }
       }
     },
@@ -175,8 +143,7 @@
       "additionalProperties": false,
       "required": [
         "build_install",
-        "ble_discovery",
-        "ble_commissioning",
+        "commissioning",
         "operational_connect",
         "onoff_invoke",
         "onoff_subscription",
@@ -184,7 +151,6 @@
         "app_restart",
         "factory_reset_recommission",
         "invalid_setup_passcode",
-        "bluetooth_disabled",
         "invalid_wifi_password",
         "remove_fabric_ui"
       ],
@@ -192,10 +158,7 @@
         "build_install": {
           "$ref": "#/$defs/testResult"
         },
-        "ble_discovery": {
-          "$ref": "#/$defs/testResult"
-        },
-        "ble_commissioning": {
+        "commissioning": {
           "$ref": "#/$defs/testResult"
         },
         "operational_connect": {
@@ -217,9 +180,6 @@
           "$ref": "#/$defs/testResult"
         },
         "invalid_setup_passcode": {
-          "$ref": "#/$defs/testResult"
-        },
-        "bluetooth_disabled": {
           "$ref": "#/$defs/testResult"
         },
         "invalid_wifi_password": {

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -68,7 +67,8 @@ class NetworkCredentials implements TransportObject {
     if (threadCredentials != null) {
       return {
         'threadCredentials': {
-          'operationalDataset': List<int>.from(threadCredentials!.operationalDataset),
+          'operationalDataset':
+              List<int>.from(threadCredentials!.operationalDataset),
         }
       };
     }
@@ -82,7 +82,6 @@ class NetworkCredentials implements TransportObject {
 }
 
 class AttestationInfo {
-
   final Uint8List challenge;
   final Uint8List nonce;
   final Uint8List elements;
@@ -94,26 +93,34 @@ class AttestationInfo {
   final int? vendorId;
   final int? productId;
 
-  AttestationInfo({required this.challenge, required this.nonce, required this.elements, required this.elementsSignature, required this.dac, required this.pai, required this.certificationDeclaration, required this.firmwareInfo, required this.vendorId, required this.productId});
+  AttestationInfo(
+      {required this.challenge,
+      required this.nonce,
+      required this.elements,
+      required this.elementsSignature,
+      required this.dac,
+      required this.pai,
+      required this.certificationDeclaration,
+      required this.firmwareInfo,
+      required this.vendorId,
+      required this.productId});
 
   factory AttestationInfo.decode(Map json) {
     return AttestationInfo(
-      challenge: toUint8List(json['challenge']), 
-      nonce: toUint8List(json['nonce']), 
-      elements: toUint8List(json['elements']), 
-      elementsSignature: toUint8List(json['elementsSignature']), 
-      dac: toUint8List(json['dac']), 
-      pai: toUint8List(json['pai']), 
-      certificationDeclaration: toUint8List(json['certificationDeclaration']),
-      firmwareInfo: toUint8List(json['firmwareInfo']),
-      vendorId: json['vendorId'] as int, 
-      productId: json['productId'] as int
-    );
+        challenge: toUint8List(json['challenge']),
+        nonce: toUint8List(json['nonce']),
+        elements: toUint8List(json['elements']),
+        elementsSignature: toUint8List(json['elementsSignature']),
+        dac: toUint8List(json['dac']),
+        pai: toUint8List(json['pai']),
+        certificationDeclaration: toUint8List(json['certificationDeclaration']),
+        firmwareInfo: toUint8List(json['firmwareInfo']),
+        vendorId: json['vendorId'] as int,
+        productId: json['productId'] as int);
   }
 }
 
 class KeypairDelegateCallbackHandler extends CallbackHandler<KeypairDelegate> {
-
   KeypairDelegateCallbackHandler() : super();
 
   @override
@@ -121,32 +128,31 @@ class KeypairDelegateCallbackHandler extends CallbackHandler<KeypairDelegate> {
     matterPrint('$runtimeType onCallbackMethodCall $methodName $arguments');
     final decodeArgs = jsonDecode(arguments);
     KeypairDelegate? kd = handlers[decodeArgs['handle'].toString()];
-      if (kd == null) {
-        final errorMsg = "Not found delegate for handle: ${decodeArgs['handle']}";
-        matterPrint(errorMsg);
-        return createPlatformCallExceptionResult(argsInvalid, errorMsg);
-      }
-      matterPrint("$kd $methodName call");
-      switch (methodName) {
-        case 'GeneratePrivateKey':
-          kd.generatePrivateKey();
-          return createPlatformCallSuccessResult();
-        case 'EcdsaSignMessage':
-          final signData = kd.ecdsaSignMessage(jsonDecode(arguments)['message'].cast<int>());
-          return createPlatformCallSuccessResult(successMsg: jsonEncode({
-            'ecdsaSign': List.from(signData)
-          }));
-        case 'GetPublicKey':
-          final publicKey = kd.getPublicKey();
-          return createPlatformCallSuccessResult(successMsg: jsonEncode({
-            'publicKey': List.from(publicKey)
-          }));
-        case 'CreateCertificateSigningRequest':
-          final csr = kd.createCertificateSigningRequest();
-          return createPlatformCallSuccessResult(successMsg: jsonEncode({
-            'certificateSigningRequest': List.from(csr)
-          }));
-      }
+    if (kd == null) {
+      final errorMsg = "Not found delegate for handle: ${decodeArgs['handle']}";
+      matterPrint(errorMsg);
+      return createPlatformCallExceptionResult(argsInvalid, errorMsg);
+    }
+    matterPrint("$kd $methodName call");
+    switch (methodName) {
+      case 'GeneratePrivateKey':
+        kd.generatePrivateKey();
+        return createPlatformCallSuccessResult();
+      case 'EcdsaSignMessage':
+        final signData =
+            kd.ecdsaSignMessage(jsonDecode(arguments)['message'].cast<int>());
+        return createPlatformCallSuccessResult(
+            successMsg: jsonEncode({'ecdsaSign': List.from(signData)}));
+      case 'GetPublicKey':
+        final publicKey = kd.getPublicKey();
+        return createPlatformCallSuccessResult(
+            successMsg: jsonEncode({'publicKey': List.from(publicKey)}));
+      case 'CreateCertificateSigningRequest':
+        final csr = kd.createCertificateSigningRequest();
+        return createPlatformCallSuccessResult(
+            successMsg:
+                jsonEncode({'certificateSigningRequest': List.from(csr)}));
+    }
   }
 }
 
@@ -154,27 +160,30 @@ final _keypairDelegateCallbackHandler = KeypairDelegateCallbackHandler();
 
 /** Represents information relating to NOC CSR. */
 class CSRInfo {
-
   final Uint8List nonce;
   final Uint8List elements;
   final Uint8List elementsSignature;
   final Uint8List csr;
 
-  CSRInfo({required this.nonce, required this.elements, required this.elementsSignature, required this.csr});
+  CSRInfo(
+      {required this.nonce,
+      required this.elements,
+      required this.elementsSignature,
+      required this.csr});
 
   factory CSRInfo.decode(Map json) {
     return CSRInfo(
-      nonce: Uint8List.fromList((json['nonce'] as List<dynamic>).cast<int>()), 
-      elements: Uint8List.fromList((json['elements'] as List<dynamic>).cast<int>()), 
-      elementsSignature: Uint8List.fromList((json['elementsSignature'] as List<dynamic>).cast<int>()), 
-      csr: Uint8List.fromList((json['csr'] as List<dynamic>).cast<int>())
-    );
+        nonce: Uint8List.fromList((json['nonce'] as List<dynamic>).cast<int>()),
+        elements:
+            Uint8List.fromList((json['elements'] as List<dynamic>).cast<int>()),
+        elementsSignature: Uint8List.fromList(
+            (json['elementsSignature'] as List<dynamic>).cast<int>()),
+        csr: Uint8List.fromList((json['csr'] as List<dynamic>).cast<int>()));
   }
 }
 
 /// Interface to listen for callbacks from CHIPDeviceController.
 abstract class CompletionListener {
-
   /// Notifies the completion of "ConnectDevice" command.
   void onConnectDeviceComplete();
 
@@ -220,14 +229,14 @@ abstract class CompletionListener {
   void onICDRegistrationComplete(int errorCode, ICDDeviceInfo? icdDeviceInfo);
 }
 
-
 /// Interface to implement custom operational credentials issuer (NOC chain generation).
 abstract class NOCChainIssuer {
-    // When a NOCChainIssuer is set for this controller, then onNOCChainGenerationNeeded will be
-    // called when the DAC chain must be verified and NOC chain needs to be issued from a CSR. This
-    // allows for custom credentials issuer and DAC verifier implementations, for example, when a
-    // proprietary cloud API will perform DAC verification and the NOC chain issuance from CSR.
-    void onNOCChainGenerationNeeded(String? onNOCChainGenerationCompleteHandle, CSRInfo csrInfo, AttestationInfo attestationInfo);
+  // When a NOCChainIssuer is set for this controller, then onNOCChainGenerationNeeded will be
+  // called when the DAC chain must be verified and NOC chain needs to be issued from a CSR. This
+  // allows for custom credentials issuer and DAC verifier implementations, for example, when a
+  // proprietary cloud API will perform DAC verification and the NOC chain issuance from CSR.
+  void onNOCChainGenerationNeeded(String? onNOCChainGenerationCompleteHandle,
+      CSRInfo csrInfo, AttestationInfo attestationInfo);
 }
 
 /// Delegate for device attestation verifiers.
@@ -257,45 +266,44 @@ abstract class DeviceAttestationDelegate {
   /// @param devicePtr Handle of device being commissioned
   /// @param attestationInfo Attestation information for the device, null is errorCode is 0.
   /// @param errorCode Error code on attestation failure. 0 if succeed.
-  void onDeviceAttestationCompleted(int devicePtr, AttestationInfo? attestationInfo, int errorCode);
+  void onDeviceAttestationCompleted(
+      int devicePtr, AttestationInfo? attestationInfo, int errorCode);
 }
 
 abstract class KeypairDelegate {
-   // Ensure that a private key is generated when this method returns.
-   //
-   // @throws KeypairException if a private key could not be generated or resolved
-   //
+  // Ensure that a private key is generated when this method returns.
+  //
+  // @throws KeypairException if a private key could not be generated or resolved
+  //
   void generatePrivateKey();
 
-   //
-   // Returns an operational PKCS#10 CSR in DER-encoded form, signed by the underlying private key.
-   //
-   // @throws KeypairException if the CSR could not be generated
-   //
+  //
+  // Returns an operational PKCS#10 CSR in DER-encoded form, signed by the underlying private key.
+  //
+  // @throws KeypairException if the CSR could not be generated
+  //
   Uint8List createCertificateSigningRequest();
 
-   //
-   // Returns the DER-encoded X.509 public key, generating a new private key if one has not already
-   // been created.
-   //
-   // @throws KeypairException if a private key could not be resolved
-   //
+  //
+  // Returns the DER-encoded X.509 public key, generating a new private key if one has not already
+  // been created.
+  //
+  // @throws KeypairException if a private key could not be resolved
+  //
   Uint8List getPublicKey();
 
-   //
-   // Signs the given message with the private key (generating one if it has not yet been created)
-   // using ECDSA and returns a DER-encoded signature.
-   //
-   // @throws KeypairException if a private key could not be resolved, or the message could not be
-   //     signed
-   //
+  //
+  // Signs the given message with the private key (generating one if it has not yet been created)
+  // using ECDSA and returns a DER-encoded signature.
+  //
+  // @throws KeypairException if a private key could not be resolved, or the message could not be
+  //     signed
+  //
   Uint8List ecdsaSignMessage(List<int> message);
 }
 
-
 /// An interface for receiving invoke response.
 abstract class InvokeCallback {
-
   /// OnError will be called when an error occurs after failing to call
   ///
   /// @param Exception The IllegalStateException which encapsulated the error message, the possible
@@ -321,7 +329,8 @@ abstract class InvokeCallback {
 abstract class OpenCommissioningCallback {
   void onError(int status, Object? connectContext);
 
-  void onSuccess(Object? connectContext, String manualPairingCode, String qrCode);
+  void onSuccess(
+      Object? connectContext, String manualPairingCode, String qrCode);
 }
 
 abstract class SubscriptionCallback implements ReportCallback {
@@ -330,60 +339,67 @@ abstract class SubscriptionCallback implements ReportCallback {
 
 class SubscriptionCallbackWarp implements SubscriptionCallback {
   final Function(int subscriptionId)? onSubscriptionEstablishedFun;
-  final Function(ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e)? onErrorFun;
+  final Function(ChipAttributePath? attributePath, ChipEventPath? eventPath,
+      Exception e)? onErrorFun;
   final Function()? onDoneFun;
   final Function(NodeState nodeState)? onReportFun;
 
-  SubscriptionCallbackWarp({this.onSubscriptionEstablishedFun, this.onErrorFun, this.onDoneFun, this.onReportFun});
-  
+  SubscriptionCallbackWarp(
+      {this.onSubscriptionEstablishedFun,
+      this.onErrorFun,
+      this.onDoneFun,
+      this.onReportFun});
+
   @override
   void onDone() {
     onDoneFun?.call();
   }
-  
+
   @override
-  void onError(ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e) {
+  void onError(
+      ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e) {
     onErrorFun?.call(attributePath, eventPath, e);
   }
-  
+
   @override
   void onReport(NodeState nodeState) {
     onReportFun?.call(nodeState);
   }
-  
+
   @override
   void onSubscriptionEstablished(int subscriptionId) {
     onSubscriptionEstablishedFun?.call(subscriptionId);
   }
-
 }
 
 abstract class ReportCallback {
-    void onError(ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e);
+  void onError(
+      ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e);
 
-    void onReport(NodeState nodeState);
+  void onReport(NodeState nodeState);
 
-    void onDone() {
-    }
+  void onDone() {}
 }
 
 class ReportCallbackWarp implements ReportCallback {
-  final Function(ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e)? onErrorFun;
+  final Function(ChipAttributePath? attributePath, ChipEventPath? eventPath,
+      Exception e)? onErrorFun;
   final Function()? onDoneFun;
   final Function(NodeState nodeState)? onReportFun;
 
   ReportCallbackWarp({this.onErrorFun, this.onDoneFun, this.onReportFun});
-  
+
   @override
   void onDone() {
     onDoneFun?.call();
   }
-  
+
   @override
-  void onError(ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e) {
+  void onError(
+      ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e) {
     onErrorFun?.call(attributePath, eventPath, e);
   }
-  
+
   @override
   void onReport(NodeState nodeState) {
     onReportFun?.call(nodeState);
@@ -391,31 +407,32 @@ class ReportCallbackWarp implements ReportCallback {
 }
 
 abstract class WriteAttributesCallback {
-    void onError(ChipAttributePath? attributePath, Exception e);
+  void onError(ChipAttributePath? attributePath, Exception e);
 
-    void onResponse(ChipAttributePath? attributePath, Status? status);
+  void onResponse(ChipAttributePath? attributePath, Status? status);
 
-    void onDone() {
-    }
+  void onDone() {}
 }
 
 class WriteAttributesCallbackWarp implements WriteAttributesCallback {
   final Function(ChipAttributePath? attributePath, Exception e)? onErrorFun;
   final Function()? onDoneFun;
-  final Function(ChipAttributePath? attributePath, Status? status)? onResponseFun;
+  final Function(ChipAttributePath? attributePath, Status? status)?
+      onResponseFun;
 
-  WriteAttributesCallbackWarp({this.onErrorFun, this.onDoneFun, this.onResponseFun});
-  
+  WriteAttributesCallbackWarp(
+      {this.onErrorFun, this.onDoneFun, this.onResponseFun});
+
   @override
   void onDone() {
     onDoneFun?.call();
   }
-  
+
   @override
   void onError(ChipAttributePath? attributePath, Exception e) {
     onErrorFun?.call(attributePath, e);
   }
-  
+
   @override
   void onResponse(ChipAttributePath? attributePath, Status? status) {
     onResponseFun?.call(attributePath, status);
@@ -492,47 +509,56 @@ class ControllerParams extends TransportObject {
     this.setupURL = "",
     this.nodeId = kTestControllerNodeId,
   });
-  
+
   @override
   String encode() {
     return jsonEncode(toJson());
   }
 
   toJson() => {
-    "fabricId": fabricId,
-    "udpListenPort": udpListenPort,
-    "controllerVendorId": controllerVendorId,
-    "failsafeTimerSeconds": failsafeTimerSeconds,
-    "caseFailsafeTimerSeconds": caseFailsafeTimerSeconds,
-    "attemptNetworkScanWiFi": attemptNetworkScanWiFi,
-    "attemptNetworkScanThread": attemptNetworkScanThread,
-    "skipCommissioningComplete": skipCommissioningComplete,
-    "skipAttestationCertificateValidation": true,
-    "countryCode": countryCode,
-    "regulatoryLocationType": regulatoryLocationType,
-    "keypairDelegateHandle": keypairDelegate?.hashCode.toString(),
-    "rootCertificate": rootCertificate,
-    "intermediateCertificate": intermediateCertificate,
-    "operationalCertificate": operationalCertificate,
-    "ipk": ipk,
-    "adminSubject": adminSubject,
-    "enableServerInteractions": enableServerInteractions,
-    "setupURL": setupURL,
-    "nodeId": nodeId,
-  };
+        "fabricId": fabricId,
+        "udpListenPort": udpListenPort,
+        "controllerVendorId": controllerVendorId,
+        "failsafeTimerSeconds": failsafeTimerSeconds,
+        "caseFailsafeTimerSeconds": caseFailsafeTimerSeconds,
+        "attemptNetworkScanWiFi": attemptNetworkScanWiFi,
+        "attemptNetworkScanThread": attemptNetworkScanThread,
+        "skipCommissioningComplete": skipCommissioningComplete,
+        "skipAttestationCertificateValidation": true,
+        "countryCode": countryCode,
+        "regulatoryLocationType": regulatoryLocationType,
+        "keypairDelegateHandle": keypairDelegate?.hashCode.toString(),
+        "rootCertificate": rootCertificate,
+        "intermediateCertificate": intermediateCertificate,
+        "operationalCertificate": operationalCertificate,
+        "ipk": ipk,
+        "adminSubject": adminSubject,
+        "enableServerInteractions": enableServerInteractions,
+        "setupURL": setupURL,
+        "nodeId": nodeId,
+      };
 }
 
-final defaultIpk = Uint8List.fromList(
-  [
-    't'.codeUnitAt(0), 'e'.codeUnitAt(0), 'm'.codeUnitAt(0), 'p'.codeUnitAt(0),
-    'o'.codeUnitAt(0), 'r'.codeUnitAt(0), 'a'.codeUnitAt(0), 'r'.codeUnitAt(0),
-    'y'.codeUnitAt(0), ' '.codeUnitAt(0), 'i'.codeUnitAt(0), 'p'.codeUnitAt(0),
-    'k'.codeUnitAt(0), ' '.codeUnitAt(0), '0'.codeUnitAt(0), '1'.codeUnitAt(0)
-  ]
-);
+final defaultIpk = Uint8List.fromList([
+  't'.codeUnitAt(0),
+  'e'.codeUnitAt(0),
+  'm'.codeUnitAt(0),
+  'p'.codeUnitAt(0),
+  'o'.codeUnitAt(0),
+  'r'.codeUnitAt(0),
+  'a'.codeUnitAt(0),
+  'r'.codeUnitAt(0),
+  'y'.codeUnitAt(0),
+  ' '.codeUnitAt(0),
+  'i'.codeUnitAt(0),
+  'p'.codeUnitAt(0),
+  'k'.codeUnitAt(0),
+  ' '.codeUnitAt(0),
+  '0'.codeUnitAt(0),
+  '1'.codeUnitAt(0)
+]);
 
 class ChipDeviceController implements MethodCallHandler {
-
   static const matchPathList = [
     'NOCChainIssuer',
     'CompletionListener',
@@ -561,59 +587,69 @@ class ChipDeviceController implements MethodCallHandler {
   final Map<String, ConnectedDeviceCallback> _connectedDeviceCallback = {};
 
   bool get isRunning => _isRunning;
-  
+
   @override
   call(String method, arguments) {
     matterPrint('DeviceController call: $method, arguments: $arguments');
     final uri = Uri.parse(method);
-    final splitPaths = uri.path.split('/').where((element) => element.trim().isNotEmpty).toList();
+    final splitPaths = uri.path
+        .split('/')
+        .where((element) => element.trim().isNotEmpty)
+        .toList();
     final decodeArgs = jsonDecode(arguments);
     matterPrint("$runtimeType ${splitPaths.join('/')} call");
     ////// NOCChainIssuer //////
-    if (splitPaths.firstOrNull == 'NOCChainIssuer') { 
+    if (splitPaths.firstOrNull == 'NOCChainIssuer') {
       if (_nocChainIssuer == null) {
-        return createPlatformCallExceptionResult(argsInvalid, 'NocChainIssuer not set!');
+        return createPlatformCallExceptionResult(
+            argsInvalid, 'NocChainIssuer not set!');
       }
       switch (splitPaths[1]) {
         case "onNOCChainGenerationNeeded":
           final csrInfoJson = checkCallArgNotNull(decodeArgs, 'csrInfo');
-          final attestationInfoJson = checkCallArgNotNull(decodeArgs, 'attestationInfo');
+          final attestationInfoJson =
+              checkCallArgNotNull(decodeArgs, 'attestationInfo');
           _nocChainIssuer!.onNOCChainGenerationNeeded(
-            decodeArgs['onNOCChainGenerationCompleteHandle'],
-            CSRInfo.decode(csrInfoJson), 
-            AttestationInfo.decode(attestationInfoJson)
-          );
+              decodeArgs['onNOCChainGenerationCompleteHandle'],
+              CSRInfo.decode(csrInfoJson),
+              AttestationInfo.decode(attestationInfoJson));
           return createPlatformCallSuccessResult();
       }
-      return createPlatformCallExceptionResult(methodNoFound, 'Not found $method');
-    } 
+      return createPlatformCallExceptionResult(
+          methodNoFound, 'Not found $method');
+    }
     ////// CompletionListener //////
     else if (splitPaths.firstOrNull == 'CompletionListener') {
       if (_completionListener == null) {
-        return createPlatformCallExceptionResult(argsInvalid, "CompletionListener not set");
+        return createPlatformCallExceptionResult(
+            argsInvalid, "CompletionListener not set");
       }
       switch (splitPaths[1]) {
         case 'onConnectDeviceComplete':
           _completionListener!.onConnectDeviceComplete();
           return createPlatformCallSuccessResult();
         case 'onStatusUpdate':
-          _completionListener!.onStatusUpdate(checkCallArgNotNull(decodeArgs, 'status'));
+          _completionListener!
+              .onStatusUpdate(checkCallArgNotNull(decodeArgs, 'status'));
           return createPlatformCallSuccessResult();
         case 'onPairingComplete':
-          _completionListener!.onPairingComplete(checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!
+              .onPairingComplete(checkCallArgNotNull(decodeArgs, 'errorCode'));
           return createPlatformCallSuccessResult();
         case 'onPairingDeleted':
-          _completionListener!.onPairingDeleted(checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!
+              .onPairingDeleted(checkCallArgNotNull(decodeArgs, 'errorCode'));
           return createPlatformCallSuccessResult();
         case 'onCommissioningComplete':
-          _completionListener!.onCommissioningComplete(decodeArgs["nodeId"], checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!.onCommissioningComplete(decodeArgs["nodeId"],
+              checkCallArgNotNull(decodeArgs, 'errorCode'));
           return createPlatformCallSuccessResult();
-        case 'onReadCommissioningInfo': 
+        case 'onReadCommissioningInfo':
           _completionListener!.onReadCommissioningInfo(
             checkCallArgNotNull(decodeArgs, 'vendorId'),
-             checkCallArgNotNull(decodeArgs, 'productId'),
-             checkCallArgNotNull(decodeArgs, 'wifiEndpointId'),
-             checkCallArgNotNull(decodeArgs, 'threadEndpointId'),
+            checkCallArgNotNull(decodeArgs, 'productId'),
+            checkCallArgNotNull(decodeArgs, 'wifiEndpointId'),
+            checkCallArgNotNull(decodeArgs, 'threadEndpointId'),
           );
           return createPlatformCallSuccessResult();
         case 'onCommissioningStatusUpdate':
@@ -630,11 +666,12 @@ class ChipDeviceController implements MethodCallHandler {
           // _completionListener!.onCloseBleComplete();
           return createPlatformCallSuccessResult();
         case 'onError':
-          _completionListener!.onError(Exception(checkCallArgNotNull(decodeArgs, 'error')));
+          _completionListener!
+              .onError(Exception(checkCallArgNotNull(decodeArgs, 'error')));
           return createPlatformCallSuccessResult();
         case 'onOpCSRGenerationComplete':
           _completionListener!.onOpCSRGenerationComplete(
-              toUint8List(checkCallArgNotNull(decodeArgs, 'csr')),
+            toUint8List(checkCallArgNotNull(decodeArgs, 'csr')),
           );
           return createPlatformCallSuccessResult();
         case 'onICDRegistrationInfoRequired':
@@ -645,30 +682,33 @@ class ChipDeviceController implements MethodCallHandler {
             checkCallArgNotNull(decodeArgs, 'errorCode'),
             decodeArgs['icdDeviceInfo'] == null
                 ? null
-                : ICDDeviceInfo.fromJson(
-                    (decodeArgs['icdDeviceInfo'] as Map).cast<String, dynamic>()),
+                : ICDDeviceInfo.fromJson((decodeArgs['icdDeviceInfo'] as Map)
+                    .cast<String, dynamic>()),
           );
           return createPlatformCallSuccessResult();
       }
-    } 
+    }
     ////// DeviceAttestationDelegate //////
     else if (splitPaths.firstOrNull == 'DeviceAttestationDelegate') {
       switch (splitPaths[1]) {
         case "onDeviceAttestationCompleted":
           deviceAttestationDelegate?.onDeviceAttestationCompleted(
-            checkCallArgNotNull(decodeArgs, "devicePtr"),
-            decodeArgs["attestationInfo"] == null ? null : AttestationInfo.decode(decodeArgs["attestationInfo"]),
-            checkCallArgNotNull(decodeArgs, "errorCode")
-          );
+              checkCallArgNotNull(decodeArgs, "devicePtr"),
+              decodeArgs["attestationInfo"] == null
+                  ? null
+                  : AttestationInfo.decode(decodeArgs["attestationInfo"]),
+              checkCallArgNotNull(decodeArgs, "errorCode"));
           return createPlatformCallSuccessResult();
       }
-    } 
+    }
     ////// InvokeCallback //////
     else if (splitPaths.firstOrNull == 'InvokeCallback') {
-      String invokeCallbackPoint = checkCallArgNotNull(decodeArgs, 'invokeCallbackPoint');
+      String invokeCallbackPoint =
+          checkCallArgNotNull(decodeArgs, 'invokeCallbackPoint');
       final callback = _invokeCallbacks[invokeCallbackPoint];
       if (callback == null) {
-        return createPlatformCallExceptionResult(argsInvalid, "Not found invoke callback by point $invokeCallbackPoint");
+        return createPlatformCallExceptionResult(argsInvalid,
+            "Not found invoke callback by point $invokeCallbackPoint");
       }
       switch (splitPaths[1]) {
         case "onDone":
@@ -676,69 +716,67 @@ class ChipDeviceController implements MethodCallHandler {
             callback.onDone();
           } catch (e) {
             matterPrint('$runtimeType invoke callback onDone error $e');
-          }          
+          }
           return createPlatformCallSuccessResult();
         case "onResponse":
           try {
             callback.onResponse(
-              InvokeElement.fromJson(checkCallArgNotNull(decodeArgs, "invokeElement")),
-              checkCallArgNotNull(decodeArgs, "successCode")
-            );
+                InvokeElement.fromJson(
+                    checkCallArgNotNull(decodeArgs, "invokeElement")),
+                checkCallArgNotNull(decodeArgs, "successCode"));
           } catch (e) {
             matterPrint('$runtimeType invoke callback onResponse error $e');
-          } 
+          }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(
-              Exception(checkCallArgNotNull(decodeArgs, "error"))
-            );
+            callback
+                .onError(Exception(checkCallArgNotNull(decodeArgs, "error")));
           } catch (e) {
             matterPrint('$runtimeType invoke callback onError error $e');
-          } 
+          }
           return createPlatformCallSuccessResult();
       }
     }
     ///// SubscriptionCallback //////
     else if (splitPaths.firstOrNull == 'SubscriptionCallback') {
-      String subscriptionCallbackPoint = checkCallArgNotNull(decodeArgs, 'subscriptionCallbackPoint');
+      String subscriptionCallbackPoint =
+          checkCallArgNotNull(decodeArgs, 'subscriptionCallbackPoint');
       final callback = _subscriptionCallbacks[subscriptionCallbackPoint];
       if (callback == null) {
-        return createPlatformCallExceptionResult(argsInvalid, "Not found invoke callback by point $subscriptionCallbackPoint");
+        return createPlatformCallExceptionResult(argsInvalid,
+            "Not found invoke callback by point $subscriptionCallbackPoint");
       }
       switch (splitPaths[1]) {
         case "onSubscriptionEstablished":
           try {
             callback.onSubscriptionEstablished(
-              checkCallArgNotNull(decodeArgs, 'subscriptionId')
-            );
+                checkCallArgNotNull(decodeArgs, 'subscriptionId'));
           } catch (e) {
-            return createPlatformCallExceptionResult(argsInvalid, "Error in callback: $e");
+            return createPlatformCallExceptionResult(
+                argsInvalid, "Error in callback: $e");
           }
           break;
         case "onReport":
           try {
-            callback.onReport(
-              NodeState.fromJson(checkCallArgNotNull(decodeArgs, "nodeState"))
-            );
+            callback.onReport(NodeState.fromJson(
+                checkCallArgNotNull(decodeArgs, "nodeState")));
           } catch (e) {
             matterPrint('subscription callback onReport error $e');
-          } 
+          }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(
-              null, null,
-              Exception(checkCallArgNotNull(decodeArgs, "error"))
-            );
-          } catch(e) {
+            callback.onError(null, null,
+                Exception(checkCallArgNotNull(decodeArgs, "error")));
+          } catch (e) {
             matterPrint('subscription callback onError error $e');
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch(e) {
+          } catch (e) {
             matterPrint('subscription callback onDone error $e');
           }
           _subscriptionCallbacks.remove(subscriptionCallbackPoint);
@@ -747,36 +785,35 @@ class ChipDeviceController implements MethodCallHandler {
     }
     ///// ReportCallback //////
     else if (splitPaths.firstOrNull == 'ReportCallback') {
-      String reportCallbackPoint = checkCallArgNotNull(decodeArgs, 'reportCallbackPoint');
+      String reportCallbackPoint =
+          checkCallArgNotNull(decodeArgs, 'reportCallbackPoint');
       final callback = _reportCallbacks[reportCallbackPoint];
       if (callback == null) {
-        return createPlatformCallExceptionResult(argsInvalid, "Not found invoke callback by point $reportCallbackPoint");
+        return createPlatformCallExceptionResult(argsInvalid,
+            "Not found invoke callback by point $reportCallbackPoint");
       }
       switch (splitPaths[1]) {
         case "onReport":
           try {
-            callback.onReport(
-              NodeState.fromJson(checkCallArgNotNull(decodeArgs, "nodeState"))
-            );
+            callback.onReport(NodeState.fromJson(
+                checkCallArgNotNull(decodeArgs, "nodeState")));
           } catch (e, s) {
             matterPrint('ReportCallback onReport error $e');
             print(s);
-          } 
+          }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(
-              null, null,
-              Exception(checkCallArgNotNull(decodeArgs, "error"))
-            );
-          } catch(e) {
+            callback.onError(null, null,
+                Exception(checkCallArgNotNull(decodeArgs, "error")));
+          } catch (e) {
             matterPrint('ReportCallback onError error $e');
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch(e) {
+          } catch (e) {
             matterPrint('ReportCallback onDone error $e');
           }
           _reportCallbacks.remove(reportCallbackPoint);
@@ -785,36 +822,42 @@ class ChipDeviceController implements MethodCallHandler {
     }
     ///// WriteAttributesCallback //////
     else if (splitPaths.firstOrNull == 'WriteAttributesCallback') {
-      String writeAttributesCallbackPoint = checkCallArgNotNull(decodeArgs, 'writeAttributesCallbackPoint');
+      String writeAttributesCallbackPoint =
+          checkCallArgNotNull(decodeArgs, 'writeAttributesCallbackPoint');
       final callback = _writeAttributesCallback[writeAttributesCallbackPoint];
       if (callback == null) {
-        return createPlatformCallExceptionResult(argsInvalid, "Not found invoke callback by point $writeAttributesCallbackPoint");
+        return createPlatformCallExceptionResult(argsInvalid,
+            "Not found invoke callback by point $writeAttributesCallbackPoint");
       }
       switch (splitPaths[1]) {
         case "onResponse":
           try {
             callback.onResponse(
-              decodeArgs["attributePath"] == null ? null : ChipAttributePath.fromJson(decodeArgs["attributePath"]),
-              decodeArgs["status"] == null ? null : Status.fromJson(decodeArgs["status"])
-            );
+                decodeArgs["attributePath"] == null
+                    ? null
+                    : ChipAttributePath.fromJson(decodeArgs["attributePath"]),
+                decodeArgs["status"] == null
+                    ? null
+                    : Status.fromJson(decodeArgs["status"]));
           } catch (e) {
             matterPrint('WriteAttributesCallback onReport error $e');
-          } 
+          }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
             callback.onError(
-              decodeArgs["attributePath"] == null ? null : ChipAttributePath.fromJson(decodeArgs["attributePath"]),
-              Exception(decodeArgs['error'] ?? 'Unknown Error')
-            );
-          } catch(e) {
+                decodeArgs["attributePath"] == null
+                    ? null
+                    : ChipAttributePath.fromJson(decodeArgs["attributePath"]),
+                Exception(decodeArgs['error'] ?? 'Unknown Error'));
+          } catch (e) {
             matterPrint('WriteAttributesCallback onError error $e');
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch(e) {
+          } catch (e) {
             matterPrint('WriteAttributesCallback onDone error $e');
           }
           _writeAttributesCallback.remove(writeAttributesCallbackPoint);
@@ -826,103 +869,123 @@ class ChipDeviceController implements MethodCallHandler {
       String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle');
       final callback = _connectedDeviceCallback[callbackHandle];
       if (callback == null) {
-        return createPlatformCallExceptionResult(argsInvalid, "Not found invoke callback by point $callbackHandle");
+        return createPlatformCallExceptionResult(
+            argsInvalid, "Not found invoke callback by point $callbackHandle");
       }
       switch (splitPaths[1]) {
         case "onDeviceConnected":
           try {
             callback.onConnected(decodeArgs['context']);
-          } catch(e) {
-            matterPrint('connected device callback onConnectionClosed error $e');
+          } catch (e) {
+            matterPrint(
+                'connected device callback onConnectionClosed error $e');
           }
           _connectedDeviceCallback.remove(callbackHandle);
           return createPlatformCallSuccessResult();
         case "onConnectionFailure":
           try {
             callback.onError(Exception(decodeArgs['error'] ?? "Unknown error"));
-          } catch(e) {
-            matterPrint('connected device callback onDisconnectionError error $e');
+          } catch (e) {
+            matterPrint(
+                'connected device callback onDisconnectionError error $e');
           }
           _connectedDeviceCallback.remove(callbackHandle);
           return createPlatformCallSuccessResult();
       }
     }
 
-    ///// OpenCommissioningCallback ///// 
+    ///// OpenCommissioningCallback /////
     else if (splitPaths.firstOrNull == "OpenCommissioningCallback") {
       String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle');
-      final callback = _openCommissioningCallbacks[callbackHandle]; 
+      final callback = _openCommissioningCallbacks[callbackHandle];
       if (callback == null) {
-        return createPlatformCallExceptionResult(argsInvalid, "Not found invoke callback by callbackHandle $callbackHandle");
+        return createPlatformCallExceptionResult(argsInvalid,
+            "Not found invoke callback by callbackHandle $callbackHandle");
       }
       switch (splitPaths[1]) {
         case "onSuccess":
           try {
             callback.onSuccess(
               decodeArgs['connectContext'],
-              checkCallArgNotNull(decodeArgs, 'manualPairingCode'), 
-              checkCallArgNotNull(decodeArgs, 'qrCode'), 
+              checkCallArgNotNull(decodeArgs, 'manualPairingCode'),
+              checkCallArgNotNull(decodeArgs, 'qrCode'),
             );
-          } catch(e) {
-            matterPrint('open commissioning callback onOpenCommissioningWindow error $e');
+          } catch (e) {
+            matterPrint(
+                'open commissioning callback onOpenCommissioningWindow error $e');
           }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(
-              checkCallArgNotNull(decodeArgs, "status") as int,
-              decodeArgs['connectContext']
-            );
-          } catch(e) {
-            matterPrint('open commissioning callback onOpenCommissioningWindow error $e');
+            callback.onError(checkCallArgNotNull(decodeArgs, "status") as int,
+                decodeArgs['connectContext']);
+          } catch (e) {
+            matterPrint(
+                'open commissioning callback onOpenCommissioningWindow error $e');
           }
           return createPlatformCallSuccessResult();
       }
     }
 
-    return PlatformCallResult(code: methodNoFound, resultJson: jsonEncode({"msg": 'Not found method $uri'})); 
+    return PlatformCallResult(
+        code: methodNoFound,
+        resultJson: jsonEncode({"msg": 'Not found method $uri'}));
   }
-  
+
   @override
   bool match(String method, arguments) {
     try {
       final uri = Uri.parse(method);
-      final splitPaths = uri.path.split('/').where((element) => element.trim().isNotEmpty).toList();
+      final splitPaths = uri.path
+          .split('/')
+          .where((element) => element.trim().isNotEmpty)
+          .toList();
       final handleId = jsonDecode(arguments)[jsonKeyHandle];
-      final isMatch = handleId == _platformDeviceControllerHandle && uri.host == _hostName && matchPathList.contains(splitPaths.firstOrNull);
-      matterPrint('ChipDeviceController($_platformDeviceControllerHandle) match $isMatch');
+      final isMatch = handleId == _platformDeviceControllerHandle &&
+          uri.host == _hostName &&
+          matchPathList.contains(splitPaths.firstOrNull);
+      matterPrint(
+          'ChipDeviceController($_platformDeviceControllerHandle) match $isMatch');
       return isMatch;
     } catch (e, s) {
-      matterPrint('$runtimeType match error $s') ;
+      matterPrint('$runtimeType match error $s');
     }
     return false;
   }
 
-  ChipDeviceController._(this.params, this._platformDeviceControllerHandle, this._keypairDelegateHandleId) {
-    _channelFlutterMatter = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+  ChipDeviceController._(this.params, this._platformDeviceControllerHandle,
+      this._keypairDelegateHandleId) {
+    _channelFlutterMatter =
+        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
     _channelFlutterMatter.addHandler(this);
     _isRunning = true;
   }
 
   /// Create a [ChipDeviceController]; if exist return the exist one or create a new one.
-  static Future<ChipDeviceController> newControllerIfNotExist(ControllerParams params) async {
+  static Future<ChipDeviceController> newControllerIfNotExist(
+      ControllerParams params) async {
     ChipDeviceController? controller = _findSameFarbicControl(params);
     if (controller != null) {
       return controller;
     }
 
-    final channelFlutterMatter = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channelFlutterMatter =
+        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
     String? keypairDelegateHandleId;
     if (params.keypairDelegate != null) {
-      keypairDelegateHandleId = _keypairDelegateCallbackHandler.addHandler(params.keypairDelegate!);
+      keypairDelegateHandleId =
+          _keypairDelegateCallbackHandler.addHandler(params.keypairDelegate!);
     }
     final result = await channelFlutterMatter.requestPlatform(
-      RequestPlatformParams(methodName: createRequestPlatformUrl(_hostName, 'new').toString(), methodParamsJson: params.encode()));
+        RequestPlatformParams(
+            methodName: createRequestPlatformUrl(_hostName, 'new').toString(),
+            methodParamsJson: params.encode()));
     if (result.code != 0) {
       throw Exception("newDeviceController failed(${result.code})");
     }
     matterPrint('newController ${result.jsonData}');
-    controller = ChipDeviceController._(params, result.jsonData[jsonKeyHandle], keypairDelegateHandleId);
+    controller = ChipDeviceController._(
+        params, result.jsonData[jsonKeyHandle], keypairDelegateHandleId);
     _saveControl(controller);
     return controller;
   }
@@ -940,23 +1003,25 @@ class ChipDeviceController implements MethodCallHandler {
     _isRunning = false;
   }
 
-  Future<Map<String, dynamic>?> _requestPlatform(String methodName, String methodParamsJson) async {
+  Future<Map<String, dynamic>?> _requestPlatform(
+      String methodName, String methodParamsJson) async {
     final result = await _channelFlutterMatter.requestPlatform(
-      RequestPlatformParams(methodName: createRequestPlatformUrl(_hostName, methodName), methodParamsJson: methodParamsJson));
+        RequestPlatformParams(
+            methodName: createRequestPlatformUrl(_hostName, methodName),
+            methodParamsJson: methodParamsJson));
     if (result.code == 0) {
       return result.jsonData;
     }
-    throw CallPlatformException("[${result.code}] Call $methodName params $methodParamsJson failed");
+    throw CallPlatformException(
+        "[${result.code}] Call $methodName params $methodParamsJson failed");
   }
-
 
   /// Sets this DeviceController to use the given issuer for issuing operational certs and verifying
   /// the DAC. By default, the DeviceController uses an internal, OperationalCredentialsDelegate
   Future<void> setNocChainIssuer(NOCChainIssuer nocChainIssuer) async {
     _nocChainIssuer = nocChainIssuer;
-    await _requestPlatform('setNocChainIssuer', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle
-    }));
+    await _requestPlatform('setNocChainIssuer',
+        jsonEncode({jsonKeyHandle: _platformDeviceControllerHandle}));
   }
 
   /// Sets a [CompletionListener] to receive provisioning lifecycle callbacks.
@@ -965,13 +1030,11 @@ class ChipDeviceController implements MethodCallHandler {
   /// available; use this method if you need to update the listener separately.
   Future<void> setCompletionListener(CompletionListener listener) async {
     _completionListener = listener;
-    await _requestPlatform('setCompletionListener', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle
-    }));
+    await _requestPlatform('setCompletionListener',
+        jsonEncode({jsonKeyHandle: _platformDeviceControllerHandle}));
   }
 
-
-  /// when [attestationDelegate] notnull, [failSafeExpiryTimeoutSecs] efficient 
+  /// when [attestationDelegate] notnull, [failSafeExpiryTimeoutSecs] efficient
   /// IOS must use onboardingPayload
   Future<void> pairDevice(
       int deviceId,
@@ -985,120 +1048,191 @@ class ChipDeviceController implements MethodCallHandler {
       int failSafeExpiryTimeoutSecs = 60,
       String displayName = 'Flutter Matter', //only for iOS
       String ecosystemName = 'FlutterEcosystem' //only for iOS
-    }) async {
+      }) async {
+    if (setupPincode == null && onboardingPayload == null) {
+      throw Exception("setupPincode or onboardingPayload must be provided");
+    }
 
-      if (setupPincode == null && onboardingPayload == null) {
-        throw Exception("setupPincode or onboardingPayload must be provided");
-      }
+    if (Platform.isIOS && onboardingPayload == null) {
+      throw Exception("onboardingPayload must be provided on iOS");
+    }
 
-      if (Platform.isIOS && onboardingPayload == null) {
-        throw Exception("onboardingPayload must be provided on iOS");
-      }
-      
     // if (attestationDelegate != null) {
-      this.deviceAttestationDelegate = attestationDelegate;
+    this.deviceAttestationDelegate = attestationDelegate;
     // }
     // if (completionListener != null) {
-      this._completionListener = completionListener;
+    this._completionListener = completionListener;
     // }
-    await _requestPlatform('pairDevice', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle,
-      'connId': connId,
-      'deviceId': deviceId,
-      'setupPincode': setupPincode,
-      'csrNonce': csrNonce == null ? null : List.from(csrNonce),
-      'networkCredentials': networkCredentials.toJson(),
-      'attestationDelegate': attestationDelegate.hashCode.toString(),
-      'failSafeExpiryTimeoutSecs': failSafeExpiryTimeoutSecs,
-      'completionListener': completionListener?.hashCode.toString(),
-      'onboardingPayload': onboardingPayload,
-      'displayName': displayName,
-      'ecosystemName': ecosystemName,
-    }));
+    await _requestPlatform(
+        'pairDevice',
+        jsonEncode({
+          jsonKeyHandle: _platformDeviceControllerHandle,
+          'connId': connId,
+          'deviceId': deviceId,
+          'setupPincode': setupPincode,
+          'csrNonce': csrNonce == null ? null : List.from(csrNonce),
+          'networkCredentials': networkCredentials.toJson(),
+          'attestationDelegate': attestationDelegate.hashCode.toString(),
+          'failSafeExpiryTimeoutSecs': failSafeExpiryTimeoutSecs,
+          'completionListener': completionListener?.hashCode.toString(),
+          'onboardingPayload': onboardingPayload,
+          'displayName': displayName,
+          'ecosystemName': ecosystemName,
+        }));
+  }
+
+  /// Commissions a commissionee that is already reachable on the local network.
+  ///
+  /// This bypasses commissionee discovery and uses the supplied address and
+  /// port for PASE. It is intended for controllers whose platform discovery
+  /// stack is unavailable or unreliable. The method is implemented on Android;
+  /// iOS continues to use [pairDevice] with the onboarding payload.
+  Future<void> pairDeviceWithAddress({
+    required int deviceId,
+    required String address,
+    required int port,
+    required int discriminator,
+    required int setupPincode,
+    Uint8List? csrNonce,
+    DeviceAttestationDelegate? attestationDelegate,
+    CompletionListener? completionListener,
+    int failSafeExpiryTimeoutSecs = 60,
+  }) async {
+    if (address.trim().isEmpty) {
+      throw ArgumentError.value(address, 'address', 'Must not be empty');
+    }
+    if (port < 1 || port > 65535) {
+      throw ArgumentError.value(port, 'port', 'Must be between 1 and 65535');
+    }
+    if (discriminator < 0 || discriminator > 0x0fff) {
+      throw ArgumentError.value(
+        discriminator,
+        'discriminator',
+        'Must be between 0 and 4095',
+      );
+    }
+    if (setupPincode < 1 || setupPincode > 99999998) {
+      throw ArgumentError.value(
+        setupPincode,
+        'setupPincode',
+        'Must be a valid Matter setup passcode',
+      );
+    }
+
+    this.deviceAttestationDelegate = attestationDelegate;
+    this._completionListener = completionListener;
+    await _requestPlatform(
+      'pairDeviceWithAddress',
+      jsonEncode({
+        jsonKeyHandle: _platformDeviceControllerHandle,
+        'deviceId': deviceId,
+        'address': address.trim(),
+        'port': port,
+        'discriminator': discriminator,
+        'setupPincode': setupPincode,
+        'csrNonce': csrNonce == null ? null : List.from(csrNonce),
+        'attestationDelegate': attestationDelegate.hashCode.toString(),
+        'failSafeExpiryTimeoutSecs': failSafeExpiryTimeoutSecs,
+        'completionListener': completionListener?.hashCode.toString(),
+      }),
+    );
   }
 
   Future<void> stopDevicePairing(int deviceId) async {
-    await _requestPlatform('stopDevicePairing', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle,
-      "deviceId": deviceId
-    }));
+    await _requestPlatform(
+        'stopDevicePairing',
+        jsonEncode({
+          jsonKeyHandle: _platformDeviceControllerHandle,
+          "deviceId": deviceId
+        }));
   }
 
   /// Create a root (self-signed) X.509 DER encoded certificate
   static Future<Uint8List> createRootCertificate(
-    KeypairDelegate keypair, int issuerId, int? fabricId) async {
-      final id = _keypairDelegateCallbackHandler.addHandler(keypair);
-      final channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
-      final result = await channel.requestPlatform(
-        RequestPlatformParams(
-          methodName: createRequestPlatformUrl(_hostName, 'createRootCertificate'), 
-          methodParamsJson: jsonEncode({
-            // jsonKeyHandle: _platformDeviceControllerHandle,
-            'keypairHandle': id,
-            'issuerId': issuerId,
-            'fabricId': fabricId
-          })
-        )
-      ).whenComplete(() {
-        _keypairDelegateCallbackHandler.removeHandler(id);
-      });
-      if (result.code != 0) {
-        throw Exception("createRootCertificate failed(${result.code})");
-      }
+      KeypairDelegate keypair, int issuerId, int? fabricId) async {
+    final id = _keypairDelegateCallbackHandler.addHandler(keypair);
+    final channel =
+        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final result = await channel
+        .requestPlatform(RequestPlatformParams(
+            methodName:
+                createRequestPlatformUrl(_hostName, 'createRootCertificate'),
+            methodParamsJson: jsonEncode({
+              // jsonKeyHandle: _platformDeviceControllerHandle,
+              'keypairHandle': id,
+              'issuerId': issuerId,
+              'fabricId': fabricId
+            })))
+        .whenComplete(() {
+      _keypairDelegateCallbackHandler.removeHandler(id);
+    });
+    if (result.code != 0) {
+      throw Exception("createRootCertificate failed(${result.code})");
+    }
     return toUint8List(result.jsonData['data']);
   }
 
-
   /// Create an X.509 DER encoded certificate that has the right fields to be a valid Matter
   /// operational certificate.
-  static Future<Uint8List>  createOperationalCertificate(
+  static Future<Uint8List> createOperationalCertificate(
       KeypairDelegate signingKeypair,
       Uint8List signingCertificate,
       Uint8List operationalPublicKey,
       int fabricId,
       int nodeId,
       List<int>? caseAuthenticatedTags) async {
-        final id = _keypairDelegateCallbackHandler.addHandler(signingKeypair);
-        final channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
-        final result = await channel.requestPlatform(
-          RequestPlatformParams(
-            methodName: createRequestPlatformUrl(_hostName, 'createOperationalCertificate'), 
+    final id = _keypairDelegateCallbackHandler.addHandler(signingKeypair);
+    final channel =
+        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final result = await channel
+        .requestPlatform(RequestPlatformParams(
+            methodName: createRequestPlatformUrl(
+                _hostName, 'createOperationalCertificate'),
             methodParamsJson: jsonEncode({
-          // jsonKeyHandle: id,
-          'signingCertificate': List.from(signingCertificate),
-          'keypairHandle': id,
-          'operationalPublicKey': List.from(operationalPublicKey),
-          'fabricId': fabricId,
-          'nodeId': nodeId,
-          'caseAuthenticatedTags': caseAuthenticatedTags == null ? null : List.from(caseAuthenticatedTags),
-        }))).whenComplete(() {
-          _keypairDelegateCallbackHandler.removeHandler(id);
-        });
-        if (result.code != 0) {
-        throw Exception("createOperationalCertificate failed(${result.code})");
-      }
-        return toUint8List(result.jsonData['data']);
+              // jsonKeyHandle: id,
+              'signingCertificate': List.from(signingCertificate),
+              'keypairHandle': id,
+              'operationalPublicKey': List.from(operationalPublicKey),
+              'fabricId': fabricId,
+              'nodeId': nodeId,
+              'caseAuthenticatedTags': caseAuthenticatedTags == null
+                  ? null
+                  : List.from(caseAuthenticatedTags),
+            })))
+        .whenComplete(() {
+      _keypairDelegateCallbackHandler.removeHandler(id);
+    });
+    if (result.code != 0) {
+      throw Exception("createOperationalCertificate failed(${result.code})");
+    }
+    return toUint8List(result.jsonData['data']);
   }
 
   /// Extract the public key from the given PKCS#10 certificate signing request. This is the public
   /// key that a certificate issued in response to the request would need to have.
   Future<Uint8List> publicKeyFromCSR(Uint8List csr) async {
-    final result = await _requestPlatform('publicKeyFromCSR', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle,
-      'csr': List.from(csr)
-    }));
+    final result = await _requestPlatform(
+        'publicKeyFromCSR',
+        jsonEncode({
+          jsonKeyHandle: _platformDeviceControllerHandle,
+          'csr': List.from(csr)
+        }));
     return toUint8List(result!['data']);
   }
 
   /// When a NOCChainIssuer is set for this controller, then onNOCChainGenerationNeeded will be
   /// called when the NOC CSR needs to be signed. This allows for custom credentials issuer
   /// implementations, for example, when a proprietary cloud API will perform the CSR signing.
-  Future<int> onNOCChainGeneration(ControllerParams params, {String? onNOCChainGenerationCompleteHandle}) async {
-    final result = await _requestPlatform('onNOCChainGeneration', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle,
-      'params': params.toJson(),
-      'onNOCChainGenerationCompleteHandle': onNOCChainGenerationCompleteHandle
-    }));
+  Future<int> onNOCChainGeneration(ControllerParams params,
+      {String? onNOCChainGenerationCompleteHandle}) async {
+    final result = await _requestPlatform(
+        'onNOCChainGeneration',
+        jsonEncode({
+          jsonKeyHandle: _platformDeviceControllerHandle,
+          'params': params.toJson(),
+          'onNOCChainGenerationCompleteHandle':
+              onNOCChainGenerationCompleteHandle
+        }));
     return result!['data'] as int;
   }
 
@@ -1107,12 +1241,15 @@ class ChipDeviceController implements MethodCallHandler {
   ///
   /// @param devicePtr a pointer to the device which is being commissioned.
   /// @param ignoreAttestationFailure whether to ignore device attestation failure.
-  Future<void> continueCommissioning(int devicePtr, bool ignoreAttestationFailure) async {
-    await _requestPlatform('continueCommissioning', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle,
-      'devicePtr': devicePtr,
-      'ignoreAttestationFailure': ignoreAttestationFailure
-    }));
+  Future<void> continueCommissioning(
+      int devicePtr, bool ignoreAttestationFailure) async {
+    await _requestPlatform(
+        'continueCommissioning',
+        jsonEncode({
+          jsonKeyHandle: _platformDeviceControllerHandle,
+          'devicePtr': devicePtr,
+          'ignoreAttestationFailure': ignoreAttestationFailure
+        }));
   }
 
   // Future<void> setDeviceAttestationDelegate(int failSafeExpiryTimeoutSecs, DeviceAttestationDelegate deviceAttestationDelegate) async {
@@ -1127,25 +1264,33 @@ class ChipDeviceController implements MethodCallHandler {
   // }
 
   Future<void> deleteDeviceController() async {
-    await _requestPlatform('deleteDeviceController', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle,
-    }));
+    await _requestPlatform(
+        'deleteDeviceController',
+        jsonEncode({
+          jsonKeyHandle: _platformDeviceControllerHandle,
+        }));
     destroy();
   }
 
-  Future<void> invoke(InvokeCallback callback, int nodeId, InvokeElement invokeElement, {Object? connectContext, int timedRequestTimeoutMs = 0, int imTimeoutMs = 0}) async {
+  Future<void> invoke(
+      InvokeCallback callback, int nodeId, InvokeElement invokeElement,
+      {Object? connectContext,
+      int timedRequestTimeoutMs = 0,
+      int imTimeoutMs = 0}) async {
     String callbackId = callback.hashCode.toString();
     _invokeCallbacks[callbackId] = callback;
     try {
-      await _requestPlatform("invoke", jsonEncode({
-        jsonKeyHandle: _platformDeviceControllerHandle,
-        'callback': callbackId,
-        'nodeId': nodeId,
-        'invokeElement': invokeElement.toJson(),
-        'timedRequestTimeoutMs': timedRequestTimeoutMs,
-        'imTimeoutMs': imTimeoutMs,
-        'connectContext': connectContext
-      }));
+      await _requestPlatform(
+          "invoke",
+          jsonEncode({
+            jsonKeyHandle: _platformDeviceControllerHandle,
+            'callback': callbackId,
+            'nodeId': nodeId,
+            'invokeElement': invokeElement.toJson(),
+            'timedRequestTimeoutMs': timedRequestTimeoutMs,
+            'imTimeoutMs': imTimeoutMs,
+            'connectContext': connectContext
+          }));
     } catch (e) {
       _invokeCallbacks.remove(callbackId);
     }
@@ -1184,38 +1329,40 @@ class ChipDeviceController implements MethodCallHandler {
   /// If provided, [connectContext] reuses an existing connected-device context
   /// instead of resolving a new one for [nodeId].
   Future<void> subscribe(
-    int nodeId, 
-    SubscriptionCallback callback, 
-    List<ChipAttributePath>? attributePaths, 
-    List<ChipEventPath>? eventPaths, 
-    List<DataVersionFilter>? dataVersionFilters,
-    int minInterval, 
-    int maxInterval, 
-    bool keepSubscriptions, 
-    bool isFabricFiltered, 
-    int imTimeoutMs, 
-    int eventMin,
-    {Object? connectContext}
-  ) async {
+      int nodeId,
+      SubscriptionCallback callback,
+      List<ChipAttributePath>? attributePaths,
+      List<ChipEventPath>? eventPaths,
+      List<DataVersionFilter>? dataVersionFilters,
+      int minInterval,
+      int maxInterval,
+      bool keepSubscriptions,
+      bool isFabricFiltered,
+      int imTimeoutMs,
+      int eventMin,
+      {Object? connectContext}) async {
     String callbackHandle = callback.hashCode.toString();
     _subscriptionCallbacks[callbackHandle] = callback;
     try {
-      await _requestPlatform('subscribe', jsonEncode({
-        jsonKeyHandle: _platformDeviceControllerHandle,
-        'nodeId': nodeId,
-        'callbackHandle': callbackHandle,
-        'attributePaths': attributePaths?.map((e) => e.toJson()).toList(),
-        'eventPaths': eventPaths?.map((e) => e.toJson()).toList(),
-        'dataVersionFilters': dataVersionFilters?.map((e) => e.toJson()).toList(),
-        'minInterval': minInterval,
-        'maxInterval': maxInterval,
-        'keepSubscriptions': keepSubscriptions,
-        'isFabricFiltered': isFabricFiltered,
-        'imTimeoutMs': imTimeoutMs,
-        'eventMin': eventMin,
-        'connectContext': connectContext
-      })); 
-    } catch(e, s) {
+      await _requestPlatform(
+          'subscribe',
+          jsonEncode({
+            jsonKeyHandle: _platformDeviceControllerHandle,
+            'nodeId': nodeId,
+            'callbackHandle': callbackHandle,
+            'attributePaths': attributePaths?.map((e) => e.toJson()).toList(),
+            'eventPaths': eventPaths?.map((e) => e.toJson()).toList(),
+            'dataVersionFilters':
+                dataVersionFilters?.map((e) => e.toJson()).toList(),
+            'minInterval': minInterval,
+            'maxInterval': maxInterval,
+            'keepSubscriptions': keepSubscriptions,
+            'isFabricFiltered': isFabricFiltered,
+            'imTimeoutMs': imTimeoutMs,
+            'eventMin': eventMin,
+            'connectContext': connectContext
+          }));
+    } catch (e, s) {
       print(s);
       _subscriptionCallbacks.remove(callbackHandle);
     }
@@ -1247,75 +1394,82 @@ class ChipDeviceController implements MethodCallHandler {
   /// If provided, [connectContext] reuses an existing connected-device context
   /// instead of resolving a new one for [nodeId].
   Future<void> read(
-    int nodeId, 
-    ReportCallback callback, 
-    // int devicePtr, 
-    List<ChipAttributePath>? attributePaths, 
-    List<ChipEventPath>? eventPaths, 
-    List<DataVersionFilter>? dataVersionFilters, 
-    bool isFabricFiltered, 
-    int imTimeoutMs, 
-    int eventMin,
-    {Object? connectContext}) async {
-      String callbackHandle = callback.hashCode.toString();
-      _reportCallbacks[callbackHandle] = callback;
-      try {
-        await _requestPlatform('read', jsonEncode({
-          jsonKeyHandle: _platformDeviceControllerHandle,
-          'nodeId': nodeId,
-          'callbackHandle': callbackHandle,
-          'attributePaths': attributePaths?.map((e) => e.toJson()).toList(),
-          'eventPaths': eventPaths?.map((e) => e.toJson()).toList(),
-          'dataVersionFilters': dataVersionFilters?.map((e) => e.toJson()).toList(),
-          'isFabricFiltered': isFabricFiltered,
-          'imTimeoutMs': imTimeoutMs,
-          'eventMin': eventMin,
-          'connectContext': connectContext,
-        }));
-      } catch(e, s) {
-        print(s);
-        _reportCallbacks.remove(callbackHandle);
-      }
+      int nodeId,
+      ReportCallback callback,
+      // int devicePtr,
+      List<ChipAttributePath>? attributePaths,
+      List<ChipEventPath>? eventPaths,
+      List<DataVersionFilter>? dataVersionFilters,
+      bool isFabricFiltered,
+      int imTimeoutMs,
+      int eventMin,
+      {Object? connectContext}) async {
+    String callbackHandle = callback.hashCode.toString();
+    _reportCallbacks[callbackHandle] = callback;
+    try {
+      await _requestPlatform(
+          'read',
+          jsonEncode({
+            jsonKeyHandle: _platformDeviceControllerHandle,
+            'nodeId': nodeId,
+            'callbackHandle': callbackHandle,
+            'attributePaths': attributePaths?.map((e) => e.toJson()).toList(),
+            'eventPaths': eventPaths?.map((e) => e.toJson()).toList(),
+            'dataVersionFilters':
+                dataVersionFilters?.map((e) => e.toJson()).toList(),
+            'isFabricFiltered': isFabricFiltered,
+            'imTimeoutMs': imTimeoutMs,
+            'eventMin': eventMin,
+            'connectContext': connectContext,
+          }));
+    } catch (e, s) {
+      print(s);
+      _reportCallbacks.remove(callbackHandle);
     }
+  }
 
   Future<void> write(
-    int nodeId,
-    WriteAttributesCallback callback, 
-    // int devicePtr, 
-    List<AttributeWriteRequest> attributeList, 
-    int timedRequestTimeoutMs, 
-    int imTimeoutMs,
-    {Object? connectContext}
-  ) async {
+      int nodeId,
+      WriteAttributesCallback callback,
+      // int devicePtr,
+      List<AttributeWriteRequest> attributeList,
+      int timedRequestTimeoutMs,
+      int imTimeoutMs,
+      {Object? connectContext}) async {
     String callbackHandle = callback.hashCode.toString();
     _writeAttributesCallback[callbackHandle] = callback;
     try {
-      await _requestPlatform('write', jsonEncode({
-        jsonKeyHandle: _platformDeviceControllerHandle,
-        'nodeId': nodeId,
-        'callbackHandle': callbackHandle,
-        // 'devicePtr': devicePtr,
-        'attributeList': attributeList.map((e) => e.toJson()).toList(),
-        'timedRequestTimeoutMs': timedRequestTimeoutMs,
-        'imTimeoutMs': imTimeoutMs,
-        'connectContext': connectContext,
-      }));
+      await _requestPlatform(
+          'write',
+          jsonEncode({
+            jsonKeyHandle: _platformDeviceControllerHandle,
+            'nodeId': nodeId,
+            'callbackHandle': callbackHandle,
+            // 'devicePtr': devicePtr,
+            'attributeList': attributeList.map((e) => e.toJson()).toList(),
+            'timedRequestTimeoutMs': timedRequestTimeoutMs,
+            'imTimeoutMs': imTimeoutMs,
+            'connectContext': connectContext,
+          }));
     } catch (e, s) {
       print(s);
       _writeAttributesCallback.remove(callbackHandle);
     }
   }
 
-  Future<void> connectedDevice(int nodeId, ConnectedDeviceCallback callback, {Object? connectContext}) async {
+  Future<void> connectedDevice(int nodeId, ConnectedDeviceCallback callback,
+      {Object? connectContext}) async {
     String callbackHandle = callback.hashCode.toString();
     _connectedDeviceCallback[callbackHandle] = callback;
     try {
-      await _requestPlatform('connectedDevice', jsonEncode({
-        'nodeId': nodeId,
-        jsonKeyHandle: _platformDeviceControllerHandle,
-        'callbackHandle': callbackHandle,
-        'connectContext': connectContext,
-      }));
+      await _requestPlatform(
+          'connectedDevice',
+          jsonEncode({
+            'nodeId': nodeId,
+            jsonKeyHandle: _platformDeviceControllerHandle,
+            'callbackHandle': callbackHandle,
+            'connectContext': connectContext,
+          }));
     } catch (e) {
       matterPrint('$e');
       _connectedDeviceCallback.remove(callbackHandle);
@@ -1323,30 +1477,33 @@ class ChipDeviceController implements MethodCallHandler {
   }
 
   Future<void> releaseConnectContext(Object connectContext) async {
-    await _requestPlatform('releaseConnectContext', jsonEncode({
-      jsonKeyHandle: _platformDeviceControllerHandle,
-      'connectContext': connectContext,
-    }));
+    await _requestPlatform(
+        'releaseConnectContext',
+        jsonEncode({
+          jsonKeyHandle: _platformDeviceControllerHandle,
+          'connectContext': connectContext,
+        }));
   }
 
   Future<bool> openPairingWindowWithPIN(
-          Object connectContext,
-          int duration,
-          int discriminator,
-          int setupPIN,
-          OpenCommissioningCallback callback
-  ) async {
+      Object connectContext,
+      int duration,
+      int discriminator,
+      int setupPIN,
+      OpenCommissioningCallback callback) async {
     final callbackId = callback.hashCode.toString();
     _openCommissioningCallbacks[callbackId] = callback;
-    try {  
-      final result = await _requestPlatform('openPairingWindowWithPIN', jsonEncode({
-        jsonKeyHandle: _platformDeviceControllerHandle,
-        'connectContext': connectContext,
-        'duration': duration,
-        'discriminator': discriminator,
-        'setupPIN': setupPIN,
-        'callbackHandle': callbackId
-      }));
+    try {
+      final result = await _requestPlatform(
+          'openPairingWindowWithPIN',
+          jsonEncode({
+            jsonKeyHandle: _platformDeviceControllerHandle,
+            'connectContext': connectContext,
+            'duration': duration,
+            'discriminator': discriminator,
+            'setupPIN': setupPIN,
+            'callbackHandle': callbackId
+          }));
       return result?['data'] == true;
     } catch (e) {
       _openCommissioningCallbacks.remove(callbackId);
@@ -1356,23 +1513,28 @@ class ChipDeviceController implements MethodCallHandler {
 
   Future<int?> getFabricIndex() async {
     try {
-      final result = await _requestPlatform('getFabricIndex', jsonEncode({
-        jsonKeyHandle: _platformDeviceControllerHandle,
-      }));
+      final result = await _requestPlatform(
+          'getFabricIndex',
+          jsonEncode({
+            jsonKeyHandle: _platformDeviceControllerHandle,
+          }));
       return result?['data'];
     } catch (e) {
       return null;
     }
   }
 
-  Future<bool> unSubscription(int fabricIndex, int nodeId, int subscriptionId) async {
+  Future<bool> unSubscription(
+      int fabricIndex, int nodeId, int subscriptionId) async {
     try {
-      final result = await _requestPlatform('unSubscribe', jsonEncode({
-        jsonKeyHandle: _platformDeviceControllerHandle,
-        "fabricIndex": fabricIndex,
-        "nodeId": nodeId,
-        "subscriptionId": subscriptionId,
-      }));
+      final result = await _requestPlatform(
+          'unSubscribe',
+          jsonEncode({
+            jsonKeyHandle: _platformDeviceControllerHandle,
+            "fabricIndex": fabricIndex,
+            "nodeId": nodeId,
+            "subscriptionId": subscriptionId,
+          }));
       return result?['data'] == true;
     } catch (e) {
       return false;

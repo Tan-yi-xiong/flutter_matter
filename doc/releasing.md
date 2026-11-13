@@ -26,14 +26,14 @@ The release-preparation pull request is also the durable record for stable-relea
 
 Each report must:
 
-- Conform to schema version `1` and provide both `device-test-report.json` and its generated Markdown summary.
+- Conform to schema version `4` and provide both `device-test-report.json` and its generated Markdown summary.
 - Identify an exact `plugin_commit` equal to the candidate commit.
 - Cover one complete clean P0 cycle for the controller platform.
-- Use a qualified real Matter On/Off device first, or the Android Virtual Device App fallback with a documented reason.
-- Include sanitized screenshots or bounded evidence attached to the pull request and linked from the Device Validation section.
+- Use a Matter On/Off commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning, and reports `wifi` as the network transport. A commissioning failure is preserved without retrying commissioning. Device provenance is not part of the report contract.
+- Include optional sanitized screenshots or other manually captured bounded evidence; the app itself emits JSON and Markdown only.
 - Record P1 and P2 results, including reasons for `not_run` entries and any accepted P2 failures.
 
-Both platform reports must show every required P0 case as `passed`. Do not create a stable tag when a report is missing, stale, failed, not run, mixed between real and virtual commissionees, or missing a clean-cycle statement.
+Both platform reports must show every required P0 case as `passed`. Do not create a stable tag when a report is missing, stale, failed, not run, or missing a clean-cycle statement.
 
 The repository does not run device validation in CI and does not use a self-hosted hardware runner for this process.
 
