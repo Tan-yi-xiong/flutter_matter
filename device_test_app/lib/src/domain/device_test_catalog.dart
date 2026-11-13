@@ -18,6 +18,11 @@ enum DeviceTestId {
     priority: DeviceTestPriority.p0,
     title: 'Operational connection',
   ),
+  appRestart(
+    wireName: 'app_restart',
+    priority: DeviceTestPriority.p1,
+    title: 'Controller runtime restart',
+  ),
   onoffInvoke(
     wireName: 'onoff_invoke',
     priority: DeviceTestPriority.p0,
@@ -28,35 +33,20 @@ enum DeviceTestId {
     priority: DeviceTestPriority.p0,
     title: 'OnOff subscription',
   ),
-  nodeLabelPersistence(
-    wireName: 'node_label_persistence',
+  nodeLabelReadWrite(
+    wireName: 'node_label_read_write',
     priority: DeviceTestPriority.p0,
-    title: 'NodeLabel persistence',
-  ),
-  appRestart(
-    wireName: 'app_restart',
-    priority: DeviceTestPriority.p1,
-    title: 'Controller app restart',
-  ),
-  factoryResetRecommission(
-    wireName: 'factory_reset_recommission',
-    priority: DeviceTestPriority.p1,
-    title: 'Factory reset and recommission',
+    title: 'NodeLabel read/write',
   ),
   invalidSetupPasscode(
     wireName: 'invalid_setup_passcode',
-    priority: DeviceTestPriority.p2,
+    priority: DeviceTestPriority.p0,
     title: 'Invalid setup passcode',
   ),
-  invalidWifiPassword(
-    wireName: 'invalid_wifi_password',
-    priority: DeviceTestPriority.p2,
-    title: 'Invalid Wi-Fi password',
-  ),
-  removeFabricUi(
-    wireName: 'remove_fabric_ui',
-    priority: DeviceTestPriority.p2,
-    title: 'Remove fabric UI',
+  fabricRemove(
+    wireName: 'fabric_remove',
+    priority: DeviceTestPriority.p1,
+    title: 'Fabric removal command',
   );
 
   const DeviceTestId({
@@ -89,8 +79,7 @@ enum DeviceTestId {
 
 enum DeviceTestPriority {
   p0('P0'),
-  p1('P1'),
-  p2('P2');
+  p1('P1');
 
   const DeviceTestPriority(this.label);
 

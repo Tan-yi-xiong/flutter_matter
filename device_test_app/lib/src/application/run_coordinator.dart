@@ -541,7 +541,7 @@ class RunCoordinator {
     if (testId.priority == DeviceTestPriority.p0) {
       return true;
     }
-    return testId == DeviceTestId.factoryResetRecommission;
+    return false;
   }
 
   RunPhase _phaseForTest(DeviceTestId testId) => switch (testId) {

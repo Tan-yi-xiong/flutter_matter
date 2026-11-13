@@ -8,12 +8,11 @@ class TestTimeouts {
     this.operationalConnect = const Duration(seconds: 30),
     this.onOffInvoke = const Duration(seconds: 10),
     this.onOffSubscription = const Duration(seconds: 15),
-    this.nodeLabelPersistence = const Duration(seconds: 75),
+    this.nodeLabelReadWrite = const Duration(seconds: 45),
     this.appRestart = const Duration(seconds: 60),
-    this.factoryResetRecommission = const Duration(seconds: 180),
     this.invalidSetupPasscode = const Duration(seconds: 120),
-    this.invalidWifiPassword = const Duration(seconds: 120),
-    this.removeFabricUi = const Duration(seconds: 60),
+    this.fabricRemove = const Duration(seconds: 60),
+    this.commissioningWindow = const Duration(seconds: 30),
   });
 
   final Duration buildInstall;
@@ -21,12 +20,13 @@ class TestTimeouts {
   final Duration operationalConnect;
   final Duration onOffInvoke;
   final Duration onOffSubscription;
-  final Duration nodeLabelPersistence;
+  final Duration nodeLabelReadWrite;
   final Duration appRestart;
-  final Duration factoryResetRecommission;
   final Duration invalidSetupPasscode;
-  final Duration invalidWifiPassword;
-  final Duration removeFabricUi;
+  final Duration fabricRemove;
+
+  /// Budget for re-opening a commissioning window as a case sub-step.
+  final Duration commissioningWindow;
 
   Duration forTest(DeviceTestId testId) => switch (testId) {
     DeviceTestId.buildInstall => buildInstall,
@@ -34,11 +34,9 @@ class TestTimeouts {
     DeviceTestId.operationalConnect => operationalConnect,
     DeviceTestId.onoffInvoke => onOffInvoke,
     DeviceTestId.onoffSubscription => onOffSubscription,
-    DeviceTestId.nodeLabelPersistence => nodeLabelPersistence,
+    DeviceTestId.nodeLabelReadWrite => nodeLabelReadWrite,
     DeviceTestId.appRestart => appRestart,
-    DeviceTestId.factoryResetRecommission => factoryResetRecommission,
     DeviceTestId.invalidSetupPasscode => invalidSetupPasscode,
-    DeviceTestId.invalidWifiPassword => invalidWifiPassword,
-    DeviceTestId.removeFabricUi => removeFabricUi,
+    DeviceTestId.fabricRemove => fabricRemove,
   };
 }

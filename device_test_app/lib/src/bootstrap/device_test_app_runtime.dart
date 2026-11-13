@@ -86,6 +86,7 @@ class DeviceTestAppRuntime {
       ports: ApplicationPorts(
         testPorts: TestPorts(
           commissioning: matterAdapter,
+          commissioningWindow: matterAdapter,
           operationalConnection: matterAdapter,
           onOff: matterAdapter,
           nodeLabel: matterAdapter,

@@ -1,12 +1,17 @@
 import 'dart:async';
 
 import '../../domain/domain.dart';
-import '../operator_prompt.dart';
 import '../ports.dart';
 import '../test_case.dart';
 import '../test_context.dart';
 import 'case_support.dart';
 
+/// Verifies the library surfaces a clear failure for a wrong setup passcode.
+///
+/// The commissionee already carries the main fabric, so the case re-opens a
+/// commissioning window with the original discriminator and passcode before
+/// attempting discovery with a well-formed payload that carries a wrong
+/// passcode. A failed PASE handshake adds no fabric to the commissionee.
 class InvalidSetupPasscodeCase implements DeviceTestCase {
   const InvalidSetupPasscodeCase();
 
@@ -25,36 +30,57 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
     if (controller == null) {
       return TestCaseOutcome.notRun('Controller metadata is unavailable.');
     }
-
-    final preparePrompt = OperatorPrompt(
-      id: 'invalid_setup_passcode_prepare',
-      title: 'Prepare the commissionee for an invalid passcode test',
-      instructions:
-          'Factory reset the commissionee and leave it commissionable, then '
-          'confirm.',
-      requiredActor: context.commissioneeActionActor,
-      testId: id,
-    );
-    final prepareDecision = await context.prompt(preparePrompt);
-    final prepareOutcome = outcomeForPromptDecision(
-      preparePrompt,
-      prepareDecision,
-    );
-    if (prepareOutcome != null) {
-      return prepareOutcome;
+    final mainIdentity = context.execution.identity;
+    final nodeId = context.execution.nodeId;
+    final mainConnection = await restoreConnection(context);
+    if (mainIdentity == null || nodeId == null || mainConnection == null) {
+      return mainIdentity == null || nodeId == null
+          ? TestCaseOutcome.notRun(
+              'An operational connection and commissioned node are required.',
+            )
+          : TestCaseOutcome.failed(
+              'The operational connection could not be restored.',
+            );
+    }
+    final discriminator = secrets.setupDiscriminator;
+    if (discriminator == null) {
+      return TestCaseOutcome.notRun(
+        'A setup discriminator is required to re-open the commissioning window.',
+      );
     }
 
-    TestCaseOutcome diagnosticOutcome;
     try {
-      final identityRequest = ControllerIdentityRequest(
-        runId: context.runId,
-        purpose: ControllerIdentityPurpose.invalidSetupPasscode,
-        platform: controller.platform,
+      await context.ports.commissioningWindow.open(
+        identity: mainIdentity,
+        nodeId: nodeId,
+        connection: mainConnection,
+        durationSeconds: commissioningWindowDurationSeconds,
+        discriminator: discriminator,
+        setupPinCode: secrets.setupPinCode,
+        timeout: context.timeouts.commissioningWindow,
       );
-      await context.ports.controllerIdentity.reset(identityRequest);
-      final identity = await context.ports.controllerIdentity.loadOrCreate(
-        identityRequest,
+    } on CommissioningWindowException catch (error) {
+      return TestCaseOutcome.failed(
+        'Opening the commissioning window failed with '
+        '${error.code.wireName}.',
       );
+    } on TimeoutException {
+      return TestCaseOutcome.failed(
+        'Opening the commissioning window timed out.',
+      );
+    }
+
+    final identityRequest = ControllerIdentityRequest(
+      runId: context.runId,
+      purpose: ControllerIdentityPurpose.invalidSetupPasscode,
+      platform: controller.platform,
+    );
+    await context.ports.controllerIdentity.reset(identityRequest);
+    final identity = await context.ports.controllerIdentity.loadOrCreate(
+      identityRequest,
+    );
+
+    try {
       final result = await commissionTarget(
         context,
         identity: identity,
@@ -63,7 +89,7 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
         onboardingPayload: secrets.invalidSetupOnboardingPayload,
         setupPinCode: secrets.invalidSetupPinCode,
       );
-      diagnosticOutcome = result.succeeded
+      return result.succeeded
           ? TestCaseOutcome.failed(
               'Invalid setup passcode incorrectly reported success.',
             )
@@ -78,40 +104,20 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
           (error.code == CommissioningFailureCode.commissioningFailed &&
               error.errorCode != null &&
               error.errorCode != 0);
-      diagnosticOutcome = clearFailure
+      return clearFailure
           ? const TestCaseOutcome.passed(
               notes:
-                  'Invalid setup passcode returned a clear commissioning failure.',
+                  'Invalid setup passcode produced a clear provisioning '
+                  'failure.',
             )
           : TestCaseOutcome.failed(
               'Invalid setup passcode produced an unexpected '
               '${error.code.wireName} failure.',
             );
     } on TimeoutException {
-      diagnosticOutcome = TestCaseOutcome.failed(
+      return TestCaseOutcome.failed(
         'The invalid-passcode commissioning test timed out.',
       );
     }
-
-    final cleanupPrompt = OperatorPrompt(
-      id: 'invalid_setup_passcode_cleanup',
-      title: 'Restore the commissionee after the invalid passcode test',
-      instructions:
-          'Factory reset the commissionee or otherwise restore a known-clean '
-          'state, then confirm.',
-      requiredActor: context.commissioneeActionActor,
-      testId: id,
-      canSkip: true,
-    );
-    final cleanupDecision = await context.prompt(cleanupPrompt);
-    if (!cleanupDecision.isConfirmed) {
-      return TestCaseOutcome.failed(
-        cleanupDecision.reason == null
-            ? 'Invalid-passcode cleanup was not confirmed.'
-            : 'Invalid-passcode cleanup was not confirmed: '
-                  '${cleanupDecision.reason}.',
-      );
-    }
-    return diagnosticOutcome;
   }
 }

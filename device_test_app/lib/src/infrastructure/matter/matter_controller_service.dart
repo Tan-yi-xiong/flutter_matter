@@ -479,6 +479,61 @@ class MatterControllerService {
     );
   }
 
+  /// Re-opens a commissionable advertisement on a commissioned node.
+  ///
+  /// Mirrors the worked example's OCW sequence: revoke any open window first
+  /// (a missing window reports a cluster failure that must not block the
+  /// open attempt), then open a PIN window with the original discriminator
+  /// and setup passcode so the original onboarding payload stays usable.
+  Future<void> openPairingWindow(MatterOpenPairingWindowRequest request) async {
+    final controller = await _requireInitializedController();
+    final context = request.connection.context;
+    if (context == null) {
+      throw MatterException(
+        MatterFailureCode.connectFailed,
+        'Opening a pairing window requires an operational connection',
+      );
+    }
+    try {
+      await _invoke(
+        nodeId: request.connection.nodeId,
+        endpointId: 0,
+        connection: request.connection,
+        timedRequestTimeoutMs: 2000,
+        imTimeoutMs: 0,
+        clusterId: matterAdministratorCommissioningClusterId,
+        commandId: matterRevokeCommissioningCommandId,
+        tlv: revokeCommissioningCommandTlv(),
+      );
+    } on Object {
+      // No commissioning window was open; continue with the open attempt.
+    }
+
+    final opened = Completer<void>();
+    final dispatched = await withMatterTimeout<bool>(
+      future: controller.openPairingWindowWithPIN(
+        context,
+        request.durationSeconds,
+        request.discriminator,
+        request.setupPinCode,
+        _PairingWindowCallback(opened),
+      ),
+      timeout: _config.operationTimeout,
+      operation: 'Open Matter pairing window',
+    );
+    if (!dispatched) {
+      throw MatterException(
+        MatterFailureCode.pairingFailed,
+        'The pairing window request was rejected by the Matter stack',
+      );
+    }
+    await withMatterTimeout<void>(
+      future: opened.future,
+      timeout: _config.operationTimeout,
+      operation: 'Wait for the pairing window result',
+    );
+  }
+
   Future<MatterInvokeResult> removeFabric(
     MatterRemoveFabricRequest request,
   ) async {
@@ -692,6 +747,35 @@ class _MatterAttestationDelegate implements DeviceAttestationDelegate {
           error,
         ),
       );
+    }
+  }
+}
+
+class _PairingWindowCallback implements OpenCommissioningCallback {
+  _PairingWindowCallback(this._opened);
+
+  final Completer<void> _opened;
+
+  @override
+  void onError(int status, Object? connectContext) {
+    if (!_opened.isCompleted) {
+      _opened.completeError(
+        MatterException(
+          MatterFailureCode.pairingFailed,
+          'The pairing window failed with status $status',
+        ),
+      );
+    }
+  }
+
+  @override
+  void onSuccess(
+    Object? connectContext,
+    String manualPairingCode,
+    String qrCode,
+  ) {
+    if (!_opened.isCompleted) {
+      _opened.complete();
     }
   }
 }

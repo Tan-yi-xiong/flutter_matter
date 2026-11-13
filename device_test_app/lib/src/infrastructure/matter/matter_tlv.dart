@@ -15,6 +15,9 @@ const int matterOperationalCredentialsClusterId = 0x003e;
 const int matterCurrentFabricIndexAttributeId = 0x0005;
 const int matterRemoveFabricCommandId = 0x000a;
 
+const int matterAdministratorCommissioningClusterId = 0x003c;
+const int matterRevokeCommissioningCommandId = 0x0002;
+
 class MatterTlvException implements Exception {
   MatterTlvException(this.message, [this.cause]);
 
@@ -35,6 +38,10 @@ Uint8List emptyStructureTlv() {
 Uint8List nodeLabelTlv(String label) {
   final writer = TlvWriter().putString(AnonymousTag.instance, label);
   return _validated(writer);
+}
+
+Uint8List revokeCommissioningCommandTlv() {
+  return emptyStructureTlv();
 }
 
 Uint8List removeFabricCommandTlv(int fabricIndex) {

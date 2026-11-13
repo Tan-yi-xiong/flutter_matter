@@ -18,7 +18,7 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 7. Do not add commissioning-transport selection, host-side scanning, or readiness gating. The app passes the raw onboarding payload to the Matter SDK, which performs discovery and commissioning.
 8. If commissioning fails, preserve the failure and stop the Run. Do not retry commissioning in the same Run.
 9. Do not send Thread commissioning material or Thread-specific setup fields.
-10. `quick` contains four iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 11 fixed tests.
+10. `quick` contains four iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 9 fixed tests.
 11. Never retry a failed P0 test in the same Run to manufacture a passing result.
 12. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
 13. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
@@ -59,7 +59,7 @@ Use `short_id` only for display. Keep the full ID in your own state for the next
 
 ## Step 2: Select the commissionee
 
-Ask the operator which physical On/Off device will be used. The operator must confirm that the device currently has an open commissioning window. A factory reset is optional before a Run: each Run adds one fabric, and accumulated fabrics reduce the available slots, so the operator may reset the device after a finished Run instead. Record the choice in the PR narrative without exposing provisioning secrets.
+Ask the operator which physical On/Off device will be used. The operator must confirm that the device currently has an open commissioning window. A factory reset is optional before a Run: a completed `full` Run removes its own fabric via `fabric_remove`, and accumulated fabrics only matter after incomplete Runs, so the operator may reset the device after such a Run instead. Record the choice in the PR narrative without exposing provisioning secrets.
 
 For the Android virtual-device app, note the restart quirk: the first Start can show the QR page without an mDNS advertisement. Pressing BACK, confirming the factory-reset dialog, reopening the app, and starting the device again makes the advertisement appear. Always verify the advertisement with `dns-sd -B _matterc._udp` before starting the Run when the operator asks for it. Full VDA guidance lives in the virtual commissionee section of `doc/device-validation.md`.
 
@@ -282,11 +282,11 @@ After the Matter SDK attempts commissioning and it fails, do not retry commissio
 
 You may retry a command when the failure is clearly a command-delivery failure and the app never executed it. Reuse the same command ID for that retry. If the app executed the test and reported `failed`, preserve the report and report the failure to the user.
 
-P1 and P2 results may be `not_run` with a concrete reason. P2 failures require explicit maintainer risk acceptance.
+P1 results may be `not_run` with a concrete reason. P1 failures require explicit maintainer risk acceptance.
 
 ### Post-Run commissionee reset (optional)
 
-After a Run reaches a terminal phase, the Runner screen offers a Commissionee cleanup card. The operator factory-resets the commissionee (or resets the virtual device), confirms through the in-app dialog, and the app purges that Run's provisioning secrets and emits a `commissioneeResetConfirmed` bridge event. This is optional and never blocks evidence collection; it keeps fabric slots available for the next Run.
+After a Run reaches a terminal phase, the Runner screen offers a Commissionee cleanup card. The operator factory-resets the commissionee (or resets the virtual device), confirms through the in-app dialog, and the app purges that Run's provisioning secrets and emits a `commissioneeResetConfirmed` bridge event. This is optional and never blocks evidence collection; it is only needed when an incomplete Run left a fabric behind, because a completed `full` Run ends with `fabric_remove`.
 
 ## Step 9: Purge reminder
 

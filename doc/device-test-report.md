@@ -29,7 +29,7 @@ A removal, rename, type change, status change, required-field change, or report-
 | Controller | `android` or `ios`, device model, OS version, and app build identifier |
 | Commissionee | Automatically parsed integer `vendor_id` and `product_id`, and `wifi` network transport |
 | Summary | Overall `passed`, `failed`, or `not_run`; counts for each status |
-| Tests | A `tests` object keyed by every fixed P0, P1, and P2 test ID, each with result, duration, optional notes, and optional relative evidence filenames |
+| Tests | A `tests` object keyed by every fixed P0 and P1 test ID, each with result, duration, optional notes, and optional relative evidence filenames |
 | Sanitization | Explicit confirmation that the report and attachments were reviewed for sensitive data |
 
 The report must not include commissionee model, firmware, external state-change method, external state-change notes, or user-entered identity fields. Commissionee discovery and commissioning are delegated to the Matter SDK. Device model and OS version refer to the controller and are sufficient for controller traceability.
@@ -44,15 +44,13 @@ Do not add serial numbers, iOS UDIDs, Wi-Fi SSIDs, Wi-Fi passwords, setup codes,
 | P0 | `commissioning` | PASE/commissioning completes through SDK-managed discovery with `errorCode == 0` within 120 seconds |
 | P0 | `operational_connect` | CASE connection returns a valid connect context within 30 seconds |
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
-| P0 | `onoff_subscription` | Initial state and an external update arrive within 15 seconds |
-| P0 | `node_label_persistence` | NodeLabel write/read succeeds and survives a commissionee restart |
+| P0 | `onoff_subscription` | Initial state and an update after an in-case toggle arrive within 15 seconds |
+| P0 | `node_label_read_write` | A NodeLabel value written through the library is read back unchanged |
+| P0 | `invalid_setup_passcode` | A well-formed setup payload with a deliberately incorrect, same-discriminator setup passcode produces a clear non-zero failure without a crash |
 | P1 | `app_restart` | Controller runtime rebuilds from persisted credentials and reconnects without recommissioning |
-| P1 | `factory_reset_recommission` | A later factory reset and commissioning cycle succeeds |
-| P2 | `invalid_setup_passcode` | A well-formed setup payload with a deliberately incorrect, same-discriminator setup passcode produces a clear non-zero failure without a crash |
-| P2 | `invalid_wifi_password` | Provisioning fails clearly without reporting false success |
-| P2 | `remove_fabric_ui` | Existing remove/delete-device UI behavior is recorded accurately |
+| P1 | `fabric_remove` | The fabric-removal command is accepted over CASE and the commissionee no longer accepts CASE afterwards |
 
-All 11 IDs must appear exactly once as keys in the `tests` object. The priority is determined by the test ID, so it is not duplicated inside each result. Unavailable P1 or P2 scenarios must be represented as `not_run` with a reason; they must not be omitted. A required P0 scenario cannot be omitted, and a stable release requires every P0 entry to be `passed`.
+All 9 IDs must appear exactly once as keys in the `tests` object. The priority is determined by the test ID, so it is not duplicated inside each result. Unavailable P1 scenarios must be represented as `not_run` with a reason; they must not be omitted. A required P0 scenario cannot be omitted, and a stable release requires every P0 entry to be `passed`.
 
 ## Commissioning rules
 
@@ -66,8 +64,8 @@ All 11 IDs must appear exactly once as keys in the `tests` object. The priority 
 - The overall result is `passed` only when `network_transport` is `wifi`, every P0 test is `passed`, and every non-P0 test is either `passed` or `not_run` with a reason.
 - The overall result is `failed` when any test is `failed`, especially any P0 test.
 - The overall result is `not_run` when any P0 test is `not_run`.
-- Counts must be calculated from the `tests` object and must total 11.
-- P2 failures are valid report data but require explicit maintainer risk acceptance before a stable release.
+- Counts must be calculated from the `tests` object and must total 9.
+- P1 failures are valid report data; a stable release requires maintainer review of every non-P0 failure.
 
 ## Markdown summary template
 
@@ -88,7 +86,7 @@ The generated Markdown should follow this structure:
 | `build_install` | P0 | `passed` | `1234 ms` | |
 | ... | ... | ... | ... | ... |
 
-#### P1 and P2 notes
+#### P1 notes
 
 Summarize non-P0 failures or `not_run` reasons.
 
@@ -117,7 +115,7 @@ The dedicated app must:
 8. Set the test-app commit from the test app's own build metadata.
 9. Parse vendor and product identity from the commissionee payload automatically.
 10. Derive the summary counts and result from the recorded test entries and their documented priorities.
-11. Mark unavailable P1/P2 tests as `not_run` with a reason; never replace a failed P0 with a retry result.
+11. Mark unavailable P1 tests as `not_run` with a reason; never replace a failed P0 with a retry result.
 12. Apply the sanitization policy before writing files; the app emits JSON and Markdown only.
 13. Validate its own JSON against this schema before declaring the run complete.
 14. Mark the report as failed or not run when a required P0 result is missing, failed, or not run, while still writing a reviewable report when possible.

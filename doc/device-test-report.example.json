@@ -20,9 +20,9 @@
   },
   "summary": {
     "result": "passed",
-    "passed": 10,
+    "passed": 9,
     "failed": 0,
-    "not_run": 1
+    "not_run": 0
   },
   "tests": {
     "build_install": {
@@ -46,6 +46,13 @@
         "android-operational-connect.png"
       ]
     },
+    "app_restart": {
+      "status": "passed",
+      "duration_ms": 6900,
+      "evidence_files": [
+        "android-app-restart.png"
+      ]
+    },
     "onoff_invoke": {
       "status": "passed",
       "duration_ms": 2900,
@@ -60,26 +67,11 @@
         "android-onoff-subscription.png"
       ]
     },
-    "node_label_persistence": {
+    "node_label_read_write": {
       "status": "passed",
-      "duration_ms": 15800,
+      "duration_ms": 9600,
       "evidence_files": [
-        "android-node-label-write.png",
-        "android-node-label-after-restart.png"
-      ]
-    },
-    "app_restart": {
-      "status": "passed",
-      "duration_ms": 6900,
-      "evidence_files": [
-        "android-app-restart.png"
-      ]
-    },
-    "factory_reset_recommission": {
-      "status": "passed",
-      "duration_ms": 70100,
-      "evidence_files": [
-        "android-recommission.png"
+        "android-node-label-write.png"
       ]
     },
     "invalid_setup_passcode": {
@@ -89,18 +81,12 @@
         "android-invalid-setup-passcode.png"
       ]
     },
-    "invalid_wifi_password": {
+    "fabric_remove": {
       "status": "passed",
-      "duration_ms": 42000,
+      "duration_ms": 5300,
       "evidence_files": [
-        "android-invalid-wifi-credentials.png"
+        "android-fabric-remove.png"
       ]
-    },
-    "remove_fabric_ui": {
-      "status": "not_run",
-      "duration_ms": 0,
-      "notes": "The test device had already been reset before this optional UI path could be exercised.",
-      "evidence_files": []
     }
   },
   "sanitization": {

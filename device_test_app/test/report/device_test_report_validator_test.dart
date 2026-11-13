@@ -39,7 +39,7 @@ void main() {
   test('rejects a missing fixed test ID', () {
     final json = _clone(buildFixtureReport().toJson());
     final tests = json['tests']! as Map<String, dynamic>;
-    tests.remove(DeviceTestId.removeFabricUi.wireName);
+    tests.remove(DeviceTestId.fabricRemove.wireName);
 
     final result = validator.validateMap(json);
 
@@ -48,7 +48,7 @@ void main() {
     expect(result.contains(ReportValidationIssueKind.semantic), isTrue);
     expect(
       result.issues.map((issue) => issue.message).join(' '),
-      contains('All 11 fixed test IDs'),
+      contains('All 9 fixed test IDs'),
     );
   });
 
@@ -100,7 +100,7 @@ void main() {
     final json = _clone(buildFixtureReport().toJson());
     final tests = json['tests']! as Map<String, dynamic>;
     final removeFabric =
-        tests[DeviceTestId.removeFabricUi.wireName]! as Map<String, dynamic>;
+        tests[DeviceTestId.fabricRemove.wireName]! as Map<String, dynamic>;
     removeFabric['notes'] = '   ';
 
     final result = validator.validateMap(json);

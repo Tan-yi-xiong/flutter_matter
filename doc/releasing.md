@@ -31,7 +31,7 @@ Each report must:
 - Cover one complete clean P0 cycle for the controller platform.
 - Use a Matter On/Off commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning, and reports `wifi` as the network transport. A commissioning failure is preserved without retrying commissioning. Device provenance is not part of the report contract.
 - Include optional sanitized screenshots or other manually captured bounded evidence; the app itself emits JSON and Markdown only.
-- Record P1 and P2 results, including reasons for `not_run` entries and any accepted P2 failures.
+- Record P1 results, including reasons for `not_run` entries and any accepted P1 failures.
 
 Both platform reports must show every required P0 case as `passed`. Do not create a stable tag when a report is missing, stale, failed, not run, or missing a clean-cycle statement.
 

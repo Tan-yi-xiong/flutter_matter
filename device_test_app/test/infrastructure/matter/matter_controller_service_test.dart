@@ -478,6 +478,17 @@ class _FakeMatterControllerPort implements MatterControllerPort {
   }
 
   @override
+  Future<bool> openPairingWindowWithPIN(
+    Object connectContext,
+    int duration,
+    int discriminator,
+    int setupPIN,
+    OpenCommissioningCallback callback,
+  ) async {
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> releaseConnectContext(Object connectContext) async {
     releasedContexts.add(connectContext);
   }

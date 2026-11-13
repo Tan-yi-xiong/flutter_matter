@@ -177,12 +177,10 @@ class PriorityBadge extends StatelessWidget {
     final background = switch (priority) {
       DeviceTestPriority.p0 => colors.errorContainer,
       DeviceTestPriority.p1 => colors.tertiaryContainer,
-      DeviceTestPriority.p2 => colors.secondaryContainer,
     };
     final foreground = switch (priority) {
       DeviceTestPriority.p0 => colors.onErrorContainer,
       DeviceTestPriority.p1 => colors.onTertiaryContainer,
-      DeviceTestPriority.p2 => colors.onSecondaryContainer,
     };
     return _Badge(
       label: priority.label,

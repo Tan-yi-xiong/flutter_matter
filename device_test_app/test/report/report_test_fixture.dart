@@ -27,14 +27,14 @@ RunSession buildFixtureSession({
     for (final testId in DeviceTestCatalog.all)
       testId: DeviceTestResult(
         testId: testId,
-        status: testId == DeviceTestId.removeFabricUi
+        status: testId == DeviceTestId.fabricRemove
             ? DeviceTestStatus.notRun
             : DeviceTestStatus.passed,
-        duration: testId == DeviceTestId.removeFabricUi
+        duration: testId == DeviceTestId.fabricRemove
             ? Duration.zero
             : Duration(milliseconds: 1000 + testId.index),
-        notes: testId == DeviceTestId.removeFabricUi
-            ? 'The optional UI path was unavailable after the factory reset.'
+        notes: testId == DeviceTestId.fabricRemove
+            ? 'The fabric removal could not be verified in this fixture.'
             : null,
         evidenceFiles: testId == DeviceTestId.buildInstall
             ? const <String>['android-build-install.png']

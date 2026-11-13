@@ -66,7 +66,7 @@ The advertisement appears after this second start. Verify with `dns-sd -B _matte
 
 ### Fabric accumulation
 
-Every commissioned Run adds one fabric to the virtual device, and fabric slots are limited. After a finished Run, reset the device through either of:
+A completed `full` Run ends with `fabric_remove`, so the commissionee returns to its uncommissioned state and no fabric slot is consumed. Only a Run that ends early (failed or stopped before `fabric_remove`) leaves its fabric on the commissionee. After such a Run, reset the device through either of:
 
 - the test app's optional post-Run `Commissionee cleanup` card (purges Run secrets and records a bridge event), or
 - the VDA itself: BACK on the QR page and confirm the `Factory Reset` dialog.
@@ -102,7 +102,7 @@ Use `device_test_app/` as the primary validation surface. A manual interim repor
 
 For each controller platform that the change requires:
 
-1. Make sure the commissionee has an open commissioning window. A factory reset is optional: every Run adds one fabric, so prefer resetting the commissionee after a finished Run instead of before each one.
+1. Make sure the commissionee has an open commissioning window. A factory reset is optional: a completed `full` Run removes its own fabric, so prefer resetting the commissionee only after an incomplete Run left a fabric behind.
 2. Provide the target Wi-Fi SSID and password. An empty password is valid only for an open network.
 3. Let the app automatically purge old run secrets, purge orphaned provisioning keys, and reset controller identities for the current platform before the Run.
 4. Start the Run and let the Matter SDK perform discovery and commissioning from the raw onboarding payload.
@@ -123,24 +123,20 @@ The user does not certify controller cleanup or secret purge. If automatic clean
 | P0 | `operational_connect` | CASE connection returns a valid connect context within 30 seconds |
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
 | P0 | `onoff_subscription` | An OnOff command triggers a state change and the subscription reports it within the timeout |
-| P0 | `node_label_persistence` | NodeLabel write/read succeeds and survives a commissionee restart |
+| P0 | `node_label_read_write` | NodeLabel write/read round trip succeeds through the library |
 
 A P0 `failed`, timeout, error, crash, or skipped result must be preserved. A failed P0 test must not be retried inside the same Run to manufacture a passing result.
 
-## P1 and P2 scenarios
+## P1 scenarios
 
 P1 results provide stability evidence and do not independently block a stable release:
 
 - `app_restart`: rebuild the controller runtime from persisted credentials and reconnect to the saved node without recommissioning.
-- `factory_reset_recommission`: confirm that a subsequent factory reset and commissioning cycle succeeds without relying on old fabric state.
+- `fabric_remove`: the fabric-removal command is accepted over CASE and the commissionee no longer accepts CASE afterwards. Device reset is expressed as a library command, not as a manual factory-reset step.
 
-P2 results record defects and must be included in the report:
+## P0 negative scenario
 
-- `invalid_setup_passcode`: a negative validation run uses a well-formed setup payload with a deliberately incorrect setup passcode and the same discriminator, and must return a clear non-zero failure without a crash.
-- `invalid_wifi_password`: provisioning fails clearly without reporting false success.
-- `remove_fabric_ui`: existing remove/delete-device UI behavior is recorded accurately.
-
-A P2 failure does not block by default. The maintainer must record the failure and explicitly decide whether it is acceptable for the candidate. Do not claim that the missing public `unPairDevice` method was verified by the existing UI delete flow.
+- `invalid_setup_passcode`: after the main commissioning, the controller re-opens a commissioning window with the original discriminator and passcode (revoke-then-open, mirroring the worked example), then attempts commissioning with a well-formed payload carrying a deliberately incorrect passcode. The attempt must return a clear non-zero failure without a crash. A failed PASE handshake adds no fabric to the commissionee.
 
 ## Report and evidence rules
 
@@ -180,14 +176,14 @@ For a stable release, the release-preparation pull request must contain:
 - One clean Android P0 report and one clean iOS P0 report for the candidate commit.
 - A schema v4 report for each platform.
 - Sanitized JSON attachments for both reports; screenshots are optional manual evidence.
-- A maintainer confirmation that all required P0 results passed and that P1/P2 results were reviewed.
+- A maintainer confirmation that all required P0 results passed and that P1 results were reviewed.
 
 The stable version tag must not be created when any required P0 result is `Failed` or `Not run`, when the report commit does not match the candidate, when `network_transport` is not `wifi`, or when any required report field is invalid.
 
 ## Known limits
 
-- The repository has no supported public `unPairDevice` method; only the existing UI delete path can be evaluated.
+- The repository has no supported public `unPairDevice` method; the `fabric_remove` CASE command is the supported removal path.
 - iOS simulator results are not valid evidence.
-- Android validation uses the virtual device app on the controller phone, so commissionee-side actions (factory reset, device restart, invalid-input preparation) are performed by the Agent through mobile automation. Physical commissionee actions and iOS external-app control remain operator tasks and stay outside formal acceptance.
+- Android validation uses the virtual device app on the controller phone. The 9-item `full` matrix performs every test action through library APIs with no operator prompts; only VDA recovery (the documented restart quirk) and post-Run cleanup remain device-side actions.
 - Hardware-in-the-loop CI remains outside formal acceptance.
 - The device-test workflow has no Thread commissioning path.

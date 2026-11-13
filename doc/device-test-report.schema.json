@@ -145,14 +145,12 @@
         "build_install",
         "commissioning",
         "operational_connect",
+        "app_restart",
         "onoff_invoke",
         "onoff_subscription",
-        "node_label_persistence",
-        "app_restart",
-        "factory_reset_recommission",
+        "node_label_read_write",
         "invalid_setup_passcode",
-        "invalid_wifi_password",
-        "remove_fabric_ui"
+        "fabric_remove"
       ],
       "properties": {
         "build_install": {
@@ -164,28 +162,22 @@
         "operational_connect": {
           "$ref": "#/$defs/testResult"
         },
+        "app_restart": {
+          "$ref": "#/$defs/testResult"
+        },
         "onoff_invoke": {
           "$ref": "#/$defs/testResult"
         },
         "onoff_subscription": {
           "$ref": "#/$defs/testResult"
         },
-        "node_label_persistence": {
-          "$ref": "#/$defs/testResult"
-        },
-        "app_restart": {
-          "$ref": "#/$defs/testResult"
-        },
-        "factory_reset_recommission": {
+        "node_label_read_write": {
           "$ref": "#/$defs/testResult"
         },
         "invalid_setup_passcode": {
           "$ref": "#/$defs/testResult"
         },
-        "invalid_wifi_password": {
-          "$ref": "#/$defs/testResult"
-        },
-        "remove_fabric_ui": {
+        "fabric_remove": {
           "$ref": "#/$defs/testResult"
         }
       }

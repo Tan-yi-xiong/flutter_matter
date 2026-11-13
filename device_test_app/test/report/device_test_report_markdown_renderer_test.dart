@@ -23,7 +23,7 @@ void main() {
     expect(markdown, contains('vendor `4660`'));
     expect(markdown, contains('product `22136`'));
     expect(markdown, contains('android-build-install.png'));
-    expect(markdown, contains('The optional UI path was unavailable'));
+    expect(markdown, contains('The fabric removal could not be verified'));
 
     final rawTests = json['tests']! as Map<String, dynamic>;
     for (final testId in DeviceTestCatalog.all) {
@@ -55,8 +55,8 @@ void main() {
     final report = const DeviceTestReportBuilder().buildFormal(
       buildFixtureSession(
         overrides: <DeviceTestId, DeviceTestResult>{
-          DeviceTestId.invalidWifiPassword: DeviceTestResult(
-            testId: DeviceTestId.invalidWifiPassword,
+          DeviceTestId.invalidSetupPasscode: DeviceTestResult(
+            testId: DeviceTestId.invalidSetupPasscode,
             status: DeviceTestStatus.failed,
             notes: 'failed | with\ntwo lines',
           ),
