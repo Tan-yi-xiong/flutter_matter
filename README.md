@@ -260,6 +260,47 @@ Agent-driven runs use the Mac WebSocket bridge and the repository Skill `flutter
 
 ---
 
+## 🛠️ Development
+
+### Environment
+
+- Flutter **3.41.0** via [FVM](https://fvm.app) (pinned in `.fvmrc`).
+- Android: JDK 17, Android SDK 34+.
+- iOS: Xcode 16.4+, CocoaPods 1.17; physical iPhone only — the vendored `ZGMatter.framework` has no simulator slice.
+
+### Common commands
+
+| Task | Command |
+| --- | --- |
+| Analyze (errors only) | `fvm flutter analyze --no-fatal-infos --no-fatal-warnings` |
+| Format | `fvm dart format .` |
+| Plugin tests (CI gate) | `fvm flutter test` |
+| Example Android build | `cd example && fvm flutter build apk --debug` |
+| Device test app analyze / tests | `cd device_test_app && fvm flutter analyze --no-fatal-infos --no-fatal-warnings && fvm flutter test` |
+| Device test app builds / runs | `fvm dart run tool/device_test_app.dart build-apk` / `build-ios` / `run` |
+
+### Repository guide
+
+| Document | Covers |
+| --- | --- |
+| [Public API](doc/public-api.md) | Exported API reference and changelog pointers |
+| [Platform support](doc/platform-support.md) | Android / iOS capability matrix |
+| [Device test app](doc/device-test-app.md) | Validation app architecture, run lifecycle, persistence |
+| [Agent device testing](doc/agent-device-testing.md) | Mac bridge protocol, JSON CLI, agent loop |
+| [Device validation](doc/device-validation.md) | Validation strategy, P0/P1/P2 scenarios, virtual commissionee |
+| [Device test report](doc/device-test-report.md) | Schema v4 report contract and evidence rules |
+| [PR review checklist](doc/pr-review-checklist.md) | What reviewers must verify |
+| [Releasing](doc/releasing.md) | Version bump and publish workflow |
+| [ADR records](doc/adr/) | Architecture decisions |
+
+### Validation gates
+
+- The Dart CI gate runs the plugin test suite only; it does not validate Matter behavior on hardware.
+- Any device-behavior change requires a `device_test_app` **full** run with a valid schema v4 report attached to the PR, and the report commit must match the PR head.
+- Native Matter artifacts (`ZGMatter.framework`, the prefixed Android Matter AAR) are versioned inputs — do not rewrite them inside unrelated changes.
+
+---
+
 ## 📌 Notes
 
 - Images are displayed using fixed widths to keep them clean and prevent stretching.
