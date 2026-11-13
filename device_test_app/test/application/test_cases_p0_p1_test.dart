@@ -541,6 +541,10 @@ void main() {
       expect(hardware.commissioningWindow.discriminators.single, 3840);
       expect(hardware.commissioningWindow.setupPinCodes.single, 20202021);
       expect(hardware.commissioning.requests.single.setupPinCode, 20202022);
+      expect(
+        hardware.commissioning.requests.single.onNetworkEndpoint?.address,
+        '127.0.0.1',
+      );
       expect(harness.prompts, isEmpty);
     });
 

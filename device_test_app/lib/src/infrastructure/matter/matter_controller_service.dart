@@ -153,19 +153,36 @@ class MatterControllerService {
       final networkCredentials = request.networkCredentials
           .toPluginCredentials();
       const connectId = null;
-      await withMatterTimeout<void>(
-        future: controller.pairDevice(
-          nodeId: request.nodeId,
-          connectId: connectId,
-          setupPinCode: request.setupPinCode,
-          onboardingPayload: request.onboardingPayload,
-          networkCredentials: networkCredentials,
-          attestationDelegate: attestationDelegate,
-          completionListener: listener,
-        ),
-        timeout: timeout,
-        operation: 'Start Matter commissioning',
-      );
+      if (request.onNetworkAddress != null && request.onNetworkPort != null) {
+        await withMatterTimeout<void>(
+          future: controller.pairDeviceWithAddress(
+            nodeId: request.nodeId,
+            address: request.onNetworkAddress!,
+            port: request.onNetworkPort!,
+            discriminator: request.discriminator ?? 0,
+            setupPincode: request.setupPinCode,
+            csrNonce: null,
+            attestationDelegate: attestationDelegate,
+            completionListener: listener,
+          ),
+          timeout: timeout,
+          operation: 'Start Matter commissioning',
+        );
+      } else {
+        await withMatterTimeout<void>(
+          future: controller.pairDevice(
+            nodeId: request.nodeId,
+            connectId: connectId,
+            setupPinCode: request.setupPinCode,
+            onboardingPayload: request.onboardingPayload,
+            networkCredentials: networkCredentials,
+            attestationDelegate: attestationDelegate,
+            completionListener: listener,
+          ),
+          timeout: timeout,
+          operation: 'Start Matter commissioning',
+        );
+      }
 
       final outcome = await listener.wait(timeout);
       if (outcome.errorCode != 0) {

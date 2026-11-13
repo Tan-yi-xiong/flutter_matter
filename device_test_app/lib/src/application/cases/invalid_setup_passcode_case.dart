@@ -80,6 +80,16 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
       identityRequest,
     );
 
+    // Same-phone Android validation advertises the re-opened window in basic
+    // commissioning mode, which the SDK's payload discovery refuses to hand
+    // to PASE. Commissioning directly to the on-phone VDA loopback endpoint
+    // bypasses discovery while the window is open, so the wrong passcode is
+    // still exercised against the real PASE handshake.
+    final endpoint =
+        secrets.onNetworkEndpoint ??
+        (controller.platform == ControllerPlatform.android
+            ? OnNetworkCommissioningEndpoint(address: '127.0.0.1', port: 5540)
+            : null);
     try {
       final result = await commissionTarget(
         context,
@@ -88,6 +98,7 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
         timeout: context.timeoutFor(id),
         onboardingPayload: secrets.invalidSetupOnboardingPayload,
         setupPinCode: secrets.invalidSetupPinCode,
+        onNetworkEndpoint: endpoint,
       );
       return result.succeeded
           ? TestCaseOutcome.failed(

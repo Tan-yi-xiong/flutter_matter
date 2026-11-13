@@ -66,7 +66,20 @@ class MatterCommissioningListener implements CompletionListener {
   void onConnectDeviceComplete() {}
 
   @override
-  void onStatusUpdate(int status) {}
+  void onStatusUpdate(int status) {
+    // The native completion callback reports CHIP error codes here. Progress
+    // updates arrive through onCommissioningStatusUpdate, so a non-zero
+    // status is terminal and must not be swallowed by the collector.
+    if (status == 0) {
+      return;
+    }
+    fail(
+      MatterException(
+        MatterFailureCode.commissioningFailed,
+        'Commissioning failed with error code $status',
+      ),
+    );
+  }
 
   @override
   void onPairingComplete(int errorCode) {

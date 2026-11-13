@@ -95,6 +95,7 @@ Future<CommissioningResult> commissionTarget(
   required Duration timeout,
   String? onboardingPayload,
   int? setupPinCode,
+  OnNetworkCommissioningEndpoint? onNetworkEndpoint,
 }) {
   return context.ports.commissioning.commission(
     CommissioningRequest(
@@ -104,7 +105,7 @@ Future<CommissioningResult> commissionTarget(
       setupPinCode: setupPinCode ?? secrets.setupPinCode,
       network: secrets.network,
       setupDiscriminator: secrets.setupDiscriminator,
-      onNetworkEndpoint: secrets.onNetworkEndpoint,
+      onNetworkEndpoint: onNetworkEndpoint ?? secrets.onNetworkEndpoint,
       timeout: timeout,
     ),
   );
