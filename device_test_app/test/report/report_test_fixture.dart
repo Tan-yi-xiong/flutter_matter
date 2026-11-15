@@ -27,15 +27,8 @@ RunSession buildFixtureSession({
     for (final testId in DeviceTestCatalog.all)
       testId: DeviceTestResult(
         testId: testId,
-        status: testId == DeviceTestId.removeFabricUi
-            ? DeviceTestStatus.notRun
-            : DeviceTestStatus.passed,
-        duration: testId == DeviceTestId.removeFabricUi
-            ? Duration.zero
-            : Duration(milliseconds: 1000 + testId.index),
-        notes: testId == DeviceTestId.removeFabricUi
-            ? 'The optional UI path was unavailable after the factory reset.'
-            : null,
+        status: DeviceTestStatus.passed,
+        duration: Duration(milliseconds: 1000 + testId.index),
         evidenceFiles: testId == DeviceTestId.buildInstall
             ? const <String>['android-build-install.png']
             : const <String>[],

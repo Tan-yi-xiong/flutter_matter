@@ -8,26 +8,17 @@ import 'runner_state.dart';
 
 /// Controller identity material stays behind the adapter. The application only
 /// sees an opaque identity handle.
-enum ControllerIdentityPurpose {
-  main,
-  invalidSetupPasscode,
-  invalidWifiPassword,
-  removeFabricUi,
-}
+enum ControllerIdentityPurpose { main, invalidSetupPasscode }
 
 extension ControllerIdentityPurposeWire on ControllerIdentityPurpose {
   String get wireName => switch (this) {
     ControllerIdentityPurpose.main => 'main',
     ControllerIdentityPurpose.invalidSetupPasscode => 'invalid_setup_passcode',
-    ControllerIdentityPurpose.invalidWifiPassword => 'invalid_wifi_password',
-    ControllerIdentityPurpose.removeFabricUi => 'remove_fabric_ui',
   };
 
   static ControllerIdentityPurpose parse(Object? value) => switch (value) {
     'main' => ControllerIdentityPurpose.main,
     'invalid_setup_passcode' => ControllerIdentityPurpose.invalidSetupPasscode,
-    'invalid_wifi_password' => ControllerIdentityPurpose.invalidWifiPassword,
-    'remove_fabric_ui' => ControllerIdentityPurpose.removeFabricUi,
     _ => throw FormatException('Unknown controller identity purpose: $value'),
   };
 }
@@ -158,24 +149,6 @@ class ProvisioningSecrets {
   NetworkTransport get transport => network.transport;
 
   int get invalidSetupPinCode => invalidMatterSetupPinCodeFor(setupPinCode);
-
-  ProvisioningSecrets withInvalidWifiPassword() {
-    final networkSecret = network;
-    if (networkSecret is! WifiProvisioningSecret) {
-      throw StateError('Wi-Fi secrets are not configured');
-    }
-    return ProvisioningSecrets(
-      onboardingPayload: onboardingPayload,
-      invalidSetupOnboardingPayload: invalidSetupOnboardingPayload,
-      setupPinCode: setupPinCode,
-      setupDiscriminator: setupDiscriminator,
-      onNetworkEndpoint: onNetworkEndpoint,
-      network: WifiProvisioningSecret(
-        ssid: networkSecret.ssid,
-        password: '${networkSecret.password}#invalid',
-      ),
-    );
-  }
 
   @override
   String toString() => 'ProvisioningSecrets(redacted)';
@@ -485,6 +458,43 @@ class FabricException implements Exception {
   String toString() => 'FabricException(${code.wireName})';
 }
 
+enum CommissioningWindowFailureCode { notConnected, openFailed, timeout, other }
+
+extension CommissioningWindowFailureCodeWire on CommissioningWindowFailureCode {
+  String get wireName => switch (this) {
+    CommissioningWindowFailureCode.notConnected => 'not_connected',
+    CommissioningWindowFailureCode.openFailed => 'open_failed',
+    CommissioningWindowFailureCode.timeout => 'timeout',
+    CommissioningWindowFailureCode.other => 'other',
+  };
+}
+
+class CommissioningWindowException implements Exception {
+  CommissioningWindowException(this.code);
+
+  final CommissioningWindowFailureCode code;
+
+  @override
+  String toString() => 'CommissioningWindowException(${code.wireName})';
+}
+
+/// Re-opens a commissionable advertisement on an already commissioned node.
+///
+/// The window reuses the original discriminator and setup passcode so the
+/// invalid-commissioning scenarios can discover the commissionee with the
+/// regular onboarding payload after the main fabric is in place.
+abstract interface class CommissioningWindowPort {
+  Future<void> open({
+    required ControllerIdentity identity,
+    required int nodeId,
+    required OperationalConnectionLease connection,
+    required int durationSeconds,
+    required int discriminator,
+    required int setupPinCode,
+    required Duration timeout,
+  });
+}
+
 abstract interface class FabricPort {
   Future<FabricStatus> inspect({
     required ControllerIdentity identity,
@@ -551,6 +561,7 @@ abstract interface class RunPersistencePort {
 class TestPorts {
   const TestPorts({
     required this.commissioning,
+    required this.commissioningWindow,
     required this.operationalConnection,
     required this.onOff,
     required this.nodeLabel,
@@ -559,6 +570,7 @@ class TestPorts {
   });
 
   final CommissioningPort commissioning;
+  final CommissioningWindowPort commissioningWindow;
   final OperationalConnectionPort operationalConnection;
   final OnOffPort onOff;
   final NodeLabelPort nodeLabel;

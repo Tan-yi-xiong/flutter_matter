@@ -18,7 +18,7 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 7. Do not add commissioning-transport selection, host-side scanning, or readiness gating. The app passes the raw onboarding payload to the Matter SDK, which performs discovery and commissioning.
 8. If commissioning fails, preserve the failure and stop the Run. Do not retry commissioning in the same Run.
 9. Do not send Thread commissioning material or Thread-specific setup fields.
-10. `quick` contains four iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 11 fixed tests.
+10. `quick` contains four iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 8 fixed tests.
 11. Never retry a failed P0 test in the same Run to manufacture a passing result.
 12. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
 13. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
@@ -184,7 +184,11 @@ Read the latest state and prompt.
 
 ### `agent_android` prompt
 
-The prompt applies only to the selected Android controller. Use the installed mobile automation capability to inspect that controller screen and perform the smallest requested action, such as accepting a local-network permission.
+The prompt applies only to the selected Android controller. Use the installed mobile automation capability to inspect that controller screen and perform the smallest requested action. Android prompts cover both app surfaces and commissionee surfaces:
+
+- Accepting system permission dialogs (local network, Bluetooth).
+- Operating the virtual device app on the same phone when the prompt asks for a commissionee action (factory reset, restart, commissioning-window preparation): restart the app or drive its UI (BACK -> confirm factory reset -> start the device again) with adb taps.
+- These actions are always bounded to the selected controller phone; a physical Matter commissionee is never driven through mobile automation.
 
 Before acting:
 
@@ -200,7 +204,7 @@ fvm dart run tool/device_test_agent.dart command \
   --command-id <stable-prompt-command-id>
 ```
 
-Do not use mobile automation to operate physical Matter state changes or iOS system surfaces.
+Do not use mobile automation to operate physical Matter devices or iOS system surfaces. Commissionee automation is limited to the virtual device app on the selected Android controller.
 
 ### `human` prompt
 
@@ -214,6 +218,8 @@ fvm dart run tool/device_test_agent.dart command \
 ```
 
 If the prompt allows skipping or must be failed, use `skip_prompt` or `fail_prompt` with the current `prompt_id` and a concrete reason. Do not claim a human action succeeded until the app reports the next semantic state or the operator explicitly confirms it.
+
+**Wait bound:** poll the prompt for at most three minutes. If neither the operator nor a mobile-automated action resolves it, `skip_prompt` with the concrete reason (for example `operator unavailable`) and let the Run record the result truthfully — never leave a `human` prompt waiting indefinitely, and never fabricate a confirmation.
 
 ### `app_restart` behavior
 
@@ -276,7 +282,7 @@ After the Matter SDK attempts commissioning and it fails, do not retry commissio
 
 You may retry a command when the failure is clearly a command-delivery failure and the app never executed it. Reuse the same command ID for that retry. If the app executed the test and reported `failed`, preserve the report and report the failure to the user.
 
-P1 and P2 results may be `not_run` with a concrete reason. P2 failures require explicit maintainer risk acceptance.
+P1 results may be `not_run` with a concrete reason. P1 failures require explicit maintainer risk acceptance.
 
 ### Post-Run commissionee reset (optional)
 

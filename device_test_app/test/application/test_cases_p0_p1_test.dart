@@ -4,8 +4,8 @@ import 'package:flutter_matter_device_test_app/src/application/application.dart'
 import 'package:flutter_matter_device_test_app/src/application/cases/app_restart_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/build_install_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/commissioning_case.dart';
-import 'package:flutter_matter_device_test_app/src/application/cases/factory_reset_recommission_case.dart';
-import 'package:flutter_matter_device_test_app/src/application/cases/node_label_persistence_case.dart';
+import 'package:flutter_matter_device_test_app/src/application/cases/invalid_setup_passcode_case.dart';
+import 'package:flutter_matter_device_test_app/src/application/cases/node_label_read_write_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/onoff_invoke_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/onoff_subscription_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/operational_connect_case.dart';
@@ -282,106 +282,109 @@ void main() {
 
   group('onoff_subscription', () {
     test(
-      'passes when an external update arrives and routes the prompt',
-      () async {
-        final hardware = FakeHardware();
-        final harness = TestContextHarness(
-          testId: DeviceTestId.onoffSubscription,
-          ports: hardware.ports,
-          operatorHandler: (prompt) async {
-            expect(prompt.requiredActor, RequiredActor.human);
-            expect(prompt.testId, DeviceTestId.onoffSubscription);
-            hardware.onOff.pushUpdate(OnOffState.off);
-            return OperatorDecision.confirmed();
-          },
-        );
-        final context = harness.build();
-
-        final outcome = await const OnOffSubscriptionCase().execute(context);
-
-        expect(outcome.status, DeviceTestStatus.passed);
-        expect(harness.prompts.single.id, 'onoff_subscription_external_change');
-        expect(hardware.onOff.cancelCount, 1);
-      },
-    );
-
-    test(
-      'returns not_run when the operator skips the external action',
+      'passes by triggering the state change and observing the update',
       () async {
         final hardware = FakeHardware();
         final context = TestContextHarness(
           testId: DeviceTestId.onoffSubscription,
           ports: hardware.ports,
-          operatorHandler: (_) =>
-              OperatorDecision.skipped('external update unavailable'),
         ).build();
 
         final outcome = await const OnOffSubscriptionCase().execute(context);
 
-        expect(outcome.status, DeviceTestStatus.notRun);
-        expect(outcome.notes, contains('external update unavailable'));
+        expect(outcome.status, DeviceTestStatus.passed);
+        expect(hardware.onOff.invokedCommands, [OnOffCommand.toggle]);
+        expect(hardware.onOff.cancelCount, 1);
       },
     );
 
-    test('fails when no external update arrives before the timeout', () async {
+    test('fails when the trigger command does not change state', () async {
       final hardware = FakeHardware();
+      hardware.onOff.handler = (connection, command, timeout) async {
+        return OnOffInvocation(
+          previousState: hardware.onOff.currentState,
+          currentState: hardware.onOff.currentState,
+        );
+      };
       final context = TestContextHarness(
         testId: DeviceTestId.onoffSubscription,
         ports: hardware.ports,
-        operatorHandler: (_) => OperatorDecision.confirmed(),
       ).build();
 
       final outcome = await const OnOffSubscriptionCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('external OnOff update'));
+      expect(
+        outcome.notes,
+        contains('trigger command did not change the commissionee state'),
+      );
     });
+
+    test(
+      'fails when no subscription update arrives before the timeout',
+      () async {
+        final hardware = FakeHardware();
+        hardware.onOff.handler = (connection, command, timeout) async {
+          // Report a state change without pushing it to the subscription.
+          return const OnOffInvocation(
+            previousState: OnOffState.on,
+            currentState: OnOffState.off,
+          );
+        };
+        final context = TestContextHarness(
+          testId: DeviceTestId.onoffSubscription,
+          ports: hardware.ports,
+        ).build();
+
+        final outcome = await const OnOffSubscriptionCase().execute(context);
+
+        expect(outcome.status, DeviceTestStatus.failed);
+        expect(outcome.notes, contains('No OnOff subscription update arrived'));
+      },
+    );
   });
 
-  group('node_label_persistence', () {
-    test('passes when NodeLabel survives a commissionee restart', () async {
+  group('node_label_read_write', () {
+    test('passes a write/read round trip without prompts', () async {
       final hardware = FakeHardware();
-      final context = TestContextHarness(
-        testId: DeviceTestId.nodeLabelPersistence,
+      final harness = TestContextHarness(
+        testId: DeviceTestId.nodeLabelReadWrite,
         ports: hardware.ports,
-      ).build();
+      );
+      final context = harness.build();
 
-      final outcome = await const NodeLabelPersistenceCase().execute(context);
+      final outcome = await const NodeLabelReadWriteCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.passed);
       expect(hardware.nodeLabel.writeCount, 1);
-      expect(hardware.nodeLabel.readCount, 2);
-      expect(hardware.operational.reconnectCount, 1);
+      expect(hardware.nodeLabel.readCount, 1);
+      expect(hardware.operational.reconnectCount, 0);
+      expect(harness.prompts, isEmpty);
     });
 
-    test('fails when NodeLabel changes after the restart', () async {
+    test('fails when the readback does not match the written value', () async {
       final hardware = FakeHardware();
-      var reads = 0;
-      hardware.nodeLabel.readHandler = () async {
-        reads++;
-        return reads == 1 ? 'flutter-matter-test' : 'changed';
-      };
+      hardware.nodeLabel.readHandler = () async => 'changed';
       final context = TestContextHarness(
-        testId: DeviceTestId.nodeLabelPersistence,
+        testId: DeviceTestId.nodeLabelReadWrite,
         ports: hardware.ports,
       ).build();
 
-      final outcome = await const NodeLabelPersistenceCase().execute(context);
+      final outcome = await const NodeLabelReadWriteCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('did not survive'));
+      expect(outcome.notes, contains('did not match'));
     });
 
-    test('returns not_run when restart confirmation is skipped', () async {
+    test('returns not_run without identity or node context', () async {
       final hardware = FakeHardware();
       final context = TestContextHarness(
-        testId: DeviceTestId.nodeLabelPersistence,
+        testId: DeviceTestId.nodeLabelReadWrite,
         ports: hardware.ports,
-        operatorHandler: (_) =>
-            OperatorDecision.skipped('device restart unavailable'),
+        execution: RunExecutionContext(),
       ).build();
 
-      final outcome = await const NodeLabelPersistenceCase().execute(context);
+      final outcome = await const NodeLabelReadWriteCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.notRun);
     });
@@ -429,67 +432,77 @@ void main() {
     });
   });
 
-  group('factory_reset_recommission', () {
-    test(
-      'passes through reset, recommissioning, connection, and OnOff',
-      () async {
-        final hardware = FakeHardware();
-        final context = TestContextHarness(
-          testId: DeviceTestId.factoryResetRecommission,
-          ports: hardware.ports,
-          execution: makeExecution(),
-        ).build();
+  group('invalid_setup_passcode', () {
+    test('passes when the wrong passcode fails commissioning', () async {
+      final hardware = FakeHardware();
+      final harness = TestContextHarness(
+        testId: DeviceTestId.invalidSetupPasscode,
+        ports: hardware.ports,
+      );
+      final context = harness.build();
 
-        final outcome = await const FactoryResetRecommissionCase().execute(
-          context,
-        );
+      final outcome = await const InvalidSetupPasscodeCase().execute(context);
 
-        expect(outcome.status, DeviceTestStatus.passed);
-        expect(hardware.identity.resetCount, greaterThanOrEqualTo(1));
-        expect(
-          hardware.commissioning.requests.single.onboardingPayload,
-          'MT:TEST-ONBOARDING-PAYLOAD',
-        );
-        expect(hardware.commissioning.requests, isNotEmpty);
-        expect(hardware.onOff.invokedCommands, contains(OnOffCommand.on));
-      },
-    );
+      expect(outcome.status, DeviceTestStatus.passed);
+      expect(hardware.commissioningWindow.openCount, 1);
+      expect(hardware.commissioningWindow.discriminators.single, 3840);
+      expect(hardware.commissioningWindow.setupPinCodes.single, 20202021);
+      expect(hardware.commissioning.requests.single.setupPinCode, 20202022);
+      expect(
+        hardware.commissioning.requests.single.onNetworkEndpoint?.address,
+        '127.0.0.1',
+      );
+      expect(harness.prompts, isEmpty);
+    });
 
-    test(
-      'returns not_run when operator skips the factory reset prompt',
-      () async {
-        final hardware = FakeHardware();
-        final context = TestContextHarness(
-          testId: DeviceTestId.factoryResetRecommission,
-          ports: hardware.ports,
-          operatorHandler: (_) =>
-              OperatorDecision.skipped('factory reset unavailable'),
-        ).build();
-
-        final outcome = await const FactoryResetRecommissionCase().execute(
-          context,
-        );
-
-        expect(outcome.status, DeviceTestStatus.notRun);
-      },
-    );
-
-    test('fails when post-reset commissioning fails', () async {
+    test('fails when the wrong passcode is accepted', () async {
       final hardware = FakeHardware();
       hardware.commissioning.handler = (_) async =>
-          const CommissioningResult(errorCode: 23);
+          const CommissioningResult(errorCode: 0, nodeId: 1);
       final context = TestContextHarness(
-        testId: DeviceTestId.factoryResetRecommission,
+        testId: DeviceTestId.invalidSetupPasscode,
         ports: hardware.ports,
-        execution: makeExecution(),
       ).build();
 
-      final outcome = await const FactoryResetRecommissionCase().execute(
-        context,
-      );
+      final outcome = await const InvalidSetupPasscodeCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('23'));
+      expect(outcome.notes, contains('incorrectly reported success'));
+    });
+
+    test('fails when the commissioning window cannot open', () async {
+      final hardware = FakeHardware();
+      hardware.commissioningWindow.openError =
+          CommissioningWindowFailureCode.openFailed;
+      final context = TestContextHarness(
+        testId: DeviceTestId.invalidSetupPasscode,
+        ports: hardware.ports,
+      ).build();
+
+      final outcome = await const InvalidSetupPasscodeCase().execute(context);
+
+      expect(outcome.status, DeviceTestStatus.failed);
+      expect(outcome.notes, contains('open_failed'));
+    });
+
+    test('returns not_run without a setup discriminator', () async {
+      final hardware = FakeHardware();
+      final secrets = makeSecrets();
+      final noDiscriminator = ProvisioningSecrets(
+        onboardingPayload: secrets.onboardingPayload,
+        invalidSetupOnboardingPayload: secrets.invalidSetupOnboardingPayload,
+        setupPinCode: secrets.setupPinCode,
+        network: secrets.network,
+      );
+      final context = TestContextHarness(
+        testId: DeviceTestId.invalidSetupPasscode,
+        ports: hardware.ports,
+        secrets: noDiscriminator,
+      ).build();
+
+      final outcome = await const InvalidSetupPasscodeCase().execute(context);
+
+      expect(outcome.status, DeviceTestStatus.notRun);
     });
   });
 }

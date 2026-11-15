@@ -10,10 +10,10 @@ void main() {
     ]);
 
     expect(summary.result, ReportResult.passed);
-    expect(summary.passed, 11);
+    expect(summary.passed, 8);
     expect(summary.failed, 0);
     expect(summary.notRun, 0);
-    expect(summary.total, 11);
+    expect(summary.total, 8);
   });
 
   test('a P0 not_run makes the overall result not_run', () {
@@ -31,7 +31,7 @@ void main() {
     expect(summary.notRun, 1);
   });
 
-  test('P1 and P2 not_run results do not block a passed summary', () {
+  test('P1 not_run results do not block a passed summary', () {
     final summary = ReportSummary.calculate(<DeviceTestResult>[
       for (final testId in DeviceTestCatalog.all)
         DeviceTestResult(
@@ -43,8 +43,8 @@ void main() {
     ]);
 
     expect(summary.result, ReportResult.passed);
-    expect(summary.passed, 6);
-    expect(summary.notRun, 5);
+    expect(summary.passed, 7);
+    expect(summary.notRun, 1);
   });
 
   test('any failure makes the overall result failed', () {
@@ -52,7 +52,7 @@ void main() {
       for (final testId in DeviceTestCatalog.all)
         DeviceTestResult(
           testId: testId,
-          status: testId == DeviceTestId.invalidWifiPassword
+          status: testId == DeviceTestId.invalidSetupPasscode
               ? DeviceTestStatus.failed
               : DeviceTestStatus.passed,
         ),

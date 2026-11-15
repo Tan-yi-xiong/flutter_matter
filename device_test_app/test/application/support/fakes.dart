@@ -94,6 +94,35 @@ class FakeCommissioningPort implements CommissioningPort {
   }
 }
 
+class FakeCommissioningWindowPort implements CommissioningWindowPort {
+  FakeCommissioningWindowPort({this.openError});
+
+  /// When set, [open] throws a CommissioningWindowException with this code.
+  CommissioningWindowFailureCode? openError;
+  final List<int> discriminators = <int>[];
+  final List<int> setupPinCodes = <int>[];
+  int openCount = 0;
+
+  @override
+  Future<void> open({
+    required ControllerIdentity identity,
+    required int nodeId,
+    required OperationalConnectionLease connection,
+    required int durationSeconds,
+    required int discriminator,
+    required int setupPinCode,
+    required Duration timeout,
+  }) async {
+    openCount++;
+    discriminators.add(discriminator);
+    setupPinCodes.add(setupPinCode);
+    final error = openError;
+    if (error != null) {
+      throw CommissioningWindowException(error);
+    }
+  }
+}
+
 class FakeOperationalConnectionPort extends OperationalConnectionPort {
   FakeOperationalConnectionPort({
     this.connectValid = true,
@@ -213,6 +242,11 @@ class FakeOnOffPort extends OnOffPort {
       OnOffCommand.on => OnOffState.on,
       OnOffCommand.toggle => currentState.toggled,
     };
+    // A real commissionee pushes the attribute change to active
+    // subscriptions after executing the command.
+    if (currentState != previous) {
+      _updates.add(currentState);
+    }
     return OnOffInvocation(previousState: previous, currentState: currentState);
   }
 
@@ -393,6 +427,8 @@ class RecordingHooksPort extends RunnerHooksPort {
 
 class FakeHardware {
   final FakeCommissioningPort commissioning = FakeCommissioningPort();
+  final FakeCommissioningWindowPort commissioningWindow =
+      FakeCommissioningWindowPort();
   final FakeOperationalConnectionPort operational =
       FakeOperationalConnectionPort();
   final FakeOnOffPort onOff = FakeOnOffPort();
@@ -402,6 +438,7 @@ class FakeHardware {
 
   TestPorts get ports => TestPorts(
     commissioning: commissioning,
+    commissioningWindow: commissioningWindow,
     operationalConnection: operational,
     onOff: onOff,
     nodeLabel: nodeLabel,
@@ -437,6 +474,7 @@ ProvisioningSecrets makeSecrets({ProvisioningNetworkSecret? network}) =>
       network:
           network ??
           const WifiProvisioningSecret(ssid: 'matter-lab', password: 'correct'),
+      setupDiscriminator: 3840,
     );
 
 const TestTimeouts fastTimeouts = TestTimeouts(
@@ -445,12 +483,10 @@ const TestTimeouts fastTimeouts = TestTimeouts(
   operationalConnect: Duration(milliseconds: 100),
   onOffInvoke: Duration(milliseconds: 100),
   onOffSubscription: Duration(milliseconds: 100),
-  nodeLabelPersistence: Duration(milliseconds: 100),
+  nodeLabelReadWrite: Duration(milliseconds: 100),
   appRestart: Duration(milliseconds: 100),
-  factoryResetRecommission: Duration(milliseconds: 100),
   invalidSetupPasscode: Duration(milliseconds: 100),
-  invalidWifiPassword: Duration(milliseconds: 100),
-  removeFabricUi: Duration(milliseconds: 100),
+  commissioningWindow: Duration(milliseconds: 100),
 );
 
 RunSession makeSession({

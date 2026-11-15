@@ -22,8 +22,8 @@ void main() {
     );
 
     expect(jsonEncode(first.toJson()), jsonEncode(second.toJson()));
-    expect(first.summary.passed, 10);
-    expect(first.summary.notRun, 1);
+    expect(first.summary.passed, 8);
+    expect(first.summary.notRun, 0);
     expect(first.summary.result, ReportResult.passed);
     expect(first.profile, TestProfile.full);
     expect(first.commissionee.vendorId, 4660);
@@ -216,8 +216,8 @@ void main() {
   test('rejects not_run results without a reason', () {
     final session = buildFixtureSession(
       overrides: <DeviceTestId, DeviceTestResult>{
-        DeviceTestId.removeFabricUi: DeviceTestResult(
-          testId: DeviceTestId.removeFabricUi,
+        DeviceTestId.appRestart: DeviceTestResult(
+          testId: DeviceTestId.appRestart,
           status: DeviceTestStatus.notRun,
         ),
       },

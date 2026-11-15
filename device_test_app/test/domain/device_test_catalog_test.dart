@@ -8,14 +8,11 @@ void main() {
         'build_install',
         'commissioning',
         'operational_connect',
+        'app_restart',
         'onoff_invoke',
         'onoff_subscription',
-        'node_label_persistence',
-        'app_restart',
-        'factory_reset_recommission',
+        'node_label_read_write',
         'invalid_setup_passcode',
-        'invalid_wifi_password',
-        'remove_fabric_ui',
       ]);
       expect(
         DeviceTestCatalog.all.map((testId) => testId.priority),
@@ -23,14 +20,11 @@ void main() {
           DeviceTestPriority.p0,
           DeviceTestPriority.p0,
           DeviceTestPriority.p0,
-          DeviceTestPriority.p0,
-          DeviceTestPriority.p0,
-          DeviceTestPriority.p0,
           DeviceTestPriority.p1,
-          DeviceTestPriority.p1,
-          DeviceTestPriority.p2,
-          DeviceTestPriority.p2,
-          DeviceTestPriority.p2,
+          DeviceTestPriority.p0,
+          DeviceTestPriority.p0,
+          DeviceTestPriority.p0,
+          DeviceTestPriority.p0,
         ],
       );
     });
@@ -50,7 +44,7 @@ void main() {
 
     test('full contains every fixed test in canonical order', () {
       expect(TestProfile.full.testIds, DeviceTestCatalog.all);
-      expect(TestProfile.full.testIds.toSet(), hasLength(11));
+      expect(TestProfile.full.testIds.toSet(), hasLength(8));
     });
 
     test('wire names round trip and unknown names fail', () {

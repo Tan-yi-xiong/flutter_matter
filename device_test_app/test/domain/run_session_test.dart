@@ -19,7 +19,7 @@ void main() {
         startedAt: startedAt,
       );
 
-      expect(session.results, hasLength(11));
+      expect(session.results, hasLength(8));
       expect(
         session.orderedResults.map((result) => result.status),
         everyElement(DeviceTestStatus.pending),
@@ -75,7 +75,7 @@ void main() {
         DeviceTestStatus.passed,
       );
       expect(resumed.nextActionableTestId, DeviceTestId.commissioning);
-      expect(resumed.progress, closeTo(1 / 11, 0.0001));
+      expect(resumed.progress, closeTo(1 / 8, 0.0001));
     });
 
     test('serializes and restores schema-version 2 snapshots', () {
@@ -136,7 +136,7 @@ void main() {
       expect(
         () => session.recordResult(
           DeviceTestResult(
-            testId: DeviceTestId.nodeLabelPersistence,
+            testId: DeviceTestId.nodeLabelReadWrite,
             status: DeviceTestStatus.passed,
           ),
           at: startedAt.add(const Duration(seconds: 1)),

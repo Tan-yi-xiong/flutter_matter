@@ -61,8 +61,8 @@ void main() {
       );
 
       expect(payload.status, AgentRunStatus.passed);
-      expect(payload.completedTests, 11);
-      expect(payload.totalTests, 11);
+      expect(payload.completedTests, 8);
+      expect(payload.totalTests, 8);
     });
 
     test('keeps a P0 not-run result out of the passed state', () {
@@ -105,7 +105,7 @@ void main() {
         timestamp: DateTime.utc(2026, 11, 12),
         message: 'Fabric removal failed.',
         runId: 'run-fixture',
-        testId: DeviceTestId.removeFabricUi,
+        testId: DeviceTestId.appRestart,
         data: const <String, Object?>{
           'stage': 'remove',
           'password': 'must-not-leak',
@@ -116,7 +116,7 @@ void main() {
       final payload = projection.projectEvent(event);
 
       expect(payload.severity, AgentEventSeverity.error);
-      expect(payload.testId, DeviceTestId.removeFabricUi.wireName);
+      expect(payload.testId, DeviceTestId.appRestart.wireName);
       expect(payload.data, <String, Object?>{'stage': 'remove'});
     });
 

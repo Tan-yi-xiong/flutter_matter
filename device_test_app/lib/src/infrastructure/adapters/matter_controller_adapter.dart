@@ -15,6 +15,7 @@ class MatterControllerAdapter
     implements
         ControllerIdentityPort,
         CommissioningPort,
+        CommissioningWindowPort,
         OperationalConnectionPort,
         OnOffPort,
         NodeLabelPort,
@@ -573,6 +574,51 @@ class MatterControllerAdapter
       throw FabricException(FabricFailureCode.timeout);
     } on Object {
       throw FabricException(FabricFailureCode.other);
+    }
+  }
+
+  @override
+  Future<void> open({
+    required ControllerIdentity identity,
+    required int nodeId,
+    required OperationalConnectionLease connection,
+    required int durationSeconds,
+    required int discriminator,
+    required int setupPinCode,
+    required Duration timeout,
+  }) async {
+    final handle = _requireConnection(
+      connection,
+      failure: CommissioningWindowException(
+        CommissioningWindowFailureCode.notConnected,
+      ),
+    );
+    try {
+      await _withTimeout(
+        handle.runtime.controller.openPairingWindow(
+          MatterOpenPairingWindowRequest(
+            connection: handle.matterConnection,
+            durationSeconds: durationSeconds,
+            discriminator: discriminator,
+            setupPinCode: setupPinCode,
+          ),
+        ),
+        timeout,
+      );
+    } on MatterTimeoutException {
+      throw CommissioningWindowException(
+        CommissioningWindowFailureCode.timeout,
+      );
+    } on MatterException {
+      throw CommissioningWindowException(
+        CommissioningWindowFailureCode.openFailed,
+      );
+    } on TimeoutException {
+      throw CommissioningWindowException(
+        CommissioningWindowFailureCode.timeout,
+      );
+    } on Object {
+      throw CommissioningWindowException(CommissioningWindowFailureCode.other);
     }
   }
 

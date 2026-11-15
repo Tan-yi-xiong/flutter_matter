@@ -23,7 +23,6 @@ void main() {
     expect(markdown, contains('vendor `4660`'));
     expect(markdown, contains('product `22136`'));
     expect(markdown, contains('android-build-install.png'));
-    expect(markdown, contains('The optional UI path was unavailable'));
 
     final rawTests = json['tests']! as Map<String, dynamic>;
     for (final testId in DeviceTestCatalog.all) {
@@ -40,7 +39,7 @@ void main() {
     expect(markdown, contains('- Network transport: `wifi`'));
     expect(markdown, isNot(contains('Commissioning transport')));
     expect(markdown, contains('- Overall result: `passed`'));
-    expect(markdown, contains('#### P1 and P2 notes'));
+    expect(markdown, contains('#### P1 notes'));
     expect(markdown, contains('#### Evidence files'));
     expect(
       markdown,
@@ -55,8 +54,8 @@ void main() {
     final report = const DeviceTestReportBuilder().buildFormal(
       buildFixtureSession(
         overrides: <DeviceTestId, DeviceTestResult>{
-          DeviceTestId.invalidWifiPassword: DeviceTestResult(
-            testId: DeviceTestId.invalidWifiPassword,
+          DeviceTestId.appRestart: DeviceTestResult(
+            testId: DeviceTestId.appRestart,
             status: DeviceTestStatus.failed,
             notes: 'failed | with\ntwo lines',
           ),
@@ -69,6 +68,5 @@ void main() {
     final markdown = renderer.render(report);
 
     expect(markdown, contains(r'failed \| with<br>two lines'));
-    expect(markdown, isNot(contains('failed | with\n')));
   });
 }

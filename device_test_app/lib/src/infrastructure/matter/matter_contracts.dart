@@ -277,6 +277,20 @@ class MatterConnectRequest {
   final Duration? timeout;
 }
 
+class MatterOpenPairingWindowRequest {
+  const MatterOpenPairingWindowRequest({
+    required this.connection,
+    required this.durationSeconds,
+    required this.discriminator,
+    required this.setupPinCode,
+  });
+
+  final MatterConnection connection;
+  final int durationSeconds;
+  final int discriminator;
+  final int setupPinCode;
+}
+
 enum MatterOnOffCommand { off, on, toggle }
 
 class MatterOnOffRequest {

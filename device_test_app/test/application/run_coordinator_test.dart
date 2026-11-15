@@ -116,7 +116,7 @@ void main() {
     );
 
     test(
-      'full profile reaches 11 terminal results and sanitized state',
+      'full profile reaches 8 terminal results and sanitized state',
       () async {
         final hardware = FakeHardware();
         final persistence = MemoryRunPersistencePort();
@@ -150,7 +150,7 @@ void main() {
 
         expect(snapshot.status, RunnerStatus.passed);
         expect(snapshot.session!.allResultsTerminal, isTrue);
-        expect(snapshot.session!.orderedResults.length, 11);
+        expect(snapshot.session!.orderedResults.length, 8);
         expect(
           snapshot.session!.orderedResults.every(
             (result) => result.status == DeviceTestStatus.passed,
@@ -206,14 +206,7 @@ void main() {
           DeviceTestStatus.failed,
         );
         expect(
-          snapshot
-              .session!
-              .results[DeviceTestId.factoryResetRecommission]!
-              .status,
-          DeviceTestStatus.notRun,
-        );
-        expect(
-          snapshot.session!.results[DeviceTestId.invalidWifiPassword]!.status,
+          snapshot.session!.results[DeviceTestId.invalidSetupPasscode]!.status,
           DeviceTestStatus.notRun,
         );
         expect(snapshot.session!.allResultsTerminal, isTrue);
@@ -268,8 +261,8 @@ void main() {
         DeviceTestId.appRestart,
         (_) => TestCaseOutcome.failed('reconnect failed'),
       );
-      final factoryReset = ScriptedCase(
-        DeviceTestId.factoryResetRecommission,
+      final onoffInvoke = ScriptedCase(
+        DeviceTestId.onoffInvoke,
         (_) => const TestCaseOutcome.passed(),
       );
       final coordinator = RunCoordinator(
@@ -277,7 +270,7 @@ void main() {
         registry: scriptedRegistry(
           overrides: {
             DeviceTestId.appRestart: appRestart,
-            DeviceTestId.factoryResetRecommission: factoryReset,
+            DeviceTestId.onoffInvoke: onoffInvoke,
           },
         ),
         timeouts: fastTimeouts,
@@ -287,56 +280,14 @@ void main() {
       final snapshot = await coordinator.start(startRequest(TestProfile.full));
 
       expect(snapshot.status, RunnerStatus.failed);
-      expect(factoryReset.calls, 1);
+      expect(onoffInvoke.calls, 1);
       expect(
-        snapshot
-            .session!
-            .results[DeviceTestId.factoryResetRecommission]!
-            .status,
+        snapshot.session!.results[DeviceTestId.onoffInvoke]!.status,
         DeviceTestStatus.passed,
       );
     });
 
-    test('factory-reset P1 failure stops the remaining P2 sequence', () async {
-      final hardware = FakeHardware();
-      final persistence = MemoryRunPersistencePort();
-      final ports = hardware.applicationPorts(
-        persistence: persistence,
-        secrets: FakeSecretAccessPort(makeSecrets()),
-        prompts: FakeOperatorPromptPort(),
-        clock: FakeClock(),
-      );
-      final factoryReset = ScriptedCase(
-        DeviceTestId.factoryResetRecommission,
-        (_) => TestCaseOutcome.failed('factory reset failed'),
-      );
-      final invalidWifi = ScriptedCase(
-        DeviceTestId.invalidWifiPassword,
-        (_) => const TestCaseOutcome.passed(),
-      );
-      final coordinator = RunCoordinator(
-        ports: ports,
-        registry: scriptedRegistry(
-          overrides: {
-            DeviceTestId.factoryResetRecommission: factoryReset,
-            DeviceTestId.invalidWifiPassword: invalidWifi,
-          },
-        ),
-        timeouts: fastTimeouts,
-      );
-      addTearDown(coordinator.dispose);
-
-      final snapshot = await coordinator.start(startRequest(TestProfile.full));
-
-      expect(invalidWifi.calls, 0);
-      expect(
-        snapshot.session!.results[DeviceTestId.invalidWifiPassword]!.status,
-        DeviceTestStatus.notRun,
-      );
-      expect(snapshot.session!.allResultsTerminal, isTrue);
-    });
-
-    test('P2 failure is recorded and later cases continue', () async {
+    test('P0 invalid-passcode failure produces a failed run', () async {
       final hardware = FakeHardware();
       final persistence = MemoryRunPersistencePort();
       final ports = hardware.applicationPorts(
@@ -349,22 +300,10 @@ void main() {
         DeviceTestId.invalidSetupPasscode,
         (_) => TestCaseOutcome.failed('invalid passcode was accepted'),
       );
-      final invalidWifi = ScriptedCase(
-        DeviceTestId.invalidWifiPassword,
-        (_) => const TestCaseOutcome.passed(),
-      );
-      final removeFabric = ScriptedCase(
-        DeviceTestId.removeFabricUi,
-        (_) => const TestCaseOutcome.passed(),
-      );
       final coordinator = RunCoordinator(
         ports: ports,
         registry: scriptedRegistry(
-          overrides: {
-            DeviceTestId.invalidSetupPasscode: invalidSetup,
-            DeviceTestId.invalidWifiPassword: invalidWifi,
-            DeviceTestId.removeFabricUi: removeFabric,
-          },
+          overrides: {DeviceTestId.invalidSetupPasscode: invalidSetup},
         ),
         timeouts: fastTimeouts,
       );
@@ -372,9 +311,11 @@ void main() {
 
       final snapshot = await coordinator.start(startRequest(TestProfile.full));
 
-      expect(invalidWifi.calls, 1);
-      expect(removeFabric.calls, 1);
       expect(snapshot.status, RunnerStatus.failed);
+      expect(
+        snapshot.session!.results[DeviceTestId.invalidSetupPasscode]!.status,
+        DeviceTestStatus.failed,
+      );
       expect(snapshot.session!.allResultsTerminal, isTrue);
     });
 
@@ -402,12 +343,10 @@ void main() {
           operationalConnect: Duration(milliseconds: 100),
           onOffInvoke: Duration(milliseconds: 10),
           onOffSubscription: Duration(milliseconds: 100),
-          nodeLabelPersistence: Duration(milliseconds: 100),
+          nodeLabelReadWrite: Duration(milliseconds: 100),
           appRestart: Duration(milliseconds: 100),
-          factoryResetRecommission: Duration(milliseconds: 100),
           invalidSetupPasscode: Duration(milliseconds: 100),
-          invalidWifiPassword: Duration(milliseconds: 100),
-          removeFabricUi: Duration(milliseconds: 100),
+          commissioningWindow: Duration(milliseconds: 100),
         ),
       );
       addTearDown(coordinator.dispose);

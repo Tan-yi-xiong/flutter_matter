@@ -205,7 +205,7 @@ Use `"mode": "full"` and an appropriate timeout for formal evidence. Retain the 
 
 Before a Run starts, the app automatically purges old run provisioning secrets and resets controller identities for the current platform. The caller does not certify cleanup. If automatic cleanup fails, the app blocks the new Run before persisting new secrets or starting a test.
 
-After `start_run` is accepted, the app supplies the raw onboarding payload to the Matter SDK. The SDK performs commissionee discovery and commissioning; the app does not scan for BLE or mDNS commissionees itself and does not report a commissioning transport.
+After `start_run` is accepted, the app supplies the raw onboarding payload to the Matter SDK. The SDK performs commissionee discovery and commissioning; the app does not scan for BLE or mDNS commissionees itself and does not report a commissioning transport. Commissionee-side prompts (factory reset, restart, invalid-input preparation) are routed to the Agent as `agent_android` prompts on Android validation because the virtual device runs on the controller phone; physical commissionees keep `human` prompts.
 
 If commissioning fails, the Run preserves the failure and stops. It must not retry commissioning inside the same Run.
 
@@ -214,7 +214,7 @@ The fixed profiles are:
 | Profile | Tests | Formal evidence |
 | --- | --- | --- |
 | `quick` | `build_install`, `commissioning`, `operational_connect`, `onoff_invoke` | No |
-| `full` | All 11 fixed tests from the report contract | Yes, when required P0 tests pass and the schema v4 report is valid |
+| `full` | All 8 fixed tests from the report contract | Yes, when required P0 tests pass and the schema v4 report is valid |
 
 A P0 failure or skip ends the current Run. Dependent tests are recorded as `not_run` with a reason. A P0 test is never retried in the same Run to manufacture a green result.
 
@@ -304,7 +304,7 @@ The repository Skill enforces this sequence:
 The host performs structural checks before writing report files:
 
 - Envelope and report schema versions are supported.
-- All 11 fixed test IDs occur exactly once.
+- All 8 fixed test IDs occur exactly once.
 - Test statuses and durations have valid types.
 - Summary counts match the `tests` object.
 - Overall result is consistent with P0 and failure rules.

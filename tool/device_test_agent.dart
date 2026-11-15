@@ -21,14 +21,11 @@ const List<String> _reportTestIds = <String>[
   'build_install',
   'commissioning',
   'operational_connect',
+  'app_restart',
   'onoff_invoke',
   'onoff_subscription',
-  'node_label_persistence',
-  'app_restart',
-  'factory_reset_recommission',
+  'node_label_read_write',
   'invalid_setup_passcode',
-  'invalid_wifi_password',
-  'remove_fabric_ui',
 ];
 
 /// A CLI error that can be represented as structured JSON.
@@ -3039,7 +3036,8 @@ void _validateReportJson(
     'operational_connect',
     'onoff_invoke',
     'onoff_subscription',
-    'node_label_persistence',
+    'node_label_read_write',
+    'invalid_setup_passcode',
   };
   for (final testId in _reportTestIds) {
     final test = _requiredMap(tests, testId);

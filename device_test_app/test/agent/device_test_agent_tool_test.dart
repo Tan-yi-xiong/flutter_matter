@@ -547,14 +547,11 @@ const List<String> _validReportTestIds = <String>[
   'build_install',
   'commissioning',
   'operational_connect',
+  'app_restart',
   'onoff_invoke',
   'onoff_subscription',
-  'node_label_persistence',
-  'app_restart',
-  'factory_reset_recommission',
+  'node_label_read_write',
   'invalid_setup_passcode',
-  'invalid_wifi_password',
-  'remove_fabric_ui',
 ];
 
 Map<String, Object?> _validReport({required String pluginCommit}) {

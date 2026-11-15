@@ -1,15 +1,12 @@
 import '../domain/domain.dart';
 import 'cases/app_restart_case.dart';
 import 'cases/build_install_case.dart';
-import 'cases/factory_reset_recommission_case.dart';
-import 'cases/invalid_setup_passcode_case.dart';
-import 'cases/invalid_wifi_password_case.dart';
 import 'cases/commissioning_case.dart';
-import 'cases/node_label_persistence_case.dart';
+import 'cases/invalid_setup_passcode_case.dart';
+import 'cases/node_label_read_write_case.dart';
 import 'cases/onoff_invoke_case.dart';
 import 'cases/onoff_subscription_case.dart';
 import 'cases/operational_connect_case.dart';
-import 'cases/remove_fabric_ui_case.dart';
 import 'test_case.dart';
 
 class TestCaseRegistryException implements Exception {
@@ -47,14 +44,11 @@ class TestCaseRegistry {
     const BuildInstallCase(),
     const CommissioningCase(),
     const OperationalConnectCase(),
+    const AppRestartCase(),
     const OnOffInvokeCase(),
     const OnOffSubscriptionCase(),
-    const NodeLabelPersistenceCase(),
-    const AppRestartCase(),
-    const FactoryResetRecommissionCase(),
+    const NodeLabelReadWriteCase(),
     const InvalidSetupPasscodeCase(),
-    const InvalidWifiPasswordCase(),
-    const RemoveFabricUiCase(),
   ]);
 
   late final Map<DeviceTestId, DeviceTestCase> _cases;

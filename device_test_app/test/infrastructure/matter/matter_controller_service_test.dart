@@ -110,7 +110,7 @@ void main() {
     });
 
     test(
-      'keeps SDK discovery when an on-network endpoint is present',
+      'commissions directly through an on-network endpoint when present',
       () async {
         final fixture = _TestFixture();
         addTearDown(fixture.service.close);
@@ -130,14 +130,46 @@ void main() {
           ),
         );
 
-        final pair = fixture.controller.pairRequest;
-        expect(pair, isNotNull);
-        expect(pair!.connectId, isNull);
-        expect(pair.nodeId, 42);
-        expect(pair.onboardingPayload, 'MT:TEST-PAYLOAD');
-        expect(fixture.controller.pairWithAddressRequest, isNull);
+        expect(fixture.controller.pairRequest, isNull);
+        final direct = fixture.controller.pairWithAddressRequest;
+        expect(direct, isNotNull);
+        expect(direct!.nodeId, 42);
+        expect(direct.address, '192.0.2.10');
+        expect(direct.port, 5540);
+        expect(direct.discriminator, 3841);
+        expect(direct.setupPincode, 20202021);
       },
     );
+
+    test('fails fast when the native status update reports an error', () async {
+      final fixture = _TestFixture();
+      addTearDown(fixture.service.close);
+      fixture.controller.onPairDeviceListener = (listener) {
+        scheduleMicrotask(() => listener.onStatusUpdate(1));
+      };
+
+      await expectLater(
+        fixture.service.commission(
+          MatterCommissionRequest(
+            onboardingPayload: 'MT:TEST-PAYLOAD',
+            setupPinCode: 20202021,
+            nodeId: 42,
+            networkCredentials: MatterWifiNetworkCredentials(
+              MatterWifiCredentials(ssid: 'Lab Wi-Fi', password: 'secret'),
+            ),
+            timeout: const Duration(milliseconds: 500),
+          ),
+        ),
+        throwsA(
+          isA<MatterException>().having(
+            (error) => error.message,
+            'message',
+            contains('error code 1'),
+          ),
+        ),
+      );
+      expect(fixture.controller.stoppedPairingNodeIds, contains(42));
+    });
   });
 
   group('controller operations', () {
@@ -385,6 +417,7 @@ class _FakeMatterControllerPort implements MatterControllerPort {
   NodeState? subscriptionState;
   int invokeSuccessCode = 0;
   int commissionedErrorCode = 0;
+  void Function(CompletionListener completionListener)? onPairDeviceListener;
   int? fabricIndex = 3;
   final List<Object> releasedContexts = [];
   final List<List<int>> unsubscriptions = [];
@@ -414,6 +447,11 @@ class _FakeMatterControllerPort implements MatterControllerPort {
       attestationDelegate: attestationDelegate,
       completionListener: completionListener,
     );
+    final hook = onPairDeviceListener;
+    if (hook != null) {
+      scheduleMicrotask(() => hook(completionListener));
+      return;
+    }
     scheduleMicrotask(() {
       completionListener.onCommissioningComplete(nodeId, commissionedErrorCode);
     });
@@ -475,6 +513,17 @@ class _FakeMatterControllerPort implements MatterControllerPort {
     Object? connectContext,
   }) async {
     scheduleMicrotask(() => callback.onConnected('connected-context'));
+  }
+
+  @override
+  Future<bool> openPairingWindowWithPIN(
+    Object connectContext,
+    int duration,
+    int discriminator,
+    int setupPIN,
+    OpenCommissioningCallback callback,
+  ) async {
+    throw UnimplementedError();
   }
 
   @override
