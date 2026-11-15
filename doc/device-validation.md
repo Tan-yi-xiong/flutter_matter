@@ -183,6 +183,6 @@ The stable version tag must not be created when any required P0 result is `Faile
 
 - The repository has no supported public `unPairDevice` method; commissionee cleanup stays a post-Run operator action through the app's cleanup card or the VDA reset dialog.
 - iOS simulator results are not valid evidence.
-- Android validation uses the virtual device app on the controller phone. The 9-item `full` matrix performs every test action through library APIs with no operator prompts; only VDA recovery (the documented restart quirk) and post-Run cleanup remain device-side actions.
+- Android validation uses the virtual device app on the controller phone. The 8-item `full` matrix performs every test action through library APIs with no operator prompts; only VDA recovery (the documented restart quirk) and post-Run cleanup remain device-side actions.
 - Hardware-in-the-loop CI remains outside formal acceptance.
 - The device-test workflow has no Thread commissioning path.
