@@ -68,7 +68,7 @@ The Agent must collect the minimal setup data with Codex interactive prompts, pa
 
 ## Prerequisites
 
-- Android: physical device, USB or ADB-over-Wi-Fi access, and local-network connectivity.
+- Android: physical device, USB or ADB-over-Wi-Fi access, and local-network connectivity. When no real device is available, the bundled virtual-device APK (`device_test_app/third_party/virtual-device-app.apk`) simulates one; see `doc/device-validation.md`.
 - iOS: physical iPhone, valid local signing, a Matter Extension, the matching App Group, and the required Bonjour, Bluetooth, and local-network declarations.
 - Xcode and CocoaPods tooling are required for iOS development builds.
 - The controller must be able to reach the target Wi-Fi network for provisioning and CASE/control.

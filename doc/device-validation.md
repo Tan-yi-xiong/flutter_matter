@@ -27,7 +27,19 @@ If no suitable commissionee is available, stop validation and record the blocker
 
 ## Virtual commissionee (Android VDA)
 
-The Matter Virtual Device App (VDA) is a supported commissionee for iteration and validation on Android. It can run on the controller phone itself or on a separate Android device on the same Wi-Fi network.
+The Matter Virtual Device App (VDA) simulates a Matter On/Off commissionee on an Android phone. Use it when no real device is available. It can run on the controller phone itself or on a separate Android device on the same Wi-Fi network.
+
+### Bundled APK
+
+A prebuilt APK ships at `device_test_app/third_party/virtual-device-app.apk`, so no real device is needed. It was built from `connectedhomeip` commit `1a11f9956e` (SHA-256 `d100e00740a7b22785afe01d815d190786521d602091dbeebf117ee19e7f622a`). Install it with the Bluetooth and location permissions granted (re-run the grants after `pm clear`):
+
+```bash
+adb -s <device-serial> install -r device_test_app/third_party/virtual-device-app.apk
+adb -s <device-serial> shell pm grant com.matter.virtual.device.app android.permission.BLUETOOTH_CONNECT
+adb -s <device-serial> shell pm grant com.matter.virtual.device.app android.permission.ACCESS_FINE_LOCATION
+adb -s <device-serial> shell pm grant com.matter.virtual.device.app android.permission.BLUETOOTH_SCAN
+adb -s <device-serial> shell pm grant com.matter.virtual.device.app android.permission.BLUETOOTH_ADVERTISE
+```
 
 ### Starting a virtual device
 

@@ -21,8 +21,6 @@ The current schema version is `4`. Schema versions `1`, `2`, and `3` are retired
 
 A removal, rename, type change, status change, required-field change, or report-content rule change requires a new schema version and an update to this document and the PR template. Reports with an unknown or unsupported `schema_version` must not be accepted as release evidence.
 
-Old v2 and v3 reports and old Run snapshots are not migrated.
-
 ## Required data
 
 | Area | Required content |
