@@ -27,7 +27,7 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 ## Preconditions
 
 - The dedicated device-test app is built and installed on the selected controller.
-- A Matter On/Off commissionee is available with an open commissioning window. A factory reset is no longer required before a Run; devices accumulate one fabric per Run, so prefer resetting the commissionee after a finished Run (the app offers an optional post-Run reset action).
+- A Matter On/Off commissionee is available with an open commissioning window. A factory reset is not required before a Run; devices accumulate one fabric per Run, so prefer resetting the commissionee after a finished Run (the app offers an optional post-Run reset action).
 - The commissionee is discoverable by the Matter SDK through its supported commissioning transports.
 - The controller has connectivity to the target Wi-Fi network for provisioning and the CASE/control stage.
 - The Mac and phones share a trusted private LAN that permits the WebSocket connection.
@@ -144,7 +144,7 @@ Use exactly this minimal structure, replacing values only in the local file:
 }
 ```
 
-For formal evidence, set `"mode": "full"` in the same local file and use a new stable command ID. Only `mode`, `setup_code`, `wifi_ssid`, and `wifi_password` are accepted. `clean_cycle` is retired and must be rejected instead of silently ignored.
+For formal evidence, set `"mode": "full"` in the same local file and use a new stable command ID. Only `mode`, `setup_code`, `wifi_ssid`, and `wifi_password` are accepted; any other field, including `clean_cycle`, must be rejected instead of silently ignored.
 
 Quick iteration run:
 

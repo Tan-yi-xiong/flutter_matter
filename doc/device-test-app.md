@@ -15,7 +15,7 @@ The setup flow is deliberately minimal. The user or Agent provides only:
 - Target Wi-Fi SSID.
 - Wi-Fi password; an empty value is valid only for an open network.
 
-A commissionee factory reset is optional and has moved after the Run: every Run adds one fabric to the commissionee, so the post-Run `Commissionee cleanup` card (or a manual reset) frees the slots for the next Run.
+A commissionee factory reset is optional and happens after a finished Run: every Run adds one fabric to the commissionee, so the post-Run `Commissionee cleanup` card (or a manual reset) frees the slots for the next Run.
 The app does not ask for commissionee model, firmware, external state-change method, commissioning transport, controller-clean state, or secrets-purged state. It accepts `vendor_id` and `product_id` from the commissionee payload automatically for report metadata.
 
 Before a Run starts, the app purges old run provisioning secrets and resets controller identities for the current platform. Cleanup failure blocks the Run before new secrets are persisted.
@@ -66,7 +66,7 @@ The app is designed for Android and physical iOS controllers. Every device run u
 ## Controller and commissionee roles
 
 - **Controller:** the Android or physical iOS phone running `device_test_app`. It creates controller identity, delegates commissionee discovery and commissioning to the Matter SDK, provisions Wi-Fi credentials, connects over CASE, invokes and subscribes to OnOff, and manages fabric state.
-- **Commissionee:** a Matter On/Off device discoverable by the Matter SDK through its supported commissioning transports. A physical device or the Android Matter Virtual Device App (VDA) both work; see the virtual commissionee section in `doc/device-validation.md` for VDA startup steps, the mDNS success criterion, the restart quirk, and fabric-reset options.
+- **Commissionee:** a Matter On/Off device discoverable by the Matter SDK through its supported commissioning transports. A physical device or the Android Matter Virtual Device App (VDA) both work; see the virtual commissionee section in `doc/device-validation.md` for the bundled APK, startup steps, the mDNS success criterion, the restart quirk, and fabric-reset options.
 
 When multiple phones are connected, the Agent must ask the user to choose the controller. The Agent never selects a phone by connection order, platform, or previous use. A device Run uses the commissionee selected by the operator.
 
@@ -80,7 +80,7 @@ runs/<run_id>/
   device-test-report.md
 ```
 
-Runs are intentionally one-shot and are never resumed. `run_state.json` is not produced anymore; `FileRunPersistence` only deletes stale state files left by interrupted Runs during startup cleanup and before each new Run. Report artifacts stay available for evidence.
+Runs are intentionally one-shot and are never resumed, so no `run_state.json` is kept; `FileRunPersistence` only deletes stale state files left by interrupted Runs during startup cleanup and before each new Run. Report artifacts stay available for evidence.
 
 After a Run reaches a terminal phase, the Runner screen offers an optional Commissionee cleanup card: the operator factory-resets the commissionee, confirms in the dialog, and the app purges that Run's provisioning secrets and emits a `commissioneeResetConfirmed` event over the bridge. Commissionee devices accumulate one fabric per Run, so this optional reset keeps fabric slots available.
 
