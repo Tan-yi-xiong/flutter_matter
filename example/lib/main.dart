@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
+import 'src/app.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MaterialApp(
-    home: HomePage(),
-  ));
+  runApp(const ExampleApp());
 }
-

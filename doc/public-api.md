@@ -43,6 +43,11 @@ Commissioning delegates:
 
 `ChipDeviceController` provides the main workflows: `newControllerIfNotExist`, `pairDevice`, `setCompletionListener`, `setNocChainIssuer`, `continueCommissioning`, `invoke`, `read`, `write`, `subscribe`, `connectedDevice`, `releaseConnectContext`, `openPairingWindowWithPIN`, `getFabricIndex`, `unSubscription`, and `deleteDeviceController`.
 
+The current API does not export `unPairDevice`. Applications can inspect the
+OperationalCredentials Fabric Table with `read`, obtain the active controller
+fabric index with `getFabricIndex`, and send `RemoveFabric` with `invoke` and
+TLV. The example includes a guarded implementation of that flow.
+
 The callback wrapper types and callback-handler types are exported for advanced use. Most applications should implement the delegate interfaces and use the wrapper classes instead of constructing bridge handlers directly.
 
 `NetworkCredentials` retains the legacy Wi-Fi constructor for compatibility and provides named Wi-Fi and Thread constructors. Empty Wi-Fi passwords are valid for open networks.
