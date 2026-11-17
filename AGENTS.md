@@ -138,7 +138,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 - BLE demo uses `flutter_blue_plus` / `flutter_reactive_ble`; NSD uses `bonsoir`.
 - Commissioning accepts the raw onboarding code directly; `OnboardingPayloadParser` is optional and only displays payload details.
 - Wi-Fi SSID / password persist in `SharedPreferences`, auto-fill on page entry, and all inputs are plain text (debug app only).
-- Google Home dual-fabric commissioning (Android) uses the sibling `flutter_matter_google_home` checkout: `startHandoffSession` -> handoff -> local-stack `pairDeviceWithAddress` -> `completeHandoff`.
+- Google Home dual-fabric commissioning (Android) uses the pinned `flutter_matter_google_home` git dependency: `startHandoffSession` -> handoff -> local-stack `pairDeviceWithAddress` -> `completeHandoff`.
 - Android example builds require `GOOGLE_MATTER_SDK_REPO` pointing at the unzipped Google Home Android SDK 1.11.1 repo; example `minSdkVersion` is 29, `compileSdk` 36, Kotlin 2.4.0.
 - The example is for builds and manual functional testing. It has no automated test role.
 

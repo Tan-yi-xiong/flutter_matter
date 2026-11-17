@@ -26,9 +26,11 @@ dependencies:
     # the parent directory to use the current plugin's version.
     path: ../
   flutter_matter_google_home:
-    # Android-only Google Play Services Home commissioning. Kept as a sibling
-    # checkout path dependency for this local demo app.
-    path: ../../flutter_matter_google_home
+    # Android-only Google Play Services Home commissioning. Pinned to the
+    # upstream commit so CI resolves it without a sibling checkout.
+    git:
+      url: https://github.com/Tan-yi-xiong/flutter_matter_google_home.git
+      ref: 548ff7c067eafa5aeeab9da1895f62a6363173ae
 
   bonsoir: 6.1.0
   flutter_blue_plus: 1.34.5

@@ -9,8 +9,8 @@ feature panels instead of mock data.
   onboarding code; `OnboardingPayloadParser` is optional and only surfaces
   payload details (VID / PID / discriminator / discovery capabilities).
 - SDK-managed Wi-Fi commissioning through `ChipDeviceController.pairDevice`.
-- Google Home dual-fabric commissioning on Android through the sibling
-  `flutter_matter_google_home` plugin: GMS hosts the first fabric via
+- Google Home dual-fabric commissioning on Android through the pinned
+  `flutter_matter_google_home` git dependency: GMS hosts the first fabric via
   `startHandoffSession`, the handoff endpoint feeds a local-stack
   `pairDeviceWithAddress` second fabric, and the session is completed with the
   truthful second-fabric result.
@@ -42,8 +42,9 @@ manifest, and Android builds require `GOOGLE_MATTER_SDK_REPO` pointing at the
 unzipped Google Home Android SDK (Home APIs 1.11.1) Maven repository
 (`home.android.sdk_1_11_1.zip`, SHA256
 `9154ee88b3d93e7eafb85a1132043e281a14d1f60fc50913a4c230b34afafef4`); the Google
-dual-fabric path additionally needs the sibling `flutter_matter_google_home`
-checkout and a device with Google Play Services' Home module. iOS requires the
+dual-fabric path additionally needs the pinned `flutter_matter_google_home`
+git dependency and a device with Google Play Services' Home module. iOS
+requires the
 Matter Extension, App Group, `AppGroupId`, Info.plist entries, and signing
 setup documented in the repository README. The vendored `ZGMatter.framework`
 does not support the iOS simulator.

@@ -242,8 +242,8 @@ Download `home.android.sdk_1_11_1.zip` from the
 [Android SDK release notes](https://developers.home.google.com/apis/android/release-notes)
 (SHA256 `9154ee88b3d93e7eafb85a1132043e281a14d1f60fc50913a4c230b34afafef4`),
 unzip it, and point the variable at the unzipped repository root. Do not
-commit the SDK artifacts. The Google dual-fabric path also uses the sibling
-`flutter_matter_google_home` checkout referenced by `example/pubspec.yaml`.
+commit the SDK artifacts. The Google dual-fabric path also uses the
+`flutter_matter_google_home` git dependency pinned by `example/pubspec.yaml`.
 
 ### Start the example
 

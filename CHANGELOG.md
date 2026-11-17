@@ -27,7 +27,7 @@
 - Removed the example's obsolete `win32` override after refreshing its mobile plugin dependencies.
 - Kept the required CI gate Dart-only and limited automated tests to the plugin root `test/` suite. The example remains a build and manual demonstration target.
 - Reworked the example into an English API and feature showcase with a generic Interaction Model console, direct-address and NSD advanced tools, explicit operation results, and demo-only restart persistence.
-- Integrated Google Home dual-fabric commissioning into the example through the sibling `flutter_matter_google_home` plugin: GMS hosts the first fabric (`startHandoffSession`), the handoff endpoint drives a local-stack `pairDeviceWithAddress` second fabric, and the session reports the truthful second-fabric outcome.
+- Integrated Google Home dual-fabric commissioning into the example through the pinned `flutter_matter_google_home` git dependency: GMS hosts the first fabric (`startHandoffSession`), the handoff endpoint drives a local-stack `pairDeviceWithAddress` second fabric, and the session reports the truthful second-fabric outcome.
 - Commissioning now works straight from the raw onboarding code; payload parsing is optional and only displays payload details.
 - Commissioning-window re-open clears the previous window state first so the action can be repeated.
 - Back-press during commissioning cancels the active pairing and resets stale state; Wi-Fi SSID / password persist and auto-fill.
