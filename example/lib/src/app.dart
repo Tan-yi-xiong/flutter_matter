@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_matter/flutter_matter.dart';
+import 'package:flutter_matter_google_home/flutter_matter_google_home.dart';
 
 import 'commissioning_service.dart';
 import 'identity.dart';
@@ -56,7 +58,13 @@ class _ExampleAppState extends State<ExampleApp> {
           isDense: true,
         ),
       ),
-      home: ExampleScope(controller: _controller, child: const HomePage()),
+      builder: (context, child) {
+        return ExampleScope(
+          controller: _controller,
+          child: SafeArea(child: child ?? const SizedBox.shrink()),
+        );
+      },
+      home: const HomePage(),
     );
   }
 }
@@ -83,9 +91,18 @@ class MatterSessionController extends ChangeNotifier {
       MatterCommissioningService();
   final MatterNsdMonitor nsd = MatterNsdMonitor();
 
+  final GoogleHomeMatterCommissioner _googleCommissioner =
+      GoogleHomeMatterCommissioner();
+  GoogleHomeMatterAvailability? googleAvailability;
+  GoogleHomeMatterTarget googleTarget =
+      GoogleHomeMatterTarget.androidLocalFabric;
+  bool googleAvailabilityChecking = false;
+
   MatterSessionController() {
     _identityRepository = MatterIdentityRepository(_store);
   }
+
+  bool get supportsGoogleCommissioning => Platform.isAndroid;
 
   MatterIdentity? identity;
   ChipDeviceController? _controller;
@@ -107,6 +124,135 @@ class MatterSessionController extends ChangeNotifier {
       throw StateError('Matter controller has not been created yet.');
     }
     return value;
+  }
+
+  Future<({String ssid, String password})?> loadWifiCredentials() {
+    return _store.loadWifiCredentials();
+  }
+
+  Future<void> saveWifiCredentials(String ssid, String password) {
+    return _store.saveWifiCredentials(ssid, password);
+  }
+
+  Future<bool> cancelCommissioning() async {
+    if (!operationBusy ||
+        (currentOperation != 'commissionDevice' &&
+            currentOperation != 'googleDualFabric')) {
+      return false;
+    }
+    commissioningStage = 'Cancelling commissioning';
+    notifyListeners();
+    return _commissioningService.cancelCommissioning();
+  }
+
+  void setGoogleTarget(GoogleHomeMatterTarget target) {
+    if (googleTarget == target) {
+      return;
+    }
+    googleTarget = target;
+    notifyListeners();
+  }
+
+  Future<void> checkGoogleAvailability() async {
+    if (!supportsGoogleCommissioning || googleAvailabilityChecking) {
+      return;
+    }
+    googleAvailabilityChecking = true;
+    notifyListeners();
+    try {
+      googleAvailability = await _googleCommissioner.checkAvailability();
+    } finally {
+      googleAvailabilityChecking = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> requestGoogleModuleInstall() async {
+    if (!supportsGoogleCommissioning) {
+      return;
+    }
+    await _googleCommissioner.requestModuleInstall();
+    await checkGoogleAvailability();
+  }
+
+  Future<OperationResult> commissionGoogleDualFabric({
+    OnboardingPayload? payload,
+    required String onboardingPayload,
+  }) async {
+    if (operationBusy) {
+      return OperationResult.failure('Another operation is already running.');
+    }
+    operationBusy = true;
+    currentOperation = 'googleDualFabric';
+    commissioningStage = 'Preparing Google commissioning';
+    lastResult = null;
+    notifyListeners();
+    try {
+      identity ??= await _identityRepository.loadOrCreate();
+      final nodeId = await _store.allocateNodeId();
+      final outcome = await _commissioningService.commissionGoogleDualFabric(
+        identity: identity!,
+        nodeId: nodeId,
+        onboardingPayload: onboardingPayload,
+        target: googleTarget,
+        onStage: (stage) {
+          commissioningStage = stage;
+          notifyListeners();
+        },
+      );
+      _controller = await ensureController();
+      final result = outcome.result;
+      final device = SavedDevice(
+        nodeId: outcome.nodeId,
+        vendorId: result.vendorId ?? payload?.vendorId,
+        productId: result.productId ?? payload?.productId,
+        label: result.deviceName?.trim().isEmpty == false
+            ? result.deviceName!.trim()
+            : 'Google dual fabric',
+        commissionedAt: DateTime.now(),
+      );
+      await _saveDevice(device);
+      activeDevice = device;
+      connectionContext = null;
+      connectionPhase = ConnectionPhase.disconnected;
+      final operationResult = OperationResult(
+        success: true,
+        summary:
+            'Dual-fabric commissioning complete (${result.target.wireName}).',
+      );
+      lastResult = operationResult;
+      _addLog(
+        'commissionGoogleDualFabric via startHandoffSession',
+        'Google dual fabric',
+        operationResult,
+      );
+      return operationResult;
+    } catch (error) {
+      final result = OperationResult.failure(
+        'Google dual-fabric commissioning failed.',
+        error,
+      );
+      lastResult = result;
+      _addLog(
+        'commissionGoogleDualFabric via startHandoffSession',
+        'Google dual fabric',
+        result,
+      );
+      return result;
+    } finally {
+      operationBusy = false;
+      currentOperation = null;
+      notifyListeners();
+    }
+  }
+
+  void resetCommissioningState() {
+    if (operationBusy) {
+      return;
+    }
+    commissioningStage = null;
+    lastResult = null;
+    notifyListeners();
   }
 
   bool get isConnected =>
@@ -139,7 +285,7 @@ class MatterSessionController extends ChangeNotifier {
   }
 
   Future<OperationResult> commission({
-    required OnboardingPayload payload,
+    required OnboardingPayload? payload,
     required String onboardingPayload,
     required String ssid,
     required String password,
@@ -179,6 +325,8 @@ class MatterSessionController extends ChangeNotifier {
         label: deviceLabel.trim().isEmpty ? null : deviceLabel.trim(),
         commissionedAt: DateTime.now(),
       );
+      // Vendor/product fall back to the parsed payload when the native result
+      // does not surface them.
       await _saveDevice(device);
       activeDevice = device;
       connectionContext = null;

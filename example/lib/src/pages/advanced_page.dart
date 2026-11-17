@@ -149,7 +149,6 @@ class _AdvancedPageState extends State<AdvancedPage> {
                     controller: _setupPinController,
                     enabled: Platform.isAndroid && !busy,
                     keyboardType: TextInputType.number,
-                    obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Setup PIN',
                       prefixIcon: Icon(Icons.password),

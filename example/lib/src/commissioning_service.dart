@@ -3,15 +3,29 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_matter/flutter_matter.dart';
+import 'package:flutter_matter_google_home/flutter_matter_google_home.dart';
 
 import 'android_ble_transport.dart';
 import 'identity.dart';
 import 'models.dart';
 
 class MatterCommissioningService {
+  ChipDeviceController? _activeController;
+  int? _activeNodeId;
+
+  Future<bool> cancelCommissioning() async {
+    final controller = _activeController;
+    final nodeId = _activeNodeId;
+    if (controller == null || nodeId == null) {
+      return false;
+    }
+    await controller.stopDevicePairing(nodeId).catchError((Object _) {});
+    return true;
+  }
+
   Future<CommissionedNode> commission({
     required MatterIdentity identity,
-    required OnboardingPayload payload,
+    required OnboardingPayload? payload,
     required String onboardingPayload,
     required String ssid,
     required String password,
@@ -24,7 +38,7 @@ class MatterCommissioningService {
     ChipDeviceController? controller;
     try {
       int? connectId;
-      if (Platform.isAndroid && useAndroidBle) {
+      if (Platform.isAndroid && useAndroidBle && payload != null) {
         bleTransport = AndroidBleTransport();
         connectId = await bleTransport.connect(payload, onStage: onStage);
       }
@@ -33,6 +47,8 @@ class MatterCommissioningService {
       controller = await ChipDeviceController.newControllerIfNotExist(
         identity.controllerParams,
       );
+      _activeController = controller;
+      _activeNodeId = nodeId;
       final delegate = _CommissioningDelegate(
         identity: identity,
         controller: controller,
@@ -44,7 +60,7 @@ class MatterCommissioningService {
       await controller.pairDevice(
         nodeId,
         connectId,
-        payload.setupPinCode,
+        payload?.setupPinCode,
         onboardingPayload,
         null,
         NetworkCredentials.wifi(
@@ -60,8 +76,8 @@ class MatterCommissioningService {
       return CommissionedNode(
         nodeId: completedNodeId,
         controller: controller,
-        vendorId: payload.vendorId,
-        productId: payload.productId,
+        vendorId: payload?.vendorId,
+        productId: payload?.productId,
       );
     } catch (_) {
       if (controller != null) {
@@ -70,6 +86,8 @@ class MatterCommissioningService {
       }
       rethrow;
     } finally {
+      _activeController = null;
+      _activeNodeId = null;
       await bleTransport?.dispose();
     }
   }
@@ -89,6 +107,8 @@ class MatterCommissioningService {
       controller = await ChipDeviceController.newControllerIfNotExist(
         identity.controllerParams,
       );
+      _activeController = controller;
+      _activeNodeId = nodeId;
       final delegate = _CommissioningDelegate(
         identity: identity,
         controller: controller,
@@ -116,8 +136,73 @@ class MatterCommissioningService {
         await controller.deleteDeviceController().catchError((Object _) {});
       }
       rethrow;
+    } finally {
+      _activeController = null;
+      _activeNodeId = null;
     }
   }
+
+  /// Google dual-fabric commissioning:
+  ///
+  /// 1. GMS hosted UI commissions the device into the selected first fabric.
+  /// 2. GMS hands back the device endpoint (address / port / PIN).
+  /// 3. The local Matter stack commissions the second fabric with that
+  ///    endpoint, then the handoff session is completed with the truthful
+  ///    second-fabric outcome.
+  Future<GoogleDualFabricOutcome> commissionGoogleDualFabric({
+    required MatterIdentity identity,
+    required int nodeId,
+    required String onboardingPayload,
+    required GoogleHomeMatterTarget target,
+    required void Function(String stage) onStage,
+  }) async {
+    final commissioner = GoogleHomeMatterCommissioner();
+    onStage('Starting Google commissioning (GMS UI)');
+    final session = await commissioner.startHandoffSession(
+      onboardingPayload: onboardingPayload,
+      target: target,
+      secondFabricTimeout: const Duration(seconds: 180),
+    );
+    GoogleHomeMatterHandoff handoff;
+    try {
+      handoff = await session.handoff;
+    } catch (_) {
+      // GMS-side commissioning failed or was cancelled; session.result already
+      // carries the sanitized failure, so surface it as-is.
+      rethrow;
+    }
+    onStage(
+      'Google fabric ready; second fabric endpoint ${handoff.address}:${handoff.port}',
+    );
+    try {
+      final handoffPayload = await OnboardingPayloadParser().parse(
+        handoff.onboardingPayload,
+      );
+      await commissionWithAddress(
+        identity: identity,
+        address: handoff.address,
+        port: handoff.port,
+        discriminator: handoffPayload.discriminator,
+        setupPin: handoff.setupPinCode,
+        nodeId: nodeId,
+        onStage: onStage,
+      );
+    } catch (error) {
+      await session.completeHandoff(succeeded: false, errorCode: 1);
+      rethrow;
+    }
+    await session.completeHandoff(succeeded: true);
+    final result = await session.result;
+    return GoogleDualFabricOutcome(result: result, nodeId: nodeId);
+  }
+}
+
+/// Terminal outcome of the Google dual-fabric flow.
+class GoogleDualFabricOutcome {
+  const GoogleDualFabricOutcome({required this.result, required this.nodeId});
+
+  final GoogleHomeMatterResult result;
+  final int nodeId;
 }
 
 class _CommissioningDelegate

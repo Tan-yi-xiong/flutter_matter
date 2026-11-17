@@ -31,7 +31,7 @@ fvm flutter analyze
 fvm dart format .
 fvm flutter test
 
-# Example app
+# Example app (Android build needs GOOGLE_MATTER_SDK_REPO)
 cd example
 fvm flutter pub get
 fvm flutter build apk --debug
@@ -136,7 +136,10 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 
 - Mobile-only. Linux / macOS / Windows / Web targets were removed.
 - BLE demo uses `flutter_blue_plus` / `flutter_reactive_ble`; NSD uses `bonsoir`.
-- On iOS the example can autofill the current Wi-Fi SSID and commission with an empty password; otherwise it falls back to `WifiInputPage`.
+- Commissioning accepts the raw onboarding code directly; `OnboardingPayloadParser` is optional and only displays payload details.
+- Wi-Fi SSID / password persist in `SharedPreferences`, auto-fill on page entry, and all inputs are plain text (debug app only).
+- Google Home dual-fabric commissioning (Android) uses the sibling `flutter_matter_google_home` checkout: `startHandoffSession` -> handoff -> local-stack `pairDeviceWithAddress` -> `completeHandoff`.
+- Android example builds require `GOOGLE_MATTER_SDK_REPO` pointing at the unzipped Google Home Android SDK 1.11.1 repo; example `minSdkVersion` is 29, `compileSdk` 36, Kotlin 2.4.0.
 - The example is for builds and manual functional testing. It has no automated test role.
 
 ## Device-test App and Agent Testing
@@ -167,7 +170,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 | Analyze plugin (errors only) | `fvm flutter analyze --no-fatal-infos --no-fatal-warnings` |
 | Format Dart | `fvm dart format .` |
 | Plugin tests | `fvm flutter test` |
-| Example Android build | `cd example && fvm flutter build apk --debug` |
+| Example Android build | `GOOGLE_MATTER_SDK_REPO=... && cd example && fvm flutter build apk --debug` |
 | Example iOS build | `cd example && fvm flutter build ios --debug --no-codesign` |
 | Run example | `cd example && fvm flutter run` |
 | iOS workspace | `open example/ios/Runner.xcworkspace` |

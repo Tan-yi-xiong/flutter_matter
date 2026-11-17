@@ -7,6 +7,8 @@ import 'models.dart';
 class ExampleStore {
   static const _devicesKey = 'devices';
   static const _maxNodeIdKey = 'last_node_id';
+  static const _wifiSsidKey = 'commissioning_wifi_ssid';
+  static const _wifiPasswordKey = 'commissioning_wifi_password';
   static const _keypairKey = 'network_keypair';
   static const _certificateKey = 'network_certificate';
 
@@ -60,5 +62,21 @@ class ExampleStore {
     final preferences = await SharedPreferences.getInstance();
     await preferences.setString(_keypairKey, keypairJson);
     await preferences.setString(_certificateKey, certificateJson);
+  }
+
+  Future<({String ssid, String password})?> loadWifiCredentials() async {
+    final preferences = await SharedPreferences.getInstance();
+    final ssid = preferences.getString(_wifiSsidKey);
+    final password = preferences.getString(_wifiPasswordKey);
+    if (ssid == null || password == null) {
+      return null;
+    }
+    return (ssid: ssid, password: password);
+  }
+
+  Future<void> saveWifiCredentials(String ssid, String password) async {
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.setString(_wifiSsidKey, ssid);
+    await preferences.setString(_wifiPasswordKey, password);
   }
 }

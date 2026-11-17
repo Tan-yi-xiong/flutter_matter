@@ -88,7 +88,7 @@ import 'package:flutter_matter/flutter_matter.dart';
 | Flutter | Flutter `3.41.0`, pinned in `.fvmrc`; older SDKs satisfy the pubspec constraint but are not currently validated |
 | Dart | `>=3.3.3 <4.0.0`, unchanged in `pubspec.yaml` |
 | Android | `minSdkVersion 21`, `compileSdk 34`, JDK 17 |
-| Example Android build | Gradle 8.7, Android Gradle Plugin 8.6.0, Kotlin 1.9.22 |
+| Example Android build | Gradle 8.7, Android Gradle Plugin 8.6.0, Kotlin 2.4.0; requires `GOOGLE_MATTER_SDK_REPO` (Google Home Android SDK 1.11.1) |
 | iOS | iOS 16.1 minimum for the plugin and example; Xcode 16.4 or later and CocoaPods 1.17 |
 | iOS device support | Physical arm64 iPhoneOS devices only; the vendored `ZGMatter.framework` has no simulator slice |
 
@@ -230,7 +230,20 @@ Then:
 
 ### Android
 
-No additional setup is required.
+Building the example requires the Google Home Android SDK (Home APIs 1.11.1)
+Maven repository, because the dual-fabric commissioning path depends on
+`play-services-home` 17.1.0, which is not on public Maven:
+
+```sh
+export GOOGLE_MATTER_SDK_REPO=/absolute/path/to/unzipped/home.android.sdk_1_11_1/repo
+```
+
+Download `home.android.sdk_1_11_1.zip` from the
+[Android SDK release notes](https://developers.home.google.com/apis/android/release-notes)
+(SHA256 `9154ee88b3d93e7eafb85a1132043e281a14d1f60fc50913a4c230b34afafef4`),
+unzip it, and point the variable at the unzipped repository root. Do not
+commit the SDK artifacts. The Google dual-fabric path also uses the sibling
+`flutter_matter_google_home` checkout referenced by `example/pubspec.yaml`.
 
 ### Start the example
 

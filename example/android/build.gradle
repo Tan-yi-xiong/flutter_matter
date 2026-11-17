@@ -1,11 +1,18 @@
+def googleMatterSdkRepo = providers.gradleProperty('googleMatterSdkRepo')
+    .orElse(providers.environmentVariable('GOOGLE_MATTER_SDK_REPO'))
+    .orNull
+
 allprojects {
     repositories {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        if (googleMatterSdkRepo != null) {
+            maven { url = uri(googleMatterSdkRepo) }
+        }
     }
     buildscript {
-        ext.kotlin_version = '1.9.22'
+        ext.kotlin_version = '2.4.0'
     }
 }
 

@@ -706,7 +706,6 @@ class _DevicePageState extends State<DevicePage> {
                   TextField(
                     controller: _setupPinController,
                     keyboardType: TextInputType.number,
-                    obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Setup PIN',
                       prefixIcon: Icon(Icons.password),

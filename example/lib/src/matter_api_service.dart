@@ -228,23 +228,30 @@ class MatterApiService {
     required int setupPin,
     Duration timeout = const Duration(seconds: 20),
   }) async {
-    final writer = TlvWriter()
+    // Clear any existing commissioning-window state first so the button can be
+    // pressed repeatedly. When no window is open the device answers
+    // WindowNotOpen (cluster-status 0x04); that failure is expected and must
+    // not block opening a fresh window below.
+    final revokeWriter = TlvWriter()
       ..startStructure(AnonymousTag.instance)
       ..endStructure();
-    await invoke(
-      controller: controller,
-      nodeId: nodeId,
-      context: context,
-      timedRequestTimeoutMs: 5000,
-      element: InvokeElement.create(
-        0,
-        0x003C,
-        0x0002,
-        writer.getEncoded(),
-        null,
-      ),
-    );
-
+    try {
+      await invoke(
+        controller: controller,
+        nodeId: nodeId,
+        context: context,
+        timedRequestTimeoutMs: 5000,
+        element: InvokeElement.create(
+          0,
+          0x003C,
+          0x0002,
+          revokeWriter.getEncoded(),
+          null,
+        ),
+      );
+    } catch (error) {
+      // Revoke may legitimately fail when no window is open; proceed.
+    }
     final completer = Completer<CommissioningWindowResult>();
     final callback = _OpenCommissioningCallback(
       onSuccessValue: (manualPairingCode, qrCode) {
