@@ -5,7 +5,7 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
     buildscript {
-        ext.kotlin_version = '1.6.0'
+        ext.kotlin_version = '1.9.22'
     }
 }
 

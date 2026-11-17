@@ -22,10 +22,11 @@
 ### Tooling and tests
 - Added a root plugin Dart test suite covering public exports, MethodChannel contracts, models, TLV parsing, onboarding parsing, and callback routing.
 - Pinned Flutter `3.41.0` through `.fvmrc`; the Dart and Flutter pubspec lower bounds remain unchanged, while only Flutter `3.41.0` is currently validated.
-- Documented the Android build baseline as `minSdk 21`, `compileSdk 34`, JDK 17, Gradle 8.7, Android Gradle Plugin 8.6.0, and Kotlin 1.7.10 without claiming an upgrade.
+- Documented the Android build baseline as `minSdk 21`, `compileSdk 34`, JDK 17, Gradle 8.7, Android Gradle Plugin 8.6.0, and Kotlin 1.9.22 without claiming an SDK upgrade.
 - Documented that Flutter 3.41 may auto-migrate the example Android minSdk from 21 to 24 and that this migration is outside the current compatibility decision.
-- Updated the example's `win32` override so dependency resolution remains compatible with Dart 3.11.
+- Removed the example's obsolete `win32` override after refreshing its mobile plugin dependencies.
 - Kept the required CI gate Dart-only and limited automated tests to the plugin root `test/` suite. The example remains a build and manual demonstration target.
+- Reworked the example into an English API and feature showcase with a generic Interaction Model console, direct-address and NSD advanced tools, explicit operation results, and demo-only restart persistence.
 
 ### Bug Fixes
 - Fixed signed little-endian TLV decoding for negative integer widths.
@@ -38,6 +39,7 @@
 - Added a device-validation process and schema-versioned JSON/Markdown report contract for Android and physical iOS controllers using Matter commissionees with dual-path discovery.
 - Added the Flutter 3.41 UIScene migration for the iOS example and aligned its deployment targets to iOS 16.1.
 - Clarified that `example/**` is never an automated test target and that iOS simulator builds are unsupported by the current vendored Matter framework.
+- Corrected the public documentation to describe fabric removal through OperationalCredentials `read` + `invoke`; `unPairDevice` is not part of the current exported controller API.
 
 ## 0.0.11
 

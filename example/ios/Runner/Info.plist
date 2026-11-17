@@ -41,10 +41,6 @@
 	<string>This app needs camera access to scan QR codes</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Required to discover local network devices</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Used to read the currently connected Wi-Fi name for Matter provisioning.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs photos access to get QR code from photo library</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

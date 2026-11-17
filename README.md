@@ -66,12 +66,10 @@ import 'package:flutter_matter/flutter_matter.dart';
 - **Invoke**  
   Send commands to any cluster endpoint.
 
-- **Unpair**  
-  Remove a device from the fabric with:
-
-  ```dart
-  unPairDevice(nodeId)
-  ```
+- **Fabric management**
+  Inspect the OperationalCredentials Fabric Table through `read`, then send
+  `RemoveFabric` through `invoke`. The example includes a guarded
+  current-fabric removal flow.
 
 - **TLV**  
   Full TLV read/write stack for advanced low-level control.
@@ -90,7 +88,7 @@ import 'package:flutter_matter/flutter_matter.dart';
 | Flutter | Flutter `3.41.0`, pinned in `.fvmrc`; older SDKs satisfy the pubspec constraint but are not currently validated |
 | Dart | `>=3.3.3 <4.0.0`, unchanged in `pubspec.yaml` |
 | Android | `minSdkVersion 21`, `compileSdk 34`, JDK 17 |
-| Example Android build | Gradle 8.7, Android Gradle Plugin 8.6.0, Kotlin 1.7.10 |
+| Example Android build | Gradle 8.7, Android Gradle Plugin 8.6.0, Kotlin 1.9.22 |
 | iOS | iOS 16.1 minimum for the plugin and example; Xcode 16.4 or later and CocoaPods 1.17 |
 | iOS device support | Physical arm64 iPhoneOS devices only; the vendored `ZGMatter.framework` has no simulator slice |
 

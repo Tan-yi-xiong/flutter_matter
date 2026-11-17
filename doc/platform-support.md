@@ -16,7 +16,7 @@ This page defines the supported platform and toolchain baseline for `flutter_mat
 | Android build JDK | 17 |
 | Example Android Gradle | 8.7 |
 | Example Android Gradle Plugin | 8.6.0 |
-| Kotlin | 1.7.10 |
+| Example Kotlin | 1.9.22 |
 | iOS minimum support | 16.1 for both plugin and example |
 | iOS build host | macOS with Xcode 16.4 or later |
 | CocoaPods | 1.17 |
@@ -25,7 +25,7 @@ This page defines the supported platform and toolchain baseline for `flutter_mat
 
 The Flutter and Dart lower bounds in `pubspec.yaml` remain unchanged. Compatibility is currently validated with Flutter 3.41.0; older versions satisfy the declared constraints but are not part of the validated baseline.
 
-The Android baseline reflects the current example build files and plugin declarations. It does not record or imply a recent SDK upgrade. The wrapper properties target Gradle 8.7. The example `gradlew` and wrapper JAR are generated local files and are intentionally ignored by the example project, so documentation and CI must not depend on them being present in a clean checkout. Flutter 3.41 defaults new app projects to minSdk 24 and may attempt to migrate the example's current minSdk 21 declaration during an Android build; that migration is intentionally outside this phase and must be reviewed before it is committed.
+The Android baseline reflects the current example build files and plugin declarations. The example uses Kotlin 1.9.22 so its current Flutter plugin dependencies compile on the validated Flutter 3.41 toolchain. This does not imply an Android SDK or plugin-native Kotlin upgrade. The wrapper properties target Gradle 8.7. The example `gradlew` and wrapper JAR are generated local files and are intentionally ignored by the example project, so documentation and CI must not depend on them being present in a clean checkout. Flutter 3.41 defaults new app projects to minSdk 24 and may attempt to migrate the example's current minSdk 21 declaration during an Android build; that migration is intentionally outside this phase and must be reviewed before it is committed.
 
 The iOS support floor is 16.1 across the podspec, Podfile, app framework metadata, and Xcode targets. A Flutter 3.41 device build without code signing completed on 2026-11-11 with Xcode 26.3 and CocoaPods 1.17.0. Xcode 16.4 remains the documented `macos-15` baseline unless a future validation records a different supported host.
 
