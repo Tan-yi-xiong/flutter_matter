@@ -6,13 +6,19 @@ The only supported import is:
 import 'package:flutter_matter/flutter_matter.dart';
 ```
 
-Everything exported by that library is public API. Direct imports from `package:flutter_matter/src/...` are internal implementation paths and are not a supported consumer boundary. Tests may import internal paths when they need to verify implementation details.
+Everything exported from that library is public API. Files under `package:flutter_matter/src/` are internal; tests may import them, applications should not.
 
-The package version is currently `0.0.11`. The public surface is organized below by capability. The final export-map table is the authoritative list of paths exported from `lib/flutter_matter.dart`.
+The current package version is `0.0.11`.
+
+Use the generated [pub.dev API reference](https://pub.dev/documentation/flutter_matter/latest/) for signatures, parameters, return values, and member-level documentation. This page records the supported import boundary, exported surface, and compatibility rules.
+
+For task-oriented examples, start with [Getting started](getting-started.md), [Commissioning](commissioning.md), or [Device operations](device-operations.md).
+
+The [example code map](../example/README.md#code-map) links each workflow to the corresponding file and symbol under `example/lib/`.
 
 ## Controller and commissioning
 
-Core controller types:
+Core types:
 
 - `ChipDeviceController`
 - `ControllerParams`
@@ -24,7 +30,7 @@ Core controller types:
 - `defaultIpk`
 - `kTestControllerNodeId`
 
-Commissioning delegates:
+Delegates and callbacks:
 
 - `CompletionListener`
 - `NOCChainIssuer`
@@ -33,24 +39,24 @@ Commissioning delegates:
 - `InvokeCallback`
 - `OpenCommissioningCallback`
 - `ConnectedDeviceCallback`
-- `ReportCallback`
-- `ReportCallbackWarp`
-- `SubscriptionCallback`
-- `SubscriptionCallbackWarp`
-- `WriteAttributesCallback`
-- `WriteAttributesCallbackWarp`
+- `ReportCallback` and `ReportCallbackWarp`
+- `SubscriptionCallback` and `SubscriptionCallbackWarp`
+- `WriteAttributesCallback` and `WriteAttributesCallbackWarp`
 - `KeypairDelegateCallbackHandler`
 
-`ChipDeviceController` provides the main workflows: `newControllerIfNotExist`, `pairDevice`, `setCompletionListener`, `setNocChainIssuer`, `continueCommissioning`, `invoke`, `read`, `write`, `subscribe`, `connectedDevice`, `releaseConnectContext`, `openPairingWindowWithPIN`, `getFabricIndex`, `unSubscription`, and `deleteDeviceController`.
+`ChipDeviceController` provides:
 
-The current API does not export `unPairDevice`. Applications can inspect the
-OperationalCredentials Fabric Table with `read`, obtain the active controller
-fabric index with `getFabricIndex`, and send `RemoveFabric` with `invoke` and
-TLV. The example includes a guarded implementation of that flow.
+- lifecycle: `newControllerIfNotExist`, `deleteDeviceController`, `destroy`
+- commissioning: `pairDevice`, `pairDeviceWithAddress`, `stopDevicePairing`, `continueCommissioning`, `setCompletionListener`, `setNocChainIssuer`
+- identity: `createRootCertificate`, `createOperationalCertificate`, `publicKeyFromCSR`, `onNOCChainGeneration`
+- operations: `invoke`, `read`, `write`, `subscribe`, `unSubscription`, `connectedDevice`, `releaseConnectContext`
+- commissioning windows and fabric state: `openPairingWindowWithPIN`, `getFabricIndex`
 
-The callback wrapper types and callback-handler types are exported for advanced use. Most applications should implement the delegate interfaces and use the wrapper classes instead of constructing bridge handlers directly.
+`NetworkCredentials` supports named Wi-Fi and Thread constructors plus the legacy Wi-Fi constructor. An empty Wi-Fi password represents an open network.
 
-`NetworkCredentials` retains the legacy Wi-Fi constructor for compatibility and provides named Wi-Fi and Thread constructors. Empty Wi-Fi passwords are valid for open networks.
+Fabric removal is not exposed as `unPairDevice`. Read the OperationalCredentials Fabric Table, obtain the active fabric index with `getFabricIndex()`, then send `RemoveFabric` through `invoke`.
+
+`ControllerParams` currently sends `skipAttestationCertificateValidation: true` in its JSON payload. Treat this as a security-sensitive native-configuration limit.
 
 ## Onboarding
 
@@ -59,7 +65,7 @@ The callback wrapper types and callback-handler types are exported for advanced 
 - `OnboardingPayloadParser`
 - `onboardingPayloadHost`
 
-`OnboardingPayloadParser` parses either a QR setup code or a manual pairing code. iOS callers must provide an onboarding payload to `pairDevice`.
+`OnboardingPayloadParser` parses QR setup codes and manual pairing codes. `pairDevice` requires an onboarding payload on iOS.
 
 ## BLE and GATT
 
@@ -68,36 +74,9 @@ The callback wrapper types and callback-handler types are exported for advanced 
 - `BlePlatformDelegate`
 - `BlePlatformDelegateCallbackHandler`
 - `bleHostName`
+- All exported `BLE_ERROR_*` constants
 
-Current BLE error constants:
-
-```text
-BLE_ERROR_ADAPTER_UNAVAILABLE
-BLE_ERROR_NO_CONNECTION_RECEIVED_CALLBACK
-BLE_ERROR_CENTRAL_UNSUBSCRIBED
-BLE_ERROR_GATT_SUBSCRIBE_FAILED
-BLE_ERROR_GATT_UNSUBSCRIBE_FAILED
-BLE_ERROR_GATT_WRITE_FAILED
-BLE_ERROR_GATT_INDICATE_FAILED
-BLE_ERROR_CHIPOBLE_PROTOCOL_ABORT
-BLE_ERROR_REMOTE_DEVICE_DISCONNECTED
-BLE_ERROR_APP_CLOSED_CONNECTION
-BLE_ERROR_NOT_CHIP_DEVICE
-BLE_ERROR_INCOMPATIBLE_PROTOCOL_VERSIONS
-BLE_ERROR_INVALID_FRAGMENT_SIZE
-BLE_ERROR_START_TIMER_FAILED
-BLE_ERROR_CONNECT_TIMED_OUT
-BLE_ERROR_RECEIVE_TIMED_OUT
-BLE_ERROR_INVALID_MESSAGE
-BLE_ERROR_FRAGMENT_ACK_TIMED_OUT
-BLE_ERROR_KEEP_ALIVE_TIMED_OUT
-BLE_ERROR_NO_CONNECT_COMPLETE_CALLBACK
-BLE_ERROR_INVALID_ACK
-BLE_ERROR_REASSEMBLER_MISSING_DATA
-BLE_ERROR_INVALID_BTP_HEADER_FLAGS
-BLE_ERROR_INVALID_BTP_SEQUENCE_NUMBER
-BLE_ERROR_REASSEMBLER_INCORRECT_STATE
-```
+Android supports a custom GATT platform delegate. iOS exposes the callback surface, but Android remains the documented custom-GATT path.
 
 ## DNS-SD
 
@@ -108,9 +87,9 @@ BLE_ERROR_REASSEMBLER_INCORRECT_STATE
 - `PublishCallback`
 - `nsdHostName`
 
-The NSD host is implemented on Android only. The iOS plugin does not route `nsd` requests.
+DNS-SD is implemented on Android. The iOS plugin does not route `nsd` requests.
 
-## Matter paths and state models
+## Matter paths and state
 
 - `ChipAttributePath`
 - `ChipEventPath`
@@ -127,123 +106,48 @@ The NSD host is implemented on Android only. The iOS plugin does not route `nsd`
 - `EndpointState`
 - `ICDDeviceInfo`
 
-These types define the JSON models exchanged with native code. Their field names and JSON representations are compatibility surfaces. `DataVersionFilter` is currently supported by Android subscriptions only.
+These types encode the JSON exchanged with native code. Their public fields and JSON representations are compatibility surfaces. `DataVersionFilter` is supported in Android subscriptions only.
 
-## TLV primitives
+## TLV
 
 - `Element`
 - `TlvReader`
 - `TlvWriter`
 - `TlvParsingException`
 - `TlvEncodingException`
-- `Value`
-- `IntValue`
-- `UnsignedIntValue`
-- `BooleanValue`
-- `FloatValue`
-- `DoubleValue`
-- `Utf8StringValue`
-- `ByteStringValue`
-- `NullValue`
-- `StructureValue`
-- `ArrayValue`
-- `ListValue`
-- `EndOfContainerValue`
-- `Tag`
-- `AnonymousTag`
-- `ContextSpecificTag`
-- `CommonProfileTag`
-- `ImplicitProfileTag`
-- `FullyQualifiedTag`
-- `encodeSize`
-- `SignedIntType`
-- `UnsignedIntType`
-- `BooleanType`
-- `FloatType`
-- `DoubleType`
-- `Utf8StringType`
-- `ByteStringType`
-- `NullType`
-- `StructureType`
-- `ArrayType`
-- `ListType`
-- `EndOfContainerType`
+- `Value` and its concrete value types
+- `Tag` and its concrete tag types
+- TLV type classes, type constants, tag constants, and `encodeSize`
 
-The `Type` class from `tlv_types.dart` is intentionally hidden at the package root to avoid a name collision. Type-code and tag constants exported from the root are:
-
-```text
-MODIFIED_TYPE_MASK
-ELEMENT_TYPE_MASK
-SIGNED_INT_TYPE
-UNSIGNED_INT_TYPE
-UTF8_STRING_TYPE
-BYTE_STRING_TYPE
-BOOLEAN_FALSE
-BOOLEAN_TRUE
-FLOATING_POINT_4
-FLOATING_POINT_8
-NULL
-STRUCTURE
-ARRAY
-LIST
-END_OF_CONTAINER
-TAG_MASK
-ANONYMOUS
-CONTEXT_SPECIFIC
-COMMON_PROFILE_2
-COMMON_PROFILE_4
-IMPLICIT_PROFILE_2
-IMPLICIT_PROFILE_4
-FULLY_QUALIFIED_6
-FULLY_QUALIFIED_8
-```
+`tlv_types.dart` exports a `Type` class that is hidden from the package root to avoid colliding with `dart:core`.
 
 ## Cluster helpers
 
-- `DescriptorCluster` with `readDeviceTypeListAttribute`, `readPartsListAttribute`, and `readServerListAttribute`.
-- `BasicInformationCluster` with `readProductIDAttribute`, `readVendorIDAttribute`, `readSoftwareVersionAttribute`, and `readHardwareVersionStringAttribute`.
+- `DescriptorCluster`
+- `BasicInformationCluster`
 
 Both helpers require a connected `ChipDeviceController`, node ID, and connection context.
 
 ## Export map
 
-| Export path | Exported top-level symbols |
+| Export path | Public symbols |
 | --- | --- |
-| `src/controller.dart` | `AttestationInfo`, `ChipDeviceController`, `CompletionListener`, `ConnectedDeviceCallback`, `ControllerParams`, `CSRInfo`, `defaultIpk`, `DeviceAttestationDelegate`, `InvokeCallback`, `KeypairDelegate`, `KeypairDelegateCallbackHandler`, `kTestControllerNodeId`, `NetworkCredentials`, `NOCChainIssuer`, `OpenCommissioningCallback`, `ReportCallback`, `ReportCallbackWarp`, `SubscriptionCallback`, `SubscriptionCallbackWarp`, `ThreadCredentials`, `WiFiCredentials`, `WriteAttributesCallback`, `WriteAttributesCallbackWarp` |
-| `src/onboarding.dart` | `DiscoveryCapability`, `onboardingPayloadHost`, `OnboardingPayload`, `OnboardingPayloadParser` |
-| `src/ble.dart` | `bleHostName`, all `BLE_ERROR_*` constants, `BLELayerPlatform`, `BLEManager`, `BlePlatformDelegate`, `BlePlatformDelegateCallbackHandler` |
-| `src/model/invoke_element.dart` | `InvokeElement` |
-| `src/model/chip_path_id.dart` | `ChipPathId`, `IdType` |
-| `src/tlv/element.dart` | `Element` |
-| `src/tlv/tag.dart` | `Tag` hierarchy and tag constants |
-| `src/tlv/tlv_reader.dart` | `TlvParsingException`, `TlvReader` |
-| `src/tlv/tlv_writer.dart` | `TlvEncodingException`, `TlvWriter` |
-| `src/tlv/tlv_types.dart` | Type classes, type constants, and `encodeSize`; `Type` is hidden at the package root |
-| `src/tlv/values.dart` | `Value` hierarchy |
-| `src/model/attribute_state.dart` | `AttributeState` |
-| `src/model/attribute_write_request.dart` | `AttributeWriteRequest` |
-| `src/model/cluster_state.dart` | `ClusterState` |
-| `src/model/event_state.dart` | `EventState` |
-| `src/model/status.dart` | `Status` |
-| `src/model/node_state.dart` | `NodeState` |
-| `src/model/endpoint_state.dart` | `EndpointState` |
-| `src/model/chip_attribute_path.dart` | `ChipAttributePath` |
-| `src/model/chip_event_path.dart` | `ChipEventPath` |
-| `src/model/data_version_filter.dart` | `DataVersionFilter` |
-| `src/model/icd_device_info.dart` | `ICDDeviceInfo` |
-| `src/nsd.dart` | `NsdManager`, `NsdServiceInfo`, `nsdHostName`, `PublishCallback`, `RemoveServicesCallback`, `ResolveCallback` |
-| `src/clusters/descriptor_cluster.dart` | `DescriptorCluster` |
-| `src/clusters/basic_information_cluster.dart` | `BasicInformationCluster` |
+| `src/controller.dart` | Controller, credentials, callback, delegate, and certificate APIs listed above |
+| `src/onboarding.dart` | Onboarding types and parser |
+| `src/ble.dart` | BLE manager, platform delegate, host name, and `BLE_ERROR_*` constants |
+| `src/nsd.dart` | NSD manager, service info, callbacks, and host name |
+| `src/model/*.dart` | Matter paths, state, status, invoke, data-version, and ICD models |
+| `src/tlv/*.dart` | TLV elements, tags, values, readers, writers, type classes, and constants |
+| `src/clusters/*.dart` | Basic Information and Descriptor helpers |
 
-## Versioning and deprecation policy
+`test/public_api_test.dart` guards the golden export list. `test/method_channel_contract_test.dart` guards URL construction and JSON envelopes. These tests do not replace compatibility review of method signatures or callback semantics.
 
-The package follows Semantic Versioning. Public types, constructors, methods, default values, exported paths, and MethodChannel wire contracts are compatibility surfaces.
+## Versioning and deprecation
 
-- Before `1.0.0`, a breaking public API change may be released in a minor version under Semantic Versioning's initial-development rule. It must be labeled explicitly in the pull request and `CHANGELOG.md`, and it must include migration guidance.
+The package follows Semantic Versioning. Public types, constructors, methods, default values, export paths, and MethodChannel contracts are compatibility surfaces.
+
+- Before `1.0.0`, a breaking change may use a minor version under Semantic Versioning's initial-development rule. Label it explicitly and provide migration guidance.
 - After `1.0.0`, breaking changes require a major version.
 - Compatible additions and fixes follow normal minor and patch rules.
-- Deprecations use Dart's `@Deprecated` annotation with the replacement and migration note. A deprecated API should remain for at least one minor release unless retaining it is unsafe or technically impossible.
-- Removing or changing an existing MethodChannel host, path, JSON key, or callback envelope requires compatibility review even when no Dart symbol is removed.
-- Direct `src/` imports are not versioned as a consumer API and may change without a public migration path.
-
-Public export drift is guarded by `test/public_api_test.dart`. URL and envelope behavior is guarded by `test/method_channel_contract_test.dart`. These tests are lightweight governance; they do not replace review of method signatures or wire compatibility.
+- Deprecations use `@Deprecated` with a replacement and migration note. Keep a deprecated API for at least one minor release unless retention is unsafe or impossible.
+- Removing or changing an existing API requires the same versioning review as adding a breaking replacement.

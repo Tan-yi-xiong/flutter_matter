@@ -1,119 +1,80 @@
+# Pull request
+
 ## Summary
 
-<!-- Describe the problem, the change, and the expected outcome. -->
+<!-- What changed, why, and what outcome should reviewers expect? -->
 
 ## Scope
 
 - [ ] Android
 - [ ] iOS
-- [ ] Both platforms
-- [ ] Dart library only
-- [ ] Example app only
+- [ ] Both Android and iOS
+- [ ] Dart library
+- [ ] Example app
 - [ ] Device test app or Agent tooling
-- [ ] Documentation or CI only
+- [ ] Documentation, CI, or release metadata
 
-## Public API and compatibility impact
+## Compatibility
 
-- [ ] No public Dart API or MethodChannel contract changes
-- [ ] Public Dart API changed
-- [ ] Native plugin interface changed
-- [ ] MethodChannel URL or JSON envelope changed
+- [ ] No public Dart, MethodChannel, JSON, or callback contract change
+- [ ] Public Dart API change
+- [ ] MethodChannel or wire-format change
 - [ ] Breaking change
 
-<!-- Describe compatibility, migration, or versioning impact for every selected item above. -->
+<!-- Describe migration, versioning, and compatibility impact. -->
 
-## Verification Evidence
+## Verification
 
-Use `Passed`, `Failed`, or `Not run` in the result column. Do not delete rows that
-do not apply. For `Not run`, explain the reason and the remaining risk. Include
-safe evidence links or summaries; never include credentials or private keys.
+Use `Passed`, `Failed`, or `Not run`. For `Not run`, include the reason and remaining risk. Link reproducible evidence when available. Exact commands and toolchains are in [CONTRIBUTING](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/CONTRIBUTING.md).
 
-Automated tests cover the plugin root `test/` suite only. `example/**` is a
-build and manual demonstration target, not an automated test target. Device test
-app checks are local and are not part of required CI.
+| Check                         | Result | Evidence or notes |
+| ----------------------------- | ------ | ----------------- |
+| Dart analyze and plugin tests |        |                   |
+| Android example build         |        |                   |
+| iOS no-codesign build         |        |                   |
+| Device test app checks/build  |        |                   |
+| Manual or device scenario     |        |                   |
 
-| Check | Command or manual scenario | Platform / device | Result | Evidence | Not run reason |
-| --- | --- | --- | --- | --- | --- |
-| Dart analyze | `flutter analyze --no-fatal-infos --no-fatal-warnings` | Host |  |  |  |
-| Plugin Dart tests | `flutter test` (`test/` only) | Host |  |  |  |
-| Android debug build | `cd example && flutter build apk --debug` | Android build host |  |  |  |
-| iOS no-codesign build | `cd example && flutter build ios --debug --no-codesign` | macOS |  |  |  |
-| Device test app analyze/tests | `cd device_test_app && flutter analyze --no-fatal-infos --no-fatal-warnings && flutter test` | Host |  |  |  |
-| Device test app Android build | `fvm dart run tool/device_test_app.dart build-apk` | Android build host |  |  |  |
-| Device test app iOS build | `fvm dart run tool/device_test_app.dart build-ios` | macOS |  |  |  |
-| Manual functional test | Describe the exact scenario | Device and OS |  |  |  |
-| Regression or negative scenario | Describe the exact scenario | Device and OS |  |  |  |
+**Toolchain and device:**
 
-## Device Validation
+- [ ] The selected evidence covers the changed code path and affected platforms.
+- [ ] Evidence links contain no credentials, device identifiers, or raw private logs.
 
-<!-- Required for changes affecting commissioning, BLE, networking, controller lifecycle, attributes, commands, subscriptions, callbacks, MethodChannel behavior, or native Matter code. Follow doc/device-validation.md and doc/device-test-report.md. Mark Not applicable only for changes that cannot affect device behavior. -->
+## Device validation
 
-- [ ] Not applicable; explain why in the field below
-- [ ] Matter commissionee used
-- [ ] Matter SDK discovery and commissioning used; the report records `wifi` network transport
+<!-- Required for commissioning, BLE, networking, controller lifecycle, Interaction Model, callbacks, MethodChannel, or native Matter changes. -->
 
-**Applicability or not-applicable reason:**
+- [ ] Not applicable; explain why below
+- [ ] `full` profile used with a Matter commissionee
+- [ ] Schema v4 report matches the current PR head
+- [ ] Android report attached/linked
+- [ ] iOS report attached/linked
+- [ ] Shared behavior covered on both platforms, or the exception is explained
+- [ ] Sanitized JSON is attached or linked
+- [ ] Optional screenshots are sanitized
+
+**Reason or platform exception:**
 
 **Plugin commit under test:**
 
-**Test app version and commit, or interim manual report:**
+**Android result and evidence:**
 
-**Commissionee vendor/product ID from the report:**
-
-**Network transport:** `<wifi>`
-
-**Controller and commissionee confirmed on the same trusted LAN:** `<Yes|No>`
-
-**Android result:** `<Passed|Failed|Not run>` — `<report and attachment links>`
-
-**iOS result:** `<Passed|Failed|Not run>` — `<report and attachment links>`
+**iOS result and evidence:**
 
 <details>
-<summary>Generated Markdown device-test-report summary</summary>
+<summary>Generated device-test-report.md</summary>
 
 ```markdown
-Paste `device-test-report.md` here.
+Paste the generated report here.
 ```
 
 </details>
 
-- [ ] The report commit matches the current PR head.
-- [ ] Sanitized JSON is attached in a PR comment and linked above.
-- [ ] Any screenshots attached manually are sanitized and linked above.
-- [ ] Both Android and iOS reports are present for shared behavior, or the platform exception is explained.
-- [ ] The reports and attachments contain no device identifiers, provisioning secrets, certificates, keys, or raw logs.
+## Risks
 
-## Untested areas and risks
-
-<!-- List every affected behavior that was not verified and the risk reviewers must accept. -->
+<!-- List affected behavior that was not verified and the risk reviewers must accept. -->
 
 ## Documentation and changelog
 
-- [ ] Documentation updated, or the change does not require documentation updates
-- [ ] `CHANGELOG.md` updated, or the change does not require a changelog entry
-
-## Author checklist
-
-- [ ] I ran every applicable check listed above and reported the actual result.
-- [ ] I did not leave any verification field blank.
-- [ ] I identified all affected platforms and native behavior.
-- [ ] I did not run or report `example/**` as an automated test target.
-- [ ] I described public API and compatibility impact.
-- [ ] I included no credentials, tokens, private keys, or unsanitized private logs.
-- [ ] I reviewed all added or modified documentation and confirmed it is English.
-- [ ] For device-behavior changes, I supplied full-profile reports for every affected platform using the repository report contract.
-- [ ] Agent-driven runs used `$flutter-matter-device-test` and requested a user choice when multiple phones were connected.
-
-## Reviewer checklist
-
-- [ ] The verification evidence covers the changed code path and affected platforms.
-- [ ] Every `Not run` item has a reason and an explicit remaining-risk statement.
-- [ ] Public API, MethodChannel, JSON, and compatibility impacts were reviewed.
-- [ ] Android and iOS behavior were considered, with any platform exception justified.
-- [ ] Documentation and changelog impact was reviewed.
-- [ ] All added or modified documentation is English.
-- [ ] A green CI result was not treated as proof of native compilation or device behavior.
-- [ ] Device-behavior evidence uses the versioned report contract, matches the PR head, and covers every affected platform.
-- [ ] No P0 failure was retried in the same Run to manufacture a green result.
-- [ ] Formal evidence used a Matter commissionee, delegated discovery and commissioning to the Matter SDK, and did not retry commissioning in the same Run.
-- [ ] Attached reports and screenshots contain no credentials, device identifiers, provisioning secrets, certificates, keys, or raw logs.
+- [ ] Documentation updated, or not required
+- [ ] `CHANGELOG.md` updated, or not required

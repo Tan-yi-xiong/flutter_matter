@@ -1,64 +1,53 @@
 # flutter_matter API showcase
 
-The example app exercises the public `flutter_matter` APIs through interactive
-feature panels instead of mock data.
+This app exercises the public `flutter_matter` APIs through interactive feature panels. It is a manual build and demonstration target, not an automated test suite.
 
-## Features
+## Code map
 
-- QR or manual setup-code entry. Commissioning works straight from the raw
-  onboarding code; `OnboardingPayloadParser` is optional and only surfaces
-  payload details (VID / PID / discriminator / discovery capabilities).
-- SDK-managed Wi-Fi commissioning through `ChipDeviceController.pairDevice`.
-- Google Home dual-fabric commissioning on Android through the pinned
-  `flutter_matter_google_home` git dependency: GMS hosts the first fabric via
-  `startHandoffSession`, the handoff endpoint feeds a local-stack
-  `pairDeviceWithAddress` second fabric, and the session is completed with the
-  truthful second-fabric result.
-- Persisted Wi-Fi SSID / password auto-fill on the commissioning page.
-- Commissioning window creation with `openPairingWindowWithPIN`; re-opening
-  first clears any existing window state so the action can be repeated.
-- Optional Android manual BLE/GATT transport through `BlePlatformDelegate`.
-- CASE connection ownership through `connectedDevice` and
-  `releaseConnectContext`.
-- `BasicInformationCluster` and `DescriptorCluster` reads.
-- On/Off `invoke`, attribute `subscribe`, and `unSubscription`.
-- NodeLabel `read` and `write` with TLV input/output.
-- Fabric Table inspection and current-fabric removal through
-  OperationalCredentials `read` + `invoke`.
-- A generic API console for `invoke`, `read`, `write`, and `subscribe`,
-  including wildcard paths, event paths, data-version filters, and raw TLV.
-- Android `pairDeviceWithAddress` and an NSD callback monitor in Advanced.
+| Feature | Source location |
+| --- | --- |
+| Persistent fabric identity and controller parameters | [`MatterIdentity`](lib/src/identity.dart#L13-L41), [`MatterIdentityRepository.loadOrCreate`](lib/src/identity.dart#L48-L67) |
+| SDK-managed Wi-Fi commissioning | [`MatterCommissioningService.commission`](lib/src/commissioning_service.dart#L26-L93) |
+| Cancel an in-progress commissioning attempt | [`cancelCommissioning`](lib/src/commissioning_service.dart#L16-L24) |
+| Direct-address commissioning | [`commissionWithAddress`](lib/src/commissioning_service.dart#L95-L143) |
+| Google Home dual-fabric commissioning | [`commissionGoogleDualFabric`](lib/src/commissioning_service.dart#L145-L197) |
+| Commissioning callbacks, NOC issuance, and attestation | [`_CommissioningDelegate`](lib/src/commissioning_service.dart#L208-L341) |
+| Android custom BLE/GATT transport | [`AndroidBleTransport`](lib/src/android_ble_transport.dart#L8-L225) |
+| Connection, read, write, invoke, and subscribe | [`MatterApiService`](lib/src/matter_api_service.dart#L8-L220) |
+| Fabric Table read and removal | [`readFabrics` / `removeFabric`](lib/src/matter_api_service.dart#L286-L335) |
+| Commissioning UI flow | [`CommissioningPage._startCommissioning`](lib/src/pages/commissioning_page.dart#L130-L169) |
+| Device control UI flow | [`DevicePage`](lib/src/pages/device_page.dart#L19-L418) |
+| Generic Interaction Model console | [`ApiConsolePage`](lib/src/pages/api_console_page.dart#L22-L286) |
+| Android direct-address and NSD tools | [`AdvancedPage`](lib/src/pages/advanced_page.dart#L10-L262) |
+
+These links identify the complete implementation. The user guide pages keep only minimal snippets and link back here instead of duplicating the code.
 
 ## Run
 
 ```sh
 cd example
 fvm flutter pub get
+
+# Android builds only.
+export GOOGLE_MATTER_SDK_REPO=/absolute/path/to/home.android.sdk_1_11_1/repo
 fvm flutter run
 ```
 
-The app is mobile-only. Android uses the permissions declared in the example
-manifest, and Android builds require `GOOGLE_MATTER_SDK_REPO` pointing at the
-unzipped Google Home Android SDK (Home APIs 1.11.1) Maven repository
-(`home.android.sdk_1_11_1.zip`, SHA256
-`9154ee88b3d93e7eafb85a1132043e281a14d1f60fc50913a4c230b34afafef4`); the Google
-dual-fabric path additionally needs the pinned `flutter_matter_google_home`
-git dependency and a device with Google Play Services' Home module. iOS
-requires the
-Matter Extension, App Group, `AppGroupId`, Info.plist entries, and signing
-setup documented in the repository README. The vendored `ZGMatter.framework`
-does not support the iOS simulator.
+The app is mobile-only. Android uses the permissions declared in the example manifest. The `GOOGLE_MATTER_SDK_REPO` variable must point at the extracted Google Home Android SDK.
+
+Download the SDK from the [Google Home Android release notes](https://developers.home.google.com/apis/android/release-notes). Do not commit SDK artifacts. Google dual-fabric commissioning also requires a device with the Play Services Home module.
+
+For iOS, complete the Matter Extension, App Group, `AppGroupId`, Info.plist, and signing steps in [Getting started](../doc/getting-started.md), then run on a physical iPhone. The vendored `ZGMatter.framework` does not support the simulator.
+
+## Related guides
+
+- [Getting started](../doc/getting-started.md)
+- [Commissioning](../doc/commissioning.md)
+- [Device operations](../doc/device-operations.md)
+- [Platform support](../doc/platform-support.md)
 
 ## Storage and security
 
-This example persists its demo fabric identity and device list in
-`SharedPreferences` so the flow survives an app restart. That is intentionally
-simple and is not production-safe. Real applications must protect controller
-private keys, certificates, setup payloads, and Wi-Fi credentials with a
-platform keystore and explicit user consent.
+The example persists its demo fabric identity and device list in `SharedPreferences`. That is intentionally simple and not production-safe. Real applications must protect controller private keys, certificates, setup payloads, and Wi-Fi credentials with platform secure storage and explicit user consent.
 
-Setup codes, Wi-Fi passwords, pairing codes, certificates, private keys, and
-raw native logs are not written to the operation log or example documentation.
-The example deliberately renders all user inputs (setup codes and Wi-Fi
-passwords included) in plain text for debugging; real applications must not
-follow this.
+The example renders setup codes and Wi-Fi passwords as plain text for debugging. Do not copy that behavior into a production app. The operation log excludes setup codes, passwords, pairing codes, certificates, private keys, and raw native logs.

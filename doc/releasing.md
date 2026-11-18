@@ -1,47 +1,47 @@
-# Release Process
+# Release process
 
-This repository produces source-only GitHub Releases and keeps pub.dev publication as an explicit maintainer action. The release workflow validates the exact commit, creates a source archive and checksum, and records release notes from `CHANGELOG.md`.
+Releases are source-only GitHub Releases. Creating a tag validates the exact commit, generates a deterministic source archive and checksum, and creates a GitHub Release from `CHANGELOG.md`. Publishing to pub.dev remains a manual maintainer action.
 
-## Release Contract
+## Release contract
 
-- Release tags use stable `vX.Y.Z` names only. Pre-release suffixes are not supported.
-- `pubspec.yaml` version and the matching `CHANGELOG.md` heading must use the same `X.Y.Z` version.
-- The CHANGELOG heading must be exactly `## X.Y.Z`; the release notes end at the next level-two heading.
+- Tags use stable `vX.Y.Z` names; pre-release suffixes are not supported.
+- `pubspec.yaml` and the matching `CHANGELOG.md` heading use the same `X.Y.Z`.
+- Release notes are the content under the exact `## X.Y.Z` heading and stop at the next level-two heading.
 - GitHub Releases contain `flutter_matter-X.Y.Z.tar.gz` and its `.sha256` checksum.
-- No APK, IPA, framework archive, or other build artifact is published.
-- The workflow never publishes to pub.dev and never needs a pub.dev token.
+- The workflow does not publish APKs, IPAs, framework archives, or pub.dev packages.
 
-## Prepare the Release Commit
+## Prepare the release
 
-1. Choose the version according to the repository's semantic-versioning policy.
-2. Set the exact version in `pubspec.yaml`.
-3. Move the relevant `Unreleased` entries into a new `## X.Y.Z` section in `CHANGELOG.md`.
-4. Update platform, API, architecture, and migration documentation required by the change.
-5. Confirm every new or changed documentation file is written in English.
-6. Open and merge a pull request into `main`; do not tag a pull-request branch.
+1. Choose the version using the [public API versioning policy](public-api.md#versioning-and-deprecation).
+2. Set the version in `pubspec.yaml`.
+3. Move relevant `Unreleased` entries under a new `## X.Y.Z` heading in `CHANGELOG.md`.
+4. Update public API, platform, architecture, and migration documentation.
+5. Confirm all new or changed documentation is in English.
+6. Merge the release-preparation pull request into `main`; do not tag a pull-request branch.
 
-## Device Validation Before Tagging
+## Device validation
 
-The release-preparation pull request is also the durable record for stable-release device validation. It must include separate Android and physical iOS reports against the release-candidate commit.
+The release-preparation pull request is the durable record of stable-release device validation. It must include separate reports for Android and physical iOS against the release-candidate commit.
 
 Each report must:
 
-- Conform to schema version `4` and provide both `device-test-report.json` and its generated Markdown summary.
-- Identify an exact `plugin_commit` equal to the candidate commit.
-- Cover one complete clean P0 cycle for the controller platform.
-- Use a Matter On/Off commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning, and reports `wifi` as the network transport. A commissioning failure is preserved without retrying commissioning. Device provenance is not part of the report contract.
-- Include optional sanitized screenshots or other manually captured bounded evidence; the app itself emits JSON and Markdown only.
-- Record P1 results, including reasons for `not_run` entries and any accepted P1 failures.
+- use schema version 4 and include `device-test-report.json` plus its generated Markdown summary;
+- identify the exact candidate commit in `plugin_commit`;
+- contain one complete clean P0 cycle;
+- use a Matter On/Off commissionee and record `network_transport: "wifi"`;
+- preserve failed results instead of retrying a failed commissioning or P0 within the same Run;
+- include P1 results and reasons for any `not_run` entry;
+- contain no device identifiers, provisioning secrets, certificates, private keys, or raw logs.
 
-Both platform reports must show every required P0 case as `passed`. Do not create a stable tag when a report is missing, stale, failed, not run, or missing a clean-cycle statement.
+Factory-reset the commissionee before each clean cycle. A completed Run leaves a test fabric behind; the app's post-Run cleanup card only purges Run secrets and records operator confirmation, so it is not a substitute for resetting the commissionee.
 
-The repository does not run device validation in CI and does not use a self-hosted hardware runner for this process.
+Do not tag a stable release when a report is missing, stale, failed, not run, or produced from the wrong commit. Device validation is not run in hosted CI.
 
-## Local Verification
+## Local verification
 
-Run from the repository root:
+From the repository root:
 
-```bash
+```sh
 fvm flutter pub get
 fvm flutter analyze --no-fatal-infos --no-fatal-warnings
 fvm flutter test
@@ -52,53 +52,48 @@ git diff --check
 git status --short
 ```
 
-`dart pub publish --dry-run` must exit successfully without warnings. `tool/release.dart validate` must report the expected archive name, and `notes` must print only the matching release section.
+`dart pub publish --dry-run` must exit with 0 warnings. The release tool must report the expected archive name, and `notes` must print only the matching release section.
 
-## GitHub Preflight
+## GitHub preflight
 
-After the release commit is on `main`, run the workflow manually from the default branch:
+After the release commit is on `main`, run the workflow from the default branch:
 
-```bash
+```sh
 gh workflow run release.yml --ref main
 gh run list --workflow release.yml --limit 1
 ```
 
-A manual dispatch stops after validation and archive generation. It does not create a GitHub Release. Inspect the `Validate release` job and its summary, and confirm the source archive checksum is present.
+A manual dispatch stops after validation and archive generation. Confirm the `Validate release` job passes and the source checksum exists. It does not create a GitHub Release.
 
-## Create the Release
+## Create the release
 
-Before tagging, confirm the device-validation requirements above are satisfied in the release-preparation pull request and that the attached evidence is still accessible.
+Confirm the device-validation reports are present and still accessible, then create an annotated tag from the release commit:
 
-Use the merge commit on `main` and create an annotated tag:
-
-```bash
+```sh
 git switch main
 git pull --ff-only
 git tag -a vX.Y.Z -m "flutter_matter X.Y.Z"
 git push origin vX.Y.Z
 ```
 
-The tag runs the same validation and then creates the GitHub Release with the CHANGELOG notes, source archive, and checksum. A rerun fails if the Release already exists; do not overwrite or reuse a published release. Resolve the existing release state manually before retrying.
+The tag runs validation and creates the GitHub Release. Do not move or reuse a tag. If the Release already exists, resolve its state manually instead of overwriting it.
 
 ## Publish to pub.dev
 
-After the GitHub Release is verified, publish the exact tagged source manually:
+After verifying the GitHub Release, publish the tagged source:
 
-```bash
+```sh
 git fetch --tags
 git switch --detach vX.Y.Z
 fvm flutter pub get
 fvm dart pub publish
 ```
 
-Authenticate as a package publisher and complete the pub.dev confirmation flow. Verify the published version and changelog on `https://pub.dev/packages/flutter_matter`.
+Authenticate as a package publisher and complete the pub.dev confirmation flow. Verify the published version and changelog. Never reuse or move a version after pub.dev accepts it.
 
-Never reuse or move a version after it has been published to pub.dev. If publication fails before the server accepts the archive, correct the issue and use a new version rather than replacing a published tag.
+## Failures
 
-## Failure Handling
-
-- If validation fails before the GitHub Release is created, fix the issue through a new pull request and rerun the workflow on the same tag only when the tag still points to the intended commit.
-- If the GitHub Release exists but assets or notes are incomplete, verify and repair it manually; do not silently replace a published release.
-- If pub.dev publication fails, keep the GitHub Release immutable and follow the new-version path unless pub.dev confirms that nothing was accepted.
-- Security issues must follow [`SECURITY.md`](../SECURITY.md), not the public release checklist.
-- Third-party licensing obligations are documented in [`THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md).
+- If validation fails before GitHub Release creation, fix through a new pull request and rerun only while the tag still points to the intended commit.
+- If a GitHub Release exists with incomplete assets or notes, repair it manually; do not replace a published release silently.
+- If pub.dev rejects or fails publication, keep the GitHub Release immutable and use a new version unless pub.dev confirms nothing was accepted.
+- Security issues follow [SECURITY.md](../SECURITY.md), not the public release checklist.

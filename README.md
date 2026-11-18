@@ -1,327 +1,73 @@
-<div align="center">
-
 # flutter_matter
 
-A beautiful and low-level [Matter](https://csa-iot.org/) plugin for **Flutter** on **Android** and **iOS**.
+A low-level Matter controller plugin for Flutter on Android and iOS. It provides commissioning, operational connections, Interaction Model operations, BLE hooks, and TLV helpers backed by the native Matter SDKs.
 
 <p align="center">
-  <img src="images/demo.gif" alt="flutter_matter demo" width="320" />
+  <img src="https://raw.githubusercontent.com/Tan-yi-xiong/flutter_matter/main/images/demo.gif" alt="flutter_matter example app" width="320" />
 </p>
 
 <p align="center">
   <a href="https://github.com/Tan-yi-xiong/flutter_matter/actions/workflows/dart-gate.yml"><img src="https://github.com/Tan-yi-xiong/flutter_matter/actions/workflows/dart-gate.yml/badge.svg" alt="Dart Gate"></a>
-  <a href="https://pub.dev/packages/flutter_matter"><img src="https://img.shields.io/pub/v/flutter_matter.svg" alt="pub.dev"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
+  <a href="https://pub.dev/packages/flutter_matter"><img src="https://img.shields.io/pub/v/flutter_matter.svg" alt="pub.dev version"></a>
+  <a href="https://github.com/Tan-yi-xiong/flutter_matter/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
 </p>
 
-</div>
-
----
-
-## 📦 Installation
-
-Add the package:
+## Quick start
 
 ```sh
 flutter pub add flutter_matter
 ```
 
-Then import it:
-
 ```dart
 import 'package:flutter_matter/flutter_matter.dart';
 ```
 
----
+Follow [Getting started](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/getting-started.md) to configure Android or iOS and commission a first device. iOS requires a physical arm64 device; the simulator is not supported.
 
-## ✨ Features
+## What it provides
 
-- **Provisioning**  
-  Supports both **BLE commissioning** and **on-network commissioning**.  
-  On Android, you can also provide your own GATT implementation to send Matter commissioning data.
+- BLE and on-network commissioning, including open Wi-Fi and Thread credentials.
+- Controller lifecycle, CASE connection ownership, and ICD registration callbacks.
+- Attribute and event reads, writes, commands, subscriptions, and wildcard paths.
+- Fabric management through OperationalCredentials `read` and `invoke`.
+- Optional custom GATT transport on Android, plus DNS-SD helpers on Android.
+- TLV primitives and Basic Information/Descriptor cluster helpers.
 
-- **Thread network support**  
-  Pass a Thread Active Operational Dataset using:
+This is a controller-side plugin. It does not turn an app into a Matter commissionee.
 
-  ```dart
-  NetworkCredentials.thread(ThreadCredentials(...))
-  ```
+## Documentation
 
-- **ICD (Intermittently Connected Devices)**  
-  Full support for **Matter 1.2+ ICD commissioning** via:
+### Start here
 
-  ```dart
-  CompletionListener.onICDRegistrationComplete
-  ```
+- [Getting started](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/getting-started.md)
 
-- **Attribute read**  
-  Read any attribute from any cluster.
+### Guides
 
-- **Attribute write**  
-  Write any attribute to any cluster.
+- [Commissioning](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/commissioning.md)
+- [Device operations](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/device-operations.md)
+- [Example app](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/example/README.md)
 
-- **Attribute / event subscribe**  
-  Subscribe with optional `DataVersionFilter` for efficient change-only updates.
+### Reference
 
-- **Invoke**  
-  Send commands to any cluster endpoint.
+- [Public API](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/public-api.md)
+- [Platform support](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/platform-support.md)
 
-- **Fabric management**
-  Inspect the OperationalCredentials Fabric Table through `read`, then send
-  `RemoveFabric` through `invoke`. The example includes a guarded
-  current-fabric removal flow.
+### Maintainers
 
-- **TLV**  
-  Full TLV read/write stack for advanced low-level control.
+- [Architecture](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/ARCHITECTURE.md)
+- [Contributing](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/CONTRIBUTING.md)
+- [Device validation](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/device-validation.md)
+- [Device test report contract](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/device-test-report.md)
+- [Release process](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/releasing.md)
 
-- **Cluster helpers**  
-  Convenience wrappers for:
-  - `BasicInformationCluster`
-  - `DescriptorCluster`
+## Example app
 
----
+The [example app](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/example/README.md) is the complete runnable reference for commissioning, device control, the Interaction Model console, NSD, and Android Google Home dual-fabric commissioning. Its README maps each feature to the relevant source file and symbol.
 
-## Requirements and platform support
+## Security
 
-| Area | Supported baseline |
-| --- | --- |
-| Flutter | Flutter `3.41.0`, pinned in `.fvmrc`; older SDKs satisfy the pubspec constraint but are not currently validated |
-| Dart | `>=3.3.3 <4.0.0`, unchanged in `pubspec.yaml` |
-| Android | `minSdkVersion 21`, `compileSdk 34`, JDK 17 |
-| Example Android build | Gradle 8.7, Android Gradle Plugin 8.6.0, Kotlin 2.4.0; requires `GOOGLE_MATTER_SDK_REPO` (Google Home Android SDK 1.11.1) |
-| iOS | iOS 16.1 minimum for the plugin and example; Xcode 16.4 or later and CocoaPods 1.17 |
-| iOS device support | Physical arm64 iPhoneOS devices only; the vendored `ZGMatter.framework` has no simulator slice |
+Report vulnerabilities privately through [GitHub security advisories](https://github.com/Tan-yi-xiong/flutter_matter/security/advisories/new). Do not include setup codes, Wi-Fi credentials, certificates, private keys, or raw device logs in a public issue.
 
-The Android values describe the current repository build configuration and do not imply that an SDK upgrade has already been completed. The iOS deployment targets are aligned to 16.1. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
+## License
 
-Automated tests cover the plugin root `test/` suite only. The `example/` application is a build and manual demonstration target, never an automated test target. Device-behavior changes require a versioned Android and/or iOS device-validation report; shared behavior requires both platforms. Formal reports use schema v4 evidence. The device-test app passes the raw onboarding payload to the Matter SDK, which performs discovery and commissioning. Device provenance is not part of the report contract.
-
-See [Architecture](ARCHITECTURE.md), [Public API](doc/public-api.md), [Platform support](doc/platform-support.md), [Device validation](doc/device-validation.md), [Device test reports](doc/device-test-report.md), [Contributing](CONTRIBUTING.md), [Security policy](SECURITY.md), [Release process](doc/releasing.md), [Third-party notices](THIRD_PARTY_NOTICES.md), and the [PR review checklist](doc/pr-review-checklist.md) for details.
-
----
-
-## 🚀 Getting Started
-
-## Android
-
-Make sure the following permissions are added to your **AndroidManifest.xml**:
-
-```xml
-<!-- Tell Google Play Store that your app uses Bluetooth LE -->
-<!-- Set android:required="true" if Bluetooth is required -->
-<uses-feature
-    android:name="android.hardware.bluetooth_le"
-    android:required="false" />
-
-<!-- Android 12+ Bluetooth permissions -->
-<uses-permission
-    android:name="android.permission.BLUETOOTH_SCAN"
-    android:usesPermissionFlags="neverForLocation" />
-<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-
-<!-- Android 11 and lower -->
-<uses-permission
-    android:name="android.permission.BLUETOOTH"
-    android:maxSdkVersion="30" />
-<uses-permission
-    android:name="android.permission.BLUETOOTH_ADMIN"
-    android:maxSdkVersion="30" />
-<uses-permission
-    android:name="android.permission.ACCESS_FINE_LOCATION"
-    android:maxSdkVersion="30" />
-
-<!-- Android 9 and lower -->
-<uses-permission
-    android:name="android.permission.ACCESS_COARSE_LOCATION"
-    android:maxSdkVersion="28" />
-
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-```
-
----
-
-## iOS
-
-### 1. Add the required keys to `Info.plist`
-
-```xml
-<key>NSBluetoothAlwaysUsageDescription</key>
-<string>This app uses Bluetooth to connect to nearby devices for communication.</string>
-
-<key>NSBonjourServices</key>
-<array>
-  <string>_meshcop._udp</string>
-  <string>_matter._tcp</string>
-  <string>_matterc._udp</string>
-  <string>_matterd._udp</string>
-</array>
-
-<key>NSCameraUsageDescription</key>
-<string>This app needs camera access to scan QR codes.</string>
-
-<key>NSLocalNetworkUsageDescription</key>
-<string>Required to discover local network devices.</string>
-```
-
-### 2. Add a Matter Extension to your project
-
-<p align="center">
-  <img src="images/addMatterExt.png" alt="Add Matter Extension" width="700" />
-</p>
-
-### 3. Add capabilities to both targets
-
-In both the **main app target** and the **Matter Extension target**, add:
-
-- **App Groups**
-- **Matter Allow Setup Payload**
-
-Make sure both targets use the **same App Group**.
-
-<p align="center">
-  <img src="images/ExtAppGroups.png" alt="App Groups setup" width="700" />
-</p>
-
-### 4. Add `AppGroupId` to both targets
-
-In the **Info** section of both the main app target and the Matter Extension target, add:
-
-- **Key:** `AppGroupId`
-- **Value:** the same App Group value selected in step 3
-
-This allows data sharing between the two targets.
-
-<p align="center">
-  <img src="images/infoConfig.jpeg" alt="Info.plist AppGroupId configuration" width="700" />
-</p>
-
-### 5. Copy the request handler code
-
-Copy the contents of:
-
-```text
-example/ios/MatterExt/RequestHandler.swift
-```
-
-into your Matter Extension’s:
-
-```text
-RequestHandler.swift
-```
-
----
-
-## ▶️ Run the Example
-
-### iOS
-
-Open the following workspace in Xcode:
-
-```sh
-example/ios/Runner.xcworkspace
-```
-
-Then:
-
-1. Fill in your signing information
-2. Complete the iOS setup steps above
-
-### Android
-
-Building the example requires the Google Home Android SDK (Home APIs 1.11.1)
-Maven repository, because the dual-fabric commissioning path depends on
-`play-services-home` 17.1.0, which is not on public Maven:
-
-```sh
-export GOOGLE_MATTER_SDK_REPO=/absolute/path/to/unzipped/home.android.sdk_1_11_1/repo
-```
-
-Download `home.android.sdk_1_11_1.zip` from the
-[Android SDK release notes](https://developers.home.google.com/apis/android/release-notes)
-(SHA256 `9154ee88b3d93e7eafb85a1132043e281a14d1f60fc50913a4c230b34afafef4`),
-unzip it, and point the variable at the unzipped repository root. Do not
-commit the SDK artifacts. The Google dual-fabric path also uses the
-`flutter_matter_google_home` git dependency pinned by `example/pubspec.yaml`.
-
-### Start the example
-
-```sh
-cd example
-fvm flutter pub get
-fvm flutter run
-```
-
-
----
-
-## 🛠️ Development
-
-### Validation app
-
-`device_test_app/` is the dedicated validation surface: a quick four-test commissioning/control profile for iteration, or the full 11-test validation matrix for formal evidence, on Android and physical iOS. Every run delegates commissionee discovery and commissioning to the Matter SDK.
-
-> [!TIP]
-> **Using Codex or another coding Agent?** Just tell it:
->
-> ```text
-> Run a device validation for my change with the flutter-matter-device-test skill.
-> ```
->
-> It drives the bridge, the run, Android permission prompts, and the report pull — you only pick the phone and provide the setup payload. Details: [Agent device testing](doc/agent-device-testing.md).
-
-### Environment
-
-- Flutter **3.41.0** via [FVM](https://fvm.app) (pinned in `.fvmrc`).
-- Android: JDK 17, Android SDK 34+.
-- iOS: Xcode 16.4+, CocoaPods 1.17; physical iPhone only — the vendored `ZGMatter.framework` has no simulator slice.
-
-### Common commands
-
-| Task | Command |
-| --- | --- |
-| Analyze (errors only) | `fvm flutter analyze --no-fatal-infos --no-fatal-warnings` |
-| Format | `fvm dart format .` |
-| Plugin tests (CI gate) | `fvm flutter test` |
-| Example Android build | `cd example && fvm flutter build apk --debug` |
-| Device test app analyze / tests | `cd device_test_app && fvm flutter analyze --no-fatal-infos --no-fatal-warnings && fvm flutter test` |
-| Device test app builds / runs | `fvm dart run tool/device_test_app.dart build-apk` / `build-ios` / `run` |
-
-### Repository guide
-
-| Document | Covers |
-| --- | --- |
-| [Public API](doc/public-api.md) | Exported API reference and changelog pointers |
-| [Platform support](doc/platform-support.md) | Android / iOS capability matrix |
-| [Device test app](doc/device-test-app.md) | Validation app architecture, run lifecycle, persistence |
-| [Agent device testing](doc/agent-device-testing.md) | Mac bridge protocol, JSON CLI, agent loop |
-| [Device validation](doc/device-validation.md) | Validation strategy, P0/P1/P2 scenarios, virtual commissionee |
-| [Device test report](doc/device-test-report.md) | Schema v4 report contract and evidence rules |
-| [PR review checklist](doc/pr-review-checklist.md) | What reviewers must verify |
-| [Releasing](doc/releasing.md) | Version bump and publish workflow |
-| [ADR records](doc/adr/) | Architecture decisions |
-
-### Validation gates
-
-- The Dart CI gate runs the plugin test suite only; it does not validate Matter behavior on hardware.
-- Any device-behavior change requires a `device_test_app` **full** run with a valid schema v4 report attached to the PR, and the report commit must match the PR head.
-- Native Matter artifacts (`ZGMatter.framework`, the prefixed Android Matter AAR) are versioned inputs — do not rewrite them inside unrelated changes.
-
----
-
-## 🔐 Security
-
-Report suspected vulnerabilities privately through [GitHub Private Vulnerability Reporting](https://github.com/Tan-yi-xiong/flutter_matter/security/advisories/new). Do not open a public issue for a suspected vulnerability. See [SECURITY.md](SECURITY.md) for scope, required report details, and disclosure expectations.
-
-## 📄 License
-
-Original `flutter_matter` code is licensed under the [MIT License](LICENSE). Project CHIP/Matter SDK-derived source and bundled Matter binaries retain their Apache-2.0 terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome.
-
-If you find this plugin useful, consider giving it a star.
+Original `flutter_matter` code is MIT licensed. Matter SDK-derived source and bundled binaries retain their Apache-2.0 terms. See [THIRD_PARTY_NOTICES.md](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/THIRD_PARTY_NOTICES.md).

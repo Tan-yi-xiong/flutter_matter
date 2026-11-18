@@ -12,7 +12,7 @@
 - Added `SECURITY.md`, third-party license notices, and GitHub Private Vulnerability Reporting.
 
 ### Device Test App and Agent Automation
-- Added a dedicated Android/iOS device-test app with quick and full validation profiles, resumable Run state, secure credential storage, and schema-validated JSON/Markdown reports.
+- Added a dedicated Android/iOS device-test app with quick and full validation profiles, one-shot Run lifecycle with stale-state cleanup, secure credential storage, and schema-validated JSON/Markdown reports.
 - Added a Mac-hosted WebSocket Agent bridge, JSON CLI, and repository Skill for guided device validation. Multiple connected phones require an explicit user choice.
 - The device-test app remains outside the required CI workflow; its local checks and Agent workflows are documented for contributors.
 
@@ -22,8 +22,7 @@
 ### Tooling and tests
 - Added a root plugin Dart test suite covering public exports, MethodChannel contracts, models, TLV parsing, onboarding parsing, and callback routing.
 - Pinned Flutter `3.41.0` through `.fvmrc`; the Dart and Flutter pubspec lower bounds remain unchanged, while only Flutter `3.41.0` is currently validated.
-- Documented the Android build baseline as `minSdk 21`, `compileSdk 34`, JDK 17, Gradle 8.7, Android Gradle Plugin 8.6.0, and Kotlin 1.9.22 without claiming an SDK upgrade.
-- Documented that Flutter 3.41 may auto-migrate the example Android minSdk from 21 to 24 and that this migration is outside the current compatibility decision.
+- Documented the plugin Android baseline as `minSdk 21`, `compileSdk 34`, JDK 17, and Kotlin 1.7.10, with the example Gradle/AGP/Kotlin baseline tracked separately.
 - Removed the example's obsolete `win32` override after refreshing its mobile plugin dependencies.
 - Kept the required CI gate Dart-only and limited automated tests to the plugin root `test/` suite. The example remains a build and manual demonstration target.
 - Reworked the example into an English API and feature showcase with a generic Interaction Model console, direct-address and NSD advanced tools, explicit operation results, and demo-only restart persistence.
@@ -39,12 +38,15 @@
 - Fixed nested event and event-status decoding in `ClusterState`.
 
 ### Documentation
+- Reorganized consumer documentation into a Getting started tutorial, commissioning and device-operation guides, and a compact public API boundary, with symbol-level links to the runnable `example/` implementation.
+- Added core dartdoc comments for controller, commissioning, onboarding, connection, and Interaction Model operations.
 - Added architecture, public API, platform support, and architecture decision records.
 - Added contribution and review guidance for public API, MethodChannel, JSON, platform, and testing compatibility.
-- Added a device-validation process and schema-versioned JSON/Markdown report contract for Android and physical iOS controllers using Matter commissionees with dual-path discovery.
+- Added a device-validation process and schema-versioned JSON/Markdown report contract for Android and physical iOS controllers using Matter commissionees with SDK-managed discovery and commissioning.
 - Added the Flutter 3.41 UIScene migration for the iOS example and aligned its deployment targets to iOS 16.1.
 - Clarified that `example/**` is never an automated test target and that iOS simulator builds are unsupported by the current vendored Matter framework.
 - Corrected the public documentation to describe fabric removal through OperationalCredentials `read` + `invoke`; `unPairDevice` is not part of the current exported controller API.
+- Refreshed the README and core project documentation around plugin-user onboarding, platform baselines, device-test lifecycle, and the 8-test schema v4 matrix; consolidated the device-test app guide into its README; reduced duplication across the PR template, review checklist, and contributor guide.
 
 ## 0.0.11
 

@@ -34,3 +34,11 @@ The iOS 16.1 minimum is aligned across the podspec, Podfile, app framework metad
 - The Dart workflow remains host-only and does not verify any entry in this baseline beyond the Dart layer.
 - Platform build checks are declared in pull requests with the actual device, OS, JDK, Xcode, and CocoaPods versions used.
 - Future changes to Flutter, Dart, Android, iOS, or Matter binary support must update `doc/platform-support.md` and the relevant ADR or add a replacement ADR.
+
+## Amendment (2026-11-18): Separate plugin and example Android baselines
+
+The plugin Android baseline remains `minSdk 21`, `compileSdk 34`, JDK 17, and Kotlin 1.7.10. The example app moved to Kotlin 2.4.0, `minSdk 29`, and `compileSdk 36` for its Google Home dual-fabric path.
+
+The example Android build also requires `GOOGLE_MATTER_SDK_REPO` to point at the separately downloaded Google Home Android SDK repository. This is an example-only build prerequisite; it does not change the plugin's public platform baseline.
+
+`doc/platform-support.md` is the current source of truth. This amendment supersedes the earlier combined example version statement without rewriting the original decision.

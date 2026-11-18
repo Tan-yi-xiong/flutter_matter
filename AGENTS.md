@@ -10,11 +10,11 @@ This is a Flutter plugin (`flutter_matter` 0.0.11) that exposes a low-level [Mat
 - Dart SDK `>=3.3.3 <4.0.0`, Flutter `>=3.3.0`; validated with Flutter `3.41.0`
 - MethodChannel name: `flutter_matter`
 - Dart → native calls use `zgMatter://<host>/<path>` URLs from `createRequestPlatformUrl` in `lib/flutter_matter_method_channel.dart`. Native plugins parse host + path.
-- Hosts:
+- Hosts after `Uri` normalization:
   - `devicecontroller` → `ChipDeviceController`
-  - `BLE` → BLE / GATT
-  - onboarding host → QR / manual setup-code parsing
-  - `nsd` on Android (the iOS plugin currently does not route NSD)
+  - `ble` → BLE / GATT
+  - `onboarding` → QR / manual setup-code parsing
+  - `nsd` on Android only
 - Android plugin: `com.tyx.flutter_matter.FlutterMatterPlugin`
 - iOS plugin: `FlutterMatterPlugin` (Objective-C), vendored `ios/frameworks/ZGMatter.framework`
 - Android Matter stack: `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.5`
@@ -34,7 +34,7 @@ fvm flutter test
 # Example app (Android build needs GOOGLE_MATTER_SDK_REPO)
 cd example
 fvm flutter pub get
-fvm flutter build apk --debug
+GOOGLE_MATTER_SDK_REPO=/absolute/path/to/home.android.sdk_1_11_1/repo fvm flutter build apk --debug
 fvm flutter build ios --debug --no-codesign
 fvm flutter run
 ```
@@ -54,6 +54,7 @@ cd device_test_app
 fvm flutter pub get
 fvm flutter analyze --no-fatal-infos --no-fatal-warnings
 fvm flutter test
+# Official builds use the repository wrapper from the plugin root.
 fvm dart run ../tool/device_test_app.dart build-apk
 fvm dart run ../tool/device_test_app.dart build-ios
 ```
@@ -62,7 +63,7 @@ Do not invent pytest, ruff, mypy, or Docker workflows. Automated tests cover the
 
 ## Project structure
 
-```
+```text
 flutter_matter/
 ├── lib/
 │   ├── flutter_matter.dart                    # public exports
@@ -79,7 +80,7 @@ flutter_matter/
 ├── android/src/main/kotlin/com/tyx/flutter_matter/
 ├── ios/Classes/                               # ObjC + some Swift
 ├── ios/frameworks/ZGMatter.framework
-├── doc/                                       # architecture, API, release, and ADR docs
+├── doc/                                       # setup, commissioning, operations, API, validation, release, and ADR docs
 ├── tool/release.dart                          # release metadata and notes CLI
 ├── tool/device_test_app.dart                  # commit metadata and app build wrapper
 ├── tool/device_test_agent.dart                # Mac WebSocket bridge and Agent JSON CLI
@@ -91,7 +92,7 @@ flutter_matter/
 └── test/                                      # root plugin Dart test suite
 ```
 
-New public types and functions must be exported from `lib/flutter_matter.dart`, documented in `doc/public-api.md`, and reflected in the export golden test when the public export list changes. Consumers should not import `src/` paths; tests may do so.
+New public types and functions must be exported from `lib/flutter_matter.dart`, documented in `doc/public-api.md` and their core API doc comments, and reflected in the export golden test when the public export list changes. Consumers should not import `src/` paths; tests may do so. User-guide examples should link to the relevant `example/` file and symbol; do not copy the full example implementation into Markdown.
 
 ## Dart / Flutter conventions
 
@@ -117,10 +118,10 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ### Android (Kotlin, `com.tyx.flutter_matter`)
 
 - Entry: `FlutterMatterPlugin.kt` dispatches by URI host to `onDeviceControlCall`, `onBLECall`, `onOnboardingCall`, `onNsdCall`.
-- minSdk 21, compileSdk 34, Java/Kotlin 1.8.
+- minSdk 21, compileSdk 34, Kotlin plugin 1.7.10, JVM target 1.8.
 - Do not revive `com.zengge.flutter_matter`.
 - Example applicationId / namespace: `com.fluttermatter.example`.
-- BLE / Wi-Fi permissions belong in the **host app** `AndroidManifest.xml` (see README), not necessarily the plugin manifest.
+- BLE / Wi-Fi permissions belong in the **host app** `AndroidManifest.xml`; see `doc/getting-started.md`.
 
 ### iOS (ObjC plugin + Swift Matter Extension)
 
@@ -129,7 +130,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 - Vendored framework: `ZGMatter.framework` via `ios/flutter_matter.podspec`.
 - Deployment targets are iOS 16.1. Documented toolchain baseline is Xcode 16.4 or later with CocoaPods 1.17; the migration build evidence used Xcode 26.3 and CocoaPods 1.17.0.
 - The vendored `ZGMatter.framework` is iPhoneOS arm64 only; simulator builds are not supported.
-- Host apps need a Matter Extension, App Groups, `AppGroupId`, and Matter Allow Setup Payload (README). Copy `example/ios/MatterExt/RequestHandler.swift`.
+- Host apps need a Matter Extension, App Groups, `AppGroupId`, and Matter Allow Setup Payload; see `doc/getting-started.md`. Copy `example/ios/MatterExt/RequestHandler.swift`.
 - Info.plist: Bluetooth, Bonjour (`_matter._tcp`, `_matterc._udp`, `_matterd._udp`, `_meshcop._udp`), local network, and camera if scanning QR codes.
 
 ## Example app
@@ -145,11 +146,11 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ## Device-test App and Agent Testing
 
 - `device_test_app/` is the primary physical-device validation surface. It is not included in the required Dart CI workflow.
-- The `quick` profile is iteration-only and is never formal evidence. PR and release evidence require `full` and the schema-version 4 JSON/Markdown report.
+- `quick` has 4 tests and is iteration-only. `full` has all 8 fixed tests; PR and release evidence require `full` plus the schema v4 JSON/Markdown report.
 - Every device Run requires a Matter commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning. A commissioning failure is preserved without retrying commissioning in the same Run. Device provenance is not part of the contract.
 - Use `$flutter-matter-device-test` for Agent-driven device runs.
 - When multiple phones are connected, the Agent must ask the user which one to use. It must not choose from connection order, platform, or previous use.
-- Commissionee actions and iOS system permission prompts remain human-operated unless a later workflow explicitly documents otherwise.
+- Physical commissionee actions and iOS system permission prompts remain human-operated. Android VDA prompts may be handled only on the explicitly selected controller.
 - Never put setup codes, Wi-Fi credentials, full UDIDs, serial numbers, certificates, private keys, or raw logs in evidence.
 
 ## Agent working rules
@@ -158,19 +159,19 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 - Do not add `example/**` tests to required CI or report them as automated evidence.
 - For device-behavior changes, follow `doc/device-validation.md` and `doc/device-test-report.md`; the Dart CI gate does not validate Matter behavior.
 - Device evidence must use the schema-based report contract, match the PR head, and contain no device identifiers, provisioning secrets, certificates, private keys, or raw logs.
-- Do not commit Flutter's Android minSdk 21 -> 24 migration unless it is part of an explicit compatibility task.
+- Keep the plugin and example Android baselines separate: plugin `minSdk 21` / `compileSdk 34` / Kotlin `1.7.10`; example `minSdk 29` / `compileSdk 36` / Kotlin `2.4.0`.
 - Do not commit `.history/`, `build/`, `.dart_tool/`, or `pubspec.lock` / `example/pubspec.lock` (gitignored for this plugin).
 - Do not rewrite `ZGMatter.framework` or the prefixed Android Matter AAR unless that is the task.
-- Recent behavior to preserve (see `CHANGELOG.md`): open Wi-Fi commissioning, ICD, Thread credentials, `unPairDevice`, iOS wildcard attribute paths.
+- Preserve open Wi-Fi, ICD, Thread credentials, Android `dataVersionFilters`, iOS wildcard paths, and fabric removal through OperationalCredentials `read` + `invoke`; `unPairDevice` is not a public controller API.
 
 ## Quick reference
 
 | Action | Command |
-|--------|---------|
+| --- | --- |
 | Analyze plugin (errors only) | `fvm flutter analyze --no-fatal-infos --no-fatal-warnings` |
 | Format Dart | `fvm dart format .` |
 | Plugin tests | `fvm flutter test` |
-| Example Android build | `GOOGLE_MATTER_SDK_REPO=... && cd example && fvm flutter build apk --debug` |
+| Example Android build | `cd example && GOOGLE_MATTER_SDK_REPO=/absolute/path/to/repo fvm flutter build apk --debug` |
 | Example iOS build | `cd example && fvm flutter build ios --debug --no-codesign` |
 | Run example | `cd example && fvm flutter run` |
 | iOS workspace | `open example/ios/Runner.xcworkspace` |

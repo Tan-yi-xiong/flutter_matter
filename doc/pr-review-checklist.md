@@ -1,109 +1,46 @@
-# Pull Request Review Checklist
+# Pull request review checklist
 
-This checklist applies to every pull request targeting `main`. The `Dart check and tests` workflow is the only required automated check, so the reviewer must explicitly validate the author's declared evidence.
+Use the PR template for submitted evidence. Use [Contributing](../CONTRIBUTING.md), [Device validation](device-validation.md), and [Device test report contract](device-test-report.md) for the authoritative rules.
 
-## Before reviewing the code
+## Scope and verification
 
-- Confirm the PR template is fully completed.
-- Identify the affected platforms, public interfaces, native code paths, and user-visible behavior.
-- Check that the summary and scope agree with the actual diff.
-- Identify whether the change affects device behavior and therefore requires device validation reports.
-- Treat an administrator bypass as a process exception, not as proof of correctness.
-- Confirm the automated test scope is the root plugin `test/` suite only.
-- Confirm `device_test_app/` local checks were declared when the app, Agent bridge, report logic, or Skill changed. They are not part of required CI.
+- [ ] The PR template is complete and the changed behavior matches the selected scope.
+- [ ] Every check has `Passed`, `Failed`, or `Not run`; each `Not run` has a reason and residual risk.
+- [ ] The evidence covers the changed code path, not only a neighboring build or test.
+- [ ] A green Dart gate is not treated as proof of native compilation or device behavior.
+- [ ] The report `plugin_commit`, when required, matches the PR head.
 
-## Verification evidence
+## Compatibility and platforms
 
-- Require an exact command or manual scenario for every reported test.
-- Require the platform, device, OS, or toolchain used.
-- Require a concrete result and safe evidence.
-- Reject vague statements such as "tested locally" without supporting detail.
-- Reject evidence that does not exercise the changed behavior.
-- Reject blank rows and ensure every empty result is represented as `Not run`.
-- For `Not run`, confirm that the reason is credible and that the remaining risk is stated.
-- Decide explicitly whether the remaining risk is acceptable for this change.
-- Do not accept `example/**` tests as automated evidence; the example is a build and manual demonstration target.
+- [ ] Exported Dart symbols, constructors, defaults, deprecations, and documented paths were reviewed.
+- [ ] MethodChannel hosts, paths, arguments, envelopes, and callback semantics were reviewed.
+- [ ] Public API and contract tests were updated where the exported or wire surface changed.
+- [ ] Breaking changes identify versioning and migration impact.
+- [ ] Shared behavior has Android and physical-iOS evidence; platform-specific changes justify the exception.
+- [ ] iOS simulator results are not accepted as plugin evidence.
 
-## Device validation reports
+## Device evidence
 
-- Require the Device Validation section for every commissioning, BLE, networking, controller lifecycle, attribute, command, subscription, callback, MethodChannel, or native Matter change.
-- Verify the report uses schema version `4`, contains all 8 fixed test IDs exactly once, and includes both the generated Markdown summary and sanitized JSON attachment.
-- Verify `plugin_commit` matches the current pull request head; reject stale reports after relevant code changes.
-- Verify every affected platform has a report. Shared behavior requires Android and physical iOS reports; a platform exception must be explicit and technically justified.
-- Verify formal evidence used a Matter commissionee whose report records `wifi` network transport and delegates discovery and commissioning to the Matter SDK. Reject a report that contains a commissioning-transport field.
-- Verify all required P0 results are `passed`. P1 results are stability evidence; P1 failures require an explicit maintainer risk decision.
-- Verify the report describes one commissionee and one controller cycle. Device provenance is not part of the report contract.
-- Verify the report includes a clean-cycle statement and that Android and iOS were treated as independent commissioned cycles.
-- Reject reports with device serial numbers, iOS UDIDs, Wi-Fi credentials, setup codes, onboarding payloads, BLE addresses, certificates, private keys, or complete raw logs.
-- Confirm attached JSON and Markdown are accessible and sanitized. Any screenshots are optional manual evidence and must also be sanitized. Public attachments must be treated as public content.
+- [ ] Device-behavior changes use the `full` profile, a Matter commissionee, and schema v4 JSON plus generated Markdown.
+- [ ] The report records `network_transport: "wifi"`, vendor/product IDs, and no retired commissionee model, firmware, state-change, or commissioning-transport fields.
+- [ ] All required P0 results are `passed`; any P1 failure has an explicit maintainer risk decision.
+- [ ] Failed commissioning or P0 cases were not retried in the same Run.
+- [ ] The Run starts from a factory-reset commissionee, and any remaining test fabric is handled before the next clean cycle.
+- [ ] Attached reports and screenshots are sanitized; no credentials, serial numbers, UDIDs, setup payloads, certificates, private keys, or raw logs are present.
 
-## Platform coverage
+## Code, security, and documentation
 
-- Verify both Android and iOS when shared Dart, MethodChannel, JSON, callback, or native behavior changes.
-- Verify Android-specific changes on Android.
-- Verify iOS-specific changes on iOS.
-- Confirm Android evidence states the JDK and Gradle/AGP context when the build toolchain is relevant.
-- Confirm iOS evidence states the Xcode, CocoaPods, and physical arm64 device context when the build or behavior is relevant.
-- Reject iOS simulator evidence as support for the current vendored Matter framework.
-- Accept a single-platform review only when the PR clearly documents why the other platform is unaffected.
+- [ ] Native compile evidence is present when Kotlin, Objective-C, Swift, or bundled Matter inputs changed.
+- [ ] Error-path changes include regression or negative-case evidence when practical.
+- [ ] Workflow changes do not add unnecessary permissions, secrets, or unsafe triggers.
+- [ ] Third-party code and binaries have a documented source or are otherwise reviewable.
+- [ ] Public usage changes update `README.md`, the relevant `doc/` page, or `CHANGELOG.md`.
+- [ ] All repository documentation and review text is in English.
 
-## Public API and compatibility
+## Merge gate
 
-- Check changes to exported Dart symbols, constructors, methods, defaults, exported paths, and deprecations.
-- Check MethodChannel host, path, argument, result, and callback formats.
-- Verify that public API documentation is updated when the exported surface changes.
-- Verify that `test/public_api_test.dart` is updated when the export-path golden changes.
-- Verify that `test/method_channel_contract_test.dart` covers changed URL or envelope behavior.
-- Identify breaking changes and require appropriate versioning and migration notes.
-- Reject undocumented changes to existing wire formats or callback semantics.
-- Remember that lightweight tests cover export paths and core envelopes; method-level compatibility remains a manual review responsibility.
+- [ ] Required evidence is present, current, and internally consistent.
+- [ ] Untested behavior and accepted risk are explicitly recorded.
+- [ ] No sensitive material is present in the PR body, comments, reports, or attachments.
 
-## Native and functional behavior
-
-- Confirm native compile checks were declared when Kotlin or Objective-C/Swift code changed.
-- Confirm versioned device reports were supplied when commissioning, BLE, Wi-Fi, Thread, ICD, subscription, reconnect, or unpair behavior changed.
-- Require regression or negative-case evidence where a change alters an error path.
-- Record which scenarios remain unverified and whether that risk is acceptable.
-
-## Documentation and changelog
-
-- Confirm public usage changes are reflected in `README.md`, `doc/`, or `CHANGELOG.md` when appropriate.
-- Confirm all repository documentation, workflow comments, and review guidance are written in English.
-- Preserve non-English text only when it is a required user-facing string or an exact quoted reference.
-
-## Security
-
-- Check that logs, screenshots, recordings, and evidence links contain no credentials, tokens, private keys, or private provisioning data.
-- Confirm workflow changes do not introduce write permissions, secrets, or unsafe `pull_request_target` usage.
-- Confirm third-party code and binaries have a documented source or are otherwise reviewable.
-
-## Approval and merge
-
-- Do not approve when required evidence is missing or does not match the change.
-- Do not treat a green `Dart check and tests` result as proof that Android or iOS native code builds.
-- Request additional evidence when the remaining risk is not acceptable.
-- Confirm the PR scope, verification, documentation, and compatibility statements are internally consistent before approval.
-
-## Related documents
-
-- [Contributing](../CONTRIBUTING.md)
-- [Architecture](../ARCHITECTURE.md)
-- [Public API](public-api.md)
-- [Platform support](platform-support.md)
-- [Device validation](device-validation.md)
-- [Device test report contract](device-test-report.md)
-- [ADR 0005: Dart-only CI and PR evidence](adr/0005-dart-only-ci-and-pr-evidence.md)
-- [ADR 0006: Device validation report contract](adr/0006-device-validation-report-contract.md)
-
-## Insufficient evidence examples
-
-- "Works on my machine" with no command or result.
-- A Dart test result used to claim Android or iOS native compilation.
-- A successful Android build used to claim that an iOS behavior works.
-- A successful example Dart test used as native or functional evidence.
-- A device-behavior change with no schema-based report for an affected platform.
-- A report whose `plugin_commit` does not match the pull request head.
-- A report that contains a commissioning-transport field.
-- `Not run` with no explanation.
-- A screenshot that hides the relevant error or device state.
-- A public API change without a compatibility section.
+Do not approve when required evidence is missing, stale, mismatched to the head, or contradicted by the implementation.

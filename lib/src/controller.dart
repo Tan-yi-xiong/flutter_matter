@@ -24,6 +24,9 @@ const _hostName = 'devicecontroller';
 
 const kTestControllerNodeId = 112233;
 
+/// Wi-Fi network credentials used during commissioning.
+///
+/// An empty [password] represents an open network.
 class WiFiCredentials {
   final String ssid;
   final String password;
@@ -81,6 +84,7 @@ class NetworkCredentials implements TransportObject {
   }
 }
 
+/// Device attestation data supplied to [DeviceAttestationDelegate].
 class AttestationInfo {
   final Uint8List challenge;
   final Uint8List nonce;
@@ -326,6 +330,7 @@ abstract class InvokeCallback {
   void onDone() {}
 }
 
+/// Receives the result of [ChipDeviceController.openPairingWindowWithPIN].
 abstract class OpenCommissioningCallback {
   void onError(int status, Object? connectContext);
 
@@ -333,6 +338,7 @@ abstract class OpenCommissioningCallback {
       Object? connectContext, String manualPairingCode, String qrCode);
 }
 
+/// Receives subscription establishment and report callbacks.
 abstract class SubscriptionCallback implements ReportCallback {
   void onSubscriptionEstablished(int subscriptionId);
 }
@@ -372,6 +378,7 @@ class SubscriptionCallbackWarp implements SubscriptionCallback {
   }
 }
 
+/// Receives reports and errors for a read or subscription.
 abstract class ReportCallback {
   void onError(
       ChipAttributePath? attributePath, ChipEventPath? eventPath, Exception e);
@@ -406,6 +413,7 @@ class ReportCallbackWarp implements ReportCallback {
   }
 }
 
+/// Receives write results and errors for attribute paths.
 abstract class WriteAttributesCallback {
   void onError(ChipAttributePath? attributePath, Exception e);
 
@@ -439,6 +447,7 @@ class WriteAttributesCallbackWarp implements WriteAttributesCallback {
   }
 }
 
+/// Receives the result of a CASE connection request.
 abstract class ConnectedDeviceCallback {
   void onError(Exception e);
 
@@ -465,6 +474,14 @@ _removeControl(ChipDeviceController control) {
   _controls.remove(control);
 }
 
+/// Native controller configuration for one Matter fabric.
+///
+/// Reuse the same [fabricId] and [rootCertificate] to reuse an existing
+/// controller through [ChipDeviceController.newControllerIfNotExist].
+///
+/// The current JSON payload sets `skipAttestationCertificateValidation` to
+/// `true`; review that security-sensitive native-configuration limit before
+/// production use.
 class ControllerParams extends TransportObject {
   final int fabricId;
   final int udpListenPort;
@@ -558,6 +575,12 @@ final defaultIpk = Uint8List.fromList([
   '1'.codeUnitAt(0)
 ]);
 
+/// Stateful Matter controller for one fabric.
+///
+/// A controller owns native commissioning and connection state. Keep it alive
+/// for the lifetime of the fabric session. Use [deleteDeviceController] when
+/// the native controller should be deleted, and [destroy] only to clear
+/// Dart-side handlers.
 class ChipDeviceController implements MethodCallHandler {
   static const matchPathList = [
     'NOCChainIssuer',
@@ -961,7 +984,11 @@ class ChipDeviceController implements MethodCallHandler {
     _isRunning = true;
   }
 
-  /// Create a [ChipDeviceController]; if exist return the exist one or create a new one.
+  /// Creates a controller or returns the existing controller for the same
+  /// [ControllerParams.fabricId] and [ControllerParams.rootCertificate].
+  ///
+  /// The returned controller must remain alive while native operations or
+  /// callbacks are in flight.
   static Future<ChipDeviceController> newControllerIfNotExist(
       ControllerParams params) async {
     ChipDeviceController? controller = _findSameFarbicControl(params);
@@ -990,6 +1017,11 @@ class ChipDeviceController implements MethodCallHandler {
     return controller;
   }
 
+  /// Removes Dart-side handlers and callback state without requesting native
+  /// controller deletion.
+  ///
+  /// Use [deleteDeviceController] when the native controller should also be
+  /// deleted.
   void destroy() {
     _channelFlutterMatter.removeHandler(this);
     if (_keypairDelegateHandleId != null) {
@@ -1034,8 +1066,16 @@ class ChipDeviceController implements MethodCallHandler {
         jsonEncode({jsonKeyHandle: _platformDeviceControllerHandle}));
   }
 
-  /// when [attestationDelegate] notnull, [failSafeExpiryTimeoutSecs] efficient
-  /// IOS must use onboardingPayload
+  /// Starts commissioning through the native Matter discovery and pairing flow.
+  ///
+  /// [deviceId] is the node ID requested for the commissionee. Supply either
+  /// [setupPincode] or [onboardingPayload] on Android; iOS requires
+  /// [onboardingPayload]. [networkCredentials] contains the Wi-Fi or Thread
+  /// credentials that the commissionee should join.
+  ///
+  /// This method starts the asynchronous operation. Completion is delivered to
+  /// [completionListener] through [CompletionListener.onCommissioningComplete].
+  /// Keep the listener and [attestationDelegate] alive until that callback fires.
   Future<void> pairDevice(
       int deviceId,
       int? connId,
@@ -1138,6 +1178,9 @@ class ChipDeviceController implements MethodCallHandler {
     );
   }
 
+  /// Stops an in-progress commissioning attempt for [deviceId].
+  ///
+  /// This does not remove a device that has already been commissioned.
   Future<void> stopDevicePairing(int deviceId) async {
     await _requestPlatform(
         'stopDevicePairing',
@@ -1263,6 +1306,7 @@ class ChipDeviceController implements MethodCallHandler {
   //   }));
   // }
 
+  /// Deletes the native controller and releases its Dart-side handler state.
   Future<void> deleteDeviceController() async {
     await _requestPlatform(
         'deleteDeviceController',
@@ -1272,6 +1316,12 @@ class ChipDeviceController implements MethodCallHandler {
     destroy();
   }
 
+  /// Sends an Interaction Model command to [nodeId].
+  ///
+  /// Responses and failures are delivered to [callback]. Pass
+  /// [connectContext] from [connectedDevice] to reuse an existing CASE
+  /// connection. `timedRequestTimeoutMs` and `imTimeoutMs` use the native
+  /// defaults when set to zero.
   Future<void> invoke(
       InvokeCallback callback, int nodeId, InvokeElement invokeElement,
       {Object? connectContext,
@@ -1428,6 +1478,11 @@ class ChipDeviceController implements MethodCallHandler {
     }
   }
 
+  /// Writes attributes on [nodeId].
+  ///
+  /// [attributeList] contains the requested paths and values. Results and
+  /// failures are delivered to [callback]. Pass [connectContext] from
+  /// [connectedDevice] to reuse an existing CASE connection.
   Future<void> write(
       int nodeId,
       WriteAttributesCallback callback,
@@ -1457,6 +1512,11 @@ class ChipDeviceController implements MethodCallHandler {
     }
   }
 
+  /// Establishes or reuses a CASE connection to [nodeId].
+  ///
+  /// [ConnectedDeviceCallback.onConnected] receives the opaque connection
+  /// context to pass to operation methods. The caller should release that
+  /// context with [releaseConnectContext] when the session ends.
   Future<void> connectedDevice(int nodeId, ConnectedDeviceCallback callback,
       {Object? connectContext}) async {
     String callbackHandle = callback.hashCode.toString();
@@ -1476,6 +1536,7 @@ class ChipDeviceController implements MethodCallHandler {
     }
   }
 
+  /// Releases a connection context returned by [connectedDevice].
   Future<void> releaseConnectContext(Object connectContext) async {
     await _requestPlatform(
         'releaseConnectContext',
@@ -1485,6 +1546,11 @@ class ChipDeviceController implements MethodCallHandler {
         }));
   }
 
+  /// Opens a device pairing window and returns whether the native request was
+  /// accepted.
+  ///
+  /// The pairing codes are delivered through [callback]. [duration] is in
+  /// seconds. Callers must keep [callback] alive until it completes.
   Future<bool> openPairingWindowWithPIN(
       Object connectContext,
       int duration,
@@ -1511,6 +1577,8 @@ class ChipDeviceController implements MethodCallHandler {
     return false;
   }
 
+  /// Returns the active fabric index for this controller, or `null` when the
+  /// native controller does not expose one.
   Future<int?> getFabricIndex() async {
     try {
       final result = await _requestPlatform(
@@ -1524,6 +1592,10 @@ class ChipDeviceController implements MethodCallHandler {
     }
   }
 
+  /// Cancels the subscription identified by [fabricIndex], [nodeId], and
+  /// [subscriptionId].
+  ///
+  /// Returns `true` when the native subscription was removed.
   Future<bool> unSubscription(
       int fabricIndex, int nodeId, int subscriptionId) async {
     try {

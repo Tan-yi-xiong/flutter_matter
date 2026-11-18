@@ -53,3 +53,11 @@ The fixed matrix is now 11 tests, and the quick profile is a four-test iteration
 - [Device Test Report Contract](../device-test-report.md)
 - [Device Test Report Schema](../device-test-report.schema.json)
 - [ADR 0005: Dart-Only CI and Pull Request Evidence](0005-dart-only-ci-and-pr-evidence.md)
+
+## Amendment (2026-11-18): Eight-test matrix and operator-owned commissionee reset
+
+The current fixed matrix contains 8 tests: 7 P0 tests, including `invalid_setup_passcode`, plus the P1 test `app_restart`. The `quick` profile contains 4 tests. This supersedes the earlier statement that the full matrix contained 11 tests.
+
+Runs are one-shot and interrupted Runs are never resumed. Every commissioned Run adds one fabric to the commissionee. The post-Run cleanup card purges stored Run secrets and records operator confirmation; it does not reset the commissionee or remove the fabric. A clean cycle therefore starts with an explicit commissionee factory reset and an open commissioning window.
+
+The schema v4 artifact, source test catalog, and generated reports remain authoritative for the current contract.

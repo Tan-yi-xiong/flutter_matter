@@ -1,4 +1,5 @@
-
+/// Low-level Matter controller APIs for commissioning, CASE connections,
+/// Interaction Model operations, BLE, DNS-SD, TLV, and cluster helpers.
 library flutter_matter;
 
 export 'src/controller.dart';

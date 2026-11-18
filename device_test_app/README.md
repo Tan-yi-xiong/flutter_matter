@@ -1,87 +1,107 @@
-# flutter_matter_device_test_app
+# flutter_matter device test app
 
-Dedicated physical-device validation app for `flutter_matter`.
+Dedicated Android and physical-iOS validation app for `flutter_matter`. It is not published with the plugin and is not part of the required Dart CI gate.
 
-The app runs on Android and physical iOS controllers. It is not published with the plugin and is not part of the required Dart CI gate. Every Run uses a Matter commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning. Device provenance is not part of the report contract. A commissioning failure is preserved and never retried in the same Run.
+Every Run uses a Matter commissionee. The app passes the raw onboarding payload to the Matter SDK, which performs discovery and commissioning. A commissioning failure is preserved and is not retried in the same Run.
 
-## Test profiles
+## Profiles and execution
 
-| Profile | Contents | Evidence role |
+| Profile | Contents | Role |
 | --- | --- | --- |
-| `quick` | `build_install`, `commissioning`, `operational_connect`, `onoff_invoke` | Iteration feedback only |
-| `full` | All 8 fixed tests in [../doc/device-test-report.md](../doc/device-test-report.md) | The only formal PR/release evidence |
+| `quick` | Build/install, commissioning, operational connection, OnOff invoke | Developer iteration |
+| `full` | All 8 fixed tests | Formal PR and release evidence |
 
-Only a completed `full` run can produce formal evidence. A P0 failure is preserved and never retried inside the same Run. Every device run, including `quick` iteration, uses a Matter commissionee.
+Only a completed `full` Run produces formal evidence. See [Device Test Report Contract](../doc/device-test-report.md) for the fixed IDs, timeouts, schema v4 fields, and result rules.
 
-## Setup
+A P0 failure or P0 `not_run` blocks later P0 work and ends the Run. Dependent cases are recorded as `not_run` with a reason. P1 failures are recorded without blocking the remaining sequence. No P0 failure is retried in the same Run.
 
-The setup flow requires only:
+`app_restart` rebuilds the controller runtime from persisted controller credentials and reconnects without recommissioning. It is a test case, not a resumable Run.
+
+## Setup and lifecycle
+
+Provide only:
 
 - Run mode: `quick` or `full`.
-- Setup code or QR setup payload.
+- QR setup payload or manual setup code.
 - Target Wi-Fi SSID.
 - Wi-Fi password, or an empty value for an open network.
 
-A commissionee factory reset is optional and happens after a finished Run (every Run adds one fabric); the Runner screen offers an optional post-Run cleanup action.
+The app parses vendor and product identity from the payload. Before persisting new secrets, it removes stale Run state, purges old provisioning secrets and orphaned keys, and resets controller identities for the current platform. Cleanup failure blocks the Run.
 
-The app does not ask for model, firmware, state-change method, commissioning transport, controller-clean state, or secrets-purged state. It parses vendor and product identity from the commissionee payload automatically.
+The app then supplies the raw onboarding payload to the Matter SDK, executes the selected profile, and records terminal results. Runs are one-shot: interrupted Runs are discarded and never resumed. A completed `full` Run writes JSON and Markdown from the same result object.
 
-Before a Run starts, the app purges old run secrets and resets controller identities for the current platform. Cleanup failure blocks the Run. The app may cache the latest Wi-Fi SSID and password in secure storage and offers an explicit clear action; cached credentials never appear in state, reports, logs, or screenshots.
+## Application structure
+
+- **Domain:** fixed test catalog, priorities, outcomes, and report model.
+- **Application:** `RunCoordinator`, profiles, cases, prompts, failure policy, and one-shot lifecycle.
+- **Infrastructure:** Matter controller and certificate services, SDK-managed commissioning, secure storage, platform information, report files, and sharing.
+- **Presentation:** setup, runner, prompt, result, and cleanup screens.
+
+The UI and Agent bridge observe the same coordinator state and event streams. Widgets do not call native APIs directly.
 
 ## Local checks
 
-```bash
+```sh
 cd device_test_app
 fvm flutter pub get
 fvm flutter analyze --no-fatal-infos --no-fatal-warnings
 fvm flutter test
 ```
 
-Official builds should be run from the repository root so commit metadata is injected through [../tool/device_test_app.dart](../tool/device_test_app.dart):
+Official builds run from the repository root so commit metadata is injected:
 
-```bash
+```sh
 fvm dart run tool/device_test_app.dart check
 fvm dart run tool/device_test_app.dart build-apk
 fvm dart run tool/device_test_app.dart build-ios
 fvm dart run tool/device_test_app.dart run --device <device-id>
 ```
 
-The wrapper requires a clean tracked Git worktree and injects `PLUGIN_COMMIT` and `TEST_APP_COMMIT`. It prevents reports from claiming the wrong source revision.
+The wrapper requires a clean tracked worktree and injects `PLUGIN_COMMIT` and `TEST_APP_COMMIT`.
 
-For Agent mode, launch the app with the WebSocket endpoint printed by `tool/device_test_agent.dart serve`:
+## Agent mode
 
-```bash
+Agent mode uses a Mac-hosted trusted-LAN WebSocket service and JSON CLI. The phone connects outward to the Mac; the CLI control server stays on loopback.
+
+From the repository root, launch the app with the endpoint printed by `serve`:
+
+```sh
+fvm dart run tool/device_test_agent.dart serve --device <device-id> --port 8765
+
 fvm dart run tool/device_test_app.dart run \
   --device <device-id> \
   -- --dart-define=AGENT_WS_URL=<websocket_endpoint>
 ```
 
-The Agent must collect the minimal setup data with Codex interactive prompts, pass `start_run` material through `--args-file`, not `--args-json`, and must never print or commit that file.
+Agent-driven validation must use `$flutter-matter-device-test`, ask the user to choose when multiple phones are connected, pass `start_run` material through a transient `--args-file`, and never print or commit that file.
 
-## Physical-device roles
+See [Agent-Driven Device Testing](../doc/agent-device-testing.md) for protocol, commands, prompts, artifacts, and failure handling.
 
-- Use a Matter On/Off commissionee for every Run, including quick iteration. The app does not inspect or record device provenance.
-- Confirm that the commissionee is discoverable by the Matter SDK through its supported commissioning transports.
-- Confirm that the commissionee has an open commissioning window before starting the Run; a factory reset is optional and preferred after a finished Run.
-- Do not add a host-side BLE/mDNS scan or readiness gate: commissionee discovery is delegated to the Matter SDK.
-- Do not use an isolated guest network that blocks BLE setup, Wi-Fi/IP commissioning, CASE, or the Agent WebSocket connection.
+## Requirements
 
-## Prerequisites
+- Android: physical device, ADB access, local-network connectivity, and host-app permissions from [Getting started](../doc/getting-started.md). The app uses `minSdk 24`, `compileSdk 36`, and arm64.
+- iOS: physical iPhone, development signing, Matter Extension, matching App Group, and the required Bonjour, Bluetooth, and local-network declarations. Simulator builds are invalid evidence.
+- Commissionee: Matter On/Off device with NodeLabel support and an open commissioning window.
+- Network: the controller can reach the target Wi-Fi network for provisioning and CASE.
 
-- Android: physical device, USB or ADB-over-Wi-Fi access, and local-network connectivity. When no real device is available, the bundled virtual-device APK (`device_test_app/third_party/virtual-device-app.apk`) simulates one; see `doc/device-validation.md`.
-- iOS: physical iPhone, valid local signing, a Matter Extension, the matching App Group, and the required Bonjour, Bluetooth, and local-network declarations.
-- Xcode and CocoaPods tooling are required for iOS development builds.
-- The controller must be able to reach the target Wi-Fi network for provisioning and CASE/control.
+When no physical commissionee is available, use the bundled Android virtual device as described in [Device Validation](../doc/device-validation.md).
 
-## Security and evidence hygiene
+## Cleanup and secrets
 
-Never put setup codes, onboarding payloads, Wi-Fi SSIDs or passwords, full UDIDs, serial numbers, certificates, private keys, or raw logs in reports or PR text. Use the in-app purge action before handing a device to another user. Purge is required because iOS Keychain items can survive app uninstallation.
+Every commissioned Run adds one fabric to the commissionee. The post-Run **Commissionee cleanup** card purges the Run's stored secrets and records operator confirmation; it does not reset or modify the commissionee.
 
-Hardware-in-the-loop CI is intentionally out of scope. Attach full-run JSON and Markdown reports to the PR manually and verify that the report plugin commit matches the PR head. Reports must use schema v4. All app UI, protocol strings, and repository documentation are English.
+Factory-reset the commissionee or remove the test fabric before the next clean cycle. A failed or interrupted Run can also leave a fabric behind.
 
-## Further documentation
+Setup codes, onboarding payloads, Wi-Fi credentials, controller private keys, and certificates stay in platform secure storage. They are excluded from reports, logs, screenshots, Agent state, and event transcripts. The separate Wi-Fi credential cache is removed only by its explicit clear action. On iOS, uninstalling the app is not a purge because Keychain items can survive.
 
-- App architecture and manual flow: [../doc/device-test-app.md](../doc/device-test-app.md)
-- Agent bridge, CLI, and protocol: [../doc/agent-device-testing.md](../doc/agent-device-testing.md)
-- Evidence contract: [../doc/device-test-report.md](../doc/device-test-report.md)
-- Validation policy: [../doc/device-validation.md](../doc/device-validation.md)
+## Troubleshooting
+
+- **Bridge does not connect:** verify `serve`, the `AGENT_WS_URL` endpoint, the trusted LAN, and firewall access.
+- **No commissionee found:** confirm an open commissioning window and SDK-visible discovery. For the Android VDA, follow the restart quirk in [Device Validation](../doc/device-validation.md).
+- **Commissioning fails:** preserve the failure and stop. Do not retry commissioning in the same Run.
+- **Stale report:** rebuild from the PR head, reinstall, and start a new Run.
+- **Sensitive output found:** do not attach it. Purge the invalid evidence, correct the source, and regenerate the report.
+
+## Evidence hygiene
+
+Never put setup codes, onboarding payloads, Wi-Fi credentials, full UDIDs, serial numbers, certificates, private keys, or raw logs in reports or pull-request text. Hardware-in-the-loop CI is intentionally out of scope. Attach completed reports manually and verify that the report commit matches the pull-request head.

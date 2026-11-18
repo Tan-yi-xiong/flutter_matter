@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
@@ -7,8 +6,10 @@ import 'package:flutter_matter/flutter_matter_platform_interface.dart';
 
 import 'exception.dart';
 
+/// MethodChannel host used by the onboarding parser.
 const String onboardingPayloadHost = 'Onboarding';
 
+/// Discovery transports advertised by a Matter onboarding payload.
 enum DiscoveryCapability {
   soft_ap(1),
   ble(2),
@@ -19,8 +20,12 @@ enum DiscoveryCapability {
   const DiscoveryCapability(this.value);
 }
 
+/// Parsed Matter onboarding payload.
+///
+/// Contains the commissioning flow, rendezvous capabilities, discriminator,
+/// and setup PIN code from a QR code or manual pairing code.
 class OnboardingPayload {
-   /// Version info of the OnboardingPayload: version SHALL be 0
+  /// Version info of the OnboardingPayload: version SHALL be 0
   final int version;
 
   /// The CHIP device vendor ID: Vendor ID SHALL be between 1 and 0xFFF4.
@@ -48,57 +53,71 @@ class OnboardingPayload {
   /// 99999999, 12345678, 87654321}.
   final int setupPinCode;
 
-  OnboardingPayload({required this.version, required this.vendorId, required this.productId, required this.commissioningFlow, required this.discoveryCapabilities, required this.discriminator, required this.hasShortDiscriminator, required this.setupPinCode});
+  OnboardingPayload(
+      {required this.version,
+      required this.vendorId,
+      required this.productId,
+      required this.commissioningFlow,
+      required this.discoveryCapabilities,
+      required this.discriminator,
+      required this.hasShortDiscriminator,
+      required this.setupPinCode});
 
   factory OnboardingPayload.decode(Map json) {
     return OnboardingPayload(
-      version: json["version"],
-      vendorId: json["vendorId"],
-      productId: json["productId"],
-      commissioningFlow: json["commissioningFlow"],
-      discriminator: json["discriminator"],
-      setupPinCode: json["setupPinCode"],
-      hasShortDiscriminator: json["hasShortDiscriminator"],
-      discoveryCapabilities: (json["discoveryCapabilities"] as List).map((e) => DiscoveryCapability.values.firstWhereOrNull((element) => element.value == e)).whereNotNull().toSet()
-    );
+        version: json["version"],
+        vendorId: json["vendorId"],
+        productId: json["productId"],
+        commissioningFlow: json["commissioningFlow"],
+        discriminator: json["discriminator"],
+        setupPinCode: json["setupPinCode"],
+        hasShortDiscriminator: json["hasShortDiscriminator"],
+        discoveryCapabilities: (json["discoveryCapabilities"] as List)
+            .map((e) => DiscoveryCapability.values
+                .firstWhereOrNull((element) => element.value == e))
+            .whereNotNull()
+            .toSet());
   }
 }
 
-class OnboardingPayloadParser  {
-
+/// Parses Matter QR setup codes and manual pairing codes.
+///
+/// Parsing is optional for commissioning. [ChipDeviceController.pairDevice]
+/// accepts the raw onboarding code directly.
+class OnboardingPayloadParser {
   late MethodChannelFlutterMatter _channel;
 
   OnboardingPayloadParser() {
     _channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
   }
 
+  /// Parses a QR setup code or manual pairing code, selecting the format by
+  /// the `MT:` prefix.
   Future<OnboardingPayload> parse(String code) async {
     if (code.startsWith("MT:")) {
       return parseQrCode(code);
     }
     return parseManualPairingCode(code);
   }
-  
+
+  /// Parses a Matter QR setup code.
   Future<OnboardingPayload> parseQrCode(String qrCode) async {
     final result = await _channel.requestPlatform(RequestPlatformParams(
-      methodName: createRequestPlatformUrl(onboardingPayloadHost, "parseQrCode"), 
-      methodParamsJson: jsonEncode({
-        'qrCode': qrCode
-      })
-    ));
+        methodName:
+            createRequestPlatformUrl(onboardingPayloadHost, "parseQrCode"),
+        methodParamsJson: jsonEncode({'qrCode': qrCode})));
     if (result.code != successCode) {
       throw Exception("Failed to parse QR code: ${result.code}");
     }
     return OnboardingPayload.decode(result.jsonData);
   }
 
+  /// Parses a Matter manual pairing code.
   Future<OnboardingPayload> parseManualPairingCode(String pairingCode) async {
     final result = await _channel.requestPlatform(RequestPlatformParams(
-      methodName: createRequestPlatformUrl(onboardingPayloadHost, "parseManualPairingCode"), 
-      methodParamsJson: jsonEncode({
-        'pairingCode': pairingCode
-      })
-    ));
+        methodName: createRequestPlatformUrl(
+            onboardingPayloadHost, "parseManualPairingCode"),
+        methodParamsJson: jsonEncode({'pairingCode': pairingCode})));
     if (result.code != successCode) {
       throw Exception("Failed to parse QR code: ${result.code}");
     }

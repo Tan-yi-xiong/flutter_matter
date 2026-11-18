@@ -1,141 +1,131 @@
-# Device Test Report Contract
+# Device test report contract
 
-The device-test report is the reviewable evidence produced by a physical-device validation run. The dedicated device-test app must emit both a machine-readable JSON report and a Markdown summary from the same in-memory result data.
+A device-test Run produces reviewable evidence through two files generated from the same in-memory result:
 
-The dedicated app implements this contract and includes a local report validator. The app and its tests are outside the required CI gate.
+- `device-test-report.json`: sanitized schema v4 data.
+- `device-test-report.md`: human-readable summary for the pull request.
 
-Formal acceptance requires a Matter commissionee. The app passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning. Device provenance is not part of the report contract.
+Formal evidence requires the `full` profile and a real Matter commissionee. The app passes the raw onboarding payload to the Matter SDK, which performs discovery and commissioning.
 
-## Output files
+## Schema
 
-The test app must write these files into a user-selected output directory:
+The current schema version is `4`. Versions `1`, `2`, and `3` are retired and must not be accepted as device evidence.
 
-- `device-test-report.json`: the complete sanitized result, conforming to [`device-test-report.schema.json`](device-test-report.schema.json).
-- `device-test-report.md`: a human-readable summary for the pull request description.
+Keep these aligned at version 4:
 
-Both files must describe the same run. The Markdown summary must contain the same plugin commit, test-app commit, controller platform, commissionee identity and network transport, test results, and evidence file names as the JSON report.
+- [JSON Schema](device-test-report.schema.json)
+- [Example report](device-test-report.example.json)
+- device-test app model and validator
+- Agent CLI validator
+- Markdown renderer
+- this document and the pull-request template
 
-## Schema version
-
-The current schema version is `4`. Schema versions `1`, `2`, and `3` are retired and must not be accepted as device evidence. The schema artifact, example report, app model, app validator, Agent CLI validator, Markdown renderer, documentation, and PR template must remain aligned at version `4`.
-
-A removal, rename, type change, status change, required-field change, or report-content rule change requires a new schema version and an update to this document and the PR template. Reports with an unknown or unsupported `schema_version` must not be accepted as release evidence.
+A required-field, type, status, ID, or content-rule change requires a new schema version and corresponding documentation update. Unknown schema versions are invalid evidence.
 
 ## Required data
 
 | Area | Required content |
 | --- | --- |
-| Run identity | `generated_at`, test-app name/version/commit, and the exact `plugin_commit` under test |
-| Controller | `android` or `ios`, device model, OS version, and app build identifier |
-| Commissionee | Automatically parsed integer `vendor_id` and `product_id`, and `wifi` network transport |
-| Summary | Overall `passed`, `failed`, or `not_run`; counts for each status |
-| Tests | A `tests` object keyed by every fixed P0 test ID, each with result, duration, optional notes, and optional relative evidence filenames |
-| Sanitization | Explicit confirmation that the report and attachments were reviewed for sensitive data |
+| Run | `generated_at`, test-app name/version/commit, and exact `plugin_commit` |
+| Controller | `android` or `ios`, device model, OS version, app build |
+| Commissionee | Parsed `vendor_id`, `product_id`, and `network_transport: "wifi"` |
+| Summary | `passed`, `failed`, or `not_run`, plus counts |
+| Tests | Every fixed test ID with status, duration, optional notes, and optional relative evidence filenames |
+| Sanitization | Explicit review confirmation and policy version |
 
-The report must not include commissionee model, firmware, external state-change method, external state-change notes, or user-entered identity fields. Commissionee discovery and commissioning are delegated to the Matter SDK. Device model and OS version refer to the controller and are sufficient for controller traceability.
-
-Do not add serial numbers, iOS UDIDs, Wi-Fi SSIDs, Wi-Fi passwords, setup codes, onboarding payloads, BLE addresses, certificates, or private keys to any field.
+Do not include commissionee model, firmware, external state-change method, user-entered identity, serial numbers, UDIDs, Wi-Fi SSIDs/passwords, setup codes, onboarding payloads, BLE addresses, certificates, private keys, or raw logs.
 
 ## Fixed test IDs
 
-| Priority | Test ID | Requirement |
+| Priority | ID | Requirement |
 | --- | --- | --- |
-| P0 | `build_install` | Android APK or signed iOS app installs and launches |
-| P0 | `commissioning` | PASE/commissioning completes through SDK-managed discovery with `errorCode == 0` within 120 seconds |
-| P0 | `operational_connect` | CASE connection returns a valid connect context within 30 seconds |
-| P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
-| P0 | `onoff_subscription` | Initial state and an update after an in-case toggle arrive within 15 seconds |
-| P0 | `node_label_read_write` | A NodeLabel value written through the library is read back unchanged |
-| P0 | `invalid_setup_passcode` | A well-formed setup payload with a deliberately incorrect, same-discriminator setup passcode produces a clear non-zero failure without a crash |
+| P0 | `build_install` | APK or signed iOS app installs and launches |
+| P0 | `commissioning` | PASE completes through SDK-managed discovery with `errorCode == 0` within 120 seconds |
+| P0 | `operational_connect` | CASE returns a valid connect context within 30 seconds |
 | P1 | `app_restart` | Controller runtime rebuilds from persisted credentials and reconnects without recommissioning |
+| P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
+| P0 | `onoff_subscription` | Initial state and a command-triggered update arrive within 15 seconds |
+| P0 | `node_label_read_write` | A written NodeLabel is read back unchanged |
+| P0 | `invalid_setup_passcode` | A well-formed payload with a deliberately incorrect, same-discriminator passcode fails clearly without a crash |
 
-All 8 IDs must appear exactly once as keys in the `tests` object. The priority is determined by the test ID, so it is not duplicated inside each result. Unavailable P1 scenarios must be represented as `not_run` with a reason; they must not be omitted. A required P0 scenario cannot be omitted, and a stable release requires every P0 entry to be `passed`.
+All 8 IDs must appear exactly once in `tests`. Priority is derived from the ID and is not duplicated in each result. A P0 entry cannot be omitted. P1 may be `not_run` only with a reason.
 
-## Commissioning rules
+## Run rules
 
 - The app does not scan for BLE or mDNS commissionees itself.
-- The app supplies the raw onboarding payload to the Matter SDK.
-- The Matter SDK performs commissionee discovery and commissioning; no commissioning-transport field is reported.
-- After commissioning fails, the Run preserves the failure and stops. It does not retry commissioning in the same Run.
+- The app delegates discovery and commissioning to the Matter SDK.
+- No commissioning-transport field is reported.
+- A commissioning failure is preserved and ends commissioning work in that Run.
+- The app purges old Run secrets and resets controller identities before persisting a new Run.
+- Runs are one-shot; interrupted Runs are discarded and not resumed.
+- The app writes JSON and Markdown atomically only after the Run reaches a terminal state when possible.
 
 ## Summary rules
 
-- The overall result is `passed` only when `network_transport` is `wifi`, every P0 test is `passed`, and every non-P0 test is either `passed` or `not_run` with a reason.
-- The overall result is `failed` when any test is `failed`, especially any P0 test.
-- The overall result is `not_run` when any P0 test is `not_run`.
-- Counts must be calculated from the `tests` object and must total 8.
-- P1 failures are valid report data; a stable release requires maintainer review of every non-P0 failure.
+- `passed`: `network_transport` is `wifi`, every P0 is `passed`, and every P1 is `passed` or `not_run` with a reason.
+- `failed`: any test is `failed`.
+- `not_run`: any P0 is `not_run`.
+- Counts derive from the 8 entries in `tests` and must total 8.
+- A P1 failure is valid report data and requires maintainer review.
 
-## Markdown summary template
+## Markdown summary
 
-The generated Markdown should follow this structure:
+The generated summary should contain:
 
 ```markdown
 ### Device validation summary
 
 - Plugin commit: `<40-character SHA>`
 - Test app: `<name> <version> (<commit>)`
-- Controller: `<android|ios>` / `<device model>` / `<OS version>`
+- Controller: `<android|ios> / <model> / <OS>`
 - Commissionee: vendor `<vendor_id>` / product `<product_id>`
 - Network transport: `wifi`
 - Overall result: `<passed|failed|not_run>`
 
 | ID | Priority | Result | Duration | Notes |
 | --- | --- | --- | --- | --- |
-| `build_install` | P0 | `passed` | `1234 ms` | |
 | ... | ... | ... | ... | ... |
 
 #### P1 notes
-
-Summarize non-P0 failures or `not_run` reasons.
-
 #### Evidence files
-
-- `<relative evidence filename>`
-
 #### Sanitization
-
-Confirmed: no device identifiers, provisioning secrets, certificates, private keys, or raw logs are attached.
 ```
 
-The dedicated app may render the table automatically. Manual interim reports must preserve the same information; they must not claim to have been generated by the dedicated app.
+The Markdown must describe the same run, commits, controller, commissionee, transport, results, and evidence filenames as the JSON.
 
-## Test-app responsibilities
+## App responsibilities
 
-The dedicated app must:
+The device-test app must:
 
-1. Use the selected controller and commissionee from [`device-validation.md`](device-validation.md).
-2. Delegate discovery and commissioning to the Matter SDK through the raw onboarding payload.
-3. Reject unsupported `start_run` fields and unsupported report fields instead of silently ignoring them.
-4. Automatically purge old Run secrets and controller identities before a Run, and block the Run if cleanup fails.
-5. Keep cached Wi-Fi credentials in secure storage and exclude them from all state, logs, screenshots, and reports.
-6. Emit both output files atomically only after the run is complete.
-7. Set `plugin_commit` from the plugin checkout actually exercised by the test app.
-8. Set the test-app commit from the test app's own build metadata.
-9. Parse vendor and product identity from the commissionee payload automatically.
-10. Derive the summary counts and result from the recorded test entries and their documented priorities.
-11. Mark unavailable P1 tests as `not_run` with a reason; never replace a failed P0 with a retry result.
-12. Apply the sanitization policy before writing files; the app emits JSON and Markdown only.
-13. Validate its own JSON against this schema before declaring the run complete.
-14. Mark the report as failed or not run when a required P0 result is missing, failed, or not run, while still writing a reviewable report when possible.
+1. Use the selected controller and commissionee.
+2. Delegate discovery and commissioning through the raw onboarding payload.
+3. Reject unsupported `start_run` and report fields.
+4. Block the Run when pre-run cleanup fails.
+5. Keep cached Wi-Fi credentials in secure storage and out of state, logs, screenshots, and reports.
+6. Set `plugin_commit` from the exercised checkout and the test-app commit from build metadata.
+7. Derive summary counts and result from the test entries.
+8. Apply the sanitization policy before writing evidence.
+9. Validate its JSON against the schema before declaring the report complete.
+
+The post-Run cleanup card purges Run secrets and emits operator confirmation. It does not reset the commissionee. Every Run adds a fabric, so factory-reset the commissionee or remove the fabric before the next clean cycle.
 
 ## Pull request submission
 
 For a device-behavior pull request:
 
-1. Paste `device-test-report.md` into the Device Validation section of the PR description.
-2. Upload the sanitized JSON and sanitized evidence files in a PR comment.
-3. Add the uploaded file links to the Markdown summary and PR section.
-4. Confirm that the report commit matches the PR head.
-5. Update the report after any code change that could affect device behavior.
+1. Paste the generated Markdown into the Device Validation section.
+2. Upload sanitized JSON and any sanitized evidence in a pull-request comment.
+3. Link those files from the summary and PR section.
+4. Confirm `plugin_commit` matches the PR head.
+5. Regenerate evidence after any device-relevant code change.
 
-For a stable release-preparation pull request, provide separate Android and iOS reports against the candidate commit. Both reports must use a Matter commissionee and schema v4. Device provenance is not part of the report contract.
+For a stable release, provide separate Android and iOS reports for the candidate commit. Both must use schema v4 and a Matter commissionee.
 
 ## Failure handling
 
-- If the report or attachment is missing, reviewers must treat the change as unverified.
-- If the report commit is stale, request a new report against the current PR head.
-- If the schema is not v4 or `network_transport` is not `wifi`, reviewers must reject the report as formal evidence.
-- If a report contains retired commissionee model, firmware, state-change, or commissioning-transport fields, reject it and regenerate from a schema v4 source.
-- If an attached file contains sensitive data, remove the attachment, regenerate the report, and rotate any exposed credential.
-- If the test app cannot emit a valid report, keep the run result local and record the blocker; do not hand-edit sensitive data into an attachment.
+- Missing report or attachment: treat the change as unverified.
+- Stale commit: request a new report from the current PR head.
+- Wrong schema or non-Wi-Fi transport: reject as formal evidence.
+- Retired commissionee or transport fields: reject and regenerate from a v4 source.
+- Sensitive attachment: remove it, regenerate the report, and rotate exposed credentials.
+- Invalid app output: keep the result local and record the blocker; do not hand-edit sensitive data into an attachment.
