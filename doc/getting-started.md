@@ -21,6 +21,24 @@ import 'package:flutter_matter/flutter_matter.dart';
 
 ## 2. Configure Android
 
+### Add the JitPack repository
+
+The Android controller stack is hosted on JitPack (`com.github.Tan-yi-xiong:flutter_matter_android_prefixed`). Gradle resolves dependencies using the repositories of the consuming `:app` module, so the plugin cannot declare this repository for you.
+
+In the stock Flutter template, add JitPack to the root-level `allprojects` block in `android/build.gradle`:
+
+```groovy
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+This is what the bundled `example/` does.
+
 Add the permissions your feature set needs to the host app's `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
