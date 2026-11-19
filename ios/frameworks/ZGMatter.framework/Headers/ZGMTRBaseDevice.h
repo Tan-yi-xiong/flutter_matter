@@ -127,6 +127,8 @@ ZGMTR_EXTERN NSString * const ZGMTRCommandPathKey ZGMTR_AVAILABLE(ios(16.1), mac
 ZGMTR_EXTERN NSString * const ZGMTREventPathKey ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 ZGMTR_EXTERN NSString * const ZGMTRDataKey ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 ZGMTR_EXTERN NSString * const ZGMTRErrorKey ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+ZGMTR_EXTERN NSString * const ZGMTRTlvValueType ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+
 ZGMTR_EXTERN NSString * const ZGMTRTypeKey ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 ZGMTR_EXTERN NSString * const ZGMTRValueKey ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 ZGMTR_EXTERN NSString * const ZGMTRContextTagKey ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -146,9 +148,6 @@ ZGMTR_EXTERN NSString * const ZGMTREventTimeTypeKey ZGMTR_AVAILABLE(ios(16.5), m
 ZGMTR_EXTERN NSString * const ZGMTREventSystemUpTimeKey ZGMTR_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5));
 ZGMTR_EXTERN NSString * const ZGMTREventTimestampDateKey ZGMTR_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5));
 ZGMTR_EXTERN NSString * const ZGMTREventIsHistoricalKey ZGMTR_AVAILABLE(ios(17.3), macos(14.3), watchos(10.3), tvos(17.3));
-ZGMTR_EXTERN NSString * const ZGMTRValueDecodTypeKey ZGMTR_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5));
-ZGMTR_EXTERN NSString * const ZGMTRNSDataDecodKey ZGMTR_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5));
-ZGMTR_EXTERN NSString * const ZGMTRTlvValueType ZGMTR_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5));
 
 @class ZGMTRClusterStateCacheContainer;
 @class ZGMTRAttributeCacheContainer;
@@ -181,21 +180,24 @@ ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0))
     ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 @end
 
-ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0))
-@interface ZGMTRAttributeWriteRequest : ZGMTRAttributeRequestPath <NSCopying, NSSecureCoding>
 
-@property (nonatomic, readonly, copy, nullable) NSData * tlv;
+/**
+ * ZG extension: Represents a single attribute write request with pre-encoded TLV data.
+ */
+ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+@interface ZGMTRAttributeWriteRequest : ZGMTRAttributeRequestPath <NSSecureCoding>
 
-+ (ZGMTRAttributeWriteRequest *)requestPathWithEndpointID:(NSNumber * _Nullable)endpointID
-                                                  clusterID:(NSNumber * _Nullable)clusterID
-                                                attributeID:(NSNumber * _Nullable)attributeID
-                                                       tlv:(NSData * _Nullable)tlv;
+/**
+ * Pre-encoded TLV data for the attribute value to write.
+ */
+@property (nonatomic, copy, readonly, nullable) NSData * tlv;
+
 - (instancetype)initWithEndpointID:(NSNumber * _Nullable)endpointID
                           clusterID:(NSNumber * _Nullable)clusterID
                         attributeID:(NSNumber * _Nullable)attributeID
-                               tlv:(NSData * _Nullable)tlv;
-@end
+                               tlv:(NSData * _Nullable)tlv ZGMTR_NEWLY_AVAILABLE;
 
+@end
 /**
  * A path indicating an event being requested (for read or subscribe).
  *
@@ -362,13 +364,17 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
                           completion:(ZGMTRDeviceResponseHandler)completion
     ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
-
+/**
+ * ZG extension: Write one or more attributes using pre-encoded TLV data.
+ * timedWriteTimeout controls the timed-write interaction timeout.
+ * imTimeoutMs controls the IM exchange timeout for the write request.
+ */
 - (void)writeAttributeRequests:(NSArray<ZGMTRAttributeWriteRequest *> * _Nullable)attributePaths
                    timedWriteTimeout:(NSNumber * _Nullable)timeoutMs
                    imTimeoutMs:(NSNumber * _Nullable)imTimeoutMs
                          queue:(dispatch_queue_t)queue
                           completion:(ZGMTRDeviceResponseHandler)completion
-    ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+    ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 /**
  * Invoke a command with a designated command path
@@ -461,6 +467,20 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
                     reportHandler:(ZGMTRDeviceResponseHandler)reportHandler
           subscriptionEstablished:(ZGMTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
           resubscriptionScheduled:(ZGMTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled
+    ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
+
+/**
+ * ZG extension: subscribe to attribute paths with the subscription ID passed to the
+ * established callback.  Identical to subscribeToAttributePaths, except that the
+ * callback receives the real SubscriptionId as an NSNumber.
+ */
+- (void)customSubscribeToAttributePaths:(NSArray<ZGMTRAttributeRequestPath *> * _Nullable)attributePaths
+                             eventPaths:(NSArray<ZGMTREventRequestPath *> * _Nullable)eventPaths
+                                 params:(ZGMTRSubscribeParams * _Nullable)params
+                                  queue:(dispatch_queue_t)queue
+                          reportHandler:(ZGMTRDeviceResponseHandler)reportHandler
+                subscriptionEstablished:(void (^_Nullable)(NSNumber * _Nullable subscriptionId))subscriptionEstablished
+                resubscriptionScheduled:(ZGMTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled
     ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 
 /**
@@ -595,22 +615,11 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
     ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 /**
- * Copy subscribeToAttributePaths, change subscriptionEstablished callback
+ * ZG extension: Shut down a subscription by its subscription ID and scoped node ID.
+ * Returns YES on success, NO on failure.
  */
-- (void)customSubscribeToAttributePaths:(NSArray<ZGMTRAttributeRequestPath *> * _Nullable)attributePaths
-                       eventPaths:(NSArray<ZGMTREventRequestPath *> * _Nullable)eventPaths
-                           params:(ZGMTRSubscribeParams * _Nullable)params
-                            queue:(dispatch_queue_t)queue
-                    reportHandler:(ZGMTRDeviceResponseHandler)reportHandler
-                subscriptionEstablished:(ZGMTRSubscriptionEstablishedWithIdHandler _Nullable)subscriptionEstablished
-          resubscriptionScheduled:(ZGMTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled
-    ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-
-/**
- * shutdownSubscription
- */
-- (BOOL)shutdownSubscription:(NSNumber *)subscriptionId scopedNodeId:(NSNumber *)scopedNodeId
-    ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+- (BOOL)shutdownSubscription:(nonnull NSNumber *)subscriptionId scopedNodeId:(nonnull NSNumber *)scopedNodeId
+    ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 @end
 
@@ -691,16 +700,16 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * * The attribute is nullable and the value of the attribute is null.
  *
  * If value is not nil, the actual type of value will depend on the
- * schema-defined (typically defined in the Matter specification) type of the
+ * schema-defined (typically defined in the ZGMatter specification) type of the
  * attribute as follows:
  *
  * * list: NSArray of whatever type the list entries are.
- * * struct: The corresponding structure interface defined by Matter.framework
+ * * struct: The corresponding structure interface defined by ZGMatter.framework
  * * octet string: NSData
  * * string: NSString
  * * discrete/analog types: NSNumber
  *
- * Derived types (in the Matter specification sense) are represented the same as
+ * Derived types (in the ZGMatter specification sense) are represented the same as
  * the base type, except for "string" (which is a derived type of "octet string"
  * in the specification).
  */

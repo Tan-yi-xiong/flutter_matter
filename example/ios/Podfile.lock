@@ -5,7 +5,7 @@ PODS:
   - Flutter (1.0.0)
   - flutter_blue_plus (0.0.1):
     - Flutter
-  - flutter_matter (0.0.11):
+  - flutter_matter (0.0.12):
     - Flutter
   - GoogleDataTransport (9.4.1):
     - GoogleUtilities/Environment (~> 7.7)
@@ -110,7 +110,7 @@ SPEC CHECKSUMS:
   bonsoir_darwin: 14bd7429acb51db6a8e51f6574ac3b1ea0037a87
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   flutter_blue_plus: e5808fc4e5ebc58bb911635f8fdaf5e2b4da2754
-  flutter_matter: 8cde99b875d154e3f5558b3ee338046ca39cedd0
+  flutter_matter: 85415e705eca6587e1fe05aadd1a71f167eedf81
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleMLKit: 97ac7af399057e99182ee8edfa8249e3226a4065
   GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8

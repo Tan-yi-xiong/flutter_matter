@@ -18,8 +18,10 @@
 
 ### Compatibility
 - **iOS 16.1 minimum support** — The podspec, Podfile, app framework metadata, and Xcode targets now use iOS 16.1 for both the plugin and the example. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
+- **iOS Matter SDK 1.6.1** — Rebuilt `ZGMatter.framework` from official connectedhomeip `v1.6.1-branch` (`da8f6a0bff`) with a reproducible rename + feature-patch pipeline. The framework keeps the ZGMTR-prefixed public APIs and no longer carries the legacy iOS BLE proxy overrides.
 
 ### Tooling and tests
+- Moved the reproducible ZGMatter framework build pipeline into `ios/zgmatter/`, with explicit `ZGMATTER_CONNECTEDHOMEIP_DIR` or `--connectedhomeip-dir` source configuration and English maintainer documentation.
 - Added a root plugin Dart test suite covering public exports, MethodChannel contracts, models, TLV parsing, onboarding parsing, and callback routing.
 - Pinned Flutter `3.41.0` through `.fvmrc`; the Dart and Flutter pubspec lower bounds remain unchanged, while only Flutter `3.41.0` is currently validated.
 - Documented the plugin Android baseline as `minSdk 21`, `compileSdk 34`, JDK 17, and Kotlin 1.7.10, with the example Gradle/AGP/Kotlin baseline tracked separately.

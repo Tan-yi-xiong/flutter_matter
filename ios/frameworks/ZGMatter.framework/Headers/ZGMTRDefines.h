@@ -22,7 +22,7 @@
 /**
  * @define `ZGMTR_NO_AVAILABILITY`
  * Turns off availability annotations, to allow compiling a version of
- * Matter.framework for "local use", not as a system framework.
+ * ZGMatter.framework for "local use", not as a system framework.
  */
 #ifndef ZGMTR_NO_AVAILABILITY
 #define ZGMTR_NO_AVAILABILITY 0
@@ -93,7 +93,7 @@
 #if ZGMTR_ENABLE_PROVISIONAL
 #define ZGMTR_PROVISIONALLY_AVAILABLE ZGMTR_NEWLY_AVAILABLE
 #else
-#define ZGMTR_PROVISIONALLY_AVAILABLE 
+#define ZGMTR_PROVISIONALLY_AVAILABLE _ZGMTR_UNAVAILABLE
 #endif
 
 #if ZGMTR_ENABLE_UNSTABLE_API

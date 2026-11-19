@@ -54,9 +54,9 @@ typedef NS_ENUM(NSUInteger, ZGMTRStorageSharingType) {
  *    it is to get its controllerID.
  *
  * 2) The delegate method calls will happen on the queue that was provided along
- *    with the delegate.  All Matter work will be blocked until the method
- *    completes, and these calls may themselves block other Matter API calls
- *    from completing.  Attempting to call any Matter API on the queue used for
+ *    with the delegate.  All ZGMatter work will be blocked until the method
+ *    completes, and these calls may themselves block other ZGMatter API calls
+ *    from completing.  Attempting to call any ZGMatter API on the queue used for
  *    this delegate, apart from de-serializing and serializing the items being
  *    stored and calling ZGMTRDeviceControllerStorageClasses(), is likely to lead
  *    to deadlocks.

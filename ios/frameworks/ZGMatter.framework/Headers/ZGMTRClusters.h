@@ -43,8 +43,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -89,8 +87,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -156,8 +152,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -245,8 +239,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -280,8 +272,6 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -323,11 +313,11 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeTagListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeEndpointUniqueIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -367,8 +357,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -402,7 +390,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface ZGMTRClusterAccessControl : ZGMTRGenericCluster
 
-- (void)reviewFabricRestrictionsWithParams:(ZGMTRAccessControlClusterReviewFabricRestrictionsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRAccessControlClusterReviewFabricRestrictionsResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)reviewFabricRestrictionsWithParams:(ZGMTRAccessControlClusterReviewFabricRestrictionsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRAccessControlClusterReviewFabricRestrictionsResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeACLWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)writeAttributeACLWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -418,15 +406,15 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAccessControlEntriesPerFabricWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCommissioningARLWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCommissioningARLWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeARLWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeARLWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAuxiliaryACLWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -480,8 +468,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -563,15 +549,19 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeProductAppearanceWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpecificationVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpecificationVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxPathsPerInvokeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxPathsPerInvokeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDeviceLocationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeDeviceLocationWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeDeviceLocationWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeConfigurationVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
@@ -598,7 +588,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 /**
  * Cluster OTA Software Update Provider
- *    Provides an interface for providing OTA software updates
+ *    This cluster implements the Provider role in the OTA process.
  */
 ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 @interface ZGMTRClusterOTASoftwareUpdateProvider : ZGMTRGenericCluster
@@ -610,8 +600,6 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
@@ -638,7 +626,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 /**
  * Cluster OTA Software Update Requestor
- *    Provides an interface for downloading and applying OTA software updates
+ *    This cluster implements the Requestor role in the OTA process.
  */
 ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 @interface ZGMTRClusterOTASoftwareUpdateRequestor : ZGMTRGenericCluster
@@ -658,8 +646,6 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
@@ -703,8 +689,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -753,8 +737,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -792,11 +774,11 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)writeAttributeTemperatureUnitWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 - (void)writeAttributeTemperatureUnitWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedTemperatureUnitsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -833,8 +815,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -934,8 +914,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -993,11 +971,17 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeTCAcknowledgementsRequiredWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTCUpdateDeadlineWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeRecoveryIdentifierWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNetworkRecoveryReasonWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeIsCommissioningWithoutPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1024,7 +1008,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 /**
  * Cluster Network Commissioning
- *    Functionality to configure, enable, disable network credentials and access on a Matter device.
+ *    Functionality to configure, enable, disable network credentials and access on a ZGMatter device.
  */
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface ZGMTRClusterNetworkCommissioning : ZGMTRGenericCluster
@@ -1057,17 +1041,15 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeLastConnectErrorValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWiFiBandsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWiFiBandsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedThreadFeaturesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedThreadFeaturesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeThreadVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeThreadVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1105,8 +1087,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -1138,10 +1118,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface ZGMTRClusterGeneralDiagnostics : ZGMTRGenericCluster
 
 - (void)testEventTriggerWithParams:(ZGMTRGeneralDiagnosticsClusterTestEventTriggerParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-- (void)timeSnapshotWithParams:(ZGMTRGeneralDiagnosticsClusterTimeSnapshotParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRGeneralDiagnosticsClusterTimeSnapshotResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)timeSnapshotWithParams:(ZGMTRGeneralDiagnosticsClusterTimeSnapshotParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRGeneralDiagnosticsClusterTimeSnapshotResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)timeSnapshotWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRGeneralDiagnosticsClusterTimeSnapshotResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)payloadTestRequestWithParams:(ZGMTRGeneralDiagnosticsClusterPayloadTestRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRGeneralDiagnosticsClusterPayloadTestResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)payloadTestRequestWithParams:(ZGMTRGeneralDiagnosticsClusterPayloadTestRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRGeneralDiagnosticsClusterPayloadTestResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeNetworkInterfacesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1161,11 +1141,11 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeTestEventTriggersEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDeviceLoadStatusWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1212,8 +1192,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1375,11 +1353,13 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveNetworkFaultsListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeExtAddressWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeRloc16WithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1445,8 +1425,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -1503,8 +1481,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -1532,52 +1508,50 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * Cluster Time Synchronization
  *    Accurate time is required for a number of reasons, including scheduling, display and validating security materials.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterTimeSynchronization : ZGMTRGenericCluster
 
-- (void)setUTCTimeWithParams:(ZGMTRTimeSynchronizationClusterSetUTCTimeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setTrustedTimeSourceWithParams:(ZGMTRTimeSynchronizationClusterSetTrustedTimeSourceParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setTimeZoneWithParams:(ZGMTRTimeSynchronizationClusterSetTimeZoneParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTimeSynchronizationClusterSetTimeZoneResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setDSTOffsetWithParams:(ZGMTRTimeSynchronizationClusterSetDSTOffsetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setDefaultNTPWithParams:(ZGMTRTimeSynchronizationClusterSetDefaultNTPParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setUTCTimeWithParams:(ZGMTRTimeSynchronizationClusterSetUTCTimeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setTrustedTimeSourceWithParams:(ZGMTRTimeSynchronizationClusterSetTrustedTimeSourceParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setTimeZoneWithParams:(ZGMTRTimeSynchronizationClusterSetTimeZoneParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTimeSynchronizationClusterSetTimeZoneResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setDSTOffsetWithParams:(ZGMTRTimeSynchronizationClusterSetDSTOffsetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setDefaultNTPWithParams:(ZGMTRTimeSynchronizationClusterSetDefaultNTPParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeUTCTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUTCTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGranularityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGranularityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeSourceWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeSourceWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTrustedTimeSourceWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTrustedTimeSourceWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeDefaultNTPWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDefaultNTPWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeZoneWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeZoneWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeDSTOffsetWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDSTOffsetWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeLocalTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLocalTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeZoneDatabaseWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeZoneDatabaseWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNTPServerAvailableWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNTPServerAvailableWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeZoneListMaxSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeZoneListMaxSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeDSTOffsetListMaxSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDSTOffsetListMaxSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportsDNSResolveWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportsDNSResolveWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -1592,7 +1566,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -1606,7 +1580,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 @interface ZGMTRClusterBridgedDeviceBasicInformation : ZGMTRGenericCluster
 
-- (void)keepActiveWithParams:(ZGMTRBridgedDeviceBasicInformationClusterKeepActiveParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)keepActiveWithParams:(ZGMTRBridgedDeviceBasicInformationClusterKeepActiveParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeVendorNameWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
@@ -1614,7 +1588,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeProductNameWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeProductIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeProductIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeNodeLabelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)writeAttributeNodeLabelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -1644,11 +1618,15 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeProductAppearanceWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDeviceLocationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeDeviceLocationWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeDeviceLocationWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeConfigurationVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
@@ -1691,8 +1669,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1740,8 +1716,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -1780,6 +1754,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)updateFabricLabelWithParams:(ZGMTROperationalCredentialsClusterUpdateFabricLabelParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROperationalCredentialsClusterNOCResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)removeFabricWithParams:(ZGMTROperationalCredentialsClusterRemoveFabricParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROperationalCredentialsClusterNOCResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)addTrustedRootCertificateWithParams:(ZGMTROperationalCredentialsClusterAddTrustedRootCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+- (void)setVIDVerificationStatementWithParams:(ZGMTROperationalCredentialsClusterSetVIDVerificationStatementParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setVIDVerificationStatementWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)signVIDVerificationRequestWithParams:(ZGMTROperationalCredentialsClusterSignVIDVerificationRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROperationalCredentialsClusterSignVIDVerificationResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeNOCsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1796,8 +1774,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1846,11 +1822,13 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxGroupKeysPerFabricWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGroupcastAdoptionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeGroupcastAdoptionWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeGroupcastAdoptionWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1888,8 +1866,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -1929,8 +1905,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -1967,8 +1941,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -1996,44 +1968,42 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * Cluster ICD Management
  *    Allows servers to ensure that listed clients are notified when a server is available for communication.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterICDManagement : ZGMTRGenericCluster
 
-- (void)registerClientWithParams:(ZGMTRICDManagementClusterRegisterClientParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRICDManagementClusterRegisterClientResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)unregisterClientWithParams:(ZGMTRICDManagementClusterUnregisterClientParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)stayActiveRequestWithParams:(ZGMTRICDManagementClusterStayActiveRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRICDManagementClusterStayActiveResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)registerClientWithParams:(ZGMTRICDManagementClusterRegisterClientParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRICDManagementClusterRegisterClientResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)unregisterClientWithParams:(ZGMTRICDManagementClusterUnregisterClientParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)stayActiveRequestWithParams:(ZGMTRICDManagementClusterStayActiveRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRICDManagementClusterStayActiveResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeIdleModeDurationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeIdleModeDurationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveModeDurationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveModeDurationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveModeThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveModeThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeRegisteredClientsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeRegisteredClientsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeICDCounterWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeICDCounterWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClientsSupportedPerFabricWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClientsSupportedPerFabricWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeUserActiveModeTriggerHintWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUserActiveModeTriggerHintWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeUserActiveModeTriggerInstructionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUserActiveModeTriggerInstructionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOperatingModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOperatingModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaximumCheckInBackOffWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaximumCheckInBackOffWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2048,56 +2018,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@end
-
-/**
- * Cluster Timer
- *    This cluster supports creating a simple timer functionality.
- */
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRClusterTimer : ZGMTRGenericCluster
-
-- (void)setTimerWithParams:(ZGMTRTimerClusterSetTimerParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)resetTimerWithParams:(ZGMTRTimerClusterResetTimerParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)resetTimerWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)addTimeWithParams:(ZGMTRTimerClusterAddTimeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)reduceTimeWithParams:(ZGMTRTimerClusterReduceTimeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSetTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimeRemainingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTimerStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
-
-@end
-
-@interface ZGMTRClusterTimer (Availability)
-
-/**
- * For all instance methods that take a completion (i.e. command invocations),
- * the completion will be called on the provided queue.
- */
-- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
-                              endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2105,45 +2026,37 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Oven Cavity Operational State
  *    This cluster supports remotely monitoring and, where supported, changing the operational state of an Oven.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterOvenCavityOperationalState : ZGMTRGenericCluster
 
-- (void)pauseWithParams:(ZGMTROvenCavityOperationalStateClusterPauseParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)pauseWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)stopWithParams:(ZGMTROvenCavityOperationalStateClusterStopParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)stopWithParams:(ZGMTROvenCavityOperationalStateClusterStopParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)stopWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)startWithParams:(ZGMTROvenCavityOperationalStateClusterStartParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)startWithParams:(ZGMTROvenCavityOperationalStateClusterStartParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)startWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)resumeWithParams:(ZGMTROvenCavityOperationalStateClusterResumeParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)resumeWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePhaseListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePhaseListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentPhaseWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentPhaseWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCountdownTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCountdownTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOperationalStateListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOperationalStateListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOperationalStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOperationalStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOperationalErrorWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOperationalErrorWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2158,7 +2071,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2166,34 +2079,24 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Oven Mode
  *    Attributes and commands for selecting a mode from a list of supported options.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterOvenMode : ZGMTRGenericCluster
 
-- (void)changeToModeWithParams:(ZGMTROvenModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)changeToModeWithParams:(ZGMTROvenModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTROvenModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOnModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2208,7 +2111,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2217,20 +2120,56 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  *    This cluster provides a way to access options associated with the operation of
             a laundry dryer device type.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterLaundryDryerControls : ZGMTRGenericCluster
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedDrynessLevelsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedDrynessLevelsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSelectedDrynessLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeSelectedDrynessLevelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeSelectedDrynessLevelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSelectedDrynessLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeSelectedDrynessLevelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeSelectedDrynessLevelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterLaundryDryerControls (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@end
+
+/**
+ * Cluster Temperature Controlled Cabinet Topology
+ *    This cluster provides contextual information with respect to the disablement or otherwise of Temperature Controlled Cabinet Endpoints that may be composed as part of a Device.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterTemperatureControlledCabinetTopology : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDisabledCabinetsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTopologyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -2243,7 +2182,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @end
 
-@interface ZGMTRClusterLaundryDryerControls (Availability)
+@interface ZGMTRClusterTemperatureControlledCabinetTopology (Availability)
 
 /**
  * The queue is currently unused, but may be used in the future for calling completions
@@ -2284,8 +2223,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -2313,34 +2250,24 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * Cluster Laundry Washer Mode
  *    Attributes and commands for selecting a mode from a list of supported options.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterLaundryWasherMode : ZGMTRGenericCluster
 
-- (void)changeToModeWithParams:(ZGMTRLaundryWasherModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRLaundryWasherModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)changeToModeWithParams:(ZGMTRLaundryWasherModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRLaundryWasherModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOnModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2355,7 +2282,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2363,34 +2290,24 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Refrigerator And Temperature Controlled Cabinet Mode
  *    Attributes and commands for selecting a mode from a list of supported options.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterRefrigeratorAndTemperatureControlledCabinetMode : ZGMTRGenericCluster
 
-- (void)changeToModeWithParams:(ZGMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)changeToModeWithParams:(ZGMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOnModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2405,7 +2322,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2413,32 +2330,30 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Laundry Washer Controls
  *    This cluster supports remotely monitoring and controlling the different types of functionality available to a washing device, such as a washing machine.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterLaundryWasherControls : ZGMTRGenericCluster
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpinSpeedsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpinSpeedsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpinSpeedCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeSpinSpeedCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeSpinSpeedCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpinSpeedCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeSpinSpeedCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeSpinSpeedCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfRinsesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeNumberOfRinsesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeNumberOfRinsesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfRinsesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeNumberOfRinsesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeNumberOfRinsesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedRinsesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedRinsesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2453,7 +2368,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2473,8 +2388,6 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
@@ -2516,8 +2429,6 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
@@ -2545,36 +2456,34 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * Cluster Temperature Control
  *    Attributes and commands for configuring the temperature control, and reporting temperature.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterTemperatureControl : ZGMTRGenericCluster
 
-- (void)setTemperatureWithParams:(ZGMTRTemperatureControlClusterSetTemperatureParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setTemperatureWithParams:(ZGMTRTemperatureControlClusterSetTemperatureParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)setTemperatureWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTemperatureSetpointWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTemperatureSetpointWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinTemperatureWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinTemperatureWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxTemperatureWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxTemperatureWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStepWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStepWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSelectedTemperatureLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSelectedTemperatureLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedTemperatureLevelsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedTemperatureLevelsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2589,7 +2498,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2597,26 +2506,24 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Refrigerator Alarm
  *    Attributes and commands for configuring the Refrigerator alarm.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterRefrigeratorAlarm : ZGMTRGenericCluster
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaskWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaskWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2631,7 +2538,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2639,34 +2546,24 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Dishwasher Mode
  *    Attributes and commands for selecting a mode from a list of supported options.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterDishwasherMode : ZGMTRGenericCluster
 
-- (void)changeToModeWithParams:(ZGMTRDishwasherModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRDishwasherModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)changeToModeWithParams:(ZGMTRDishwasherModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRDishwasherModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOnModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2681,7 +2578,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2697,8 +2594,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -2762,11 +2657,11 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeExpiryDateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnmountedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -2795,31 +2690,29 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * Cluster Dishwasher Alarm
  *    Attributes and commands for configuring the Dishwasher alarm.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterDishwasherAlarm : ZGMTRGenericCluster
 
-- (void)resetWithParams:(ZGMTRDishwasherAlarmClusterResetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)modifyEnabledAlarmsWithParams:(ZGMTRDishwasherAlarmClusterModifyEnabledAlarmsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)resetWithParams:(ZGMTRDishwasherAlarmClusterResetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)modifyEnabledAlarmsWithParams:(ZGMTRDishwasherAlarmClusterModifyEnabledAlarmsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaskWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaskWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeLatchWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLatchWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2834,7 +2727,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2842,24 +2735,22 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Microwave Oven Mode
  *    Attributes and commands for selecting a mode from a list of supported options.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterMicrowaveOvenMode : ZGMTRGenericCluster
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2874,7 +2765,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2882,43 +2773,41 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Microwave Oven Control
  *    Attributes and commands for configuring the microwave oven control, and reporting cooking stats.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterMicrowaveOvenControl : ZGMTRGenericCluster
 
-- (void)setCookingParametersWithParams:(ZGMTRMicrowaveOvenControlClusterSetCookingParametersParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setCookingParametersWithParams:(ZGMTRMicrowaveOvenControlClusterSetCookingParametersParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)setCookingParametersWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)addMoreTimeWithParams:(ZGMTRMicrowaveOvenControlClusterAddMoreTimeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)addMoreTimeWithParams:(ZGMTRMicrowaveOvenControlClusterAddMoreTimeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCookTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCookTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxCookTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxCookTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerSettingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerSettingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerStepWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerStepWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWattsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeSelectedWattIndexWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeWattRatingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeWattRatingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -2933,7 +2822,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -2973,8 +2862,6 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
@@ -3011,9 +2898,9 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
 - (void)resumeWithParams:(ZGMTRRVCOperationalStateClusterResumeParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 - (void)resumeWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
     ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
-- (void)goHomeWithParams:(ZGMTRRVCOperationalStateClusterGoHomeParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)goHomeWithParams:(ZGMTRRVCOperationalStateClusterGoHomeParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)goHomeWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRRVCOperationalStateClusterOperationalCommandResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributePhaseListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
@@ -3030,8 +2917,6 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 
@@ -3072,8 +2957,6 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 - (void)getSceneMembershipWithParams:(ZGMTRScenesManagementClusterGetSceneMembershipParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRScenesManagementClusterGetSceneMembershipResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)copySceneWithParams:(ZGMTRScenesManagementClusterCopySceneParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRScenesManagementClusterCopySceneResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeLastConfiguredByWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeSceneTableSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFabricSceneInfoWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
@@ -3081,8 +2964,6 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -3096,6 +2977,56 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 @interface ZGMTRClusterScenesManagement (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Groupcast
+ *    The Groupcast cluster manages the content of the node-wide multicast Group membership that is part of the underlying interaction layer.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterGroupcast : ZGMTRGenericCluster
+
+- (void)joinGroupWithParams:(ZGMTRGroupcastClusterJoinGroupParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)leaveGroupWithParams:(ZGMTRGroupcastClusterLeaveGroupParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRGroupcastClusterLeaveGroupResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)updateGroupKeyWithParams:(ZGMTRGroupcastClusterUpdateGroupKeyParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)configureAuxiliaryACLWithParams:(ZGMTRGroupcastClusterConfigureAuxiliaryACLParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)groupcastTestingWithParams:(ZGMTRGroupcastClusterGroupcastTestingParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMembershipWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxMembershipCountWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxMcastAddrCountWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUsedMcastAddrCountWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFabricUnderTestWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterGroupcast (Availability)
 
 /**
  * For all instance methods that take a completion (i.e. command invocations),
@@ -3135,8 +3066,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -3190,8 +3119,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -3212,6 +3139,58 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
                                    queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
+
+@end
+
+/**
+ * Cluster Water Tank Level Monitoring
+ *    This generic cluster provides an interface to the current condition of a resource.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterWaterTankLevelMonitoring : ZGMTRGenericCluster
+
+- (void)resetConditionWithParams:(ZGMTRWaterTankLevelMonitoringClusterResetConditionParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)resetConditionWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeConditionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDegradationDirectionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeChangeIndicationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeInPlaceIndicatorWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLastChangedTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeLastChangedTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeLastChangedTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeReplacementProductListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterWaterTankLevelMonitoring (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
 
 @end
 
@@ -3246,8 +3225,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -3315,8 +3292,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -3390,8 +3365,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -3438,8 +3411,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -3467,37 +3438,35 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * Cluster Water Heater Management
  *    This cluster is used to allow clients to control the operation of a hot water heating appliance so that it can be used with energy management.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterWaterHeaterManagement : ZGMTRGenericCluster
 
-- (void)boostWithParams:(ZGMTRWaterHeaterManagementClusterBoostParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)cancelBoostWithParams:(ZGMTRWaterHeaterManagementClusterCancelBoostParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)boostWithParams:(ZGMTRWaterHeaterManagementClusterBoostParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)cancelBoostWithParams:(ZGMTRWaterHeaterManagementClusterCancelBoostParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)cancelBoostWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeHeaterTypesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHeaterTypesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeHeatDemandWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHeatDemandWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTankVolumeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTankVolumeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEstimatedHeatRequiredWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeEstimatedHeatRequiredWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeTankPercentageWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTankPercentageWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeBoostStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBoostStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -3512,50 +3481,31 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
 /**
- * Cluster Demand Response Load Control
- *    This cluster provides an interface to the functionality of Smart Energy Demand Response and Load Control.
+ * Cluster Commodity Price
+ *    The Commodity Price Cluster provides the mechanism for communicating Gas, Energy, or Water pricing information within the premises.
  */
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRClusterDemandResponseLoadControl : ZGMTRGenericCluster
+@interface ZGMTRClusterCommodityPrice : ZGMTRGenericCluster
 
-- (void)registerLoadControlProgramRequestWithParams:(ZGMTRDemandResponseLoadControlClusterRegisterLoadControlProgramRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)unregisterLoadControlProgramRequestWithParams:(ZGMTRDemandResponseLoadControlClusterUnregisterLoadControlProgramRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)addLoadControlEventRequestWithParams:(ZGMTRDemandResponseLoadControlClusterAddLoadControlEventRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)removeLoadControlEventRequestWithParams:(ZGMTRDemandResponseLoadControlClusterRemoveLoadControlEventRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)clearLoadControlEventsRequestWithParams:(ZGMTRDemandResponseLoadControlClusterClearLoadControlEventsRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)clearLoadControlEventsRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)getDetailedPriceRequestWithParams:(ZGMTRCommodityPriceClusterGetDetailedPriceRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommodityPriceClusterGetDetailedPriceResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)getDetailedForecastRequestWithParams:(ZGMTRCommodityPriceClusterGetDetailedForecastRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommodityPriceClusterGetDetailedForecastResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeLoadControlProgramsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTariffUnitWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfLoadControlProgramsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrencyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentPriceWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveEventsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfEventsPerProgramWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfTransitionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeDefaultRandomStartWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeDefaultRandomStartWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeDefaultRandomStartWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeDefaultRandomDurationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeDefaultRandomDurationWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeDefaultRandomDurationWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePriceForecastWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -3568,7 +3518,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @end
 
-@interface ZGMTRClusterDemandResponseLoadControl (Availability)
+@interface ZGMTRClusterCommodityPrice (Availability)
 
 /**
  * For all instance methods that take a completion (i.e. command invocations),
@@ -3584,27 +3534,25 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Messages
  *    This cluster provides an interface for passing messages to be presented by a device.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterMessages : ZGMTRGenericCluster
 
-- (void)presentMessagesRequestWithParams:(ZGMTRMessagesClusterPresentMessagesRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)cancelMessagesRequestWithParams:(ZGMTRMessagesClusterCancelMessagesRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)presentMessagesRequestWithParams:(ZGMTRMessagesClusterPresentMessagesRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)cancelMessagesRequestWithParams:(ZGMTRMessagesClusterCancelMessagesRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMessagesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMessagesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveMessageIDsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveMessageIDsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -3619,7 +3567,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -3627,51 +3575,55 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Device Energy Management
  *    This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA).
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterDeviceEnergyManagement : ZGMTRGenericCluster
 
-- (void)powerAdjustRequestWithParams:(ZGMTRDeviceEnergyManagementClusterPowerAdjustRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)cancelPowerAdjustRequestWithParams:(ZGMTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)powerAdjustRequestWithParams:(ZGMTRDeviceEnergyManagementClusterPowerAdjustRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)cancelPowerAdjustRequestWithParams:(ZGMTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)cancelPowerAdjustRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)startTimeAdjustRequestWithParams:(ZGMTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)pauseRequestWithParams:(ZGMTRDeviceEnergyManagementClusterPauseRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)resumeRequestWithParams:(ZGMTRDeviceEnergyManagementClusterResumeRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)startTimeAdjustRequestWithParams:(ZGMTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)pauseRequestWithParams:(ZGMTRDeviceEnergyManagementClusterPauseRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)resumeRequestWithParams:(ZGMTRDeviceEnergyManagementClusterResumeRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)resumeRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)modifyForecastRequestWithParams:(ZGMTRDeviceEnergyManagementClusterModifyForecastRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)requestConstraintBasedForecastWithParams:(ZGMTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)cancelRequestWithParams:(ZGMTRDeviceEnergyManagementClusterCancelRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)modifyForecastRequestWithParams:(ZGMTRDeviceEnergyManagementClusterModifyForecastRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)requestConstraintBasedForecastWithParams:(ZGMTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)cancelRequestWithParams:(ZGMTRDeviceEnergyManagementClusterCancelRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)cancelRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)powerRangeAdjustRequestWithParams:(ZGMTRDeviceEnergyManagementClusterPowerRangeAdjustRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)cancelPowerRangeAdjustRequestWithParams:(ZGMTRDeviceEnergyManagementClusterCancelPowerRangeAdjustRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)cancelPowerRangeAdjustRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
     ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeESATypeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeESATypeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeESACanGenerateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeESACanGenerateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeESAStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeESAStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAbsMinPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAbsMinPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAbsMaxPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAbsMaxPowerWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerAdjustmentCapabilityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerAdjustmentCapabilityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeForecastWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeForecastWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOptOutStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOptOutStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerRangeAdjustmentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -3686,7 +3638,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -3694,62 +3646,62 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Energy EVSE
  *    Electric Vehicle Supply Equipment (EVSE) is equipment used to charge an Electric Vehicle (EV) or Plug-In Hybrid Electric Vehicle. This cluster provides an interface to the functionality of Electric Vehicle Supply Equipment (EVSE) management.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterEnergyEVSE : ZGMTRGenericCluster
 
-- (void)disableWithParams:(ZGMTREnergyEVSEClusterDisableParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)disableWithParams:(ZGMTREnergyEVSEClusterDisableParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)disableWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)enableChargingWithParams:(ZGMTREnergyEVSEClusterEnableChargingParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)enableChargingWithParams:(ZGMTREnergyEVSEClusterEnableChargingParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)enableDischargingWithParams:(ZGMTREnergyEVSEClusterEnableDischargingParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)startDiagnosticsWithParams:(ZGMTREnergyEVSEClusterStartDiagnosticsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)startDiagnosticsWithParams:(ZGMTREnergyEVSEClusterStartDiagnosticsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)startDiagnosticsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setTargetsWithParams:(ZGMTREnergyEVSEClusterSetTargetsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)getTargetsWithParams:(ZGMTREnergyEVSEClusterGetTargetsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTREnergyEVSEClusterGetTargetsResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setTargetsWithParams:(ZGMTREnergyEVSEClusterSetTargetsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)getTargetsWithParams:(ZGMTREnergyEVSEClusterGetTargetsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTREnergyEVSEClusterGetTargetsResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)getTargetsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTREnergyEVSEClusterGetTargetsResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)clearTargetsWithParams:(ZGMTREnergyEVSEClusterClearTargetsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)clearTargetsWithParams:(ZGMTREnergyEVSEClusterClearTargetsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)clearTargetsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupplyStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupplyStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFaultStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFaultStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeChargingEnabledUntilWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeChargingEnabledUntilWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeDischargingEnabledUntilWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCircuitCapacityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCircuitCapacityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinimumChargeCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinimumChargeCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaximumChargeCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaximumChargeCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeMaximumDischargeCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeUserMaximumChargeCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeUserMaximumChargeCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeUserMaximumChargeCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUserMaximumChargeCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeUserMaximumChargeCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeUserMaximumChargeCurrentWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeRandomizationDelayWindowWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeRandomizationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeRandomizationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeRandomizationDelayWindowWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeRandomizationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeRandomizationDelayWindowWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextChargeStartTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextChargeStartTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextChargeTargetTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextChargeTargetTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextChargeRequiredEnergyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextChargeRequiredEnergyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextChargeTargetSoCWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextChargeTargetSoCWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeApproximateEVEfficiencyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeApproximateEVEfficiencyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeApproximateEVEfficiencyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeApproximateEVEfficiencyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeApproximateEVEfficiencyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeApproximateEVEfficiencyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeStateOfChargeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -3757,25 +3709,23 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeVehicleIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSessionIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSessionIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSessionDurationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSessionDurationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSessionEnergyChargedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSessionEnergyChargedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeSessionEnergyDischargedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -3790,7 +3740,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -3819,8 +3769,6 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
@@ -3848,24 +3796,26 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Power Topology
  *    The Power Topology Cluster provides a mechanism for expressing how power is flowing between endpoints.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterPowerTopology : ZGMTRGenericCluster
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAvailableEndpointsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAvailableEndpointsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveEndpointsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveEndpointsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeElectricalCircuitNodesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeElectricalCircuitNodesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeElectricalCircuitNodesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -3880,7 +3830,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -3888,34 +3838,24 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Energy EVSE Mode
  *    Attributes and commands for selecting a mode from a list of supported options.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterEnergyEVSEMode : ZGMTRGenericCluster
 
-- (void)changeToModeWithParams:(ZGMTREnergyEVSEModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTREnergyEVSEModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)changeToModeWithParams:(ZGMTREnergyEVSEModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTREnergyEVSEModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOnModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -3930,7 +3870,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -3938,34 +3878,24 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Water Heater Mode
  *    Attributes and commands for selecting a mode from a list of supported options.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterWaterHeaterMode : ZGMTRGenericCluster
 
-- (void)changeToModeWithParams:(ZGMTRWaterHeaterModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRWaterHeaterModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)changeToModeWithParams:(ZGMTRWaterHeaterModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRWaterHeaterModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOnModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -3980,7 +3910,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -3988,28 +3918,60 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Device Energy Management Mode
  *    Attributes and commands for selecting a mode from a list of supported options.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterDeviceEnergyManagementMode : ZGMTRGenericCluster
 
-- (void)changeToModeWithParams:(ZGMTRDeviceEnergyManagementModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRDeviceEnergyManagementModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)changeToModeWithParams:(ZGMTRDeviceEnergyManagementModeClusterChangeToModeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRDeviceEnergyManagementModeClusterChangeToModeResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeStartUpModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeOnModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeOnModeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterDeviceEnergyManagementMode (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@end
+
+/**
+ * Cluster Electrical Grid Conditions
+ *    The Electrical Grid Conditions Cluster provides the mechanism for communicating electricity grid carbon intensity to devices within the premises in units of Grams of CO2e per kWh.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterElectricalGridConditions : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLocalGenerationAvailableWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeLocalGenerationAvailableWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeLocalGenerationAvailableWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentConditionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeForecastConditionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -4022,7 +3984,175 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @end
 
-@interface ZGMTRClusterDeviceEnergyManagementMode (Availability)
+@interface ZGMTRClusterElectricalGridConditions (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Electrical Alarm
+ *    This cluster is a derived cluster of the Alarm Base cluster and provides the alarm definition related to Electrical Sensor device type.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterElectricalAlarm : ZGMTRGenericCluster
+
+- (void)resetWithParams:(ZGMTRElectricalAlarmClusterResetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)modifyEnabledAlarmsWithParams:(ZGMTRElectricalAlarmClusterModifyEnabledAlarmsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setElectricalAlarmThresholdsWithParams:(ZGMTRElectricalAlarmClusterSetElectricalAlarmThresholdsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setElectricalAlarmThresholdsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaskWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLatchWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverVoltageThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnderVoltageThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverFrequencyThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnderFrequencyThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverPowerThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnderPowerThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverCurrentThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnderCurrentThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerImportThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerExportThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterElectricalAlarm (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Electrical Distribution
+ *    This cluster provides an interface for a device which distributes electrical power to other devices, providing information about the capacity of the device as well as whether it has been damaged or has reached the end of its service life.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterElectricalDistribution : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxContinuousCurrentWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxVoltageWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfPolesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeEndOfLifeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeServiceEntranceRatedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterElectricalDistribution (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Electrical Protection Alarm
+ *    This cluster is a derived cluster of the Alarm Base cluster and provides the alarm definition related to the Electrical Protection device type.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterElectricalProtectionAlarm : ZGMTRGenericCluster
+
+- (void)modifyEnabledAlarmsWithParams:(ZGMTRElectricalProtectionAlarmClusterModifyEnabledAlarmsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaskWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeArcCauseWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverLoadRatingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverVoltageRatingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSurgeProtectionRatingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeShortCircuitRatingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeResidualCurrentRatingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeArcFaultRatingWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterElectricalProtectionAlarm (Availability)
 
 /**
  * For all instance methods that take a completion (i.e. command invocations),
@@ -4063,13 +4193,13 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)setCredentialWithParams:(ZGMTRDoorLockClusterSetCredentialParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRDoorLockClusterSetCredentialResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)getCredentialStatusWithParams:(ZGMTRDoorLockClusterGetCredentialStatusParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRDoorLockClusterGetCredentialStatusResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)clearCredentialWithParams:(ZGMTRDoorLockClusterClearCredentialParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-- (void)unboltDoorWithParams:(ZGMTRDoorLockClusterUnboltDoorParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)unboltDoorWithParams:(ZGMTRDoorLockClusterUnboltDoorParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)unboltDoorWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setAliroReaderConfigWithParams:(ZGMTRDoorLockClusterSetAliroReaderConfigParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)clearAliroReaderConfigWithParams:(ZGMTRDoorLockClusterClearAliroReaderConfigParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setAliroReaderConfigWithParams:(ZGMTRDoorLockClusterSetAliroReaderConfigParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)clearAliroReaderConfigWithParams:(ZGMTRDoorLockClusterClearAliroReaderConfigParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)clearAliroReaderConfigWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeLockStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -4179,29 +4309,27 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)writeAttributeExpiringUserTimeoutWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 - (void)writeAttributeExpiringUserTimeoutWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroReaderVerificationKeyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroReaderVerificationKeyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroReaderGroupIdentifierWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroReaderGroupIdentifierWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroReaderGroupSubIdentifierWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroReaderGroupSubIdentifierWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroGroupResolvingKeyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroGroupResolvingKeyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroSupportedBLEUWBProtocolVersionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroSupportedBLEUWBProtocolVersionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroBLEAdvertisingVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAliroBLEAdvertisingVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfAliroEndpointKeysSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfAliroEndpointKeysSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -4297,8 +4425,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -4323,38 +4449,162 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @end
 
 /**
- * Cluster Service Area
- *    The Service Area cluster provides an interface for controlling the areas where a device should operate, and for querying the current area being serviced.
+ * Cluster Closure Control
+ *    This cluster provides an interface for controlling a Closure.
  */
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRClusterServiceArea : ZGMTRGenericCluster
+@interface ZGMTRClusterClosureControl : ZGMTRGenericCluster
 
-- (void)selectAreasWithParams:(ZGMTRServiceAreaClusterSelectAreasParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRServiceAreaClusterSelectAreasResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)skipAreaWithParams:(ZGMTRServiceAreaClusterSkipAreaParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRServiceAreaClusterSkipAreaResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)stopWithParams:(ZGMTRClosureControlClusterStopParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)stopWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)moveToWithParams:(ZGMTRClosureControlClusterMoveToParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)moveToWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)calibrateWithParams:(ZGMTRClosureControlClusterCalibrateParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)calibrateWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)groupedMoveToWithParams:(ZGMTRClosureControlClusterGroupedMoveToParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)groupedMoveToWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedAreasWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCountdownTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedMapsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMainStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSelectedAreasWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentErrorListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentAreaWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverallCurrentStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEstimatedEndTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverallTargetStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeProgressWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLatchControlModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterClosureControl (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Closure Dimension
+ *    This cluster provides an interface to reflect and control a closure's range of movement, usually involving a panel, by using 6-axis framework.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterClosureDimension : ZGMTRGenericCluster
+
+- (void)setTargetWithParams:(ZGMTRClosureDimensionClusterSetTargetParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setTargetWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)stepWithParams:(ZGMTRClosureDimensionClusterStepParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)groupedSetTargetWithParams:(ZGMTRClosureDimensionClusterGroupedSetTargetParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)groupedSetTargetWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)groupedStepWithParams:(ZGMTRClosureDimensionClusterGroupedStepParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTargetStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeResolutionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStepValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnitWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnitRangeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLimitRangeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTranslationDirectionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeRotationAxisWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOverflowWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeModulationTypeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLatchControlModesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterClosureDimension (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Service Area
+ *    The Service Area cluster provides an interface for controlling the areas where a device should operate, and for querying the current area being serviced.
+ */
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRClusterServiceArea : ZGMTRGenericCluster
+
+- (void)selectAreasWithParams:(ZGMTRServiceAreaClusterSelectAreasParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRServiceAreaClusterSelectAreasResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)skipAreaWithParams:(ZGMTRServiceAreaClusterSkipAreaParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRServiceAreaClusterSkipAreaResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedAreasWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedMapsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSelectedAreasWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentAreaWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeEstimatedEndTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeProgressWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -4369,7 +4619,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -4438,8 +4688,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -4476,9 +4724,11 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)clearWeeklyScheduleWithParams:(ZGMTRThermostatClusterClearWeeklyScheduleParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)clearWeeklyScheduleWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
     ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-- (void)setActiveScheduleRequestWithParams:(ZGMTRThermostatClusterSetActiveScheduleRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setActivePresetRequestWithParams:(ZGMTRThermostatClusterSetActivePresetRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)atomicRequestWithParams:(ZGMTRThermostatClusterAtomicRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThermostatClusterAtomicResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setActiveScheduleRequestWithParams:(ZGMTRThermostatClusterSetActiveScheduleRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setActivePresetRequestWithParams:(ZGMTRThermostatClusterSetActivePresetRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)addThermostatSuggestionWithParams:(ZGMTRThermostatClusterAddThermostatSuggestionParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThermostatClusterAddThermostatSuggestionResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeThermostatSuggestionWithParams:(ZGMTRThermostatClusterRemoveThermostatSuggestionParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)atomicRequestWithParams:(ZGMTRThermostatClusterAtomicRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThermostatClusterAtomicResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeLocalTemperatureWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -4632,37 +4882,43 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)writeAttributeACCapacityformatWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 - (void)writeAttributeACCapacityformatWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePresetTypesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePresetTypesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeScheduleTypesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeScheduleTypesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfPresetsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfPresetsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfSchedulesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfSchedulesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfScheduleTransitionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfScheduleTransitionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfScheduleTransitionPerDayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumberOfScheduleTransitionPerDayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActivePresetHandleWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActivePresetHandleWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveScheduleHandleWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveScheduleHandleWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePresetsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributePresetsWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributePresetsWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePresetsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributePresetsWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributePresetsWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSchedulesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeSchedulesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeSchedulesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSchedulesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeSchedulesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeSchedulesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSetpointHoldExpiryTimestampWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSetpointHoldExpiryTimestampWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxThermostatSuggestionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeThermostatSuggestionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentThermostatSuggestionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeThermostatSuggestionNotFollowingReasonWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -4738,8 +4994,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -4786,8 +5040,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -4808,6 +5060,66 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
                                    queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+
+@end
+
+/**
+ * Cluster Humidistat
+ *    This cluster specifies an interface to control the humidity of an environment.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterHumidistat : ZGMTRGenericCluster
+
+- (void)setSettingsWithParams:(ZGMTRHumidistatClusterSetSettingsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setSettingsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeModeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSystemStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUserSetpointWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinSetpointWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxSetpointWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStepWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTargetSetpointWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMistTypeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeContinuousWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSleepWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeOptimalWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterHumidistat (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
 
 @end
 
@@ -4899,48 +5211,26 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributePrimary6IntensityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeWhitePointXWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeWhitePointXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeWhitePointXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeWhitePointYWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeWhitePointYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeWhitePointYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointRXWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointRXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointRXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointRYWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointRYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointRYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointRIntensityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointRIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointRIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointGXWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointGXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointGXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointGYWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointGYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointGYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointGIntensityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointGIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointGIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointBXWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointBXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointBXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointBYWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointBYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointBYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeColorPointBIntensityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointBIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-- (void)writeAttributeColorPointBIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeEnhancedCurrentHueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -4971,8 +5261,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -5056,8 +5344,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -5082,6 +5368,53 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @end
 
 /**
+ * Cluster Dynamic Lighting
+ *    This cluster provides a means to activate and control dynamic lighting effects on a light.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterDynamicLighting : ZGMTRGenericCluster
+
+- (void)startEffectWithParams:(ZGMTRDynamicLightingClusterStartEffectParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)stopEffectWithParams:(ZGMTRDynamicLightingClusterStopEffectParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)stopEffectWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAvailableEffectsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentEffectIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentSpeedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeCurrentSpeedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeCurrentSpeedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterDynamicLighting (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
  * Cluster Illuminance Measurement
  *    Attributes and commands for configuring the measurement of illuminance, and reporting illuminance measurements.
  */
@@ -5101,8 +5434,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -5145,8 +5476,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -5200,8 +5529,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -5243,8 +5570,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -5288,8 +5613,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -5326,11 +5649,13 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeOccupancySensorTypeBitmapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeHoldTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeHoldTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeHoldTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHoldTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeHoldTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributeHoldTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeHoldTimeLimitsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHoldTimeLimitsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePredictedOccupancyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributePIROccupiedToUnoccupiedDelayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)writeAttributePIROccupiedToUnoccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -5371,8 +5696,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -5430,8 +5753,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -5487,8 +5808,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -5546,8 +5865,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -5603,8 +5920,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -5662,8 +5977,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -5719,8 +6032,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -5778,8 +6089,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -5835,8 +6144,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
@@ -5894,8 +6201,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -5952,8 +6257,6 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
@@ -5978,31 +6281,332 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 @end
 
 /**
- * Cluster Wi-Fi Network Management
- *    Functionality to retrieve operational information about a managed Wi-Fi network.
+ * Cluster Soil Measurement
+ *    This cluster provides an interface to soil measurement functionality, including configuration and provision of notifications of soil measurements.
  */
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRClusterWiFiNetworkManagement : ZGMTRGenericCluster
+@interface ZGMTRClusterSoilMeasurement : ZGMTRGenericCluster
 
-- (void)networkPassphraseRequestWithParams:(ZGMTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)networkPassphraseRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSoilMoistureMeasurementLimitsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSSIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePassphraseSurrogateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSoilMoistureMeasuredValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterSoilMeasurement (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Ambient Context Sensing
+ *    This server cluster provides an interface to ambient context sensing functionality.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterAmbientContextSensing : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHumanActivityDetectedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeObjectIdentifiedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAudioContextDetectedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAmbientContextTypeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAmbientContextTypeSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeObjectCountThresholdReachedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeObjectCountConfigWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeObjectCountConfigWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeObjectCountConfigWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeObjectCountWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSimultaneousDetectionLimitWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHoldTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeHoldTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeHoldTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHoldTimeLimitsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePredictedActivityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSensorFusionSupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterAmbientContextSensing (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Ambient Sensing Union
+ *    This cluster provides data modeling and protocol implementation of multi-node ambient sensing system.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterAmbientSensingUnion : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnionNameWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeUnionNameWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeUnionNameWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnionHealthWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnionContributorListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterAmbientSensingUnion (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Proximity Ranging
+ *    This cluster enables the configuration of proximity ranging sessions and reporting of proximity ranging data.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterProximityRanging : ZGMTRGenericCluster
+
+- (void)startRangingRequestWithParams:(ZGMTRProximityRangingClusterStartRangingRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRProximityRangingClusterStartRangingResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)stopRangingRequestWithParams:(ZGMTRProximityRangingClusterStopRangingRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeRangingCapabilitiesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeWiFiDevIKWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBLEDeviceIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBLTDevIKWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBLTCSSecurityLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBLTCSModeCapabilityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSessionIDListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterProximityRanging (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Smoke Concentration Measurement
+ *    The server cluster provides an interface to concentration measurement functionality.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterSmokeConcentrationMeasurement : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMeasuredValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinMeasuredValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxMeasuredValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePeakMeasuredValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePeakMeasuredValueWindowWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAverageMeasuredValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAverageMeasuredValueWindowWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUncertaintyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMeasurementUnitWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMeasurementMediumWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLevelValueWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterSmokeConcentrationMeasurement (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Network Identity Management
+ *    This cluster manages the identities and credentials of devices that connect to a managed network.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterNetworkIdentityManagement : ZGMTRGenericCluster
+
+- (void)addClientWithParams:(ZGMTRNetworkIdentityManagementClusterAddClientParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRNetworkIdentityManagementClusterAddClientResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeClientWithParams:(ZGMTRNetworkIdentityManagementClusterRemoveClientParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeClientWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)queryIdentityWithParams:(ZGMTRNetworkIdentityManagementClusterQueryIdentityParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRNetworkIdentityManagementClusterQueryIdentityResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)queryIdentityWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRNetworkIdentityManagementClusterQueryIdentityResponseParams * _Nullable data, NSError * _Nullable error))completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)importAdminSecretWithParams:(ZGMTRNetworkIdentityManagementClusterImportAdminSecretParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)exportAdminSecretWithParams:(ZGMTRNetworkIdentityManagementClusterExportAdminSecretParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRNetworkIdentityManagementClusterExportAdminSecretResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)exportAdminSecretWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRNetworkIdentityManagementClusterExportAdminSecretResponseParams * _Nullable data, NSError * _Nullable error))completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveNetworkIdentitiesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClientsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClientTableSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterNetworkIdentityManagement (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Wi-Fi Network Management
+ *    Functionality to retrieve operational information about a managed Wi-Fi network.
+ */
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRClusterWiFiNetworkManagement : ZGMTRGenericCluster
+
+- (void)networkPassphraseRequestWithParams:(ZGMTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)networkPassphraseRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams * _Nullable data, NSError * _Nullable error))completion
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSSIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePassphraseSurrogateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -6017,7 +6621,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -6025,41 +6629,39 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Thread Border Router Management
  *    Manage the Thread network of Thread Border Router
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterThreadBorderRouterManagement : ZGMTRGenericCluster
 
-- (void)getActiveDatasetRequestWithParams:(ZGMTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)getActiveDatasetRequestWithParams:(ZGMTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)getActiveDatasetRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)getPendingDatasetRequestWithParams:(ZGMTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)getPendingDatasetRequestWithParams:(ZGMTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)getPendingDatasetRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setActiveDatasetRequestWithParams:(ZGMTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)setPendingDatasetRequestWithParams:(ZGMTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setActiveDatasetRequestWithParams:(ZGMTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)setPendingDatasetRequestWithParams:(ZGMTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeBorderRouterNameWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBorderRouterNameWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeBorderAgentIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBorderAgentIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeThreadVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeThreadVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeInterfaceEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeInterfaceEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveDatasetTimestampWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveDatasetTimestampWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePendingDatasetTimestampWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePendingDatasetTimestampWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -6074,7 +6676,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
-                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 
@@ -6082,26 +6684,85 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Thread Network Directory
  *    Manages the names and credentials of Thread networks visible to the user.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterThreadNetworkDirectory : ZGMTRGenericCluster
 
-- (void)addNetworkWithParams:(ZGMTRThreadNetworkDirectoryClusterAddNetworkParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)removeNetworkWithParams:(ZGMTRThreadNetworkDirectoryClusterRemoveNetworkParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)getOperationalDatasetWithParams:(ZGMTRThreadNetworkDirectoryClusterGetOperationalDatasetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addNetworkWithParams:(ZGMTRThreadNetworkDirectoryClusterAddNetworkParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)removeNetworkWithParams:(ZGMTRThreadNetworkDirectoryClusterRemoveNetworkParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)getOperationalDatasetWithParams:(ZGMTRThreadNetworkDirectoryClusterGetOperationalDatasetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributePreferredExtendedPanIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributePreferredExtendedPanIDWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributePreferredExtendedPanIDWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePreferredExtendedPanIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributePreferredExtendedPanIDWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)writeAttributePreferredExtendedPanIDWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeThreadNetworksWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeThreadNetworksWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeThreadNetworkTableSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeThreadNetworkTableSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterThreadNetworkDirectory (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@end
+
+/**
+ * Cluster Commissioning Proxy
+ *    This cluster provides a proxy service allowing a Commissioner to utilize commissioning transports not supported locally, or to extend the commissioning range of the Commissioner.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterCommissioningProxy : ZGMTRGenericCluster
+
+- (void)proxyConnectRequestWithParams:(ZGMTRCommissioningProxyClusterProxyConnectRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommissioningProxyClusterProxyConnectResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)proxyDisconnectRequestWithParams:(ZGMTRCommissioningProxyClusterProxyDisconnectRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)proxyScanRequestWithParams:(ZGMTRCommissioningProxyClusterProxyScanRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommissioningProxyClusterProxyScanResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)proxyBackGroundScanStartRequestWithParams:(ZGMTRCommissioningProxyClusterProxyBackGroundScanStartRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)proxyBackGroundScanStopRequestWithParams:(ZGMTRCommissioningProxyClusterProxyBackGroundScanStopRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)proxyMessageRequestWithParams:(ZGMTRCommissioningProxyClusterProxyMessageRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommissioningProxyClusterProxyMessageResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTransportWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeScanMaxTimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeScanMaxTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeScanMaxTimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxSessionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxCachedResultsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNumCachedResultsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCacheTimeoutWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeCacheTimeoutWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeCacheTimeoutWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCachedResultsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeWiFiBandWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -6114,7 +6775,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @end
 
-@interface ZGMTRClusterThreadNetworkDirectory (Availability)
+@interface ZGMTRClusterCommissioningProxy (Availability)
 
 /**
  * For all instance methods that take a completion (i.e. command invocations),
@@ -6135,13 +6796,11 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeMACAddressWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeLinkLocalAddressWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLinkLocalAddressWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
@@ -6176,11 +6835,11 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)changeChannelWithParams:(ZGMTRChannelClusterChangeChannelParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRChannelClusterChangeChannelResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)changeChannelByNumberWithParams:(ZGMTRChannelClusterChangeChannelByNumberParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)skipChannelWithParams:(ZGMTRChannelClusterSkipChannelParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-- (void)getProgramGuideWithParams:(ZGMTRChannelClusterGetProgramGuideParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRChannelClusterProgramGuideResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)getProgramGuideWithParams:(ZGMTRChannelClusterGetProgramGuideParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRChannelClusterProgramGuideResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)getProgramGuideWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRChannelClusterProgramGuideResponseParams * _Nullable data, NSError * _Nullable error))completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)recordProgramWithParams:(ZGMTRChannelClusterRecordProgramParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)cancelRecordProgramWithParams:(ZGMTRChannelClusterCancelRecordProgramParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)recordProgramWithParams:(ZGMTRChannelClusterRecordProgramParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)cancelRecordProgramWithParams:(ZGMTRChannelClusterCancelRecordProgramParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeChannelListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6191,8 +6850,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6233,8 +6890,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6293,11 +6948,11 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)skipForwardWithParams:(ZGMTRMediaPlaybackClusterSkipForwardParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)skipBackwardWithParams:(ZGMTRMediaPlaybackClusterSkipBackwardParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)seekWithParams:(ZGMTRMediaPlaybackClusterSeekParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRMediaPlaybackClusterPlaybackResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
-- (void)activateAudioTrackWithParams:(ZGMTRMediaPlaybackClusterActivateAudioTrackParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)activateTextTrackWithParams:(ZGMTRMediaPlaybackClusterActivateTextTrackParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)deactivateTextTrackWithParams:(ZGMTRMediaPlaybackClusterDeactivateTextTrackParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)activateAudioTrackWithParams:(ZGMTRMediaPlaybackClusterActivateAudioTrackParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)activateTextTrackWithParams:(ZGMTRMediaPlaybackClusterActivateTextTrackParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)deactivateTextTrackWithParams:(ZGMTRMediaPlaybackClusterDeactivateTextTrackParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 - (void)deactivateTextTrackWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+    ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6321,11 +6976,13 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAvailableTextTracksWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAvailableCommandsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeContentInfoWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6374,8 +7031,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -6414,8 +7069,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -6452,8 +7105,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -6486,6 +7137,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (void)launchContentWithParams:(ZGMTRContentLauncherClusterLaunchContentParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRContentLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)launchURLWithParams:(ZGMTRContentLauncherClusterLaunchURLParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRContentLauncherClusterLauncherResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+- (void)contentReplicationRequestWithParams:(ZGMTRContentLauncherClusterContentReplicationRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRContentLauncherClusterContentReplicationResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)contentReplicationRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRContentLauncherClusterContentReplicationResponseParams * _Nullable data, NSError * _Nullable error))completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)playPresetWithParams:(ZGMTRContentLauncherClusterPlayPresetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptHeaderWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6493,11 +7148,13 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)writeAttributeSupportedStreamingProtocolsWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 - (void)writeAttributeSupportedStreamingProtocolsWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMovableWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePresetsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6539,8 +7196,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6592,8 +7247,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -6644,8 +7297,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
@@ -6685,8 +7336,6 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
@@ -6728,9 +7377,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 - (void)disableWithParams:(ZGMTRContentControlClusterDisableParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)disableWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
     ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)addBonusTimeWithParams:(ZGMTRContentControlClusterAddBonusTimeParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)addBonusTimeWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
-    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addBonusTimeWithParams:(ZGMTRContentControlClusterAddBonusTimeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)setScreenDailyTimeWithParams:(ZGMTRContentControlClusterSetScreenDailyTimeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)blockUnratedContentWithParams:(ZGMTRContentControlClusterBlockUnratedContentParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)blockUnratedContentWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
@@ -6740,6 +7387,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
     ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)setOnDemandRatingThresholdWithParams:(ZGMTRContentControlClusterSetOnDemandRatingThresholdParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)setScheduledContentRatingThresholdWithParams:(ZGMTRContentControlClusterSetScheduledContentRatingThresholdParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addBlockChannelsWithParams:(ZGMTRContentControlClusterAddBlockChannelsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeBlockChannelsWithParams:(ZGMTRContentControlClusterRemoveBlockChannelsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addBlockApplicationsWithParams:(ZGMTRContentControlClusterAddBlockApplicationsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeBlockApplicationsWithParams:(ZGMTRContentControlClusterRemoveBlockApplicationsParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setBlockContentTimeWindowWithParams:(ZGMTRContentControlClusterSetBlockContentTimeWindowParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeBlockContentTimeWindowWithParams:(ZGMTRContentControlClusterRemoveBlockContentTimeWindowParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -6757,11 +7410,15 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeBlockUnratedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBlockChannelListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBlockApplicationListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBlockContentTimeWindowWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -6790,16 +7447,62 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Content App Observer
  *    This cluster provides an interface for sending targeted commands to an Observer of a Content App on a Video Player device such as a Streaming Media Player, Smart TV or Smart Screen. The cluster server for Content App Observer is implemented by an endpoint that communicates with a Content App, such as a Casting Video Client. The cluster client for Content App Observer is implemented by a Content App endpoint. A Content App is informed of the NodeId of an Observer when a binding is set on the Content App. The Content App can then send the ContentAppMessage to the Observer (server cluster), and the Observer responds with a ContentAppMessageResponse.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterContentAppObserver : ZGMTRGenericCluster
 
-- (void)contentAppMessageWithParams:(ZGMTRContentAppObserverClusterContentAppMessageParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRContentAppObserverClusterContentAppMessageResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)contentAppMessageWithParams:(ZGMTRContentAppObserverClusterContentAppMessageParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRContentAppObserverClusterContentAppMessageResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterContentAppObserver (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@end
+
+/**
+ * Cluster Media File Management
+ *    This cluster provides an interface for managing and sharing media files on devices such as Streaming Speakers, Smart TVs, or other media playback devices.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterMediaFileManagement : ZGMTRGenericCluster
+
+- (void)addFileWithParams:(ZGMTRMediaFileManagementClusterAddFileParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRMediaFileManagementClusterAddFileResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)deleteFileWithParams:(ZGMTRMediaFileManagementClusterDeleteFileParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)requestSharedFilesWithParams:(ZGMTRMediaFileManagementClusterRequestSharedFilesParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)getSharedFileWithParams:(ZGMTRMediaFileManagementClusterGetSharedFileParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRMediaFileManagementClusterGetSharedFileResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)offerFileWithParams:(ZGMTRMediaFileManagementClusterOfferFileParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTotalStorageWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAvailableStorageWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAvailableFilesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedMimeTypesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -6812,7 +7515,407 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @end
 
-@interface ZGMTRClusterContentAppObserver (Availability)
+@interface ZGMTRClusterMediaFileManagement (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Audio Control
+ *    This cluster provides attributes and commands to control the audio output volume and frequency corrections of a device.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterAudioControl : ZGMTRGenericCluster
+
+- (void)muteWithParams:(ZGMTRAudioControlClusterMuteParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)muteWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)unmuteWithParams:(ZGMTRAudioControlClusterUnmuteParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)unmuteWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)toggleMutedWithParams:(ZGMTRAudioControlClusterToggleMutedParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)toggleMutedWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setVolumeWithParams:(ZGMTRAudioControlClusterSetVolumeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)increaseVolumeWithParams:(ZGMTRAudioControlClusterIncreaseVolumeParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)increaseVolumeWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)decreaseVolumeWithParams:(ZGMTRAudioControlClusterDecreaseVolumeParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)decreaseVolumeWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSoftMutedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePhysicallyMutedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeVolumeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinDeviceVolumeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxDeviceVolumeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxDeviceVolumeDBWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxUserVolumeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMaxUserVolumeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMaxUserVolumeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDefaultStepSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeDefaultStepSizeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeDefaultStepSizeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSetVolumeUnmutePolicyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSetVolumeUnmutePolicyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSetVolumeUnmutePolicyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeIncreaseVolumeUnmutePolicyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeIncreaseVolumeUnmutePolicyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeIncreaseVolumeUnmutePolicyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeIncreaseVolumeUnmuteVolumeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeIncreaseVolumeUnmuteVolumeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeIncreaseVolumeUnmuteVolumeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDecreaseVolumeUnmutePolicyWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeDecreaseVolumeUnmutePolicyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeDecreaseVolumeUnmutePolicyWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpMutedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeStartUpMutedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeStartUpMutedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartUpVolumeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeStartUpVolumeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeStartUpVolumeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeBassWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeBassWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeBassWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMidWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMidWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMidWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTrebleWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeTrebleWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeTrebleWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinCorrectionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxCorrectionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterAudioControl (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Zone Management
+ *    This cluster provides an interface to manage regions of interest, or Zones, which can be either manufacturer or user defined.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterZoneManagement : ZGMTRGenericCluster
+
+- (void)createTwoDCartesianZoneWithParams:(ZGMTRZoneManagementClusterCreateTwoDCartesianZoneParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRZoneManagementClusterCreateTwoDCartesianZoneResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)updateTwoDCartesianZoneWithParams:(ZGMTRZoneManagementClusterUpdateTwoDCartesianZoneParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeZoneWithParams:(ZGMTRZoneManagementClusterRemoveZoneParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)createOrUpdateTriggerWithParams:(ZGMTRZoneManagementClusterCreateOrUpdateTriggerParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeTriggerWithParams:(ZGMTRZoneManagementClusterRemoveTriggerParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxUserDefinedZonesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxZonesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeZonesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTriggersWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSensitivityMaxWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSensitivityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSensitivityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSensitivityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTwoDCartesianMaxWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterZoneManagement (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Camera AV Stream Management
+ *    The Camera AV Stream Management cluster is used to allow clients to manage, control, and configure various audio, video, and snapshot streams on a camera.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterCameraAVStreamManagement : ZGMTRGenericCluster
+
+- (void)audioStreamAllocateWithParams:(ZGMTRCameraAVStreamManagementClusterAudioStreamAllocateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCameraAVStreamManagementClusterAudioStreamAllocateResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)audioStreamDeallocateWithParams:(ZGMTRCameraAVStreamManagementClusterAudioStreamDeallocateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)videoStreamAllocateWithParams:(ZGMTRCameraAVStreamManagementClusterVideoStreamAllocateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCameraAVStreamManagementClusterVideoStreamAllocateResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)videoStreamModifyWithParams:(ZGMTRCameraAVStreamManagementClusterVideoStreamModifyParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)videoStreamDeallocateWithParams:(ZGMTRCameraAVStreamManagementClusterVideoStreamDeallocateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)snapshotStreamAllocateWithParams:(ZGMTRCameraAVStreamManagementClusterSnapshotStreamAllocateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCameraAVStreamManagementClusterSnapshotStreamAllocateResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)snapshotStreamModifyWithParams:(ZGMTRCameraAVStreamManagementClusterSnapshotStreamModifyParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)snapshotStreamDeallocateWithParams:(ZGMTRCameraAVStreamManagementClusterSnapshotStreamDeallocateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setStreamPrioritiesWithParams:(ZGMTRCameraAVStreamManagementClusterSetStreamPrioritiesParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)captureSnapshotWithParams:(ZGMTRCameraAVStreamManagementClusterCaptureSnapshotParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCameraAVStreamManagementClusterCaptureSnapshotResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxConcurrentEncodersWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxEncodedPixelRateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeVideoSensorParamsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNightVisionUsesInfraredWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMinViewportResolutionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeRateDistortionTradeOffPointsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxContentBufferSizeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMicrophoneCapabilitiesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpeakerCapabilitiesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTwoWayTalkSupportWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSnapshotCapabilitiesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxNetworkBandwidthWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentFrameRateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHDRModeEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeHDRModeEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeHDRModeEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedStreamUsagesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAllocatedVideoStreamsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAllocatedAudioStreamsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAllocatedSnapshotStreamsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStreamUsagePrioritiesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSoftRecordingPrivacyModeEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSoftRecordingPrivacyModeEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSoftRecordingPrivacyModeEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSoftLivestreamPrivacyModeEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSoftLivestreamPrivacyModeEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSoftLivestreamPrivacyModeEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeHardPrivacyModeOnWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNightVisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeNightVisionWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeNightVisionWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNightVisionIllumWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeNightVisionIllumWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeNightVisionIllumWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeViewportWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeViewportWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeViewportWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpeakerMutedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSpeakerMutedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSpeakerMutedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpeakerVolumeLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSpeakerVolumeLevelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSpeakerVolumeLevelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpeakerMaxLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSpeakerMinLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMicrophoneMutedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMicrophoneMutedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMicrophoneMutedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMicrophoneVolumeLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMicrophoneVolumeLevelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMicrophoneVolumeLevelWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMicrophoneMaxLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMicrophoneMinLevelWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMicrophoneAGCEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMicrophoneAGCEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeMicrophoneAGCEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeImageRotationWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeImageRotationWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeImageRotationWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeImageFlipHorizontalWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeImageFlipHorizontalWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeImageFlipHorizontalWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeImageFlipVerticalWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeImageFlipVerticalWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeImageFlipVerticalWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLocalVideoRecordingEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeLocalVideoRecordingEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeLocalVideoRecordingEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeLocalSnapshotRecordingEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeLocalSnapshotRecordingEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeLocalSnapshotRecordingEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStatusLightEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeStatusLightEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeStatusLightEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStatusLightBrightnessWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeStatusLightBrightnessWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeStatusLightBrightnessWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeImageRotationDiscreteAnglesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeImageRotationDiscreteAnglesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeImageRotationDiscreteAnglesWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterCameraAVStreamManagement (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Camera AV Settings User Level Management
+ *    This cluster provides an interface into controls associated with the operation of a device that provides pan, tilt, and zoom functions, either mechanically, or against a digital image.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterCameraAVSettingsUserLevelManagement : ZGMTRGenericCluster
+
+- (void)MPTZSetPositionWithParams:(ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZSetPositionParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)MPTZSetPositionWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)MPTZRelativeMoveWithParams:(ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZRelativeMoveParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)MPTZRelativeMoveWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)MPTZMoveToPresetWithParams:(ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZMoveToPresetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)MPTZSavePresetWithParams:(ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZSavePresetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)MPTZRemovePresetWithParams:(ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZRemovePresetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)DPTZSetViewportWithParams:(ZGMTRCameraAVSettingsUserLevelManagementClusterDPTZSetViewportParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)DPTZRelativeMoveWithParams:(ZGMTRCameraAVSettingsUserLevelManagementClusterDPTZRelativeMoveParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMPTZPositionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxPresetsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMPTZPresetsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDPTZStreamsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeZoomMaxWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTiltMinWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTiltMaxWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePanMinWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePanMaxWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMovementStateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterCameraAVSettingsUserLevelManagement (Availability)
 
 /**
  * For all instance methods that take a completion (i.e. command invocations),
@@ -6834,7 +7937,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 - (void)solicitOfferWithParams:(ZGMTRWebRTCTransportProviderClusterSolicitOfferParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRWebRTCTransportProviderClusterSolicitOfferResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)provideOfferWithParams:(ZGMTRWebRTCTransportProviderClusterProvideOfferParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRWebRTCTransportProviderClusterProvideOfferResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)provideAnswerWithParams:(ZGMTRWebRTCTransportProviderClusterProvideAnswerParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)provideICECandidateWithParams:(ZGMTRWebRTCTransportProviderClusterProvideICECandidateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)provideICECandidatesWithParams:(ZGMTRWebRTCTransportProviderClusterProvideICECandidatesParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)endSessionWithParams:(ZGMTRWebRTCTransportProviderClusterEndSessionParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentSessionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
@@ -6842,8 +7945,6 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -6869,6 +7970,92 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 /**
+ * Cluster WebRTC Transport Requestor
+ *    The WebRTC transport requestor cluster provides a way for stream consumers (e.g. ZGMatter Stream Viewer) to establish a WebRTC connection with a stream provider.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterWebRTCTransportRequestor : ZGMTRGenericCluster
+
+- (void)offerWithParams:(ZGMTRWebRTCTransportRequestorClusterOfferParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)answerWithParams:(ZGMTRWebRTCTransportRequestorClusterAnswerParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)ICECandidatesWithParams:(ZGMTRWebRTCTransportRequestorClusterICECandidatesParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)endWithParams:(ZGMTRWebRTCTransportRequestorClusterEndParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentSessionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterWebRTCTransportRequestor (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Push AV Stream Transport
+ *    This cluster implements the upload of Audio and Video streams from the Push AV Stream Transport Cluster using suitable push-based transports.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterPushAVStreamTransport : ZGMTRGenericCluster
+
+- (void)allocatePushTransportWithParams:(ZGMTRPushAVStreamTransportClusterAllocatePushTransportParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRPushAVStreamTransportClusterAllocatePushTransportResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)deallocatePushTransportWithParams:(ZGMTRPushAVStreamTransportClusterDeallocatePushTransportParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)modifyPushTransportWithParams:(ZGMTRPushAVStreamTransportClusterModifyPushTransportParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)setTransportStatusWithParams:(ZGMTRPushAVStreamTransportClusterSetTransportStatusParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)manuallyTriggerTransportWithParams:(ZGMTRPushAVStreamTransportClusterManuallyTriggerTransportParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)findTransportWithParams:(ZGMTRPushAVStreamTransportClusterFindTransportParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRPushAVStreamTransportClusterFindTransportResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedFormatsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentConnectionsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterPushAVStreamTransport (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
  * Cluster Chime
  *    This cluster provides facilities to configure and play Chime sounds, such as those used in a doorbell.
  */
@@ -6881,9 +8068,9 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeInstalledChimeSoundsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveChimeIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeActiveChimeIDWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)writeAttributeActiveChimeIDWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSelectedChimeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSelectedChimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeSelectedChimeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)writeAttributeEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
@@ -6892,8 +8079,6 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -6919,6 +8104,136 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 /**
+ * Cluster AV Analysis
+ *    This server cluster provides an interface for controlling events pertaining to AV analysis.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterAVAnalysis : ZGMTRGenericCluster
+
+- (void)enableContextTriggersWithParams:(ZGMTRAVAnalysisClusterEnableContextTriggersParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)disableContextTriggersWithParams:(ZGMTRAVAnalysisClusterDisableContextTriggersParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)establishAnalysisStreamWithParams:(ZGMTRAVAnalysisClusterEstablishAnalysisStreamParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRAVAnalysisClusterEstablishAnalysisStreamResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)activateAnalysisStreamWithParams:(ZGMTRAVAnalysisClusterActivateAnalysisStreamParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)deactivateAnalysisStreamWithParams:(ZGMTRAVAnalysisClusterDeactivateAnalysisStreamParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeAnalysisStreamWithParams:(ZGMTRAVAnalysisClusterRemoveAnalysisStreamParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedAmbientContextsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeActiveAmbientContextTriggersWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxAnalysisStreamCountWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentAnalysisStreamCountWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAnalysisStreamsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTrackingEnabledWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeTrackingEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeTrackingEnabledWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterAVAnalysis (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Commodity Tariff
+ *    The CommodityTariffCluster provides the mechanism for communicating Commodity Tariff information within the premises.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterCommodityTariff : ZGMTRGenericCluster
+
+- (void)getTariffComponentWithParams:(ZGMTRCommodityTariffClusterGetTariffComponentParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommodityTariffClusterGetTariffComponentResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)getDayEntryWithParams:(ZGMTRCommodityTariffClusterGetDayEntryParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommodityTariffClusterGetDayEntryResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTariffInfoWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTariffUnitWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStartDateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDayEntriesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDayPatternsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCalendarPeriodsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeIndividualDaysWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentDayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextDayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentDayEntryWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentDayEntryDateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextDayEntryWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextDayEntryDateWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTariffComponentsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTariffPeriodsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeCurrentTariffComponentsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNextTariffComponentsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDefaultRandomizationOffsetWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeDefaultRandomizationTypeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterCommodityTariff (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
  * Cluster Ecosystem Information
  *    Provides extended device information for all the logical devices represented by a Bridged Node.
  */
@@ -6932,8 +8247,6 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -6962,19 +8275,100 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * Cluster Commissioner Control
  *    Supports the ability for clients to request the commissioning of themselves or other nodes onto a fabric which the cluster server can commission onto.
  */
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRClusterCommissionerControl : ZGMTRGenericCluster
 
-- (void)requestCommissioningApprovalWithParams:(ZGMTRCommissionerControlClusterRequestCommissioningApprovalParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
-- (void)commissionNodeWithParams:(ZGMTRCommissionerControlClusterCommissionNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommissionerControlClusterReverseOpenCommissioningWindowParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)requestCommissioningApprovalWithParams:(ZGMTRCommissionerControlClusterRequestCommissioningApprovalParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+- (void)commissionNodeWithParams:(ZGMTRCommissionerControlClusterCommissionNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRCommissionerControlClusterReverseOpenCommissioningWindowParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedDeviceCategoriesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeSupportedDeviceCategoriesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterCommissionerControl (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@end
+
+/**
+ * Cluster Joint Fabric Datastore
+ *    The Joint Fabric Datastore Cluster is a cluster that provides a mechanism for the Joint Fabric Administrators to manage the set of Nodes, Groups, and Group membership among Nodes in the Joint Fabric.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterJointFabricDatastore : ZGMTRGenericCluster
+
+- (void)addKeySetWithParams:(ZGMTRJointFabricDatastoreClusterAddKeySetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)updateKeySetWithParams:(ZGMTRJointFabricDatastoreClusterUpdateKeySetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeKeySetWithParams:(ZGMTRJointFabricDatastoreClusterRemoveKeySetParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addGroupWithParams:(ZGMTRJointFabricDatastoreClusterAddGroupParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)updateGroupWithParams:(ZGMTRJointFabricDatastoreClusterUpdateGroupParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeGroupWithParams:(ZGMTRJointFabricDatastoreClusterRemoveGroupParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addAdminWithParams:(ZGMTRJointFabricDatastoreClusterAddAdminParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)updateAdminWithParams:(ZGMTRJointFabricDatastoreClusterUpdateAdminParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeAdminWithParams:(ZGMTRJointFabricDatastoreClusterRemoveAdminParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addPendingNodeWithParams:(ZGMTRJointFabricDatastoreClusterAddPendingNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)refreshNodeWithParams:(ZGMTRJointFabricDatastoreClusterRefreshNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)updateNodeWithParams:(ZGMTRJointFabricDatastoreClusterUpdateNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeNodeWithParams:(ZGMTRJointFabricDatastoreClusterRemoveNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)updateEndpointForNodeWithParams:(ZGMTRJointFabricDatastoreClusterUpdateEndpointForNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addGroupIDToEndpointForNodeWithParams:(ZGMTRJointFabricDatastoreClusterAddGroupIDToEndpointForNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeGroupIDFromEndpointForNodeWithParams:(ZGMTRJointFabricDatastoreClusterRemoveGroupIDFromEndpointForNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addBindingToEndpointForNodeWithParams:(ZGMTRJointFabricDatastoreClusterAddBindingToEndpointForNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeBindingFromEndpointForNodeWithParams:(ZGMTRJointFabricDatastoreClusterRemoveBindingFromEndpointForNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addACLToNodeWithParams:(ZGMTRJointFabricDatastoreClusterAddACLToNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeACLFromNodeWithParams:(ZGMTRJointFabricDatastoreClusterRemoveACLFromNodeParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAnchorRootCAWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAnchorNodeIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAnchorVendorIDWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFriendlyNameWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGroupKeySetListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGroupListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNodeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAdminListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeStatusWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeEndpointGroupIDListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeEndpointBindingListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNodeKeySetListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNodeACLListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeNodeEndpointListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -6987,11 +8381,241 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @end
 
-@interface ZGMTRClusterCommissionerControl (Availability)
+@interface ZGMTRClusterJointFabricDatastore (Availability)
 
 /**
  * For all instance methods that take a completion (i.e. command invocations),
  * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Joint Fabric Administrator
+ *    An instance of the Joint Fabric Administrator Cluster only applies to Joint Fabric Administrator nodes fulfilling the role of Anchor CA.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterJointFabricAdministrator : ZGMTRGenericCluster
+
+- (void)ICACCSRRequestWithParams:(ZGMTRJointFabricAdministratorClusterICACCSRRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRJointFabricAdministratorClusterICACCSRResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)ICACCSRRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRJointFabricAdministratorClusterICACCSRResponseParams * _Nullable data, NSError * _Nullable error))completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)addICACWithParams:(ZGMTRJointFabricAdministratorClusterAddICACParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRJointFabricAdministratorClusterICACResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)openJointCommissioningWindowWithParams:(ZGMTRJointFabricAdministratorClusterOpenJointCommissioningWindowParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)transferAnchorRequestWithParams:(ZGMTRJointFabricAdministratorClusterTransferAnchorRequestParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRJointFabricAdministratorClusterTransferAnchorResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)transferAnchorRequestWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRJointFabricAdministratorClusterTransferAnchorResponseParams * _Nullable data, NSError * _Nullable error))completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)transferAnchorCompleteWithParams:(ZGMTRJointFabricAdministratorClusterTransferAnchorCompleteParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)transferAnchorCompleteWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)announceJointFabricAdministratorWithParams:(ZGMTRJointFabricAdministratorClusterAnnounceJointFabricAdministratorParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAdministratorFabricIndexWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterJointFabricAdministrator (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster TLS Certificate Management
+ *    This Cluster is used to manage TLS Client Certificates and to provision
+      TLS endpoints with enough information to facilitate subsequent connection.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterTLSCertificateManagement : ZGMTRGenericCluster
+
+- (void)provisionRootCertificateWithParams:(ZGMTRTLSCertificateManagementClusterProvisionRootCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTLSCertificateManagementClusterProvisionRootCertificateResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)findRootCertificateWithParams:(ZGMTRTLSCertificateManagementClusterFindRootCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTLSCertificateManagementClusterFindRootCertificateResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)lookupRootCertificateWithParams:(ZGMTRTLSCertificateManagementClusterLookupRootCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTLSCertificateManagementClusterLookupRootCertificateResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeRootCertificateWithParams:(ZGMTRTLSCertificateManagementClusterRemoveRootCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)clientCSRWithParams:(ZGMTRTLSCertificateManagementClusterClientCSRParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTLSCertificateManagementClusterClientCSRResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)provisionClientCertificateWithParams:(ZGMTRTLSCertificateManagementClusterProvisionClientCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)findClientCertificateWithParams:(ZGMTRTLSCertificateManagementClusterFindClientCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTLSCertificateManagementClusterFindClientCertificateResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)lookupClientCertificateWithParams:(ZGMTRTLSCertificateManagementClusterLookupClientCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTLSCertificateManagementClusterLookupClientCertificateResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeClientCertificateWithParams:(ZGMTRTLSCertificateManagementClusterRemoveClientCertificateParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxRootCertificatesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeProvisionedRootCertificatesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxClientCertificatesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeProvisionedClientCertificatesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterTLSCertificateManagement (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster TLS Client Management
+ *    This Cluster is used to provision TLS Endpoints with enough information to facilitate subsequent connection.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterTLSClientManagement : ZGMTRGenericCluster
+
+- (void)provisionEndpointWithParams:(ZGMTRTLSClientManagementClusterProvisionEndpointParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTLSClientManagementClusterProvisionEndpointResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)findEndpointWithParams:(ZGMTRTLSClientManagementClusterFindEndpointParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRTLSClientManagementClusterFindEndpointResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)removeEndpointWithParams:(ZGMTRTLSClientManagementClusterRemoveEndpointParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaxProvisionedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeProvisionedEndpointsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterTLSClientManagement (Availability)
+
+/**
+ * For all instance methods that take a completion (i.e. command invocations),
+ * the completion will be called on the provided queue.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Meter Identification
+ *    This Meter Identification Cluster provides attributes for determining advanced information about utility metering device.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterMeterIdentification : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMeterTypeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePointOfDeliveryWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMeterSerialNumberWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeProtocolVersionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributePowerThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterMeterIdentification (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+/**
+ * Cluster Commodity Metering
+ *    The Commodity Metering Cluster provides the mechanism for communicating commodity consumption information within a premises.
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterCommodityMetering : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMeteredQuantityWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMeteredQuantityTimestampWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTariffUnitWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeMaximumMeteredQuantitiesWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterCommodityMetering (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
  */
 - (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
                               endpointID:(NSNumber *)endpointID
@@ -7046,6 +8670,9 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 - (void)testSecondBatchHelperRequestWithParams:(ZGMTRUnitTestingClusterTestSecondBatchHelperRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRUnitTestingClusterTestBatchHelperResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)stringEchoRequestWithParams:(ZGMTRUnitTestingClusterStringEchoRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRUnitTestingClusterStringEchoResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)globalEchoRequestWithParams:(ZGMTRUnitTestingClusterGlobalEchoRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRUnitTestingClusterGlobalEchoResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)testCheckCommandFlagsWithParams:(ZGMTRUnitTestingClusterTestCheckCommandFlagsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)testCheckCommandFlagsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(ZGMTRStatusCompletion)completion
+    ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)testDifferentVendorMeiRequestWithParams:(ZGMTRUnitTestingClusterTestDifferentVendorMeiRequestParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completion:(void (^)(ZGMTRUnitTestingClusterTestDifferentVendorMeiResponseParams * _Nullable data, NSError * _Nullable error))completion ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeBooleanWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -7244,6 +8871,10 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 - (void)writeAttributeGlobalStructWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
 - (void)writeAttributeGlobalStructWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeUnsupportedAttributeRequiringAdminPrivilegeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeUnsupportedAttributeRequiringAdminPrivilegeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_PROVISIONALLY_AVAILABLE;
+- (void)writeAttributeUnsupportedAttributeRequiringAdminPrivilegeWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeUnsupportedWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)writeAttributeUnsupportedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 - (void)writeAttributeUnsupportedWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -7404,8 +9035,6 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
@@ -7453,8 +9082,6 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
-- (NSDictionary<NSString *, id> * _Nullable)readAttributeEventListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
-
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
 
 - (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
@@ -7478,27 +9105,63 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @end
 
-ZGMTR_DEPRECATED("Please use MTRClusterBasicInformation", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+/**
+ * Cluster Test Hidden Manufacturer Specific
+ *    Test cluster for validating manufacturer-specific cluster handling without controller-side implementation
+ */
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClusterTestHiddenManufacturerSpecific : ZGMTRGenericCluster
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeTestAttributeWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeGeneratedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAcceptedCommandListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeAttributeListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeFeatureMapWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (NSDictionary<NSString *, id> * _Nullable)readAttributeClusterRevisionWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_PROVISIONALLY_AVAILABLE;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
+@interface ZGMTRClusterTestHiddenManufacturerSpecific (Availability)
+
+/**
+ * The queue is currently unused, but may be used in the future for calling completions
+ * for command invocations if commands are added to this cluster.
+ */
+- (instancetype _Nullable)initWithDevice:(ZGMTRDevice *)device
+                              endpointID:(NSNumber *)endpointID
+                                   queue:(dispatch_queue_t)queue ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@end
+
+ZGMTR_DEPRECATED("Please use ZGMTRClusterBasicInformation", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 @interface ZGMTRClusterBasic : ZGMTRClusterBasicInformation
 @end
 
-ZGMTR_DEPRECATED("Please use MTRClusterOTASoftwareUpdateProvider", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+ZGMTR_DEPRECATED("Please use ZGMTRClusterOTASoftwareUpdateProvider", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 @interface ZGMTRClusterOtaSoftwareUpdateProvider : ZGMTRClusterOTASoftwareUpdateProvider
 @end
 
-ZGMTR_DEPRECATED("Please use MTRClusterOTASoftwareUpdateRequestor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+ZGMTR_DEPRECATED("Please use ZGMTRClusterOTASoftwareUpdateRequestor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 @interface ZGMTRClusterOtaSoftwareUpdateRequestor : ZGMTRClusterOTASoftwareUpdateRequestor
 @end
 
-ZGMTR_DEPRECATED("Please use MTRClusterBridgedDeviceBasicInformation", ios(16.1, 17.0), macos(13.0, 14.0), watchos(9.1, 10.0), tvos(16.1, 17.0))
+ZGMTR_DEPRECATED("Please use ZGMTRClusterBridgedDeviceBasicInformation", ios(16.1, 17.0), macos(13.0, 14.0), watchos(9.1, 10.0), tvos(16.1, 17.0))
 @interface ZGMTRClusterBridgedDeviceBasic : ZGMTRClusterBridgedDeviceBasicInformation
 @end
 
-ZGMTR_DEPRECATED("Please use MTRClusterWakeOnLAN", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+ZGMTR_DEPRECATED("Please use ZGMTRClusterWakeOnLAN", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 @interface ZGMTRClusterWakeOnLan : ZGMTRClusterWakeOnLAN
 @end
 
-ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+ZGMTR_DEPRECATED("Please use ZGMTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 @interface ZGMTRClusterTestCluster : ZGMTRClusterUnitTesting
 @end
 
@@ -7568,7 +9231,7 @@ ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue ZGMTR_DEPRECATED("Please use initWithDevice:endpoindID:queue:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
-- (NSDictionary<NSString *, id> *)readAttributeDeviceListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeDeviceTypeListWithParams on MTRClusterDescriptor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeDeviceListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeDeviceTypeListWithParams on ZGMTRClusterDescriptor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 @interface ZGMTRClusterBinding (Deprecated)
@@ -7585,9 +9248,9 @@ ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue ZGMTR_DEPRECATED("Please use initWithDevice:endpoindID:queue:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
-- (NSDictionary<NSString *, id> *)readAttributeAclWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeACLWithParams on MTRClusterAccessControl", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributeAclWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributeACLWithValue on MTRClusterAccessControl", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributeAclWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributeACLWithValue on MTRClusterAccessControl", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeAclWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeACLWithParams on ZGMTRClusterAccessControl", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeAclWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributeACLWithValue on ZGMTRClusterAccessControl", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeAclWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributeACLWithValue on ZGMTRClusterAccessControl", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 @interface ZGMTRClusterActions (Deprecated)
@@ -7638,9 +9301,9 @@ ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0
                                   queue:(dispatch_queue_t)queue ZGMTR_DEPRECATED("Please use initWithDevice:endpoindID:queue:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (void)announceOtaProviderWithParams:(ZGMTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use announceOTAProviderWithParams:expectedValues:expectedValueInterval:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (NSDictionary<NSString *, id> *)readAttributeDefaultOtaProvidersWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeDefaultOTAProvidersWithParams on MTRClusterOTASoftwareUpdateRequestor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributeDefaultOtaProvidersWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributeDefaultOTAProvidersWithValue on MTRClusterOTASoftwareUpdateRequestor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributeDefaultOtaProvidersWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributeDefaultOTAProvidersWithValue on MTRClusterOTASoftwareUpdateRequestor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeDefaultOtaProvidersWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeDefaultOTAProvidersWithParams on ZGMTRClusterOTASoftwareUpdateRequestor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeDefaultOtaProvidersWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributeDefaultOTAProvidersWithValue on ZGMTRClusterOTASoftwareUpdateRequestor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeDefaultOtaProvidersWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributeDefaultOTAProvidersWithValue on ZGMTRClusterOTASoftwareUpdateRequestor", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 @interface ZGMTRClusterLocalizationConfiguration (Deprecated)
@@ -7725,7 +9388,7 @@ ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0
                                   queue:(dispatch_queue_t)queue ZGMTR_DEPRECATED("Please use initWithDevice:endpoindID:queue:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (void)testEventTriggerWithParams:(ZGMTRGeneralDiagnosticsClusterTestEventTriggerParams *)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use testEventTriggerWithParams:expectedValues:expectedValueInterval:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (NSDictionary<NSString *, id> *)readAttributeBootReasonsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeBootReasonWithParams on MTRClusterGeneralDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeBootReasonsWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeBootReasonWithParams on ZGMTRClusterGeneralDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 @interface ZGMTRClusterSoftwareDiagnostics (Deprecated)
@@ -7746,8 +9409,8 @@ ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0
 
 - (void)resetCountsWithParams:(ZGMTRThreadNetworkDiagnosticsClusterResetCountsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use resetCountsWithParams:expectedValues:expectedValueInterval:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 - (void)resetCountsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use resetCountsWithExpectedValues:expectedValueInterval:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (NSDictionary<NSString *, id> *)readAttributeNeighborTableListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeNeighborTableWithParams on MTRClusterThreadNetworkDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (NSDictionary<NSString *, id> *)readAttributeRouteTableListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeRouteTableWithParams on MTRClusterThreadNetworkDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeNeighborTableListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeNeighborTableWithParams on ZGMTRClusterThreadNetworkDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeRouteTableListWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeRouteTableWithParams on ZGMTRClusterThreadNetworkDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 @interface ZGMTRClusterWiFiNetworkDiagnostics (Deprecated)
@@ -7758,8 +9421,8 @@ ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0
 
 - (void)resetCountsWithParams:(ZGMTRWiFiNetworkDiagnosticsClusterResetCountsParams * _Nullable)params expectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedDataValueDictionaries expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use resetCountsWithParams:expectedValues:expectedValueInterval:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 - (void)resetCountsWithExpectedValues:(NSArray<NSDictionary<NSString *, id> *> * _Nullable)expectedValues expectedValueInterval:(NSNumber * _Nullable)expectedValueIntervalMs completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use resetCountsWithExpectedValues:expectedValueInterval:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (NSDictionary<NSString *, id> *)readAttributeBssidWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeBSSIDWithParams on MTRClusterWiFiNetworkDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (NSDictionary<NSString *, id> *)readAttributeRssiWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeRSSIWithParams on MTRClusterWiFiNetworkDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeBssidWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeBSSIDWithParams on ZGMTRClusterWiFiNetworkDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeRssiWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeRSSIWithParams on ZGMTRClusterWiFiNetworkDiagnostics", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 @interface ZGMTRClusterEthernetNetworkDiagnostics (Deprecated)
@@ -7975,9 +9638,9 @@ ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue ZGMTR_DEPRECATED("Please use initWithDevice:endpoindID:queue:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
-- (NSDictionary<NSString *, id> *)readAttributeIntrinsicBalanceFactorWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeIntrinsicBallastFactorWithParams on MTRClusterBallastConfiguration", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributeIntrinsicBalanceFactorWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributeIntrinsicBallastFactorWithValue on MTRClusterBallastConfiguration", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributeIntrinsicBalanceFactorWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributeIntrinsicBallastFactorWithValue on MTRClusterBallastConfiguration", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributeIntrinsicBalanceFactorWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributeIntrinsicBallastFactorWithParams on ZGMTRClusterBallastConfiguration", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeIntrinsicBalanceFactorWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributeIntrinsicBallastFactorWithValue on ZGMTRClusterBallastConfiguration", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeIntrinsicBalanceFactorWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributeIntrinsicBallastFactorWithValue on ZGMTRClusterBallastConfiguration", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 @interface ZGMTRClusterIlluminanceMeasurement (Deprecated)
@@ -8026,15 +9689,15 @@ ZGMTR_DEPRECATED("Please use MTRClusterUnitTesting", ios(16.1, 16.4), macos(13.0
                                endpoint:(uint16_t)endpoint
                                   queue:(dispatch_queue_t)queue ZGMTR_DEPRECATED("Please use initWithDevice:endpoindID:queue:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
-- (NSDictionary<NSString *, id> *)readAttributePirOccupiedToUnoccupiedDelayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributePIROccupiedToUnoccupiedDelayWithParams on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributePIROccupiedToUnoccupiedDelayWithValue on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributePIROccupiedToUnoccupiedDelayWithValue on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (NSDictionary<NSString *, id> *)readAttributePirUnoccupiedToOccupiedDelayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributePIRUnoccupiedToOccupiedDelayWithParams on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributePIRUnoccupiedToOccupiedDelayWithValue on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributePIRUnoccupiedToOccupiedDelayWithValue on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (NSDictionary<NSString *, id> *)readAttributePirUnoccupiedToOccupiedThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributePIRUnoccupiedToOccupiedThresholdWithParams on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributePIRUnoccupiedToOccupiedThresholdWithValue on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
-- (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributePIRUnoccupiedToOccupiedThresholdWithValue on MTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributePirOccupiedToUnoccupiedDelayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributePIROccupiedToUnoccupiedDelayWithParams on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributePIROccupiedToUnoccupiedDelayWithValue on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributePirOccupiedToUnoccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributePIROccupiedToUnoccupiedDelayWithValue on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributePirUnoccupiedToOccupiedDelayWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributePIRUnoccupiedToOccupiedDelayWithParams on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributePIRUnoccupiedToOccupiedDelayWithValue on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributePirUnoccupiedToOccupiedDelayWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributePIRUnoccupiedToOccupiedDelayWithValue on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (NSDictionary<NSString *, id> *)readAttributePirUnoccupiedToOccupiedThresholdWithParams:(ZGMTRReadParams * _Nullable)params ZGMTR_DEPRECATED("Please use readAttributePIRUnoccupiedToOccupiedThresholdWithParams on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("Please use writeAttributePIRUnoccupiedToOccupiedThresholdWithValue on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributePirUnoccupiedToOccupiedThresholdWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("Please use writeAttributePIRUnoccupiedToOccupiedThresholdWithValue on ZGMTRClusterOccupancySensing", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
 @interface ZGMTRClusterWakeOnLan (Deprecated)

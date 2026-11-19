@@ -15,7 +15,7 @@
  */
 
 /**
- * Utilities for working with Matter certificates.
+ * Utilities for working with ZGMatter certificates.
  */
 
 #import <Foundation/Foundation.h>
@@ -34,7 +34,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 /**
  * Create a root (self-signed) X.509 DER encoded certificate that has the
- * right fields to be a valid Matter root certificate.
+ * right fields to be a valid ZGMatter root certificate.
  *
  * If issuerID is not nil, it's unsignedLongLongValue will be used for the
  * matter-rcac-id attribute in the subject distinguished name of the resulting
@@ -43,10 +43,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If issuerID is nil, a random value will be generated for matter-rcac-id.
  *
  * If fabricID is not nil, it will be included in the subject DN of the
- * certificate.  In this case it must be a valid Matter fabric id.
+ * certificate.  In this case it must be a valid ZGMatter fabric id.
  *
  * validityPeriod specifies when the certificate will be valid. Note that
- * there is currently no mechanism available in Matter to update or rotate
+ * there is currently no mechanism available in ZGMatter to update or rotate
  * the root certificate of a fabric installed on a device. A certificate with
  * no expiration time can be created by specifying [NSDate distantFuture] for
  * the end of the period.
@@ -72,7 +72,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 /**
  * Create an intermediate X.509 DER encoded certificate that has the
- * right fields to be a valid Matter intermediate certificate.
+ * right fields to be a valid ZGMatter intermediate certificate.
  *
  * If issuerID is not nil, it's unsignedLongLongValue will be used for the
  * matter-icac-id attribute in the subject distinguished name of the resulting
@@ -81,7 +81,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If issuerID is nil, a random value will be generated for matter-icac-id.
  *
  * If fabricID is not nil, it will be included in the subject DN of the
- * certificate.  In this case it must be a valid Matter fabric id.
+ * certificate.  In this case it must be a valid ZGMatter fabric id.
  *
  * validityPeriod specifies when the certificate will be valid. A certificate
  * with no expiration time can be created by specifying [NSDate distantFuture]
@@ -112,16 +112,16 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 /**
  * Create an X.509 DER encoded certificate that has the
- * right fields to be a valid Matter operational certificate.
+ * right fields to be a valid ZGMatter operational certificate.
  *
  * signingKeypair and signingCertificate are the root or intermediate that is
  * signing the operational certificate.
  *
  * nodeID and fabricID are expected to be 64-bit unsigned integers.
  *
- * nodeID must be a valid Matter operational node id.
+ * nodeID must be a valid ZGMatter operational node id.
  *
- * fabricID must be a valid Matter fabric id.
+ * fabricID must be a valid ZGMatter fabric id.
  *
  * caseAuthenticatedTags may be nil to indicate no CASE Authenticated Tags
  * should be used.  If caseAuthenticatedTags is not nil, it must contain at most
@@ -181,7 +181,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * The CSR will have the subject OU DN set to 'CSA', because omitting all
  * identifying information altogether often trips up CSR parsing code.  The CA
  * being used should expect this and ignore the request subject, producing a
- * subject that matches the rules for Matter certificates.
+ * subject that matches the rules for ZGMatter certificates.
  *
  * On failure returns nil and if "error" is not null sets *error to the relevant
  * error.
@@ -190,21 +190,21 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
                                                       error:(NSError * __autoreleasing _Nullable * _Nullable)error;
 
 /**
- * Convert the given X.509v3 DER encoded certificate to the Matter certificate
+ * Convert the given X.509v3 DER encoded certificate to the ZGMatter certificate
  * format.
  *
  * Returns nil if the conversion fails (e.g. if the input data cannot be parsed
  * as a DER encoded X.509 certificate, or if the certificate cannot be
- * represented in the Matter certificate format).
+ * represented in the ZGMatter certificate format).
  */
 + (ZGMTRCertificateTLVBytes _Nullable)convertX509Certificate:(ZGMTRCertificateDERBytes)x509Certificate;
 
 /**
- * Convert the given Matter TLV encoded certificate to the X.509v3 DER encoded
+ * Convert the given ZGMatter TLV encoded certificate to the X.509v3 DER encoded
  * format.
  *
  * Returns nil if the conversion fails (e.g. if the input data cannot be parsed
- * as a Matter TLV encoded certificate, or if the certificate cannot be
+ * as a ZGMatter TLV encoded certificate, or if the certificate cannot be
  * represented in the X.509v3 DER format).
  */
 + (ZGMTRCertificateDERBytes _Nullable)convertMatterCertificate:(ZGMTRCertificateTLVBytes)matterCertificate

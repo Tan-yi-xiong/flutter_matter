@@ -20,12 +20,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * This protocol is used by the Matter framework to read and write storage.
+ * This protocol is used by the ZGMatter framework to read and write storage.
  *
- * The Matter framework may call storage methods from arbitrary threads, but
+ * The ZGMatter framework may call storage methods from arbitrary threads, but
  * will not call storage methods concurrently.
  *
- * Implementations of the storage methods must not call into any Matter
+ * Implementations of the storage methods must not call into any ZGMatter
  * framework APIs.
  */
 ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))

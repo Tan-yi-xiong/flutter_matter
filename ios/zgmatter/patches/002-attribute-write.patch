@@ -1,0 +1,150 @@
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.h b/src/darwin/Framework/CHIP/MTRBaseDevice.h
+index 71f6a9ce..6a9c31f7 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.h
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.h
+@@ -178,6 +178,24 @@ MTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0))
+     MTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
+ @end
+ 
++
++/**
++ * ZG extension: Represents a single attribute write request with pre-encoded TLV data.
++ */
++MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
++@interface MTRAttributeWriteRequest : MTRAttributeRequestPath <NSSecureCoding>
++
++/**
++ * Pre-encoded TLV data for the attribute value to write.
++ */
++@property (nonatomic, copy, readonly, nullable) NSData * tlv;
++
++- (instancetype)initWithEndpointID:(NSNumber * _Nullable)endpointID
++                          clusterID:(NSNumber * _Nullable)clusterID
++                        attributeID:(NSNumber * _Nullable)attributeID
++                               tlv:(NSData * _Nullable)tlv MTR_NEWLY_AVAILABLE;
++
++@end
+ /**
+  * A path indicating an event being requested (for read or subscribe).
+  *
+@@ -344,6 +362,18 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+                           completion:(MTRDeviceResponseHandler)completion
+     MTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+ 
++/**
++ * ZG extension: Write one or more attributes using pre-encoded TLV data.
++ * timedWriteTimeout controls the timed-write interaction timeout.
++ * imTimeoutMs controls the IM exchange timeout for the write request.
++ */
++- (void)writeAttributeRequests:(NSArray<MTRAttributeWriteRequest *> * _Nullable)attributePaths
++                   timedWriteTimeout:(NSNumber * _Nullable)timeoutMs
++                   imTimeoutMs:(NSNumber * _Nullable)imTimeoutMs
++                         queue:(dispatch_queue_t)queue
++                          completion:(MTRDeviceResponseHandler)completion
++    MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
++
+ /**
+  * Invoke a command with a designated command path
+  *
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.mm b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+index d9afb696..99e2d1e3 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.mm
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+@@ -1335,6 +1335,54 @@ - (void)_writeAttributeWithEndpointID:(NSNumber *)endpointID
+     std::move(*bridge).DispatchAction(self);
+ }
+ 
++
++- (void)writeAttributeRequests:(NSArray<MTRAttributeWriteRequest *> * _Nullable)attributePaths
++                   timedWriteTimeout:(NSNumber * _Nullable)timeoutMs
++                   imTimeoutMs:(NSNumber * _Nullable)imTimeoutMs
++                         queue:(dispatch_queue_t)queue
++                          completion:(MTRDeviceResponseHandler)completion
++{
++    auto * bridge = new MTRDataValueDictionaryCallbackBridge(queue, completion,
++        ^(ExchangeManager & exchangeManager, const SessionHandle & session, MTRDataValueDictionaryCallback successCb,
++            MTRErrorCallback failureCb, MTRCallbackBridgeBase * bridge) {
++            auto onSuccessCb = [successCb, bridge](const app::ConcreteAttributePath & attribPath) {
++                auto resultArray = @[ @ { MTRAttributePathKey : [[MTRAttributePath alloc] initWithPath:attribPath] } ];
++                successCb(bridge, resultArray);
++            };
++
++            auto onFailureCb = [failureCb, bridge](
++                                   const app::ConcreteAttributePath * attribPath, CHIP_ERROR aError) { failureCb(bridge, aError); };
++
++            auto callback = Platform::MakeUnique<chip::Controller::WriteCallback>(onSuccessCb, onFailureCb, nullptr, session->IsGroupSession());
++            VerifyOrReturnError(callback != nullptr, CHIP_ERROR_NO_MEMORY);
++
++            auto writeClient = Platform::MakeUnique<app::WriteClient>(app::InteractionModelEngine::GetInstance()->GetExchangeManager(),
++                                                                      callback->GetChunkedCallback(), (timeoutMs == nil || [timeoutMs isEqualToNumber:@(0)]) ? Optional<uint16_t>::Missing() : Optional<uint16_t>([timeoutMs unsignedShortValue]));
++            for (MTRAttributeWriteRequest * element in attributePaths) {
++                app::ConcreteDataAttributePath path(static_cast<EndpointId>([[element endpoint] intValue]),
++                    static_cast<ClusterId>([[element cluster] intValue]),
++                    static_cast<AttributeId>([[element attribute] intValue]), Optional<DataVersion>());
++                TLV::TLVReader reader;
++                reader.Init(AsByteSpan([element tlv]));
++                ReturnErrorOnFailure(reader.Next());
++                CHIP_ERROR err = writeClient->PutPreencodedAttribute(path, reader);
++                if (err != CHIP_NO_ERROR) {
++                    writeClient.release();
++                    callback.release();
++                    return err;
++                }
++            }
++
++            NSInteger imTimeout = imTimeoutMs == nil ? 0 : [imTimeoutMs intValue];
++            ReturnErrorOnFailure(writeClient->SendWriteRequest(session,
++                imTimeout != 0 ? System::Clock::Milliseconds32(imTimeout) : System::Clock::kZero));
++            writeClient.release();
++            callback.release();
++            return CHIP_NO_ERROR;
++        });
++    std::move(*bridge).DispatchAction(self);
++}
++
+ class NSObjectCommandCallback final : public app::CommandSender::Callback {
+ public:
+     using OnSuccessCallbackType
+@@ -2574,6 +2622,42 @@ - (void)encodeWithCoder:(NSCoder *)coder
+ 
+ @end
+ 
++
++@implementation MTRAttributeWriteRequest
++
+++ (BOOL)supportsSecureCoding
++{
++    return YES;
++}
++
++- (instancetype)initWithEndpointID:(NSNumber * _Nullable)endpointID
++                          clusterID:(NSNumber * _Nullable)clusterID
++                        attributeID:(NSNumber * _Nullable)attributeID
++                               tlv:(NSData * _Nullable)tlv
++{
++    self = [super initWithEndpointID:endpointID clusterID:clusterID attributeID:attributeID];
++    if (self) {
++        _tlv = [tlv copy];
++    }
++    return self;
++}
++
++- (void)encodeWithCoder:(NSCoder *)coder
++{
++    [super encodeWithCoder:coder];
++    [coder encodeObject:self.tlv forKey:@"tlv"];
++}
++
++- (instancetype)initWithCoder:(NSCoder *)coder
++{
++    self = [super initWithCoder:coder];
++    if (self) {
++        _tlv = [coder decodeObjectOfClass:[NSData class] forKey:@"tlv"];
++    }
++    return self;
++}
++
++@end
+ @implementation MTREventRequestPath
+ - (instancetype)initWithEndpointID:(NSNumber * _Nullable)endpointID
+                          clusterID:(NSNumber * _Nullable)clusterID

@@ -32,17 +32,16 @@ ZGMTR_EXTERN NSErrorDomain const ZGMTRInteractionErrorDomain ZGMTR_AVAILABLE(ios
  * This error domain also contains errors that are communicated via success
  * responses from a server but mapped to an error on the client.
  *
- * Errors reported by the server side of a Matter interaction via the normal
- * Matter error-reporting mechanisms use ZGMTRInteractionErrorDomain instead.
+ * Errors reported by the server side of a ZGMatter interaction via the normal
+ * ZGMatter error-reporting mechanisms use ZGMTRInteractionErrorDomain instead.
  */
-// clang-format off
 typedef NS_ERROR_ENUM(ZGMTRErrorDomain, ZGMTRErrorCode){
     /**
-     * ZGMTRErrorCodeGeneralError represents a generic Matter error with no
+     * ZGMTRErrorCodeGeneralError represents a generic ZGMatter error with no
      * further categorization.
      *
      * The userInfo will have a key named @"errorCode" whose value will be an
-     * integer representing the underlying Matter error code.  These integer
+     * integer representing the underlying ZGMatter error code.  These integer
      * values should not be assumed to be stable across releases, but may be
      * useful in logging and debugging.
      */
@@ -61,7 +60,7 @@ typedef NS_ERROR_ENUM(ZGMTRErrorDomain, ZGMTRErrorCode){
      * ZGMTRErrorCodeFabricExists is returned when trying to commission a device
      * into a fabric when it's already part of that fabric.
      */
-    ZGMTRErrorCodeFabricExists         = 11,
+    ZGMTRErrorCodeFabricExists = 11,
 
     /**
      * ZGMTRErrorCodeUnknownSchema means the schema for the given cluster/attribute,
@@ -95,52 +94,70 @@ typedef NS_ERROR_ENUM(ZGMTRErrorDomain, ZGMTRErrorCode){
     /**
      * The operation was cancelled.
      */
-    ZGMTRErrorCodeCancelled ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))= 16,
-};
-// clang-format on
+    ZGMTRErrorCodeCancelled ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 16,
+
+    /**
+     * Access to some resource was denied.
+     */
+    ZGMTRErrorCodeAccessDenied ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 17,
+
+    /**
+     * A request was made to some entity, and that entity cannot handle the
+     * request right now, but might be able to at a different point in time.
+     */
+    ZGMTRErrorCodeBusy ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 18,
+
+    /**
+     * Something was requested that could not be located.
+     */
+    ZGMTRErrorCodeNotFound ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 19,
+} ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+
+#define ZGMTRMaxErrorCode ZGMTRErrorCodeNotFound
 
 /**
- * ZGMTRInteractionErrorDomain contains errors that represent a Matter
+ * ZGMTRInteractionErrorDomain contains errors that represent a ZGMatter
  * StatusIB error.  These represent errors reported by the other side of a
- * Matter interaction.
+ * ZGMatter interaction.
  *
  * When the code is ZGMTRInteractionErrorCodeFailure the userInfo may have a
  * key named @"clusterStatus" whose value is the cluster-specific status that
  * was reported.  This key will be absent if there was no cluster-specific
  * status.
  */
-// clang-format off
 typedef NS_ERROR_ENUM(ZGMTRInteractionErrorDomain, ZGMTRInteractionErrorCode){
-    // These values come from the general status code table in the Matter
+    // These values come from the general status code table in the ZGMatter
     // Interaction Model specification.
-    ZGMTRInteractionErrorCodeFailure                                   = 0x01,
-    ZGMTRInteractionErrorCodeInvalidSubscription                       = 0x7d,
-    ZGMTRInteractionErrorCodeUnsupportedAccess                         = 0x7e,
-    ZGMTRInteractionErrorCodeUnsupportedEndpoint                       = 0x7f,
-    ZGMTRInteractionErrorCodeInvalidAction                             = 0x80,
-    ZGMTRInteractionErrorCodeUnsupportedCommand                        = 0x81,
-    ZGMTRInteractionErrorCodeInvalidCommand                            = 0x85,
-    ZGMTRInteractionErrorCodeUnsupportedAttribute                      = 0x86,
-    ZGMTRInteractionErrorCodeConstraintError                           = 0x87,
-    ZGMTRInteractionErrorCodeUnsupportedWrite                          = 0x88,
-    ZGMTRInteractionErrorCodeResourceExhausted                         = 0x89,
-    ZGMTRInteractionErrorCodeNotFound                                  = 0x8b,
-    ZGMTRInteractionErrorCodeUnreportableAttribute                     = 0x8c,
-    ZGMTRInteractionErrorCodeInvalidDataType                           = 0x8d,
-    ZGMTRInteractionErrorCodeUnsupportedRead                           = 0x8f,
-    ZGMTRInteractionErrorCodeDataVersionMismatch                       = 0x92,
-    ZGMTRInteractionErrorCodeTimeout                                   = 0x94,
-    ZGMTRInteractionErrorCodeBusy                                      = 0x9c,
-    ZGMTRInteractionErrorCodeUnsupportedCluster                        = 0xc3,
-    ZGMTRInteractionErrorCodeNoUpstreamSubscription                    = 0xc5,
-    ZGMTRInteractionErrorCodeNeedsTimedInteraction                     = 0xc6,
-    ZGMTRInteractionErrorCodeUnsupportedEvent                          = 0xc7,
-    ZGMTRInteractionErrorCodePathsExhausted                            = 0xc8,
-    ZGMTRInteractionErrorCodeTimedRequestMismatch                      = 0xc9,
-    ZGMTRInteractionErrorCodeFailsafeRequired                          = 0xca,
-    ZGMTRInteractionErrorCodeInvalidInState        ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))= 0xcb,
-    ZGMTRInteractionErrorCodeNoCommandResponse     ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))= 0xcc,
-};
-// clang-format on
+    ZGMTRInteractionErrorCodeFailure                                                                            = 0x01,
+    ZGMTRInteractionErrorCodeInvalidSubscription                                                                = 0x7d,
+    ZGMTRInteractionErrorCodeUnsupportedAccess                                                                  = 0x7e,
+    ZGMTRInteractionErrorCodeUnsupportedEndpoint                                                                = 0x7f,
+    ZGMTRInteractionErrorCodeInvalidAction                                                                      = 0x80,
+    ZGMTRInteractionErrorCodeUnsupportedCommand                                                                 = 0x81,
+    ZGMTRInteractionErrorCodeInvalidCommand                                                                     = 0x85,
+    ZGMTRInteractionErrorCodeUnsupportedAttribute                                                               = 0x86,
+    ZGMTRInteractionErrorCodeConstraintError                                                                    = 0x87,
+    ZGMTRInteractionErrorCodeUnsupportedWrite                                                                   = 0x88,
+    ZGMTRInteractionErrorCodeResourceExhausted                                                                  = 0x89,
+    ZGMTRInteractionErrorCodeNotFound                                                                           = 0x8b,
+    ZGMTRInteractionErrorCodeUnreportableAttribute                                                              = 0x8c,
+    ZGMTRInteractionErrorCodeInvalidDataType                                                                    = 0x8d,
+    ZGMTRInteractionErrorCodeUnsupportedRead                                                                    = 0x8f,
+    ZGMTRInteractionErrorCodeDataVersionMismatch                                                                = 0x92,
+    ZGMTRInteractionErrorCodeTimeout                                                                            = 0x94,
+    ZGMTRInteractionErrorCodeBusy                                                                               = 0x9c,
+    ZGMTRInteractionErrorCodeAccessRestricted ZGMTR_AVAILABLE(ios(26.0), macos(26.0), watchos(26.0), tvos(26.0))  = 0x9d,
+    ZGMTRInteractionErrorCodeUnsupportedCluster                                                                 = 0xc3,
+    ZGMTRInteractionErrorCodeNoUpstreamSubscription                                                             = 0xc5,
+    ZGMTRInteractionErrorCodeNeedsTimedInteraction                                                              = 0xc6,
+    ZGMTRInteractionErrorCodeUnsupportedEvent                                                                   = 0xc7,
+    ZGMTRInteractionErrorCodePathsExhausted                                                                     = 0xc8,
+    ZGMTRInteractionErrorCodeTimedRequestMismatch                                                               = 0xc9,
+    ZGMTRInteractionErrorCodeFailsafeRequired                                                                   = 0xca,
+    ZGMTRInteractionErrorCodeInvalidInState ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))    = 0xcb,
+    ZGMTRInteractionErrorCodeNoCommandResponse ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0xcc,
+    ZGMTRInteractionErrorCodeDynamicConstraintError ZGMTR_PROVISIONALLY_AVAILABLE                                 = 0xcf,
+    ZGMTRInteractionErrorCodeInvalidTransportType ZGMTR_PROVISIONALLY_AVAILABLE                                   = 0xd1,
+} ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 NS_ASSUME_NONNULL_END

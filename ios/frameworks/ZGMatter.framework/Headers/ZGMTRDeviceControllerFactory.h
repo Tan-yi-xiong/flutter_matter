@@ -16,7 +16,7 @@
  */
 
 /**
- * An object that allows creating Matter controllers. There can be only one such
+ * An object that allows creating ZGMatter controllers. There can be only one such
  * object in a given process.
  */
 
@@ -91,7 +91,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 /*
  * Initialize the device controller factory with storage.  In this mode, the
- * storage will be used to store various information needed by the Matter
+ * storage will be used to store various information needed by the ZGMatter
  * framework.
  */
 - (instancetype)initWithStorage:(id<ZGMTRStorage>)storage;
@@ -178,7 +178,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
                                                          error:(NSError * __autoreleasing *)error;
 
 /**
- * If possible, pre-warm the Matter stack for setting up a commissioning session.
+ * If possible, pre-warm the ZGMatter stack for setting up a commissioning session.
  *
  * This may be called before -[ZGMTRDeviceController setupCommissioningSessionWithPayload:]
  * if it is known that a commissioning attempt will soon take place, but the commissioning

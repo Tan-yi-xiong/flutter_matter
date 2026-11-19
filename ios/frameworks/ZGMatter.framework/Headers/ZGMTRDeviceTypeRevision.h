@@ -17,15 +17,18 @@
 #import <Foundation/Foundation.h>
 #import <ZGMatter/ZGMTRDefines.h>
 
+@class ZGMTRDescriptorClusterDeviceTypeStruct;
+@class ZGMTRDeviceType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * A representation of a "device type revision" in the sense used in the Matter
+ * A representation of a "device type revision" in the sense used in the ZGMatter
  * specification.  This has an identifier and a version number.
  */
 NS_SWIFT_SENDABLE
 ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
-@interface ZGMTRDeviceTypeRevision : NSObject <NSCopying>
+@interface ZGMTRDeviceTypeRevision : NSObject <NSCopying> /* <NSSecureCoding> (see below) */
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -38,9 +41,24 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  */
 - (nullable instancetype)initWithDeviceTypeID:(NSNumber *)deviceTypeID revision:(NSNumber *)revision;
 
+/**
+ * Initializes the receiver based on the values in the specified struct.
+ */
+- (nullable instancetype)initWithDeviceTypeStruct:(ZGMTRDescriptorClusterDeviceTypeStruct *)deviceTypeStruct ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
 @property (nonatomic, copy, readonly) NSNumber * deviceTypeID;
 @property (nonatomic, copy, readonly) NSNumber * deviceTypeRevision;
 
+/**
+ * Returns the ZGMTRDeviceType corresponding to deviceTypeID,
+ * or nil if deviceTypeID does not represent a known device type.
+ */
+@property (nonatomic, copy, readonly, nullable) ZGMTRDeviceType * typeInformation ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceTypeRevision () <NSSecureCoding>
 @end
 
 NS_ASSUME_NONNULL_END

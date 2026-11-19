@@ -117,53 +117,63 @@ typedef NS_ENUM(uint32_t, ZGMTRClusterIDType) {
     ZGMTRClusterIDTypeFixedLabelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000040,
     ZGMTRClusterIDTypeUserLabelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000041,
     ZGMTRClusterIDTypeBooleanStateID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000045,
-    ZGMTRClusterIDTypeICDManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000046,
-    ZGMTRClusterIDTypeTimerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000047,
-    ZGMTRClusterIDTypeOvenCavityOperationalStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000048,
-    ZGMTRClusterIDTypeOvenModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000049,
-    ZGMTRClusterIDTypeLaundryDryerControlsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000004A,
+    ZGMTRClusterIDTypeICDManagementID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000046,
+    ZGMTRClusterIDTypeOvenCavityOperationalStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000048,
+    ZGMTRClusterIDTypeOvenModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000049,
+    ZGMTRClusterIDTypeLaundryDryerControlsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000004A,
+    ZGMTRClusterIDTypeTemperatureControlledCabinetTopologyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000004B,
     ZGMTRClusterIDTypeModeSelectID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000050,
-    ZGMTRClusterIDTypeLaundryWasherModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000051,
-    ZGMTRClusterIDTypeRefrigeratorAndTemperatureControlledCabinetModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000052,
-    ZGMTRClusterIDTypeLaundryWasherControlsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000053,
+    ZGMTRClusterIDTypeLaundryWasherModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000051,
+    ZGMTRClusterIDTypeRefrigeratorAndTemperatureControlledCabinetModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000052,
+    ZGMTRClusterIDTypeLaundryWasherControlsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000053,
     ZGMTRClusterIDTypeRVCRunModeID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000054,
     ZGMTRClusterIDTypeRVCCleanModeID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000055,
-    ZGMTRClusterIDTypeTemperatureControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000056,
-    ZGMTRClusterIDTypeRefrigeratorAlarmID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000057,
-    ZGMTRClusterIDTypeDishwasherModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000059,
+    ZGMTRClusterIDTypeTemperatureControlID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000056,
+    ZGMTRClusterIDTypeRefrigeratorAlarmID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000057,
+    ZGMTRClusterIDTypeDishwasherModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000059,
     ZGMTRClusterIDTypeAirQualityID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000005B,
     ZGMTRClusterIDTypeSmokeCOAlarmID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000005C,
-    ZGMTRClusterIDTypeDishwasherAlarmID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000005D,
-    ZGMTRClusterIDTypeMicrowaveOvenModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000005E,
-    ZGMTRClusterIDTypeMicrowaveOvenControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000005F,
+    ZGMTRClusterIDTypeDishwasherAlarmID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000005D,
+    ZGMTRClusterIDTypeMicrowaveOvenModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000005E,
+    ZGMTRClusterIDTypeMicrowaveOvenControlID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000005F,
     ZGMTRClusterIDTypeOperationalStateID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000060,
     ZGMTRClusterIDTypeRVCOperationalStateID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000061,
     ZGMTRClusterIDTypeScenesManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000062,
+    ZGMTRClusterIDTypeGroupcastID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000065,
     ZGMTRClusterIDTypeHEPAFilterMonitoringID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000071,
     ZGMTRClusterIDTypeActivatedCarbonFilterMonitoringID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000072,
+    ZGMTRClusterIDTypeWaterTankLevelMonitoringID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000079,
     ZGMTRClusterIDTypeBooleanStateConfigurationID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000080,
     ZGMTRClusterIDTypeValveConfigurationAndControlID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000081,
     ZGMTRClusterIDTypeElectricalPowerMeasurementID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000090,
     ZGMTRClusterIDTypeElectricalEnergyMeasurementID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000091,
-    ZGMTRClusterIDTypeWaterHeaterManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000094,
-    ZGMTRClusterIDTypeDemandResponseLoadControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000096,
-    ZGMTRClusterIDTypeMessagesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000097,
-    ZGMTRClusterIDTypeDeviceEnergyManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000098,
-    ZGMTRClusterIDTypeEnergyEVSEID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000099,
+    ZGMTRClusterIDTypeWaterHeaterManagementID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000094,
+    ZGMTRClusterIDTypeCommodityPriceID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000095,
+    ZGMTRClusterIDTypeMessagesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000097,
+    ZGMTRClusterIDTypeDeviceEnergyManagementID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000098,
+    ZGMTRClusterIDTypeEnergyEVSEID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000099,
     ZGMTRClusterIDTypeEnergyPreferenceID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000009B,
-    ZGMTRClusterIDTypePowerTopologyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000009C,
-    ZGMTRClusterIDTypeEnergyEVSEModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000009D,
-    ZGMTRClusterIDTypeWaterHeaterModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000009E,
-    ZGMTRClusterIDTypeDeviceEnergyManagementModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000009F,
+    ZGMTRClusterIDTypePowerTopologyID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000009C,
+    ZGMTRClusterIDTypeEnergyEVSEModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000009D,
+    ZGMTRClusterIDTypeWaterHeaterModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000009E,
+    ZGMTRClusterIDTypeDeviceEnergyManagementModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000009F,
+    ZGMTRClusterIDTypeElectricalGridConditionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x000000A0,
+    ZGMTRClusterIDTypeElectricalAlarmID ZGMTR_PROVISIONALLY_AVAILABLE = 0x000000A1,
+    ZGMTRClusterIDTypeElectricalDistributionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x000000A2,
+    ZGMTRClusterIDTypeElectricalProtectionAlarmID ZGMTR_PROVISIONALLY_AVAILABLE = 0x000000A3,
     ZGMTRClusterIDTypeDoorLockID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000101,
     ZGMTRClusterIDTypeWindowCoveringID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000102,
-    ZGMTRClusterIDTypeServiceAreaID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000150,
+    ZGMTRClusterIDTypeClosureControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000104,
+    ZGMTRClusterIDTypeClosureDimensionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000105,
+    ZGMTRClusterIDTypeServiceAreaID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000150,
     ZGMTRClusterIDTypePumpConfigurationAndControlID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000200,
     ZGMTRClusterIDTypeThermostatID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000201,
     ZGMTRClusterIDTypeFanControlID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000202,
     ZGMTRClusterIDTypeThermostatUserInterfaceConfigurationID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000204,
+    ZGMTRClusterIDTypeHumidistatID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000205,
     ZGMTRClusterIDTypeColorControlID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000300,
     ZGMTRClusterIDTypeBallastConfigurationID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000301,
+    ZGMTRClusterIDTypeDynamicLightingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000305,
     ZGMTRClusterIDTypeIlluminanceMeasurementID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000400,
     ZGMTRClusterIDTypeTemperatureMeasurementID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000402,
     ZGMTRClusterIDTypePressureMeasurementID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000403,
@@ -180,9 +190,16 @@ typedef NS_ENUM(uint32_t, ZGMTRClusterIDType) {
     ZGMTRClusterIDTypePM10ConcentrationMeasurementID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000042D,
     ZGMTRClusterIDTypeTotalVolatileOrganicCompoundsConcentrationMeasurementID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000042E,
     ZGMTRClusterIDTypeRadonConcentrationMeasurementID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000042F,
-    ZGMTRClusterIDTypeWiFiNetworkManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000451,
-    ZGMTRClusterIDTypeThreadBorderRouterManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000452,
-    ZGMTRClusterIDTypeThreadNetworkDirectoryID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000453,
+    ZGMTRClusterIDTypeSoilMeasurementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000430,
+    ZGMTRClusterIDTypeAmbientContextSensingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000431,
+    ZGMTRClusterIDTypeAmbientSensingUnionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000432,
+    ZGMTRClusterIDTypeProximityRangingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000433,
+    ZGMTRClusterIDTypeSmokeConcentrationMeasurementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000434,
+    ZGMTRClusterIDTypeNetworkIdentityManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000450,
+    ZGMTRClusterIDTypeWiFiNetworkManagementID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000451,
+    ZGMTRClusterIDTypeThreadBorderRouterManagementID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000452,
+    ZGMTRClusterIDTypeThreadNetworkDirectoryID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000453,
+    ZGMTRClusterIDTypeCommissioningProxyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000455,
     ZGMTRClusterIDTypeWakeOnLANID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000503,
     ZGMTRClusterIDTypeChannelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000504,
     ZGMTRClusterIDTypeTargetNavigatorID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000505,
@@ -196,13 +213,29 @@ typedef NS_ENUM(uint32_t, ZGMTRClusterIDType) {
     ZGMTRClusterIDTypeApplicationBasicID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000050D,
     ZGMTRClusterIDTypeAccountLoginID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000050E,
     ZGMTRClusterIDTypeContentControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000050F,
-    ZGMTRClusterIDTypeContentAppObserverID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000510,
+    ZGMTRClusterIDTypeContentAppObserverID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000510,
+    ZGMTRClusterIDTypeMediaFileManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000511,
+    ZGMTRClusterIDTypeAudioControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000512,
+    ZGMTRClusterIDTypeZoneManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000550,
+    ZGMTRClusterIDTypeCameraAVStreamManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000551,
+    ZGMTRClusterIDTypeCameraAVSettingsUserLevelManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000552,
     ZGMTRClusterIDTypeWebRTCTransportProviderID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000553,
+    ZGMTRClusterIDTypeWebRTCTransportRequestorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000554,
+    ZGMTRClusterIDTypePushAVStreamTransportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000555,
     ZGMTRClusterIDTypeChimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000556,
+    ZGMTRClusterIDTypeAVAnalysisID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000557,
+    ZGMTRClusterIDTypeCommodityTariffID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000700,
     ZGMTRClusterIDTypeEcosystemInformationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000750,
-    ZGMTRClusterIDTypeCommissionerControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000751,
+    ZGMTRClusterIDTypeCommissionerControlID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000751,
+    ZGMTRClusterIDTypeJointFabricDatastoreID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000752,
+    ZGMTRClusterIDTypeJointFabricAdministratorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000753,
+    ZGMTRClusterIDTypeTLSCertificateManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000801,
+    ZGMTRClusterIDTypeTLSClientManagementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000802,
+    ZGMTRClusterIDTypeMeterIdentificationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000B06,
+    ZGMTRClusterIDTypeCommodityMeteringID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000B07,
     ZGMTRClusterIDTypeUnitTestingID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0xFFF1FC05,
     ZGMTRClusterIDTypeSampleMEIID ZGMTR_PROVISIONALLY_AVAILABLE = 0xFFF1FC20,
+    ZGMTRClusterIDTypeTestHiddenManufacturerSpecificID ZGMTR_PROVISIONALLY_AVAILABLE = 0xFFF1FC21,
 
     ZGMTRClusterBarrierControlID ZGMTR_DEPRECATED("Please use ZGMTRClusterIDTypeBarrierControlID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000103,
     ZGMTRClusterIDTypeBarrierControlID ZGMTR_DEPRECATED("The BarrierControl cluster will be removed", ios(16.4, 18.2), macos(13.3, 15.2), watchos(9.4, 11.2), tvos(16.4, 18.2)) = 0x00000103,
@@ -237,104 +270,78 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     // Global attributes
     ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000FFF8,
     ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000FFF9,
-    ZGMTRAttributeIDTypeGlobalAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000FFFA,
     ZGMTRAttributeIDTypeGlobalAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000FFFB,
     ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000FFFC,
     ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000FFFD,
 
     // Cluster Identify deprecated attribute names
     ZGMTRClusterIdentifyAttributeIdentifyTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeIdentifyTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeIdentifyTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterIdentifyAttributeIdentifyTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeIdentifyTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeIdentifyTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterIdentifyAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterIdentifyAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterIdentifyAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterIdentifyAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterIdentifyAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIdentifyAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster Identify attributes
     ZGMTRAttributeIDTypeClusterIdentifyAttributeIdentifyTimeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterIdentifyAttributeIdentifyTypeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterIdentifyAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterIdentifyAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterIdentifyAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterIdentifyAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterIdentifyAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterIdentifyAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster Groups deprecated attribute names
     ZGMTRClusterGroupsAttributeNameSupportID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeNameSupportID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeNameSupportID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterGroupsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterGroupsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterGroupsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterGroupsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterGroupsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster Groups attributes
     ZGMTRAttributeIDTypeClusterGroupsAttributeNameSupportID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterGroupsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterGroupsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterGroupsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterGroupsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterGroupsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterGroupsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster OnOff deprecated attribute names
     ZGMTRClusterOnOffAttributeOnOffID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeOnOffID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeOnOffID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterOnOffAttributeGlobalSceneControlID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeGlobalSceneControlID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeGlobalSceneControlID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004000,
     ZGMTRClusterOnOffAttributeOnTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeOnTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeOnTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004001,
     ZGMTRClusterOnOffAttributeOffWaitTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeOffWaitTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeOffWaitTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004002,
     ZGMTRClusterOnOffAttributeStartUpOnOffID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeStartUpOnOffID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeStartUpOnOffID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004003,
     ZGMTRClusterOnOffAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterOnOffAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterOnOffAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterOnOffAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterOnOffAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOnOffAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster OnOff attributes
     ZGMTRAttributeIDTypeClusterOnOffAttributeOnOffID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -344,69 +351,49 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterOnOffAttributeStartUpOnOffID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00004003,
     ZGMTRAttributeIDTypeClusterOnOffAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterOnOffAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOnOffAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterOnOffAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterOnOffAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterOnOffAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster LevelControl deprecated attribute names
     ZGMTRClusterLevelControlAttributeCurrentLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeCurrentLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeCurrentLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterLevelControlAttributeRemainingTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeRemainingTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeRemainingTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterLevelControlAttributeMinLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeMinLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeMinLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterLevelControlAttributeMaxLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeMaxLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeMaxLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterLevelControlAttributeCurrentFrequencyID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeCurrentFrequencyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeCurrentFrequencyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterLevelControlAttributeMinFrequencyID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeMinFrequencyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeMinFrequencyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterLevelControlAttributeMaxFrequencyID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeMaxFrequencyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeMaxFrequencyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterLevelControlAttributeOptionsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOptionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOptionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000F,
     ZGMTRClusterLevelControlAttributeOnOffTransitionTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOnOffTransitionTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOnOffTransitionTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterLevelControlAttributeOnLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOnLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOnLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterLevelControlAttributeOnTransitionTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOnTransitionTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOnTransitionTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterLevelControlAttributeOffTransitionTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOffTransitionTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeOffTransitionTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterLevelControlAttributeDefaultMoveRateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeDefaultMoveRateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeDefaultMoveRateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterLevelControlAttributeStartUpCurrentLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeStartUpCurrentLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeStartUpCurrentLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004000,
     ZGMTRClusterLevelControlAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterLevelControlAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterLevelControlAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterLevelControlAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterLevelControlAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLevelControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster LevelControl attributes
     ZGMTRAttributeIDTypeClusterLevelControlAttributeCurrentLevelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -425,32 +412,25 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterLevelControlAttributeStartUpCurrentLevelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00004000,
     ZGMTRAttributeIDTypeClusterLevelControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterLevelControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterLevelControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterLevelControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterLevelControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterLevelControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster PulseWidthModulation deprecated attribute names
     ZGMTRClusterPulseWidthModulationAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterPulseWidthModulationAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterPulseWidthModulationAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterPulseWidthModulationAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterPulseWidthModulationAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster PulseWidthModulation attributes
     ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterPulseWidthModulationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -460,32 +440,23 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
         ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeDeviceTypeListID", ios(16.2, 16.4), macos(13.1, 13.3), watchos(9.2, 9.4), tvos(16.2, 16.4))
     = 0x00000000,
     ZGMTRClusterDescriptorAttributeDeviceListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeDeviceTypeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeDeviceTypeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterDescriptorAttributeServerListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeServerListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeServerListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterDescriptorAttributeClientListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeClientListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeClientListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterDescriptorAttributePartsListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributePartsListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributePartsListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterDescriptorAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterDescriptorAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterDescriptorAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterDescriptorAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterDescriptorAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDescriptorAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster Descriptor attributes
     ZGMTRAttributeIDTypeClusterDescriptorAttributeDeviceTypeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -493,73 +464,56 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterDescriptorAttributeClientListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterDescriptorAttributePartsListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
     ZGMTRAttributeIDTypeClusterDescriptorAttributeTagListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterDescriptorAttributeEndpointUniqueIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
     ZGMTRAttributeIDTypeClusterDescriptorAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterDescriptorAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterDescriptorAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterDescriptorAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterDescriptorAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterDescriptorAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster Binding deprecated attribute names
     ZGMTRClusterBindingAttributeBindingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeBindingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeBindingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterBindingAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterBindingAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterBindingAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterBindingAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterBindingAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBindingAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster Binding attributes
     ZGMTRAttributeIDTypeClusterBindingAttributeBindingID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterBindingAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterBindingAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterBindingAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterBindingAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterBindingAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterBindingAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster AccessControl deprecated attribute names
     ZGMTRClusterAccessControlAttributeAclID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeACLID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeACLID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterAccessControlAttributeExtensionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeExtensionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeExtensionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterAccessControlAttributeSubjectsPerAccessControlEntryID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeSubjectsPerAccessControlEntryID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeSubjectsPerAccessControlEntryID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterAccessControlAttributeTargetsPerAccessControlEntryID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeTargetsPerAccessControlEntryID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeTargetsPerAccessControlEntryID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterAccessControlAttributeAccessControlEntriesPerFabricID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeAccessControlEntriesPerFabricID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeAccessControlEntriesPerFabricID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterAccessControlAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterAccessControlAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterAccessControlAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterAccessControlAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterAccessControlAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccessControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster AccessControl attributes
     ZGMTRAttributeIDTypeClusterAccessControlAttributeACLID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -567,40 +521,32 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterAccessControlAttributeSubjectsPerAccessControlEntryID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterAccessControlAttributeTargetsPerAccessControlEntryID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
     ZGMTRAttributeIDTypeClusterAccessControlAttributeAccessControlEntriesPerFabricID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000004,
-    ZGMTRAttributeIDTypeClusterAccessControlAttributeCommissioningARLID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterAccessControlAttributeARLID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterAccessControlAttributeCommissioningARLID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterAccessControlAttributeARLID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000006,
+    ZGMTRAttributeIDTypeClusterAccessControlAttributeAuxiliaryACLID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
     ZGMTRAttributeIDTypeClusterAccessControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterAccessControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterAccessControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterAccessControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterAccessControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterAccessControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster Actions deprecated attribute names
     ZGMTRClusterActionsAttributeActionListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeActionListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeActionListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterActionsAttributeEndpointListsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeEndpointListsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeEndpointListsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterActionsAttributeSetupURLID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeSetupURLID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeSetupURLID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterActionsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterActionsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterActionsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterActionsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterActionsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterActionsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster Actions attributes
     ZGMTRAttributeIDTypeClusterActionsAttributeActionListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -608,87 +554,61 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterActionsAttributeSetupURLID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterActionsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterActionsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterActionsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterActionsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterActionsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterActionsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster Basic deprecated attribute names
     ZGMTRClusterBasicAttributeDataModelRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeDataModelRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeDataModelRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterBasicAttributeVendorNameID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeVendorNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeVendorNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterBasicAttributeVendorIDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeVendorIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeVendorIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterBasicAttributeProductNameID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterBasicAttributeProductIDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterBasicAttributeNodeLabelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeNodeLabelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeNodeLabelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterBasicAttributeLocationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeLocationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeLocationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterBasicAttributeHardwareVersionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeHardwareVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeHardwareVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterBasicAttributeHardwareVersionStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeHardwareVersionStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeHardwareVersionStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterBasicAttributeSoftwareVersionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeSoftwareVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeSoftwareVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterBasicAttributeSoftwareVersionStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeSoftwareVersionStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeSoftwareVersionStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterBasicAttributeManufacturingDateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeManufacturingDateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeManufacturingDateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000B,
     ZGMTRClusterBasicAttributePartNumberID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributePartNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributePartNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000C,
     ZGMTRClusterBasicAttributeProductURLID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductURLID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductURLID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000D,
     ZGMTRClusterBasicAttributeProductLabelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductLabelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductLabelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000E,
     ZGMTRClusterBasicAttributeSerialNumberID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeSerialNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeSerialNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000F,
     ZGMTRClusterBasicAttributeLocalConfigDisabledID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeLocalConfigDisabledID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeLocalConfigDisabledID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterBasicAttributeReachableID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeReachableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeReachableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterBasicAttributeUniqueIDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeUniqueIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeUniqueIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterBasicAttributeCapabilityMinimaID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeCapabilityMinimaID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeCapabilityMinimaID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterBasicAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterBasicAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterBasicAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterBasicAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterBasicAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBasicInformationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster BasicInformation attributes
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeDataModelRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -712,68 +632,54 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeUniqueIDID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000012,
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeCapabilityMinimaID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000013,
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeProductAppearanceID ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) = 0x00000014,
-    ZGMTRAttributeIDTypeClusterBasicInformationAttributeSpecificationVersionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000015,
-    ZGMTRAttributeIDTypeClusterBasicInformationAttributeMaxPathsPerInvokeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000016,
+    ZGMTRAttributeIDTypeClusterBasicInformationAttributeSpecificationVersionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000015,
+    ZGMTRAttributeIDTypeClusterBasicInformationAttributeMaxPathsPerInvokeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000016,
+    ZGMTRAttributeIDTypeClusterBasicInformationAttributeDeviceLocationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000017,
+    ZGMTRAttributeIDTypeClusterBasicInformationAttributeConfigurationVersionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000018,
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterBasicInformationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterBasicInformationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster OtaSoftwareUpdateProvider deprecated attribute names
     ZGMTRClusterOtaSoftwareUpdateProviderAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterOtaSoftwareUpdateProviderAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterOtaSoftwareUpdateProviderAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterOtaSoftwareUpdateProviderAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterOtaSoftwareUpdateProviderAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster OTASoftwareUpdateProvider attributes
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateProviderAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster OtaSoftwareUpdateRequestor deprecated attribute names
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeDefaultOtaProvidersID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeDefaultOTAProvidersID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeDefaultOTAProvidersID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeUpdatePossibleID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeUpdatePossibleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeUpdatePossibleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeUpdateStateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeUpdateStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeUpdateStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeUpdateStateProgressID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeUpdateStateProgressID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeUpdateStateProgressID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterOtaSoftwareUpdateRequestorAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster OTASoftwareUpdateRequestor attributes
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeDefaultOTAProvidersID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -782,69 +688,52 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeUpdateStateProgressID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterOTASoftwareUpdateRequestorAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster LocalizationConfiguration deprecated attribute names
     ZGMTRClusterLocalizationConfigurationAttributeActiveLocaleID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeActiveLocaleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeActiveLocaleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterLocalizationConfigurationAttributeSupportedLocalesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeSupportedLocalesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeSupportedLocalesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterLocalizationConfigurationAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterLocalizationConfigurationAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterLocalizationConfigurationAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterLocalizationConfigurationAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterLocalizationConfigurationAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster LocalizationConfiguration attributes
     ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeActiveLocaleID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeSupportedLocalesID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterLocalizationConfigurationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster TimeFormatLocalization deprecated attribute names
     ZGMTRClusterTimeFormatLocalizationAttributeHourFormatID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeHourFormatID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeHourFormatID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterTimeFormatLocalizationAttributeActiveCalendarTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeActiveCalendarTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeActiveCalendarTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterTimeFormatLocalizationAttributeSupportedCalendarTypesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeSupportedCalendarTypesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeSupportedCalendarTypesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterTimeFormatLocalizationAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterTimeFormatLocalizationAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterTimeFormatLocalizationAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterTimeFormatLocalizationAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterTimeFormatLocalizationAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster TimeFormatLocalization attributes
     ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeHourFormatID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -852,178 +741,128 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeSupportedCalendarTypesID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterTimeFormatLocalizationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster UnitLocalization deprecated attribute names
     ZGMTRClusterUnitLocalizationAttributeTemperatureUnitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeTemperatureUnitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeTemperatureUnitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterUnitLocalizationAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterUnitLocalizationAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterUnitLocalizationAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterUnitLocalizationAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterUnitLocalizationAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster UnitLocalization attributes
     ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeTemperatureUnitID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeSupportedTemperatureUnitsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
     ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterUnitLocalizationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster PowerSourceConfiguration deprecated attribute names
     ZGMTRClusterPowerSourceConfigurationAttributeSourcesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeSourcesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeSourcesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterPowerSourceConfigurationAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterPowerSourceConfigurationAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterPowerSourceConfigurationAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterPowerSourceConfigurationAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterPowerSourceConfigurationAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster PowerSourceConfiguration attributes
     ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeSourcesID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterPowerSourceConfigurationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster PowerSource deprecated attribute names
     ZGMTRClusterPowerSourceAttributeStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterPowerSourceAttributeOrderID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeOrderID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeOrderID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterPowerSourceAttributeDescriptionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeDescriptionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeDescriptionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterPowerSourceAttributeWiredAssessedInputVoltageID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredAssessedInputVoltageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredAssessedInputVoltageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterPowerSourceAttributeWiredAssessedInputFrequencyID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredAssessedInputFrequencyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredAssessedInputFrequencyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterPowerSourceAttributeWiredCurrentTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredCurrentTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredCurrentTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterPowerSourceAttributeWiredAssessedCurrentID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredAssessedCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredAssessedCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterPowerSourceAttributeWiredNominalVoltageID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredNominalVoltageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredNominalVoltageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterPowerSourceAttributeWiredMaximumCurrentID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredMaximumCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredMaximumCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterPowerSourceAttributeWiredPresentID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredPresentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeWiredPresentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterPowerSourceAttributeActiveWiredFaultsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeActiveWiredFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeActiveWiredFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterPowerSourceAttributeBatVoltageID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatVoltageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatVoltageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000B,
     ZGMTRClusterPowerSourceAttributeBatPercentRemainingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatPercentRemainingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatPercentRemainingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000C,
     ZGMTRClusterPowerSourceAttributeBatTimeRemainingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatTimeRemainingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatTimeRemainingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000D,
     ZGMTRClusterPowerSourceAttributeBatChargeLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatChargeLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatChargeLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000E,
     ZGMTRClusterPowerSourceAttributeBatReplacementNeededID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatReplacementNeededID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatReplacementNeededID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000F,
     ZGMTRClusterPowerSourceAttributeBatReplaceabilityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatReplaceabilityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatReplaceabilityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterPowerSourceAttributeBatPresentID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatPresentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatPresentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterPowerSourceAttributeActiveBatFaultsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeActiveBatFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeActiveBatFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterPowerSourceAttributeBatReplacementDescriptionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatReplacementDescriptionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatReplacementDescriptionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterPowerSourceAttributeBatCommonDesignationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatCommonDesignationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatCommonDesignationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterPowerSourceAttributeBatANSIDesignationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatANSIDesignationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatANSIDesignationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000015,
     ZGMTRClusterPowerSourceAttributeBatIECDesignationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatIECDesignationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000016,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatIECDesignationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000016,
     ZGMTRClusterPowerSourceAttributeBatApprovedChemistryID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatApprovedChemistryID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatApprovedChemistryID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000017,
     ZGMTRClusterPowerSourceAttributeBatCapacityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatCapacityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000018,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatCapacityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000018,
     ZGMTRClusterPowerSourceAttributeBatQuantityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatQuantityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000019,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatQuantityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000019,
     ZGMTRClusterPowerSourceAttributeBatChargeStateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatChargeStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatChargeStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001A,
     ZGMTRClusterPowerSourceAttributeBatTimeToFullChargeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatTimeToFullChargeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatTimeToFullChargeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001B,
     ZGMTRClusterPowerSourceAttributeBatFunctionalWhileChargingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatFunctionalWhileChargingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatFunctionalWhileChargingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001C,
     ZGMTRClusterPowerSourceAttributeBatChargingCurrentID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatChargingCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeBatChargingCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001D,
     ZGMTRClusterPowerSourceAttributeActiveBatChargeFaultsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeActiveBatChargeFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeActiveBatChargeFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001E,
     ZGMTRClusterPowerSourceAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterPowerSourceAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterPowerSourceAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterPowerSourceAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterPowerSourceAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPowerSourceAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster PowerSource attributes
     ZGMTRAttributeIDTypeClusterPowerSourceAttributeStatusID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1060,42 +899,31 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterPowerSourceAttributeEndpointListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x0000001F,
     ZGMTRAttributeIDTypeClusterPowerSourceAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterPowerSourceAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPowerSourceAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterPowerSourceAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterPowerSourceAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterPowerSourceAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster GeneralCommissioning deprecated attribute names
     ZGMTRClusterGeneralCommissioningAttributeBreadcrumbID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeBreadcrumbID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeBreadcrumbID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterGeneralCommissioningAttributeBasicCommissioningInfoID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeBasicCommissioningInfoID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeBasicCommissioningInfoID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterGeneralCommissioningAttributeRegulatoryConfigID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeRegulatoryConfigID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeRegulatoryConfigID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterGeneralCommissioningAttributeLocationCapabilityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeLocationCapabilityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeLocationCapabilityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterGeneralCommissioningAttributeSupportsConcurrentConnectionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeSupportsConcurrentConnectionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeSupportsConcurrentConnectionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterGeneralCommissioningAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterGeneralCommissioningAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterGeneralCommissioningAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterGeneralCommissioningAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterGeneralCommissioningAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster GeneralCommissioning attributes
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeBreadcrumbID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1107,53 +935,43 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeTCMinRequiredVersionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeTCAcknowledgementsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeTCAcknowledgementsRequiredID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeTCUpdateDeadlineID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeRecoveryIdentifierID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeNetworkRecoveryReasonID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeIsCommissioningWithoutPowerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterGeneralCommissioningAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster NetworkCommissioning deprecated attribute names
     ZGMTRClusterNetworkCommissioningAttributeMaxNetworksID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeMaxNetworksID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeMaxNetworksID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterNetworkCommissioningAttributeNetworksID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeNetworksID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeNetworksID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterNetworkCommissioningAttributeScanMaxTimeSecondsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeScanMaxTimeSecondsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeScanMaxTimeSecondsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterNetworkCommissioningAttributeConnectMaxTimeSecondsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeConnectMaxTimeSecondsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeConnectMaxTimeSecondsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterNetworkCommissioningAttributeInterfaceEnabledID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeInterfaceEnabledID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeInterfaceEnabledID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterNetworkCommissioningAttributeLastNetworkingStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastNetworkingStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastNetworkingStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterNetworkCommissioningAttributeLastNetworkIDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastNetworkIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastNetworkIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterNetworkCommissioningAttributeLastConnectErrorValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastConnectErrorValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastConnectErrorValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterNetworkCommissioningAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterNetworkCommissioningAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterNetworkCommissioningAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterNetworkCommissioningAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterNetworkCommissioningAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster NetworkCommissioning attributes
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeMaxNetworksID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1164,84 +982,63 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastNetworkingStatusID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastNetworkIDID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000006,
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeLastConnectErrorValueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000007,
-    ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeSupportedWiFiBandsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
-    ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeSupportedThreadFeaturesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
-    ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeThreadVersionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeSupportedWiFiBandsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000008,
+    ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeSupportedThreadFeaturesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000009,
+    ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeThreadVersionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterNetworkCommissioningAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster DiagnosticLogs deprecated attribute names
     ZGMTRClusterDiagnosticLogsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterDiagnosticLogsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterDiagnosticLogsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterDiagnosticLogsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterDiagnosticLogsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster DiagnosticLogs attributes
     ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterDiagnosticLogsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster GeneralDiagnostics deprecated attribute names
     ZGMTRClusterGeneralDiagnosticsAttributeNetworkInterfacesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeNetworkInterfacesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeNetworkInterfacesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterGeneralDiagnosticsAttributeRebootCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeRebootCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeRebootCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterGeneralDiagnosticsAttributeUpTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeUpTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeUpTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterGeneralDiagnosticsAttributeTotalOperationalHoursID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeTotalOperationalHoursID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeTotalOperationalHoursID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterGeneralDiagnosticsAttributeBootReasonsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeBootReasonID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeBootReasonID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterGeneralDiagnosticsAttributeActiveHardwareFaultsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeActiveHardwareFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeActiveHardwareFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterGeneralDiagnosticsAttributeActiveRadioFaultsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeActiveRadioFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeActiveRadioFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterGeneralDiagnosticsAttributeActiveNetworkFaultsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeActiveNetworkFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeActiveNetworkFaultsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterGeneralDiagnosticsAttributeTestEventTriggersEnabledID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeTestEventTriggersEnabledID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeTestEventTriggersEnabledID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterGeneralDiagnosticsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterGeneralDiagnosticsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterGeneralDiagnosticsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterGeneralDiagnosticsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterGeneralDiagnosticsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster GeneralDiagnostics attributes
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeNetworkInterfacesID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1253,41 +1050,32 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeActiveRadioFaultsID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000006,
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeActiveNetworkFaultsID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000007,
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeTestEventTriggersEnabledID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000008,
+    ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeDeviceLoadStatusID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterGeneralDiagnosticsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster SoftwareDiagnostics deprecated attribute names
     ZGMTRClusterSoftwareDiagnosticsAttributeThreadMetricsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeThreadMetricsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeThreadMetricsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterSoftwareDiagnosticsAttributeCurrentHeapFreeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeCurrentHeapFreeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeCurrentHeapFreeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterSoftwareDiagnosticsAttributeCurrentHeapUsedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeCurrentHeapUsedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeCurrentHeapUsedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterSoftwareDiagnosticsAttributeCurrentHeapHighWatermarkID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeCurrentHeapHighWatermarkID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeCurrentHeapHighWatermarkID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterSoftwareDiagnosticsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterSoftwareDiagnosticsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterSoftwareDiagnosticsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterSoftwareDiagnosticsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterSoftwareDiagnosticsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster SoftwareDiagnostics attributes
     ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeThreadMetricsID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1296,216 +1084,147 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeCurrentHeapHighWatermarkID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
     ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterSoftwareDiagnosticsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ThreadNetworkDiagnostics deprecated attribute names
     ZGMTRClusterThreadNetworkDiagnosticsAttributeChannelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeChannelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeChannelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRoutingRoleID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRoutingRoleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRoutingRoleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeNetworkNameID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeNetworkNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeNetworkNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterThreadNetworkDiagnosticsAttributePanIdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributePanIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributePanIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeExtendedPanIdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeExtendedPanIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeExtendedPanIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeMeshLocalPrefixID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeMeshLocalPrefixID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeMeshLocalPrefixID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeOverrunCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeOverrunCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeOverrunCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeNeighborTableListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeNeighborTableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeNeighborTableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRouteTableListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRouteTableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRouteTableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterThreadNetworkDiagnosticsAttributePartitionIdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributePartitionIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributePartitionIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeWeightingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeWeightingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeWeightingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeDataVersionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeDataVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeDataVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000B,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeStableDataVersionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeStableDataVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeStableDataVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000C,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeLeaderRouterIdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeLeaderRouterIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeLeaderRouterIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000D,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeDetachedRoleCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeDetachedRoleCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeDetachedRoleCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000E,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeChildRoleCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeChildRoleCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeChildRoleCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000F,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRouterRoleCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRouterRoleCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRouterRoleCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeLeaderRoleCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeLeaderRoleCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeLeaderRoleCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeAttachAttemptCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeAttachAttemptCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeAttachAttemptCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterThreadNetworkDiagnosticsAttributePartitionIdChangeCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributePartitionIdChangeCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributePartitionIdChangeCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeBetterPartitionAttachAttemptCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeBetterPartitionAttachAttemptCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeBetterPartitionAttachAttemptCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeParentChangeCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeParentChangeCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeParentChangeCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000015,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxTotalCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxTotalCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000016,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxTotalCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000016,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxUnicastCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxUnicastCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxUnicastCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000017,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxBroadcastCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxBroadcastCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000018,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxBroadcastCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000018,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxAckRequestedCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxAckRequestedCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000019,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxAckRequestedCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000019,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxAckedCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxAckedCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxAckedCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001A,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxNoAckRequestedCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxNoAckRequestedCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxNoAckRequestedCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001B,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxDataCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxDataCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxDataCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001C,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxDataPollCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxDataPollCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxDataPollCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001D,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxBeaconCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxBeaconCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxBeaconCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001E,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxBeaconRequestCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxBeaconRequestCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxBeaconRequestCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001F,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxOtherCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxOtherCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000020,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxOtherCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000020,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxRetryCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxRetryCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000021,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxRetryCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000021,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxDirectMaxRetryExpiryCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxDirectMaxRetryExpiryCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000022,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxDirectMaxRetryExpiryCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000022,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxIndirectMaxRetryExpiryCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxIndirectMaxRetryExpiryCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000023,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxIndirectMaxRetryExpiryCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000023,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxErrCcaCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxErrCcaCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000024,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxErrCcaCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000024,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxErrAbortCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxErrAbortCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000025,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxErrAbortCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000025,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeTxErrBusyChannelCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxErrBusyChannelCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000026,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeTxErrBusyChannelCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000026,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxTotalCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxTotalCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000027,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxTotalCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000027,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxUnicastCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxUnicastCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000028,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxUnicastCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000028,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxBroadcastCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxBroadcastCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000029,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxBroadcastCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000029,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxDataCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxDataCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxDataCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002A,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxDataPollCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxDataPollCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxDataPollCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002B,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxBeaconCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxBeaconCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxBeaconCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002C,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxBeaconRequestCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxBeaconRequestCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxBeaconRequestCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002D,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxOtherCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxOtherCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxOtherCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002E,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxAddressFilteredCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxAddressFilteredCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxAddressFilteredCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002F,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxDestAddrFilteredCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxDestAddrFilteredCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000030,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxDestAddrFilteredCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000030,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxDuplicatedCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxDuplicatedCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000031,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxDuplicatedCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000031,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxErrNoFrameCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrNoFrameCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000032,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrNoFrameCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000032,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxErrUnknownNeighborCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrUnknownNeighborCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000033,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrUnknownNeighborCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000033,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxErrInvalidSrcAddrCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrInvalidSrcAddrCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000034,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrInvalidSrcAddrCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000034,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxErrSecCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrSecCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000035,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrSecCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000035,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxErrFcsCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrFcsCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000036,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrFcsCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000036,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeRxErrOtherCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrOtherCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000037,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRxErrOtherCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000037,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeActiveTimestampID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeActiveTimestampID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000038,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeActiveTimestampID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000038,
     ZGMTRClusterThreadNetworkDiagnosticsAttributePendingTimestampID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributePendingTimestampID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000039,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributePendingTimestampID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000039,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeDelayID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003A,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeSecurityPolicyID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeSecurityPolicyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeSecurityPolicyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003B,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeChannelPage0MaskID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeChannelPage0MaskID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeChannelPage0MaskID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003C,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeOperationalDatasetComponentsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeOperationalDatasetComponentsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeOperationalDatasetComponentsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003D,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeActiveNetworkFaultsListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeActiveNetworkFaultsListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeActiveNetworkFaultsListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003E,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterThreadNetworkDiagnosticsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster ThreadNetworkDiagnostics attributes
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeChannelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1571,68 +1290,51 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeChannelPage0MaskID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000003C,
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeOperationalDatasetComponentsID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000003D,
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeActiveNetworkFaultsListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000003E,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeExtAddressID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000003F,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeRloc16ID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000040,
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterThreadNetworkDiagnosticsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster WiFiNetworkDiagnostics deprecated attribute names
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeBssidID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeBSSIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeBSSIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeSecurityTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeSecurityTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeSecurityTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeWiFiVersionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeWiFiVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeWiFiVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeChannelNumberID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeChannelNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeChannelNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeRssiID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeRSSIID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeRSSIID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeBeaconLostCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeBeaconLostCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeBeaconLostCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeBeaconRxCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeBeaconRxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeBeaconRxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributePacketMulticastRxCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributePacketMulticastRxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributePacketMulticastRxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributePacketMulticastTxCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributePacketMulticastTxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributePacketMulticastTxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributePacketUnicastRxCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributePacketUnicastRxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributePacketUnicastRxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributePacketUnicastTxCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributePacketUnicastTxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributePacketUnicastTxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeCurrentMaxRateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeCurrentMaxRateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeCurrentMaxRateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000B,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeOverrunCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeOverrunCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeOverrunCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000C,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterWiFiNetworkDiagnosticsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster WiFiNetworkDiagnostics attributes
     ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeBSSIDID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1650,54 +1352,39 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeOverrunCountID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000000C,
     ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterWiFiNetworkDiagnosticsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster EthernetNetworkDiagnostics deprecated attribute names
     ZGMTRClusterEthernetNetworkDiagnosticsAttributePHYRateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributePHYRateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributePHYRateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeFullDuplexID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeFullDuplexID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeFullDuplexID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributePacketRxCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributePacketRxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributePacketRxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributePacketTxCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributePacketTxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributePacketTxCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeTxErrCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeTxErrCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeTxErrCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeCollisionCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeCollisionCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeCollisionCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeOverrunCountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeOverrunCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeOverrunCountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeCarrierDetectID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeCarrierDetectID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeCarrierDetectID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeTimeSinceResetID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeTimeSinceResetID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeTimeSinceResetID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterEthernetNetworkDiagnosticsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster EthernetNetworkDiagnostics attributes
     ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributePHYRateID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1711,57 +1398,41 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeTimeSinceResetID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000008,
     ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterEthernetNetworkDiagnosticsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster TimeSynchronization deprecated attribute names
     ZGMTRClusterTimeSynchronizationAttributeUTCTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeUTCTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeUTCTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterTimeSynchronizationAttributeGranularityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeGranularityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeGranularityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterTimeSynchronizationAttributeTimeSourceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeSourceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeSourceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterTimeSynchronizationAttributeTrustedTimeNodeIdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTrustedTimeSourceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTrustedTimeSourceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterTimeSynchronizationAttributeDefaultNtpID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeDefaultNTPID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeDefaultNTPID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterTimeSynchronizationAttributeTimeZoneID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeZoneID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeZoneID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterTimeSynchronizationAttributeDstOffsetID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeDSTOffsetID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeDSTOffsetID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterTimeSynchronizationAttributeLocalTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeLocalTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeLocalTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterTimeSynchronizationAttributeTimeZoneDatabaseID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeZoneDatabaseID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeZoneDatabaseID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterTimeSynchronizationAttributeNtpServerPortID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeNTPServerAvailableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeNTPServerAvailableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterTimeSynchronizationAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterTimeSynchronizationAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterTimeSynchronizationAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterTimeSynchronizationAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterTimeSynchronizationAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster TimeSynchronization attributes
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeUTCTimeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1778,83 +1449,62 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeZoneDatabaseID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000008,
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeNTPServerAvailableID ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) = 0x00000009,
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeNtpServerPortID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeNTPServerAvailableID,
-    ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeZoneListMaxSizeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
-    ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeDSTOffsetListMaxSizeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
-    ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeSupportsDNSResolveID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeTimeZoneListMaxSizeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeDSTOffsetListMaxSizeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeSupportsDNSResolveID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000000C,
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterTimeSynchronizationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster BridgedDeviceBasic deprecated attribute names
     ZGMTRClusterBridgedDeviceBasicAttributeVendorNameID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeVendorNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeVendorNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterBridgedDeviceBasicAttributeVendorIDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeVendorIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeVendorIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterBridgedDeviceBasicAttributeProductNameID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterBridgedDeviceBasicAttributeNodeLabelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeNodeLabelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeNodeLabelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterBridgedDeviceBasicAttributeHardwareVersionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeHardwareVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeHardwareVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterBridgedDeviceBasicAttributeHardwareVersionStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeHardwareVersionStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeHardwareVersionStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterBridgedDeviceBasicAttributeSoftwareVersionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeSoftwareVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeSoftwareVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterBridgedDeviceBasicAttributeSoftwareVersionStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeSoftwareVersionStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeSoftwareVersionStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterBridgedDeviceBasicAttributeManufacturingDateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeManufacturingDateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeManufacturingDateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000B,
     ZGMTRClusterBridgedDeviceBasicAttributePartNumberID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributePartNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributePartNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000C,
     ZGMTRClusterBridgedDeviceBasicAttributeProductURLID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductURLID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductURLID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000D,
     ZGMTRClusterBridgedDeviceBasicAttributeProductLabelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductLabelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductLabelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000E,
     ZGMTRClusterBridgedDeviceBasicAttributeSerialNumberID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeSerialNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeSerialNumberID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000F,
     ZGMTRClusterBridgedDeviceBasicAttributeReachableID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeReachableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeReachableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterBridgedDeviceBasicAttributeUniqueIDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeUniqueIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeUniqueIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterBridgedDeviceBasicAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterBridgedDeviceBasicAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterBridgedDeviceBasicAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterBridgedDeviceBasicAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterBridgedDeviceBasicAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster BridgedDeviceBasicInformation attributes
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeVendorNameID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeVendorIDID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductNameID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
-    ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductIDID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeNodeLabelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeHardwareVersionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000007,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeHardwareVersionStringID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000008,
@@ -1868,38 +1518,31 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeReachableID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000011,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeUniqueIDID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000012,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeProductAppearanceID ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) = 0x00000014,
+    ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeDeviceLocationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000017,
+    ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeConfigurationVersionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000018,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterBridgedDeviceBasicInformationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster Switch deprecated attribute names
     ZGMTRClusterSwitchAttributeNumberOfPositionsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeNumberOfPositionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeNumberOfPositionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterSwitchAttributeCurrentPositionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeCurrentPositionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeCurrentPositionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterSwitchAttributeMultiPressMaxID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeMultiPressMaxID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeMultiPressMaxID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterSwitchAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterSwitchAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterSwitchAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterSwitchAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterSwitchAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterSwitchAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster Switch attributes
     ZGMTRAttributeIDTypeClusterSwitchAttributeNumberOfPositionsID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1907,36 +1550,27 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterSwitchAttributeMultiPressMaxID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterSwitchAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterSwitchAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterSwitchAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterSwitchAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterSwitchAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterSwitchAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster AdministratorCommissioning deprecated attribute names
     ZGMTRClusterAdministratorCommissioningAttributeWindowStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeWindowStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeWindowStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterAdministratorCommissioningAttributeAdminFabricIndexID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAdminFabricIndexID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAdminFabricIndexID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterAdministratorCommissioningAttributeAdminVendorIdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAdminVendorIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAdminVendorIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterAdministratorCommissioningAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterAdministratorCommissioningAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterAdministratorCommissioningAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterAdministratorCommissioningAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterAdministratorCommissioningAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster AdministratorCommissioning attributes
     ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeWindowStatusID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1944,45 +1578,33 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAdminVendorIdID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterAdministratorCommissioningAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster OperationalCredentials deprecated attribute names
     ZGMTRClusterOperationalCredentialsAttributeNOCsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeNOCsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeNOCsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterOperationalCredentialsAttributeFabricsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeFabricsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeFabricsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterOperationalCredentialsAttributeSupportedFabricsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeSupportedFabricsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeSupportedFabricsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterOperationalCredentialsAttributeCommissionedFabricsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeCommissionedFabricsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeCommissionedFabricsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterOperationalCredentialsAttributeTrustedRootCertificatesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeTrustedRootCertificatesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeTrustedRootCertificatesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterOperationalCredentialsAttributeCurrentFabricIndexID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeCurrentFabricIndexID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeCurrentFabricIndexID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterOperationalCredentialsAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterOperationalCredentialsAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterOperationalCredentialsAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterOperationalCredentialsAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterOperationalCredentialsAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster OperationalCredentials attributes
     ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeNOCsID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -1993,238 +1615,188 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeCurrentFabricIndexID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterOperationalCredentialsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster GroupKeyManagement deprecated attribute names
     ZGMTRClusterGroupKeyManagementAttributeGroupKeyMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGroupKeyMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGroupKeyMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterGroupKeyManagementAttributeGroupTableID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGroupTableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGroupTableID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterGroupKeyManagementAttributeMaxGroupsPerFabricID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeMaxGroupsPerFabricID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeMaxGroupsPerFabricID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterGroupKeyManagementAttributeMaxGroupKeysPerFabricID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeMaxGroupKeysPerFabricID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeMaxGroupKeysPerFabricID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterGroupKeyManagementAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterGroupKeyManagementAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterGroupKeyManagementAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterGroupKeyManagementAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterGroupKeyManagementAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster GroupKeyManagement attributes
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGroupKeyMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGroupTableID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeMaxGroupsPerFabricID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeMaxGroupKeysPerFabricID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGroupcastAdoptionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterGroupKeyManagementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster FixedLabel deprecated attribute names
     ZGMTRClusterFixedLabelAttributeLabelListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeLabelListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeLabelListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterFixedLabelAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterFixedLabelAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterFixedLabelAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterFixedLabelAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterFixedLabelAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFixedLabelAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster FixedLabel attributes
     ZGMTRAttributeIDTypeClusterFixedLabelAttributeLabelListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterFixedLabelAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterFixedLabelAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterFixedLabelAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterFixedLabelAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterFixedLabelAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterFixedLabelAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster UserLabel deprecated attribute names
     ZGMTRClusterUserLabelAttributeLabelListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeLabelListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeLabelListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterUserLabelAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterUserLabelAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterUserLabelAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterUserLabelAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterUserLabelAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUserLabelAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster UserLabel attributes
     ZGMTRAttributeIDTypeClusterUserLabelAttributeLabelListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterUserLabelAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterUserLabelAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterUserLabelAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterUserLabelAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterUserLabelAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterUserLabelAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster BooleanState deprecated attribute names
     ZGMTRClusterBooleanStateAttributeStateValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeStateValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeStateValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterBooleanStateAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterBooleanStateAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterBooleanStateAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterBooleanStateAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterBooleanStateAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBooleanStateAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster BooleanState attributes
     ZGMTRAttributeIDTypeClusterBooleanStateAttributeStateValueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterBooleanStateAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterBooleanStateAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterBooleanStateAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterBooleanStateAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterBooleanStateAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterBooleanStateAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ICDManagement attributes
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeIdleModeDurationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeActiveModeDurationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeActiveModeThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeRegisteredClientsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeICDCounterID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeClientsSupportedPerFabricID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeUserActiveModeTriggerHintID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeUserActiveModeTriggerInstructionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeOperatingModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeMaximumCheckInBackOffID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterICDManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
-
-    // Cluster Timer attributes
-    ZGMTRAttributeIDTypeClusterTimerAttributeSetTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterTimerAttributeTimeRemainingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterTimerAttributeTimerStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterTimerAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterTimerAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterTimerAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterTimerAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterTimerAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterTimerAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeIdleModeDurationID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeActiveModeDurationID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeActiveModeThresholdID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeRegisteredClientsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeICDCounterID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeClientsSupportedPerFabricID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeUserActiveModeTriggerHintID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000006,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeUserActiveModeTriggerInstructionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000007,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeOperatingModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000008,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeMaximumCheckInBackOffID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000009,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterICDManagementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster OvenCavityOperationalState attributes
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributePhaseListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeCurrentPhaseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeCountdownTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeOperationalStateListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeOperationalStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeOperationalErrorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributePhaseListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeCurrentPhaseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeCountdownTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeOperationalStateListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeOperationalStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeOperationalErrorID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterOvenCavityOperationalStateAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster OvenMode attributes
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeSupportedModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeCurrentModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeStartUpModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeOnModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterOvenModeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterOvenModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterOvenModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterOvenModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterOvenModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterOvenModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterOvenModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterOvenModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster LaundryDryerControls attributes
-    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeSupportedDrynessLevelsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeSelectedDrynessLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeSupportedDrynessLevelsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeSelectedDrynessLevelID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterLaundryDryerControlsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster TemperatureControlledCabinetTopology attributes
+    ZGMTRAttributeIDTypeClusterTemperatureControlledCabinetTopologyAttributeDisabledCabinetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterTemperatureControlledCabinetTopologyAttributeTopologyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterTemperatureControlledCabinetTopologyAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlledCabinetTopologyAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlledCabinetTopologyAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlledCabinetTopologyAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlledCabinetTopologyAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ModeSelect deprecated attribute names
     ZGMTRClusterModeSelectAttributeDescriptionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeDescriptionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeDescriptionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterModeSelectAttributeStandardNamespaceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeStandardNamespaceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeStandardNamespaceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterModeSelectAttributeSupportedModesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeSupportedModesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeSupportedModesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterModeSelectAttributeCurrentModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeCurrentModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeCurrentModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterModeSelectAttributeStartUpModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeStartUpModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeStartUpModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterModeSelectAttributeOnModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeOnModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeOnModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterModeSelectAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterModeSelectAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterModeSelectAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterModeSelectAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterModeSelectAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterModeSelectAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster ModeSelect attributes
     ZGMTRAttributeIDTypeClusterModeSelectAttributeDescriptionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -2235,53 +1807,44 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterModeSelectAttributeOnModeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterModeSelectAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterModeSelectAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterModeSelectAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterModeSelectAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterModeSelectAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterModeSelectAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster LaundryWasherMode attributes
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeSupportedModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeCurrentModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeStartUpModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeOnModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster RefrigeratorAndTemperatureControlledCabinetMode attributes
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeSupportedModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeCurrentModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeStartUpModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeOnModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster LaundryWasherControls attributes
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeSpinSpeedsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeSpinSpeedCurrentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeNumberOfRinsesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeSupportedRinsesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeSpinSpeedsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeSpinSpeedCurrentID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeNumberOfRinsesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeSupportedRinsesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterLaundryWasherControlsAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster RVCRunMode attributes
     ZGMTRAttributeIDTypeClusterRVCRunModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterRVCRunModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterRVCRunModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterRVCRunModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterRVCRunModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterRVCRunModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterRVCRunModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterRVCRunModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -2291,53 +1854,46 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterRVCCleanModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterRVCCleanModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterRVCCleanModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterRVCCleanModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterRVCCleanModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterRVCCleanModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterRVCCleanModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster TemperatureControl attributes
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeTemperatureSetpointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeMinTemperatureID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeMaxTemperatureID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeStepID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeSelectedTemperatureLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeSupportedTemperatureLevelsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeTemperatureSetpointID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeMinTemperatureID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeMaxTemperatureID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeStepID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeSelectedTemperatureLevelID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeSupportedTemperatureLevelsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterTemperatureControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster RefrigeratorAlarm attributes
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeMaskID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeSupportedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeMaskID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeSupportedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterRefrigeratorAlarmAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster DishwasherMode attributes
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeSupportedModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeCurrentModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeStartUpModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeOnModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterDishwasherModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster AirQuality attributes
     ZGMTRAttributeIDTypeClusterAirQualityAttributeAirQualityID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterAirQualityAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterAirQualityAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterAirQualityAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterAirQualityAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterAirQualityAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterAirQualityAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -2356,51 +1912,48 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeContaminationStateID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeSmokeSensitivityLevelID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000B,
     ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeExpiryDateID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000C,
+    ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeUnmountedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
     ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterSmokeCOAlarmAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster DishwasherAlarm attributes
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeMaskID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeLatchID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeSupportedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeMaskID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeLatchID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeSupportedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterDishwasherAlarmAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster MicrowaveOvenMode attributes
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeSupportedModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeCurrentModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster MicrowaveOvenControl attributes
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeCookTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeMaxCookTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributePowerSettingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeMinPowerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeMaxPowerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributePowerStepID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeCookTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeMaxCookTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributePowerSettingID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeMinPowerID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeMaxPowerID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributePowerStepID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeSupportedWattsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
     ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeSelectedWattIndexID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeWattRatingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeWattRatingID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000008,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterMicrowaveOvenControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster OperationalState attributes
     ZGMTRAttributeIDTypeClusterOperationalStateAttributePhaseListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000000,
@@ -2411,7 +1964,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterOperationalStateAttributeOperationalErrorID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterOperationalStateAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterOperationalStateAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOperationalStateAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterOperationalStateAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterOperationalStateAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterOperationalStateAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -2425,21 +1977,30 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterRVCOperationalStateAttributeOperationalErrorID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterRVCOperationalStateAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterRVCOperationalStateAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterRVCOperationalStateAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterRVCOperationalStateAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterRVCOperationalStateAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterRVCOperationalStateAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ScenesManagement attributes
-    ZGMTRAttributeIDTypeClusterScenesManagementAttributeLastConfiguredByID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
     ZGMTRAttributeIDTypeClusterScenesManagementAttributeSceneTableSizeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
     ZGMTRAttributeIDTypeClusterScenesManagementAttributeFabricSceneInfoID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
     ZGMTRAttributeIDTypeClusterScenesManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterScenesManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterScenesManagementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterScenesManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterScenesManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterScenesManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster Groupcast attributes
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeMembershipID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeMaxMembershipCountID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeMaxMcastAddrCountID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeUsedMcastAddrCountID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeFabricUnderTestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterGroupcastAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster HEPAFilterMonitoring attributes
     ZGMTRAttributeIDTypeClusterHEPAFilterMonitoringAttributeConditionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
@@ -2450,7 +2011,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterHEPAFilterMonitoringAttributeReplacementProductListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterHEPAFilterMonitoringAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterHEPAFilterMonitoringAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterHEPAFilterMonitoringAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterHEPAFilterMonitoringAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterHEPAFilterMonitoringAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterHEPAFilterMonitoringAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -2464,10 +2024,22 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterActivatedCarbonFilterMonitoringAttributeReplacementProductListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterActivatedCarbonFilterMonitoringAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterActivatedCarbonFilterMonitoringAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterActivatedCarbonFilterMonitoringAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterActivatedCarbonFilterMonitoringAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterActivatedCarbonFilterMonitoringAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterActivatedCarbonFilterMonitoringAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster WaterTankLevelMonitoring attributes
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeConditionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeDegradationDirectionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeChangeIndicationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeInPlaceIndicatorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeLastChangedTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeReplacementProductListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterWaterTankLevelMonitoringAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster BooleanStateConfiguration attributes
     ZGMTRAttributeIDTypeClusterBooleanStateConfigurationAttributeCurrentSensitivityLevelID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
@@ -2480,7 +2052,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterBooleanStateConfigurationAttributeSensorFaultID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000007,
     ZGMTRAttributeIDTypeClusterBooleanStateConfigurationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterBooleanStateConfigurationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterBooleanStateConfigurationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterBooleanStateConfigurationAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterBooleanStateConfigurationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterBooleanStateConfigurationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -2499,7 +2070,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterValveConfigurationAndControlAttributeLevelStepID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterValveConfigurationAndControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterValveConfigurationAndControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterValveConfigurationAndControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterValveConfigurationAndControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterValveConfigurationAndControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterValveConfigurationAndControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -2526,7 +2096,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeNeutralCurrentID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000012,
     ZGMTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterElectricalPowerMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -2540,97 +2109,88 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeCumulativeEnergyResetID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000005,
     ZGMTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterElectricalEnergyMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster WaterHeaterManagement attributes
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeHeaterTypesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeHeatDemandID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeTankVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeEstimatedHeatRequiredID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeTankPercentageID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeBoostStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeHeaterTypesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeHeatDemandID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeTankVolumeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeEstimatedHeatRequiredID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeTankPercentageID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeBoostStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterManagementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
-    // Cluster DemandResponseLoadControl attributes
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeLoadControlProgramsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeNumberOfLoadControlProgramsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeEventsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeActiveEventsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeNumberOfEventsPerProgramID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeNumberOfTransitionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeDefaultRandomStartID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeDefaultRandomDurationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterDemandResponseLoadControlAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    // Cluster CommodityPrice attributes
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributeTariffUnitID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributeCurrencyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributeCurrentPriceID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributePriceForecastID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterCommodityPriceAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster Messages attributes
-    ZGMTRAttributeIDTypeClusterMessagesAttributeMessagesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterMessagesAttributeActiveMessageIDsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterMessagesAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterMessagesAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterMessagesAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterMessagesAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterMessagesAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterMessagesAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterMessagesAttributeMessagesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterMessagesAttributeActiveMessageIDsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterMessagesAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterMessagesAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterMessagesAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterMessagesAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterMessagesAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster DeviceEnergyManagement attributes
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeESATypeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeESACanGenerateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeESAStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeAbsMinPowerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeAbsMaxPowerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributePowerAdjustmentCapabilityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeForecastID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeOptOutStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeESATypeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeESACanGenerateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeESAStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeAbsMinPowerID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeAbsMaxPowerID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributePowerAdjustmentCapabilityID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeForecastID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000006,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeOptOutStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000007,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributePowerRangeAdjustmentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster EnergyEVSE attributes
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSupplyStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeFaultStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeChargingEnabledUntilID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSupplyStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeFaultStateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeChargingEnabledUntilID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
     ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeDischargingEnabledUntilID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeCircuitCapacityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeMinimumChargeCurrentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeMaximumChargeCurrentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeCircuitCapacityID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeMinimumChargeCurrentID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000006,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeMaximumChargeCurrentID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000007,
     ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeMaximumDischargeCurrentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeUserMaximumChargeCurrentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeRandomizationDelayWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeStartTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000023,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeTargetTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000024,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeRequiredEnergyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000025,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeTargetSoCID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000026,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeApproximateEVEfficiencyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000027,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeUserMaximumChargeCurrentID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000009,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeRandomizationDelayWindowID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeStartTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000023,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeTargetTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000024,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeRequiredEnergyID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000025,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeNextChargeTargetSoCID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000026,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeApproximateEVEfficiencyID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000027,
     ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeStateOfChargeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000030,
     ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeBatteryCapacityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000031,
     ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeVehicleIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000032,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSessionIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000040,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSessionDurationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000041,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSessionEnergyChargedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000042,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSessionIDID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000040,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSessionDurationID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000041,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSessionEnergyChargedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000042,
     ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeSessionEnergyDischargedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000043,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster EnergyPreference attributes
     ZGMTRAttributeIDTypeClusterEnergyPreferenceAttributeEnergyBalancesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
@@ -2640,181 +2200,190 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterEnergyPreferenceAttributeCurrentLowPowerModeSensitivityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
     ZGMTRAttributeIDTypeClusterEnergyPreferenceAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterEnergyPreferenceAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterEnergyPreferenceAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterEnergyPreferenceAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterEnergyPreferenceAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterEnergyPreferenceAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster PowerTopology attributes
-    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeAvailableEndpointsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeActiveEndpointsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeAvailableEndpointsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeActiveEndpointsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeElectricalCircuitNodesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterPowerTopologyAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster EnergyEVSEMode attributes
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeSupportedModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeCurrentModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeStartUpModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeOnModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterEnergyEVSEModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster WaterHeaterMode attributes
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeSupportedModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeCurrentModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeStartUpModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeOnModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterWaterHeaterModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster DeviceEnergyManagementMode attributes
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeSupportedModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeCurrentModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeStartUpModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeOnModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeSupportedModesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeCurrentModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterDeviceEnergyManagementModeAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster ElectricalGridConditions attributes
+    ZGMTRAttributeIDTypeClusterElectricalGridConditionsAttributeLocalGenerationAvailableID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterElectricalGridConditionsAttributeCurrentConditionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterElectricalGridConditionsAttributeForecastConditionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterElectricalGridConditionsAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterElectricalGridConditionsAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterElectricalGridConditionsAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterElectricalGridConditionsAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterElectricalGridConditionsAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster ElectricalAlarm attributes
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeMaskID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeLatchID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeSupportedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeOverVoltageThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000080,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeUnderVoltageThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000081,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeOverFrequencyThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000082,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeUnderFrequencyThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000083,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeOverPowerThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000084,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeUnderPowerThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000085,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeOverCurrentThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000086,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeUnderCurrentThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000087,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributePowerImportThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000088,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributePowerExportThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000089,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterElectricalAlarmAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster ElectricalDistribution attributes
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeMaxContinuousCurrentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeMaxVoltageID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeNumberOfPolesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeEndOfLifeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeServiceEntranceRatedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterElectricalDistributionAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster ElectricalProtectionAlarm attributes
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeMaskID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeSupportedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeArcCauseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000080,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeOverLoadRatingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000081,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeOverVoltageRatingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000082,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeSurgeProtectionRatingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000083,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeShortCircuitRatingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000084,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeResidualCurrentRatingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000085,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeArcFaultRatingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000086,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterElectricalProtectionAlarmAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster DoorLock deprecated attribute names
     ZGMTRClusterDoorLockAttributeLockStateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLockStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLockStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterDoorLockAttributeLockTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLockTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLockTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterDoorLockAttributeActuatorEnabledID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeActuatorEnabledID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeActuatorEnabledID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterDoorLockAttributeDoorStateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeDoorStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeDoorStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterDoorLockAttributeDoorOpenEventsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeDoorOpenEventsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeDoorOpenEventsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterDoorLockAttributeDoorClosedEventsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeDoorClosedEventsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeDoorClosedEventsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterDoorLockAttributeOpenPeriodID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeOpenPeriodID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeOpenPeriodID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterDoorLockAttributeNumberOfTotalUsersSupportedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfTotalUsersSupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfTotalUsersSupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterDoorLockAttributeNumberOfPINUsersSupportedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfPINUsersSupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfPINUsersSupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterDoorLockAttributeNumberOfRFIDUsersSupportedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfRFIDUsersSupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfRFIDUsersSupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterDoorLockAttributeNumberOfWeekDaySchedulesSupportedPerUserID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfWeekDaySchedulesSupportedPerUserID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfWeekDaySchedulesSupportedPerUserID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterDoorLockAttributeNumberOfYearDaySchedulesSupportedPerUserID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfYearDaySchedulesSupportedPerUserID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfYearDaySchedulesSupportedPerUserID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000015,
     ZGMTRClusterDoorLockAttributeNumberOfHolidaySchedulesSupportedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfHolidaySchedulesSupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000016,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfHolidaySchedulesSupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000016,
     ZGMTRClusterDoorLockAttributeMaxPINCodeLengthID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeMaxPINCodeLengthID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeMaxPINCodeLengthID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000017,
     ZGMTRClusterDoorLockAttributeMinPINCodeLengthID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeMinPINCodeLengthID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000018,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeMinPINCodeLengthID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000018,
     ZGMTRClusterDoorLockAttributeMaxRFIDCodeLengthID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeMaxRFIDCodeLengthID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000019,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeMaxRFIDCodeLengthID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000019,
     ZGMTRClusterDoorLockAttributeMinRFIDCodeLengthID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeMinRFIDCodeLengthID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeMinRFIDCodeLengthID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001A,
     ZGMTRClusterDoorLockAttributeCredentialRulesSupportID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeCredentialRulesSupportID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeCredentialRulesSupportID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001B,
     ZGMTRClusterDoorLockAttributeNumberOfCredentialsSupportedPerUserID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfCredentialsSupportedPerUserID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfCredentialsSupportedPerUserID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001C,
     ZGMTRClusterDoorLockAttributeLanguageID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLanguageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000021,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLanguageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000021,
     ZGMTRClusterDoorLockAttributeLEDSettingsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLEDSettingsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000022,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLEDSettingsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000022,
     ZGMTRClusterDoorLockAttributeAutoRelockTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeAutoRelockTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000023,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeAutoRelockTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000023,
     ZGMTRClusterDoorLockAttributeSoundVolumeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeSoundVolumeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000024,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeSoundVolumeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000024,
     ZGMTRClusterDoorLockAttributeOperatingModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeOperatingModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000025,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeOperatingModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000025,
     ZGMTRClusterDoorLockAttributeSupportedOperatingModesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeSupportedOperatingModesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000026,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeSupportedOperatingModesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000026,
     ZGMTRClusterDoorLockAttributeDefaultConfigurationRegisterID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeDefaultConfigurationRegisterID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000027,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeDefaultConfigurationRegisterID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000027,
     ZGMTRClusterDoorLockAttributeEnableLocalProgrammingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeEnableLocalProgrammingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000028,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeEnableLocalProgrammingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000028,
     ZGMTRClusterDoorLockAttributeEnableOneTouchLockingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeEnableOneTouchLockingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000029,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeEnableOneTouchLockingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000029,
     ZGMTRClusterDoorLockAttributeEnableInsideStatusLEDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeEnableInsideStatusLEDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeEnableInsideStatusLEDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002A,
     ZGMTRClusterDoorLockAttributeEnablePrivacyModeButtonID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeEnablePrivacyModeButtonID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeEnablePrivacyModeButtonID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002B,
     ZGMTRClusterDoorLockAttributeLocalProgrammingFeaturesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLocalProgrammingFeaturesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeLocalProgrammingFeaturesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002C,
     ZGMTRClusterDoorLockAttributeWrongCodeEntryLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeWrongCodeEntryLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000030,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeWrongCodeEntryLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000030,
     ZGMTRClusterDoorLockAttributeUserCodeTemporaryDisableTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeUserCodeTemporaryDisableTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000031,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeUserCodeTemporaryDisableTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000031,
     ZGMTRClusterDoorLockAttributeSendPINOverTheAirID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeSendPINOverTheAirID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000032,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeSendPINOverTheAirID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000032,
     ZGMTRClusterDoorLockAttributeRequirePINforRemoteOperationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeRequirePINforRemoteOperationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000033,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeRequirePINforRemoteOperationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000033,
     ZGMTRClusterDoorLockAttributeExpiringUserTimeoutID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeExpiringUserTimeoutID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000035,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeExpiringUserTimeoutID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000035,
     ZGMTRClusterDoorLockAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterDoorLockAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterDoorLockAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterDoorLockAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterDoorLockAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterDoorLockAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster DoorLock attributes
     ZGMTRAttributeIDTypeClusterDoorLockAttributeLockStateID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -2853,104 +2422,76 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterDoorLockAttributeSendPINOverTheAirID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000032,
     ZGMTRAttributeIDTypeClusterDoorLockAttributeRequirePINforRemoteOperationID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000033,
     ZGMTRAttributeIDTypeClusterDoorLockAttributeExpiringUserTimeoutID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000035,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroReaderVerificationKeyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000080,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroReaderGroupIdentifierID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000081,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroReaderGroupSubIdentifierID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000082,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroExpeditedTransactionSupportedProtocolVersionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000083,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroGroupResolvingKeyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000084,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroSupportedBLEUWBProtocolVersionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000085,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroBLEAdvertisingVersionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000086,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfAliroCredentialIssuerKeysSupportedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000087,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfAliroEndpointKeysSupportedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000088,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroReaderVerificationKeyID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000080,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroReaderGroupIdentifierID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000081,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroReaderGroupSubIdentifierID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000082,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroExpeditedTransactionSupportedProtocolVersionsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000083,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroGroupResolvingKeyID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000084,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroSupportedBLEUWBProtocolVersionsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000085,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeAliroBLEAdvertisingVersionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000086,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfAliroCredentialIssuerKeysSupportedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000087,
+    ZGMTRAttributeIDTypeClusterDoorLockAttributeNumberOfAliroEndpointKeysSupportedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000088,
     ZGMTRAttributeIDTypeClusterDoorLockAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterDoorLockAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterDoorLockAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterDoorLockAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterDoorLockAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterDoorLockAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster WindowCovering deprecated attribute names
     ZGMTRClusterWindowCoveringAttributeTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterWindowCoveringAttributePhysicalClosedLimitLiftID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributePhysicalClosedLimitLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributePhysicalClosedLimitLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterWindowCoveringAttributePhysicalClosedLimitTiltID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributePhysicalClosedLimitTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributePhysicalClosedLimitTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterWindowCoveringAttributeCurrentPositionLiftID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterWindowCoveringAttributeCurrentPositionTiltID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterWindowCoveringAttributeNumberOfActuationsLiftID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeNumberOfActuationsLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeNumberOfActuationsLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterWindowCoveringAttributeNumberOfActuationsTiltID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeNumberOfActuationsTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeNumberOfActuationsTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterWindowCoveringAttributeConfigStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeConfigStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeConfigStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterWindowCoveringAttributeCurrentPositionLiftPercentageID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionLiftPercentageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionLiftPercentageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterWindowCoveringAttributeCurrentPositionTiltPercentageID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionTiltPercentageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionTiltPercentageID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterWindowCoveringAttributeOperationalStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeOperationalStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeOperationalStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterWindowCoveringAttributeTargetPositionLiftPercent100thsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeTargetPositionLiftPercent100thsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeTargetPositionLiftPercent100thsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000B,
     ZGMTRClusterWindowCoveringAttributeTargetPositionTiltPercent100thsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeTargetPositionTiltPercent100thsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeTargetPositionTiltPercent100thsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000C,
     ZGMTRClusterWindowCoveringAttributeEndProductTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeEndProductTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeEndProductTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000D,
     ZGMTRClusterWindowCoveringAttributeCurrentPositionLiftPercent100thsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionLiftPercent100thsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionLiftPercent100thsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000E,
     ZGMTRClusterWindowCoveringAttributeCurrentPositionTiltPercent100thsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionTiltPercent100thsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeCurrentPositionTiltPercent100thsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000F,
     ZGMTRClusterWindowCoveringAttributeInstalledOpenLimitLiftID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeInstalledOpenLimitLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeInstalledOpenLimitLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterWindowCoveringAttributeInstalledClosedLimitLiftID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeInstalledClosedLimitLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeInstalledClosedLimitLiftID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterWindowCoveringAttributeInstalledOpenLimitTiltID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeInstalledOpenLimitTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeInstalledOpenLimitTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterWindowCoveringAttributeInstalledClosedLimitTiltID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeInstalledClosedLimitTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeInstalledClosedLimitTiltID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterWindowCoveringAttributeModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000017,
     ZGMTRClusterWindowCoveringAttributeSafetyStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeSafetyStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeSafetyStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001A,
     ZGMTRClusterWindowCoveringAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterWindowCoveringAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterWindowCoveringAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterWindowCoveringAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterWindowCoveringAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWindowCoveringAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster WindowCovering attributes
     ZGMTRAttributeIDTypeClusterWindowCoveringAttributeTypeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -2977,110 +2518,112 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterWindowCoveringAttributeSafetyStatusID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000001A,
     ZGMTRAttributeIDTypeClusterWindowCoveringAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterWindowCoveringAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterWindowCoveringAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterWindowCoveringAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterWindowCoveringAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterWindowCoveringAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
+    // Cluster ClosureControl attributes
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeCountdownTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeMainStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeCurrentErrorListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeOverallCurrentStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeOverallTargetStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeLatchControlModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterClosureControlAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster ClosureDimension attributes
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeCurrentStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeTargetStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeResolutionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeStepValueID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeUnitID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeUnitRangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeLimitRangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeTranslationDirectionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeRotationAxisID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeOverflowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeModulationTypeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeLatchControlModesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterClosureDimensionAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
     // Cluster ServiceArea attributes
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeSupportedAreasID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeSupportedMapsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeSelectedAreasID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeCurrentAreaID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeEstimatedEndTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeProgressID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterServiceAreaAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeSupportedAreasID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeSupportedMapsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeSelectedAreasID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeCurrentAreaID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeEstimatedEndTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeProgressID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterServiceAreaAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster PumpConfigurationAndControl deprecated attribute names
     ZGMTRClusterPumpConfigurationAndControlAttributeMaxPressureID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterPumpConfigurationAndControlAttributeMaxSpeedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterPumpConfigurationAndControlAttributeMaxFlowID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxFlowID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxFlowID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterPumpConfigurationAndControlAttributeMinConstPressureID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinConstPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinConstPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterPumpConfigurationAndControlAttributeMaxConstPressureID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxConstPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxConstPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterPumpConfigurationAndControlAttributeMinCompPressureID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinCompPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinCompPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterPumpConfigurationAndControlAttributeMaxCompPressureID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxCompPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxCompPressureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterPumpConfigurationAndControlAttributeMinConstSpeedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinConstSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinConstSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterPumpConfigurationAndControlAttributeMaxConstSpeedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxConstSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxConstSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterPumpConfigurationAndControlAttributeMinConstFlowID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinConstFlowID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinConstFlowID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterPumpConfigurationAndControlAttributeMaxConstFlowID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxConstFlowID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxConstFlowID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterPumpConfigurationAndControlAttributeMinConstTempID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinConstTempID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMinConstTempID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000B,
     ZGMTRClusterPumpConfigurationAndControlAttributeMaxConstTempID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxConstTempID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxConstTempID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000C,
     ZGMTRClusterPumpConfigurationAndControlAttributePumpStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributePumpStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributePumpStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterPumpConfigurationAndControlAttributeEffectiveOperationModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeEffectiveOperationModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeEffectiveOperationModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterPumpConfigurationAndControlAttributeEffectiveControlModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeEffectiveControlModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeEffectiveControlModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterPumpConfigurationAndControlAttributeCapacityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeCapacityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeCapacityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterPumpConfigurationAndControlAttributeSpeedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterPumpConfigurationAndControlAttributeLifetimeRunningHoursID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeLifetimeRunningHoursID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeLifetimeRunningHoursID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000015,
     ZGMTRClusterPumpConfigurationAndControlAttributePowerID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributePowerID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000016,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributePowerID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000016,
     ZGMTRClusterPumpConfigurationAndControlAttributeLifetimeEnergyConsumedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeLifetimeEnergyConsumedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeLifetimeEnergyConsumedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000017,
     ZGMTRClusterPumpConfigurationAndControlAttributeOperationModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeOperationModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000020,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeOperationModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000020,
     ZGMTRClusterPumpConfigurationAndControlAttributeControlModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeControlModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000021,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeControlModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000021,
     ZGMTRClusterPumpConfigurationAndControlAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterPumpConfigurationAndControlAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterPumpConfigurationAndControlAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterPumpConfigurationAndControlAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterPumpConfigurationAndControlAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster PumpConfigurationAndControl attributes
     ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeMaxPressureID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3108,174 +2651,119 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeControlModeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000021,
     ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterPumpConfigurationAndControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster Thermostat deprecated attribute names
     ZGMTRClusterThermostatAttributeLocalTemperatureID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeLocalTemperatureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeLocalTemperatureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterThermostatAttributeOutdoorTemperatureID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOutdoorTemperatureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOutdoorTemperatureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterThermostatAttributeOccupancyID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupancyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupancyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterThermostatAttributeAbsMinHeatSetpointLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAbsMinHeatSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAbsMinHeatSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterThermostatAttributeAbsMaxHeatSetpointLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAbsMaxHeatSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAbsMaxHeatSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterThermostatAttributeAbsMinCoolSetpointLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAbsMinCoolSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAbsMinCoolSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterThermostatAttributeAbsMaxCoolSetpointLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAbsMaxCoolSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAbsMaxCoolSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterThermostatAttributePICoolingDemandID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributePICoolingDemandID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributePICoolingDemandID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterThermostatAttributePIHeatingDemandID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributePIHeatingDemandID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributePIHeatingDemandID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterThermostatAttributeHVACSystemTypeConfigurationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeHVACSystemTypeConfigurationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeHVACSystemTypeConfigurationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterThermostatAttributeLocalTemperatureCalibrationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeLocalTemperatureCalibrationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeLocalTemperatureCalibrationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterThermostatAttributeOccupiedCoolingSetpointID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedCoolingSetpointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedCoolingSetpointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterThermostatAttributeOccupiedHeatingSetpointID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedHeatingSetpointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedHeatingSetpointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterThermostatAttributeUnoccupiedCoolingSetpointID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedCoolingSetpointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedCoolingSetpointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterThermostatAttributeUnoccupiedHeatingSetpointID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedHeatingSetpointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedHeatingSetpointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterThermostatAttributeMinHeatSetpointLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMinHeatSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMinHeatSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000015,
     ZGMTRClusterThermostatAttributeMaxHeatSetpointLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMaxHeatSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000016,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMaxHeatSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000016,
     ZGMTRClusterThermostatAttributeMinCoolSetpointLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMinCoolSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMinCoolSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000017,
     ZGMTRClusterThermostatAttributeMaxCoolSetpointLimitID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMaxCoolSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000018,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMaxCoolSetpointLimitID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000018,
     ZGMTRClusterThermostatAttributeMinSetpointDeadBandID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMinSetpointDeadBandID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000019,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeMinSetpointDeadBandID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000019,
     ZGMTRClusterThermostatAttributeRemoteSensingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeRemoteSensingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeRemoteSensingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001A,
     ZGMTRClusterThermostatAttributeControlSequenceOfOperationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeControlSequenceOfOperationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeControlSequenceOfOperationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001B,
     ZGMTRClusterThermostatAttributeSystemModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeSystemModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeSystemModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001C,
     ZGMTRClusterThermostatAttributeThermostatRunningModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeThermostatRunningModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeThermostatRunningModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001E,
     ZGMTRClusterThermostatAttributeStartOfWeekID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeStartOfWeekID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000020,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeStartOfWeekID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000020,
     ZGMTRClusterThermostatAttributeNumberOfWeeklyTransitionsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfWeeklyTransitionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000021,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfWeeklyTransitionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000021,
     ZGMTRClusterThermostatAttributeNumberOfDailyTransitionsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfDailyTransitionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000022,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfDailyTransitionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000022,
     ZGMTRClusterThermostatAttributeTemperatureSetpointHoldID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeTemperatureSetpointHoldID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000023,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeTemperatureSetpointHoldID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000023,
     ZGMTRClusterThermostatAttributeTemperatureSetpointHoldDurationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeTemperatureSetpointHoldDurationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000024,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeTemperatureSetpointHoldDurationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000024,
     ZGMTRClusterThermostatAttributeThermostatProgrammingOperationModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeThermostatProgrammingOperationModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000025,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeThermostatProgrammingOperationModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000025,
     ZGMTRClusterThermostatAttributeThermostatRunningStateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeThermostatRunningStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000029,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeThermostatRunningStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000029,
     ZGMTRClusterThermostatAttributeSetpointChangeSourceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeSetpointChangeSourceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000030,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeSetpointChangeSourceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000030,
     ZGMTRClusterThermostatAttributeSetpointChangeAmountID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeSetpointChangeAmountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000031,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeSetpointChangeAmountID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000031,
     ZGMTRClusterThermostatAttributeSetpointChangeSourceTimestampID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeSetpointChangeSourceTimestampID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000032,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeSetpointChangeSourceTimestampID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000032,
     ZGMTRClusterThermostatAttributeOccupiedSetbackID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedSetbackID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000034,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedSetbackID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000034,
     ZGMTRClusterThermostatAttributeOccupiedSetbackMinID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedSetbackMinID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000035,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedSetbackMinID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000035,
     ZGMTRClusterThermostatAttributeOccupiedSetbackMaxID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedSetbackMaxID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000036,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeOccupiedSetbackMaxID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000036,
     ZGMTRClusterThermostatAttributeUnoccupiedSetbackID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedSetbackID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000037,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedSetbackID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000037,
     ZGMTRClusterThermostatAttributeUnoccupiedSetbackMinID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedSetbackMinID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000038,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedSetbackMinID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000038,
     ZGMTRClusterThermostatAttributeUnoccupiedSetbackMaxID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedSetbackMaxID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000039,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeUnoccupiedSetbackMaxID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000039,
     ZGMTRClusterThermostatAttributeEmergencyHeatDeltaID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeEmergencyHeatDeltaID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeEmergencyHeatDeltaID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003A,
     ZGMTRClusterThermostatAttributeACTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000040,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000040,
     ZGMTRClusterThermostatAttributeACCapacityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACCapacityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000041,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACCapacityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000041,
     ZGMTRClusterThermostatAttributeACRefrigerantTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACRefrigerantTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000042,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACRefrigerantTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000042,
     ZGMTRClusterThermostatAttributeACCompressorTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACCompressorTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000043,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACCompressorTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000043,
     ZGMTRClusterThermostatAttributeACErrorCodeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACErrorCodeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000044,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACErrorCodeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000044,
     ZGMTRClusterThermostatAttributeACLouverPositionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACLouverPositionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000045,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACLouverPositionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000045,
     ZGMTRClusterThermostatAttributeACCoilTemperatureID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACCoilTemperatureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000046,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACCoilTemperatureID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000046,
     ZGMTRClusterThermostatAttributeACCapacityformatID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACCapacityformatID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000047,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeACCapacityformatID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000047,
     ZGMTRClusterThermostatAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterThermostatAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterThermostatAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterThermostatAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterThermostatAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster Thermostat attributes
     ZGMTRAttributeIDTypeClusterThermostatAttributeLocalTemperatureID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3327,73 +2815,60 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterThermostatAttributeACLouverPositionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000045,
     ZGMTRAttributeIDTypeClusterThermostatAttributeACCoilTemperatureID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000046,
     ZGMTRAttributeIDTypeClusterThermostatAttributeACCapacityformatID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000047,
-    ZGMTRAttributeIDTypeClusterThermostatAttributePresetTypesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000048,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeScheduleTypesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000049,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfPresetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000004A,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfSchedulesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000004B,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfScheduleTransitionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000004C,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfScheduleTransitionPerDayID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000004D,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeActivePresetHandleID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000004E,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeActiveScheduleHandleID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000004F,
-    ZGMTRAttributeIDTypeClusterThermostatAttributePresetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000050,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeSchedulesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000051,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeSetpointHoldExpiryTimestampID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000052,
+    ZGMTRAttributeIDTypeClusterThermostatAttributePresetTypesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000048,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeScheduleTypesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000049,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfPresetsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000004A,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfSchedulesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000004B,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfScheduleTransitionsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000004C,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeNumberOfScheduleTransitionPerDayID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000004D,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeActivePresetHandleID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000004E,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeActiveScheduleHandleID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000004F,
+    ZGMTRAttributeIDTypeClusterThermostatAttributePresetsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000050,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeSchedulesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000051,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeSetpointHoldExpiryTimestampID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000052,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeMaxThermostatSuggestionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000053,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeThermostatSuggestionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000054,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeCurrentThermostatSuggestionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000055,
+    ZGMTRAttributeIDTypeClusterThermostatAttributeThermostatSuggestionNotFollowingReasonID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000056,
     ZGMTRAttributeIDTypeClusterThermostatAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterThermostatAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterThermostatAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterThermostatAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterThermostatAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterThermostatAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster FanControl deprecated attribute names
     ZGMTRClusterFanControlAttributeFanModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeFanModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeFanModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterFanControlAttributeFanModeSequenceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeFanModeSequenceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeFanModeSequenceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterFanControlAttributePercentSettingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributePercentSettingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributePercentSettingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterFanControlAttributePercentCurrentID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributePercentCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributePercentCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterFanControlAttributeSpeedMaxID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeSpeedMaxID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeSpeedMaxID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterFanControlAttributeSpeedSettingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeSpeedSettingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeSpeedSettingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterFanControlAttributeSpeedCurrentID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeSpeedCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeSpeedCurrentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterFanControlAttributeRockSupportID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeRockSupportID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeRockSupportID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterFanControlAttributeRockSettingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeRockSettingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeRockSettingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterFanControlAttributeWindSupportID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeWindSupportID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeWindSupportID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterFanControlAttributeWindSettingID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeWindSettingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeWindSettingID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterFanControlAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterFanControlAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterFanControlAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterFanControlAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterFanControlAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFanControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster FanControl attributes
     ZGMTRAttributeIDTypeClusterFanControlAttributeFanModeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3410,36 +2885,27 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterFanControlAttributeAirflowDirectionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000B,
     ZGMTRAttributeIDTypeClusterFanControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterFanControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterFanControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterFanControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterFanControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterFanControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ThermostatUserInterfaceConfiguration deprecated attribute names
     ZGMTRClusterThermostatUserInterfaceConfigurationAttributeTemperatureDisplayModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeTemperatureDisplayModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeTemperatureDisplayModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterThermostatUserInterfaceConfigurationAttributeKeypadLockoutID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeKeypadLockoutID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeKeypadLockoutID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterThermostatUserInterfaceConfigurationAttributeScheduleProgrammingVisibilityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeScheduleProgrammingVisibilityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeScheduleProgrammingVisibilityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterThermostatUserInterfaceConfigurationAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterThermostatUserInterfaceConfigurationAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterThermostatUserInterfaceConfigurationAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterThermostatUserInterfaceConfigurationAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterThermostatUserInterfaceConfigurationAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster ThermostatUserInterfaceConfiguration attributes
     ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeTemperatureDisplayModeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3447,183 +2913,143 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeScheduleProgrammingVisibilityID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterThermostatUserInterfaceConfigurationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
+    // Cluster Humidistat attributes
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeSystemStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeUserSetpointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeMinSetpointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeMaxSetpointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeStepID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeTargetSetpointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeMistTypeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeContinuousID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeSleepID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeOptimalID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterHumidistatAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
     // Cluster ColorControl deprecated attribute names
     ZGMTRClusterColorControlAttributeCurrentHueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentHueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentHueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterColorControlAttributeCurrentSaturationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentSaturationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentSaturationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterColorControlAttributeRemainingTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeRemainingTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeRemainingTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterColorControlAttributeCurrentXID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterColorControlAttributeCurrentYID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterColorControlAttributeDriftCompensationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeDriftCompensationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeDriftCompensationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterColorControlAttributeCompensationTextID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCompensationTextID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCompensationTextID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterColorControlAttributeColorTemperatureMiredsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorTemperatureMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorTemperatureMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterColorControlAttributeColorModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterColorControlAttributeOptionsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeOptionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeOptionsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000F,
     ZGMTRClusterColorControlAttributeNumberOfPrimariesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeNumberOfPrimariesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeNumberOfPrimariesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterColorControlAttributePrimary1XID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary1XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary1XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterColorControlAttributePrimary1YID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary1YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary1YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterColorControlAttributePrimary1IntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary1IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary1IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterColorControlAttributePrimary2XID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary2XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary2XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000015,
     ZGMTRClusterColorControlAttributePrimary2YID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary2YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000016,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary2YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000016,
     ZGMTRClusterColorControlAttributePrimary2IntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary2IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary2IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000017,
     ZGMTRClusterColorControlAttributePrimary3XID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary3XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000019,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary3XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000019,
     ZGMTRClusterColorControlAttributePrimary3YID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary3YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary3YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001A,
     ZGMTRClusterColorControlAttributePrimary3IntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary3IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary3IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001B,
     ZGMTRClusterColorControlAttributePrimary4XID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary4XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000020,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary4XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000020,
     ZGMTRClusterColorControlAttributePrimary4YID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary4YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000021,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary4YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000021,
     ZGMTRClusterColorControlAttributePrimary4IntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary4IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000022,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary4IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000022,
     ZGMTRClusterColorControlAttributePrimary5XID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary5XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000024,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary5XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000024,
     ZGMTRClusterColorControlAttributePrimary5YID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary5YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000025,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary5YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000025,
     ZGMTRClusterColorControlAttributePrimary5IntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary5IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000026,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary5IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000026,
     ZGMTRClusterColorControlAttributePrimary6XID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary6XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000028,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary6XID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000028,
     ZGMTRClusterColorControlAttributePrimary6YID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary6YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000029,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary6YID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000029,
     ZGMTRClusterColorControlAttributePrimary6IntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary6IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributePrimary6IntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002A,
     ZGMTRClusterColorControlAttributeWhitePointXID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeWhitePointXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000030,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeWhitePointXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000030,
     ZGMTRClusterColorControlAttributeWhitePointYID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeWhitePointYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000031,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeWhitePointYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000031,
     ZGMTRClusterColorControlAttributeColorPointRXID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointRXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000032,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointRXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000032,
     ZGMTRClusterColorControlAttributeColorPointRYID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointRYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000033,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointRYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000033,
     ZGMTRClusterColorControlAttributeColorPointRIntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointRIntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000034,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointRIntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000034,
     ZGMTRClusterColorControlAttributeColorPointGXID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointGXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000036,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointGXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000036,
     ZGMTRClusterColorControlAttributeColorPointGYID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointGYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000037,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointGYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000037,
     ZGMTRClusterColorControlAttributeColorPointGIntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointGIntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000038,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointGIntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000038,
     ZGMTRClusterColorControlAttributeColorPointBXID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointBXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointBXID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003A,
     ZGMTRClusterColorControlAttributeColorPointBYID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointBYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointBYID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003B,
     ZGMTRClusterColorControlAttributeColorPointBIntensityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointBIntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000003C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorPointBIntensityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000003C,
     ZGMTRClusterColorControlAttributeEnhancedCurrentHueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeEnhancedCurrentHueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeEnhancedCurrentHueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004000,
     ZGMTRClusterColorControlAttributeEnhancedColorModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeEnhancedColorModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeEnhancedColorModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004001,
     ZGMTRClusterColorControlAttributeColorLoopActiveID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopActiveID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopActiveID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004002,
     ZGMTRClusterColorControlAttributeColorLoopDirectionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopDirectionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopDirectionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004003,
     ZGMTRClusterColorControlAttributeColorLoopTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004004,
     ZGMTRClusterColorControlAttributeColorLoopStartEnhancedHueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopStartEnhancedHueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopStartEnhancedHueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004005,
     ZGMTRClusterColorControlAttributeColorLoopStoredEnhancedHueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopStoredEnhancedHueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorLoopStoredEnhancedHueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004006,
     ZGMTRClusterColorControlAttributeColorCapabilitiesID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorCapabilitiesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorCapabilitiesID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400A,
     ZGMTRClusterColorControlAttributeColorTempPhysicalMinMiredsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorTempPhysicalMinMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorTempPhysicalMinMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400B,
     ZGMTRClusterColorControlAttributeColorTempPhysicalMaxMiredsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorTempPhysicalMaxMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeColorTempPhysicalMaxMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400C,
     ZGMTRClusterColorControlAttributeCoupleColorTempToLevelMinMiredsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCoupleColorTempToLevelMinMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeCoupleColorTempToLevelMinMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400D,
     ZGMTRClusterColorControlAttributeStartUpColorTemperatureMiredsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeStartUpColorTemperatureMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeStartUpColorTemperatureMiredsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004010,
     ZGMTRClusterColorControlAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterColorControlAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterColorControlAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterColorControlAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterColorControlAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterColorControlAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster ColorControl attributes
     ZGMTRAttributeIDTypeClusterColorControlAttributeCurrentHueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3680,69 +3106,49 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterColorControlAttributeStartUpColorTemperatureMiredsID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00004010,
     ZGMTRAttributeIDTypeClusterColorControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterColorControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterColorControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterColorControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterColorControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterColorControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster BallastConfiguration deprecated attribute names
     ZGMTRClusterBallastConfigurationAttributePhysicalMinLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributePhysicalMinLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributePhysicalMinLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterBallastConfigurationAttributePhysicalMaxLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributePhysicalMaxLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributePhysicalMaxLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterBallastConfigurationAttributeBallastStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeBallastStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeBallastStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterBallastConfigurationAttributeMinLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeMinLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeMinLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterBallastConfigurationAttributeMaxLevelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeMaxLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeMaxLevelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterBallastConfigurationAttributeIntrinsicBalanceFactorID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeIntrinsicBallastFactorID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeIntrinsicBallastFactorID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterBallastConfigurationAttributeBallastFactorAdjustmentID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeBallastFactorAdjustmentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeBallastFactorAdjustmentID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000015,
     ZGMTRClusterBallastConfigurationAttributeLampQuantityID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampQuantityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000020,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampQuantityID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000020,
     ZGMTRClusterBallastConfigurationAttributeLampTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000030,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000030,
     ZGMTRClusterBallastConfigurationAttributeLampManufacturerID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampManufacturerID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000031,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampManufacturerID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000031,
     ZGMTRClusterBallastConfigurationAttributeLampRatedHoursID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampRatedHoursID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000032,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampRatedHoursID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000032,
     ZGMTRClusterBallastConfigurationAttributeLampBurnHoursID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampBurnHoursID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000033,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampBurnHoursID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000033,
     ZGMTRClusterBallastConfigurationAttributeLampAlarmModeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampAlarmModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000034,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampAlarmModeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000034,
     ZGMTRClusterBallastConfigurationAttributeLampBurnHoursTripPointID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampBurnHoursTripPointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000035,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampBurnHoursTripPointID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000035,
     ZGMTRClusterBallastConfigurationAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterBallastConfigurationAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterBallastConfigurationAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterBallastConfigurationAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterBallastConfigurationAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster BallastConfiguration attributes
     ZGMTRAttributeIDTypeClusterBallastConfigurationAttributePhysicalMinLevelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3761,42 +3167,41 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeLampBurnHoursTripPointID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000035,
     ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterBallastConfigurationAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
+    // Cluster DynamicLighting attributes
+    ZGMTRAttributeIDTypeClusterDynamicLightingAttributeAvailableEffectsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterDynamicLightingAttributeCurrentEffectIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterDynamicLightingAttributeCurrentSpeedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterDynamicLightingAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterDynamicLightingAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterDynamicLightingAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterDynamicLightingAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterDynamicLightingAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
     // Cluster IlluminanceMeasurement deprecated attribute names
     ZGMTRClusterIlluminanceMeasurementAttributeMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterIlluminanceMeasurementAttributeMinMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterIlluminanceMeasurementAttributeMaxMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterIlluminanceMeasurementAttributeToleranceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterIlluminanceMeasurementAttributeLightSensorTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeLightSensorTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeLightSensorTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterIlluminanceMeasurementAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterIlluminanceMeasurementAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterIlluminanceMeasurementAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterIlluminanceMeasurementAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterIlluminanceMeasurementAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster IlluminanceMeasurement attributes
     ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeMeasuredValueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3806,39 +3211,29 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeLightSensorTypeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000004,
     ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterIlluminanceMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster TemperatureMeasurement deprecated attribute names
     ZGMTRClusterTemperatureMeasurementAttributeMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterTemperatureMeasurementAttributeMinMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterTemperatureMeasurementAttributeMaxMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterTemperatureMeasurementAttributeToleranceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterTemperatureMeasurementAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterTemperatureMeasurementAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterTemperatureMeasurementAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterTemperatureMeasurementAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterTemperatureMeasurementAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster TemperatureMeasurement attributes
     ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeMeasuredValueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3847,54 +3242,39 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeToleranceID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
     ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterTemperatureMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster PressureMeasurement deprecated attribute names
     ZGMTRClusterPressureMeasurementAttributeMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterPressureMeasurementAttributeMinMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterPressureMeasurementAttributeMaxMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterPressureMeasurementAttributeToleranceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterPressureMeasurementAttributeScaledValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeScaledValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeScaledValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterPressureMeasurementAttributeMinScaledValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMinScaledValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMinScaledValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterPressureMeasurementAttributeMaxScaledValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMaxScaledValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMaxScaledValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterPressureMeasurementAttributeScaledToleranceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeScaledToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeScaledToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterPressureMeasurementAttributeScaleID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeScaleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeScaleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterPressureMeasurementAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterPressureMeasurementAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterPressureMeasurementAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterPressureMeasurementAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterPressureMeasurementAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster PressureMeasurement attributes
     ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeMeasuredValueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3908,39 +3288,29 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeScaleID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000014,
     ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterPressureMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster FlowMeasurement deprecated attribute names
     ZGMTRClusterFlowMeasurementAttributeMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterFlowMeasurementAttributeMinMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterFlowMeasurementAttributeMaxMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterFlowMeasurementAttributeToleranceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterFlowMeasurementAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterFlowMeasurementAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterFlowMeasurementAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterFlowMeasurementAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterFlowMeasurementAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster FlowMeasurement attributes
     ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeMeasuredValueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3949,39 +3319,29 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeToleranceID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
     ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterFlowMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster RelativeHumidityMeasurement deprecated attribute names
     ZGMTRClusterRelativeHumidityMeasurementAttributeMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterRelativeHumidityMeasurementAttributeMinMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeMinMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterRelativeHumidityMeasurementAttributeMaxMeasuredValueID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeMaxMeasuredValueID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterRelativeHumidityMeasurementAttributeToleranceID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeToleranceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterRelativeHumidityMeasurementAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterRelativeHumidityMeasurementAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterRelativeHumidityMeasurementAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterRelativeHumidityMeasurementAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterRelativeHumidityMeasurementAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster RelativeHumidityMeasurement attributes
     ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeMeasuredValueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -3990,70 +3350,53 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeToleranceID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
     ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterRelativeHumidityMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster OccupancySensing deprecated attribute names
     ZGMTRClusterOccupancySensingAttributeOccupancyID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancyID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterOccupancySensingAttributeOccupancySensorTypeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancySensorTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancySensorTypeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterOccupancySensingAttributeOccupancySensorTypeBitmapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancySensorTypeBitmapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancySensorTypeBitmapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterOccupancySensingAttributePirOccupiedToUnoccupiedDelayID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIROccupiedToUnoccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIROccupiedToUnoccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterOccupancySensingAttributePirUnoccupiedToOccupiedDelayID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIRUnoccupiedToOccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIRUnoccupiedToOccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterOccupancySensingAttributePirUnoccupiedToOccupiedThresholdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIRUnoccupiedToOccupiedThresholdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIRUnoccupiedToOccupiedThresholdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterOccupancySensingAttributeUltrasonicOccupiedToUnoccupiedDelayID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeUltrasonicOccupiedToUnoccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000020,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeUltrasonicOccupiedToUnoccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000020,
     ZGMTRClusterOccupancySensingAttributeUltrasonicUnoccupiedToOccupiedDelayID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeUltrasonicUnoccupiedToOccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000021,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeUltrasonicUnoccupiedToOccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000021,
     ZGMTRClusterOccupancySensingAttributeUltrasonicUnoccupiedToOccupiedThresholdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeUltrasonicUnoccupiedToOccupiedThresholdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000022,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeUltrasonicUnoccupiedToOccupiedThresholdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000022,
     ZGMTRClusterOccupancySensingAttributePhysicalContactOccupiedToUnoccupiedDelayID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePhysicalContactOccupiedToUnoccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000030,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePhysicalContactOccupiedToUnoccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000030,
     ZGMTRClusterOccupancySensingAttributePhysicalContactUnoccupiedToOccupiedDelayID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePhysicalContactUnoccupiedToOccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000031,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePhysicalContactUnoccupiedToOccupiedDelayID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000031,
     ZGMTRClusterOccupancySensingAttributePhysicalContactUnoccupiedToOccupiedThresholdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePhysicalContactUnoccupiedToOccupiedThresholdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000032,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributePhysicalContactUnoccupiedToOccupiedThresholdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000032,
     ZGMTRClusterOccupancySensingAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterOccupancySensingAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterOccupancySensingAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterOccupancySensingAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterOccupancySensingAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterOccupancySensingAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster OccupancySensing attributes
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancyID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancySensorTypeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributeOccupancySensorTypeBitmapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
-    ZGMTRAttributeIDTypeClusterOccupancySensingAttributeHoldTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterOccupancySensingAttributeHoldTimeLimitsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterOccupancySensingAttributeHoldTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterOccupancySensingAttributeHoldTimeLimitsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterOccupancySensingAttributePredictedOccupancyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIROccupiedToUnoccupiedDelayID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000010,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIRUnoccupiedToOccupiedDelayID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000011,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributePIRUnoccupiedToOccupiedThresholdID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000012,
@@ -4065,7 +3408,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributePhysicalContactUnoccupiedToOccupiedThresholdID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000032,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOccupancySensingAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterOccupancySensingAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4084,7 +3426,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterCarbonMonoxideConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterCarbonMonoxideConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterCarbonMonoxideConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterCarbonMonoxideConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterCarbonMonoxideConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterCarbonMonoxideConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterCarbonMonoxideConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4103,7 +3444,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterCarbonDioxideConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterCarbonDioxideConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterCarbonDioxideConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterCarbonDioxideConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterCarbonDioxideConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterCarbonDioxideConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterCarbonDioxideConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4122,7 +3462,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterNitrogenDioxideConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterNitrogenDioxideConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterNitrogenDioxideConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterNitrogenDioxideConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterNitrogenDioxideConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterNitrogenDioxideConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterNitrogenDioxideConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4141,7 +3480,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterOzoneConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterOzoneConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterOzoneConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterOzoneConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterOzoneConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterOzoneConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterOzoneConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4160,7 +3498,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterPM25ConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterPM25ConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterPM25ConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPM25ConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterPM25ConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterPM25ConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterPM25ConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4179,7 +3516,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterFormaldehydeConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterFormaldehydeConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterFormaldehydeConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterFormaldehydeConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterFormaldehydeConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterFormaldehydeConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterFormaldehydeConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4198,7 +3534,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterPM1ConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterPM1ConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterPM1ConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPM1ConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterPM1ConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterPM1ConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterPM1ConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4217,7 +3552,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterPM10ConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterPM10ConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterPM10ConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterPM10ConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterPM10ConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterPM10ConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterPM10ConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4236,7 +3570,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4255,101 +3588,178 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterRadonConcentrationMeasurementAttributeLevelValueID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
     ZGMTRAttributeIDTypeClusterRadonConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterRadonConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterRadonConcentrationMeasurementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterRadonConcentrationMeasurementAttributeAttributeListID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterRadonConcentrationMeasurementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterRadonConcentrationMeasurementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
+    // Cluster SoilMeasurement attributes
+    ZGMTRAttributeIDTypeClusterSoilMeasurementAttributeSoilMoistureMeasurementLimitsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterSoilMeasurementAttributeSoilMoistureMeasuredValueID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterSoilMeasurementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterSoilMeasurementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterSoilMeasurementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterSoilMeasurementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterSoilMeasurementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster AmbientContextSensing attributes
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeHumanActivityDetectedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeObjectIdentifiedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeAudioContextDetectedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeAmbientContextTypeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeAmbientContextTypeSupportedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeObjectCountThresholdReachedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeObjectCountConfigID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeObjectCountID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeSimultaneousDetectionLimitID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeHoldTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeHoldTimeLimitsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributePredictedActivityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeSensorFusionSupportedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterAmbientContextSensingAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster AmbientSensingUnion attributes
+    ZGMTRAttributeIDTypeClusterAmbientSensingUnionAttributeUnionNameID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterAmbientSensingUnionAttributeUnionHealthID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterAmbientSensingUnionAttributeUnionContributorListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterAmbientSensingUnionAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterAmbientSensingUnionAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterAmbientSensingUnionAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterAmbientSensingUnionAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterAmbientSensingUnionAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster ProximityRanging attributes
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeRangingCapabilitiesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeWiFiDevIKID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeBLEDeviceIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeBLTDevIKID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeBLTCSSecurityLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeBLTCSModeCapabilityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeSessionIDListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterProximityRangingAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster SmokeConcentrationMeasurement attributes
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeMeasuredValueID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeMinMeasuredValueID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeMaxMeasuredValueID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributePeakMeasuredValueID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributePeakMeasuredValueWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeAverageMeasuredValueID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeAverageMeasuredValueWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeUncertaintyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeMeasurementUnitID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeMeasurementMediumID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeLevelValueID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterSmokeConcentrationMeasurementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster NetworkIdentityManagement attributes
+    ZGMTRAttributeIDTypeClusterNetworkIdentityManagementAttributeActiveNetworkIdentitiesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterNetworkIdentityManagementAttributeClientsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterNetworkIdentityManagementAttributeClientTableSizeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterNetworkIdentityManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterNetworkIdentityManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterNetworkIdentityManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterNetworkIdentityManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterNetworkIdentityManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
     // Cluster WiFiNetworkManagement attributes
-    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeSSIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributePassphraseSurrogateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeSSIDID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributePassphraseSurrogateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterWiFiNetworkManagementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ThreadBorderRouterManagement attributes
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeBorderRouterNameID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeBorderAgentIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeThreadVersionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeInterfaceEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeActiveDatasetTimestampID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributePendingDatasetTimestampID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeBorderRouterNameID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeBorderAgentIDID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeThreadVersionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeInterfaceEnabledID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeActiveDatasetTimestampID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributePendingDatasetTimestampID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterThreadBorderRouterManagementAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ThreadNetworkDirectory attributes
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributePreferredExtendedPanIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeThreadNetworksID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeThreadNetworkTableSizeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributePreferredExtendedPanIDID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeThreadNetworksID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeThreadNetworkTableSizeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterThreadNetworkDirectoryAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster CommissioningProxy attributes
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeTransportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeScanMaxTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeMaxSessionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeMaxCachedResultsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeNumCachedResultsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeCacheTimeoutID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeCachedResultsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeWiFiBandID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterCommissioningProxyAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster WakeOnLan deprecated attribute names
     ZGMTRClusterWakeOnLanAttributeMACAddressID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeMACAddressID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeMACAddressID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterWakeOnLanAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterWakeOnLanAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterWakeOnLanAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterWakeOnLanAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterWakeOnLanAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterWakeOnLANAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster WakeOnLAN attributes
     ZGMTRAttributeIDTypeClusterWakeOnLANAttributeMACAddressID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
-    ZGMTRAttributeIDTypeClusterWakeOnLANAttributeLinkLocalAddressID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterWakeOnLANAttributeLinkLocalAddressID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterWakeOnLANAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterWakeOnLANAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterWakeOnLANAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterWakeOnLANAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterWakeOnLANAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterWakeOnLANAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster Channel deprecated attribute names
     ZGMTRClusterChannelAttributeChannelListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeChannelListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeChannelListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterChannelAttributeLineupID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeLineupID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeLineupID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterChannelAttributeCurrentChannelID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeCurrentChannelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeCurrentChannelID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterChannelAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterChannelAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterChannelAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterChannelAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterChannelAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterChannelAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster Channel attributes
     ZGMTRAttributeIDTypeClusterChannelAttributeChannelListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -4357,81 +3767,60 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterChannelAttributeCurrentChannelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRAttributeIDTypeClusterChannelAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterChannelAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterChannelAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterChannelAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterChannelAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterChannelAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster TargetNavigator deprecated attribute names
     ZGMTRClusterTargetNavigatorAttributeTargetListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeTargetListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeTargetListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterTargetNavigatorAttributeCurrentTargetID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeCurrentTargetID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeCurrentTargetID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterTargetNavigatorAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterTargetNavigatorAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterTargetNavigatorAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterTargetNavigatorAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterTargetNavigatorAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster TargetNavigator attributes
     ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeTargetListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeCurrentTargetID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterTargetNavigatorAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster MediaPlayback deprecated attribute names
     ZGMTRClusterMediaPlaybackAttributeCurrentStateID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeCurrentStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeCurrentStateID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterMediaPlaybackAttributeStartTimeID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeStartTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeStartTimeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterMediaPlaybackAttributeDurationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeDurationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeDurationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterMediaPlaybackAttributeSampledPositionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeSampledPositionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeSampledPositionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterMediaPlaybackAttributePlaybackSpeedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributePlaybackSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributePlaybackSpeedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterMediaPlaybackAttributeSeekRangeEndID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeSeekRangeEndID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeSeekRangeEndID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterMediaPlaybackAttributeSeekRangeStartID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeSeekRangeStartID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeSeekRangeStartID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterMediaPlaybackAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterMediaPlaybackAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterMediaPlaybackAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterMediaPlaybackAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterMediaPlaybackAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster MediaPlayback attributes
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeCurrentStateID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -4445,235 +3834,181 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAvailableAudioTracksID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeActiveTextTrackID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAvailableTextTracksID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAvailableCommandsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeContentInfoID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterMediaPlaybackAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster MediaInput deprecated attribute names
     ZGMTRClusterMediaInputAttributeInputListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeInputListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeInputListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterMediaInputAttributeCurrentInputID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeCurrentInputID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeCurrentInputID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterMediaInputAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterMediaInputAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterMediaInputAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterMediaInputAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterMediaInputAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterMediaInputAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster MediaInput attributes
     ZGMTRAttributeIDTypeClusterMediaInputAttributeInputListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterMediaInputAttributeCurrentInputID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterMediaInputAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterMediaInputAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterMediaInputAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterMediaInputAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterMediaInputAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterMediaInputAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster LowPower deprecated attribute names
     ZGMTRClusterLowPowerAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterLowPowerAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterLowPowerAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterLowPowerAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterLowPowerAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterLowPowerAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster LowPower attributes
     ZGMTRAttributeIDTypeClusterLowPowerAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterLowPowerAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterLowPowerAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterLowPowerAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterLowPowerAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterLowPowerAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster KeypadInput deprecated attribute names
     ZGMTRClusterKeypadInputAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterKeypadInputAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterKeypadInputAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterKeypadInputAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterKeypadInputAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterKeypadInputAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster KeypadInput attributes
     ZGMTRAttributeIDTypeClusterKeypadInputAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterKeypadInputAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterKeypadInputAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterKeypadInputAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterKeypadInputAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterKeypadInputAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ContentLauncher deprecated attribute names
     ZGMTRClusterContentLauncherAttributeAcceptHeaderID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeAcceptHeaderID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeAcceptHeaderID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterContentLauncherAttributeSupportedStreamingProtocolsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeSupportedStreamingProtocolsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeSupportedStreamingProtocolsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterContentLauncherAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterContentLauncherAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterContentLauncherAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterContentLauncherAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterContentLauncherAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterContentLauncherAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster ContentLauncher attributes
     ZGMTRAttributeIDTypeClusterContentLauncherAttributeAcceptHeaderID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterContentLauncherAttributeSupportedStreamingProtocolsID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
+    ZGMTRAttributeIDTypeClusterContentLauncherAttributeMovableID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterContentLauncherAttributePresetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
     ZGMTRAttributeIDTypeClusterContentLauncherAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterContentLauncherAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterContentLauncherAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterContentLauncherAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterContentLauncherAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterContentLauncherAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster AudioOutput deprecated attribute names
     ZGMTRClusterAudioOutputAttributeOutputListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeOutputListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeOutputListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterAudioOutputAttributeCurrentOutputID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeCurrentOutputID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeCurrentOutputID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterAudioOutputAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterAudioOutputAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterAudioOutputAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterAudioOutputAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterAudioOutputAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAudioOutputAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster AudioOutput attributes
     ZGMTRAttributeIDTypeClusterAudioOutputAttributeOutputListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterAudioOutputAttributeCurrentOutputID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterAudioOutputAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterAudioOutputAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterAudioOutputAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterAudioOutputAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterAudioOutputAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterAudioOutputAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ApplicationLauncher deprecated attribute names
     ZGMTRClusterApplicationLauncherAttributeCatalogListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeCatalogListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeCatalogListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterApplicationLauncherAttributeCurrentAppID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeCurrentAppID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeCurrentAppID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterApplicationLauncherAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterApplicationLauncherAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterApplicationLauncherAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterApplicationLauncherAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterApplicationLauncherAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster ApplicationLauncher attributes
     ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeCatalogListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeCurrentAppID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterApplicationLauncherAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ApplicationBasic deprecated attribute names
     ZGMTRClusterApplicationBasicAttributeVendorNameID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeVendorNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeVendorNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterApplicationBasicAttributeVendorIDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeVendorIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeVendorIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterApplicationBasicAttributeApplicationNameID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeApplicationNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeApplicationNameID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterApplicationBasicAttributeProductIDID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeProductIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeProductIDID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterApplicationBasicAttributeApplicationID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeApplicationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeApplicationID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterApplicationBasicAttributeStatusID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeStatusID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterApplicationBasicAttributeApplicationVersionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeApplicationVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeApplicationVersionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterApplicationBasicAttributeAllowedVendorListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAllowedVendorListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAllowedVendorListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterApplicationBasicAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterApplicationBasicAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterApplicationBasicAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterApplicationBasicAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterApplicationBasicAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterApplicationBasicAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster ApplicationBasic attributes
     ZGMTRAttributeIDTypeClusterApplicationBasicAttributeVendorNameID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -4686,32 +4021,25 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAllowedVendorListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000007,
     ZGMTRAttributeIDTypeClusterApplicationBasicAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterApplicationBasicAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterApplicationBasicAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterApplicationBasicAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterApplicationBasicAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster AccountLogin deprecated attribute names
     ZGMTRClusterAccountLoginAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterAccountLoginAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterAccountLoginAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterAccountLoginAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterAccountLoginAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterAccountLoginAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster AccountLogin attributes
     ZGMTRAttributeIDTypeClusterAccountLoginAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterAccountLoginAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterAccountLoginAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterAccountLoginAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterAccountLoginAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterAccountLoginAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -4725,322 +4053,477 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterContentControlAttributeScreenDailyTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
     ZGMTRAttributeIDTypeClusterContentControlAttributeRemainingScreenTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
     ZGMTRAttributeIDTypeClusterContentControlAttributeBlockUnratedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterContentControlAttributeBlockChannelListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterContentControlAttributeBlockApplicationListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterContentControlAttributeBlockContentTimeWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
     ZGMTRAttributeIDTypeClusterContentControlAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterContentControlAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterContentControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterContentControlAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterContentControlAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterContentControlAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster ContentAppObserver attributes
-    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterContentAppObserverAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster MediaFileManagement attributes
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeTotalStorageID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeAvailableStorageID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeAvailableFilesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeSupportedMimeTypesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterMediaFileManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster AudioControl attributes
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeSoftMutedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributePhysicallyMutedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeMinDeviceVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeMaxDeviceVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeMaxDeviceVolumeDBID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeMaxUserVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeDefaultStepSizeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeSetVolumeUnmutePolicyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeIncreaseVolumeUnmutePolicyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeIncreaseVolumeUnmuteVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeDecreaseVolumeUnmutePolicyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeStartUpMutedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeStartUpVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeBassID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000E,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeMidID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000F,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeTrebleID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000010,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeMinCorrectionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000011,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeMaxCorrectionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000012,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterAudioControlAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster ZoneManagement attributes
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeMaxUserDefinedZonesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeMaxZonesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeZonesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeTriggersID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeSensitivityMaxID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeSensitivityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeTwoDCartesianMaxID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterZoneManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster CameraAVStreamManagement attributes
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMaxConcurrentEncodersID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMaxEncodedPixelRateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeVideoSensorParamsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeNightVisionUsesInfraredID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMinViewportResolutionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeRateDistortionTradeOffPointsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMaxContentBufferSizeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMicrophoneCapabilitiesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSpeakerCapabilitiesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeTwoWayTalkSupportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSnapshotCapabilitiesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMaxNetworkBandwidthID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeCurrentFrameRateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeHDRModeEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSupportedStreamUsagesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000E,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeAllocatedVideoStreamsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000F,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeAllocatedAudioStreamsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000010,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeAllocatedSnapshotStreamsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000011,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeStreamUsagePrioritiesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000012,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSoftRecordingPrivacyModeEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000013,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSoftLivestreamPrivacyModeEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000014,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeHardPrivacyModeOnID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000015,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeNightVisionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000016,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeNightVisionIllumID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000017,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeViewportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000018,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSpeakerMutedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000019,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSpeakerVolumeLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000001A,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSpeakerMaxLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000001B,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeSpeakerMinLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000001C,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMicrophoneMutedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000001D,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMicrophoneVolumeLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000001E,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMicrophoneMaxLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000001F,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMicrophoneMinLevelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000020,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeMicrophoneAGCEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000021,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeImageRotationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000022,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeImageFlipHorizontalID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000023,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeImageFlipVerticalID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000024,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeLocalVideoRecordingEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000025,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeLocalSnapshotRecordingEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000026,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeStatusLightEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000027,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeStatusLightBrightnessID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000028,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeImageRotationDiscreteAnglesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000029,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterCameraAVStreamManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster CameraAVSettingsUserLevelManagement attributes
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeMPTZPositionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeMaxPresetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeMPTZPresetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeDPTZStreamsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeZoomMaxID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeTiltMinID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeTiltMaxID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributePanMinID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributePanMaxID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeMovementStateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterCameraAVSettingsUserLevelManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster WebRTCTransportProvider attributes
     ZGMTRAttributeIDTypeClusterWebRTCTransportProviderAttributeCurrentSessionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
     ZGMTRAttributeIDTypeClusterWebRTCTransportProviderAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterWebRTCTransportProviderAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterWebRTCTransportProviderAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterWebRTCTransportProviderAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterWebRTCTransportProviderAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterWebRTCTransportProviderAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
+    // Cluster WebRTCTransportRequestor attributes
+    ZGMTRAttributeIDTypeClusterWebRTCTransportRequestorAttributeCurrentSessionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterWebRTCTransportRequestorAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterWebRTCTransportRequestorAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterWebRTCTransportRequestorAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterWebRTCTransportRequestorAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterWebRTCTransportRequestorAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster PushAVStreamTransport attributes
+    ZGMTRAttributeIDTypeClusterPushAVStreamTransportAttributeSupportedFormatsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterPushAVStreamTransportAttributeCurrentConnectionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterPushAVStreamTransportAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterPushAVStreamTransportAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterPushAVStreamTransportAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterPushAVStreamTransportAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterPushAVStreamTransportAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
     // Cluster Chime attributes
     ZGMTRAttributeIDTypeClusterChimeAttributeInstalledChimeSoundsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterChimeAttributeActiveChimeIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterChimeAttributeSelectedChimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
     ZGMTRAttributeIDTypeClusterChimeAttributeEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
     ZGMTRAttributeIDTypeClusterChimeAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterChimeAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterChimeAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterChimeAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterChimeAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterChimeAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster AVAnalysis attributes
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeSupportedAmbientContextsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeActiveAmbientContextTriggersID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeMaxAnalysisStreamCountID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeCurrentAnalysisStreamCountID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeAnalysisStreamsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeTrackingEnabledID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterAVAnalysisAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster CommodityTariff attributes
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeTariffInfoID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeTariffUnitID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeStartDateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeDayEntriesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeDayPatternsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeCalendarPeriodsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeIndividualDaysID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeCurrentDayID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeNextDayID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeCurrentDayEntryID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeCurrentDayEntryDateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeNextDayEntryID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeNextDayEntryDateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeTariffComponentsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeTariffPeriodsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000E,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeCurrentTariffComponentsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000F,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeNextTariffComponentsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000010,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeDefaultRandomizationOffsetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000011,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeDefaultRandomizationTypeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000012,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterCommodityTariffAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster EcosystemInformation attributes
     ZGMTRAttributeIDTypeClusterEcosystemInformationAttributeDeviceDirectoryID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
     ZGMTRAttributeIDTypeClusterEcosystemInformationAttributeLocationDirectoryID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
     ZGMTRAttributeIDTypeClusterEcosystemInformationAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterEcosystemInformationAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterEcosystemInformationAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterEcosystemInformationAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterEcosystemInformationAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterEcosystemInformationAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster CommissionerControl attributes
-    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeSupportedDeviceCategoriesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
-    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
-    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
-    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
-    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeSupportedDeviceCategoriesID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeAttributeListID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeFeatureMapID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterCommissionerControlAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster JointFabricDatastore attributes
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeAnchorRootCAID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeAnchorNodeIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeAnchorVendorIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeFriendlyNameID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeGroupKeySetListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeGroupListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeNodeListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeAdminListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeStatusID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeEndpointGroupIDListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeEndpointBindingListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeNodeKeySetListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeNodeACLListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeNodeEndpointListID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterJointFabricDatastoreAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster JointFabricAdministrator attributes
+    ZGMTRAttributeIDTypeClusterJointFabricAdministratorAttributeAdministratorFabricIndexID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterJointFabricAdministratorAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterJointFabricAdministratorAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterJointFabricAdministratorAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterJointFabricAdministratorAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterJointFabricAdministratorAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster TLSCertificateManagement attributes
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeMaxRootCertificatesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeProvisionedRootCertificatesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeMaxClientCertificatesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeProvisionedClientCertificatesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterTLSCertificateManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster TLSClientManagement attributes
+    ZGMTRAttributeIDTypeClusterTLSClientManagementAttributeMaxProvisionedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterTLSClientManagementAttributeProvisionedEndpointsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterTLSClientManagementAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterTLSClientManagementAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterTLSClientManagementAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterTLSClientManagementAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterTLSClientManagementAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster MeterIdentification attributes
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributeMeterTypeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributePointOfDeliveryID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributeMeterSerialNumberID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributeProtocolVersionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributePowerThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterMeterIdentificationAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster CommodityMetering attributes
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeMeteredQuantityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeMeteredQuantityTimestampID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeTariffUnitID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeMaximumMeteredQuantitiesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterCommodityMeteringAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster TestCluster deprecated attribute names
     ZGMTRClusterTestClusterAttributeBooleanID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000000,
     ZGMTRClusterTestClusterAttributeBitmap8ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBitmap8ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBitmap8ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000001,
     ZGMTRClusterTestClusterAttributeBitmap16ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBitmap16ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBitmap16ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000002,
     ZGMTRClusterTestClusterAttributeBitmap32ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBitmap32ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBitmap32ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000003,
     ZGMTRClusterTestClusterAttributeBitmap64ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBitmap64ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeBitmap64ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000004,
     ZGMTRClusterTestClusterAttributeInt8uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000005,
     ZGMTRClusterTestClusterAttributeInt16uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt16uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt16uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000006,
     ZGMTRClusterTestClusterAttributeInt24uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt24uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt24uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000007,
     ZGMTRClusterTestClusterAttributeInt32uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt32uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt32uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000008,
     ZGMTRClusterTestClusterAttributeInt40uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt40uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt40uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000009,
     ZGMTRClusterTestClusterAttributeInt48uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt48uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt48uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000A,
     ZGMTRClusterTestClusterAttributeInt56uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt56uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt56uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000B,
     ZGMTRClusterTestClusterAttributeInt64uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt64uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt64uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000C,
     ZGMTRClusterTestClusterAttributeInt8sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt8sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt8sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000D,
     ZGMTRClusterTestClusterAttributeInt16sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt16sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt16sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000E,
     ZGMTRClusterTestClusterAttributeInt24sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt24sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000000F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt24sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000000F,
     ZGMTRClusterTestClusterAttributeInt32sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt32sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt32sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000010,
     ZGMTRClusterTestClusterAttributeInt40sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt40sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt40sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000011,
     ZGMTRClusterTestClusterAttributeInt48sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt48sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt48sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000012,
     ZGMTRClusterTestClusterAttributeInt56sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt56sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt56sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000013,
     ZGMTRClusterTestClusterAttributeInt64sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt64sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeInt64sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000014,
     ZGMTRClusterTestClusterAttributeEnum8ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEnum8ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEnum8ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000015,
     ZGMTRClusterTestClusterAttributeEnum16ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEnum16ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000016,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEnum16ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000016,
     ZGMTRClusterTestClusterAttributeFloatSingleID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeFloatSingleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeFloatSingleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000017,
     ZGMTRClusterTestClusterAttributeFloatDoubleID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeFloatDoubleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000018,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeFloatDoubleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000018,
     ZGMTRClusterTestClusterAttributeOctetStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000019,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000019,
     ZGMTRClusterTestClusterAttributeListInt8uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001A,
     ZGMTRClusterTestClusterAttributeListOctetStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001B,
     ZGMTRClusterTestClusterAttributeListStructOctetStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListStructOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListStructOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001C,
     ZGMTRClusterTestClusterAttributeLongOctetStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeLongOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeLongOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001D,
     ZGMTRClusterTestClusterAttributeCharStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeCharStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeCharStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001E,
     ZGMTRClusterTestClusterAttributeLongCharStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeLongCharStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000001F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeLongCharStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000001F,
     ZGMTRClusterTestClusterAttributeEpochUsID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEpochUsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000020,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEpochUsID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000020,
     ZGMTRClusterTestClusterAttributeEpochSID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEpochSID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000021,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEpochSID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000021,
     ZGMTRClusterTestClusterAttributeVendorIdID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeVendorIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000022,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeVendorIdID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000022,
     ZGMTRClusterTestClusterAttributeListNullablesAndOptionalsStructID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListNullablesAndOptionalsStructID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000023,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListNullablesAndOptionalsStructID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000023,
     ZGMTRClusterTestClusterAttributeEnumAttrID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEnumAttrID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000024,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeEnumAttrID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000024,
     ZGMTRClusterTestClusterAttributeStructAttrID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeStructAttrID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000025,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeStructAttrID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000025,
     ZGMTRClusterTestClusterAttributeRangeRestrictedInt8uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeRangeRestrictedInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000026,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeRangeRestrictedInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000026,
     ZGMTRClusterTestClusterAttributeRangeRestrictedInt8sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeRangeRestrictedInt8sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000027,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeRangeRestrictedInt8sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000027,
     ZGMTRClusterTestClusterAttributeRangeRestrictedInt16uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeRangeRestrictedInt16uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000028,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeRangeRestrictedInt16uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000028,
     ZGMTRClusterTestClusterAttributeRangeRestrictedInt16sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeRangeRestrictedInt16sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000029,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeRangeRestrictedInt16sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000029,
     ZGMTRClusterTestClusterAttributeListLongOctetStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListLongOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListLongOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002A,
     ZGMTRClusterTestClusterAttributeListFabricScopedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListFabricScopedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000002B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeListFabricScopedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000002B,
     ZGMTRClusterTestClusterAttributeTimedWriteBooleanID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeTimedWriteBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000030,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeTimedWriteBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000030,
     ZGMTRClusterTestClusterAttributeGeneralErrorBooleanID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeGeneralErrorBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000031,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeGeneralErrorBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000031,
     ZGMTRClusterTestClusterAttributeClusterErrorBooleanID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeClusterErrorBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00000032,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeClusterErrorBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00000032,
     ZGMTRClusterTestClusterAttributeUnsupportedID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeUnsupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x000000FF,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeUnsupportedID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x000000FF,
     ZGMTRClusterTestClusterAttributeNullableBooleanID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004000,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBooleanID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004000,
     ZGMTRClusterTestClusterAttributeNullableBitmap8ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBitmap8ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004001,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBitmap8ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004001,
     ZGMTRClusterTestClusterAttributeNullableBitmap16ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBitmap16ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004002,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBitmap16ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004002,
     ZGMTRClusterTestClusterAttributeNullableBitmap32ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBitmap32ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004003,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBitmap32ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004003,
     ZGMTRClusterTestClusterAttributeNullableBitmap64ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBitmap64ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004004,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableBitmap64ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004004,
     ZGMTRClusterTestClusterAttributeNullableInt8uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004005,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004005,
     ZGMTRClusterTestClusterAttributeNullableInt16uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt16uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004006,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt16uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004006,
     ZGMTRClusterTestClusterAttributeNullableInt24uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt24uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004007,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt24uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004007,
     ZGMTRClusterTestClusterAttributeNullableInt32uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt32uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004008,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt32uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004008,
     ZGMTRClusterTestClusterAttributeNullableInt40uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt40uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004009,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt40uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004009,
     ZGMTRClusterTestClusterAttributeNullableInt48uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt48uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt48uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400A,
     ZGMTRClusterTestClusterAttributeNullableInt56uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt56uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400B,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt56uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400B,
     ZGMTRClusterTestClusterAttributeNullableInt64uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt64uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400C,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt64uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400C,
     ZGMTRClusterTestClusterAttributeNullableInt8sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt8sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400D,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt8sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400D,
     ZGMTRClusterTestClusterAttributeNullableInt16sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt16sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt16sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400E,
     ZGMTRClusterTestClusterAttributeNullableInt24sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt24sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000400F,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt24sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000400F,
     ZGMTRClusterTestClusterAttributeNullableInt32sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt32sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004010,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt32sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004010,
     ZGMTRClusterTestClusterAttributeNullableInt40sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt40sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004011,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt40sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004011,
     ZGMTRClusterTestClusterAttributeNullableInt48sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt48sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004012,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt48sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004012,
     ZGMTRClusterTestClusterAttributeNullableInt56sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt56sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004013,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt56sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004013,
     ZGMTRClusterTestClusterAttributeNullableInt64sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt64sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004014,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableInt64sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004014,
     ZGMTRClusterTestClusterAttributeNullableEnum8ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableEnum8ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004015,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableEnum8ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004015,
     ZGMTRClusterTestClusterAttributeNullableEnum16ID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableEnum16ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004016,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableEnum16ID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004016,
     ZGMTRClusterTestClusterAttributeNullableFloatSingleID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableFloatSingleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004017,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableFloatSingleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004017,
     ZGMTRClusterTestClusterAttributeNullableFloatDoubleID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableFloatDoubleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004018,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableFloatDoubleID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004018,
     ZGMTRClusterTestClusterAttributeNullableOctetStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004019,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableOctetStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004019,
     ZGMTRClusterTestClusterAttributeNullableCharStringID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableCharStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x0000401E,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableCharStringID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x0000401E,
     ZGMTRClusterTestClusterAttributeNullableEnumAttrID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableEnumAttrID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004024,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableEnumAttrID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004024,
     ZGMTRClusterTestClusterAttributeNullableStructID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableStructID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004025,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableStructID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004025,
     ZGMTRClusterTestClusterAttributeNullableRangeRestrictedInt8uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableRangeRestrictedInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004026,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableRangeRestrictedInt8uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004026,
     ZGMTRClusterTestClusterAttributeNullableRangeRestrictedInt8sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableRangeRestrictedInt8sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004027,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableRangeRestrictedInt8sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004027,
     ZGMTRClusterTestClusterAttributeNullableRangeRestrictedInt16uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableRangeRestrictedInt16uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004028,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableRangeRestrictedInt16uID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004028,
     ZGMTRClusterTestClusterAttributeNullableRangeRestrictedInt16sID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableRangeRestrictedInt16sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = 0x00004029,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableRangeRestrictedInt16sID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = 0x00004029,
     ZGMTRClusterTestClusterAttributeWriteOnlyInt8uID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeWriteOnlyInt8uID", ios(16.2, 16.4), macos(13.1, 13.3), watchos(9.2, 9.4), tvos(16.2, 16.4))
-    = 0x0000402A,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeWriteOnlyInt8uID", ios(16.2, 16.4), macos(13.1, 13.3), watchos(9.2, 9.4), tvos(16.2, 16.4)) = 0x0000402A,
     ZGMTRClusterTestClusterAttributeGeneratedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeGeneratedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeGeneratedCommandListID,
     ZGMTRClusterTestClusterAttributeAcceptedCommandListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeAcceptedCommandListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAcceptedCommandListID,
     ZGMTRClusterTestClusterAttributeAttributeListID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeAttributeListID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeAttributeListID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeAttributeListID,
     ZGMTRClusterTestClusterAttributeFeatureMapID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeFeatureMapID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeFeatureMapID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeFeatureMapID,
     ZGMTRClusterTestClusterAttributeClusterRevisionID
-        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-    = ZGMTRClusterGlobalAttributeClusterRevisionID,
+        ZGMTR_DEPRECATED("Please use ZGMTRAttributeIDTypeClusterUnitTestingAttributeClusterRevisionID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4)) = ZGMTRClusterGlobalAttributeClusterRevisionID,
 
     // Cluster UnitTesting attributes
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeBooleanID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
@@ -5092,6 +4575,7 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeClusterErrorBooleanID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000032,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeGlobalEnumID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000033,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeGlobalStructID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000034,
+    ZGMTRAttributeIDTypeClusterUnitTestingAttributeUnsupportedAttributeRequiringAdminPrivilegeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x000000FE,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeUnsupportedID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x000000FF,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeReadFailureCodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00003000,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeFailureInt32UID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00003001,
@@ -5133,7 +4617,6 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeNullableGlobalStructID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00004034,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeGeneratedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeAcceptedCommandListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterUnitTestingAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeAttributeListID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeFeatureMapID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterUnitTestingAttributeClusterRevisionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
@@ -5143,10 +4626,17 @@ typedef NS_ENUM(uint32_t, ZGMTRAttributeIDType) {
     ZGMTRAttributeIDTypeClusterSampleMEIAttributeFlipFlopID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
     ZGMTRAttributeIDTypeClusterSampleMEIAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
     ZGMTRAttributeIDTypeClusterSampleMEIAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
-    ZGMTRAttributeIDTypeClusterSampleMEIAttributeEventListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeEventListID,
     ZGMTRAttributeIDTypeClusterSampleMEIAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
     ZGMTRAttributeIDTypeClusterSampleMEIAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
     ZGMTRAttributeIDTypeClusterSampleMEIAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
+
+    // Cluster TestHiddenManufacturerSpecific attributes
+    ZGMTRAttributeIDTypeClusterTestHiddenManufacturerSpecificAttributeTestAttributeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRAttributeIDTypeClusterTestHiddenManufacturerSpecificAttributeGeneratedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeGeneratedCommandListID,
+    ZGMTRAttributeIDTypeClusterTestHiddenManufacturerSpecificAttributeAcceptedCommandListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAcceptedCommandListID,
+    ZGMTRAttributeIDTypeClusterTestHiddenManufacturerSpecificAttributeAttributeListID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeAttributeListID,
+    ZGMTRAttributeIDTypeClusterTestHiddenManufacturerSpecificAttributeFeatureMapID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeFeatureMapID,
+    ZGMTRAttributeIDTypeClusterTestHiddenManufacturerSpecificAttributeClusterRevisionID ZGMTR_PROVISIONALLY_AVAILABLE = ZGMTRAttributeIDTypeGlobalAttributeClusterRevisionID,
 
     // Cluster BarrierControl deprecated attribute names
     ZGMTRClusterBarrierControlAttributeBarrierMovingStateID
@@ -5972,8 +5462,8 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     // Cluster AccessControl deprecated command id names
 
     // Cluster AccessControl commands
-    ZGMTRCommandIDTypeClusterAccessControlCommandReviewFabricRestrictionsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterAccessControlCommandReviewFabricRestrictionsResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterAccessControlCommandReviewFabricRestrictionsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterAccessControlCommandReviewFabricRestrictionsResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster Actions deprecated command id names
     ZGMTRClusterActionsCommandInstantActionID
@@ -6157,10 +5647,10 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
 
     // Cluster GeneralDiagnostics commands
     ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandTestEventTriggerID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
-    ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandTimeSnapshotID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandTimeSnapshotResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandPayloadTestRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandPayloadTestResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandTimeSnapshotID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandTimeSnapshotResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandPayloadTestRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRCommandIDTypeClusterGeneralDiagnosticsCommandPayloadTestResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
 
     // Cluster SoftwareDiagnostics deprecated command id names
     ZGMTRClusterSoftwareDiagnosticsCommandResetWatermarksID
@@ -6200,18 +5690,18 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     = 0x00000000,
 
     // Cluster TimeSynchronization commands
-    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetUTCTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetUTCTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
     ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetUtcTimeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
-    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetTrustedTimeSourceID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetTimeZoneID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetTimeZoneResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetDSTOffsetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetDefaultNTPID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetTrustedTimeSourceID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetTimeZoneID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetTimeZoneResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetDSTOffsetID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRCommandIDTypeClusterTimeSynchronizationCommandSetDefaultNTPID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
 
     // Cluster BridgedDeviceBasic deprecated command id names
 
     // Cluster BridgedDeviceBasicInformation commands
-    ZGMTRCommandIDTypeClusterBridgedDeviceBasicInformationCommandKeepActiveID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000080,
+    ZGMTRCommandIDTypeClusterBridgedDeviceBasicInformationCommandKeepActiveID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000080,
 
     // Cluster AdministratorCommissioning deprecated command id names
     ZGMTRClusterAdministratorCommissioningCommandOpenCommissioningWindowID
@@ -6280,6 +5770,9 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterOperationalCredentialsCommandUpdateFabricLabelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000009,
     ZGMTRCommandIDTypeClusterOperationalCredentialsCommandRemoveFabricID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000000A,
     ZGMTRCommandIDTypeClusterOperationalCredentialsCommandAddTrustedRootCertificateID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000000B,
+    ZGMTRCommandIDTypeClusterOperationalCredentialsCommandSetVIDVerificationStatementID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRCommandIDTypeClusterOperationalCredentialsCommandSignVIDVerificationRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+    ZGMTRCommandIDTypeClusterOperationalCredentialsCommandSignVIDVerificationResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000E,
 
     // Cluster GroupKeyManagement deprecated command id names
     ZGMTRClusterGroupKeyManagementCommandKeySetWriteID
@@ -6310,28 +5803,20 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterGroupKeyManagementCommandKeySetReadAllIndicesResponseID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000005,
 
     // Cluster ICDManagement commands
-    ZGMTRCommandIDTypeClusterICDManagementCommandRegisterClientID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterICDManagementCommandRegisterClientResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterICDManagementCommandUnregisterClientID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterICDManagementCommandStayActiveRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterICDManagementCommandStayActiveResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-
-    // Cluster Timer commands
-    ZGMTRCommandIDTypeClusterTimerCommandSetTimerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterTimerCommandResetTimerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterTimerCommandAddTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterTimerCommandReduceTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterICDManagementCommandRegisterClientID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterICDManagementCommandRegisterClientResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterICDManagementCommandUnregisterClientID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterICDManagementCommandStayActiveRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRCommandIDTypeClusterICDManagementCommandStayActiveResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
 
     // Cluster OvenCavityOperationalState commands
-    ZGMTRCommandIDTypeClusterOvenCavityOperationalStateCommandPauseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterOvenCavityOperationalStateCommandStopID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterOvenCavityOperationalStateCommandStartID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterOvenCavityOperationalStateCommandResumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterOvenCavityOperationalStateCommandOperationalCommandResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterOvenCavityOperationalStateCommandStopID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterOvenCavityOperationalStateCommandStartID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterOvenCavityOperationalStateCommandOperationalCommandResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
 
     // Cluster OvenMode commands
-    ZGMTRCommandIDTypeClusterOvenModeCommandChangeToModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterOvenModeCommandChangeToModeResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterOvenModeCommandChangeToModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterOvenModeCommandChangeToModeResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster ModeSelect deprecated command id names
     ZGMTRClusterModeSelectCommandChangeToModeID
@@ -6342,12 +5827,12 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterModeSelectCommandChangeToModeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
 
     // Cluster LaundryWasherMode commands
-    ZGMTRCommandIDTypeClusterLaundryWasherModeCommandChangeToModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterLaundryWasherModeCommandChangeToModeResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterLaundryWasherModeCommandChangeToModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterLaundryWasherModeCommandChangeToModeResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster RefrigeratorAndTemperatureControlledCabinetMode commands
-    ZGMTRCommandIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeCommandChangeToModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeCommandChangeToModeResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeCommandChangeToModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterRefrigeratorAndTemperatureControlledCabinetModeCommandChangeToModeResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster RVCRunMode commands
     ZGMTRCommandIDTypeClusterRVCRunModeCommandChangeToModeID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000000,
@@ -6358,22 +5843,22 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterRVCCleanModeCommandChangeToModeResponseID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000001,
 
     // Cluster TemperatureControl commands
-    ZGMTRCommandIDTypeClusterTemperatureControlCommandSetTemperatureID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterTemperatureControlCommandSetTemperatureID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
 
     // Cluster DishwasherMode commands
-    ZGMTRCommandIDTypeClusterDishwasherModeCommandChangeToModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterDishwasherModeCommandChangeToModeResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterDishwasherModeCommandChangeToModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterDishwasherModeCommandChangeToModeResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster SmokeCOAlarm commands
     ZGMTRCommandIDTypeClusterSmokeCOAlarmCommandSelfTestRequestID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
 
     // Cluster DishwasherAlarm commands
-    ZGMTRCommandIDTypeClusterDishwasherAlarmCommandResetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterDishwasherAlarmCommandModifyEnabledAlarmsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterDishwasherAlarmCommandResetID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterDishwasherAlarmCommandModifyEnabledAlarmsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster MicrowaveOvenControl commands
-    ZGMTRCommandIDTypeClusterMicrowaveOvenControlCommandSetCookingParametersID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterMicrowaveOvenControlCommandAddMoreTimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterMicrowaveOvenControlCommandSetCookingParametersID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterMicrowaveOvenControlCommandAddMoreTimeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster OperationalState commands
     ZGMTRCommandIDTypeClusterOperationalStateCommandPauseID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000000,
@@ -6386,7 +5871,7 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterRVCOperationalStateCommandPauseID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000000,
     ZGMTRCommandIDTypeClusterRVCOperationalStateCommandResumeID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000003,
     ZGMTRCommandIDTypeClusterRVCOperationalStateCommandOperationalCommandResponseID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000004,
-    ZGMTRCommandIDTypeClusterRVCOperationalStateCommandGoHomeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000080,
+    ZGMTRCommandIDTypeClusterRVCOperationalStateCommandGoHomeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000080,
 
     // Cluster ScenesManagement commands
     ZGMTRCommandIDTypeClusterScenesManagementCommandAddSceneID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
@@ -6405,11 +5890,22 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterScenesManagementCommandCopySceneID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000040,
     ZGMTRCommandIDTypeClusterScenesManagementCommandCopySceneResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000040,
 
+    // Cluster Groupcast commands
+    ZGMTRCommandIDTypeClusterGroupcastCommandJoinGroupID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterGroupcastCommandLeaveGroupID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterGroupcastCommandLeaveGroupResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterGroupcastCommandUpdateGroupKeyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterGroupcastCommandConfigureAuxiliaryACLID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterGroupcastCommandGroupcastTestingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+
     // Cluster HEPAFilterMonitoring commands
     ZGMTRCommandIDTypeClusterHEPAFilterMonitoringCommandResetConditionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
 
     // Cluster ActivatedCarbonFilterMonitoring commands
     ZGMTRCommandIDTypeClusterActivatedCarbonFilterMonitoringCommandResetConditionID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
+
+    // Cluster WaterTankLevelMonitoring commands
+    ZGMTRCommandIDTypeClusterWaterTankLevelMonitoringCommandResetConditionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
 
     // Cluster BooleanStateConfiguration commands
     ZGMTRCommandIDTypeClusterBooleanStateConfigurationCommandSuppressAlarmID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
@@ -6420,51 +5916,60 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterValveConfigurationAndControlCommandCloseID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000001,
 
     // Cluster WaterHeaterManagement commands
-    ZGMTRCommandIDTypeClusterWaterHeaterManagementCommandBoostID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterWaterHeaterManagementCommandCancelBoostID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterWaterHeaterManagementCommandBoostID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterWaterHeaterManagementCommandCancelBoostID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
-    // Cluster DemandResponseLoadControl commands
-    ZGMTRCommandIDTypeClusterDemandResponseLoadControlCommandRegisterLoadControlProgramRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterDemandResponseLoadControlCommandUnregisterLoadControlProgramRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterDemandResponseLoadControlCommandAddLoadControlEventRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterDemandResponseLoadControlCommandRemoveLoadControlEventRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterDemandResponseLoadControlCommandClearLoadControlEventsRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    // Cluster CommodityPrice commands
+    ZGMTRCommandIDTypeClusterCommodityPriceCommandGetDetailedPriceRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterCommodityPriceCommandGetDetailedPriceResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterCommodityPriceCommandGetDetailedForecastRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterCommodityPriceCommandGetDetailedForecastResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
 
     // Cluster Messages commands
-    ZGMTRCommandIDTypeClusterMessagesCommandPresentMessagesRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterMessagesCommandCancelMessagesRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterMessagesCommandPresentMessagesRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterMessagesCommandCancelMessagesRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster DeviceEnergyManagement commands
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandPowerAdjustRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandCancelPowerAdjustRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandStartTimeAdjustRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandPauseRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandResumeRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandModifyForecastRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandRequestConstraintBasedForecastID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandCancelRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandPowerAdjustRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandCancelPowerAdjustRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandStartTimeAdjustRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandPauseRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandResumeRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandModifyForecastRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandRequestConstraintBasedForecastID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000006,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandCancelRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000007,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandPowerRangeAdjustRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementCommandCancelPowerRangeAdjustRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
 
     // Cluster EnergyEVSE commands
-    ZGMTRCommandIDTypeClusterEnergyEVSECommandGetTargetsResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterEnergyEVSECommandDisableID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterEnergyEVSECommandEnableChargingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterEnergyEVSECommandGetTargetsResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterEnergyEVSECommandDisableID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterEnergyEVSECommandEnableChargingID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
     ZGMTRCommandIDTypeClusterEnergyEVSECommandEnableDischargingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterEnergyEVSECommandStartDiagnosticsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRCommandIDTypeClusterEnergyEVSECommandSetTargetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRCommandIDTypeClusterEnergyEVSECommandGetTargetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRCommandIDTypeClusterEnergyEVSECommandClearTargetsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterEnergyEVSECommandStartDiagnosticsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRCommandIDTypeClusterEnergyEVSECommandSetTargetsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRCommandIDTypeClusterEnergyEVSECommandGetTargetsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000006,
+    ZGMTRCommandIDTypeClusterEnergyEVSECommandClearTargetsID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000007,
 
     // Cluster EnergyEVSEMode commands
-    ZGMTRCommandIDTypeClusterEnergyEVSEModeCommandChangeToModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterEnergyEVSEModeCommandChangeToModeResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterEnergyEVSEModeCommandChangeToModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterEnergyEVSEModeCommandChangeToModeResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster WaterHeaterMode commands
-    ZGMTRCommandIDTypeClusterWaterHeaterModeCommandChangeToModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterWaterHeaterModeCommandChangeToModeResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterWaterHeaterModeCommandChangeToModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterWaterHeaterModeCommandChangeToModeResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster DeviceEnergyManagementMode commands
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementModeCommandChangeToModeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterDeviceEnergyManagementModeCommandChangeToModeResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementModeCommandChangeToModeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterDeviceEnergyManagementModeCommandChangeToModeResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+
+    // Cluster ElectricalAlarm commands
+    ZGMTRCommandIDTypeClusterElectricalAlarmCommandResetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterElectricalAlarmCommandModifyEnabledAlarmsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterElectricalAlarmCommandSetElectricalAlarmThresholdsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000080,
+
+    // Cluster ElectricalProtectionAlarm commands
+    ZGMTRCommandIDTypeClusterElectricalProtectionAlarmCommandModifyEnabledAlarmsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
 
     // Cluster DoorLock deprecated command id names
     ZGMTRClusterDoorLockCommandLockDoorID
@@ -6565,9 +6070,9 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterDoorLockCommandGetCredentialStatusID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000024,
     ZGMTRCommandIDTypeClusterDoorLockCommandGetCredentialStatusResponseID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000025,
     ZGMTRCommandIDTypeClusterDoorLockCommandClearCredentialID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000026,
-    ZGMTRCommandIDTypeClusterDoorLockCommandUnboltDoorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000027,
-    ZGMTRCommandIDTypeClusterDoorLockCommandSetAliroReaderConfigID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000028,
-    ZGMTRCommandIDTypeClusterDoorLockCommandClearAliroReaderConfigID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000029,
+    ZGMTRCommandIDTypeClusterDoorLockCommandUnboltDoorID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000027,
+    ZGMTRCommandIDTypeClusterDoorLockCommandSetAliroReaderConfigID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000028,
+    ZGMTRCommandIDTypeClusterDoorLockCommandClearAliroReaderConfigID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000029,
 
     // Cluster WindowCovering deprecated command id names
     ZGMTRClusterWindowCoveringCommandUpOrOpenID
@@ -6601,11 +6106,23 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterWindowCoveringCommandGoToTiltValueID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000007,
     ZGMTRCommandIDTypeClusterWindowCoveringCommandGoToTiltPercentageID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000008,
 
+    // Cluster ClosureControl commands
+    ZGMTRCommandIDTypeClusterClosureControlCommandStopID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterClosureControlCommandMoveToID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterClosureControlCommandCalibrateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterClosureControlCommandGroupedMoveToID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+
+    // Cluster ClosureDimension commands
+    ZGMTRCommandIDTypeClusterClosureDimensionCommandSetTargetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterClosureDimensionCommandStepID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterClosureDimensionCommandGroupedSetTargetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterClosureDimensionCommandGroupedStepID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+
     // Cluster ServiceArea commands
-    ZGMTRCommandIDTypeClusterServiceAreaCommandSelectAreasID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterServiceAreaCommandSelectAreasResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterServiceAreaCommandSkipAreaID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterServiceAreaCommandSkipAreaResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterServiceAreaCommandSelectAreasID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterServiceAreaCommandSelectAreasResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterServiceAreaCommandSkipAreaID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterServiceAreaCommandSkipAreaResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
 
     // Cluster Thermostat deprecated command id names
     ZGMTRClusterThermostatCommandSetpointRaiseLowerID
@@ -6629,16 +6146,22 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterThermostatCommandGetWeeklyScheduleResponseID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRCommandIDTypeClusterThermostatCommandSetWeeklyScheduleID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRCommandIDTypeClusterThermostatCommandGetWeeklyScheduleID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterThermostatCommandAddThermostatSuggestionResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
     ZGMTRCommandIDTypeClusterThermostatCommandClearWeeklyScheduleID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
-    ZGMTRCommandIDTypeClusterThermostatCommandSetActiveScheduleRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRCommandIDTypeClusterThermostatCommandSetActivePresetRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRCommandIDTypeClusterThermostatCommandAtomicResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x000000FD,
-    ZGMTRCommandIDTypeClusterThermostatCommandAtomicRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x000000FE,
+    ZGMTRCommandIDTypeClusterThermostatCommandSetActiveScheduleRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRCommandIDTypeClusterThermostatCommandSetActivePresetRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000006,
+    ZGMTRCommandIDTypeClusterThermostatCommandAddThermostatSuggestionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterThermostatCommandRemoveThermostatSuggestionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRCommandIDTypeClusterThermostatCommandAtomicResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x000000FD,
+    ZGMTRCommandIDTypeClusterThermostatCommandAtomicRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x000000FE,
 
     // Cluster FanControl deprecated command id names
 
     // Cluster FanControl commands
     ZGMTRCommandIDTypeClusterFanControlCommandStepID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
+
+    // Cluster Humidistat commands
+    ZGMTRCommandIDTypeClusterHumidistatCommandSetSettingsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
 
     // Cluster ColorControl deprecated command id names
     ZGMTRClusterColorControlCommandMoveToHueID
@@ -6720,22 +6243,52 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterColorControlCommandMoveColorTemperatureID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000004B,
     ZGMTRCommandIDTypeClusterColorControlCommandStepColorTemperatureID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000004C,
 
+    // Cluster DynamicLighting commands
+    ZGMTRCommandIDTypeClusterDynamicLightingCommandStartEffectID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterDynamicLightingCommandStopEffectID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+
+    // Cluster ProximityRanging commands
+    ZGMTRCommandIDTypeClusterProximityRangingCommandStartRangingRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterProximityRangingCommandStartRangingResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterProximityRangingCommandStopRangingRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+
+    // Cluster NetworkIdentityManagement commands
+    ZGMTRCommandIDTypeClusterNetworkIdentityManagementCommandAddClientID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterNetworkIdentityManagementCommandAddClientResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterNetworkIdentityManagementCommandRemoveClientID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterNetworkIdentityManagementCommandQueryIdentityID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterNetworkIdentityManagementCommandQueryIdentityResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterNetworkIdentityManagementCommandImportAdminSecretID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000040,
+    ZGMTRCommandIDTypeClusterNetworkIdentityManagementCommandExportAdminSecretID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000041,
+    ZGMTRCommandIDTypeClusterNetworkIdentityManagementCommandExportAdminSecretResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000042,
+
     // Cluster WiFiNetworkManagement commands
-    ZGMTRCommandIDTypeClusterWiFiNetworkManagementCommandNetworkPassphraseRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterWiFiNetworkManagementCommandNetworkPassphraseResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterWiFiNetworkManagementCommandNetworkPassphraseRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterWiFiNetworkManagementCommandNetworkPassphraseResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster ThreadBorderRouterManagement commands
-    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandGetActiveDatasetRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandGetPendingDatasetRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandDatasetResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandSetActiveDatasetRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandSetPendingDatasetRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandGetActiveDatasetRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandGetPendingDatasetRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandDatasetResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandSetActiveDatasetRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTRCommandIDTypeClusterThreadBorderRouterManagementCommandSetPendingDatasetRequestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
 
     // Cluster ThreadNetworkDirectory commands
-    ZGMTRCommandIDTypeClusterThreadNetworkDirectoryCommandAddNetworkID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterThreadNetworkDirectoryCommandRemoveNetworkID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterThreadNetworkDirectoryCommandGetOperationalDatasetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterThreadNetworkDirectoryCommandOperationalDatasetResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterThreadNetworkDirectoryCommandAddNetworkID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterThreadNetworkDirectoryCommandRemoveNetworkID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterThreadNetworkDirectoryCommandGetOperationalDatasetID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterThreadNetworkDirectoryCommandOperationalDatasetResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+
+    // Cluster CommissioningProxy commands
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyConnectRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyConnectResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyDisconnectRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyScanRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyScanResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyBackGroundScanStartRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyBackGroundScanStopRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyMessageRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterCommissioningProxyCommandProxyMessageResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
 
     // Cluster Channel deprecated command id names
     ZGMTRClusterChannelCommandChangeChannelID
@@ -6756,10 +6309,10 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterChannelCommandChangeChannelResponseID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRCommandIDTypeClusterChannelCommandChangeChannelByNumberID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTRCommandIDTypeClusterChannelCommandSkipChannelID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
-    ZGMTRCommandIDTypeClusterChannelCommandGetProgramGuideID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRCommandIDTypeClusterChannelCommandProgramGuideResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRCommandIDTypeClusterChannelCommandRecordProgramID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRCommandIDTypeClusterChannelCommandCancelRecordProgramID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterChannelCommandGetProgramGuideID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTRCommandIDTypeClusterChannelCommandProgramGuideResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+    ZGMTRCommandIDTypeClusterChannelCommandRecordProgramID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000006,
+    ZGMTRCommandIDTypeClusterChannelCommandCancelRecordProgramID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000007,
 
     // Cluster TargetNavigator deprecated command id names
     ZGMTRClusterTargetNavigatorCommandNavigateTargetID
@@ -6824,9 +6377,9 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterMediaPlaybackCommandSkipBackwardID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000009,
     ZGMTRCommandIDTypeClusterMediaPlaybackCommandPlaybackResponseID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000000A,
     ZGMTRCommandIDTypeClusterMediaPlaybackCommandSeekID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000000B,
-    ZGMTRCommandIDTypeClusterMediaPlaybackCommandActivateAudioTrackID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
-    ZGMTRCommandIDTypeClusterMediaPlaybackCommandActivateTextTrackID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
-    ZGMTRCommandIDTypeClusterMediaPlaybackCommandDeactivateTextTrackID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000E,
+    ZGMTRCommandIDTypeClusterMediaPlaybackCommandActivateAudioTrackID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000000C,
+    ZGMTRCommandIDTypeClusterMediaPlaybackCommandActivateTextTrackID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000000D,
+    ZGMTRCommandIDTypeClusterMediaPlaybackCommandDeactivateTextTrackID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000000E,
 
     // Cluster MediaInput deprecated command id names
     ZGMTRClusterMediaInputCommandSelectInputID
@@ -6883,6 +6436,9 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterContentLauncherCommandLaunchContentID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTRCommandIDTypeClusterContentLauncherCommandLaunchURLID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTRCommandIDTypeClusterContentLauncherCommandLauncherResponseID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
+    ZGMTRCommandIDTypeClusterContentLauncherCommandContentReplicationRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterContentLauncherCommandContentReplicationResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterContentLauncherCommandPlayPresetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
 
     // Cluster AudioOutput deprecated command id names
     ZGMTRClusterAudioOutputCommandSelectOutputID
@@ -6948,27 +6504,171 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterContentControlCommandUnblockUnratedContentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
     ZGMTRCommandIDTypeClusterContentControlCommandSetOnDemandRatingThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
     ZGMTRCommandIDTypeClusterContentControlCommandSetScheduledContentRatingThresholdID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRCommandIDTypeClusterContentControlCommandAddBlockChannelsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRCommandIDTypeClusterContentControlCommandRemoveBlockChannelsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRCommandIDTypeClusterContentControlCommandAddBlockApplicationsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+    ZGMTRCommandIDTypeClusterContentControlCommandRemoveBlockApplicationsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000E,
+    ZGMTRCommandIDTypeClusterContentControlCommandSetBlockContentTimeWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000F,
+    ZGMTRCommandIDTypeClusterContentControlCommandRemoveBlockContentTimeWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000010,
 
     // Cluster ContentAppObserver commands
-    ZGMTRCommandIDTypeClusterContentAppObserverCommandContentAppMessageID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterContentAppObserverCommandContentAppMessageResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterContentAppObserverCommandContentAppMessageID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterContentAppObserverCommandContentAppMessageResponseID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+
+    // Cluster MediaFileManagement commands
+    ZGMTRCommandIDTypeClusterMediaFileManagementCommandAddFileID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterMediaFileManagementCommandAddFileResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterMediaFileManagementCommandDeleteFileID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterMediaFileManagementCommandRequestSharedFilesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterMediaFileManagementCommandGetSharedFileID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterMediaFileManagementCommandGetSharedFileResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterMediaFileManagementCommandOfferFileID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+
+    // Cluster AudioControl commands
+    ZGMTRCommandIDTypeClusterAudioControlCommandMuteID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterAudioControlCommandUnmuteID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterAudioControlCommandToggleMutedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterAudioControlCommandSetVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterAudioControlCommandIncreaseVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterAudioControlCommandDecreaseVolumeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+
+    // Cluster ZoneManagement commands
+    ZGMTRCommandIDTypeClusterZoneManagementCommandCreateTwoDCartesianZoneID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterZoneManagementCommandCreateTwoDCartesianZoneResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterZoneManagementCommandUpdateTwoDCartesianZoneID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterZoneManagementCommandRemoveZoneID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterZoneManagementCommandCreateOrUpdateTriggerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterZoneManagementCommandRemoveTriggerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+
+    // Cluster CameraAVStreamManagement commands
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandAudioStreamAllocateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandAudioStreamAllocateResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandAudioStreamDeallocateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandVideoStreamAllocateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandVideoStreamAllocateResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandVideoStreamModifyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandVideoStreamDeallocateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandSnapshotStreamAllocateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandSnapshotStreamAllocateResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandSnapshotStreamModifyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandSnapshotStreamDeallocateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandSetStreamPrioritiesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandCaptureSnapshotID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRCommandIDTypeClusterCameraAVStreamManagementCommandCaptureSnapshotResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+
+    // Cluster CameraAVSettingsUserLevelManagement commands
+    ZGMTRCommandIDTypeClusterCameraAVSettingsUserLevelManagementCommandMPTZSetPositionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterCameraAVSettingsUserLevelManagementCommandMPTZRelativeMoveID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterCameraAVSettingsUserLevelManagementCommandMPTZMoveToPresetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterCameraAVSettingsUserLevelManagementCommandMPTZSavePresetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterCameraAVSettingsUserLevelManagementCommandMPTZRemovePresetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterCameraAVSettingsUserLevelManagementCommandDPTZSetViewportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterCameraAVSettingsUserLevelManagementCommandDPTZRelativeMoveID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
 
     // Cluster WebRTCTransportProvider commands
-    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandSolicitOfferID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandSolicitOfferResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandProvideOfferID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandProvideOfferResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandProvideAnswerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
-    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandProvideICECandidateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
-    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandEndSessionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandSolicitOfferID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandSolicitOfferResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandProvideOfferID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandProvideOfferResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandProvideAnswerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandProvideICECandidatesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterWebRTCTransportProviderCommandEndSessionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+
+    // Cluster WebRTCTransportRequestor commands
+    ZGMTRCommandIDTypeClusterWebRTCTransportRequestorCommandOfferID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterWebRTCTransportRequestorCommandAnswerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterWebRTCTransportRequestorCommandICECandidatesID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterWebRTCTransportRequestorCommandEndID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+
+    // Cluster PushAVStreamTransport commands
+    ZGMTRCommandIDTypeClusterPushAVStreamTransportCommandAllocatePushTransportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterPushAVStreamTransportCommandAllocatePushTransportResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterPushAVStreamTransportCommandDeallocatePushTransportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterPushAVStreamTransportCommandModifyPushTransportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterPushAVStreamTransportCommandSetTransportStatusID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterPushAVStreamTransportCommandManuallyTriggerTransportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterPushAVStreamTransportCommandFindTransportID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRCommandIDTypeClusterPushAVStreamTransportCommandFindTransportResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
 
     // Cluster Chime commands
     ZGMTRCommandIDTypeClusterChimeCommandPlayChimeSoundID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
 
+    // Cluster AVAnalysis commands
+    ZGMTRCommandIDTypeClusterAVAnalysisCommandEnableContextTriggersID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterAVAnalysisCommandDisableContextTriggersID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterAVAnalysisCommandEstablishAnalysisStreamID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterAVAnalysisCommandEstablishAnalysisStreamResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterAVAnalysisCommandActivateAnalysisStreamID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterAVAnalysisCommandDeactivateAnalysisStreamID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterAVAnalysisCommandRemoveAnalysisStreamID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+
+    // Cluster CommodityTariff commands
+    ZGMTRCommandIDTypeClusterCommodityTariffCommandGetTariffComponentID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterCommodityTariffCommandGetTariffComponentResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterCommodityTariffCommandGetDayEntryID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterCommodityTariffCommandGetDayEntryResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+
     // Cluster CommissionerControl commands
-    ZGMTRCommandIDTypeClusterCommissionerControlCommandRequestCommissioningApprovalID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTRCommandIDTypeClusterCommissionerControlCommandCommissionNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTRCommandIDTypeClusterCommissionerControlCommandReverseOpenCommissioningWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterCommissionerControlCommandRequestCommissioningApprovalID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTRCommandIDTypeClusterCommissionerControlCommandCommissionNodeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTRCommandIDTypeClusterCommissionerControlCommandReverseOpenCommissioningWindowID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+
+    // Cluster JointFabricDatastore commands
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandAddKeySetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandUpdateKeySetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandRemoveKeySetID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandAddGroupID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandUpdateGroupID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandRemoveGroupID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandAddAdminID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandUpdateAdminID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandRemoveAdminID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandAddPendingNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandRefreshNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandUpdateNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandRemoveNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandUpdateEndpointForNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandAddGroupIDToEndpointForNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000E,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandRemoveGroupIDFromEndpointForNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000F,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandAddBindingToEndpointForNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000010,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandRemoveBindingFromEndpointForNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000011,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandAddACLToNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000012,
+    ZGMTRCommandIDTypeClusterJointFabricDatastoreCommandRemoveACLFromNodeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000013,
+
+    // Cluster JointFabricAdministrator commands
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandICACCSRRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandICACCSRResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandAddICACID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandICACResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandOpenJointCommissioningWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandTransferAnchorRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandTransferAnchorResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandTransferAnchorCompleteID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterJointFabricAdministratorCommandAnnounceJointFabricAdministratorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+
+    // Cluster TLSCertificateManagement commands
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandProvisionRootCertificateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandProvisionRootCertificateResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandFindRootCertificateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandFindRootCertificateResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandLookupRootCertificateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandLookupRootCertificateResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandRemoveRootCertificateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandClientCSRID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandClientCSRResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000008,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandProvisionClientCertificateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000009,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandFindClientCertificateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000A,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandFindClientCertificateResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000B,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandLookupClientCertificateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000C,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandLookupClientCertificateResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000D,
+    ZGMTRCommandIDTypeClusterTLSCertificateManagementCommandRemoveClientCertificateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000000E,
+
+    // Cluster TLSClientManagement commands
+    ZGMTRCommandIDTypeClusterTLSClientManagementCommandProvisionEndpointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTRCommandIDTypeClusterTLSClientManagementCommandProvisionEndpointResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTRCommandIDTypeClusterTLSClientManagementCommandFindEndpointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTRCommandIDTypeClusterTLSClientManagementCommandFindEndpointResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTRCommandIDTypeClusterTLSClientManagementCommandRemoveEndpointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
 
     // Cluster TestCluster deprecated command id names
     ZGMTRClusterTestClusterCommandTestID
@@ -7116,6 +6816,7 @@ typedef NS_ENUM(uint32_t, ZGMTRCommandIDType) {
     ZGMTRCommandIDTypeClusterUnitTestingCommandTestSecondBatchHelperRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000017,
     ZGMTRCommandIDTypeClusterUnitTestingCommandStringEchoRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000018,
     ZGMTRCommandIDTypeClusterUnitTestingCommandGlobalEchoRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000019,
+    ZGMTRCommandIDTypeClusterUnitTestingCommandTestCheckCommandFlagsID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000001A,
     ZGMTRCommandIDTypeClusterUnitTestingCommandTestDifferentVendorMeiRequestID ZGMTR_PROVISIONALLY_AVAILABLE = 0xFFF200AA,
     ZGMTRCommandIDTypeClusterUnitTestingCommandTestDifferentVendorMeiResponseID ZGMTR_PROVISIONALLY_AVAILABLE = 0xFFF200BB,
 
@@ -7172,7 +6873,8 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     // Cluster AccessControl events
     ZGMTREventIDTypeClusterAccessControlEventAccessControlEntryChangedID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
     ZGMTREventIDTypeClusterAccessControlEventAccessControlExtensionChangedID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
-    ZGMTREventIDTypeClusterAccessControlEventFabricRestrictionReviewUpdateID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTREventIDTypeClusterAccessControlEventFabricRestrictionReviewUpdateID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTREventIDTypeClusterAccessControlEventAuxiliaryAccessUpdatedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
 
     // Cluster Actions deprecated event names
     ZGMTRClusterActionsEventStateChangedID
@@ -7288,11 +6990,11 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     // Cluster TimeSynchronization deprecated event names
 
     // Cluster TimeSynchronization events
-    ZGMTREventIDTypeClusterTimeSynchronizationEventDSTTableEmptyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTREventIDTypeClusterTimeSynchronizationEventDSTStatusID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTREventIDTypeClusterTimeSynchronizationEventTimeZoneStatusID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTREventIDTypeClusterTimeSynchronizationEventTimeFailureID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTREventIDTypeClusterTimeSynchronizationEventMissingTrustedTimeSourceID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTREventIDTypeClusterTimeSynchronizationEventDSTTableEmptyID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTREventIDTypeClusterTimeSynchronizationEventDSTStatusID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTREventIDTypeClusterTimeSynchronizationEventTimeZoneStatusID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTREventIDTypeClusterTimeSynchronizationEventTimeFailureID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTREventIDTypeClusterTimeSynchronizationEventMissingTrustedTimeSourceID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
 
     // Cluster BridgedDeviceBasic deprecated event names
     ZGMTRClusterBridgedDeviceBasicEventStartUpID
@@ -7313,7 +7015,7 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     ZGMTREventIDTypeClusterBridgedDeviceBasicInformationEventShutDownID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000001,
     ZGMTREventIDTypeClusterBridgedDeviceBasicInformationEventLeaveID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTREventIDTypeClusterBridgedDeviceBasicInformationEventReachableChangedID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
-    ZGMTREventIDTypeClusterBridgedDeviceBasicInformationEventActiveChangedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000080,
+    ZGMTREventIDTypeClusterBridgedDeviceBasicInformationEventActiveChangedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000080,
 
     // Cluster Switch deprecated event names
     ZGMTRClusterSwitchEventSwitchLatchedID
@@ -7356,11 +7058,11 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     ZGMTREventIDTypeClusterBooleanStateEventStateChangeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000000,
 
     // Cluster OvenCavityOperationalState events
-    ZGMTREventIDTypeClusterOvenCavityOperationalStateEventOperationalErrorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTREventIDTypeClusterOvenCavityOperationalStateEventOperationCompletionID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTREventIDTypeClusterOvenCavityOperationalStateEventOperationalErrorID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTREventIDTypeClusterOvenCavityOperationalStateEventOperationCompletionID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
     // Cluster RefrigeratorAlarm events
-    ZGMTREventIDTypeClusterRefrigeratorAlarmEventNotifyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterRefrigeratorAlarmEventNotifyID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
 
     // Cluster SmokeCOAlarm events
     ZGMTREventIDTypeClusterSmokeCOAlarmEventSmokeAlarmID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
@@ -7376,7 +7078,7 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     ZGMTREventIDTypeClusterSmokeCOAlarmEventAllClearID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x0000000A,
 
     // Cluster DishwasherAlarm events
-    ZGMTREventIDTypeClusterDishwasherAlarmEventNotifyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterDishwasherAlarmEventNotifyID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
 
     // Cluster OperationalState events
     ZGMTREventIDTypeClusterOperationalStateEventOperationalErrorID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000000,
@@ -7385,6 +7087,9 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     // Cluster RVCOperationalState events
     ZGMTREventIDTypeClusterRVCOperationalStateEventOperationalErrorID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000000,
     ZGMTREventIDTypeClusterRVCOperationalStateEventOperationCompletionID ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4)) = 0x00000001,
+
+    // Cluster Groupcast events
+    ZGMTREventIDTypeClusterGroupcastEventGroupcastTestingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
 
     // Cluster BooleanStateConfiguration events
     ZGMTREventIDTypeClusterBooleanStateConfigurationEventAlarmsStateChangedID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000000,
@@ -7402,30 +7107,41 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     ZGMTREventIDTypeClusterElectricalEnergyMeasurementEventPeriodicEnergyMeasuredID ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6)) = 0x00000001,
 
     // Cluster WaterHeaterManagement events
-    ZGMTREventIDTypeClusterWaterHeaterManagementEventBoostStartedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTREventIDTypeClusterWaterHeaterManagementEventBoostEndedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTREventIDTypeClusterWaterHeaterManagementEventBoostStartedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTREventIDTypeClusterWaterHeaterManagementEventBoostEndedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
 
-    // Cluster DemandResponseLoadControl events
-    ZGMTREventIDTypeClusterDemandResponseLoadControlEventLoadControlEventStatusChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    // Cluster CommodityPrice events
+    ZGMTREventIDTypeClusterCommodityPriceEventPriceChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
 
     // Cluster Messages events
-    ZGMTREventIDTypeClusterMessagesEventMessageQueuedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTREventIDTypeClusterMessagesEventMessagePresentedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTREventIDTypeClusterMessagesEventMessageCompleteID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTREventIDTypeClusterMessagesEventMessageQueuedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTREventIDTypeClusterMessagesEventMessagePresentedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTREventIDTypeClusterMessagesEventMessageCompleteID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
 
     // Cluster DeviceEnergyManagement events
-    ZGMTREventIDTypeClusterDeviceEnergyManagementEventPowerAdjustStartID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTREventIDTypeClusterDeviceEnergyManagementEventPowerAdjustEndID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTREventIDTypeClusterDeviceEnergyManagementEventPausedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTREventIDTypeClusterDeviceEnergyManagementEventResumedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTREventIDTypeClusterDeviceEnergyManagementEventPowerAdjustStartID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTREventIDTypeClusterDeviceEnergyManagementEventPowerAdjustEndID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTREventIDTypeClusterDeviceEnergyManagementEventPausedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTREventIDTypeClusterDeviceEnergyManagementEventResumedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTREventIDTypeClusterDeviceEnergyManagementEventPowerRangeAdjustStartID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTREventIDTypeClusterDeviceEnergyManagementEventPowerRangeAdjustEndID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
 
     // Cluster EnergyEVSE events
-    ZGMTREventIDTypeClusterEnergyEVSEEventEVConnectedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
-    ZGMTREventIDTypeClusterEnergyEVSEEventEVNotDetectedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
-    ZGMTREventIDTypeClusterEnergyEVSEEventEnergyTransferStartedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
-    ZGMTREventIDTypeClusterEnergyEVSEEventEnergyTransferStoppedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
-    ZGMTREventIDTypeClusterEnergyEVSEEventFaultID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
-    ZGMTREventIDTypeClusterEnergyEVSEEventRFIDID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTREventIDTypeClusterEnergyEVSEEventEVConnectedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+    ZGMTREventIDTypeClusterEnergyEVSEEventEVNotDetectedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000001,
+    ZGMTREventIDTypeClusterEnergyEVSEEventEnergyTransferStartedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000002,
+    ZGMTREventIDTypeClusterEnergyEVSEEventEnergyTransferStoppedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000003,
+    ZGMTREventIDTypeClusterEnergyEVSEEventFaultID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000004,
+    ZGMTREventIDTypeClusterEnergyEVSEEventRFIDID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000005,
+
+    // Cluster ElectricalGridConditions events
+    ZGMTREventIDTypeClusterElectricalGridConditionsEventCurrentConditionsChangedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+
+    // Cluster ElectricalAlarm events
+    ZGMTREventIDTypeClusterElectricalAlarmEventNotifyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+
+    // Cluster ElectricalProtectionAlarm events
+    ZGMTREventIDTypeClusterElectricalProtectionAlarmEventNotifyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
 
     // Cluster DoorLock deprecated event names
     ZGMTRClusterDoorLockEventDoorLockAlarmID
@@ -7450,6 +7166,12 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     ZGMTREventIDTypeClusterDoorLockEventLockOperationID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000002,
     ZGMTREventIDTypeClusterDoorLockEventLockOperationErrorID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000003,
     ZGMTREventIDTypeClusterDoorLockEventLockUserChangeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000004,
+
+    // Cluster ClosureControl events
+    ZGMTREventIDTypeClusterClosureControlEventOperationalErrorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterClosureControlEventMovementCompletedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTREventIDTypeClusterClosureControlEventEngageStateChangedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTREventIDTypeClusterClosureControlEventSecureStateChangedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
 
     // Cluster PumpConfigurationAndControl deprecated event names
     ZGMTRClusterPumpConfigurationAndControlEventSupplyVoltageLowID
@@ -7523,31 +7245,81 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     ZGMTREventIDTypeClusterPumpConfigurationAndControlEventAirDetectionID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x0000000F,
     ZGMTREventIDTypeClusterPumpConfigurationAndControlEventTurbineOperationID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4)) = 0x00000010,
 
+    // Cluster Thermostat deprecated event names
+
+    // Cluster Thermostat events
+    ZGMTREventIDTypeClusterThermostatEventSystemModeChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterThermostatEventLocalTemperatureChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTREventIDTypeClusterThermostatEventOccupancyChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+    ZGMTREventIDTypeClusterThermostatEventSetpointChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000003,
+    ZGMTREventIDTypeClusterThermostatEventRunningStateChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000004,
+    ZGMTREventIDTypeClusterThermostatEventRunningModeChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000005,
+    ZGMTREventIDTypeClusterThermostatEventActiveScheduleChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000006,
+    ZGMTREventIDTypeClusterThermostatEventActivePresetChangeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000007,
+
     // Cluster OccupancySensing deprecated event names
 
     // Cluster OccupancySensing events
-    ZGMTREventIDTypeClusterOccupancySensingEventOccupancyChangedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterOccupancySensingEventOccupancyChangedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+
+    // Cluster AmbientContextSensing events
+    ZGMTREventIDTypeClusterAmbientContextSensingEventAmbientContextDetectStartedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterAmbientContextSensingEventAmbientContextDetectEndedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+
+    // Cluster AmbientSensingUnion events
+    ZGMTREventIDTypeClusterAmbientSensingUnionEventUnionContributorAddedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterAmbientSensingUnionEventUnionContributorRemovedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTREventIDTypeClusterAmbientSensingUnionEventUnionContributorStatusChangedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
+
+    // Cluster ProximityRanging events
+    ZGMTREventIDTypeClusterProximityRangingEventRangingResultID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterProximityRangingEventRangingSessionStatusID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
 
     // Cluster TargetNavigator deprecated event names
 
     // Cluster TargetNavigator events
-    ZGMTREventIDTypeClusterTargetNavigatorEventTargetUpdatedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterTargetNavigatorEventTargetUpdatedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
 
     // Cluster MediaPlayback deprecated event names
 
     // Cluster MediaPlayback events
-    ZGMTREventIDTypeClusterMediaPlaybackEventStateChangedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterMediaPlaybackEventStateChangedID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
+
+    // Cluster ContentLauncher deprecated event names
+
+    // Cluster ContentLauncher events
+    ZGMTREventIDTypeClusterContentLauncherEventContentReplicationID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
 
     // Cluster AccountLogin deprecated event names
 
     // Cluster AccountLogin events
-    ZGMTREventIDTypeClusterAccountLoginEventLoggedOutID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterAccountLoginEventLoggedOutID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
 
     // Cluster ContentControl events
     ZGMTREventIDTypeClusterContentControlEventRemainingScreenTimeExpiredID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterContentControlEventEnteringBlockContentTimeWindowID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+
+    // Cluster MediaFileManagement events
+    ZGMTREventIDTypeClusterMediaFileManagementEventSharedFilesAddedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+
+    // Cluster ZoneManagement events
+    ZGMTREventIDTypeClusterZoneManagementEventZoneTriggeredID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterZoneManagementEventZoneStoppedID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+
+    // Cluster PushAVStreamTransport events
+    ZGMTREventIDTypeClusterPushAVStreamTransportEventPushTransportBeginID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterPushAVStreamTransportEventPushTransportEndID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+
+    // Cluster Chime events
+    ZGMTREventIDTypeClusterChimeEventChimeStartedPlayingID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+
+    // Cluster AVAnalysis events
+    ZGMTREventIDTypeClusterAVAnalysisEventAnalysisSessionStartID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterAVAnalysisEventAnalysisSessionEndID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000001,
+    ZGMTREventIDTypeClusterAVAnalysisEventPerceivedContextID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000002,
 
     // Cluster CommissionerControl events
-    ZGMTREventIDTypeClusterCommissionerControlEventCommissioningRequestResultID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
+    ZGMTREventIDTypeClusterCommissionerControlEventCommissioningRequestResultID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000000,
 
     // Cluster TestCluster deprecated event names
     ZGMTRClusterTestClusterEventTestEventID
@@ -7566,3 +7338,104 @@ typedef NS_ENUM(uint32_t, ZGMTREventIDType) {
     ZGMTREventIDTypeClusterSampleMEIEventPingCountEventID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000000,
 
 };
+
+#pragma mark - Device Type IDs
+
+typedef NS_ENUM(uint32_t, ZGMTRDeviceTypeIDType) {
+    ZGMTRDeviceTypeIDTypeDoorLockID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000000A,
+    ZGMTRDeviceTypeIDTypeDoorLockControllerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000000B,
+    ZGMTRDeviceTypeIDTypeAggregatorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000000E,
+    ZGMTRDeviceTypeIDTypeGenericSwitchID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000000F,
+    ZGMTRDeviceTypeIDTypePowerSourceID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000011,
+    ZGMTRDeviceTypeIDTypeOTARequestorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000012,
+    ZGMTRDeviceTypeIDTypeBridgedNodeID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000013,
+    ZGMTRDeviceTypeIDTypeOTAProviderID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000014,
+    ZGMTRDeviceTypeIDTypeContactSensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000015,
+    ZGMTRDeviceTypeIDTypeRootNodeID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000016,
+    ZGMTRDeviceTypeIDTypeSolarPowerID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000017,
+    ZGMTRDeviceTypeIDTypeBatteryStorageID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000018,
+    ZGMTRDeviceTypeIDTypeSecondaryNetworkInterfaceID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000019,
+    ZGMTRDeviceTypeIDTypeSpeakerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000022,
+    ZGMTRDeviceTypeIDTypeCastingVideoPlayerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000023,
+    ZGMTRDeviceTypeIDTypeContentAppID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000024,
+    ZGMTRDeviceTypeIDTypeModeSelectID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000027,
+    ZGMTRDeviceTypeIDTypeBasicVideoPlayerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000028,
+    ZGMTRDeviceTypeIDTypeCastingVideoClientID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000029,
+    ZGMTRDeviceTypeIDTypeVideoRemoteControlID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000002A,
+    ZGMTRDeviceTypeIDTypeFanID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000002B,
+    ZGMTRDeviceTypeIDTypeAirQualitySensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000002C,
+    ZGMTRDeviceTypeIDTypeAirPurifierID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000002D,
+    ZGMTRDeviceTypeIDTypeWaterFreezeDetectorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000041,
+    ZGMTRDeviceTypeIDTypeWaterValveID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000042,
+    ZGMTRDeviceTypeIDTypeWaterLeakDetectorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000043,
+    ZGMTRDeviceTypeIDTypeRainSensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000044,
+    ZGMTRDeviceTypeIDTypeSoilSensorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000045,
+    ZGMTRDeviceTypeIDTypeRefrigeratorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000070,
+    ZGMTRDeviceTypeIDTypeTemperatureControlledCabinetID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000071,
+    ZGMTRDeviceTypeIDTypeRoomAirConditionerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000072,
+    ZGMTRDeviceTypeIDTypeLaundryWasherID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000073,
+    ZGMTRDeviceTypeIDTypeRoboticVacuumCleanerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000074,
+    ZGMTRDeviceTypeIDTypeDishwasherID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000075,
+    ZGMTRDeviceTypeIDTypeSmokeCOAlarmID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000076,
+    ZGMTRDeviceTypeIDTypeCookSurfaceID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000077,
+    ZGMTRDeviceTypeIDTypeCooktopID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000078,
+    ZGMTRDeviceTypeIDTypeMicrowaveOvenID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000079,
+    ZGMTRDeviceTypeIDTypeExtractorHoodID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000007A,
+    ZGMTRDeviceTypeIDTypeOvenID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000007B,
+    ZGMTRDeviceTypeIDTypeLaundryDryerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000007C,
+    ZGMTRDeviceTypeIDTypeHumidifierDehumidifierID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000007D,
+    ZGMTRDeviceTypeIDTypeNetworkInfrastructureManagerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000090,
+    ZGMTRDeviceTypeIDTypeThreadBorderRouterID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000091,
+    ZGMTRDeviceTypeIDTypeCommissioningByProxyID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000092,
+    ZGMTRDeviceTypeIDTypeOnOffLightID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000100,
+    ZGMTRDeviceTypeIDTypeDimmableLightID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000101,
+    ZGMTRDeviceTypeIDTypeOnOffLightSwitchID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000103,
+    ZGMTRDeviceTypeIDTypeDimmerSwitchID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000104,
+    ZGMTRDeviceTypeIDTypeColorDimmerSwitchID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000105,
+    ZGMTRDeviceTypeIDTypeLightSensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000106,
+    ZGMTRDeviceTypeIDTypeOccupancySensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000107,
+    ZGMTRDeviceTypeIDTypeOnOffPlugInUnitID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000010A,
+    ZGMTRDeviceTypeIDTypeDimmablePlugInUnitID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000010B,
+    ZGMTRDeviceTypeIDTypeColorTemperatureLightID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000010C,
+    ZGMTRDeviceTypeIDTypeExtendedColorLightID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000010D,
+    ZGMTRDeviceTypeIDTypeMountedOnOffControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000010F,
+    ZGMTRDeviceTypeIDTypeMountedDimmableLoadControlID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000110,
+    ZGMTRDeviceTypeIDTypeJointFabricAdministratorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000130,
+    ZGMTRDeviceTypeIDTypeIntercomID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000140,
+    ZGMTRDeviceTypeIDTypeAudioDoorbellID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000141,
+    ZGMTRDeviceTypeIDTypeCameraID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000142,
+    ZGMTRDeviceTypeIDTypeVideoDoorbellID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000143,
+    ZGMTRDeviceTypeIDTypeFloodlightCameraID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000144,
+    ZGMTRDeviceTypeIDTypeSnapshotCameraID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000145,
+    ZGMTRDeviceTypeIDTypeChimeID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000146,
+    ZGMTRDeviceTypeIDTypeCameraControllerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000147,
+    ZGMTRDeviceTypeIDTypeDoorbellID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000148,
+    ZGMTRDeviceTypeIDTypeAmbientContextSensorID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000150,
+    ZGMTRDeviceTypeIDTypeProximityRangerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000152,
+    ZGMTRDeviceTypeIDTypeWindowCoveringID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000202,
+    ZGMTRDeviceTypeIDTypeWindowCoveringControllerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000203,
+    ZGMTRDeviceTypeIDTypeClosureID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000230,
+    ZGMTRDeviceTypeIDTypeClosurePanelID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000231,
+    ZGMTRDeviceTypeIDTypeClosureControllerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000023E,
+    ZGMTRDeviceTypeIDTypeThermostatID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000301,
+    ZGMTRDeviceTypeIDTypeTemperatureSensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000302,
+    ZGMTRDeviceTypeIDTypePumpID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000303,
+    ZGMTRDeviceTypeIDTypePumpControllerID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000304,
+    ZGMTRDeviceTypeIDTypePressureSensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000305,
+    ZGMTRDeviceTypeIDTypeFlowSensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000306,
+    ZGMTRDeviceTypeIDTypeHumiditySensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000307,
+    ZGMTRDeviceTypeIDTypeHeatPumpID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x00000309,
+    ZGMTRDeviceTypeIDTypeThermostatControllerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x0000030A,
+    ZGMTRDeviceTypeIDTypeEVSEID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000050C,
+    ZGMTRDeviceTypeIDTypeDeviceEnergyManagementID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x0000050D,
+    ZGMTRDeviceTypeIDTypeWaterHeaterID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4)) = 0x0000050F,
+    ZGMTRDeviceTypeIDTypeElectricalSensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000510,
+    ZGMTRDeviceTypeIDTypeElectricalUtilityMeterID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000511,
+    ZGMTRDeviceTypeIDTypeMeterReferencePointID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000512,
+    ZGMTRDeviceTypeIDTypeElectricalEnergyTariffID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000513,
+    ZGMTRDeviceTypeIDTypeElectricalMeterID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000514,
+    ZGMTRDeviceTypeIDTypeElectricalCircuitBreakerID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000516,
+    ZGMTRDeviceTypeIDTypeElectricalDistributionEnclosureID ZGMTR_PROVISIONALLY_AVAILABLE = 0x00000517,
+    ZGMTRDeviceTypeIDTypeControlBridgeID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000840,
+    ZGMTRDeviceTypeIDTypeOnOffSensorID ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2)) = 0x00000850,
+} ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));

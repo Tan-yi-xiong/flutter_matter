@@ -52,6 +52,8 @@ git diff --check
 git status --short
 ```
 
+If the release changes the vendored iOS framework, also run the reproducible build and validation procedure in [ZGMatter framework build](zgmatter-build.md). Retain `build-info.txt` with the upstream SHA and framework SHA-256 as release evidence.
+
 `dart pub publish --dry-run` must exit with 0 warnings. The release tool must report the expected archive name, and `notes` must print only the matching release section.
 
 ## GitHub preflight

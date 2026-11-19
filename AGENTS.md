@@ -2,7 +2,7 @@
 
 Guidelines for coding agents working in **this repository only**.
 
-This is a Flutter plugin (`flutter_matter` 0.0.11) that exposes a low-level [Matter](https://csa-iot.org/) API on **Android and iOS**. Do not apply the parent workspace Python/Django `AGENTS.md` here.
+This is a Flutter plugin (`flutter_matter` 0.0.12) that exposes a low-level [Matter](https://csa-iot.org/) API on **Android and iOS**. Do not apply the parent workspace Python/Django `AGENTS.md` here.
 
 ## Overview
 
@@ -80,6 +80,7 @@ flutter_matter/
 ├── android/src/main/kotlin/com/tyx/flutter_matter/
 ├── ios/Classes/                               # ObjC + some Swift
 ├── ios/frameworks/ZGMatter.framework
+├── ios/zgmatter/                              # Reproducible framework build pipeline and patches
 ├── doc/                                       # setup, commissioning, operations, API, validation, release, and ADR docs
 ├── tool/release.dart                          # release metadata and notes CLI
 ├── tool/device_test_app.dart                  # commit metadata and app build wrapper
@@ -128,6 +129,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 - Entry: `ios/Classes/FlutterMatterPlugin.m` — hosts for device controller, BLE, and onboarding only.
 - Matter work runs on the `Global` serial queue; `InitializeZGMTR()` runs on plugin register.
 - Vendored framework: `ZGMatter.framework` via `ios/flutter_matter.podspec`.
+- Framework build tools live in `ios/zgmatter/`. The external connectedhomeip checkout must be supplied explicitly with `--connectedhomeip-dir` or `ZGMATTER_CONNECTEDHOMEIP_DIR`.
 - Deployment targets are iOS 16.1. Documented toolchain baseline is Xcode 16.4 or later with CocoaPods 1.17; the migration build evidence used Xcode 26.3 and CocoaPods 1.17.0.
 - The vendored `ZGMatter.framework` is iPhoneOS arm64 only; simulator builds are not supported.
 - Host apps need a Matter Extension, App Groups, `AppGroupId`, and Matter Allow Setup Payload; see `doc/getting-started.md`. Copy `example/ios/MatterExt/RequestHandler.swift`.
@@ -173,6 +175,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 | Plugin tests | `fvm flutter test` |
 | Example Android build | `cd example && GOOGLE_MATTER_SDK_REPO=/absolute/path/to/repo fvm flutter build apk --debug` |
 | Example iOS build | `cd example && fvm flutter build ios --debug --no-codesign` |
+| ZGMatter framework validation | `export ZGMATTER_CONNECTEDHOMEIP_DIR=/absolute/path/to/connectedhomeip && ios/zgmatter/build_zgmatter_framework.sh --no-copy` |
 | Run example | `cd example && fvm flutter run` |
 | iOS workspace | `open example/ios/Runner.xcworkspace` |
 | Device test app analyze/tests | `cd device_test_app && fvm flutter analyze --no-fatal-infos --no-fatal-warnings && fvm flutter test` |

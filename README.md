@@ -54,6 +54,7 @@ This is a controller-side plugin. It does not turn an app into a Matter commissi
 
 ### Maintainers
 
+- [ZGMatter framework build](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/zgmatter-build.md)
 - [Architecture](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/ARCHITECTURE.md)
 - [Contributing](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/CONTRIBUTING.md)
 - [Device validation](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/device-validation.md)

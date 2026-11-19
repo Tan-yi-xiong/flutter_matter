@@ -64,7 +64,7 @@ ZGMTR_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5))
 @property (readonly, nonatomic, nullable) ZGMTRCertificateDERBytes rootCertificate;
 
 /**
- * The same root certificate as rootCertificate, in Matter TLV format.
+ * The same root certificate as rootCertificate, in ZGMatter TLV format.
  */
 @property (readonly, nonatomic, nullable) ZGMTRCertificateTLVBytes rootCertificateTLV;
 
@@ -76,7 +76,7 @@ ZGMTR_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5))
 @property (readonly, nonatomic, nullable) ZGMTRCertificateDERBytes intermediateCertificate;
 
 /**
- * The same intermediate certificate as intermediateCertificate, in Matter TLV format.
+ * The same intermediate certificate as intermediateCertificate, in ZGMatter TLV format.
  */
 @property (readonly, nonatomic, nullable) ZGMTRCertificateTLVBytes intermediateCertificateTLV;
 
@@ -87,7 +87,7 @@ ZGMTR_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5))
 @property (readonly, nonatomic, nullable) ZGMTRCertificateDERBytes operationalCertificate;
 
 /**
- * The same operational certificate as operationalCertificate, in Matter TLV format.
+ * The same operational certificate as operationalCertificate, in ZGMatter TLV format.
  */
 @property (readonly, nonatomic, nullable) ZGMTRCertificateTLVBytes operationalCertificateTLV;
 

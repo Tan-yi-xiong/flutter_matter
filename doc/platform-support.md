@@ -32,6 +32,8 @@ Download `home.android.sdk_1_11_1.zip` from the [Google Home Android release not
 
 The iOS minimum is 16.1 across the podspec, Podfile, framework metadata, and Xcode targets. A Flutter 3.41 device build without code signing has been validated with Xcode 26.3 and CocoaPods 1.17.0; Xcode 16.4 remains the documented minimum.
 
+The vendored framework is generated from a pinned official `connectedhomeip` commit by the reproducible pipeline in `ios/zgmatter/`. See [ZGMatter framework build](zgmatter-build.md) for the explicit source-path contract, patch workflow, and validation steps.
+
 ## Device and simulator policy
 
 `ios/frameworks/ZGMatter.framework` contains an iPhoneOS arm64 binary and no simulator slice.

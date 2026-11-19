@@ -1,6 +1,6 @@
 name: flutter_matter
 description: A Flutter plugin exposing a low-level Matter API for Android and iOS commissioning and device control.
-version: 0.0.11
+version: 0.0.12
 homepage: https://github.com/Tan-yi-xiong/flutter_matter
 repository: https://github.com/Tan-yi-xiong/flutter_matter
 issue_tracker: https://github.com/Tan-yi-xiong/flutter_matter/issues

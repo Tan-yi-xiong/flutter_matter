@@ -1,0 +1,173 @@
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.h b/src/darwin/Framework/CHIP/MTRBaseDevice.h
+index 71f6a9cec4..9c07eafa91 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.h
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.h
+@@ -437,6 +437,20 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+           resubscriptionScheduled:(MTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled
+     MTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
+ 
++/**
++ * ZG extension: subscribe to attribute paths with the subscription ID passed to the
++ * established callback.  Identical to subscribeToAttributePaths, except that the
++ * callback receives the real SubscriptionId as an NSNumber.
++ */
++- (void)customSubscribeToAttributePaths:(NSArray<MTRAttributeRequestPath *> * _Nullable)attributePaths
++                             eventPaths:(NSArray<MTREventRequestPath *> * _Nullable)eventPaths
++                                 params:(MTRSubscribeParams * _Nullable)params
++                                  queue:(dispatch_queue_t)queue
++                          reportHandler:(MTRDeviceResponseHandler)reportHandler
++                subscriptionEstablished:(void (^_Nullable)(NSNumber * _Nullable subscriptionId))subscriptionEstablished
++                resubscriptionScheduled:(MTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled
++    MTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
++
+ /**
+  * Deregister all local report handlers for a remote device
+  *
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.mm b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+index d9afb69636..7391b3ca78 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.mm
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+@@ -260,6 +260,17 @@ - (void)onDone
+ 
+ @end
+ 
++@interface MTRBaseDevice (ZGSubscriptionImplementation)
++- (void)_zgSubscribeToAttributePaths:(NSArray<MTRAttributeRequestPath *> * _Nullable)attributePaths
++                           eventPaths:(NSArray<MTREventRequestPath *> * _Nullable)eventPaths
++                               params:(MTRSubscribeParams * _Nullable)params
++                                queue:(dispatch_queue_t)queue
++                        reportHandler:(MTRDeviceResponseHandler)reportHandler
++              subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
++      subscriptionEstablishedWithId:(void (^_Nullable)(NSNumber * _Nullable subscriptionId))subscriptionEstablishedWithId
++              resubscriptionScheduled:(MTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled;
++@end
++
+ @implementation MTRBaseDevice
+ 
+ - (instancetype)initWithPASEDevice:(chip::DeviceProxy *)device controller:(MTRDeviceController *)controller
+@@ -878,6 +889,7 @@ CHIP_ERROR Encode(chip::TLV::TLVWriter & writer, chip::TLV::Tag tag) const
+         const app::ConcreteAttributePath * attributePath, const app::ConcreteEventPath * eventPath, CHIP_ERROR aError)>;
+     using OnDoneCallbackType = std::function<void(BufferedReadClientCallback * callback)>;
+     using OnSubscriptionEstablishedCallbackType = std::function<void()>;
++    using OnSubscriptionEstablishedWithIdCallbackType = std::function<void(SubscriptionId)>;
+     using OnDeviceResubscriptionScheduledCallbackType = std::function<void(NSError * error, NSNumber * resubscriptionDelay)>;
+ 
+     BufferedReadClientCallback(app::AttributePathParams * aAttributePathParamsList, size_t aAttributePathParamsSize,
+@@ -885,7 +897,8 @@ CHIP_ERROR Encode(chip::TLV::TLVWriter & writer, chip::TLV::Tag tag) const
+         OnSuccessAttributeCallbackType aOnAttributeSuccess, OnSuccessEventCallbackType aOnEventSuccess,
+         OnErrorCallbackType aOnError, OnDoneCallbackType aOnDone,
+         OnSubscriptionEstablishedCallbackType aOnSubscriptionEstablished = nullptr,
+-        OnDeviceResubscriptionScheduledCallbackType aOnDeviceResubscriptionScheduled = nullptr)
++        OnDeviceResubscriptionScheduledCallbackType aOnDeviceResubscriptionScheduled = nullptr,
++        OnSubscriptionEstablishedWithIdCallbackType aOnSubscriptionEstablishedWithId = nullptr)
+         : mAttributePathParamsList(aAttributePathParamsList)
+         , mAttributePathParamsSize(aAttributePathParamsSize)
+         , mEventPathParamsList(aEventPathParamsList)
+@@ -896,6 +909,7 @@ CHIP_ERROR Encode(chip::TLV::TLVWriter & writer, chip::TLV::Tag tag) const
+         , mOnDone(aOnDone)
+         , mOnSubscriptionEstablished(aOnSubscriptionEstablished)
+         , mOnDeviceResubscriptionScheduled(aOnDeviceResubscriptionScheduled)
++        , mOnSubscriptionEstablishedWithId(aOnSubscriptionEstablishedWithId)
+         , mBufferedReadAdapter(*this)
+     {
+     }
+@@ -984,6 +998,10 @@ void OnEventData(const EventHeader & aEventHeader, TLV::TLVReader * apData, cons
+ 
+     void OnSubscriptionEstablished(SubscriptionId aSubscriptionId) override
+     {
++        if (mOnSubscriptionEstablishedWithId) {
++            mOnSubscriptionEstablishedWithId(aSubscriptionId);
++            return;
++        }
+         if (mOnSubscriptionEstablished) {
+             mOnSubscriptionEstablished();
+         }
+@@ -1010,6 +1028,7 @@ void OnDeallocatePaths(chip::app::ReadPrepareParams && aReadPrepareParams) overr
+     OnErrorCallbackType mOnError;
+     OnDoneCallbackType mOnDone;
+     OnSubscriptionEstablishedCallbackType mOnSubscriptionEstablished;
++    OnSubscriptionEstablishedWithIdCallbackType mOnSubscriptionEstablishedWithId;
+     OnDeviceResubscriptionScheduledCallbackType mOnDeviceResubscriptionScheduled;
+     app::BufferedReadCallback mBufferedReadAdapter;
+     Platform::UniquePtr<app::ReadClient> mReadClient;
+@@ -1686,6 +1705,43 @@ - (void)subscribeToAttributePaths:(NSArray<MTRAttributeRequestPath *> * _Nullabl
+                     reportHandler:(MTRDeviceResponseHandler)reportHandler
+           subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
+           resubscriptionScheduled:(MTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled
++{
++    [self _zgSubscribeToAttributePaths:attributePaths
++                            eventPaths:eventPaths
++                                params:params
++                                 queue:queue
++                         reportHandler:reportHandler
++               subscriptionEstablished:subscriptionEstablished
++       subscriptionEstablishedWithId:nil
++               resubscriptionScheduled:resubscriptionScheduled];
++}
++
++- (void)customSubscribeToAttributePaths:(NSArray<MTRAttributeRequestPath *> * _Nullable)attributePaths
++                             eventPaths:(NSArray<MTREventRequestPath *> * _Nullable)eventPaths
++                                 params:(MTRSubscribeParams * _Nullable)params
++                                  queue:(dispatch_queue_t)queue
++                          reportHandler:(MTRDeviceResponseHandler)reportHandler
++                subscriptionEstablished:(void (^_Nullable)(NSNumber * _Nullable subscriptionId))subscriptionEstablished
++                resubscriptionScheduled:(MTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled
++{
++    [self _zgSubscribeToAttributePaths:attributePaths
++                            eventPaths:eventPaths
++                                params:params
++                                 queue:queue
++                         reportHandler:reportHandler
++               subscriptionEstablished:nil
++       subscriptionEstablishedWithId:subscriptionEstablished
++               resubscriptionScheduled:resubscriptionScheduled];
++}
++
++- (void)_zgSubscribeToAttributePaths:(NSArray<MTRAttributeRequestPath *> * _Nullable)attributePaths
++                          eventPaths:(NSArray<MTREventRequestPath *> * _Nullable)eventPaths
++                              params:(MTRSubscribeParams * _Nullable)params
++                               queue:(dispatch_queue_t)queue
++                       reportHandler:(MTRDeviceResponseHandler)reportHandler
++             subscriptionEstablished:(MTRSubscriptionEstablishedHandler _Nullable)subscriptionEstablished
++     subscriptionEstablishedWithId:(void (^_Nullable)(NSNumber * _Nullable subscriptionId))subscriptionEstablishedWithId
++             resubscriptionScheduled:(MTRDeviceResubscriptionScheduledHandler _Nullable)resubscriptionScheduled
+ {
+     if ((attributePaths == nil || [attributePaths count] == 0) && (eventPaths == nil || [eventPaths count] == 0)) {
+         // Per spec a server would respond InvalidAction to this, so just go
+@@ -1792,6 +1848,27 @@ - (void)subscribeToAttributePaths:(NSArray<MTRAttributeRequestPath *> * _Nullabl
+                        }
+                    };
+ 
++                   auto onEstablishedWithIdCb = [queue, subscriptionEstablishedWithId](SubscriptionId subscriptionId) {
++                       if (subscriptionEstablishedWithId) {
++                           NSNumber * subscriptionIdNumber = @(subscriptionId);
++                           dispatch_async(queue, ^{
++                               subscriptionEstablishedWithId(subscriptionIdNumber);
++                           });
++                       }
++                   };
++
++                   // The callback class treats a non-empty std::function as a
++                   // real callback. Keep these empty when the corresponding
++                   // Objective-C block is nil so the two variants stay distinct.
++                   std::function<void()> establishedCallback;
++                   if (subscriptionEstablished) {
++                       establishedCallback = onEstablishedCb;
++                   }
++                   std::function<void(SubscriptionId)> establishedWithIdCallback;
++                   if (subscriptionEstablishedWithId) {
++                       establishedWithIdCallback = onEstablishedWithIdCb;
++                   }
++
+                    auto onResubscriptionScheduledCb
+                        = [queue, resubscriptionScheduled](NSError * error, NSNumber * resubscriptionDelay) {
+                              if (resubscriptionScheduled) {
+@@ -1851,7 +1928,7 @@ - (void)subscribeToAttributePaths:(NSArray<MTRAttributeRequestPath *> * _Nullabl
+ 
+                    auto callback = chip::Platform::MakeUnique<BufferedReadClientCallback<MTRDataValueDictionaryDecodableType>>(
+                        container.pathParams, attributePathSize, container.eventPathParams, eventPathSize, onAttributeReportCb,
+-                       onEventReportCb, onFailureCb, onDone, onEstablishedCb, onResubscriptionScheduledCb);
++                       onEventReportCb, onFailureCb, onDone, establishedCallback, onResubscriptionScheduledCb, establishedWithIdCallback);
+ 
+                    auto readClient = Platform::New<app::ReadClient>(
+                        engine, exchangeManager, callback->GetBufferedCallback(), chip::app::ReadClient::InteractionType::Subscribe);

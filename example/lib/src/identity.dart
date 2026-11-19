@@ -34,7 +34,8 @@ class MatterIdentity {
     keypairDelegate: keypairDelegate,
     ipk: defaultIpk,
     rootCertificate: rootCertificate,
-    intermediateCertificate: rootCertificate,
+    // No intermediate certificate: the operational certificate is directly
+    // signed by the root certificate.
     operationalCertificate: operationalCertificate,
   );
 }

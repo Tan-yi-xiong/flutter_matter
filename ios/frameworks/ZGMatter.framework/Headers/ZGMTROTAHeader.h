@@ -18,7 +18,7 @@
 #import <ZGMatter/ZGMTRDefines.h>
 
 /**
- * A representation of an OTA image header as defined in the Matter
+ * A representation of an OTA image header as defined in the ZGMatter
  * specification's "Over-the-Air (OTA) Software Update File Format" section.
  */
 
@@ -43,8 +43,8 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface ZGMTROTAHeader : NSObject
 
 /**
- * Initialize the ZGMTROTAHeader with the given Matter OTA software image data (as defined in the
- * "Over-the-Air (OTA) Software Update File Format" section of the Matter specification).  The
+ * Initialize the ZGMTROTAHeader with the given ZGMatter OTA software image data (as defined in the
+ * "Over-the-Air (OTA) Software Update File Format" section of the ZGMatter specification).  The
  * provided data is expected to point to a large enough initial chunk of an OTA software image that
  * it includes the entire header (e.g. the entire image).
  *

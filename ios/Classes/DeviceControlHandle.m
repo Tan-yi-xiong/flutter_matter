@@ -190,7 +190,7 @@ static dispatch_queue_t connectDeviceQueue = nil;
 
 @implementation ZGMTRNOCChainIssuerWarp
 
-- (void)onNOCChainGenerationNeeded:(CSRInfo *)csrInfo
+- (void)onNOCChainGenerationNeeded:(ZGCSRInfo *)csrInfo
                    attestationInfo:(ZGAttestationInfo *)attestationInfo
       onNOCChainGenerationComplete:(ZGMTRNOCChainGenerationCompleteHandler)onNOCChainGenerationComplete {
     FlutterMatterLog([[NSString alloc]
@@ -315,9 +315,10 @@ static ZGMTRDeviceControllerStartupParams *
 mapControllerParams(FlutterControllerParams *flutterControllerParams) {
 
     ZGMTRDeviceControllerStartupParams *params;
+    // intermediateCertificate is optional: the framework accepts nil when the
+    // operational certificate is directly signed by the root certificate.
     if ([flutterControllerParams ipk] != nil &&
         [flutterControllerParams rootCertificate] != nil &&
-        [flutterControllerParams intermediateCertificate] != nil &&
         [flutterControllerParams operationalCertificate] != nil &&
         [flutterControllerParams keypairDelegate] != nil) {
         KeypairWarp *kp =
@@ -844,8 +845,6 @@ static NSString *invoke(NSString *params) {
     NSNumber * commandId = [requestJsonValueNotNull(invokeElementJsonObject, @"commandId") objectForKey:@"id"];
     NSNumber * groupId = [invokeElementJsonObject objectForKey:@"groupId"];
     NSData * tlv = toByteArrayFromJSONArray(requestJsonValueNotNull(invokeElementJsonObject, @"tlv"));
-    
-//    NSDictionary<NSString *, id> * map = [ZGTlv decodeDataValueDictionaryFromCHIPTLV:tlv];
     
     NSNumber * connectContext = [jsonObject objectForKey:@"connectContext"];
     

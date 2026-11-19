@@ -327,7 +327,6 @@ class _CommissioningDelegate
       await controller.onNOCChainGeneration(
         ControllerParams(
           rootCertificate: identity.rootCertificate,
-          intermediateCertificate: identity.rootCertificate,
           operationalCertificate: nodeCertificate,
           adminSubject: kTestControllerNodeId,
           keypairDelegate: delegate,

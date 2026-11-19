@@ -88,7 +88,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 
 /**
  * A way for ZGMTROperationalCertificateIssuer to control whether it wants the
- * Matter framework to perform device attestation checks that require trust
+ * ZGMatter framework to perform device attestation checks that require trust
  * anchors.  If this returns NO, then productAttestationAuthorityCertificates
  * should be passed in via ZGMTRDeviceControllerFactoryParams, as well as any
  * desired additional certificationDeclarationCertificates.
@@ -109,7 +109,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * (5) CD signature check: make sure a valid CSA CD key is used to sign the CD.
  *
  * This will be read on an arbitrary queue and must not block or call any
- * Matter APIs.
+ * ZGMatter APIs.
  */
 @property (nonatomic, readonly) BOOL shouldSkipAttestationCertificateValidation;
 
@@ -124,7 +124,7 @@ ZGMTR_DEPRECATED(
 @protocol ZGMTRNOCChainIssuer <NSObject>
 @required
 
-- (void)onNOCChainGenerationNeeded:(CSRInfo *)csrInfo
+- (void)onNOCChainGenerationNeeded:(ZGCSRInfo *)csrInfo
                    attestationInfo:(ZGAttestationInfo *)attestationInfo
       onNOCChainGenerationComplete:(ZGMTRNOCChainGenerationCompleteHandler)onNOCChainGenerationComplete;
 
