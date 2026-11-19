@@ -17,7 +17,7 @@ This is a Flutter plugin (`flutter_matter` 0.0.12) that exposes a low-level [Mat
   - `nsd` on Android only
 - Android plugin: `com.tyx.flutter_matter.FlutterMatterPlugin`
 - iOS plugin: `FlutterMatterPlugin` (Objective-C), vendored `ios/frameworks/ZGMatter.framework`
-- Android Matter stack: `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.5`
+- Android Matter stack: `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`
 - FVM Flutter **3.41.0** (`.fvmrc`). Prefer `fvm flutter` / `fvm dart` when FVM is available; otherwise use Flutter `3.41.0` and `flutter` / `dart` on PATH.
 
 ## Commands

@@ -14,4 +14,4 @@ The prebuilt iOS framework at `ios/frameworks/ZGMatter.framework` and other bund
 
 ## Android Matter dependency
 
-The Android package `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.5` is an external dependency resolved through JitPack and is not vendored by this repository. Its Matter SDK-derived components remain subject to the Apache License, Version 2.0 and their upstream notices.
+The Android package `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6` is an external dependency resolved through JitPack and is not vendored by this repository. Its Matter SDK-derived components remain subject to the Apache License, Version 2.0 and their upstream notices.

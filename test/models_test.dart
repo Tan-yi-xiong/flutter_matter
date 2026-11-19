@@ -132,6 +132,7 @@ void main() {
     expect(encoded['controllerVendorId'], 0xFFF4);
     expect(encoded['skipAttestationCertificateValidation'], isTrue);
     expect(encoded['nodeId'], 112233);
+    expect(encoded.containsKey('setupURL'), isFalse);
   });
 
   test('NodeState decodes nested endpoint and cluster state', () {

@@ -56,7 +56,7 @@ Delegates and callbacks:
 
 Fabric removal is not exposed as `unPairDevice`. Read the OperationalCredentials Fabric Table, obtain the active fabric index with `getFabricIndex()`, then send `RemoveFabric` through `invoke`.
 
-`ControllerParams` currently sends `skipAttestationCertificateValidation: true` in its JSON payload. Treat this as a security-sensitive native-configuration limit.
+`ControllerParams` currently sends `skipAttestationCertificateValidation: true` in its JSON payload. Treat this as a security-sensitive native-configuration limit. `setupURL` is not supported by the Matter 1.6.1 Android SDK and was removed from `ControllerParams`; omit it from constructor calls and JSON payloads.
 
 ## Onboarding
 

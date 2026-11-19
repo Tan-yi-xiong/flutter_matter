@@ -20,6 +20,7 @@ package com.tyx.flutter_matter
 import android.content.Context
 import chip.devicecontroller.ChipDeviceController
 import chip.platform.AndroidChipPlatform
+import chip.platform.AndroidNfcCommissioningManager
 import chip.platform.ChipMdnsCallbackImpl
 import chip.platform.DiagnosticDataProviderImpl
 import chip.platform.NsdManagerServiceBrowser
@@ -33,6 +34,7 @@ object ChipClient {
   private const val TAG = "ChipClient"
 //  private lateinit var chipDeviceController: ChipDeviceController
   private lateinit var androidPlatform: AndroidChipPlatform
+  private val androidNfcCommissioningManager = AndroidNfcCommissioningManager()
   /* 0xFFF4 is a test vendor ID, replace with your assigned company ID */
   const val VENDOR_ID = 0xFFF4
   private var serviceResolver: ServiceResolver? = null
@@ -97,6 +99,7 @@ object ChipClient {
       androidPlatform =
         AndroidChipPlatform(
           ZGAndroidBleManager(context),
+          androidNfcCommissioningManager,
           PreferencesKeyValueStoreManager(context),
           PreferencesConfigurationManager(context),
           getServiceResolver(context),

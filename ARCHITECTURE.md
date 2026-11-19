@@ -68,7 +68,7 @@ iOS runs plugin work on the serial `Matter Thread queue`. Callback bridges dispa
 
 ## Native boundaries
 
-The Android entry point is `FlutterMatterPlugin`. It routes requests by URI host to controller, BLE, onboarding, and NSD handlers. Matter behavior comes from the prefixed Android artifact `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.5`.
+The Android entry point is `FlutterMatterPlugin`. It routes requests by URI host to controller, BLE, onboarding, and NSD handlers. Matter behavior comes from the prefixed Android artifact `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`.
 
 The iOS entry point is the Objective-C `FlutterMatterPlugin`, backed by the vendored `ZGMatter.framework`. It routes controller, BLE, and onboarding hosts. NSD is not implemented on iOS. `InitializeZGMTR()` runs during plugin registration.
 

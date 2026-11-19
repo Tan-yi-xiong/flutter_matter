@@ -12,7 +12,7 @@ Use [Getting started](getting-started.md) for host-app setup, [Commissioning](co
 | Dart SDK | `>=3.3.3 <4.0.0` in `pubspec.yaml` |
 | Flutter SDK constraint | `>=3.3.0` in `pubspec.yaml` |
 | Validated Flutter version | 3.41.0 |
-| Android plugin | `minSdk 21`, `compileSdk 34`, JDK 17, Kotlin 1.7.10 |
+| Android plugin | `minSdk 21`, `compileSdk 34`, JDK 17, Kotlin 1.7.10, Matter 1.6.1 artifact `1.0.6` |
 | Example Android build | `minSdk 29`, `compileSdk 36`, Kotlin 2.4.0, Gradle 8.7, AGP 8.6.0 |
 | Device-test app Android | `minSdk 24`, `compileSdk 36`, arm64 |
 | iOS | 16.1 or later for the plugin and example |

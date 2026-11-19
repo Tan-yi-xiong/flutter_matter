@@ -19,6 +19,8 @@
 ### Compatibility
 - **iOS 16.1 minimum support** — The podspec, Podfile, app framework metadata, and Xcode targets now use iOS 16.1 for both the plugin and the example. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
 - **iOS Matter SDK 1.6.1** — Rebuilt `ZGMatter.framework` from official connectedhomeip `v1.6.1-branch` (`da8f6a0bff`) with a reproducible rename + feature-patch pipeline. The framework keeps the ZGMTR-prefixed public APIs and no longer carries the legacy iOS BLE proxy overrides.
+- **Android Matter SDK 1.6.1** — Rebuilt the prefixed Android artifact from the same official connectedhomeip commit (`da8f6a0bff`) for `arm64-v8a` and `armeabi-v7a`. The dependency is now `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`.
+- **Breaking: `ControllerParams.setupURL` removed** — Matter 1.6.1 removed `ControllerParams.Builder.setSetupURL`; the field and its JSON wire key were removed. Migrate by omitting `setupURL`; there is no upstream replacement.
 
 ### Tooling and tests
 - Moved the reproducible ZGMatter framework build pipeline into `ios/zgmatter/`, with explicit `ZGMATTER_CONNECTEDHOMEIP_DIR` or `--connectedhomeip-dir` source configuration and English maintainer documentation.
@@ -35,6 +37,7 @@
 - Updated the example Android baseline to Kotlin 2.4.0, minSdk 29, and compileSdk 36 for the Google Home SDK, and documented the `GOOGLE_MATTER_SDK_REPO` build prerequisite. The plugin's own Android baseline is unchanged.
 
 ### Bug Fixes
+- Fixed Android Matter 1.6.1 commissioning failing at `GenerateNOCChain` with `CHIP_ERROR_BAD_REQUEST` (`0x92`, callback code `146`). The Android bridge now supplies an empty ICAC instead of `null`.
 - Fixed signed little-endian TLV decoding for negative integer widths.
 - Fixed context-tagged TLV boolean and non-integer type parsing.
 - Fixed nested event and event-status decoding in `ClusterState`.

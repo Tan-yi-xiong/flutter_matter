@@ -428,10 +428,6 @@ private fun mapControllerParams(jsonObject: JSONObject): ControllerParams {
         setIpk(jsonObject.optJSONArray("ipk")?.toByteArray())
         setAdminSubject(jsonObject.optLong("adminSubject"))
         setEnableServerInteractions(jsonObject.optBoolean("enableServerInteractions"))
-        val setupURL = jsonObject.optString("setupURL")
-        if (setupURL.isNotEmpty()) {
-            setSetupURL(setupURL)
-        }
     }.build()
 }
 
@@ -581,6 +577,11 @@ fun setCompletionListener(params: String): String {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+
+        override fun onCommissioningStageStart(nodeId: Long, stage: String) {
+            // The Dart API exposes stage completion updates; preserve that contract for now.
+            matterPrint("onCommissioningStageStart: $nodeId $stage")
         }
 
         override fun onCommissioningStatusUpdate(nodeId: Long, stage: String?, errorCode: Long) {
@@ -866,12 +867,18 @@ fun publicKeyFromCSR(params: String): String {
 fun onNOCChainGeneration(params: String): String {
     val jsonObject = JSONObject(params)
     val control = Objects.requireNonNull((getDeviceController(jsonObject.optNotNull(jsonKeyHandle).toString())), "Not found control")!!
-    val controllerParams = mapControllerParams(
-        Objects.requireNonNull(
-            jsonObject.optJSONObject("params"),
-            "params is null"
-        )
+    val controllerParamsJson = Objects.requireNonNull(
+        jsonObject.optJSONObject("params"),
+        "params is null"
     )
+    // CHIP's Android JNI rejects a null intermediateCertificate with
+    // CHIP_ERROR_BAD_REQUEST even though an empty ICAC is a valid chain.
+    // Normalize null to an empty array; AutoCommissioner treats it as no ICAC.
+    if (controllerParamsJson.isNull("intermediateCertificate")) {
+        matterPrint("onNOCChainGeneration: using empty ICAC")
+        controllerParamsJson.put("intermediateCertificate", JSONArray())
+    }
+    val controllerParams = mapControllerParams(controllerParamsJson)
     val onNOCChainGenerationResult = control.onNOCChainGeneration(controllerParams)
     return createFlutterRequestResult(0, JSONObject(mapOf("data" to onNOCChainGenerationResult)))
 }

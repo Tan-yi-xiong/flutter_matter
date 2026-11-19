@@ -501,7 +501,6 @@ class ControllerParams extends TransportObject {
   final Uint8List? ipk;
   final int adminSubject;
   final bool enableServerInteractions;
-  final String setupURL;
   final int nodeId;
 
   ControllerParams({
@@ -523,7 +522,6 @@ class ControllerParams extends TransportObject {
     this.ipk,
     this.adminSubject = 0,
     this.enableServerInteractions = false,
-    this.setupURL = "",
     this.nodeId = kTestControllerNodeId,
   });
 
@@ -551,7 +549,6 @@ class ControllerParams extends TransportObject {
         "ipk": ipk,
         "adminSubject": adminSubject,
         "enableServerInteractions": enableServerInteractions,
-        "setupURL": setupURL,
         "nodeId": nodeId,
       };
 }
