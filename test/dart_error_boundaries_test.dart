@@ -134,6 +134,46 @@ void main() {
       expect(duplicate.code, successCode);
     });
 
+    test('DescriptorCluster decodes DeviceTypeList struct fields', () async {
+      final writer = TlvWriter()
+        ..startArray(AnonymousTag.instance)
+        ..startStructure(AnonymousTag.instance)
+        ..putUnsigned(ContextSpecificTag(0), 0x0100)
+        ..putUnsigned(ContextSpecificTag(1), 1)
+        ..endStructure()
+        ..endArray();
+      final future = DescriptorCluster(
+        controller: controller,
+        connContext: null,
+        endpointId: 1,
+        nodeId: 1,
+      ).readDeviceTypeListAttribute();
+
+      final params = jsonDecode(await readRequest.future) as Map;
+      final handle = params['callbackHandle'] as String;
+      controller.call(
+        'zgMatter://devicecontroller/ReportCallback/onReport',
+        jsonEncode({
+          'reportCallbackPoint': handle,
+          'nodeState': {
+            'endpoints': {
+              '1': {
+                'clusters': {
+                  '29': {
+                    'attributes': {
+                      '0': {'tlv': writer.getEncoded().toList()},
+                    },
+                  },
+                },
+              },
+            },
+          },
+        }),
+      );
+
+      expect(await future, <int>[0x0100]);
+    });
+
     test('DescriptorCluster completes typed error when read request fails',
         () async {
       failRead = true;

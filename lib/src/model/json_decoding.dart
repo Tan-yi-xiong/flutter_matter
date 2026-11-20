@@ -71,10 +71,13 @@ Uint8List decodeJsonBytes(Object? value, String field) {
   final bytes = <int>[];
   for (var i = 0; i < array.length; i++) {
     final item = array[i];
-    if (item is! int || item < 0 || item > 0xff) {
-      throw FormatException('$field[$i] must be a byte between 0 and 255');
+    if (item is! int) {
+      throw FormatException('$field[$i] must be an integer');
     }
-    bytes.add(item);
+    // Match Uint8List.fromList: normalize integer width differences by keeping
+    // the low eight bits. Android emits signed Java bytes while other bridges
+    // may emit unsigned or wider integer representations.
+    bytes.add(item & 0xff);
   }
   return Uint8List.fromList(bytes);
 }

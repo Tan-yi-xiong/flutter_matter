@@ -71,9 +71,11 @@ the abandoned native handle so the next acquisition can shut it down before
 creating a replacement. A failed native shutdown poisons the manager until the
 process restarts.
 
-The Dart manager is isolate-scoped; the native gate is process-wide. Multiple
-Flutter engines therefore cannot each own a controller, even though each engine
-has an independent Dart manager.
+The Dart manager is isolate-scoped. Android also has a process-wide native
+gate because `shutdownCommissioning()` stops process-wide CHIP IO/factory state.
+iOS keeps an independent handle map and does not enforce a native single-controller
+slot, so separate engines may own separate iOS controllers even though each
+engine still serializes its own Dart acquisitions.
 
 ## Threading
 
@@ -85,7 +87,7 @@ iOS runs plugin work on the serial `Matter Thread queue`. Callback bridges dispa
 
 The Android entry point is `FlutterMatterPlugin`. It routes requests by URI host to controller, BLE, onboarding, and NSD handlers. Matter behavior comes from the prefixed Android artifact `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`.
 
-The iOS entry point is the Objective-C `FlutterMatterPlugin`, backed by the vendored `ZGMatter.framework`. It routes controller, BLE, and onboarding hosts. NSD is not implemented on iOS. `ZGMTRInitializeControllerFactory()` starts the process-wide factory during plugin registration without creating a hidden default controller.
+The iOS entry point is the Objective-C `FlutterMatterPlugin`, backed by the vendored `ZGMatter.framework`. It routes controller, BLE, and onboarding hosts. NSD is not implemented on iOS. `ZGMTRInitializeControllerFactory()` starts the process-wide factory during plugin registration without creating a hidden default controller. Controller handles remain independent, allowing the iOS native layer to host more than one controller.
 
 ## Platform differences
 

@@ -183,6 +183,14 @@ void main() {
     expect(cluster.dataVersion, 9);
   });
 
+  test('AttributeState normalizes integer byte JSON without width bounds', () {
+    final state = AttributeState.fromJson(<String, dynamic>{
+      'tlv': <int>[-0x81, -0x80, -1, 0, 0x7f, 0xff, 0x100, 0xffff],
+    });
+
+    expect(state.tlv, <int>[0x7f, 0x80, 0xff, 0, 0x7f, 0xff, 0, 0xff]);
+  });
+
   test('ICDDeviceInfo round-trips through JSON', () {
     final info = ICDDeviceInfo(
       symmetricKey: Uint8List.fromList(List<int>.generate(16, (i) => i)),
@@ -284,7 +292,7 @@ void main() {
           'priorityLevel': 1,
           'timestampType': 0,
           'timestampValue': 1,
-          'tlv': <int>[300],
+          'tlv': <dynamic>['bad'],
         }),
       );
       expectFormatContaining(

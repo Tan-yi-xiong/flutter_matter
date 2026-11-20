@@ -1548,8 +1548,9 @@ class ChipDeviceController implements MethodCallHandler {
   ///
   /// Responses and failures are delivered to [callback]. Pass
   /// [connectContext] from [connectedDevice] to reuse an existing CASE
-  /// connection. `timedRequestTimeoutMs` and `imTimeoutMs` use the native
-  /// defaults when set to zero.
+  /// connection. `timedRequestTimeoutMs` is the timed-invoke timeout and
+  /// `imTimeoutMs` overrides the Interaction Model timeout where the platform
+  /// supports it. A value of zero uses the native defaults.
   Future<void> invoke(
       InvokeCallback callback, int nodeId, InvokeElement invokeElement,
       {Object? connectContext,

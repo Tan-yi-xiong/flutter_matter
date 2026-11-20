@@ -141,11 +141,12 @@ them.
   and supported host before dispatch. Unknown hosts and paths return structured
   `FlutterError` values.
 - Plugin registration starts the process-wide controller factory without creating
-  a hidden default controller. `DeviceControlHandle.m` admits one Dart-visible
-  controller at a time, and engine detach asynchronously shuts it down on the
-  stable Matter serial queue. A shutdown that cannot be confirmed permanently
-  poisons controller creation for the process; engine re-registration does not
-  clear it.
+  a hidden default controller. `DeviceControlHandle.m` stores controllers by
+  handle and allows multiple native controllers. `/deleteDeviceController` calls
+  the controller's explicit `shutdown` and removes that handle; iOS does not add
+  a native single-controller gate or process-wide poison state. The shared Dart
+  manager still serializes the normal application lifecycle and poisons itself
+  when a native shutdown request fails.
 - `FlutterMatterResultSender` makes result delivery single-shot and main-thread
   safe.
 - `DeviceControlHandle.m` validates pairing, Wi-Fi/Thread, callback-handle,

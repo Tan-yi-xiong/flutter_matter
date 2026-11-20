@@ -22,9 +22,6 @@
 static NSMutableDictionary *controls = nil;
 static NSMutableDictionary *onNOCChainGenerationCompletes = nil;
 static dispatch_queue_t connectDeviceQueue = nil;
-static NSString *activeControlHandle = nil;
-static BOOL controllerLifecycleEnabled = NO;
-static BOOL controllerLifecyclePoisoned = NO;
 
 static void FlutterMatterEnsureDeviceControlState(void) {
     static dispatch_once_t onceToken;
@@ -56,53 +53,10 @@ static FlutterDeviceController *FlutterMatterControllerForHandle(NSString *handl
     }
 }
 
-static NSString *FlutterMatterActiveControllerHandle(void) {
+static void FlutterMatterStoreController(NSString *handle, FlutterDeviceController *controller) {
     FlutterMatterEnsureDeviceControlState();
     @synchronized (controls) {
-        return activeControlHandle;
-    }
-}
-
-static BOOL FlutterMatterIsControllerLifecycleEnabled(void) {
-    FlutterMatterEnsureDeviceControlState();
-    @synchronized (controls) {
-        return controllerLifecycleEnabled;
-    }
-}
-
-static BOOL FlutterMatterIsControllerLifecyclePoisoned(void) {
-    FlutterMatterEnsureDeviceControlState();
-    @synchronized (controls) {
-        return controllerLifecyclePoisoned;
-    }
-}
-
-static void FlutterMatterPoisonControllerLifecycle(void) {
-    FlutterMatterEnsureDeviceControlState();
-    @synchronized (controls) {
-        if (!controllerLifecyclePoisoned) {
-            controllerLifecyclePoisoned = YES;
-            FlutterMatterLog(@"Controller lifecycle is permanently poisoned until process restart");
-        }
-    }
-}
-
-void FlutterMatterSetControllerLifecycleEnabled(BOOL enabled) {
-    FlutterMatterEnsureDeviceControlState();
-    @synchronized (controls) {
-        controllerLifecycleEnabled = enabled;
-    }
-}
-
-static BOOL FlutterMatterStoreController(NSString *handle, FlutterDeviceController *controller) {
-    FlutterMatterEnsureDeviceControlState();
-    @synchronized (controls) {
-        if (controllerLifecyclePoisoned || !controllerLifecycleEnabled || activeControlHandle.length > 0) {
-            return NO;
-        }
         controls[handle] = controller;
-        activeControlHandle = [handle copy];
-        return YES;
     }
 }
 
@@ -110,9 +64,6 @@ static void FlutterMatterRemoveController(NSString *handle) {
     FlutterMatterEnsureDeviceControlState();
     @synchronized (controls) {
         [controls removeObjectForKey:handle];
-        if ([activeControlHandle isEqualToString:handle]) {
-            activeControlHandle = nil;
-        }
     }
 }
 
@@ -127,51 +78,9 @@ static BOOL FlutterMatterShutdownControllerSafely(ZGMTRDeviceController *control
         [controller shutdown];
         return YES;
     } @catch (NSException *exception) {
-        FlutterMatterPoisonControllerLifecycle();
         FlutterMatterLogException(context, exception);
         return NO;
     }
-}
-
-void FlutterMatterShutdownActiveControllerAsync(void) {
-    FlutterMatterEnsureDeviceControlState();
-    FlutterMatterSetControllerLifecycleEnabled(NO);
-
-    NSString *handle = nil;
-    FlutterDeviceController *fdController = nil;
-    @synchronized (controls) {
-        handle = [activeControlHandle copy];
-        if (handle.length > 0) {
-            fdController = controls[handle];
-            [controls removeObjectForKey:handle];
-            activeControlHandle = nil;
-        }
-    }
-    if (fdController == nil) {
-        return;
-    }
-
-    dispatch_queue_t queue = FlutterMatterEnsureMatterQueue();
-
-    dispatch_async(queue, ^{
-        BOOL shutdownSucceeded = NO;
-        @try {
-            ZGMTRDeviceController *controller = [fdController controller];
-            FlutterMatterLog(@"Shutting down the active Matter controller");
-            shutdownSucceeded = FlutterMatterShutdownControllerSafely(controller,
-                                                                      @"controller.detach.shutdown");
-        } @catch (NSException *exception) {
-            FlutterMatterPoisonControllerLifecycle();
-            FlutterMatterLogException(@"controller.detach.prepareShutdown", exception);
-        }
-
-        if (shutdownSucceeded) {
-            FlutterMatterLog(@"Active Matter controller shutdown completed");
-        } else {
-            FlutterMatterPoisonControllerLifecycle();
-            FlutterMatterLog(@"Active Matter controller state was cleared; native shutdown was not confirmed");
-        }
-    });
 }
 
 static NSError *FlutterMatterOperationError(NSString *message) {
@@ -181,20 +90,6 @@ static NSError *FlutterMatterOperationError(NSString *message) {
 }
 
 static BOOL FlutterMatterInvokeCallback(NSString *path, NSDictionary *payload) {
-    if (!FlutterMatterIsControllerLifecycleEnabled()) {
-        FlutterMatterLog(@"Dropped Matter callback while controller lifecycle is inactive");
-        return NO;
-    }
-
-    id callbackHandle = payload[jsonKeyHandle];
-    if ([callbackHandle isKindOfClass:[NSString class]] && ((NSString *)callbackHandle).length > 0) {
-        NSString *activeHandle = FlutterMatterActiveControllerHandle();
-        if (activeHandle.length == 0 || ![activeHandle isEqualToString:callbackHandle]) {
-            FlutterMatterLog(@"Dropped Matter callback for an inactive controller");
-            return NO;
-        }
-    }
-
     @try {
         NSString *arguments = toJSONStringFromObject(payload ?: @{});
         NSString *result = invokeMethodBlockGet([Global externalChannel], path, arguments);
@@ -845,21 +740,6 @@ static NSDictionary *convertNodeStateJsonFormat(NSArray<NSDictionary<NSString *,
 //  ██████  ██   ██  ███████  ███████
 
 static NSString *newDeviceControllerCall(NSString *params) {
-    if (FlutterMatterIsControllerLifecyclePoisoned()) {
-        return createFlutterRequestResultWithCode(1, @{
-            @"error": @"Native controller lifecycle is poisoned; restart the process before creating another controller.",
-        });
-    }
-    if (!FlutterMatterIsControllerLifecycleEnabled()) {
-        return createFlutterRequestResultWithCode(1, @{
-            @"error": @"Controller lifecycle is inactive.",
-        });
-    }
-    if (FlutterMatterActiveControllerHandle().length > 0) {
-        return createFlutterRequestResultWithCode(1, @{
-            @"error": @"A Dart-visible controller is already active. Delete it before creating another.",
-        });
-    }
     if (!ZGMTRInitializeControllerFactory()) {
         return createFlutterRequestResultWithCode(1, @{
             @"error": @"Matter controller factory is unavailable.",
@@ -891,17 +771,7 @@ static NSString *newDeviceControllerCall(NSString *params) {
         NSString *response = createFlutterRequestResultWithCode(0, @{@"handle" : uuid});
         FlutterDeviceController *fdController =
             [[FlutterDeviceController alloc] initWithController:controller controllerParams:fControlParams];
-        if (!FlutterMatterStoreController(uuid, fdController)) {
-            FlutterMatterShutdownControllerSafely(controller, @"controller.new.storeRejectedShutdown");
-            if (FlutterMatterIsControllerLifecyclePoisoned()) {
-                return createFlutterRequestResultWithCode(1, @{
-                    @"error": @"Native controller lifecycle is poisoned; restart the process before creating another controller.",
-                });
-            }
-            return createFlutterRequestResultWithCode(1, @{
-                @"error": @"Controller lifecycle changed before the controller could be registered.",
-            });
-        }
+        FlutterMatterStoreController(uuid, fdController);
         stored = YES;
         return response;
     } @catch (NSException *exception) {
@@ -1209,7 +1079,6 @@ static NSString *deleteDeviceController(NSString *params) {
 
     ZGMTRDeviceController *control = [fdController controller];
     if (control == nil) {
-        FlutterMatterPoisonControllerLifecycle();
         FlutterMatterRemoveController(handle);
         FlutterMatterLog(@"Controller state was stale and has been cleared");
         return createFlutterRequestResultWithCode(1, @{
@@ -1317,8 +1186,10 @@ static NSString *invoke(NSString *params) {
     NSString *callbackId = FlutterMatterRequiredString(jsonObject, @"callback");
     NSNumber *nodeId = FlutterMatterRequiredNumber(jsonObject, @"nodeId");
     
-    (void)FlutterMatterOptionalNumber(jsonObject, @"timedRequestTimeoutMs");
-    NSNumber *imTimeoutMs = FlutterMatterOptionalNumber(jsonObject, @"imTimeoutMs") ?: @(0);
+    // Timed commands such as AdministratorCommissioning.RevokeCommissioning
+    // require the SDK's timed-invoke path; imTimeoutMs is not a substitute.
+    NSNumber *timedRequestTimeoutMs = FlutterMatterOptionalNumber(jsonObject, @"timedRequestTimeoutMs") ?: @(0);
+    (void)FlutterMatterOptionalNumber(jsonObject, @"imTimeoutMs");
     
     NSDictionary *invokeElementJsonObject = FlutterMatterRequiredDictionary(jsonObject, @"invokeElement");
     NSNumber *endpointId = FlutterMatterRequiredPathID(invokeElementJsonObject, @"endpointId");
@@ -1336,7 +1207,7 @@ static NSString *invoke(NSString *params) {
             @"error": @"Connected device was not found.",
         });
     }
-    [baseDevice invokeCommandWithEndpointID:endpointId clusterID:clusterId commandID:commandId commandFields:tlv timedInvokeTimeout:[imTimeoutMs isEqualToNumber:@(0)] ? nil : imTimeoutMs queue:connectDeviceQueue completion:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable values, NSError * _Nullable error) {
+    [baseDevice invokeCommandWithEndpointID:endpointId clusterID:clusterId commandID:commandId commandFields:tlv timedInvokeTimeout:[timedRequestTimeoutMs isEqualToNumber:@(0)] ? nil : timedRequestTimeoutMs queue:connectDeviceQueue completion:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable values, NSError * _Nullable error) {
         @try {
             if (error) {
                 FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"InvokeCallback/onError"), @{
@@ -1949,13 +1820,6 @@ void onDeviceControlCall(NSString *path, NSString *params,
     FlutterMatterResultSender *sender = [[FlutterMatterResultSender alloc] initWithResult:result];
     dispatch_queue_t queue = FlutterMatterEnsureMatterQueue();
     dispatch_async(queue, ^{
-          if (!FlutterMatterIsControllerLifecycleEnabled()) {
-              [sender sendValue:createFlutterRequestResultWithCode(1, @{
-                  @"error": @"Controller lifecycle is inactive.",
-              })];
-              return;
-          }
-
           NSString *resultData = nil;
           @try {
               if ([path isEqualToString:@"/new"]) {

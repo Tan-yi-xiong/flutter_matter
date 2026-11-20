@@ -86,10 +86,10 @@ try {
 `activeController`, and `hasActiveController` for applications that need to
 coordinate the lifecycle explicitly.
 
-The Dart manager is per isolate, while Android and iOS enforce the single
-controller slot per native process. Do not assume that separate Flutter engines
-can each own a controller; a second engine is rejected until the owning engine
-releases it or detaches.
+The Dart manager is per isolate. Android also enforces one native controller
+slot per process. iOS keeps independent native handles and does not impose a
+process-wide single-controller gate, so separate Flutter engines may own separate
+iOS controllers while each engine still serializes its own acquisitions.
 
 `NetworkCredentials` supports named Wi-Fi and Thread constructors plus the legacy Wi-Fi constructor. An empty Wi-Fi password represents an open network.
 

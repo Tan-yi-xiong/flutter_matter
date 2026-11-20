@@ -102,8 +102,8 @@ New public types and functions must be exported from `lib/flutter_matter.dart`, 
 - Preserve the MethodChannel URL scheme and JSON result shapes (`{code, jsonData}` / `{code, resultJson}`).
 - Native → Dart callbacks use path prefixes such as `NOCChainIssuer`, `CompletionListener`, `InvokeCallback`, `SubscriptionCallback`, `ReportCallback`, `WriteAttributesCallback`, `ConnectedDeviceCallback`, `OpenCommissioningCallback`.
 - Prefer existing wrappers: `ReportCallbackWarp`, `SubscriptionCallbackWarp`, `WriteAttributesCallbackWarp`.
-- `ChipDeviceController.newControllerIfNotExist` delegates to the process-wide `ChipDeviceControllerManager`. Same-identity acquisitions share one Dart handle and increment a reference count; every successful acquisition must be balanced by `close()` (or the compatibility alias `deleteDeviceController()`).
-- Only one native controller may be active per process. A different fabric identity is switched by invalidating/closing the old handle, awaiting native shutdown, then creating the replacement.
+- `ChipDeviceController.newControllerIfNotExist` delegates to the singleton `ChipDeviceControllerManager`. Same-identity acquisitions share one Dart handle and increment a reference count; every successful acquisition must be balanced by `close()` (or the compatibility alias `deleteDeviceController()`).
+- The Dart manager allows one live Dart-visible controller per isolate. Android additionally enforces one native controller per process because its shutdown path stops process-wide IO/factory state. iOS stores independent native handles and does not impose a native single-controller gate. A different fabric identity is switched by invalidating/closing the old handle, awaiting native shutdown, then creating the replacement.
 - `destroy()` is Dart-only cleanup. Never use it as a substitute for native shutdown.
 - iOS `pairDevice` requires `onboardingPayload`.
 - Open Wi-Fi: empty `WiFiCredentials.password` is valid.
@@ -129,7 +129,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ### iOS (ObjC plugin + Swift Matter Extension)
 
 - Entry: `ios/Classes/FlutterMatterPlugin.m` — hosts for device controller, BLE, and onboarding only.
-- Matter work runs on the `Global` serial queue; `ZGMTRInitializeControllerFactory()` runs on plugin registration and must not create a hidden default controller.
+- Matter work runs on the `Global` serial queue; `ZGMTRInitializeControllerFactory()` runs on plugin registration and must not create a hidden default controller. `DeviceControlHandle.m` keeps controllers in a handle map and may host multiple native controllers; the Dart manager controls the common single-active application path.
 - Vendored framework: `ZGMatter.framework` via `ios/flutter_matter.podspec`.
 - Framework build tools live in `ios/zgmatter/`. The external connectedhomeip checkout must be supplied explicitly with `--connectedhomeip-dir` or `ZGMATTER_CONNECTEDHOMEIP_DIR`.
 - Deployment targets are iOS 16.1. Documented toolchain baseline is Xcode 16.4 or later with CocoaPods 1.17; the migration build evidence used Xcode 26.3 and CocoaPods 1.17.0.

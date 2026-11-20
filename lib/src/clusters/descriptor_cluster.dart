@@ -63,7 +63,9 @@ class DescriptorCluster {
         final values = <int>[];
         while (!reader.isEndOfContainer()) {
           reader.enterStructure(AnonymousTag.instance);
-          values.add(reader.getUInt(AnonymousTag.instance));
+          values.add(reader.getUInt(ContextSpecificTag(0)));
+          // DeviceTypeStruct also carries revision (context tag 1), which this
+          // convenience API intentionally omits from its return value.
           reader.exitContainer();
         }
         reader.exitContainer();

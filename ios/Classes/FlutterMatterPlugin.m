@@ -9,8 +9,6 @@
 #import "Onboarding.h"
 #import "Utiles.h"
 
-void FlutterMatterShutdownActiveControllerAsync(void);
-void FlutterMatterSetControllerLifecycleEnabled(BOOL enabled);
 dispatch_queue_t FlutterMatterEnsureMatterQueue(void);
 
 @implementation FlutterMatterPlugin
@@ -26,7 +24,6 @@ dispatch_queue_t FlutterMatterEnsureMatterQueue(void);
 
     // Keep one process-wide Matter queue across engine re-registration.
     FlutterMatterEnsureMatterQueue();
-    FlutterMatterSetControllerLifecycleEnabled(YES);
 
     // Start the process-wide factory once. Controllers are created only by
     // explicit Dart requests and remain owned by DeviceControlHandle.
@@ -36,11 +33,6 @@ dispatch_queue_t FlutterMatterEnsureMatterQueue(void);
   } @catch (NSException *exception) {
     FlutterMatterLogException(@"FlutterMatterPlugin.register", exception);
   }
-}
-
-- (void)detachFromEngineForRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  (void)registrar;
-  FlutterMatterShutdownActiveControllerAsync();
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
