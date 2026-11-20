@@ -82,6 +82,36 @@ void main() {
     );
 
     test(
+      'restart releases active connections before replacing the runtime',
+      () async {
+        final request = ControllerIdentityRequest(
+          runId: 'run-1',
+          purpose: ControllerIdentityPurpose.main,
+          platform: ControllerPlatform.android,
+        );
+        final identity = await adapter.loadOrCreate(request);
+        final originalController = runtimeProvider.controllerFor(
+          ControllerIdentityPurpose.main,
+        );
+        final connection = await adapter.connect(
+          identity: identity,
+          nodeId: 42,
+          timeout: const Duration(seconds: 1),
+        );
+
+        await adapter.restart(request);
+
+        expect(originalController.releasedConnections, hasLength(1));
+        expect(
+          originalController.releasedConnections.single.context,
+          'context',
+        );
+        expect(originalController.closeCount, 1);
+        expect(connection.opaqueId, isNotEmpty);
+      },
+    );
+
+    test(
       'maps a Wi-Fi commissioning request to the direct Matter SDK request',
       () async {
         final identity = await _identity(adapter);
