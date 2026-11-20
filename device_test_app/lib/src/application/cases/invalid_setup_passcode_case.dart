@@ -70,21 +70,13 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
       );
     }
 
-    final identityRequest = ControllerIdentityRequest(
-      runId: context.runId,
-      purpose: ControllerIdentityPurpose.invalidSetupPasscode,
-      platform: controller.platform,
-    );
-    await context.ports.controllerIdentity.reset(identityRequest);
-    final identity = await context.ports.controllerIdentity.loadOrCreate(
-      identityRequest,
-    );
-
     // Same-phone Android validation advertises the re-opened window in basic
     // commissioning mode, which the SDK's payload discovery refuses to hand
     // to PASE. Commissioning directly to the on-phone VDA loopback endpoint
     // bypasses discovery while the window is open, so the wrong passcode is
-    // still exercised against the real PASE handshake.
+    // still exercised against the real PASE handshake. Reuse the live main
+    // controller: creating a second CHIP controller in the same process aborts
+    // in the pinned Android controller implementation.
     final endpoint =
         secrets.onNetworkEndpoint ??
         (controller.platform == ControllerPlatform.android
@@ -93,7 +85,7 @@ class InvalidSetupPasscodeCase implements DeviceTestCase {
     try {
       final result = await commissionTarget(
         context,
-        identity: identity,
+        identity: mainIdentity,
         secrets: secrets,
         timeout: context.timeoutFor(id),
         onboardingPayload: secrets.invalidSetupOnboardingPayload,

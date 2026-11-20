@@ -97,6 +97,8 @@ A failed or interrupted Run can leave a fabric behind. The post-Run **Commission
 
 The report contract defines exact timeouts, result rules, and required fields. See [Device Test Report Contract](device-test-report.md).
 
+`invalid_setup_passcode` reuses the live main controller after reopening the commissioning window. The pinned Android CHIP controller wrapper cannot initialize a second controller in the same process; attempting it aborts in `newDeviceController`.
+
 The `quick` profile contains `build_install`, `commissioning`, `operational_connect`, and `onoff_invoke`. It is iteration feedback only.
 
 ## Evidence and gates

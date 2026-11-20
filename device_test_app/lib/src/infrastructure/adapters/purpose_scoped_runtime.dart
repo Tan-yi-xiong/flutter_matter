@@ -31,12 +31,11 @@ abstract interface class MatterControllerRuntimeProvider {
   Future<void> close();
 }
 
-/// Creates one purpose-isolated controller per platform.
+/// Creates one controller runtime per purpose and platform.
 ///
-/// A purpose gets its own secure-storage key, so a negative-test controller can
-/// never accidentally reuse the main controller credentials. The storage key
-/// intentionally excludes the run id: the main identity must survive a run and
-/// an app restart.
+/// A purpose gets its own secure-storage key, so runtime purposes cannot
+/// accidentally reuse each other's credentials. The storage key intentionally
+/// excludes the run id: the main identity must survive a run and an app restart.
 class FlutterMatterControllerRuntimeProvider
     implements MatterControllerRuntimeProvider {
   FlutterMatterControllerRuntimeProvider({
