@@ -89,7 +89,10 @@ class MatterControllerService {
         skipCommissioningComplete: false,
         keypairDelegate: credentials.identity,
         rootCertificate: credentials.rootCertificate,
-        intermediateCertificate: credentials.rootCertificate,
+        // The test fabric has no ICA. Reusing the RCAC as ICAC makes Matter
+        // SDK reject the NOC chain with CHIP_ERROR_WRONG_CERT_DN because the
+        // root certificate's DN type is kRoot, not kICA.
+        intermediateCertificate: Uint8List(0),
         operationalCertificate: credentials.operationalCertificate,
         ipk: _config.ipk,
         nodeId: _config.controllerNodeId,
@@ -700,7 +703,7 @@ class _MatterNocChainIssuer implements NOCChainIssuer {
             fabricId: config.fabricId,
             keypairDelegate: credentials.identity,
             rootCertificate: credentials.rootCertificate,
-            intermediateCertificate: credentials.rootCertificate,
+            intermediateCertificate: Uint8List(0),
             operationalCertificate: operationalCertificate,
             ipk: config.ipk,
             nodeId: config.controllerNodeId,
