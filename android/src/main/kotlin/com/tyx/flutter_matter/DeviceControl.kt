@@ -39,7 +39,6 @@ import io.flutter.plugin.common.MethodChannel
 import matter.onboardingpayload.OnboardingPayload
 import org.json.JSONArray
 import org.json.JSONObject
-import java.lang.reflect.InvocationTargetException
 import java.util.Objects
 import java.util.UUID
 import java.util.concurrent.Executor
@@ -1052,30 +1051,12 @@ fun onNOCChainGeneration(params: String): String {
 fun deleteDeviceController(params: String): String {
     val jsonObject = JSONObject(params)
     val handle = jsonObject.optNotNull(jsonKeyHandle).toString()
-    val control = controls.remove(handle)
-    if (control != null) {
-        releaseNativeDeviceController(control)
-    }
+    // The pinned CHIPController Java wrapper has no safe native-close API:
+    // finalization invokes PlatformMgr().Shutdown() while the CHIP event loop
+    // is still running, which aborts the process. Drop the Java reference and
+    // let process teardown reclaim the native controller.
+    controls.remove(handle)
     return createFlutterRequestResult(0, JSONObject())
-}
-
-private fun releaseNativeDeviceController(control: ChipDeviceController) {
-    // ChipDeviceController.close() only releases the BLE GATT connection. The
-    // pinned CHIPController Java API has no public native-close method; its
-    // finalizer is the only synchronous path that invokes native
-    // deleteDeviceController and clears the pointer. Invoke it explicitly so a
-    // following controller can initialize without reusing stale KVS state.
-    val finalizeMethod = control.javaClass.getDeclaredMethod("finalize")
-    finalizeMethod.isAccessible = true
-    try {
-        finalizeMethod.invoke(control)
-    } catch (error: InvocationTargetException) {
-        val cause = error.targetException
-        if (cause is Exception) {
-            throw cause
-        }
-        throw RuntimeException("Native controller release failed", cause)
-    }
 }
 
 fun invoke(params: String): String {

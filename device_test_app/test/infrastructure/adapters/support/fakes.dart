@@ -223,10 +223,6 @@ class FakeRuntimeProvider implements MatterControllerRuntimeProvider {
   Future<MatterControllerRuntime> restart(
     ControllerIdentityRequest request,
   ) async {
-    final stale = _entries.remove(request.purpose);
-    if (stale != null) {
-      await stale.controller.close();
-    }
     final entry = _entry(request.purpose);
     return MatterControllerRuntime(
       purpose: request.purpose,

@@ -6,14 +6,13 @@ import '../test_case.dart';
 import '../test_context.dart';
 import 'case_support.dart';
 
-/// Rebuilds the controller runtime from its persisted credentials and
-/// verifies the commissioned device accepts a fresh CASE session without
-/// recommissioning.
+/// Reloads the controller credentials and verifies the commissioned device
+/// accepts a fresh CASE session without recommissioning.
 ///
-/// The restart is runtime-scoped: the live controller handle is disposed and
-/// recreated from the stored identity, which is the library-level behavior
-/// under test. A process-level restart is an app lifecycle concern and is
-/// intentionally out of scope for this validation Run.
+/// The restart is runtime-scoped: stored credentials are reloaded and the live
+/// native controller is reused for a fresh CASE connection. A process-level
+/// restart is an app lifecycle concern and is intentionally out of scope for
+/// this validation Run.
 class AppRestartCase implements DeviceTestCase {
   const AppRestartCase();
 

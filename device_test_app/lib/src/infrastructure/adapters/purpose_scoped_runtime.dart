@@ -22,8 +22,8 @@ class MatterControllerRuntime {
 abstract interface class MatterControllerRuntimeProvider {
   Future<MatterControllerRuntime> load(ControllerIdentityRequest request);
 
-  /// Disposes the live controller for [request.purpose] while keeping the
-  /// persisted credentials, then rebuilds the runtime from those credentials.
+  /// Returns the live runtime for [request.purpose] so the caller can reload
+  /// persisted credentials and reconnect without native controller teardown.
   Future<MatterControllerRuntime> restart(ControllerIdentityRequest request);
 
   Future<void> reset(ControllerIdentityRequest request);
@@ -98,14 +98,14 @@ class FlutterMatterControllerRuntimeProvider
   ) async {
     final key = _keyFor(request);
     final existing = _runtimes[key];
-    if (existing != null) {
-      // Dispose the live controller only; stored credentials survive.
-      await existing.controller.close();
-      _runtimes.remove(key);
+    if (existing == null) {
+      return load(request);
     }
-    // load() restores credentials from secure storage and builds a brand-new
-    // controller, so the CASE session state does not survive the restart.
-    return load(request);
+    // Keep the native controller alive. CHIPController's Android delete path
+    // calls PlatformMgr().Shutdown() while its event loop is still running,
+    // which aborts the process. The adapter reloads the persisted identity and
+    // reconnects CASE without entering that unsupported lifecycle path.
+    return existing;
   }
 
   @override

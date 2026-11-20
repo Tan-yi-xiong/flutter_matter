@@ -93,7 +93,7 @@ A failed or interrupted Run can leave a fabric behind. The post-Run **Commission
 | `onoff_subscription` | P0 | A command-triggered state change reaches an active subscription |
 | `node_label_read_write` | P0 | NodeLabel write/read round trip succeeds |
 | `invalid_setup_passcode` | P0 | Incorrect same-discriminator passcode fails clearly without a crash |
-| `app_restart` | P1 | Controller runtime rebuilds and reconnects without recommissioning |
+| `app_restart` | P1 | Reloads persisted credentials, releases the CASE session, and reconnects without recommissioning |
 
 The report contract defines exact timeouts, result rules, and required fields. See [Device Test Report Contract](device-test-report.md).
 

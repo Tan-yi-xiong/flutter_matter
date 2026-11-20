@@ -223,7 +223,7 @@ If the prompt allows skipping or must be failed, use `skip_prompt` or `fail_prom
 
 ### `app_restart` behavior
 
-The `app_restart` case restarts the controller runtime in place: it disposes the live controller, rebuilds it from the persisted credentials, and verifies CASE reconnection without recommissioning. It is fully automatic and never prompts or waits for an app restart; there is no checkpoint and no resume path. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
+The `app_restart` case performs a soft controller-runtime restart: it reloads the persisted controller credentials, releases established operational connections and subscriptions, reuses the live native controller, and verifies CASE reconnection without recommissioning. It is fully automatic and never prompts or waits for an app restart; there is no checkpoint and no resume path. Process-level and native-controller teardown are out of scope because the pinned CHIPController Java wrapper aborts when native deletion runs `PlatformMgr().Shutdown()` while the event loop is active. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
 
 ## Step 7: Verify progress
 

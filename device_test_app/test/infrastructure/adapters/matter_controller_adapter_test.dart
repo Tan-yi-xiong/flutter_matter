@@ -82,7 +82,7 @@ void main() {
     );
 
     test(
-      'restart releases active connections before replacing the runtime',
+      'restart reloads identity and releases connections without closing runtime',
       () async {
         final request = ControllerIdentityRequest(
           runId: 'run-1',
@@ -93,20 +93,25 @@ void main() {
         final originalController = runtimeProvider.controllerFor(
           ControllerIdentityPurpose.main,
         );
+        final originalStore = runtimeProvider.identityFor(
+          ControllerIdentityPurpose.main,
+        );
         final connection = await adapter.connect(
           identity: identity,
           nodeId: 42,
           timeout: const Duration(seconds: 1),
         );
 
-        await adapter.restart(request);
+        final restarted = await adapter.restart(request);
 
+        expect(restarted.opaqueId, identity.opaqueId);
         expect(originalController.releasedConnections, hasLength(1));
         expect(
           originalController.releasedConnections.single.context,
           'context',
         );
-        expect(originalController.closeCount, 1);
+        expect(originalStore.loadCount, 2);
+        expect(originalController.closeCount, 0);
         expect(connection.opaqueId, isNotEmpty);
       },
     );

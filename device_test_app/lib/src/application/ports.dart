@@ -49,9 +49,10 @@ class ControllerIdentityRequest {
 abstract interface class ControllerIdentityPort {
   Future<ControllerIdentity> loadOrCreate(ControllerIdentityRequest request);
 
-  /// Disposes the live controller runtime for [request.purpose] while keeping
-  /// the persisted credentials, then rebuilds the runtime from those stored
-  /// credentials. Returns the restored identity.
+  /// Reloads the persisted identity for [request.purpose] and invalidates live
+  /// operational connections before returning the restored identity. The
+  /// runtime may reuse its native controller; process-level teardown is out of
+  /// scope. Returns the restored identity.
   Future<ControllerIdentity> restart(ControllerIdentityRequest request);
 
   Future<void> reset(ControllerIdentityRequest request);
