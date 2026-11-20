@@ -60,14 +60,18 @@ Uint8List toUint8List(List list) {
   final bytes = <int>[];
   for (var i = 0; i < list.length; i++) {
     final value = list[i];
-    if (value is! int || value < 0 || value > 0xff) {
+    // Android's org.json serializes Java bytes as signed values (-128..127),
+    // while iOS and other platform bridges use unsigned values (0..255).
+    // Accept exactly the union of those wire representations and normalize
+    // signed values to their two's-complement byte.
+    if (value is! int || value < -0x80 || value > 0xff) {
       throw ArgumentError.value(
         value,
         'bytes[$i]',
-        'must be an integer between 0 and 255',
+        'must be a signed or unsigned byte represented as an integer',
       );
     }
-    bytes.add(value);
+    bytes.add(value & 0xff);
   }
   return Uint8List.fromList(bytes);
 }

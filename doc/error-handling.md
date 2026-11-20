@@ -86,7 +86,10 @@ background threads and report them instead of losing an uncaught `NPE`.
   rejects empty input, and returns stable QR/manual-pairing error messages.
 - `Utils.kt` provides typed JSON extraction helpers, sanitized error categories,
   safe main-thread result delivery, and bounded native-to-Flutter callback waits.
-  Byte-array conversion accepts only integer values in the range `0..255`.
+  Inbound Android byte-array conversion accepts only integer values in the range
+  `0..255`. On the Dart side, native response bytes accept either the Android
+  signed representation (`-128..127`) or the unsigned representation (`0..255`)
+  and normalize both to the same octet values.
 - `ChipClient.kt` validates platform/context initialization and reports a safe
   initialization failure.
 - `ExampleAttestationTrustStoreDelegate.kt` contains malformed test-certificate

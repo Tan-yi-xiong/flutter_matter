@@ -121,7 +121,7 @@ The bridge preserves the `{code, jsonData}` and `{code, resultJson}` envelopes. 
 - Cluster helpers await request acceptance and complete their returned `Future` with a typed error when the request is rejected, no report arrives, the payload cannot be decoded, or the 15-second one-shot read timeout expires.
 - BLE delegate registration rolls back the new Dart handler when native registration fails. Clearing a delegate keeps the existing local handler until native confirms the clear.
 - `FlutterMatterPlatform` exposes `requestPlatform`, `addHandler`, and `removeHandler`; controller creation, BLE manager, NSD, and onboarding request paths use this interface instead of a concrete MethodChannel cast.
-- Android byte arrays require integer values in `0..255`; onboarding discovery capabilities use wire values `1`, `2`, and `3` for soft AP, BLE, and on-network discovery.
+- Android inbound byte arrays require integer values in `0..255`; Dart also accepts Android's signed native-response byte representation (`-128..127`) and normalizes it to octets. Onboarding discovery capabilities use wire values `1`, `2`, and `3` for soft AP, BLE, and on-network discovery.
 - iOS subscription reports are non-terminal. A terminal subscription error produces one `onDone`; path-level StatusIB values are exposed through `attributeStatuses`/`eventStatuses`. Write callbacks identify attributes with `attributeId` and deliver path-specific statuses through `onResponse`.
 - NSD, onboarding, BLE, model, and TLV operations surface typed, sanitized failures; the example NSD resolver skips a missing host.
 - iOS uses the stable bridge codes documented in [Error handling](error-handling.md).

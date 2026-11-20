@@ -174,8 +174,15 @@ void main() {
     expect(result.resultJson, '{"msg":"safe message"}');
   });
 
+  test('toUint8List accepts signed and unsigned byte representations', () {
+    expect(
+      toUint8List(<dynamic>[-0x80, -1, 0, 0x7f, 0xff]),
+      orderedEquals(<int>[0x80, 0xff, 0, 0x7f, 0xff]),
+    );
+  });
+
   test('toUint8List rejects invalid byte values with ArgumentError', () {
-    expect(() => toUint8List(<dynamic>[0, 255]), returnsNormally);
+    expect(() => toUint8List(<dynamic>[-0x81]), throwsArgumentError);
     expect(() => toUint8List(<dynamic>[256]), throwsArgumentError);
     expect(() => toUint8List(<dynamic>['1']), throwsArgumentError);
   });
@@ -302,6 +309,32 @@ void main() {
         ),
       ),
     );
+
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
+  });
+
+  test('certificate success payload accepts Android signed bytes', () async {
+    const channel = MethodChannel('flutter_matter');
+    final platform = MethodChannelFlutterMatter();
+    FlutterMatterPlatform.instance = platform;
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, (call) async {
+      return jsonEncode({
+        'code': 0,
+        'jsonData': {
+          'data': <int>[-0x80, -1, 0, 0x7f],
+        },
+      });
+    });
+
+    final certificate = await ChipDeviceController.createRootCertificate(
+      _TestKeypairDelegate(),
+      1,
+      2,
+    );
+
+    expect(certificate, orderedEquals(<int>[0x80, 0xff, 0, 0x7f]));
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(channel, null);
