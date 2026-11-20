@@ -136,7 +136,10 @@ Copy `example/ios/MatterExt/RequestHandler.swift` into the extension target's `R
 
 ## 4. Create a persistent controller identity
 
-Create the controller from a persistent fabric identity. `newControllerIfNotExist` reuses an existing controller when `fabricId` and `rootCertificate` match.
+Create the controller from a persistent fabric identity.
+`newControllerIfNotExist` delegates to the process-wide
+`ChipDeviceControllerManager`. It returns the same controller when `fabricId`
+and `rootCertificate` match and increments an acquisition reference count.
 
 ```dart
 final identity = await identityRepository.loadOrCreate();
@@ -144,6 +147,13 @@ final controller = await ChipDeviceController.newControllerIfNotExist(
   identity.controllerParams,
 );
 ```
+
+Only one native controller can be active in the process. A request for a
+different fabric closes the old controller before creating the replacement, and
+the old Dart handle then fails with `ControllerLifecycleException.closed`.
+Balance every successful acquisition with `await controller.close()` when the
+fabric session ends. `deleteDeviceController()` remains a compatibility alias;
+`destroy()` is Dart-only cleanup and does not immediately release native state.
 
 The example's `MatterIdentity` builds `ControllerParams` from a keypair, root certificate, operational certificate, and fabric ID. See [`MatterIdentity`](../example/lib/src/identity.dart#L13-L41) and [`MatterIdentityRepository.loadOrCreate`](../example/lib/src/identity.dart#L48-L67).
 

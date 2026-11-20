@@ -9,6 +9,10 @@
 #import "Onboarding.h"
 #import "Utiles.h"
 
+void FlutterMatterShutdownActiveControllerAsync(void);
+void FlutterMatterSetControllerLifecycleEnabled(BOOL enabled);
+dispatch_queue_t FlutterMatterEnsureMatterQueue(void);
+
 @implementation FlutterMatterPlugin
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -20,16 +24,23 @@
     [registrar addMethodCallDelegate:instance channel:channel];
     [Global setExternalChannel:channel];
 
-    // 创建matter代码执行的线程队列
-    [Global setBackgroundSerialQueue:dispatch_queue_create("Matter Thread queue", DISPATCH_QUEUE_SERIAL)];
+    // Keep one process-wide Matter queue across engine re-registration.
+    FlutterMatterEnsureMatterQueue();
+    FlutterMatterSetControllerLifecycleEnabled(YES);
 
-    // 初始化库,
-    if (InitializeZGMTR() == nil) {
-      FlutterMatterLog(@"Matter controller initialization failed");
+    // Start the process-wide factory once. Controllers are created only by
+    // explicit Dart requests and remain owned by DeviceControlHandle.
+    if (!ZGMTRInitializeControllerFactory()) {
+      FlutterMatterLog(@"Matter controller factory initialization failed");
     }
   } @catch (NSException *exception) {
     FlutterMatterLogException(@"FlutterMatterPlugin.register", exception);
   }
+}
+
+- (void)detachFromEngineForRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
+  (void)registrar;
+  FlutterMatterShutdownActiveControllerAsync();
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {

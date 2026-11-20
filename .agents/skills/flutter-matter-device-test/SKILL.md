@@ -223,9 +223,9 @@ If the prompt allows skipping or must be failed, use `skip_prompt` or `fail_prom
 
 ### `app_restart` behavior
 
-The `app_restart` case performs a soft controller-runtime restart: it reloads the persisted controller credentials, releases established operational connections and subscriptions, reuses the live native controller, and verifies CASE reconnection without recommissioning. It is fully automatic and never prompts or waits for an app restart; there is no checkpoint and no resume path. Process-level and native-controller teardown are out of scope because the pinned CHIPController Java wrapper aborts when native deletion runs `PlatformMgr().Shutdown()` while the event loop is active. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
+The `app_restart` case performs a controller-runtime rebuild: it releases established operational connections and subscriptions, closes the active runtime, reloads persisted credentials into a new runtime through the single-active controller lifecycle, and verifies CASE reconnection without recommissioning. The old native controller must finish shutting down before the replacement is created. The case is fully automatic and never prompts or waits for a process-level app restart; there is no checkpoint and no resume path. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
 
-The `invalid_setup_passcode` case also reuses the live main controller. Do not create a second CHIP controller in the same app process: the pinned Android wrapper aborts inside `newDeviceController`.
+The `invalid_setup_passcode` case reuses the active main controller after reopening the commissioning window. It keeps the public `invalid_setup_passcode` test ID but does not allocate a second controller identity.
 
 ## Step 7: Verify progress
 

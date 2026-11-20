@@ -22,8 +22,8 @@ class MatterControllerRuntime {
 abstract interface class MatterControllerRuntimeProvider {
   Future<MatterControllerRuntime> load(ControllerIdentityRequest request);
 
-  /// Returns the live runtime for [request.purpose] so the caller can reload
-  /// persisted credentials and reconnect without native controller teardown.
+  /// Closes the active runtime for [request.purpose], then rebuilds it from
+  /// persisted credentials under the single-active controller lifecycle.
   Future<MatterControllerRuntime> restart(ControllerIdentityRequest request);
 
   Future<void> reset(ControllerIdentityRequest request);
@@ -31,11 +31,11 @@ abstract interface class MatterControllerRuntimeProvider {
   Future<void> close();
 }
 
-/// Creates one controller runtime per purpose and platform.
+/// Creates the device-test controller runtime for a platform.
 ///
-/// A purpose gets its own secure-storage key, so runtime purposes cannot
-/// accidentally reuse each other's credentials. The storage key intentionally
-/// excludes the run id: the main identity must survive a run and an app restart.
+/// Controller credentials are scoped by platform and identity purpose. The
+/// storage key intentionally excludes the run id: the main identity must
+/// survive a run and an app restart.
 class FlutterMatterControllerRuntimeProvider
     implements MatterControllerRuntimeProvider {
   FlutterMatterControllerRuntimeProvider({
@@ -97,14 +97,18 @@ class FlutterMatterControllerRuntimeProvider
   ) async {
     final key = _keyFor(request);
     final existing = _runtimes[key];
-    if (existing == null) {
-      return load(request);
+    if (existing != null) {
+      try {
+        // The single-active lifecycle guarantees the old native controller is
+        // shut down before the replacement runtime is created.
+        await existing.controller.close();
+      } finally {
+        _runtimes.remove(key);
+      }
     }
-    // Keep the native controller alive. CHIPController's Android delete path
-    // calls PlatformMgr().Shutdown() while its event loop is still running,
-    // which aborts the process. The adapter reloads the persisted identity and
-    // reconnects CASE without entering that unsupported lifecycle path.
-    return existing;
+    // Credentials remain in secure storage. load() creates a genuinely new
+    // controller and identity store, then reloads the persisted identity.
+    return load(request);
   }
 
   @override

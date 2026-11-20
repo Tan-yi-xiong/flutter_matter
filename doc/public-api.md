@@ -8,7 +8,7 @@ import 'package:flutter_matter/flutter_matter.dart';
 
 Everything exported from that library is public API. Files under `package:flutter_matter/src/` are internal; tests may import them, applications should not.
 
-The current package version is `0.0.11`.
+The current package version is `0.0.12`.
 
 Use the generated [pub.dev API reference](https://pub.dev/documentation/flutter_matter/latest/) for signatures, parameters, return values, and member-level documentation. This page records the supported import boundary, exported surface, and compatibility rules.
 
@@ -21,6 +21,9 @@ The [example code map](../example/README.md#code-map) links each workflow to the
 Core types:
 
 - `ChipDeviceController`
+- `ChipDeviceControllerManager`
+- `ControllerLifecycleException`
+- `ControllerLifecycleFailure`
 - `ControllerParams`
 - `NetworkCredentials`
 - `WiFiCredentials`
@@ -46,11 +49,47 @@ Delegates and callbacks:
 
 `ChipDeviceController` provides:
 
-- lifecycle: `newControllerIfNotExist`, `deleteDeviceController`, `destroy`
+- lifecycle: `newControllerIfNotExist`, `close`, `closed`, `deleteDeviceController`, `destroy`
 - commissioning: `pairDevice`, `pairDeviceWithAddress`, `stopDevicePairing`, `continueCommissioning`, `setCompletionListener`, `setNocChainIssuer`
 - identity: `createRootCertificate`, `createOperationalCertificate`, `publicKeyFromCSR`, `onNOCChainGeneration`
 - operations: `invoke`, `read`, `write`, `subscribe`, `unSubscription`, `connectedDevice`, `releaseConnectContext`
 - commissioning windows and fabric state: `openPairingWindowWithPIN` (deprecated; verify platform-specific semantics), `getFabricIndex`
+
+Exactly one Dart-visible native controller can be active per process. The shared
+`ChipDeviceControllerManager.instance` serializes acquisition and shutdown:
+
+- Repeated `acquire`/`newControllerIfNotExist` calls with the same `fabricId`
+  and `rootCertificate` return the same `ChipDeviceController` and increment a
+  reference count. Every successful acquisition must be balanced by `close()`
+  (or the compatibility alias `deleteDeviceController()`); only the final
+  release shuts down native state.
+- Acquiring a different fabric identity immediately invalidates the old Dart
+  handle, shuts down its native controller, and only then creates the
+  replacement. Requests through the old handle fail with
+  `ControllerLifecycleException.closed`.
+- `destroy()` performs Dart-only cleanup and does not request native shutdown.
+  The next acquisition first removes the abandoned native controller before
+  creating another one.
+- A native shutdown failure invalidates the handle and poisons the manager.
+  Further acquisition is rejected until the process restarts.
+
+```dart
+final controller = await ChipDeviceController.newControllerIfNotExist(params);
+try {
+  await controller.pairDevice(/* ... */);
+} finally {
+  await controller.close();
+}
+```
+
+`ChipDeviceControllerManager` also exposes `acquire`, `release`, `closeAll`,
+`activeController`, and `hasActiveController` for applications that need to
+coordinate the lifecycle explicitly.
+
+The Dart manager is per isolate, while Android and iOS enforce the single
+controller slot per native process. Do not assume that separate Flutter engines
+can each own a controller; a second engine is rejected until the owning engine
+releases it or detaches.
 
 `NetworkCredentials` supports named Wi-Fi and Thread constructors plus the legacy Wi-Fi constructor. An empty Wi-Fi password represents an open network.
 
@@ -110,9 +149,10 @@ These types encode the JSON exchanged with native code. Their public fields and 
 
 ## Error handling
 
-The bridge preserves the `{code, jsonData}` and `{code, resultJson}` envelopes. Dart request envelopes are validated before use, and malformed native payloads produce contextual typed errors instead of `TypeError`, `NoSuchMethodError`, or platform stack text. The bridge exception classes remain internal and are not added to the package-root export list.
+The bridge preserves the `{code, jsonData}` and `{code, resultJson}` envelopes. Dart request envelopes are validated before use, and malformed native payloads produce contextual typed errors instead of `TypeError`, `NoSuchMethodError`, or platform stack text. General bridge exception classes remain internal, while controller lifecycle failures are exported as `ControllerLifecycleException` and `ControllerLifecycleFailure`.
 
 - `CallPlatformException` carries an optional code, method name, safe details, and cause.
+- `ControllerLifecycleException` reports a closed/superseded handle, native/Dart lifecycle conflict, or shutdown failure that poisoned controller creation for the current process.
 - Native `PlatformException` and `MissingPluginException` failures from the MethodChannel transport are normalized to `CallPlatformException` with the method name and a safe category.
 - `PlatformProtocolException` reports invalid platform response envelopes with the method name but without the response body; it also implements `FormatException`.
 - `checkCallArgNotNull` throws `ArgumentError` with the missing field and callback context.
@@ -163,7 +203,7 @@ Both helpers require a connected `ChipDeviceController`, node ID, and connection
 
 | Export path | Public symbols |
 | --- | --- |
-| `src/controller.dart` | Controller, credentials, callback, delegate, and certificate APIs listed above |
+| `src/controller.dart` | Controller lifecycle manager/errors, controller, credentials, callback, delegate, and certificate APIs listed above |
 | `src/onboarding.dart` | Onboarding types and parser |
 | `src/ble.dart` | BLE manager, platform delegate, host name, and `BLE_ERROR_*` constants |
 | `src/nsd.dart` | NSD manager, service info, callbacks, and host name |

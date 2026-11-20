@@ -72,3 +72,43 @@ class PlatformProtocolException extends CallPlatformException
           cause: cause,
         );
 }
+
+/// Reason a [ControllerLifecycleException] was raised.
+enum ControllerLifecycleFailure {
+  /// The controller handle is closed, destroyed, or superseded by a switch.
+  closed,
+
+  /// Native shutdown failed after the Dart handle was invalidated.
+  shutdownFailed,
+
+  /// Native and Dart lifecycle state no longer agree.
+  nativeStateConflict,
+}
+
+/// Exception raised when a controller lifecycle invariant is violated.
+///
+/// Lifecycle failures are fail-closed. [shutdownFailed] and
+/// [ControllerLifecycleFailure.nativeStateConflict] poison the manager so it
+/// refuses to create another controller until the process is restarted.
+class ControllerLifecycleException extends CallPlatformException {
+  final ControllerLifecycleFailure reason;
+
+  ControllerLifecycleException(
+    this.reason,
+    String message, {
+    String? methodName,
+    Object? cause,
+  }) : super(
+          message,
+          code: unHandlerException,
+          methodName: methodName,
+          details: <String, Object?>{
+            'category': 'controller-lifecycle',
+            'reason': reason.name,
+          },
+          cause: cause,
+        );
+
+  @override
+  String toString() => 'ControllerLifecycleException(${reason.name}): $message';
+}

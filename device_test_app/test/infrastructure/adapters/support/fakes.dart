@@ -29,6 +29,7 @@ class FakeMatterControllerApi implements MatterControllerApi {
   Future<MatterConnection> Function(MatterConnectRequest request)?
   connectHandler;
   Future<void> Function(MatterConnection connection)? releaseHandler;
+  Future<void> Function()? closeHandler;
 
   final List<MatterCommissionRequest> commissionRequests =
       <MatterCommissionRequest>[];
@@ -158,6 +159,7 @@ class FakeMatterControllerApi implements MatterControllerApi {
   @override
   Future<void> close() async {
     closeCount++;
+    await closeHandler?.call();
   }
 }
 
@@ -168,6 +170,9 @@ class FakeMatterIdentityStore implements MatterControllerIdentityStoreApi {
   MatterControllerIdentity? _identity;
   int loadCount = 0;
   int clearCount = 0;
+
+  FakeMatterIdentityStore copyForRestart() =>
+      FakeMatterIdentityStore(identity: _identity);
 
   @override
   Future<MatterControllerCredentials> loadOrCreate(
@@ -196,6 +201,7 @@ class FakeRuntimeProvider implements MatterControllerRuntimeProvider {
   final MatterControllerConfig config;
   final Map<ControllerIdentityPurpose, _RuntimeEntry> _entries =
       <ControllerIdentityPurpose, _RuntimeEntry>{};
+  final List<String> restartEvents = <String>[];
   int closeCount = 0;
 
   FakeMatterControllerApi controllerFor(ControllerIdentityPurpose purpose) {
@@ -223,7 +229,17 @@ class FakeRuntimeProvider implements MatterControllerRuntimeProvider {
   Future<MatterControllerRuntime> restart(
     ControllerIdentityRequest request,
   ) async {
-    final entry = _entry(request.purpose);
+    final existing = _entries.remove(request.purpose);
+    if (existing != null) {
+      await existing.controller.close();
+    }
+    final entry = _RuntimeEntry(
+      controller: FakeMatterControllerApi(),
+      identity:
+          existing?.identity.copyForRestart() ?? FakeMatterIdentityStore(),
+    );
+    _entries[request.purpose] = entry;
+    restartEvents.add('recreate');
     return MatterControllerRuntime(
       purpose: request.purpose,
       config: config,

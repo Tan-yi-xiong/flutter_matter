@@ -273,15 +273,29 @@ class MatterSessionController extends ChangeNotifier {
 
   Future<ChipDeviceController> ensureController() async {
     final existing = _controller;
-    if (existing != null) {
+    if (existing != null && existing.isRunning) {
       return existing;
     }
+    _controller = null;
     identity ??= await _identityRepository.loadOrCreate();
     final created = await ChipDeviceController.newControllerIfNotExist(
       identity!.controllerParams,
     );
     _controller = created;
     return created;
+  }
+
+  Future<void> _adoptCommissionedController(
+    ChipDeviceController controller,
+  ) async {
+    final previous = _controller;
+    _controller = controller;
+    if (previous != null && identical(previous, controller)) {
+      // The commissioning service acquired one additional reference to the
+      // session-owned controller. Collapse that lease without shutting down the
+      // native controller.
+      await controller.close();
+    }
   }
 
   Future<OperationResult> commission({
@@ -317,7 +331,9 @@ class MatterSessionController extends ChangeNotifier {
           notifyListeners();
         },
       );
-      _controller = result.controller as ChipDeviceController;
+      await _adoptCommissionedController(
+        result.controller as ChipDeviceController,
+      );
       final device = SavedDevice(
         nodeId: result.nodeId,
         vendorId: result.vendorId,
@@ -385,7 +401,9 @@ class MatterSessionController extends ChangeNotifier {
           notifyListeners();
         },
       );
-      _controller = result.controller as ChipDeviceController;
+      await _adoptCommissionedController(
+        result.controller as ChipDeviceController,
+      );
       final device = SavedDevice(
         nodeId: result.nodeId,
         label: deviceLabel.trim().isEmpty

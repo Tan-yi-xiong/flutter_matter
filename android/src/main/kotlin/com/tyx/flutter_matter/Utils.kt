@@ -181,6 +181,172 @@ internal fun JSONObject.requiredByteArrayParam(name: String): ByteArray {
     return value.toByteArray()
 }
 
+
+/**
+ * Serializes ownership of the process-wide Android Matter controller.
+ *
+ * Android's pinned CHIPController artifact uses a process singleton under the
+ * Java API. The gate prevents a second native controller from being
+ * constructed until the current one has completed a safe shutdown.
+ */
+internal class ControllerLifecycleGate<T : Any, O : Any> {
+    enum class State {
+        EMPTY,
+        CREATING,
+        ACTIVE,
+        SHUTTING_DOWN,
+        POISONED,
+    }
+
+    sealed class ShutdownDecision<out T> {
+        data class Ready<T>(val handle: String, val controller: T) : ShutdownDecision<T>()
+        object NoActiveController : ShutdownDecision<Nothing>()
+        object HandleMismatch : ShutdownDecision<Nothing>()
+        object OwnerMismatch : ShutdownDecision<Nothing>()
+        object Poisoned : ShutdownDecision<Nothing>()
+    }
+
+    private var state = State.EMPTY
+    private var creationOwner: O? = null
+    private var activeHandle: String? = null
+    private var activeOwner: O? = null
+    private var activeController: T? = null
+
+    @Synchronized
+    fun currentState(): State = state
+
+    @Synchronized
+    fun hasActivity(): Boolean {
+        return state == State.CREATING || state == State.ACTIVE || state == State.SHUTTING_DOWN
+    }
+
+    @Synchronized
+    fun beginCreation(owner: O): Boolean {
+        if (state != State.EMPTY) {
+            return false
+        }
+        creationOwner = owner
+        state = State.CREATING
+        return true
+    }
+
+    @Synchronized
+    fun activate(handle: String, controller: T, owner: O) {
+        check(state == State.CREATING) { "Controller creation was not reserved" }
+        check(creationOwner == owner) { "Controller creation owner changed" }
+        check(handle.isNotBlank()) { "Controller handle must not be blank" }
+        activeHandle = handle
+        activeOwner = owner
+        activeController = controller
+        creationOwner = null
+        state = State.ACTIVE
+    }
+
+    @Synchronized
+    fun cancelCreation(owner: O): Boolean {
+        if (state != State.CREATING || creationOwner != owner) {
+            return false
+        }
+        creationOwner = null
+        state = State.EMPTY
+        return true
+    }
+
+    @Synchronized
+    fun findActiveController(handle: String, owner: O? = null): T? {
+        if (state != State.ACTIVE || activeHandle != handle) {
+            return null
+        }
+        if (owner != null && activeOwner != owner) {
+            return null
+        }
+        return activeController
+    }
+
+    @Synchronized
+    fun isOwnerActive(owner: O): Boolean {
+        return (state == State.CREATING && creationOwner == owner) ||
+            ((state == State.ACTIVE || state == State.SHUTTING_DOWN) && activeOwner == owner)
+    }
+
+    @Synchronized
+    fun beginShutdown(expectedHandle: String? = null, expectedOwner: O? = null): ShutdownDecision<T> {
+        return when (state) {
+            State.POISONED -> ShutdownDecision.Poisoned
+            State.ACTIVE -> {
+                if (expectedHandle != null && expectedHandle != activeHandle) {
+                    ShutdownDecision.HandleMismatch
+                } else if (expectedOwner != null && expectedOwner != activeOwner) {
+                    ShutdownDecision.OwnerMismatch
+                } else {
+                    val handle = checkNotNull(activeHandle) { "Active controller has no handle" }
+                    val controller = checkNotNull(activeController) { "Active controller is missing" }
+                    state = State.SHUTTING_DOWN
+                    ShutdownDecision.Ready(handle, controller)
+                }
+            }
+            else -> ShutdownDecision.NoActiveController
+        }
+    }
+
+    @Synchronized
+    fun completeShutdown(handle: String): Boolean {
+        if (state != State.SHUTTING_DOWN || activeHandle != handle) {
+            state = State.POISONED
+            return false
+        }
+        activeHandle = null
+        activeOwner = null
+        activeController = null
+        state = State.EMPTY
+        return true
+    }
+
+    @Synchronized
+    fun failShutdown() {
+        state = State.POISONED
+    }
+
+    @Synchronized
+    fun poison() {
+        state = State.POISONED
+    }
+
+    @Synchronized
+    fun poisonIfInUse(): Boolean {
+        if (state == State.EMPTY || state == State.POISONED) {
+            return false
+        }
+        state = State.POISONED
+        return true
+    }
+}
+
+/** Tracks one channel per attached Flutter engine and returns a safe fallback channel. */
+internal class EngineSessionRegistry<O : Any, C : Any> {
+    private val sessions = LinkedHashMap<O, C>()
+
+    @Synchronized
+    fun register(owner: O, channel: C) {
+        sessions[owner] = channel
+    }
+
+    @Synchronized
+    fun unregister(owner: O): C? {
+        sessions.remove(owner)
+        return sessions.values.lastOrNull()
+    }
+
+    @Synchronized
+    fun isRegistered(owner: O): Boolean = sessions.containsKey(owner)
+
+    @Synchronized
+    fun channelFor(owner: O): C? = sessions[owner]
+
+    @Synchronized
+    fun count(): Int = sessions.size
+}
+
 fun MethodChannel.invokeMethodBlockGet(method: String, arguments: Any?): String? {
     if (Looper.myLooper() == Looper.getMainLooper()) {
         throw IllegalStateException(

@@ -22,6 +22,14 @@
 - **Android Matter SDK 1.6.1** — Rebuilt the prefixed Android artifact from the same official connectedhomeip commit (`da8f6a0bff`) for `arm64-v8a` and `armeabi-v7a`. The dependency is now `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`.
 - **Breaking: `ControllerParams.setupURL` removed** — Matter 1.6.1 removed `ControllerParams.Builder.setSetupURL`; the field and its JSON wire key were removed. Migrate by omitting `setupURL`; there is no upstream replacement.
 
+### Controller Lifecycle
+- Added `ChipDeviceControllerManager` as the process-wide single-active controller owner on Dart, Android, and iOS, with serialized acquire/switch/shutdown transitions and same-fabric acquisition reference counting.
+- Added `ChipDeviceController.close()`, `closed`, and the public `ControllerLifecycleException` / `ControllerLifecycleFailure.closed`, `nativeStateConflict`, and `shutdownFailed` contract. Superseded handles now reject further requests instead of racing the replacement controller.
+- Android `/deleteDeviceController` now calls the supported `shutdownCommissioning()` path, which stops the CHIP IO thread before controller/factory shutdown. The lifecycle gate prevents a second `ChipDeviceController` construction and enters a fail-closed poisoned state if shutdown fails.
+- iOS plugin registration now starts the controller factory without creating a hidden default controller. `DeviceControlHandle` enforces one Dart-visible controller and supports best-effort shutdown on Flutter engine detach.
+- `destroy()` remains Dart-only cleanup. The next acquisition shuts down an abandoned native handle before creating a replacement. Android and iOS also schedule best-effort active-controller cleanup when their Flutter engines detach.
+- Device-test `app_restart` now verifies a real close-and-recreate cycle from persisted credentials while retaining connection/subscription release cleanup.
+
 ### Error Handling and TLV
 - Added typed validation and sanitized error boundaries across the Dart MethodChannel, controller, BLE, DNS-SD, onboarding, model decoders, and cluster helpers. Malformed native payloads now fail with contextual `FormatException`, `ArgumentError`, `CallPlatformException`, or `PlatformProtocolException` instead of unchecked cast errors.
 - Controller `invoke`, `subscribe`, `read`, `write`, and `connectedDevice` requests now rethrow native request rejections and remove only the callback registered for that failed request. Cluster helpers await request acceptance and bound one-shot reads with a 15-second typed timeout instead of hanging.

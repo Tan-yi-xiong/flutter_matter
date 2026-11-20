@@ -102,14 +102,15 @@ New public types and functions must be exported from `lib/flutter_matter.dart`, 
 - Preserve the MethodChannel URL scheme and JSON result shapes (`{code, jsonData}` / `{code, resultJson}`).
 - Native → Dart callbacks use path prefixes such as `NOCChainIssuer`, `CompletionListener`, `InvokeCallback`, `SubscriptionCallback`, `ReportCallback`, `WriteAttributesCallback`, `ConnectedDeviceCallback`, `OpenCommissioningCallback`.
 - Prefer existing wrappers: `ReportCallbackWarp`, `SubscriptionCallbackWarp`, `WriteAttributesCallbackWarp`.
-- `ChipDeviceController.newControllerIfNotExist` reuses a controller with the same `fabricId` + `rootCertificate`.
+- `ChipDeviceController.newControllerIfNotExist` delegates to the process-wide `ChipDeviceControllerManager`. Same-identity acquisitions share one Dart handle and increment a reference count; every successful acquisition must be balanced by `close()` (or the compatibility alias `deleteDeviceController()`).
+- Only one native controller may be active per process. A different fabric identity is switched by invalidating/closing the old handle, awaiting native shutdown, then creating the replacement.
+- `destroy()` is Dart-only cleanup. Never use it as a substitute for native shutdown.
 - iOS `pairDevice` requires `onboardingPayload`.
 - Open Wi-Fi: empty `WiFiCredentials.password` is valid.
 - Thread: `NetworkCredentials.thread(ThreadCredentials(operationalDataset: ...))`.
 - ICD: implement `CompletionListener.onICDRegistrationComplete`.
 - `subscribe()` `dataVersionFilters` is currently Android-only.
 - Keep legacy constructors (`NetworkCredentials({required WiFiCredentials ...})`) unless a breaking change is explicitly requested.
-- Known typo in code: `_findSameFarbicControl`. Do not rename it unless that is the task.
 - Generated cluster code is not currently present, and code-generation dependencies are intentionally omitted. Add `built_value` / `build_runner` only when introducing generated code.
 
 ## Native conventions
@@ -119,6 +120,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ### Android (Kotlin, `com.tyx.flutter_matter`)
 
 - Entry: `FlutterMatterPlugin.kt` dispatches by URI host to `onDeviceControlCall`, `onBLECall`, `onOnboardingCall`, `onNsdCall`.
+- `DeviceControl.kt` uses the single-active `ControllerLifecycleGate`. Native deletion must call `ChipDeviceController.shutdownCommissioning()`; do not restore reflection-based `finalize()` or construct a second controller before shutdown completes.
 - minSdk 21, compileSdk 34, Kotlin plugin 1.7.10, JVM target 1.8.
 - Do not revive `com.zengge.flutter_matter`.
 - Example applicationId / namespace: `com.fluttermatter.example`.
@@ -127,7 +129,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ### iOS (ObjC plugin + Swift Matter Extension)
 
 - Entry: `ios/Classes/FlutterMatterPlugin.m` — hosts for device controller, BLE, and onboarding only.
-- Matter work runs on the `Global` serial queue; `InitializeZGMTR()` runs on plugin register.
+- Matter work runs on the `Global` serial queue; `ZGMTRInitializeControllerFactory()` runs on plugin registration and must not create a hidden default controller.
 - Vendored framework: `ZGMatter.framework` via `ios/flutter_matter.podspec`.
 - Framework build tools live in `ios/zgmatter/`. The external connectedhomeip checkout must be supplied explicitly with `--connectedhomeip-dir` or `ZGMATTER_CONNECTEDHOMEIP_DIR`.
 - Deployment targets are iOS 16.1. Documented toolchain baseline is Xcode 16.4 or later with CocoaPods 1.17; the migration build evidence used Xcode 26.3 and CocoaPods 1.17.0.

@@ -42,7 +42,7 @@ Do not include commissionee model, firmware, external state-change method, user-
 | P0 | `build_install` | APK or signed iOS app installs and launches |
 | P0 | `commissioning` | PASE completes through SDK-managed discovery with `errorCode == 0` within 120 seconds |
 | P0 | `operational_connect` | CASE returns a valid connect context within 30 seconds |
-| P1 | `app_restart` | Persisted credentials reload and CASE reconnects without recommissioning; native-controller teardown is out of scope |
+| P1 | `app_restart` | Active connections and subscriptions are released, the controller runtime is closed and rebuilt from persisted credentials, and CASE reconnects without recommissioning |
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
 | P0 | `onoff_subscription` | Initial state and a command-triggered update arrive within 15 seconds |
 | P0 | `node_label_read_write` | A written NodeLabel is read back unchanged |

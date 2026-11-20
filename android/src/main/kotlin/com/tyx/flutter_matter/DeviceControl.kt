@@ -1,9 +1,7 @@
 package com.tyx.flutter_matter
 
-import android.os.Looper
 import android.util.Log
 import androidx.annotation.NonNull
-import androidx.core.os.HandlerCompat
 import chip.devicecontroller.AttestationInfo
 import chip.devicecontroller.CSRInfo
 import chip.devicecontroller.ChipDeviceController
@@ -41,14 +39,15 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.Objects
 import java.util.UUID
-import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 import java.util.concurrent.RejectedExecutionException
 import kotlin.concurrent.thread
 import kotlin.jvm.optionals.getOrDefault
 import kotlin.jvm.optionals.getOrNull
 
-private val controls = mutableMapOf<String, ChipDeviceController>()
+private val controllerLifecycle = ControllerLifecycleGate<ChipDeviceController, Any>()
+private val anonymousControllerOwner = Any()
+private val deviceControlRequestOwner = ThreadLocal<Any?>()
 
 private val deviceControllerExecutor = FlutterMatterPlugin.executors
 
@@ -126,8 +125,12 @@ private fun safeError(error: Throwable?): String =
     error?.javaClass?.name ?: "Unknown error"
 
 private fun getDeviceController(handle: String): ChipDeviceController? {
-    return controls[handle]
+    return controllerLifecycle.findActiveController(handle, deviceControlRequestOwner.get())
 }
+
+internal fun hasDeviceControllerLifecycleActivity(): Boolean = controllerLifecycle.hasActivity()
+
+internal fun isDeviceControllerOwnedBy(owner: Any): Boolean = controllerLifecycle.isOwnerActive(owner)
 
 private fun CSRInfo.toJSONObject(): JSONObject {
     return JSONObject(mapOf(
@@ -253,29 +256,41 @@ class KeypairDelegateWarp(
 
 }
 
-fun onDeviceControlCall(path: String, params: String, result: MethodChannel.Result) {
+fun onDeviceControlCall(
+    path: String,
+    params: String,
+    result: MethodChannel.Result,
+    owner: Any? = null
+) {
     matterPrint("onDeviceControlCall $path")
     fun callResultSuccess(data: Any) {
-        HandlerCompat.createAsync(Looper.getMainLooper()).post {
-            result.success(data)
+        if (owner !is FlutterMatterPlugin || owner.isAttachedToEngine()) {
+            result.postPlatformSuccess(data, "Device control response $path")
         }
     }
     fun callResultError(error: Exception? = null) {
-        HandlerCompat.createAsync(Looper.getMainLooper()).post {
-            result.error(
-                "-99",
-                DEVICE_CONTROL_FAILURE_MESSAGE,
-                error?.let { safePlatformErrorDetails(it) } ?: ""
-            )
-        }
+        result.postPlatformError(
+            "-99",
+            DEVICE_CONTROL_FAILURE_MESSAGE,
+            error?.let { safePlatformErrorDetails(it) } ?: "",
+            "Device control error $path"
+        )
     }
     try {
         deviceControllerExecutor.execute {
+            if (owner is FlutterMatterPlugin && !owner.isAttachedToEngine()) {
+                return@execute
+            }
             matterPrint("onDeviceControlCall run")
+            if (owner is FlutterMatterPlugin && isDeviceControllerOwnedBy(owner)) {
+                owner.useControllerChannel()
+            }
+            val previousOwner = deviceControlRequestOwner.get()
+            deviceControlRequestOwner.set(owner)
             try {
                 when (path) {
                     "/new" -> {
-                        callResultSuccess(newDeviceControllerCall(params))
+                        callResultSuccess(newDeviceControllerCall(params, owner ?: anonymousControllerOwner))
                     }
                     "/createRootCertificate" -> {
                         callResultSuccess(createRootCertificate(params))
@@ -311,7 +326,7 @@ fun onDeviceControlCall(path: String, params: String, result: MethodChannel.Resu
                         callResultSuccess(setDeviceAttestationDelegate(params))
                     }
                     "/deleteDeviceController" -> {
-                        callResultSuccess(deleteDeviceController(params))
+                        callResultSuccess(deleteDeviceController(params, owner ?: anonymousControllerOwner))
                     }
                     "/invoke" -> {
                         callResultSuccess(invoke(params))
@@ -349,12 +364,23 @@ fun onDeviceControlCall(path: String, params: String, result: MethodChannel.Resu
                 }
             } catch (e: Exception) {
                 logDeviceControlException("Device control request $path", e)
-                callResultError(e)
+                if (owner !is FlutterMatterPlugin || owner.isAttachedToEngine()) {
+                    callResultError(e)
+                }
+            } finally {
+                if (previousOwner == null) {
+                    deviceControlRequestOwner.remove()
+                } else {
+                    deviceControlRequestOwner.set(previousOwner)
+                }
             }
         }
     } catch (e: RejectedExecutionException) {
+        controllerLifecycle.poisonIfInUse()
         logDeviceControlException("Device control request submission $path", e)
-        callResultError(e)
+        if (owner !is FlutterMatterPlugin || owner.isAttachedToEngine()) {
+            callResultError(e)
+        }
     }
 }
 
@@ -530,13 +556,56 @@ private fun mapInvokeElement(jsonObject: JSONObject): InvokeElement {
     )
 }
 
-fun newDeviceControllerCall(params: String): String {
-    val jsonObject = JSONObject(params)
-    val controllerParams = mapControllerParams(jsonObject)
-    val chipDeviceController = ChipDeviceController(controllerParams)
-    val uuid = UUID.randomUUID().toString()
-    controls[uuid] = chipDeviceController
-    return createFlutterRequestResult(0, JSONObject(mapOf("handle" to uuid)))
+fun newDeviceControllerCall(
+    params: String,
+    owner: Any = anonymousControllerOwner
+): String {
+    if (!controllerLifecycle.beginCreation(owner)) {
+        val message = when (controllerLifecycle.currentState()) {
+            ControllerLifecycleGate.State.POISONED ->
+                "Controller runtime is unavailable after a failed shutdown"
+            else -> "Only one active Matter controller is allowed"
+        }
+        throw IllegalStateException(message)
+    }
+
+    try {
+        if (owner is FlutterMatterPlugin) {
+            owner.useControllerChannel()
+        }
+        val jsonObject = JSONObject(params)
+        val controllerParams = mapControllerParams(jsonObject)
+        val uuid = UUID.randomUUID().toString()
+        val response = createFlutterRequestResult(0, JSONObject(mapOf("handle" to uuid)))
+        val chipDeviceController = ChipDeviceController(controllerParams)
+
+        if (owner is FlutterMatterPlugin && !owner.isAttachedToEngine()) {
+            releaseUnregisteredController(owner, chipDeviceController)
+            throw IllegalStateException("Plugin engine detached during controller creation")
+        }
+
+        try {
+            controllerLifecycle.activate(uuid, chipDeviceController, owner)
+        } catch (error: Exception) {
+            releaseUnregisteredController(owner, chipDeviceController)
+            throw error
+        }
+        return response
+    } catch (error: Exception) {
+        controllerLifecycle.cancelCreation(owner)
+        throw error
+    }
+}
+
+private fun releaseUnregisteredController(owner: Any, controller: ChipDeviceController) {
+    try {
+        controller.shutdownCommissioning()
+    } catch (cleanupError: Throwable) {
+        controllerLifecycle.poison()
+        throw IllegalStateException("Controller creation cleanup failed", cleanupError)
+    } finally {
+        controllerLifecycle.cancelCreation(owner)
+    }
 }
 
 fun createRootCertificate(params: String): String {
@@ -1048,15 +1117,69 @@ fun onNOCChainGeneration(params: String): String {
     return createFlutterRequestResult(0, JSONObject(mapOf("data" to onNOCChainGenerationResult)))
 }
 
-fun deleteDeviceController(params: String): String {
+fun deleteDeviceController(
+    params: String,
+    owner: Any = anonymousControllerOwner
+): String {
     val jsonObject = JSONObject(params)
     val handle = jsonObject.optNotNull(jsonKeyHandle).toString()
-    // The pinned CHIPController Java wrapper has no safe native-close API:
-    // finalization invokes PlatformMgr().Shutdown() while the CHIP event loop
-    // is still running, which aborts the process. Drop the Java reference and
-    // let process teardown reclaim the native controller.
-    controls.remove(handle)
-    return createFlutterRequestResult(0, JSONObject())
+    when (val decision = controllerLifecycle.beginShutdown(handle, owner)) {
+        is ControllerLifecycleGate.ShutdownDecision.Ready -> {
+            shutdownNativeController(decision.handle, decision.controller)
+            return createFlutterRequestResult(0, JSONObject())
+        }
+        ControllerLifecycleGate.ShutdownDecision.HandleMismatch ->
+            throw IllegalStateException("Controller handle does not match the active controller")
+        ControllerLifecycleGate.ShutdownDecision.OwnerMismatch ->
+            throw IllegalStateException("Controller is owned by another Flutter engine")
+        ControllerLifecycleGate.ShutdownDecision.NoActiveController ->
+            throw IllegalStateException("No active Matter controller")
+        ControllerLifecycleGate.ShutdownDecision.Poisoned ->
+            throw IllegalStateException("Controller runtime is unavailable after a failed shutdown")
+    }
+}
+
+private fun shutdownNativeController(handle: String, controller: ChipDeviceController) {
+    try {
+        // This public JNI path stops the CHIP IO thread before shutting down the
+        // controller and factory singleton. The Java pointer intentionally
+        // remains until finalization; the wrapper's mIsInitialized guard makes
+        // that later delete non-destructive and prevents a second shutdown.
+        controller.shutdownCommissioning()
+    } catch (error: Throwable) {
+        controllerLifecycle.failShutdown()
+        if (error is Exception) {
+            throw error
+        }
+        throw IllegalStateException("Controller shutdown failed", error)
+    }
+
+    if (!controllerLifecycle.completeShutdown(handle)) {
+        throw IllegalStateException("Controller lifecycle changed during shutdown")
+    }
+}
+
+internal fun scheduleDeviceControllerShutdownOnEngineDetach(owner: Any) {
+    try {
+        deviceControllerExecutor.execute {
+            when (val decision = controllerLifecycle.beginShutdown(expectedOwner = owner)) {
+                is ControllerLifecycleGate.ShutdownDecision.Ready -> {
+                    try {
+                        shutdownNativeController(decision.handle, decision.controller)
+                    } catch (error: Throwable) {
+                        reportPlatformException("Engine detach controller shutdown", error)
+                    }
+                }
+                ControllerLifecycleGate.ShutdownDecision.HandleMismatch,
+                ControllerLifecycleGate.ShutdownDecision.OwnerMismatch,
+                ControllerLifecycleGate.ShutdownDecision.NoActiveController,
+                ControllerLifecycleGate.ShutdownDecision.Poisoned -> Unit
+            }
+        }
+    } catch (error: RejectedExecutionException) {
+        controllerLifecycle.poisonIfInUse()
+        reportPlatformException("Engine detach controller shutdown submission", error)
+    }
 }
 
 fun invoke(params: String): String {

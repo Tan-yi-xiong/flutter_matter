@@ -19,6 +19,8 @@ logs.
 - Complete each owned `Future`, `Completer`, or `FlutterResult` at most once.
 - Preserve existing error codes where callers already consume them. Add
   structured detail instead of silently changing a public code.
+- Controller lifecycle failures fail closed. Once native shutdown fails, the
+  manager must not attempt to construct another controller in the same process.
 
 ## Dart error contract
 
@@ -29,6 +31,7 @@ logs.
 | Callback handler boundary | `ArgumentError` or framework error envelope | Invalid callback arguments map to the compatible `argsInvalid` / `-99` envelopes with a safe message. |
 | `checkCallArgNotNull` | `ArgumentError` | Reports the missing field and callback context without serializing the callback payload. |
 | Controller request methods | `CallPlatformException` | `invoke`, `subscribe`, `read`, `write`, and `connectedDevice` await native acceptance. A rejected request removes its pending callback and rethrows the typed platform error. |
+| Controller lifecycle | `ControllerLifecycleException` | A closed or superseded handle reports `ControllerLifecycleFailure.closed`; invalid manager state reports `nativeStateConflict`; native shutdown failure reports `shutdownFailed` and poisons further creation. |
 | BLE and NSD calls | `CallPlatformException` | Keeps code and method name as structured fields and removes full parameter JSON from messages. |
 | Onboarding parser | `CallPlatformException` / `FormatException` / `ArgumentError` | Distinguishes native parser failure, malformed native payload, and empty caller input. |
 | Model `fromJson` / `decode` | `FormatException` | Reports a concrete field path such as `NodeState.endpoints[1]`. |
@@ -38,8 +41,10 @@ logs.
 | TLV encoding | `TlvEncodingException` | Unclosed containers and internal encoding failures are reported without corrupting the writer. |
 
 `CallPlatformException` and `PlatformProtocolException` remain internal bridge
-types; this change does not add them to the package-root export list. Existing
-callers can continue to catch them as `Exception` through the affected APIs.
+types. `ControllerLifecycleException` is re-exported from `controller.dart` so
+callers can distinguish closed handles and poisoned lifecycle state. Existing
+callers can continue to catch all of these as `Exception` through the affected
+APIs.
 
 `FlutterMatterPlatform` declares the transport methods used by controller, BLE,
 NSD, and onboarding code: `requestPlatform`, `addHandler`, and `removeHandler`.
@@ -56,6 +61,12 @@ existing callback methods. A request rejection is different from an asynchronous
 callback error, so only the callback registered for that rejected request is
 removed.
 
+The manager invalidates the Dart handle before issuing native deletion. This
+means an in-flight request that completes after a fabric switch is rejected by
+the post-request closed-handle check and cannot be mistaken for a result from the
+replacement controller. Native shutdown and replacement creation are serialized
+through the same lifecycle queue.
+
 ## Android
 
 ### MethodChannel dispatch and controller operations
@@ -69,6 +80,14 @@ Matter SDK is called. `pairDevice` and `pairDeviceWithAddress` use explicit
 optional-string checks, so an absent completion listener is no longer confused
 with `JSONObject.NULL`. Attestation and NOC callbacks catch failures inside
 background threads and report them instead of losing an uncaught `NPE`.
+
+`DeviceControl.kt` owns a single `ControllerLifecycleGate` slot. `/new` reserves
+the slot before invoking the native constructor, and `/deleteDeviceController`
+calls `shutdownCommissioning()` rather than reflection or `finalize()`.
+`shutdownCommissioning()` stops the CHIP IO thread before wrapper and factory
+shutdown. Successful shutdown returns the gate to `EMPTY`; a throw transitions it
+to `POISONED`. The gate records the owning Flutter engine, so only that engine's
+detach schedules the safe shutdown on the plugin's single-thread executor.
 
 ### BLE, DNS-SD, onboarding, and shared utilities
 
@@ -121,6 +140,12 @@ them.
 - `FlutterMatterPlugin.m` validates the method URL, host, path, arguments type,
   and supported host before dispatch. Unknown hosts and paths return structured
   `FlutterError` values.
+- Plugin registration starts the process-wide controller factory without creating
+  a hidden default controller. `DeviceControlHandle.m` admits one Dart-visible
+  controller at a time, and engine detach asynchronously shuts it down on the
+  stable Matter serial queue. A shutdown that cannot be confirmed permanently
+  poisons controller creation for the process; engine re-registration does not
+  clear it.
 - `FlutterMatterResultSender` makes result delivery single-shot and main-thread
   safe.
 - `DeviceControlHandle.m` validates pairing, Wi-Fi/Thread, callback-handle,

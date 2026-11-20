@@ -188,7 +188,7 @@ Before a Run starts, the app purges stale Run state, old provisioning secrets, o
 
 The app supplies the raw onboarding payload to the Matter SDK. The SDK performs discovery and commissioning; the app does not scan for BLE or mDNS commissionees and does not report a commissioning transport. A commissioning failure is preserved and stops the Run.
 
-Runs are one-shot and never resumed. `app_restart` reloads persisted controller credentials, releases active operational connections and subscriptions, and reconnects without recommissioning. It reuses the live native controller because the pinned CHIPController Android wrapper has no safe native-controller shutdown path; process-level teardown is out of scope. It is not a recovery path for an interrupted Run.
+Runs are one-shot and never resumed. `app_restart` releases active operational connections and subscriptions, closes the active controller runtime, rebuilds it from persisted credentials through the single-active lifecycle, and reconnects without recommissioning. The old controller must be fully shut down before the new one is created. It is not a recovery path for an interrupted Run.
 
 A P0 failure or P0 `not_run` blocks later P0 cases and fills dependent results with reasons. No P0 failure is retried in the same Run.
 

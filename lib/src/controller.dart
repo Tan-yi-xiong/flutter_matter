@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -19,6 +20,9 @@ import 'model/data_version_filter.dart';
 import 'model/invoke_element.dart';
 import 'model/node_state.dart';
 import 'model/status.dart';
+
+export 'exception.dart'
+    show ControllerLifecycleException, ControllerLifecycleFailure;
 
 const _hostName = 'devicecontroller';
 
@@ -472,26 +476,6 @@ abstract class ConnectedDeviceCallback {
   void onConnected(Object? context);
 }
 
-final List<ChipDeviceController> _controls = [];
-
-ChipDeviceController? _findSameFarbicControl(ControllerParams params) {
-  for (var control in _controls) {
-    if (control.params.fabricId == params.fabricId &&
-        listEquals(control.params.rootCertificate, params.rootCertificate)) {
-      return control;
-    }
-  }
-  return null;
-}
-
-_saveControl(ChipDeviceController control) {
-  _controls.add(control);
-}
-
-_removeControl(ChipDeviceController control) {
-  _controls.remove(control);
-}
-
 /// Native controller configuration for one Matter fabric.
 ///
 /// Reuse the same [fabricId] and [rootCertificate] to reuse an existing
@@ -593,9 +577,9 @@ final defaultIpk = Uint8List.fromList([
 /// Stateful Matter controller for one fabric.
 ///
 /// A controller owns native commissioning and connection state. Keep it alive
-/// for the lifetime of the fabric session. Use [deleteDeviceController] when
-/// the native controller should be deleted, and [destroy] only to clear
-/// Dart-side handlers.
+/// for the lifetime of the fabric session. Prefer [close] for balanced release
+/// of an acquired controller. [deleteDeviceController] is a compatibility
+/// alias, while [destroy] performs local cleanup only.
 class ChipDeviceController implements MethodCallHandler {
   static const matchPathList = [
     'NOCChainIssuer',
@@ -623,11 +607,26 @@ class ChipDeviceController implements MethodCallHandler {
   final Map<String, ReportCallback> _reportCallbacks = {};
   final Map<String, WriteAttributesCallback> _writeAttributesCallback = {};
   final Map<String, ConnectedDeviceCallback> _connectedDeviceCallback = {};
+  final Completer<void> _closedCompleter = Completer<void>();
+  bool _isClosed = false;
 
   bool get isRunning => _isRunning;
 
+  /// Completes when this Dart handle is closed, destroyed, or superseded by a
+  /// controller switch.
+  ///
+  /// Completion is independent of native shutdown success. Await the future
+  /// returned by [close] or [deleteDeviceController] for that result.
+  Future<void> get closed => _closedCompleter.future;
+
   @override
   call(String method, arguments) {
+    if (_isClosed) {
+      return createPlatformCallExceptionResult(
+        argsInvalid,
+        'Controller is closed',
+      );
+    }
     matterPrint('DeviceController call: $method');
     final uri = Uri.parse(method);
     final splitPaths = uri.path
@@ -1048,6 +1047,9 @@ class ChipDeviceController implements MethodCallHandler {
 
   @override
   bool match(String method, arguments) {
+    if (_isClosed) {
+      return false;
+    }
     try {
       final uri = Uri.parse(method);
       final splitPaths = uri.path
@@ -1080,11 +1082,10 @@ class ChipDeviceController implements MethodCallHandler {
   /// callbacks are in flight.
   static Future<ChipDeviceController> newControllerIfNotExist(
       ControllerParams params) async {
-    ChipDeviceController? controller = _findSameFarbicControl(params);
-    if (controller != null) {
-      return controller;
-    }
+    return ChipDeviceControllerManager.instance.acquire(params);
+  }
 
+  static Future<ChipDeviceController> _create(ControllerParams params) async {
     final channelFlutterMatter = FlutterMatterPlatform.instance;
     String? keypairDelegateHandleId;
     if (params.keypairDelegate != null) {
@@ -1107,15 +1108,15 @@ class ChipDeviceController implements MethodCallHandler {
           },
         );
       }
-      final handle = checkCallArgNotNull(
-        result.jsonData,
-        jsonKeyHandle,
-        context: 'newDeviceController',
-      );
-      controller = ChipDeviceController._(
-          params, handle as String, keypairDelegateHandleId);
-      _saveControl(controller);
-      return controller;
+      final handle = result.jsonData[jsonKeyHandle];
+      if (handle is! String || handle.trim().isEmpty) {
+        throw ControllerLifecycleException(
+          ControllerLifecycleFailure.nativeStateConflict,
+          'Native controller creation succeeded without a usable handle',
+          methodName: 'new',
+        );
+      }
+      return ChipDeviceController._(params, handle, keypairDelegateHandleId);
     } catch (e, s) {
       // The native controller is not usable when creation fails. Remove only
       // the handle registered for this attempt; the hashCode-based ID scheme
@@ -1132,27 +1133,55 @@ class ChipDeviceController implements MethodCallHandler {
     }
   }
 
+  /// Releases one acquisition of this controller.
+  ///
+  /// Repeated acquires for the same fabric identity return this object and
+  /// increment a manager-owned acquisition count. Each close releases exactly
+  /// one acquisition; only the final release invalidates this handle and asks
+  /// native code to delete the controller. Closing an already closed or
+  /// superseded handle throws [ControllerLifecycleFailure.closed].
+  Future<void> close() {
+    return ChipDeviceControllerManager.instance.release(this);
+  }
+
   /// Removes Dart-side handlers and callback state without requesting native
   /// controller deletion.
   ///
-  /// Use [deleteDeviceController] when the native controller should also be
-  /// deleted.
+  /// The manager remembers the abandoned native handle. The next acquire first
+  /// deletes that abandoned handle and then creates a fresh controller. Use
+  /// [close] or [deleteDeviceController] when a balanced release should perform
+  /// native deletion immediately.
   void destroy() {
-    _channelFlutterMatter.removeHandler(this);
-    if (_keypairDelegateHandleId != null) {
-      _keypairDelegateCallbackHandler.removeHandler(_keypairDelegateHandleId!);
+    if (_isClosed) {
+      return;
     }
-    _invokeCallbacks.clear();
-    _subscriptionCallbacks.clear();
-    _reportCallbacks.clear();
-    _writeAttributesCallback.clear();
-    _connectedDeviceCallback.clear();
-    _openCommissioningCallbacks.clear();
-    _removeControl(this);
-    _isRunning = false;
+    _markClosed();
+    ChipDeviceControllerManager.instance._controllerDestroyed(this);
   }
 
   Future<Map<String, dynamic>> _requestPlatform(
+      String methodName, String methodParamsJson) async {
+    _ensureOpen(methodName);
+    final result = await _channelFlutterMatter.requestPlatform(
+        RequestPlatformParams(
+            methodName: createRequestPlatformUrl(_hostName, methodName),
+            methodParamsJson: methodParamsJson));
+    _ensureOpen(methodName);
+    if (result.code == 0) {
+      return result.jsonData;
+    }
+    throw CallPlatformException(
+      'Call $methodName failed with code ${result.code}',
+      code: result.code,
+      methodName: methodName,
+      details: const <String, Object?>{
+        'host': 'devicecontroller',
+        'category': 'platform-error',
+      },
+    );
+  }
+
+  Future<Map<String, dynamic>> _requestPlatformUnchecked(
       String methodName, String methodParamsJson) async {
     final result = await _channelFlutterMatter.requestPlatform(
         RequestPlatformParams(
@@ -1170,6 +1199,40 @@ class ChipDeviceController implements MethodCallHandler {
         'category': 'platform-error',
       },
     );
+  }
+
+  void _ensureOpen(String operation) {
+    if (_isClosed) {
+      throw ControllerLifecycleException(
+        ControllerLifecycleFailure.closed,
+        'Controller is closed; cannot perform $operation',
+        methodName: operation,
+      );
+    }
+  }
+
+  void _markClosed() {
+    if (_isClosed) {
+      return;
+    }
+    _isClosed = true;
+    _isRunning = false;
+    _channelFlutterMatter.removeHandler(this);
+    if (_keypairDelegateHandleId != null) {
+      _keypairDelegateCallbackHandler.removeHandler(_keypairDelegateHandleId!);
+    }
+    _nocChainIssuer = null;
+    _completionListener = null;
+    deviceAttestationDelegate = null;
+    _invokeCallbacks.clear();
+    _subscriptionCallbacks.clear();
+    _reportCallbacks.clear();
+    _writeAttributesCallback.clear();
+    _connectedDeviceCallback.clear();
+    _openCommissioningCallbacks.clear();
+    if (!_closedCompleter.isCompleted) {
+      _closedCompleter.complete();
+    }
   }
 
   /// Handles a native request rejection and removes its pending callback.
@@ -1191,6 +1254,7 @@ class ChipDeviceController implements MethodCallHandler {
   /// Sets this DeviceController to use the given issuer for issuing operational certs and verifying
   /// the DAC. By default, the DeviceController uses an internal, OperationalCredentialsDelegate
   Future<void> setNocChainIssuer(NOCChainIssuer nocChainIssuer) async {
+    _ensureOpen('setNocChainIssuer');
     _nocChainIssuer = nocChainIssuer;
     await _requestPlatform('setNocChainIssuer',
         jsonEncode({jsonKeyHandle: _platformDeviceControllerHandle}));
@@ -1201,6 +1265,7 @@ class ChipDeviceController implements MethodCallHandler {
   /// Prefer passing the listener directly to [pairDevice] when you have it
   /// available; use this method if you need to update the listener separately.
   Future<void> setCompletionListener(CompletionListener listener) async {
+    _ensureOpen('setCompletionListener');
     _completionListener = listener;
     await _requestPlatform('setCompletionListener',
         jsonEncode({jsonKeyHandle: _platformDeviceControllerHandle}));
@@ -1229,6 +1294,7 @@ class ChipDeviceController implements MethodCallHandler {
       String displayName = 'Flutter Matter', //only for iOS
       String ecosystemName = 'FlutterEcosystem' //only for iOS
       }) async {
+    _ensureOpen('pairDevice');
     if (setupPincode == null && onboardingPayload == null) {
       throw Exception("setupPincode or onboardingPayload must be provided");
     }
@@ -1278,6 +1344,7 @@ class ChipDeviceController implements MethodCallHandler {
     CompletionListener? completionListener,
     int failSafeExpiryTimeoutSecs = 60,
   }) async {
+    _ensureOpen('pairDeviceWithAddress');
     if (address.trim().isEmpty) {
       throw ArgumentError.value(address, 'address', 'Must not be empty');
     }
@@ -1469,14 +1536,12 @@ class ChipDeviceController implements MethodCallHandler {
   //   }));
   // }
 
-  /// Deletes the native controller and releases its Dart-side handler state.
+  /// Compatibility alias for [close].
+  ///
+  /// The final acquisition release deletes the native controller and clears
+  /// this handle. Earlier releases only decrement the acquisition count.
   Future<void> deleteDeviceController() async {
-    await _requestPlatform(
-        'deleteDeviceController',
-        jsonEncode({
-          jsonKeyHandle: _platformDeviceControllerHandle,
-        }));
-    destroy();
+    await close();
   }
 
   /// Sends an Interaction Model command to [nodeId].
@@ -1490,6 +1555,7 @@ class ChipDeviceController implements MethodCallHandler {
       {Object? connectContext,
       int timedRequestTimeoutMs = 0,
       int imTimeoutMs = 0}) async {
+    _ensureOpen('invoke');
     String callbackId = callback.hashCode.toString();
     _invokeCallbacks[callbackId] = callback;
     try {
@@ -1556,6 +1622,7 @@ class ChipDeviceController implements MethodCallHandler {
       int imTimeoutMs,
       int eventMin,
       {Object? connectContext}) async {
+    _ensureOpen('subscribe');
     String callbackHandle = callback.hashCode.toString();
     _subscriptionCallbacks[callbackHandle] = callback;
     try {
@@ -1620,6 +1687,7 @@ class ChipDeviceController implements MethodCallHandler {
       int imTimeoutMs,
       int eventMin,
       {Object? connectContext}) async {
+    _ensureOpen('read');
     String callbackHandle = callback.hashCode.toString();
     _reportCallbacks[callbackHandle] = callback;
     try {
@@ -1658,6 +1726,7 @@ class ChipDeviceController implements MethodCallHandler {
       int timedRequestTimeoutMs,
       int imTimeoutMs,
       {Object? connectContext}) async {
+    _ensureOpen('write');
     String callbackHandle = callback.hashCode.toString();
     _writeAttributesCallback[callbackHandle] = callback;
     try {
@@ -1687,6 +1756,7 @@ class ChipDeviceController implements MethodCallHandler {
   /// context with [releaseConnectContext] when the session ends.
   Future<void> connectedDevice(int nodeId, ConnectedDeviceCallback callback,
       {Object? connectContext}) async {
+    _ensureOpen('connectedDevice');
     String callbackHandle = callback.hashCode.toString();
     _connectedDeviceCallback[callbackHandle] = callback;
     try {
@@ -1734,6 +1804,7 @@ class ChipDeviceController implements MethodCallHandler {
       int discriminator,
       int setupPIN,
       OpenCommissioningCallback callback) async {
+    _ensureOpen('openPairingWindowWithPIN');
     final callbackId = callback.hashCode.toString();
     _openCommissioningCallbacks[callbackId] = callback;
     try {
@@ -1748,6 +1819,8 @@ class ChipDeviceController implements MethodCallHandler {
             'callbackHandle': callbackId
           }));
       return result['data'] == true;
+    } on ControllerLifecycleException {
+      rethrow;
     } catch (e, s) {
       reportMatterError('$runtimeType openPairingWindowWithPIN', e, s);
       _openCommissioningCallbacks.remove(callbackId);
@@ -1765,6 +1838,8 @@ class ChipDeviceController implements MethodCallHandler {
             jsonKeyHandle: _platformDeviceControllerHandle,
           }));
       return result['data'];
+    } on ControllerLifecycleException {
+      rethrow;
     } catch (e, s) {
       reportMatterError('$runtimeType getFabricIndex', e, s);
       return null;
@@ -1787,10 +1862,307 @@ class ChipDeviceController implements MethodCallHandler {
             "subscriptionId": subscriptionId,
           }));
       return result['data'] == true;
+    } on ControllerLifecycleException {
+      rethrow;
     } catch (e, s) {
       reportMatterError('$runtimeType unSubscription', e, s);
       return false;
     }
+  }
+}
+
+enum _ControllerManagerPhase {
+  idle,
+  active,
+  switching,
+  shuttingDown,
+  poisoned,
+}
+
+/// Process-wide owner of the single active native Matter controller.
+///
+/// The manager serializes acquisition and shutdown so two controller
+/// constructions can never overlap. Repeating [acquire] for the same
+/// [ControllerParams.fabricId] and [ControllerParams.rootCertificate] returns
+/// the same [ChipDeviceController] and increments its acquisition count.
+/// Requesting a different identity closes the old handle, performs native
+/// deletion, and only then creates the replacement.
+///
+/// Queued acquire, release, and close operations execute in invocation order.
+/// Switching or closing a handle invalidates every outstanding acquisition of
+/// that object; a later acquire for the old identity creates a new object with
+/// a fresh count. [ChipDeviceController.destroy] is synchronous and local-only,
+/// so it invalidates immediately: a release queued before it then fails as
+/// closed, while a queued acquire cleans up the abandoned native handle.
+class ChipDeviceControllerManager {
+  ChipDeviceControllerManager._();
+
+  /// The process-wide controller lifecycle manager.
+  static final ChipDeviceControllerManager instance =
+      ChipDeviceControllerManager._();
+
+  ChipDeviceController? _active;
+  ChipDeviceController? _abandoned;
+  int _acquisitionCount = 0;
+  _ControllerManagerPhase _phase = _ControllerManagerPhase.idle;
+  ControllerLifecycleException? _poison;
+  Future<void> _operationTail = Future<void>.value();
+
+  /// The controller currently owning the native slot.
+  ///
+  /// Returns `null` while creating, switching, shutting down, poisoned, or
+  /// after the active handle has closed.
+  ChipDeviceController? get activeController {
+    final controller = _active;
+    if (_phase != _ControllerManagerPhase.active ||
+        controller == null ||
+        controller._isClosed) {
+      return null;
+    }
+    return controller;
+  }
+
+  /// Whether a live controller currently owns the native controller slot.
+  bool get hasActiveController => activeController != null;
+
+  /// Acquires the controller for [params], creating or switching when needed.
+  ///
+  /// Identical fabric identity requests share one Dart object. A different
+  /// identity immediately invalidates and closes the old handle before native
+  /// deletion starts, then creates the replacement after deletion succeeds.
+  Future<ChipDeviceController> acquire(ControllerParams params) {
+    return _serialize(() async {
+      _throwIfPoisoned('acquire');
+
+      final current = _active;
+      if (current != null &&
+          !current._isClosed &&
+          _sameIdentity(current.params, params)) {
+        _acquisitionCount++;
+        return current;
+      }
+
+      if (current != null) {
+        await _shutdownActive(current, _ControllerManagerPhase.switching);
+      } else if (_abandoned != null) {
+        await _shutdownAbandoned(_ControllerManagerPhase.switching);
+      }
+
+      _throwIfPoisoned('acquire');
+      _phase = _ControllerManagerPhase.switching;
+      try {
+        final controller = await ChipDeviceController._create(params);
+        _active = controller;
+        _acquisitionCount = 1;
+        _phase = _ControllerManagerPhase.active;
+        return controller;
+      } on ControllerLifecycleException catch (error, stackTrace) {
+        if (error.reason == ControllerLifecycleFailure.nativeStateConflict) {
+          _poisonControllerManager(
+            reason: ControllerLifecycleFailure.nativeStateConflict,
+            message: error.message,
+            operation: 'new',
+            error: error,
+            stackTrace: stackTrace,
+          );
+          throw _poison!;
+        }
+        _phase = _ControllerManagerPhase.idle;
+        rethrow;
+      } catch (_) {
+        _phase = _ControllerManagerPhase.idle;
+        rethrow;
+      }
+    });
+  }
+
+  /// Releases one acquisition of [controller].
+  ///
+  /// Only the final release invalidates the handle and requests native
+  /// deletion. Releasing a closed, superseded, or non-active controller throws
+  /// [ControllerLifecycleFailure.closed]. Each successful [acquire] must have
+  /// exactly one matching release or [ChipDeviceController.close] call.
+  Future<void> release(ChipDeviceController controller) {
+    return _serialize(() async {
+      _throwIfPoisoned('release');
+      final current = _active;
+      if (current == null ||
+          !identical(current, controller) ||
+          controller._isClosed) {
+        throw ControllerLifecycleException(
+          ControllerLifecycleFailure.closed,
+          'Controller is no longer active; cannot release it',
+          methodName: 'release',
+        );
+      }
+      if (_acquisitionCount <= 0) {
+        throw ControllerLifecycleException(
+          ControllerLifecycleFailure.nativeStateConflict,
+          'Controller acquisition count is invalid',
+          methodName: 'release',
+        );
+      }
+
+      _acquisitionCount--;
+      if (_acquisitionCount > 0) {
+        return;
+      }
+      await _shutdownActive(
+        controller,
+        _ControllerManagerPhase.shuttingDown,
+      );
+    });
+  }
+
+  /// Force-closes the active or abandoned controller and clears acquisitions.
+  ///
+  /// A successful call leaves the manager idle and reusable. Native shutdown
+  /// failure poisons the manager until process restart.
+  Future<void> closeAll() {
+    return _serialize(() async {
+      _throwIfPoisoned('closeAll');
+      _phase = _ControllerManagerPhase.shuttingDown;
+      final current = _active;
+      if (current != null) {
+        await _shutdownActive(current, _ControllerManagerPhase.shuttingDown);
+      } else if (_abandoned != null) {
+        await _shutdownAbandoned(_ControllerManagerPhase.shuttingDown);
+      }
+      if (_phase != _ControllerManagerPhase.poisoned) {
+        _phase = _ControllerManagerPhase.idle;
+      }
+    });
+  }
+
+  /// Records a local-only destroy so the next acquire can clean up native state.
+  void _controllerDestroyed(ChipDeviceController controller) {
+    if (identical(_active, controller)) {
+      _active = null;
+      _acquisitionCount = 0;
+      _abandoned = controller;
+      _phase = _ControllerManagerPhase.idle;
+      return;
+    }
+    if (identical(_abandoned, controller)) {
+      _acquisitionCount = 0;
+    }
+  }
+
+  Future<void> _shutdownActive(
+    ChipDeviceController controller,
+    _ControllerManagerPhase phase,
+  ) async {
+    _phase = phase;
+    _active = null;
+    _acquisitionCount = 0;
+    controller._markClosed();
+    try {
+      await controller._requestPlatformUnchecked(
+        'deleteDeviceController',
+        jsonEncode({jsonKeyHandle: controller._platformDeviceControllerHandle}),
+      );
+      _phase = _ControllerManagerPhase.idle;
+    } catch (error, stackTrace) {
+      _poisonControllerManager(
+        reason: ControllerLifecycleFailure.shutdownFailed,
+        message: 'Native controller shutdown failed; restart the process '
+            'before creating another controller',
+        operation: 'deleteDeviceController',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      throw _poison!;
+    }
+  }
+
+  Future<void> _shutdownAbandoned(_ControllerManagerPhase phase) async {
+    final controller = _abandoned!;
+    _abandoned = null;
+    _phase = phase;
+    try {
+      await controller._requestPlatformUnchecked(
+        'deleteDeviceController',
+        jsonEncode({jsonKeyHandle: controller._platformDeviceControllerHandle}),
+      );
+      _phase = _ControllerManagerPhase.idle;
+    } catch (error, stackTrace) {
+      _poisonControllerManager(
+        reason: ControllerLifecycleFailure.shutdownFailed,
+        message: 'Native controller shutdown failed; restart the process '
+            'before creating another controller',
+        operation: 'deleteDeviceController',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      throw _poison!;
+    }
+  }
+
+  void _poisonControllerManager({
+    required ControllerLifecycleFailure reason,
+    required String message,
+    required String operation,
+    required Object error,
+    required StackTrace stackTrace,
+  }) {
+    _active = null;
+    _abandoned = null;
+    _acquisitionCount = 0;
+    _phase = _ControllerManagerPhase.poisoned;
+    _poison = ControllerLifecycleException(
+      reason,
+      message,
+      methodName: operation,
+      cause: error,
+    );
+    reportMatterError(
+        'ChipDeviceControllerManager.$operation', error, stackTrace);
+  }
+
+  void _throwIfPoisoned(String operation) {
+    final poison = _poison;
+    if (poison == null) {
+      return;
+    }
+    throw ControllerLifecycleException(
+      poison.reason,
+      'Controller manager is poisoned by an earlier shutdown failure; cannot '
+      'perform $operation',
+      methodName: operation,
+      cause: poison.cause,
+    );
+  }
+
+  Future<T> _serialize<T>(Future<T> Function() operation) {
+    final completer = Completer<T>();
+    _operationTail = _operationTail.then((_) async {
+      try {
+        completer.complete(await operation());
+      } catch (error, stackTrace) {
+        completer.completeError(error, stackTrace);
+      }
+    });
+    return completer.future;
+  }
+
+  bool _sameIdentity(ControllerParams left, ControllerParams right) {
+    return left.fabricId == right.fabricId &&
+        listEquals(left.rootCertificate, right.rootCertificate);
+  }
+
+  /// Clears in-memory lifecycle state without issuing a native request.
+  ///
+  /// This is intentionally limited to tests that swap platform transports.
+  @visibleForTesting
+  void resetForTesting() {
+    _active?._markClosed();
+    _abandoned?._markClosed();
+    _active = null;
+    _abandoned = null;
+    _acquisitionCount = 0;
+    _phase = _ControllerManagerPhase.idle;
+    _poison = null;
+    _operationTail = Future<void>.value();
   }
 }
 

@@ -15,7 +15,7 @@ Only a completed `full` Run produces formal evidence. See [Device Test Report Co
 
 A P0 failure or P0 `not_run` blocks later P0 work and ends the Run. Dependent cases are recorded as `not_run` with a reason. P1 failures are recorded without blocking the remaining sequence. No P0 failure is retried in the same Run.
 
-`app_restart` reloads persisted controller credentials, releases active operational connections and subscriptions, and reconnects without recommissioning. It reuses the live native controller; process-level teardown is out of scope for the pinned controller SDK. It is a test case, not a resumable Run.
+`app_restart` releases active operational connections and subscriptions, closes the active controller runtime, rebuilds it from persisted credentials under the single-active lifecycle, and reconnects without recommissioning. A process-level app restart is out of scope. It is a test case, not a resumable Run.
 
 ## Setup and lifecycle
 
