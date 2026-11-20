@@ -50,7 +50,7 @@ Delegates and callbacks:
 - commissioning: `pairDevice`, `pairDeviceWithAddress`, `stopDevicePairing`, `continueCommissioning`, `setCompletionListener`, `setNocChainIssuer`
 - identity: `createRootCertificate`, `createOperationalCertificate`, `publicKeyFromCSR`, `onNOCChainGeneration`
 - operations: `invoke`, `read`, `write`, `subscribe`, `unSubscription`, `connectedDevice`, `releaseConnectContext`
-- commissioning windows and fabric state: `openPairingWindowWithPIN`, `getFabricIndex`
+- commissioning windows and fabric state: `openPairingWindowWithPIN` (deprecated; verify platform-specific semantics), `getFabricIndex`
 
 `NetworkCredentials` supports named Wi-Fi and Thread constructors plus the legacy Wi-Fi constructor. An empty Wi-Fi password represents an open network.
 
@@ -108,6 +108,26 @@ DNS-SD is implemented on Android. The iOS plugin does not route `nsd` requests.
 
 These types encode the JSON exchanged with native code. Their public fields and JSON representations are compatibility surfaces. `DataVersionFilter` is supported in Android subscriptions only.
 
+## Error handling
+
+The bridge preserves the `{code, jsonData}` and `{code, resultJson}` envelopes. Dart request envelopes are validated before use, and malformed native payloads produce contextual typed errors instead of `TypeError`, `NoSuchMethodError`, or platform stack text. The bridge exception classes remain internal and are not added to the package-root export list.
+
+- `CallPlatformException` carries an optional code, method name, safe details, and cause.
+- Native `PlatformException` and `MissingPluginException` failures from the MethodChannel transport are normalized to `CallPlatformException` with the method name and a safe category.
+- `PlatformProtocolException` reports invalid platform response envelopes with the method name but without the response body; it also implements `FormatException`.
+- `checkCallArgNotNull` throws `ArgumentError` with the missing field and callback context.
+- Onboarding and model decoders use `FormatException` for malformed payload fields.
+- `invoke`, `subscribe`, `read`, `write`, and `connectedDevice` complete only after native accepts the request; rejection removes the pending callback and throws the typed platform error.
+- Cluster helpers await request acceptance and complete their returned `Future` with a typed error when the request is rejected, no report arrives, the payload cannot be decoded, or the 15-second one-shot read timeout expires.
+- BLE delegate registration rolls back the new Dart handler when native registration fails. Clearing a delegate keeps the existing local handler until native confirms the clear.
+- `FlutterMatterPlatform` exposes `requestPlatform`, `addHandler`, and `removeHandler`; controller creation, BLE manager, NSD, and onboarding request paths use this interface instead of a concrete MethodChannel cast.
+- Android byte arrays require integer values in `0..255`; onboarding discovery capabilities use wire values `1`, `2`, and `3` for soft AP, BLE, and on-network discovery.
+- iOS subscription reports are non-terminal. A terminal subscription error produces one `onDone`; path-level StatusIB values are exposed through `attributeStatuses`/`eventStatuses`. Write callbacks identify attributes with `attributeId` and deliver path-specific statuses through `onResponse`.
+- NSD, onboarding, BLE, model, and TLV operations surface typed, sanitized failures; the example NSD resolver skips a missing host.
+- iOS uses the stable bridge codes documented in [Error handling](error-handling.md).
+
+Full boundary rules and platform-specific changes are in [Error handling](error-handling.md).
+
 ## TLV
 
 - `Element`
@@ -120,6 +140,17 @@ These types encode the JSON exchanged with native code. Their public fields and 
 - TLV type classes, type constants, tag constants, and `encodeSize`
 
 `tlv_types.dart` exports a `Type` class that is hidden from the package root to avoid colliding with `dart:core`.
+
+The TLV implementation follows the connectedhomeip Kotlin TLV contract while retaining the existing entry points:
+
+- Invalid bytes and out-of-range decoded values throw `TlvParsingException`.
+- Invalid caller arguments and container placement throw `ArgumentError`.
+- Unclosed containers and internal encoding failures throw `TlvEncodingException`.
+- `TlvReader` copies input bytes, supports `Iterable<Element>`, and provides `peekElement`, `skipElement`, `exitContainer`, `reset`, `getLengthRead`, and `getRemainingLength`.
+- `getULong()` remains the compatibility entry point but rejects values above `2^63 - 1`; use `getULongBigInt()` for the complete unsigned 64-bit range.
+- `putUnsignedBigInt()` and `UnsignedIntValue.fromBigInt()` provide the corresponding full-width unsigned write path.
+- `putByteStringArray(Tag, List<int>)` is deprecated but preserves its original signed-integer behavior. Use `putByteStringArrayValues(Tag, List<Uint8List>)` for octet-string arrays.
+- `TlvWriter` has a dynamic container stack, transactional writes, `putFloat`, `putUnsignedLongArray`, and both `copyElement` forms.
 
 ## Cluster helpers
 
@@ -137,7 +168,7 @@ Both helpers require a connected `ChipDeviceController`, node ID, and connection
 | `src/ble.dart` | BLE manager, platform delegate, host name, and `BLE_ERROR_*` constants |
 | `src/nsd.dart` | NSD manager, service info, callbacks, and host name |
 | `src/model/*.dart` | Matter paths, state, status, invoke, data-version, and ICD models |
-| `src/tlv/*.dart` | TLV elements, tags, values, readers, writers, type classes, and constants |
+| `src/tlv/*.dart` | TLV elements, tags, values, readers, writers, exceptions, type classes, and constants |
 | `src/clusters/*.dart` | Basic Information and Descriptor helpers |
 
 `test/public_api_test.dart` guards the golden export list. `test/method_channel_contract_test.dart` guards URL construction and JSON envelopes. These tests do not replace compatibility review of method signatures or callback semantics.

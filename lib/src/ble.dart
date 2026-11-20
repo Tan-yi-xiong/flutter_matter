@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:flutter_matter/flutter_matter_method_channel.dart';
 import 'package:flutter_matter/flutter_matter_platform_interface.dart';
 import 'package:flutter_matter/src/constant.dart';
 import 'package:flutter_matter/src/onboarding.dart';
+import 'package:flutter_matter/src/platform_transport_types.dart';
 import 'package:flutter_matter/src/utils.dart';
 
 import 'callback_handler.dart';
@@ -227,11 +227,34 @@ abstract class BlePlatformDelegate {
 
 class BlePlatformDelegateCallbackHandler
     extends CallbackHandler<BlePlatformDelegate> {
+  Uint8List _callbackByteList(
+      Map<dynamic, dynamic> arguments, String key, String context) {
+    final value = checkCallArgNotNull(arguments, key, context: context);
+    if (value is! List) {
+      throw ArgumentError.value(
+        null,
+        key,
+        '$context: $key must be a list of bytes',
+      );
+    }
+    return toUint8List(value);
+  }
+
   @override
   onCallbackMethodCall(String methodName, arguments) async {
-    final decodeArgs = jsonDecode(arguments);
-    BlePlatformDelegate? delegate =
-        handlers[checkCallArgNotNull(decodeArgs, jsonKeyHandle).toString()];
+    final decoded = jsonDecode(arguments);
+    if (decoded is! Map) {
+      throw ArgumentError.value(
+        decoded,
+        'arguments',
+        'BLE callback arguments must be a JSON object',
+      );
+    }
+    final decodeArgs = decoded;
+    final callbackContext = '$runtimeType.$methodName';
+    BlePlatformDelegate? delegate = handlers[
+        checkCallArgNotNull(decodeArgs, jsonKeyHandle, context: callbackContext)
+            .toString()];
     if (delegate == null) {
       return createPlatformCallExceptionResult(
           argsInvalid, "Not found BlePlatformDelegate handle");
@@ -239,74 +262,67 @@ class BlePlatformDelegateCallbackHandler
     switch (methodName) {
       case 'subscribeCharacteristic':
         final result = await delegate.subscribeCharacteristic(
-            checkCallArgNotNull(decodeArgs, 'connObj'),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'svcId').cast<int>()),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'charId').cast<int>()));
+            checkCallArgNotNull(decodeArgs, 'connObj',
+                context: callbackContext),
+            _callbackByteList(decodeArgs, 'svcId', callbackContext),
+            _callbackByteList(decodeArgs, 'charId', callbackContext));
         return createPlatformCallSuccessResult(
             successMsg: jsonEncode({'data': result}));
       case 'sendReadResponse':
         final result = await delegate.sendReadResponse(
-            checkCallArgNotNull(decodeArgs, 'connObj'),
-            checkCallArgNotNull(decodeArgs, 'requestContext'),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'svcId').cast<int>()),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'charId').cast<int>()));
+            checkCallArgNotNull(decodeArgs, 'connObj',
+                context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'requestContext',
+                context: callbackContext),
+            _callbackByteList(decodeArgs, 'svcId', callbackContext),
+            _callbackByteList(decodeArgs, 'charId', callbackContext));
         return createPlatformCallSuccessResult(
             successMsg: jsonEncode({'data': result}));
       case 'sendWriteRequest':
         final result = await delegate.sendWriteRequest(
-            checkCallArgNotNull(decodeArgs, 'connObj'),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'svcId').cast<int>()),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'charId').cast<int>()),
-            Uint8List.fromList(
-              checkCallArgNotNull(decodeArgs, 'data').cast<int>()));
+            checkCallArgNotNull(decodeArgs, 'connObj',
+                context: callbackContext),
+            _callbackByteList(decodeArgs, 'svcId', callbackContext),
+            _callbackByteList(decodeArgs, 'charId', callbackContext),
+            _callbackByteList(decodeArgs, 'data', callbackContext));
         return createPlatformCallSuccessResult(
             successMsg: jsonEncode({'data': result}));
       case 'sendReadRequest':
         final result = await delegate.sendReadRequest(
-            checkCallArgNotNull(decodeArgs, 'connObj'),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'svcId').cast<int>()),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'charId').cast<int>()),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'data').cast<int>()));
+            checkCallArgNotNull(decodeArgs, 'connObj',
+                context: callbackContext),
+            _callbackByteList(decodeArgs, 'svcId', callbackContext),
+            _callbackByteList(decodeArgs, 'charId', callbackContext),
+            _callbackByteList(decodeArgs, 'data', callbackContext));
         return createPlatformCallSuccessResult(
             successMsg: jsonEncode({'data': result}));
       case 'sendIndication':
         final result = await delegate.sendIndication(
-            checkCallArgNotNull(decodeArgs, 'connObj'),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'svcId').cast<int>()),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'charId').cast<int>()),
-            Uint8List.fromList(
-                checkCallArgNotNull(decodeArgs, 'data').cast<int>()));
+            checkCallArgNotNull(decodeArgs, 'connObj',
+                context: callbackContext),
+            _callbackByteList(decodeArgs, 'svcId', callbackContext),
+            _callbackByteList(decodeArgs, 'charId', callbackContext),
+            _callbackByteList(decodeArgs, 'data', callbackContext));
         return createPlatformCallSuccessResult(
             successMsg: jsonEncode({'data': result}));
       case 'unsubscribeCharacteristic':
         final result = await delegate.unsubscribeCharacteristic(
-          checkCallArgNotNull(decodeArgs, 'connObj'),
-          Uint8List.fromList(
-              checkCallArgNotNull(decodeArgs, 'svcId').cast<int>()),
-          Uint8List.fromList(
-              checkCallArgNotNull(decodeArgs, 'charId').cast<int>()),
+          checkCallArgNotNull(decodeArgs, 'connObj', context: callbackContext),
+          _callbackByteList(decodeArgs, 'svcId', callbackContext),
+          _callbackByteList(decodeArgs, 'charId', callbackContext),
         );
         return createPlatformCallSuccessResult(
             successMsg: jsonEncode({'data': result}));
       case 'closeConnection':
         final result = await delegate.closeConnection(
-          checkCallArgNotNull(decodeArgs, 'connObj'),
+          checkCallArgNotNull(decodeArgs, 'connObj', context: callbackContext),
         );
         return createPlatformCallSuccessResult(
             successMsg: jsonEncode({'data': result}));
       case 'getMTU':
-        final result = await delegate.getMTU(checkCallArgNotNull(decodeArgs, 'connObj'));
+        final result = await delegate.getMTU(checkCallArgNotNull(
+            decodeArgs, 'connObj',
+            context: callbackContext));
         return createPlatformCallSuccessResult(
             successMsg: jsonEncode({'data': result}));
     }
@@ -319,121 +335,148 @@ final BlePlatformDelegateCallbackHandler _blePlatformDelegateCallbackHandler =
     BlePlatformDelegateCallbackHandler();
 
 class BLELayerPlatform {
-
-  static Future<Map<String, dynamic>?> _requestPlatform(String methodName, String methodParamsJson) async {
-    final channelFlutterMatter = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+  static Future<Map<String, dynamic>> _requestPlatform(
+      String methodName, String methodParamsJson) async {
+    final channelFlutterMatter = FlutterMatterPlatform.instance;
     final result = await channelFlutterMatter.requestPlatform(
-      RequestPlatformParams(methodName: createRequestPlatformUrl(bleHostName, methodName), methodParamsJson: methodParamsJson));
+        RequestPlatformParams(
+            methodName: createRequestPlatformUrl(bleHostName, methodName),
+            methodParamsJson: methodParamsJson));
     if (result.code == 0) {
       return result.jsonData;
     }
-    throw CallPlatformException("[${result.code}] Call $methodName params $methodParamsJson failed");
+    throw CallPlatformException(
+      'Call $methodName failed with code ${result.code}',
+      code: result.code,
+      methodName: methodName,
+      details: const <String, Object?>{
+        'host': bleHostName,
+        'category': 'platform-error',
+      },
+    );
   }
 
   static Future<void> setBlePlatformDelegate(
       BlePlatformDelegate? delegate) async {
-    if (delegate != null && _blePlatformDelegateCallbackHandler.handlers.isNotEmpty) {
-      throw Exception("Already set delegate");
+    if (delegate != null &&
+        _blePlatformDelegateCallbackHandler.handlers.isNotEmpty) {
+      throw Exception('Already set delegate');
     }
-    final channel =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
-    final String? id;
-    if (delegate == null) {
-      id = null;
-      for (var element in _blePlatformDelegateCallbackHandler.handlers.keys.toList()) {
-        _blePlatformDelegateCallbackHandler.removeHandler(element);
+
+    final previousHandles =
+        _blePlatformDelegateCallbackHandler.handlers.keys.toList();
+    final id = delegate == null
+        ? null
+        : _blePlatformDelegateCallbackHandler.addHandler(delegate);
+
+    try {
+      await _requestPlatform(
+        'setBlePlatformDelegate',
+        jsonEncode({jsonKeyHandle: id}),
+      );
+    } catch (_) {
+      // A failed new registration must not leave a handle that blocks retry.
+      // Clearing keeps the existing local handle until native confirms removal.
+      if (id != null) {
+        _blePlatformDelegateCallbackHandler.removeHandler(id);
       }
-    } else {
-      id = _blePlatformDelegateCallbackHandler.addHandler(delegate);
+      rethrow;
     }
-    final result = await channel.requestPlatform(RequestPlatformParams(
-        methodName:
-            createRequestPlatformUrl(bleHostName, 'setBlePlatformDelegate'),
-        methodParamsJson: jsonEncode({jsonKeyHandle: id})));
-    if (result.code != 0) {
-      throw Exception("setBlePlatformDelegate failed ${result.code}");
+
+    if (delegate == null) {
+      for (final handle in previousHandles) {
+        _blePlatformDelegateCallbackHandler.removeHandler(handle);
+      }
     }
   }
 
   static Future<bool> handleSubscribeReceived(
       dynamic connObj, Uint8List svcId, Uint8List charId) async {
-        await _requestPlatform(
-          'handleSubscribeReceived', jsonEncode({
-            'connObj': connObj,
-            'svcId': List.from(svcId),
-            'charId': List.from(charId),
-          })
-        );
-        return true;
+    await _requestPlatform(
+        'handleSubscribeReceived',
+        jsonEncode({
+          'connObj': connObj,
+          'svcId': List.from(svcId),
+          'charId': List.from(charId),
+        }));
+    return true;
   }
 
   static Future<bool> handleSubscribeComplete(
       dynamic connObj, Uint8List svcId, Uint8List charId, bool success) async {
-        await _requestPlatform(
-          'handleSubscribeComplete', jsonEncode({
-            'connObj': connObj,
-            'svcId': List.from(svcId),
-            'charId': List.from(charId),
-            'success': success,
-          })
-        );
-        return true;
-      }
+    await _requestPlatform(
+        'handleSubscribeComplete',
+        jsonEncode({
+          'connObj': connObj,
+          'svcId': List.from(svcId),
+          'charId': List.from(charId),
+          'success': success,
+        }));
+    return true;
+  }
 
   /// < Platform must call this function when a GATT unsubscribe is requested on any CHIP
   ///   service charateristic, that is, when an existing GATT subscription on a CHIP service
   ///   characteristic is canceled.
   static Future<bool> handleUnsubscribeReceived(
       dynamic connObj, Uint8List svcId, Uint8List charId) async {
-      await _requestPlatform(
-        'handleUnsubscribeReceived', jsonEncode({
+    await _requestPlatform(
+        'handleUnsubscribeReceived',
+        jsonEncode({
           'connObj': connObj,
           'svcId': List.from(svcId),
           'charId': List.from(charId),
-        })
-      );
-      return true;
+        }));
+    return true;
   }
 
   /// Call when a GATT unsubscribe request succeeds.
   static Future<bool> handleUnsubscribeComplete(
       dynamic connObj, Uint8List svcId, Uint8List charId, bool success) async {
     await _requestPlatform(
-      'handleUnsubscribeComplete', jsonEncode({
-        'connObj': connObj,
-        'svcId': List.from(svcId),
-        'charId': List.from(charId),
-        'success': success,
-      })
-    );
+        'handleUnsubscribeComplete',
+        jsonEncode({
+          'connObj': connObj,
+          'svcId': List.from(svcId),
+          'charId': List.from(charId),
+          'success': success,
+        }));
     return true;
   }
 
   /// Call when a GATT write request is received.
-  static Future<bool> handleWriteReceived(
-      dynamic connObj, Uint8List svcId, Uint8List charId, Uint8List pBuf) async {
+  static Future<bool> handleWriteReceived(dynamic connObj, Uint8List svcId,
+      Uint8List charId, Uint8List pBuf) async {
     final result = await _requestPlatform(
-      'handleWriteReceived', jsonEncode({
-        'connObj': connObj,
-        'svcId': List.from(svcId),
-        'charId': List.from(charId),
-        'pBuf': List.from(pBuf),
-      })
-    );
-    return result!['data'] == true;
+        'handleWriteReceived',
+        jsonEncode({
+          'connObj': connObj,
+          'svcId': List.from(svcId),
+          'charId': List.from(charId),
+          'pBuf': List.from(pBuf),
+        }));
+    final data = result['data'];
+    if (data is! bool) {
+      throw PlatformProtocolException(
+        'data must be a boolean',
+        code: unHandlerException,
+        methodName: 'handleWriteReceived',
+      );
+    }
+    return data;
   }
 
   /// Call when a GATT indication is received.
-  static Future<bool> handleIndicationReceived(
-      dynamic connObj, Uint8List svcId, Uint8List charId, Uint8List pBuf) async {
+  static Future<bool> handleIndicationReceived(dynamic connObj, Uint8List svcId,
+      Uint8List charId, Uint8List pBuf) async {
     await _requestPlatform(
-      'handleIndicationReceived', jsonEncode({
-        'connObj': connObj,
-        'svcId': List.from(svcId),
-        'charId': List.from(charId),
-        'pBuf': List.from(pBuf),
-      })
-    );
+        'handleIndicationReceived',
+        jsonEncode({
+          'connObj': connObj,
+          'svcId': List.from(svcId),
+          'charId': List.from(charId),
+          'pBuf': List.from(pBuf),
+        }));
     return true;
   }
 
@@ -441,13 +484,13 @@ class BLELayerPlatform {
   static Future<bool> handleWriteConfirmation(
       dynamic connObj, Uint8List svcId, Uint8List charId, bool success) async {
     await _requestPlatform(
-      'handleWriteConfirmation', jsonEncode({
-        'connObj': connObj,
-        'svcId': List.from(svcId),
-        'charId': List.from(charId),
-        'success': success,
-      })
-    );
+        'handleWriteConfirmation',
+        jsonEncode({
+          'connObj': connObj,
+          'svcId': List.from(svcId),
+          'charId': List.from(charId),
+          'success': success,
+        }));
     return true;
   }
 
@@ -455,13 +498,13 @@ class BLELayerPlatform {
   static Future<bool> handleIndicationConfirmation(
       dynamic connObj, Uint8List svcId, Uint8List charId, bool success) async {
     await _requestPlatform(
-      'handleIndicationConfirmation', jsonEncode({
-        'connObj': connObj,
-        'svcId': List.from(svcId),
-        'charId': List.from(charId),
-        'success': success
-      })
-    );
+        'handleIndicationConfirmation',
+        jsonEncode({
+          'connObj': connObj,
+          'svcId': List.from(svcId),
+          'charId': List.from(charId),
+          'success': success
+        }));
     return true;
   }
 
@@ -480,20 +523,19 @@ class BLELayerPlatform {
   ///   err = BLE_ERROR_APP_CLOSED_CONNECTION to prevent the leak of this chipConnection and its end point object.
   static Future<void> handleConnectionError(dynamic connObj, int err) async {
     await _requestPlatform(
-      'handleConnectionError',
-      jsonEncode({
-        'connObj': connObj,
-        'err': err,
-      })
-    );
+        'handleConnectionError',
+        jsonEncode({
+          'connObj': connObj,
+          'err': err,
+        }));
   }
 }
 
 class BLEManager {
-  late MethodChannelFlutterMatter _channel;
+  late FlutterMatterPlatform _channel;
 
   BLEManager() {
-    _channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    _channel = FlutterMatterPlatform.instance;
   }
 
   Future<int?> connect(OnboardingPayload onboardingPayload) async {
@@ -508,6 +550,13 @@ class BLEManager {
       return null;
     }
     final connectId = result.jsonData['data'];
+    if (connectId is! int) {
+      throw PlatformProtocolException(
+        'data must be an integer',
+        code: unHandlerException,
+        methodName: 'connectDevice',
+      );
+    }
     return connectId >= 0 ? connectId : null;
   }
 
@@ -517,7 +566,15 @@ class BLEManager {
         methodParamsJson: jsonEncode({"connectId": connectId})));
     if (result.code != successCode) {
       matterPrint('BLE disconnect failed code: ${result.code}');
-      throw Exception("BLE disconnect failed ${result.code}");
+      throw CallPlatformException(
+        'BLE disconnect failed with code ${result.code}',
+        code: result.code,
+        methodName: 'disconnect',
+        details: const <String, Object?>{
+          'host': bleHostName,
+          'category': 'platform-error',
+        },
+      );
     }
   }
 }

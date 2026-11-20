@@ -1,158 +1,512 @@
 #import "Utiles.h"
-#import "Flutter/Flutter.h"
 
+#include <CoreFoundation/CoreFoundation.h>
+#include <math.h>
 
-void FlutterMatterLog(NSString * msg) {
-    NSLog(@"[FlutterMatter] %@", msg);
+NSString * const FlutterMatterErrorInvalidArguments = @"invalidArguments";
+NSString * const FlutterMatterErrorInvalidMethod = @"invalidMethod";
+NSString * const FlutterMatterErrorUnsupportedHost = @"unsupportedHost";
+NSString * const FlutterMatterErrorMethodNotImplemented = @"methodNotImplemented";
+NSString * const FlutterMatterErrorCallbackFailed = @"callbackDeliveryFailed";
+NSString * const FlutterMatterErrorInternal = @"internalError";
+NSString * const FlutterMatterOnBLECallExceptionCode = @"onBLECallException";
+NSString * const FlutterMatterOnOnboardingCallExceptionCode = @"onOnboardingCallException";
+NSString * const FlutterMatterDeviceControlCallExceptionCode = @"DeviceControlCallException";
+
+@implementation FlutterMatterArgumentException
+
+- (instancetype)initWithArgumentName:(NSString *)argumentName
+                              message:(NSString *)message {
+    self = [super initWithName:@"FlutterMatterArgumentException"
+                       reason:message
+                     userInfo:@{@"argumentName": argumentName ?: @"arguments"}];
+    if (self) {
+        _argumentName = [argumentName copy] ?: @"arguments";
+    }
+    return self;
 }
 
-NSString *createFlutterCallPath(NSString *host, NSString *path) {
-    // 使用字符串拼接构建路径
-    NSString *fullPath = [NSString stringWithFormat:@"//%@/%@", host, path];
-    
-    // 返回最终的路径字符串
-    return fullPath;
+@end
+
+static void FlutterMatterRaiseInvalidArgument(NSString *name, NSString *message) {
+    @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:name
+                                                                 message:message];
 }
 
-NSString *createCallFlutterExceptionMessage(NSString *functionName) {
-    return [NSString stringWithFormat:@"call flutter %@ failed", functionName];
+static BOOL FlutterMatterIsBooleanNumber(NSNumber *number) {
+    return CFGetTypeID((__bridge CFTypeRef)number) == CFBooleanGetTypeID();
 }
 
-id requestJsonValueNotNull(NSDictionary* dict, NSString *key) {
-    id value = [dict objectForKey:key];
-    if (value == nil || [value isEqual:[NSNull null]]) {
-        @throw [NSException exceptionWithName:@"NotFoundValueException"
-                                       reason:[[NSString alloc] initWithFormat:@"Not found json key %@ value", key]
-                                     userInfo:nil];
+static id FlutterMatterJSONValue(NSDictionary *dictionary,
+                                 NSString *key,
+                                 BOOL required) {
+    if (![dictionary isKindOfClass:[NSDictionary class]]) {
+        FlutterMatterRaiseInvalidArgument(@"arguments",
+                                          @"Request arguments must be a JSON object.");
+    }
+
+    id value = dictionary[key];
+    if (value == nil || value == [NSNull null]) {
+        if (required) {
+            FlutterMatterRaiseInvalidArgument(key, @"Missing required argument.");
+        }
+        return nil;
     }
     return value;
 }
 
-NSDictionary* parseJSONString(NSString *jsonString) {
-    // 将 JSON 字符串转换为 NSData
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    // 使用 NSJSONSerialization 将 NSData 转换为 NSDictionary 或 NSArray
-    NSError *error = nil;
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
-    
-    if (error) {
-        @throw [NSException exceptionWithName:@"parseJSONStringException"
-                                              reason:@"JSONObjectWithData result error"
-                                            userInfo:nil];
-    }
-    
-    // 如果解析成功，返回 NSDictionary 或 NSArray
-    if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-        return jsonObject;
-    }
-    
-    // 如果解析失败，返回 nil
-    return nil;
+id FlutterMatterOptionalJSONValue(NSDictionary *dictionary, NSString *key) {
+    return FlutterMatterJSONValue(dictionary, key, NO);
 }
 
-NSString* toJSONStringFromObject(id object) {
-    // 使用 NSJSONSerialization 将对象转换为 JSON 数据
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:&error];
-    
-    // 如果序列化失败，返回 nil
-    if (!jsonData || error) {
-        @throw [NSException exceptionWithName:@"toJSONStringFromObjectException"
-                                              reason:@"dataWithJSONObject result error"
-                                            userInfo:nil];
+id FlutterMatterRequiredJSONValue(NSDictionary *dictionary, NSString *key) {
+    return FlutterMatterJSONValue(dictionary, key, YES);
+}
+
+NSString *FlutterMatterRequiredString(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterRequiredJSONValue(dictionary, key);
+    if (![value isKindOfClass:[NSString class]]) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected a string.");
     }
-    
-    // 将 NSData 转换为 NSString
+    return (NSString *)value;
+}
+
+NSNumber *FlutterMatterRequiredNumber(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterRequiredJSONValue(dictionary, key);
+    if (![value isKindOfClass:[NSNumber class]] || FlutterMatterIsBooleanNumber(value)) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected a number.");
+    }
+    return (NSNumber *)value;
+}
+
+NSNumber *FlutterMatterRequiredBoolean(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterRequiredJSONValue(dictionary, key);
+    if (![value isKindOfClass:[NSNumber class]] || !FlutterMatterIsBooleanNumber(value)) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected a boolean.");
+    }
+    return (NSNumber *)value;
+}
+
+NSDictionary *FlutterMatterRequiredDictionary(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterRequiredJSONValue(dictionary, key);
+    if (![value isKindOfClass:[NSDictionary class]]) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected an object.");
+    }
+    return (NSDictionary *)value;
+}
+
+NSArray *FlutterMatterRequiredArray(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterRequiredJSONValue(dictionary, key);
+    if (![value isKindOfClass:[NSArray class]]) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected an array.");
+    }
+    return (NSArray *)value;
+}
+
+NSString *FlutterMatterOptionalString(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterOptionalJSONValue(dictionary, key);
+    if (value == nil) {
+        return nil;
+    }
+    if (![value isKindOfClass:[NSString class]]) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected a string.");
+    }
+    return (NSString *)value;
+}
+
+NSNumber *FlutterMatterOptionalNumber(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterOptionalJSONValue(dictionary, key);
+    if (value == nil) {
+        return nil;
+    }
+    if (![value isKindOfClass:[NSNumber class]] || FlutterMatterIsBooleanNumber(value)) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected a number.");
+    }
+    return (NSNumber *)value;
+}
+
+NSNumber *FlutterMatterOptionalBoolean(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterOptionalJSONValue(dictionary, key);
+    if (value == nil) {
+        return nil;
+    }
+    if (![value isKindOfClass:[NSNumber class]] || !FlutterMatterIsBooleanNumber(value)) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected a boolean.");
+    }
+    return (NSNumber *)value;
+}
+
+NSDictionary *FlutterMatterOptionalDictionary(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterOptionalJSONValue(dictionary, key);
+    if (value == nil) {
+        return nil;
+    }
+    if (![value isKindOfClass:[NSDictionary class]]) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected an object.");
+    }
+    return (NSDictionary *)value;
+}
+
+NSArray *FlutterMatterOptionalArray(NSDictionary *dictionary, NSString *key) {
+    id value = FlutterMatterOptionalJSONValue(dictionary, key);
+    if (value == nil) {
+        return nil;
+    }
+    if (![value isKindOfClass:[NSArray class]]) {
+        FlutterMatterRaiseInvalidArgument(key, @"Expected an array.");
+    }
+    return (NSArray *)value;
+}
+
+NSData *FlutterMatterByteArrayFromJSONValue(id value, NSString *fieldName) {
+    if (![value isKindOfClass:[NSArray class]]) {
+        FlutterMatterRaiseInvalidArgument(fieldName, @"Expected an array of bytes.");
+    }
+
+    NSMutableData *bytes = [NSMutableData dataWithCapacity:((NSArray *)value).count];
+    for (id item in (NSArray *)value) {
+        if (![item isKindOfClass:[NSNumber class]] || FlutterMatterIsBooleanNumber(item)) {
+            FlutterMatterRaiseInvalidArgument(fieldName, @"Each byte must be a number.");
+        }
+        NSNumber *number = (NSNumber *)item;
+        const double byteValue = number.doubleValue;
+        if (!isfinite(byteValue) || byteValue < 0 || byteValue > 255 || byteValue != floor(byteValue)) {
+            FlutterMatterRaiseInvalidArgument(fieldName, @"Each byte must be an integer from 0 to 255.");
+        }
+        uint8_t byte = (uint8_t)number.unsignedIntValue;
+        [bytes appendBytes:&byte length:1];
+    }
+    return [bytes copy];
+}
+
+NSData *FlutterMatterRequiredByteArray(NSDictionary *dictionary, NSString *key) {
+    return FlutterMatterByteArrayFromJSONValue(FlutterMatterRequiredJSONValue(dictionary, key), key);
+}
+
+void FlutterMatterLog(NSString *msg) {
+    NSLog(@"[FlutterMatter] %@", msg ?: @"");
+}
+
+NSString *createFlutterCallPath(NSString *host, NSString *path) {
+    return [NSString stringWithFormat:@"//%@/%@", host ?: @"", path ?: @""];
+}
+
+NSString *createCallFlutterExceptionMessage(NSString *functionName) {
+    return [NSString stringWithFormat:@"call flutter %@ failed", functionName ?: @"callback"];
+}
+
+id requestJsonValueNotNull(NSDictionary *dictionary, NSString *key) {
+    return FlutterMatterRequiredJSONValue(dictionary, key);
+}
+
+NSDictionary *FlutterMatterParseJSONObject(NSString *jsonString) {
+    if (![jsonString isKindOfClass:[NSString class]]) {
+        FlutterMatterRaiseInvalidArgument(@"arguments",
+                                          @"Request arguments must be a JSON object string.");
+    }
+
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    if (jsonData == nil) {
+        FlutterMatterRaiseInvalidArgument(@"arguments", @"Request arguments are not valid UTF-8.");
+    }
+
+    NSError *error = nil;
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    if (jsonObject == nil || ![jsonObject isKindOfClass:[NSDictionary class]]) {
+        FlutterMatterLog(@"json.parse failed");
+        FlutterMatterRaiseInvalidArgument(@"arguments",
+                                          @"Request arguments must be a JSON object.");
+    }
+    return (NSDictionary *)jsonObject;
+}
+
+NSDictionary *parseJSONString(NSString *jsonString) {
+    return FlutterMatterParseJSONObject(jsonString);
+}
+
+NSString *toJSONStringFromObject(id object) {
+    if (![NSJSONSerialization isValidJSONObject:object]) {
+        @throw [NSException exceptionWithName:@"FlutterMatterEncodingException"
+                                       reason:@"Native callback payload is not JSON serializable."
+                                     userInfo:nil];
+    }
+
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    if (jsonData == nil || error != nil) {
+        FlutterMatterLogNSError(@"json.encode", error);
+        @throw [NSException exceptionWithName:@"FlutterMatterEncodingException"
+                                       reason:@"Native callback payload could not be encoded."
+                                     userInfo:nil];
+    }
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
-NSString* createFlutterRequestResultWithCode(NSInteger code, NSDictionary *jsonData) {
-    NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-    resultDict[@"code"] = @(code);
-    resultDict[@"jsonData"] = jsonData;
-    return toJSONStringFromObject(resultDict);
+NSString *createFlutterRequestResultWithCode(NSInteger code, NSDictionary *jsonData) {
+    return toJSONStringFromObject(@{
+        @"code": @(code),
+        @"jsonData": jsonData ?: @{},
+    });
 }
 
 NSData *toByteArrayFromJSONArray(NSArray *jsonArray) {
-    NSMutableData *byteArray = [NSMutableData dataWithCapacity:jsonArray.count];
-
-    for (NSNumber *number in jsonArray) {
-        // 获取每个元素并转换为字节
-        uint8_t byte = [number intValue] & 0xFF;
-        [byteArray appendBytes:&byte length:1];
-    }
-
-    return byteArray;
+    return FlutterMatterByteArrayFromJSONValue(jsonArray, @"bytes");
 }
 
-NSString* invokeMethodBlockGet(FlutterMethodChannel *channel, NSString* method, id arguments) {
-    if ([NSThread isMainThread]) {
-        @throw [NSException exceptionWithName:@"MainThreadException"
-                                           reason:[NSString stringWithFormat:@"Methods must be executed on the not main thread. Current thread: %@", [NSThread currentThread].name]
-                                         userInfo:nil];
+NSString *invokeMethodBlockGet(FlutterMethodChannel *channel,
+                               NSString *method,
+                               NSString *arguments) {
+    if (channel == nil) {
+        @throw [NSException exceptionWithName:@"FlutterMatterCallbackDeliveryException"
+                                       reason:@"Flutter callback channel is unavailable."
+                                     userInfo:nil];
     }
-    
+    if ([NSThread isMainThread]) {
+        @throw [NSException exceptionWithName:@"FlutterMatterCallbackDeliveryException"
+                                       reason:@"Synchronous Flutter callbacks cannot run on the main thread."
+                                     userInfo:nil];
+    }
+
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __block NSString *callbackResult = nil;
-    __block BOOL invokeFinish = NO;
+    __block NSException *callbackException = nil;
+    __block BOOL callbackFinished = NO;
+
     dispatch_async(dispatch_get_main_queue(), ^{
-        [channel invokeMethod:method arguments:arguments result:^(id result) {
-            FlutterMatterLog([[NSString alloc] initWithFormat:@"invoke %@ result %@", method, result]);
-            if ([result isKindOfClass:[NSString class]]) {
-                @try {
-                    NSDictionary *jsonObject = parseJSONString(result);
-                    NSNumber *code = [jsonObject objectForKey:@"code"];
-                    if ([code isEqualToNumber:@(0)]) {
-                        callbackResult = [jsonObject objectForKey:@"resultJson"];
-                    } else {
-                        FlutterMatterLog([[NSString alloc] initWithFormat:@"invoke %@ error %@", method, code]);
-                    }
-                } @catch (NSException *exception) {
-                    
-                } @finally {
-                    
+        @try {
+            [channel invokeMethod:method arguments:arguments result:^(id result) {
+                if (callbackFinished) {
+                    FlutterMatterLog([NSString stringWithFormat:@"callback %@ completed more than once",
+                                                                method ?: @""]);
+                    return;
                 }
-            }
+                callbackFinished = YES;
+                @try {
+                    if ([result isKindOfClass:[FlutterError class]]) {
+                        FlutterMatterRaiseInvalidArgument(@"callback", @"Flutter callback returned an error.");
+                    }
+                    if (![result isKindOfClass:[NSString class]]) {
+                        FlutterMatterRaiseInvalidArgument(@"callback", @"Flutter callback returned an invalid response.");
+                    }
+
+                    NSDictionary *jsonObject = FlutterMatterParseJSONObject((NSString *)result);
+                    NSNumber *code = FlutterMatterRequiredNumber(jsonObject, @"code");
+                    if (code.integerValue != 0) {
+                        FlutterMatterLog([NSString stringWithFormat:@"callback %@ failed with code %ld",
+                                                                    method ?: @"", (long)code.integerValue]);
+                        FlutterMatterRaiseInvalidArgument(@"callback", @"Flutter callback reported failure.");
+                    }
+                    id resultJson = FlutterMatterRequiredJSONValue(jsonObject, @"resultJson");
+                    if (![resultJson isKindOfClass:[NSString class]]) {
+                        FlutterMatterRaiseInvalidArgument(@"callback", @"Flutter callback resultJson must be a string.");
+                    }
+                    callbackResult = (NSString *)resultJson;
+                } @catch (NSException *exception) {
+                    callbackException = exception;
+                } @finally {
+                    dispatch_semaphore_signal(semaphore);
+                }
+            }];
+        } @catch (NSException *exception) {
+            callbackException = exception;
             dispatch_semaphore_signal(semaphore);
-            invokeFinish = YES;
-        }];
+        }
     });
-    if (!invokeFinish) {
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+    if (dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC))) != 0) {
+        @throw [NSException exceptionWithName:@"FlutterMatterCallbackTimeoutException"
+                                       reason:@"Flutter callback did not complete in time."
+                                     userInfo:nil];
+    }
+    if (callbackException != nil) {
+        @throw callbackException;
     }
     return callbackResult;
 }
 
-NSMutableArray* nsDataToIntegerArray(NSData* data) {
-    // 创建一个可变数组来存储字节的整数值
-    NSMutableArray *intArray = [NSMutableArray array];
-    
-    // 获取 NSData 中的字节数据
-    const uint8_t *bytes = [data bytes];
-    NSUInteger length = [data length];
-    
-    // 遍历 NSData 中的每个字节，将其转换为整数值
-    for (NSUInteger i = 0; i < length; i++) {
-        [intArray addObject:@(bytes[i])];  // 将字节的整数值添加到数组
+NSMutableArray *nsDataToIntegerArray(NSData *data) {
+    if (data == nil) {
+        return [NSMutableArray array];
     }
-    
+    if (![data isKindOfClass:[NSData class]]) {
+        FlutterMatterLog(@"nsDataToIntegerArray received a non-NSData value");
+        return [NSMutableArray array];
+    }
+
+    NSMutableArray *intArray = [NSMutableArray arrayWithCapacity:data.length];
+    const uint8_t *bytes = data.bytes;
+    for (NSUInteger i = 0; i < data.length; i++) {
+        [intArray addObject:@(bytes[i])];
+    }
     return intArray;
 }
 
 SecKeyRef nsDataToSecKey(NSData *publicKeyData) {
-    NSDictionary *attributes = @{
-        (__bridge id)kSecAttrKeyType :
-            (__bridge id)kSecAttrKeyTypeEC, // 指定密钥类型为 EC（椭圆曲线）
-        (__bridge id)
-        kSecAttrKeyClass : (__bridge id)kSecAttrKeyClassPublic, // 这是一个公钥
-        (__bridge id)kSecAttrKeySizeInBits : @(256), // P-256 是 256 位
-    };
+    if (publicKeyData.length == 0) {
+        FlutterMatterLog(@"Cannot create SecKey from empty key data");
+        return NULL;
+    }
 
-    // 使用 SecKeyCreateWithData 创建 SecKeyRef
-    return SecKeyCreateWithData(
-        (__bridge CFDataRef)publicKeyData,    // 公钥数据
-        (__bridge CFDictionaryRef)attributes, // 公钥属性字典
-        NULL                                  // 可选的错误返回
-    );
+    NSDictionary *attributes = @{
+        (__bridge id)kSecAttrKeyType: (__bridge id)kSecAttrKeyTypeEC,
+        (__bridge id)kSecAttrKeyClass: (__bridge id)kSecAttrKeyClassPublic,
+        (__bridge id)kSecAttrKeySizeInBits: @(256),
+    };
+    CFErrorRef error = NULL;
+    SecKeyRef key = SecKeyCreateWithData((__bridge CFDataRef)publicKeyData,
+                                         (__bridge CFDictionaryRef)attributes,
+                                         &error);
+    if (error != NULL) {
+        FlutterMatterLogNSError(@"security.createPublicKey", (__bridge NSError *)error);
+        CFRelease(error);
+    }
+    return key;
 }
+
+FlutterError *FlutterMatterFlutterError(NSString *code,
+                                        NSString *message,
+                                        NSDictionary<NSString *, id> *details) {
+    return [FlutterError errorWithCode:code ?: FlutterMatterErrorInternal
+                               message:message ?: @"Matter operation failed."
+                               details:details ?: @{}];
+}
+
+NSString *FlutterMatterSafeNSErrorSummary(NSError *error) {
+    if (error == nil) {
+        return @"No error";
+    }
+
+    // Domain and code are stable and safe. localizedDescription and userInfo
+    // can contain setup payloads, credentials, device values, or file paths.
+    return [NSString stringWithFormat:@"%@ (code %ld)",
+                                      error.domain ?: @"Matter",
+                                      (long)error.code];
+}
+
+NSString *FlutterMatterSafeExceptionSummary(NSException *exception) {
+    if ([exception isKindOfClass:[FlutterMatterArgumentException class]]) {
+        FlutterMatterArgumentException *argumentException = (FlutterMatterArgumentException *)exception;
+        return [NSString stringWithFormat:@"FlutterMatterArgumentException (%@)",
+                                          argumentException.argumentName];
+    }
+    return exception.name ?: @"Native exception";
+}
+
+void FlutterMatterLogNSError(NSString *context, NSError *error) {
+    FlutterMatterLog([NSString stringWithFormat:@"%@ failed: %@", context ?: @"native operation",
+                                                              FlutterMatterSafeNSErrorSummary(error)]);
+}
+
+void FlutterMatterLogException(NSString *context, NSException *exception) {
+    FlutterMatterLog([NSString stringWithFormat:@"%@ failed: %@", context ?: @"native callback",
+                                                              FlutterMatterSafeExceptionSummary(exception)]);
+}
+
+FlutterError *FlutterMatterErrorForException(NSException *exception,
+                                             NSString *fallbackCode,
+                                             NSString *host,
+                                             NSString *path) {
+    NSMutableDictionary *details = [@{
+        @"host": host ?: @"unknown",
+        @"path": path ?: @"unknown",
+    } mutableCopy];
+
+    if ([exception isKindOfClass:[FlutterMatterArgumentException class]]) {
+        FlutterMatterArgumentException *argumentException = (FlutterMatterArgumentException *)exception;
+        details[@"category"] = @"invalid-argument";
+        details[@"argument"] = argumentException.argumentName;
+        return FlutterMatterFlutterError(FlutterMatterErrorInvalidArguments,
+                                         [NSString stringWithFormat:@"Invalid request argument: %@.",
+                                                                    argumentException.argumentName],
+                                         details);
+    }
+
+    details[@"category"] = @"internal-error";
+    details[@"exception"] = exception.name ?: @"Native exception";
+    return FlutterMatterFlutterError(fallbackCode ?: FlutterMatterErrorInternal,
+                                     [NSString stringWithFormat:@"%@ operation failed.", host ?: @"Matter"],
+                                     details);
+}
+
+FlutterError *FlutterMatterUnknownPathError(NSString *host, NSString *path) {
+    return FlutterMatterFlutterError(FlutterMatterErrorMethodNotImplemented,
+                                     @"Unsupported MethodChannel method.",
+                                     @{
+                                         @"host": host ?: @"unknown",
+                                         @"path": path ?: @"unknown",
+                                         @"category": @"unsupported-method",
+                                     });
+}
+
+FlutterError *FlutterMatterUnsupportedHostError(NSString *host) {
+    return FlutterMatterFlutterError(FlutterMatterErrorUnsupportedHost,
+                                     @"Unsupported MethodChannel host.",
+                                     @{
+                                         @"host": host ?: @"unknown",
+                                         @"category": @"unsupported-host",
+                                     });
+}
+
+@interface FlutterMatterResultSender () {
+    FlutterResult _result;
+    BOOL _completed;
+}
+@end
+
+@implementation FlutterMatterResultSender
+
+- (instancetype)initWithResult:(FlutterResult)result {
+    self = [super init];
+    if (self) {
+        _result = [result copy];
+        _completed = NO;
+    }
+    return self;
+}
+
+- (void)sendValue:(id)value {
+    FlutterResult result = nil;
+    @synchronized (self) {
+        if (_completed) {
+            FlutterMatterLog(@"ignored duplicate MethodChannel result");
+            return;
+        }
+        _completed = YES;
+        result = _result;
+    }
+    if (result == nil) {
+        return;
+    }
+
+    id safeValue = value ?: [NSNull null];
+    void (^deliver)(void) = ^{
+        @try {
+            result(safeValue);
+        } @catch (NSException *exception) {
+            FlutterMatterLogException(@"result.delivery", exception);
+        }
+    };
+    if ([NSThread isMainThread]) {
+        deliver();
+    } else {
+        dispatch_async(dispatch_get_main_queue(), deliver);
+    }
+}
+
+- (void)sendError:(FlutterError *)error {
+    [self sendValue:error ?: FlutterMatterFlutterError(FlutterMatterErrorInternal,
+                                                        @"Matter operation failed.",
+                                                        @{@"category": @"internal-error"})];
+}
+
+- (void)sendUnsupportedHost:(NSString *)host {
+    [self sendError:FlutterMatterUnsupportedHostError(host)];
+}
+
+- (void)sendUnknownPathForHost:(NSString *)host path:(NSString *)path {
+    [self sendError:FlutterMatterUnknownPathError(host, path)];
+}
+
+@end

@@ -1,5 +1,6 @@
 import 'attribute_state.dart';
 import 'event_state.dart';
+import 'json_decoding.dart';
 import 'status.dart';
 
 class ClusterState {
@@ -18,46 +19,75 @@ class ClusterState {
   });
 
   factory ClusterState.fromJson(Map json) {
+    final root = decodeJsonObject(json, 'ClusterState');
     return ClusterState(
-      attributes: _decodeMap(json['attributes'], AttributeState.fromJson),
-      events: _decodeListMap(json['events'], EventState.fromJson),
-      attributeStatuses: _decodeMap(json['attributeStatuses'], Status.fromJson),
-      eventStatuses: _decodeListMap(json['eventStatuses'], Status.fromJson),
-      dataVersion: json['dataVersion'],
+      attributes: _decodeMap(
+        root['attributes'],
+        'ClusterState.attributes',
+        AttributeState.fromJson,
+      ),
+      events: _decodeListMap(
+        root['events'],
+        'ClusterState.events',
+        EventState.fromJson,
+      ),
+      attributeStatuses: _decodeMap(
+        root['attributeStatuses'],
+        'ClusterState.attributeStatuses',
+        Status.fromJson,
+      ),
+      eventStatuses: _decodeListMap(
+        root['eventStatuses'],
+        'ClusterState.eventStatuses',
+        Status.fromJson,
+      ),
+      dataVersion: root['dataVersion'] == null
+          ? null
+          : decodeJsonInt(root['dataVersion'], 'ClusterState.dataVersion'),
     );
   }
 
   static Map<int, T> _decodeMap<T>(
-    dynamic source,
+    Object? source,
+    String field,
     T Function(Map json) decode,
   ) {
     if (source == null) {
       return <int, T>{};
     }
 
-    return (source as Map).map<int, T>(
-      (key, value) => MapEntry(
-        int.parse(key.toString()),
-        decode(value as Map),
-      ),
-    );
+    final map = decodeJsonObject(source, field);
+    final result = <int, T>{};
+    for (final entry in map.entries) {
+      final itemField = '$field[${entry.key}]';
+      result[decodeJsonMapKeyInt(entry.key, field)] = decode(
+        decodeJsonObject(entry.value, itemField),
+      );
+    }
+    return result;
   }
 
   static Map<int, List<T>> _decodeListMap<T>(
-    dynamic source,
+    Object? source,
+    String field,
     T Function(Map json) decode,
   ) {
     if (source == null) {
       return <int, List<T>>{};
     }
 
-    return (source as Map).map<int, List<T>>(
-      (key, value) => MapEntry(
-        int.parse(key.toString()),
-        (value as List)
-            .map((item) => decode(item as Map))
-            .toList(growable: false),
-      ),
-    );
+    final map = decodeJsonObject(source, field);
+    final result = <int, List<T>>{};
+    for (final entry in map.entries) {
+      final itemField = '$field[${entry.key}]';
+      final rawList = decodeJsonArray(entry.value, itemField);
+      result[decodeJsonMapKeyInt(entry.key, field)] = <T>[
+        for (var i = 0; i < rawList.length; i++)
+          decode(
+            decodeJsonObject(rawList[i], '$itemField[$i]'),
+          ),
+      ];
+    }
+    return result;
   }
 }

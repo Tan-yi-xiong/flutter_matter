@@ -1,27 +1,73 @@
 package com.tyx.flutter_matter
 
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
+import matter.onboardingpayload.DiscoveryCapability
 import kotlin.test.Test
-import org.mockito.Mockito
-
-/*
- * This demonstrates a simple unit test of the Kotlin portion of this plugin's implementation.
- *
- * Once you have built the plugin's example app, you can run these tests from the command
- * line by running `./gradlew testDebugUnitTest` in the `example/android/` directory, or
- * you can run them directly from IDEs that support JUnit such as Android Studio.
- */
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 internal class FlutterMatterPluginTest {
   @Test
-  fun onMethodCall_getPlatformVersion_returnsExpectedValue() {
-    val plugin = FlutterMatterPlugin()
+  fun jsonNumberToByte_acceptsIntegralBoundaries() {
+    assertEquals(0.toByte(), jsonNumberToByte(0))
+    assertEquals(0.toByte(), jsonNumberToByte(0L))
+    assertEquals(0.toByte(), jsonNumberToByte(0.0))
+    assertEquals(127.toByte(), jsonNumberToByte(127.toByte()))
+    assertEquals(255.toByte(), jsonNumberToByte(255))
+    assertEquals(255.toByte(), jsonNumberToByte(255L))
+    assertEquals(255.toByte(), jsonNumberToByte(255.0))
+  }
 
-    val call = MethodCall("getPlatformVersion", null)
-    val mockResult: MethodChannel.Result = Mockito.mock(MethodChannel.Result::class.java)
-    plugin.onMethodCall(call, mockResult)
+  @Test
+  fun jsonNumberToByte_rejectsInvalidValues() {
+    val invalidValues = listOf<Any?>(
+      -1,
+      -1L,
+      -1.0,
+      256,
+      256L,
+      256.0,
+      0.5,
+      254.999,
+      Double.NaN,
+      Double.POSITIVE_INFINITY,
+      Double.NEGATIVE_INFINITY,
+      "1",
+      null,
+      true,
+    )
 
-    Mockito.verify(mockResult).success("Android " + android.os.Build.VERSION.RELEASE)
+    invalidValues.forEach { value ->
+      assertFailsWith<IllegalArgumentException> {
+        jsonNumberToByte(value)
+      }
+    }
+  }
+
+  @Test
+  fun discoveryCapabilities_useDartWireValues() {
+    assertEquals(
+      listOf(1, 2, 3),
+      discoveryCapabilitiesToDart(
+        listOf(
+          DiscoveryCapability.SOFT_AP,
+          DiscoveryCapability.BLE,
+          DiscoveryCapability.ON_NETWORK,
+        )
+      )
+    )
+  }
+
+  @Test
+  fun discoveryCapabilities_ignoreUnsupportedUpstreamValues() {
+    assertEquals(
+      listOf(2),
+      discoveryCapabilitiesToDart(
+        listOf(
+          DiscoveryCapability.NFC,
+          DiscoveryCapability.BLE,
+          DiscoveryCapability.WIFI_PAF,
+        )
+      )
+    )
   }
 }

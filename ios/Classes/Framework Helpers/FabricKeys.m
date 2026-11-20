@@ -15,6 +15,7 @@
  */
 
 #import "FabricKeys.h"
+#import "Utiles.h"
 
 #import <Security/SecKey.h>
 
@@ -47,11 +48,11 @@ static const NSString * ZGMTRCAKeyChainLabel = @"matter-tool.nodeopcerts.CA:0";
     CFDataRef keyDataRef;
     OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef) query, (CFTypeRef *) &keyDataRef);
     if (status != errSecSuccess || keyDataRef == nil) {
-        NSLog(@"Did not find IPK in the keychain");
+        FlutterMatterLog(@"Did not find an IPK in the keychain");
         return nil;
     }
 
-    NSLog(@"Found an existing IPK in the keychain");
+    FlutterMatterLog(@"Found an existing IPK in the keychain");
     NSData * keyData = CFBridgingRelease(keyDataRef);
 
     return [[NSData alloc] initWithBase64EncodedData:keyData options:0];
@@ -76,7 +77,7 @@ static const NSString * ZGMTRCAKeyChainLabel = @"matter-tool.nodeopcerts.CA:0";
 
     int status = SecRandomCopyBytes(kSecRandomDefault, ipk_size, [ipkData mutableBytes]);
     if (status != errSecSuccess) {
-        NSLog(@"Failed to generate IPK : %d", status);
+        FlutterMatterLog([NSString stringWithFormat:@"Failed to generate IPK (%d)", status]);
         return nil;
     }
 
@@ -84,7 +85,7 @@ static const NSString * ZGMTRCAKeyChainLabel = @"matter-tool.nodeopcerts.CA:0";
 
     OSStatus addStatus = SecItemAdd((__bridge CFDictionaryRef) query, NULL);
     if (addStatus != errSecSuccess) {
-        NSLog(@"Failed to store IPK : %d", addStatus);
+        FlutterMatterLog([NSString stringWithFormat:@"Failed to store IPK (%d)", addStatus]);
         return nil;
     }
 
@@ -126,24 +127,29 @@ static const NSString * ZGMTRCAKeyChainLabel = @"matter-tool.nodeopcerts.CA:0";
     CFDataRef keyDataRef;
     OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef) query, (CFTypeRef *) &keyDataRef);
     if (status != errSecSuccess || keyDataRef == nil) {
-        NSLog(@"Did not find CA key in the keychain");
+        FlutterMatterLog(@"Did not find a CA key in the keychain");
         return NULL;
     }
 
-    NSLog(@"Found an existing CA key in the keychain");
+    FlutterMatterLog(@"Found an existing CA key in the keychain");
     NSData * encodedKey = CFBridgingRelease(keyDataRef);
 
     NSData * keyData = [[NSData alloc] initWithBase64EncodedData:encodedKey options:0];
     if (keyData == nil) {
-        NSLog(@"Could not base64-decode CA key");
+        FlutterMatterLog(@"Could not decode the stored CA key");
         return NULL;
     }
 
     CFErrorRef error = NULL;
     SecKeyRef key = SecKeyCreateWithData(
         (__bridge CFDataRef) keyData, (__bridge CFDictionaryRef)[FabricKeys privateKeyCreationParams], &error);
-    if (error) {
-        NSLog(@"Could not reconstruct private key %@", (__bridge NSError *) error);
+    if (error != NULL) {
+        FlutterMatterLogNSError(@"fabricKeys.loadPrivateKey", (__bridge NSError *)error);
+        CFRelease(error);
+        return NULL;
+    }
+    if (key == NULL) {
+        FlutterMatterLog(@"Could not reconstruct private key");
         return NULL;
     }
 
@@ -161,14 +167,25 @@ static const NSString * ZGMTRCAKeyChainLabel = @"matter-tool.nodeopcerts.CA:0";
 
     CFErrorRef error = NULL;
     SecKeyRef key = SecKeyCreateRandomKey((__bridge CFDictionaryRef)[FabricKeys privateKeyCreationParams], &error);
-    if (error) {
-        NSLog(@"Could not generate private key: %@", (__bridge NSError *) error);
+    if (error != NULL) {
+        FlutterMatterLogNSError(@"fabricKeys.generatePrivateKey", (__bridge NSError *)error);
+        CFRelease(error);
+        return NULL;
+    }
+    if (key == NULL) {
+        FlutterMatterLog(@"Could not generate private key");
         return NULL;
     }
 
     NSData * keyData = (__bridge_transfer NSData *) SecKeyCopyExternalRepresentation(key, &error);
-    if (error) {
-        NSLog(@"Could not get key external representation: %@", (__bridge NSError *) error);
+    if (error != NULL) {
+        FlutterMatterLogNSError(@"fabricKeys.keyRepresentation", (__bridge NSError *)error);
+        CFRelease(error);
+        CFRelease(key);
+        return NULL;
+    }
+    if (keyData == nil) {
+        FlutterMatterLog(@"Could not get key external representation");
         CFRelease(key);
         return NULL;
     }
@@ -177,7 +194,7 @@ static const NSString * ZGMTRCAKeyChainLabel = @"matter-tool.nodeopcerts.CA:0";
 
     OSStatus status = SecItemAdd((__bridge CFDictionaryRef) query, NULL);
     if (status != errSecSuccess) {
-        NSLog(@"Failed to store private key : %d", status);
+        FlutterMatterLog([NSString stringWithFormat:@"Failed to store the CA private key (%d)", status]);
         CFRelease(key);
         return NULL;
     }
@@ -204,6 +221,10 @@ static const NSString * ZGMTRCAKeyChainLabel = @"matter-tool.nodeopcerts.CA:0";
     }
 
     _publicKey = SecKeyCopyPublicKey(_privateKey);
+    if (_publicKey == NULL) {
+        FlutterMatterLog(@"Could not derive public key from CA private key");
+        return nil;
+    }
     return self;
 }
 
@@ -213,8 +234,11 @@ static const NSString * ZGMTRCAKeyChainLabel = @"matter-tool.nodeopcerts.CA:0";
     CFDataRef outData
         = SecKeyCreateSignature(_privateKey, kSecKeyAlgorithmECDSASignatureMessageX962SHA256, (__bridge CFDataRef) message, &error);
 
-    if (error != noErr) {
-        NSLog(@"Failed to sign cert: %@", (__bridge NSError *) error);
+    if (error != NULL) {
+        FlutterMatterLogNSError(@"fabricKeys.signMessage", (__bridge NSError *)error);
+        CFRelease(error);
+    } else if (outData == NULL) {
+        FlutterMatterLog(@"Fabric key signing returned no signature");
     }
     return (__bridge_transfer NSData *) outData;
 }

@@ -18,6 +18,7 @@
 package com.tyx.flutter_matter
 
 import android.content.Context
+import android.util.Log
 import chip.devicecontroller.ChipDeviceController
 import chip.platform.AndroidChipPlatform
 import chip.platform.AndroidNfcCommissioningManager
@@ -33,10 +34,12 @@ import chip.platform.ServiceResolver
 object ChipClient {
   private const val TAG = "ChipClient"
 //  private lateinit var chipDeviceController: ChipDeviceController
-  private lateinit var androidPlatform: AndroidChipPlatform
+  @Volatile
+  private var androidPlatform: AndroidChipPlatform? = null
   private val androidNfcCommissioningManager = AndroidNfcCommissioningManager()
   /* 0xFFF4 is a test vendor ID, replace with your assigned company ID */
   const val VENDOR_ID = 0xFFF4
+  @Volatile
   private var serviceResolver: ServiceResolver? = null
 
 //  fun getDeviceController(context: Context): ChipDeviceController {
@@ -79,37 +82,40 @@ object ChipClient {
 //  }
 
   fun getServiceResolver(context: Context): ServiceResolver {
-    if (serviceResolver == null) {
-      synchronized(this) {
-        if (serviceResolver == null) {
-          serviceResolver = CustomNsdManagerServiceResolver(
-            context,
-            NsdManagerServiceResolver.NsdManagerResolverAvailState()
-          )
-        }
-      }
+    serviceResolver?.let { return it }
+    return synchronized(this) {
+      serviceResolver ?: CustomNsdManagerServiceResolver(
+        context,
+        NsdManagerServiceResolver.NsdManagerResolverAvailState()
+      ).also { serviceResolver = it }
     }
-    return serviceResolver!!
   }
 
   fun getAndroidChipPlatform(context: Context?): AndroidChipPlatform {
-    if (!this::androidPlatform.isInitialized && context != null) {
-      // force ChipDeviceController load jni
-      ChipDeviceController.loadJni()
-      androidPlatform =
-        AndroidChipPlatform(
-          ZGAndroidBleManager(context),
-          androidNfcCommissioningManager,
-          PreferencesKeyValueStoreManager(context),
-          PreferencesConfigurationManager(context),
-          getServiceResolver(context),
-          NsdManagerServiceBrowser(context),
-          ChipMdnsCallbackImpl(),
-          DiagnosticDataProviderImpl(context)
-        )
+    androidPlatform?.let { return it }
+    return synchronized(this) {
+      androidPlatform ?: run {
+        val appContext = context?.applicationContext
+          ?: throw IllegalStateException("Chip platform context is unavailable")
+        try {
+          // force ChipDeviceController load jni
+          ChipDeviceController.loadJni()
+          AndroidChipPlatform(
+            ZGAndroidBleManager(appContext),
+            androidNfcCommissioningManager,
+            PreferencesKeyValueStoreManager(appContext),
+            PreferencesConfigurationManager(appContext),
+            getServiceResolver(appContext),
+            NsdManagerServiceBrowser(appContext),
+            ChipMdnsCallbackImpl(),
+            DiagnosticDataProviderImpl(appContext)
+          ).also { androidPlatform = it }
+        } catch (e: Exception) {
+          Log.e(TAG, "Unable to initialize Android Chip platform", e)
+          throw e
+        }
+      }
     }
-
-    return androidPlatform
   }
 
   /**

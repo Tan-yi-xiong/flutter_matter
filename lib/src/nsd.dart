@@ -3,19 +3,17 @@ import 'dart:typed_data';
 
 import 'package:flutter_matter/src/constant.dart';
 
-import '../flutter_matter_method_channel.dart';
 import '../flutter_matter_platform_interface.dart';
 import 'exception.dart';
+import 'platform_transport_types.dart';
 import 'utils.dart';
 
 const String nsdHostName = "nsd";
 
-
 abstract class ResolveCallback {
-
   /// Resolve an address for the given instance name and service type
-  void resolve(String serviceName, String serviceType, Future Function(NsdServiceInfo) chipMdnsCallback);
-
+  void resolve(String serviceName, String serviceType,
+      Future Function(NsdServiceInfo) chipMdnsCallback);
 }
 
 abstract class RemoveServicesCallback {
@@ -23,7 +21,14 @@ abstract class RemoveServicesCallback {
 }
 
 abstract class PublishCallback {
-  void publish(String serviceName, String hostName, String type, int port, List<String>? textEntriesKeys, List<String>? subTypes, List<Uint8List>? textEntriesDatas);
+  void publish(
+      String serviceName,
+      String hostName,
+      String type,
+      int port,
+      List<String>? textEntriesKeys,
+      List<String>? subTypes,
+      List<Uint8List>? textEntriesDatas);
 }
 
 class NsdServiceInfo {
@@ -34,27 +39,105 @@ class NsdServiceInfo {
   final int port;
   final Map<String, Uint8List>? attributes;
 
-  NsdServiceInfo({required this.hostName, required this.serviceType, required this.serviceName, required this.address, required this.port, this.attributes});
+  NsdServiceInfo(
+      {required this.hostName,
+      required this.serviceType,
+      required this.serviceName,
+      required this.address,
+      required this.port,
+      this.attributes});
 
   toJson() => {
-    'hostName': hostName,
-    'serviceType': serviceType,
-    'serviceName': serviceName,
-    'address': address,
-    'port': port,
-    'attributes': attributes?.map((key, value) => MapEntry(key, List.from(value)))
-  };
+        'hostName': hostName,
+        'serviceType': serviceType,
+        'serviceName': serviceName,
+        'address': address,
+        'port': port,
+        'attributes':
+            attributes?.map((key, value) => MapEntry(key, List.from(value)))
+      };
 }
 
+List<String>? _optionalStringList(
+  Map<dynamic, dynamic> arguments,
+  String key,
+  String context,
+) {
+  final value = arguments[key];
+  if (value == null) {
+    return null;
+  }
+  if (value is! List) {
+    throw ArgumentError.value(
+      value,
+      key,
+      '$context: $key must be a list of strings',
+    );
+  }
+  final result = <String>[];
+  for (var i = 0; i < value.length; i++) {
+    final item = value[i];
+    if (item is! String) {
+      throw ArgumentError.value(
+        item,
+        '$key[$i]',
+        '$context: $key[$i] must be a string',
+      );
+    }
+    result.add(item);
+  }
+  return result;
+}
 
+List<Uint8List>? _optionalByteArrayList(
+  Map<dynamic, dynamic> arguments,
+  String key,
+  String context,
+) {
+  final value = arguments[key];
+  if (value == null) {
+    return null;
+  }
+  if (value is! List) {
+    throw ArgumentError.value(
+      value,
+      key,
+      '$context: $key must be a list of byte arrays',
+    );
+  }
+  final result = <Uint8List>[];
+  for (var i = 0; i < value.length; i++) {
+    final item = value[i];
+    if (item is! List) {
+      throw ArgumentError.value(
+        item,
+        '$key[$i]',
+        '$context: $key[$i] must be a byte array',
+      );
+    }
+    final bytes = <int>[];
+    for (var j = 0; j < item.length; j++) {
+      final byte = item[j];
+      if (byte is! int || byte < 0 || byte > 0xff) {
+        throw ArgumentError.value(
+          byte,
+          '$key[$i][$j]',
+          '$context: $key[$i][$j] must be a byte between 0 and 255',
+        );
+      }
+      bytes.add(byte);
+    }
+    result.add(Uint8List.fromList(bytes));
+  }
+  return result;
+}
 
 class NsdManager implements MethodCallHandler {
-
   static NsdManager? _instance;
   NsdManager._() {
-    (FlutterMatterPlatform.instance as MethodChannelFlutterMatter).addHandler(this);
+    FlutterMatterPlatform.instance.addHandler(this);
   }
-  
+
   factory NsdManager() => _instance ??= NsdManager._();
 
   ResolveCallback? _resolveCallback;
@@ -64,94 +147,183 @@ class NsdManager implements MethodCallHandler {
   @override
   call(String method, arguments) {
     final uri = Uri.parse(method);
-    final decodeArgs = jsonDecode(arguments);
+    if (uri.pathSegments.isEmpty) {
+      throw ArgumentError.value(
+        method,
+        'method',
+        'NSD callback path must include an operation',
+      );
+    }
+    final decoded = jsonDecode(arguments);
+    if (decoded is! Map) {
+      throw ArgumentError.value(
+        decoded,
+        'arguments',
+        'NSD callback arguments must be a JSON object',
+      );
+    }
+    final decodeArgs = decoded;
+    final callbackContext = '$runtimeType ${uri.path}';
     switch (uri.pathSegments.first) {
       case 'resolve':
-        final callbackHandle = checkCallArgNotNull(decodeArgs, "chipMdnsCallbackHandle");
-        _resolveCallback?.resolve(
-          checkCallArgNotNull(decodeArgs, "instanceName"),
-          checkCallArgNotNull(decodeArgs, "serviceType"),
+        final callback = _resolveCallback;
+        if (callback == null) {
+          return createPlatformCallExceptionResult(
+            argsInvalid,
+            'Resolve callback is not set',
+          );
+        }
+        final callbackHandle = checkCallArgNotNull(
+          decodeArgs,
+          'chipMdnsCallbackHandle',
+          context: callbackContext,
+        );
+        callback.resolve(
+          checkCallArgNotNull(
+            decodeArgs,
+            'instanceName',
+            context: callbackContext,
+          ),
+          checkCallArgNotNull(
+            decodeArgs,
+            'serviceType',
+            context: callbackContext,
+          ),
           (nsdServiceInfo) async {
             return _handleServiceResolve(callbackHandle, nsdServiceInfo);
-          }
+          },
         );
         return createPlatformCallSuccessResult();
       case 'publish':
-        // jsonKeyHandle to proxyHandle,
-        //                     "serviceName" to serviceName,
-        //                     "hostName" to hostName,
-        //                     "type" to type,
-        //                     "port" to port,
-        //                     "textEntriesKeys" to if (textEntriesKeys == null) null else JSONArray(
-        //                         textEntriesKeys
-        //                     ),
-        //                     "textEntriesDatas" to if (textEntriesDatas == null) null else JSONArray(textEntriesDatas.map { JSONArray(it) }),
-        //                     "subTypes" to if (textEntriesKeys == null) null else JSONArray(subTypes),
-        _publishCallback?.publish(
-          checkCallArgNotNull(decodeArgs, 'serviceName'),
-          checkCallArgNotNull(decodeArgs, 'hostName'),
-          checkCallArgNotNull(decodeArgs, 'type'),
-          checkCallArgNotNull(decodeArgs, 'port'),
-          decodeArgs['textEntriesKeys'] == null ? null : (decodeArgs['textEntriesKeys'] as List).cast(),
-          decodeArgs['subTypes'] == null ? null : (decodeArgs['subTypes'] as List).cast(),
-          decodeArgs['textEntriesDatas'] == null ? null : (decodeArgs['textEntriesDatas'] as List).map((e) => Uint8List.fromList(e.cast())).toList().cast()
+        final callback = _publishCallback;
+        if (callback == null) {
+          return createPlatformCallExceptionResult(
+            argsInvalid,
+            'Publish callback is not set',
+          );
+        }
+        final port = checkCallArgNotNull(
+          decodeArgs,
+          'port',
+          context: callbackContext,
+        );
+        if (port is! int) {
+          throw ArgumentError.value(
+            port,
+            'port',
+            '$callbackContext: port must be an integer',
+          );
+        }
+        callback.publish(
+          checkCallArgNotNull(
+            decodeArgs,
+            'serviceName',
+            context: callbackContext,
+          ),
+          checkCallArgNotNull(
+            decodeArgs,
+            'hostName',
+            context: callbackContext,
+          ),
+          checkCallArgNotNull(
+            decodeArgs,
+            'type',
+            context: callbackContext,
+          ),
+          port,
+          _optionalStringList(
+            decodeArgs,
+            'textEntriesKeys',
+            callbackContext,
+          ),
+          _optionalStringList(decodeArgs, 'subTypes', callbackContext),
+          _optionalByteArrayList(
+            decodeArgs,
+            'textEntriesDatas',
+            callbackContext,
+          ),
         );
         return createPlatformCallSuccessResult();
       case 'removeServices':
-        _removeServicesCallback?.removeServices();
+        final callback = _removeServicesCallback;
+        if (callback == null) {
+          return createPlatformCallExceptionResult(
+            argsInvalid,
+            'Remove-services callback is not set',
+          );
+        }
+        callback.removeServices();
         return createPlatformCallSuccessResult();
       default:
-        return createPlatformCallExceptionResult(methodNoFound, 'Not found $method');
+        return createPlatformCallExceptionResult(
+          methodNoFound,
+          'Not found $method',
+        );
     }
   }
-  
+
   @override
   bool match(String method, arguments) {
     try {
       final uri = Uri.parse(method);
       return uri.host == nsdHostName;
     } catch (e, s) {
-      matterPrint('$runtimeType match error $s') ;
+      reportMatterError('$runtimeType match', e, s);
     }
     return false;
   }
 
-  Future<Map<String, dynamic>?> _requestPlatform(String methodName, String methodParamsJson) async {
-    final channelFlutterMatter = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+  Future<Map<String, dynamic>> _requestPlatform(
+      String methodName, String methodParamsJson) async {
+    final channelFlutterMatter = FlutterMatterPlatform.instance;
     final result = await channelFlutterMatter.requestPlatform(
-      RequestPlatformParams(methodName: createRequestPlatformUrl(nsdHostName, methodName), methodParamsJson: methodParamsJson));
+        RequestPlatformParams(
+            methodName: createRequestPlatformUrl(nsdHostName, methodName),
+            methodParamsJson: methodParamsJson));
     if (result.code == 0) {
       return result.jsonData;
     }
-    throw CallPlatformException("[${result.code}] Call $methodName params $methodParamsJson failed");
+    throw CallPlatformException(
+      'Call $methodName failed with code ${result.code}',
+      code: result.code,
+      methodName: methodName,
+      details: const <String, Object?>{
+        'host': nsdHostName,
+        'category': 'platform-error',
+      },
+    );
   }
 
-
   Future<void> setResolveHandle(ResolveCallback? resolveCallback) async {
-    await _requestPlatform("setResolve", jsonEncode({
-      'proxyHandle': resolveCallback?.hashCode.toString(),
-    })).then((v) {
+    await _requestPlatform(
+        "setResolve",
+        jsonEncode({
+          'proxyHandle': resolveCallback?.hashCode.toString(),
+        })).then((v) {
       _resolveCallback = resolveCallback;
       return v;
     });
   }
-  
-  Future<void> _handleServiceResolve(String handleId, NsdServiceInfo serviceInfo) async {
-    await _requestPlatform("handleServiceResolve", jsonEncode({
-      jsonKeyHandle: handleId,
-      ...serviceInfo.toJson()
-    }));
+
+  Future<void> _handleServiceResolve(
+      String handleId, NsdServiceInfo serviceInfo) async {
+    await _requestPlatform("handleServiceResolve",
+        jsonEncode({jsonKeyHandle: handleId, ...serviceInfo.toJson()}));
   }
 
   Future<void> setPublishHandle(PublishCallback? callback) async {
-    await _requestPlatform("setPublish", jsonEncode({
-      jsonKeyHandle: callback?.hashCode.toString(),
-    })).then((value) => _publishCallback = callback);
+    await _requestPlatform(
+        "setPublish",
+        jsonEncode({
+          jsonKeyHandle: callback?.hashCode.toString(),
+        })).then((value) => _publishCallback = callback);
   }
 
   Future<void> setRemoveServices(RemoveServicesCallback? callback) async {
-    await _requestPlatform("setRemoveServices", jsonEncode({
-      jsonKeyHandle: callback?.hashCode.toString(),
-    })).then((value) => _removeServicesCallback = callback);
+    await _requestPlatform(
+        "setRemoveServices",
+        jsonEncode({
+          jsonKeyHandle: callback?.hashCode.toString(),
+        })).then((value) => _removeServicesCallback = callback);
   }
 }

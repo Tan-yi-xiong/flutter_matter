@@ -4,8 +4,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_matter/flutter_matter.dart';
-import 'package:flutter_matter/flutter_matter_method_channel.dart';
 import 'package:flutter_matter/flutter_matter_platform_interface.dart';
+import 'package:flutter_matter/src/platform_transport_types.dart';
 import 'package:flutter_matter/src/callback_handler.dart';
 import 'package:flutter_matter/src/constant.dart';
 import 'package:flutter_matter/src/utils.dart';
@@ -129,15 +129,28 @@ class KeypairDelegateCallbackHandler extends CallbackHandler<KeypairDelegate> {
 
   @override
   onCallbackMethodCall(String methodName, arguments) {
-    matterPrint('$runtimeType onCallbackMethodCall $methodName $arguments');
-    final decodeArgs = jsonDecode(arguments);
-    KeypairDelegate? kd = handlers[decodeArgs['handle'].toString()];
+    final decoded = jsonDecode(arguments);
+    if (decoded is! Map) {
+      throw ArgumentError.value(
+        decoded,
+        'arguments',
+        'Keypair callback arguments must be a JSON object',
+      );
+    }
+    final decodeArgs = decoded;
+    final callbackContext = '$runtimeType.onCallbackMethodCall';
+    final handle = checkCallArgNotNull(
+      decodeArgs,
+      'handle',
+      context: callbackContext,
+    ).toString();
+    KeypairDelegate? kd = handlers[handle];
     if (kd == null) {
-      final errorMsg = "Not found delegate for handle: ${decodeArgs['handle']}";
-      matterPrint(errorMsg);
+      final errorMsg = 'Not found delegate for handle: $handle';
+      reportMatterError(callbackContext, StateError(errorMsg));
       return createPlatformCallExceptionResult(argsInvalid, errorMsg);
     }
-    matterPrint("$kd $methodName call");
+    matterPrint('$runtimeType $methodName call');
     switch (methodName) {
       case 'GeneratePrivateKey':
         kd.generatePrivateKey();
@@ -156,6 +169,11 @@ class KeypairDelegateCallbackHandler extends CallbackHandler<KeypairDelegate> {
         return createPlatformCallSuccessResult(
             successMsg:
                 jsonEncode({'certificateSigningRequest': List.from(csr)}));
+      default:
+        return createPlatformCallExceptionResult(
+          methodNoFound,
+          'Not found method $methodName',
+        );
     }
   }
 }
@@ -594,7 +612,7 @@ class ChipDeviceController implements MethodCallHandler {
   final ControllerParams params;
   NOCChainIssuer? _nocChainIssuer;
   CompletionListener? _completionListener;
-  late MethodChannelFlutterMatter _channelFlutterMatter;
+  late FlutterMatterPlatform _channelFlutterMatter;
   final String? _platformDeviceControllerHandle;
   DeviceAttestationDelegate? deviceAttestationDelegate;
   String? _keypairDelegateHandleId;
@@ -610,13 +628,28 @@ class ChipDeviceController implements MethodCallHandler {
 
   @override
   call(String method, arguments) {
-    matterPrint('DeviceController call: $method, arguments: $arguments');
+    matterPrint('DeviceController call: $method');
     final uri = Uri.parse(method);
     final splitPaths = uri.path
         .split('/')
         .where((element) => element.trim().isNotEmpty)
         .toList();
-    final decodeArgs = jsonDecode(arguments);
+    if (splitPaths.length < 2) {
+      return createPlatformCallExceptionResult(
+        methodNoFound,
+        'Device controller callback path must include a callback type and method',
+      );
+    }
+    final decoded = jsonDecode(arguments);
+    if (decoded is! Map) {
+      throw ArgumentError.value(
+        decoded,
+        'arguments',
+        'Device controller callback arguments must be a JSON object',
+      );
+    }
+    final decodeArgs = decoded;
+    final callbackContext = '$runtimeType ${splitPaths.join('/')}';
     matterPrint("$runtimeType ${splitPaths.join('/')} call");
     ////// NOCChainIssuer //////
     if (splitPaths.firstOrNull == 'NOCChainIssuer') {
@@ -626,9 +659,11 @@ class ChipDeviceController implements MethodCallHandler {
       }
       switch (splitPaths[1]) {
         case "onNOCChainGenerationNeeded":
-          final csrInfoJson = checkCallArgNotNull(decodeArgs, 'csrInfo');
-          final attestationInfoJson =
-              checkCallArgNotNull(decodeArgs, 'attestationInfo');
+          final csrInfoJson = checkCallArgNotNull(decodeArgs, 'csrInfo',
+              context: callbackContext);
+          final attestationInfoJson = checkCallArgNotNull(
+              decodeArgs, 'attestationInfo',
+              context: callbackContext);
           _nocChainIssuer!.onNOCChainGenerationNeeded(
               decodeArgs['onNOCChainGenerationCompleteHandle'],
               CSRInfo.decode(csrInfoJson),
@@ -649,34 +684,44 @@ class ChipDeviceController implements MethodCallHandler {
           _completionListener!.onConnectDeviceComplete();
           return createPlatformCallSuccessResult();
         case 'onStatusUpdate':
-          _completionListener!
-              .onStatusUpdate(checkCallArgNotNull(decodeArgs, 'status'));
+          _completionListener!.onStatusUpdate(checkCallArgNotNull(
+              decodeArgs, 'status',
+              context: callbackContext));
           return createPlatformCallSuccessResult();
         case 'onPairingComplete':
-          _completionListener!
-              .onPairingComplete(checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!.onPairingComplete(checkCallArgNotNull(
+              decodeArgs, 'errorCode',
+              context: callbackContext));
           return createPlatformCallSuccessResult();
         case 'onPairingDeleted':
-          _completionListener!
-              .onPairingDeleted(checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!.onPairingDeleted(checkCallArgNotNull(
+              decodeArgs, 'errorCode',
+              context: callbackContext));
           return createPlatformCallSuccessResult();
         case 'onCommissioningComplete':
-          _completionListener!.onCommissioningComplete(decodeArgs["nodeId"],
-              checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!.onCommissioningComplete(
+              decodeArgs["nodeId"],
+              checkCallArgNotNull(decodeArgs, 'errorCode',
+                  context: callbackContext));
           return createPlatformCallSuccessResult();
         case 'onReadCommissioningInfo':
           _completionListener!.onReadCommissioningInfo(
-            checkCallArgNotNull(decodeArgs, 'vendorId'),
-            checkCallArgNotNull(decodeArgs, 'productId'),
-            checkCallArgNotNull(decodeArgs, 'wifiEndpointId'),
-            checkCallArgNotNull(decodeArgs, 'threadEndpointId'),
+            checkCallArgNotNull(decodeArgs, 'vendorId',
+                context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'productId',
+                context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'wifiEndpointId',
+                context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'threadEndpointId',
+                context: callbackContext),
           );
           return createPlatformCallSuccessResult();
         case 'onCommissioningStatusUpdate':
           _completionListener!.onCommissioningStatusUpdate(
-            checkCallArgNotNull(decodeArgs, 'nodeId'),
-            checkCallArgNotNull(decodeArgs, 'stage'),
-            checkCallArgNotNull(decodeArgs, 'errorCode'),
+            checkCallArgNotNull(decodeArgs, 'nodeId', context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'stage', context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'errorCode',
+                context: callbackContext),
           );
           return createPlatformCallSuccessResult();
         case 'onNotifyChipConnectionClosed':
@@ -686,12 +731,14 @@ class ChipDeviceController implements MethodCallHandler {
           // _completionListener!.onCloseBleComplete();
           return createPlatformCallSuccessResult();
         case 'onError':
-          _completionListener!
-              .onError(Exception(checkCallArgNotNull(decodeArgs, 'error')));
+          _completionListener!.onError(Exception(checkCallArgNotNull(
+              decodeArgs, 'error',
+              context: callbackContext)));
           return createPlatformCallSuccessResult();
         case 'onOpCSRGenerationComplete':
           _completionListener!.onOpCSRGenerationComplete(
-            toUint8List(checkCallArgNotNull(decodeArgs, 'csr')),
+            toUint8List(checkCallArgNotNull(decodeArgs, 'csr',
+                context: callbackContext)),
           );
           return createPlatformCallSuccessResult();
         case 'onICDRegistrationInfoRequired':
@@ -699,7 +746,8 @@ class ChipDeviceController implements MethodCallHandler {
           return createPlatformCallSuccessResult();
         case 'onICDRegistrationComplete':
           _completionListener!.onICDRegistrationComplete(
-            checkCallArgNotNull(decodeArgs, 'errorCode'),
+            checkCallArgNotNull(decodeArgs, 'errorCode',
+                context: callbackContext),
             decodeArgs['icdDeviceInfo'] == null
                 ? null
                 : ICDDeviceInfo.fromJson((decodeArgs['icdDeviceInfo'] as Map)
@@ -713,18 +761,21 @@ class ChipDeviceController implements MethodCallHandler {
       switch (splitPaths[1]) {
         case "onDeviceAttestationCompleted":
           deviceAttestationDelegate?.onDeviceAttestationCompleted(
-              checkCallArgNotNull(decodeArgs, "devicePtr"),
+              checkCallArgNotNull(decodeArgs, "devicePtr",
+                  context: callbackContext),
               decodeArgs["attestationInfo"] == null
                   ? null
                   : AttestationInfo.decode(decodeArgs["attestationInfo"]),
-              checkCallArgNotNull(decodeArgs, "errorCode"));
+              checkCallArgNotNull(decodeArgs, "errorCode",
+                  context: callbackContext));
           return createPlatformCallSuccessResult();
       }
     }
     ////// InvokeCallback //////
     else if (splitPaths.firstOrNull == 'InvokeCallback') {
-      String invokeCallbackPoint =
-          checkCallArgNotNull(decodeArgs, 'invokeCallbackPoint');
+      String invokeCallbackPoint = checkCallArgNotNull(
+          decodeArgs, 'invokeCallbackPoint',
+          context: callbackContext);
       final callback = _invokeCallbacks[invokeCallbackPoint];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -734,34 +785,37 @@ class ChipDeviceController implements MethodCallHandler {
         case "onDone":
           try {
             callback.onDone();
-          } catch (e) {
-            matterPrint('$runtimeType invoke callback onDone error $e');
+          } catch (e, s) {
+            reportMatterError('$runtimeType InvokeCallback.onDone', e, s);
           }
+          _invokeCallbacks.remove(invokeCallbackPoint);
           return createPlatformCallSuccessResult();
         case "onResponse":
           try {
             callback.onResponse(
-                InvokeElement.fromJson(
-                    checkCallArgNotNull(decodeArgs, "invokeElement")),
-                checkCallArgNotNull(decodeArgs, "successCode"));
-          } catch (e) {
-            matterPrint('$runtimeType invoke callback onResponse error $e');
+                InvokeElement.fromJson(checkCallArgNotNull(
+                    decodeArgs, "invokeElement", context: callbackContext)),
+                checkCallArgNotNull(decodeArgs, "successCode",
+                    context: callbackContext));
+          } catch (e, s) {
+            reportMatterError('$runtimeType InvokeCallback.onResponse', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback
-                .onError(Exception(checkCallArgNotNull(decodeArgs, "error")));
-          } catch (e) {
-            matterPrint('$runtimeType invoke callback onError error $e');
+            callback.onError(Exception(checkCallArgNotNull(decodeArgs, "error",
+                context: callbackContext)));
+          } catch (e, s) {
+            reportMatterError('$runtimeType InvokeCallback.onError', e, s);
           }
           return createPlatformCallSuccessResult();
       }
     }
     ///// SubscriptionCallback //////
     else if (splitPaths.firstOrNull == 'SubscriptionCallback') {
-      String subscriptionCallbackPoint =
-          checkCallArgNotNull(decodeArgs, 'subscriptionCallbackPoint');
+      String subscriptionCallbackPoint = checkCallArgNotNull(
+          decodeArgs, 'subscriptionCallbackPoint',
+          context: callbackContext);
       final callback = _subscriptionCallbacks[subscriptionCallbackPoint];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -770,34 +824,46 @@ class ChipDeviceController implements MethodCallHandler {
       switch (splitPaths[1]) {
         case "onSubscriptionEstablished":
           try {
-            callback.onSubscriptionEstablished(
-                checkCallArgNotNull(decodeArgs, 'subscriptionId'));
-          } catch (e) {
+            callback.onSubscriptionEstablished(checkCallArgNotNull(
+                decodeArgs, 'subscriptionId',
+                context: callbackContext));
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType SubscriptionCallback.onSubscriptionEstablished',
+              e,
+              s,
+            );
             return createPlatformCallExceptionResult(
-                argsInvalid, "Error in callback: $e");
+                argsInvalid, 'Subscription callback failed');
           }
-          break;
+          return createPlatformCallSuccessResult();
         case "onReport":
           try {
-            callback.onReport(NodeState.fromJson(
-                checkCallArgNotNull(decodeArgs, "nodeState")));
-          } catch (e) {
-            matterPrint('subscription callback onReport error $e');
+            callback.onReport(NodeState.fromJson(checkCallArgNotNull(
+                decodeArgs, "nodeState",
+                context: callbackContext)));
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType SubscriptionCallback.onReport', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(null, null,
-                Exception(checkCallArgNotNull(decodeArgs, "error")));
-          } catch (e) {
-            matterPrint('subscription callback onError error $e');
+            callback.onError(
+                null,
+                null,
+                Exception(checkCallArgNotNull(decodeArgs, "error",
+                    context: callbackContext)));
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType SubscriptionCallback.onError', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch (e) {
-            matterPrint('subscription callback onDone error $e');
+          } catch (e, s) {
+            reportMatterError('$runtimeType SubscriptionCallback.onDone', e, s);
           }
           _subscriptionCallbacks.remove(subscriptionCallbackPoint);
           return createPlatformCallSuccessResult();
@@ -805,8 +871,9 @@ class ChipDeviceController implements MethodCallHandler {
     }
     ///// ReportCallback //////
     else if (splitPaths.firstOrNull == 'ReportCallback') {
-      String reportCallbackPoint =
-          checkCallArgNotNull(decodeArgs, 'reportCallbackPoint');
+      String reportCallbackPoint = checkCallArgNotNull(
+          decodeArgs, 'reportCallbackPoint',
+          context: callbackContext);
       final callback = _reportCallbacks[reportCallbackPoint];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -815,26 +882,29 @@ class ChipDeviceController implements MethodCallHandler {
       switch (splitPaths[1]) {
         case "onReport":
           try {
-            callback.onReport(NodeState.fromJson(
-                checkCallArgNotNull(decodeArgs, "nodeState")));
+            callback.onReport(NodeState.fromJson(checkCallArgNotNull(
+                decodeArgs, "nodeState",
+                context: callbackContext)));
           } catch (e, s) {
-            matterPrint('ReportCallback onReport error $e');
-            print(s);
+            reportMatterError('$runtimeType ReportCallback.onReport', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(null, null,
-                Exception(checkCallArgNotNull(decodeArgs, "error")));
-          } catch (e) {
-            matterPrint('ReportCallback onError error $e');
+            callback.onError(
+                null,
+                null,
+                Exception(checkCallArgNotNull(decodeArgs, "error",
+                    context: callbackContext)));
+          } catch (e, s) {
+            reportMatterError('$runtimeType ReportCallback.onError', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch (e) {
-            matterPrint('ReportCallback onDone error $e');
+          } catch (e, s) {
+            reportMatterError('$runtimeType ReportCallback.onDone', e, s);
           }
           _reportCallbacks.remove(reportCallbackPoint);
           return createPlatformCallSuccessResult();
@@ -842,8 +912,9 @@ class ChipDeviceController implements MethodCallHandler {
     }
     ///// WriteAttributesCallback //////
     else if (splitPaths.firstOrNull == 'WriteAttributesCallback') {
-      String writeAttributesCallbackPoint =
-          checkCallArgNotNull(decodeArgs, 'writeAttributesCallbackPoint');
+      String writeAttributesCallbackPoint = checkCallArgNotNull(
+          decodeArgs, 'writeAttributesCallbackPoint',
+          context: callbackContext);
       final callback = _writeAttributesCallback[writeAttributesCallbackPoint];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -859,8 +930,9 @@ class ChipDeviceController implements MethodCallHandler {
                 decodeArgs["status"] == null
                     ? null
                     : Status.fromJson(decodeArgs["status"]));
-          } catch (e) {
-            matterPrint('WriteAttributesCallback onReport error $e');
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType WriteAttributesCallback.onResponse', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onError":
@@ -870,15 +942,17 @@ class ChipDeviceController implements MethodCallHandler {
                     ? null
                     : ChipAttributePath.fromJson(decodeArgs["attributePath"]),
                 Exception(decodeArgs['error'] ?? 'Unknown Error'));
-          } catch (e) {
-            matterPrint('WriteAttributesCallback onError error $e');
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType WriteAttributesCallback.onError', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch (e) {
-            matterPrint('WriteAttributesCallback onDone error $e');
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType WriteAttributesCallback.onDone', e, s);
           }
           _writeAttributesCallback.remove(writeAttributesCallbackPoint);
           return createPlatformCallSuccessResult();
@@ -886,7 +960,8 @@ class ChipDeviceController implements MethodCallHandler {
     }
     ///// ConnectedDeviceCallback /////
     else if (splitPaths.firstOrNull == "ConnectedDeviceCallback") {
-      String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle');
+      String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle',
+          context: callbackContext);
       final callback = _connectedDeviceCallback[callbackHandle];
       if (callback == null) {
         return createPlatformCallExceptionResult(
@@ -896,18 +971,24 @@ class ChipDeviceController implements MethodCallHandler {
         case "onDeviceConnected":
           try {
             callback.onConnected(decodeArgs['context']);
-          } catch (e) {
-            matterPrint(
-                'connected device callback onConnectionClosed error $e');
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType ConnectedDeviceCallback.onDeviceConnected',
+              e,
+              s,
+            );
           }
           _connectedDeviceCallback.remove(callbackHandle);
           return createPlatformCallSuccessResult();
         case "onConnectionFailure":
           try {
             callback.onError(Exception(decodeArgs['error'] ?? "Unknown error"));
-          } catch (e) {
-            matterPrint(
-                'connected device callback onDisconnectionError error $e');
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType ConnectedDeviceCallback.onConnectionFailure',
+              e,
+              s,
+            );
           }
           _connectedDeviceCallback.remove(callbackHandle);
           return createPlatformCallSuccessResult();
@@ -916,7 +997,8 @@ class ChipDeviceController implements MethodCallHandler {
 
     ///// OpenCommissioningCallback /////
     else if (splitPaths.firstOrNull == "OpenCommissioningCallback") {
-      String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle');
+      String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle',
+          context: callbackContext);
       final callback = _openCommissioningCallbacks[callbackHandle];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -927,22 +1009,34 @@ class ChipDeviceController implements MethodCallHandler {
           try {
             callback.onSuccess(
               decodeArgs['connectContext'],
-              checkCallArgNotNull(decodeArgs, 'manualPairingCode'),
-              checkCallArgNotNull(decodeArgs, 'qrCode'),
+              checkCallArgNotNull(decodeArgs, 'manualPairingCode',
+                  context: callbackContext),
+              checkCallArgNotNull(decodeArgs, 'qrCode',
+                  context: callbackContext),
             );
-          } catch (e) {
-            matterPrint(
-                'open commissioning callback onOpenCommissioningWindow error $e');
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType OpenCommissioningCallback.onSuccess',
+              e,
+              s,
+            );
           }
+          _openCommissioningCallbacks.remove(callbackHandle);
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(checkCallArgNotNull(decodeArgs, "status") as int,
+            callback.onError(
+                checkCallArgNotNull(decodeArgs, "status",
+                    context: callbackContext) as int,
                 decodeArgs['connectContext']);
-          } catch (e) {
-            matterPrint(
-                'open commissioning callback onOpenCommissioningWindow error $e');
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType OpenCommissioningCallback.onError',
+              e,
+              s,
+            );
           }
+          _openCommissioningCallbacks.remove(callbackHandle);
           return createPlatformCallSuccessResult();
       }
     }
@@ -964,19 +1058,17 @@ class ChipDeviceController implements MethodCallHandler {
       final isMatch = handleId == _platformDeviceControllerHandle &&
           uri.host == _hostName &&
           matchPathList.contains(splitPaths.firstOrNull);
-      matterPrint(
-          'ChipDeviceController($_platformDeviceControllerHandle) match $isMatch');
+      matterPrint('$runtimeType match $isMatch');
       return isMatch;
     } catch (e, s) {
-      matterPrint('$runtimeType match error $s');
+      reportMatterError('$runtimeType match', e, s);
     }
     return false;
   }
 
   ChipDeviceController._(this.params, this._platformDeviceControllerHandle,
       this._keypairDelegateHandleId) {
-    _channelFlutterMatter =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    _channelFlutterMatter = FlutterMatterPlatform.instance;
     _channelFlutterMatter.addHandler(this);
     _isRunning = true;
   }
@@ -993,25 +1085,51 @@ class ChipDeviceController implements MethodCallHandler {
       return controller;
     }
 
-    final channelFlutterMatter =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channelFlutterMatter = FlutterMatterPlatform.instance;
     String? keypairDelegateHandleId;
     if (params.keypairDelegate != null) {
       keypairDelegateHandleId =
           _keypairDelegateCallbackHandler.addHandler(params.keypairDelegate!);
     }
-    final result = await channelFlutterMatter.requestPlatform(
-        RequestPlatformParams(
-            methodName: createRequestPlatformUrl(_hostName, 'new').toString(),
-            methodParamsJson: params.encode()));
-    if (result.code != 0) {
-      throw Exception("newDeviceController failed(${result.code})");
+    try {
+      final result = await channelFlutterMatter.requestPlatform(
+          RequestPlatformParams(
+              methodName: createRequestPlatformUrl(_hostName, 'new').toString(),
+              methodParamsJson: params.encode()));
+      if (result.code != 0) {
+        throw CallPlatformException(
+          'newDeviceController failed with code ${result.code}',
+          code: result.code,
+          methodName: 'new',
+          details: const <String, Object?>{
+            'host': 'devicecontroller',
+            'category': 'platform-error',
+          },
+        );
+      }
+      final handle = checkCallArgNotNull(
+        result.jsonData,
+        jsonKeyHandle,
+        context: 'newDeviceController',
+      );
+      controller = ChipDeviceController._(
+          params, handle as String, keypairDelegateHandleId);
+      _saveControl(controller);
+      return controller;
+    } catch (e, s) {
+      // The native controller is not usable when creation fails. Remove only
+      // the handle registered for this attempt; the hashCode-based ID scheme
+      // itself remains unchanged.
+      if (keypairDelegateHandleId != null) {
+        _keypairDelegateCallbackHandler.removeHandler(keypairDelegateHandleId);
+      }
+      reportMatterError(
+        'ChipDeviceController.newControllerIfNotExist',
+        e,
+        s,
+      );
+      rethrow;
     }
-    matterPrint('newController ${result.jsonData}');
-    controller = ChipDeviceController._(
-        params, result.jsonData[jsonKeyHandle], keypairDelegateHandleId);
-    _saveControl(controller);
-    return controller;
   }
 
   /// Removes Dart-side handlers and callback state without requesting native
@@ -1028,11 +1146,13 @@ class ChipDeviceController implements MethodCallHandler {
     _subscriptionCallbacks.clear();
     _reportCallbacks.clear();
     _writeAttributesCallback.clear();
+    _connectedDeviceCallback.clear();
+    _openCommissioningCallbacks.clear();
     _removeControl(this);
     _isRunning = false;
   }
 
-  Future<Map<String, dynamic>?> _requestPlatform(
+  Future<Map<String, dynamic>> _requestPlatform(
       String methodName, String methodParamsJson) async {
     final result = await _channelFlutterMatter.requestPlatform(
         RequestPlatformParams(
@@ -1042,7 +1162,30 @@ class ChipDeviceController implements MethodCallHandler {
       return result.jsonData;
     }
     throw CallPlatformException(
-        "[${result.code}] Call $methodName params $methodParamsJson failed");
+      'Call $methodName failed with code ${result.code}',
+      code: result.code,
+      methodName: methodName,
+      details: const <String, Object?>{
+        'host': 'devicecontroller',
+        'category': 'platform-error',
+      },
+    );
+  }
+
+  /// Handles a native request rejection and removes its pending callback.
+  ///
+  /// Cleanup is intentionally limited to the rejection path. A successful
+  /// response means native accepted an asynchronous operation and may still
+  /// invoke the callback later, so this must not run in `finally`.
+  void _handleRejectedRequest<T>(
+    Map<String, T> callbacks,
+    String callbackHandle,
+    String operation,
+    Object error,
+    StackTrace stackTrace,
+  ) {
+    reportMatterError(operation, error, stackTrace);
+    callbacks.remove(callbackHandle);
   }
 
   /// Sets this DeviceController to use the given issuer for issuing operational certs and verifying
@@ -1109,7 +1252,7 @@ class ChipDeviceController implements MethodCallHandler {
           'setupPincode': setupPincode,
           'csrNonce': csrNonce == null ? null : List.from(csrNonce),
           'networkCredentials': networkCredentials.toJson(),
-          'attestationDelegate': attestationDelegate.hashCode.toString(),
+          'attestationDelegate': attestationDelegate?.hashCode.toString(),
           'failSafeExpiryTimeoutSecs': failSafeExpiryTimeoutSecs,
           'completionListener': completionListener?.hashCode.toString(),
           'onboardingPayload': onboardingPayload,
@@ -1168,7 +1311,7 @@ class ChipDeviceController implements MethodCallHandler {
         'discriminator': discriminator,
         'setupPincode': setupPincode,
         'csrNonce': csrNonce == null ? null : List.from(csrNonce),
-        'attestationDelegate': attestationDelegate.hashCode.toString(),
+        'attestationDelegate': attestationDelegate?.hashCode.toString(),
         'failSafeExpiryTimeoutSecs': failSafeExpiryTimeoutSecs,
         'completionListener': completionListener?.hashCode.toString(),
       }),
@@ -1191,8 +1334,7 @@ class ChipDeviceController implements MethodCallHandler {
   static Future<Uint8List> createRootCertificate(
       KeypairDelegate keypair, int issuerId, int? fabricId) async {
     final id = _keypairDelegateCallbackHandler.addHandler(keypair);
-    final channel =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channel = FlutterMatterPlatform.instance;
     final result = await channel
         .requestPlatform(RequestPlatformParams(
             methodName:
@@ -1207,9 +1349,17 @@ class ChipDeviceController implements MethodCallHandler {
       _keypairDelegateCallbackHandler.removeHandler(id);
     });
     if (result.code != 0) {
-      throw Exception("createRootCertificate failed(${result.code})");
+      throw CallPlatformException(
+        'createRootCertificate failed with code ${result.code}',
+        code: result.code,
+        methodName: 'createRootCertificate',
+        details: const <String, Object?>{
+          'host': 'devicecontroller',
+          'category': 'platform-error',
+        },
+      );
     }
-    return toUint8List(result.jsonData['data']);
+    return _platformBytesOrThrow(result.jsonData, 'createRootCertificate');
   }
 
   /// Create an X.509 DER encoded certificate that has the right fields to be a valid Matter
@@ -1222,8 +1372,7 @@ class ChipDeviceController implements MethodCallHandler {
       int nodeId,
       List<int>? caseAuthenticatedTags) async {
     final id = _keypairDelegateCallbackHandler.addHandler(signingKeypair);
-    final channel =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channel = FlutterMatterPlatform.instance;
     final result = await channel
         .requestPlatform(RequestPlatformParams(
             methodName: createRequestPlatformUrl(
@@ -1243,9 +1392,18 @@ class ChipDeviceController implements MethodCallHandler {
       _keypairDelegateCallbackHandler.removeHandler(id);
     });
     if (result.code != 0) {
-      throw Exception("createOperationalCertificate failed(${result.code})");
+      throw CallPlatformException(
+        'createOperationalCertificate failed with code ${result.code}',
+        code: result.code,
+        methodName: 'createOperationalCertificate',
+        details: const <String, Object?>{
+          'host': 'devicecontroller',
+          'category': 'platform-error',
+        },
+      );
     }
-    return toUint8List(result.jsonData['data']);
+    return _platformBytesOrThrow(
+        result.jsonData, 'createOperationalCertificate');
   }
 
   /// Extract the public key from the given PKCS#10 certificate signing request. This is the public
@@ -1257,7 +1415,7 @@ class ChipDeviceController implements MethodCallHandler {
           jsonKeyHandle: _platformDeviceControllerHandle,
           'csr': List.from(csr)
         }));
-    return toUint8List(result!['data']);
+    return _platformBytesOrThrow(result, 'publicKeyFromCSR');
   }
 
   /// When a NOCChainIssuer is set for this controller, then onNOCChainGenerationNeeded will be
@@ -1273,7 +1431,15 @@ class ChipDeviceController implements MethodCallHandler {
           'onNOCChainGenerationCompleteHandle':
               onNOCChainGenerationCompleteHandle
         }));
-    return result!['data'] as int;
+    final data = result['data'];
+    if (data is! int) {
+      throw PlatformProtocolException(
+        'data must be an integer',
+        code: unHandlerException,
+        methodName: 'onNOCChainGeneration',
+      );
+    }
+    return data;
   }
 
   /// This function instructs the commissioner to proceed to the next stage of commissioning after
@@ -1338,8 +1504,10 @@ class ChipDeviceController implements MethodCallHandler {
             'imTimeoutMs': imTimeoutMs,
             'connectContext': connectContext
           }));
-    } catch (e) {
-      _invokeCallbacks.remove(callbackId);
+    } catch (e, s) {
+      _handleRejectedRequest(
+          _invokeCallbacks, callbackId, '$runtimeType invoke', e, s);
+      rethrow;
     }
   }
 
@@ -1410,8 +1578,9 @@ class ChipDeviceController implements MethodCallHandler {
             'connectContext': connectContext
           }));
     } catch (e, s) {
-      print(s);
-      _subscriptionCallbacks.remove(callbackHandle);
+      _handleRejectedRequest(_subscriptionCallbacks, callbackHandle,
+          '$runtimeType subscribe', e, s);
+      rethrow;
     }
   }
 
@@ -1470,8 +1639,9 @@ class ChipDeviceController implements MethodCallHandler {
             'connectContext': connectContext,
           }));
     } catch (e, s) {
-      print(s);
-      _reportCallbacks.remove(callbackHandle);
+      _handleRejectedRequest(
+          _reportCallbacks, callbackHandle, '$runtimeType read', e, s);
+      rethrow;
     }
   }
 
@@ -1504,8 +1674,9 @@ class ChipDeviceController implements MethodCallHandler {
             'connectContext': connectContext,
           }));
     } catch (e, s) {
-      print(s);
-      _writeAttributesCallback.remove(callbackHandle);
+      _handleRejectedRequest(
+          _writeAttributesCallback, callbackHandle, '$runtimeType write', e, s);
+      rethrow;
     }
   }
 
@@ -1527,9 +1698,10 @@ class ChipDeviceController implements MethodCallHandler {
             'callbackHandle': callbackHandle,
             'connectContext': connectContext,
           }));
-    } catch (e) {
-      matterPrint('$e');
-      _connectedDeviceCallback.remove(callbackHandle);
+    } catch (e, s) {
+      _handleRejectedRequest(_connectedDeviceCallback, callbackHandle,
+          '$runtimeType connectedDevice', e, s);
+      rethrow;
     }
   }
 
@@ -1548,6 +1720,14 @@ class ChipDeviceController implements MethodCallHandler {
   ///
   /// The pairing codes are delivered through [callback]. [duration] is in
   /// seconds. Callers must keep [callback] alive until it completes.
+  ///
+  /// This API is deprecated because platform implementations may not match the
+  /// expected commissioning-window semantics. Verify the behavior on each
+  /// target platform before relying on it.
+  @Deprecated(
+    'Platform-specific behavior may not match the expected commissioning-window '
+    'semantics; verify each target platform before use.',
+  )
   Future<bool> openPairingWindowWithPIN(
       Object connectContext,
       int duration,
@@ -1567,8 +1747,9 @@ class ChipDeviceController implements MethodCallHandler {
             'setupPIN': setupPIN,
             'callbackHandle': callbackId
           }));
-      return result?['data'] == true;
-    } catch (e) {
+      return result['data'] == true;
+    } catch (e, s) {
+      reportMatterError('$runtimeType openPairingWindowWithPIN', e, s);
       _openCommissioningCallbacks.remove(callbackId);
     }
     return false;
@@ -1583,8 +1764,9 @@ class ChipDeviceController implements MethodCallHandler {
           jsonEncode({
             jsonKeyHandle: _platformDeviceControllerHandle,
           }));
-      return result?['data'];
-    } catch (e) {
+      return result['data'];
+    } catch (e, s) {
+      reportMatterError('$runtimeType getFabricIndex', e, s);
       return null;
     }
   }
@@ -1604,9 +1786,30 @@ class ChipDeviceController implements MethodCallHandler {
             "nodeId": nodeId,
             "subscriptionId": subscriptionId,
           }));
-      return result?['data'] == true;
-    } catch (e) {
+      return result['data'] == true;
+    } catch (e, s) {
+      reportMatterError('$runtimeType unSubscription', e, s);
       return false;
     }
+  }
+}
+
+Uint8List _platformBytesOrThrow(
+  Map<String, dynamic> jsonData,
+  String methodName,
+) {
+  try {
+    final data = jsonData['data'];
+    if (data is! List) {
+      throw const FormatException('data must be a byte array');
+    }
+    return toUint8List(data);
+  } catch (error) {
+    throw PlatformProtocolException(
+      'data must be a byte array',
+      code: unHandlerException,
+      methodName: methodName,
+      cause: error,
+    );
   }
 }

@@ -63,6 +63,8 @@ The vendored framework is generated from a pinned official `connectedhomeip` com
 
 The required Dart workflow covers only the Dart layer. Native builds and Matter behavior are pull-request evidence, not CI results. Device-behavior changes require a `full` Run with a schema v4 report on every affected controller platform.
 
+Dart, Android, and iOS failure behavior follows the [Error handling](error-handling.md) contract. Native error-path changes require Android and iOS compile evidence even when the Dart gate is green.
+
 See [Contributing](../CONTRIBUTING.md), [Device validation](device-validation.md), and [Device test report contract](device-test-report.md).
 
 ## Toolchain changes

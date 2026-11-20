@@ -43,6 +43,7 @@ import java.util.Objects
 import java.util.UUID
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
+import java.util.concurrent.RejectedExecutionException
 import kotlin.concurrent.thread
 import kotlin.jvm.optionals.getOrDefault
 import kotlin.jvm.optionals.getOrNull
@@ -50,6 +51,79 @@ import kotlin.jvm.optionals.getOrNull
 private val controls = mutableMapOf<String, ChipDeviceController>()
 
 private val deviceControllerExecutor = FlutterMatterPlugin.executors
+
+private const val DEVICE_CONTROL_TAG = "FlutterMatterDeviceControl"
+private const val DEVICE_CONTROL_FAILURE_MESSAGE = "Device control operation failed"
+
+private fun logDeviceControlException(context: String, error: Exception) {
+    // Log frames only. The exception message may contain request data or
+    // credentials supplied by the host application.
+    val frames = error.stackTrace.joinToString(separator = "\n") { it.toString() }
+    Log.e(DEVICE_CONTROL_TAG, "$context failed (${error.javaClass.name})\n$frames")
+}
+
+private fun JSONObject.requiredString(name: String): String {
+    val value = opt(name)
+    if (value == null || value == JSONObject.NULL) {
+        throw IllegalArgumentException("Missing required parameter: $name")
+    }
+    return value as? String
+        ?: throw IllegalArgumentException("Parameter $name must be a string")
+}
+
+private fun JSONObject.requiredLong(name: String): Long {
+    return readLong(name, required = true)!!
+}
+
+private fun JSONObject.requiredInt(name: String): Int {
+    val value = requiredLong(name)
+    if (value < Int.MIN_VALUE || value > Int.MAX_VALUE) {
+        throw IllegalArgumentException("Parameter $name must fit in a 32-bit integer")
+    }
+    return value.toInt()
+}
+
+private fun JSONObject.optionalLong(name: String): Long? {
+    return readLong(name, required = false)
+}
+
+private fun JSONObject.optionalInt(name: String): Int? {
+    return optionalLong(name)?.let { value ->
+        if (value < Int.MIN_VALUE || value > Int.MAX_VALUE) {
+            throw IllegalArgumentException("Parameter $name must fit in a 32-bit integer")
+        }
+        value.toInt()
+    }
+}
+
+private fun JSONObject.readLong(name: String, required: Boolean): Long? {
+    val value = opt(name)
+    if (value == null || value == JSONObject.NULL) {
+        if (required) {
+            throw IllegalArgumentException("Missing required parameter: $name")
+        }
+        return null
+    }
+    val text = when (value) {
+        is Number -> value.toString()
+        is String -> value
+        else -> throw IllegalArgumentException("Parameter $name must be an integer")
+    }
+    return text.toLongOrNull()
+        ?: throw IllegalArgumentException("Parameter $name must be an integer")
+}
+
+private fun JSONObject.optionalString(name: String): String? {
+    val value = opt(name)
+    if (value == null || value == JSONObject.NULL) {
+        return null
+    }
+    return value as? String
+        ?: throw IllegalArgumentException("Parameter $name must be a string")
+}
+
+private fun safeError(error: Throwable?): String =
+    error?.javaClass?.name ?: "Unknown error"
 
 private fun getDeviceController(handle: String): ChipDeviceController? {
     return controls[handle]
@@ -171,7 +245,7 @@ class KeypairDelegateWarp(
             val resultJson = JSONObject(invokeMethodBlockGetResult.toString())
             return resultJson.optJSONArray("ecdsaSign").toByteArray()
         } catch (e: Exception) {
-            e.printStackTrace()
+            logDeviceControlException("Device control callback", e)
             throw e
         }
 
@@ -180,98 +254,107 @@ class KeypairDelegateWarp(
 }
 
 fun onDeviceControlCall(path: String, params: String, result: MethodChannel.Result) {
-    matterPrint("onDeviceControlCall $path $params")
+    matterPrint("onDeviceControlCall $path")
     fun callResultSuccess(data: Any) {
         HandlerCompat.createAsync(Looper.getMainLooper()).post {
             result.success(data)
         }
     }
-    fun callResultError(errorMessage: String) {
+    fun callResultError(error: Exception? = null) {
         HandlerCompat.createAsync(Looper.getMainLooper()).post {
-            result.error("-99", errorMessage, "")
+            result.error(
+                "-99",
+                DEVICE_CONTROL_FAILURE_MESSAGE,
+                error?.let { safePlatformErrorDetails(it) } ?: ""
+            )
         }
     }
-    deviceControllerExecutor.execute {
-        matterPrint("onDeviceControlCall run")
-        try {
-            when (path) {
-                "/new" -> {
-                    callResultSuccess(newDeviceControllerCall(params))
+    try {
+        deviceControllerExecutor.execute {
+            matterPrint("onDeviceControlCall run")
+            try {
+                when (path) {
+                    "/new" -> {
+                        callResultSuccess(newDeviceControllerCall(params))
+                    }
+                    "/createRootCertificate" -> {
+                        callResultSuccess(createRootCertificate(params))
+                    }
+                    "/setNocChainIssuer" -> {
+                        callResultSuccess(setNocChainIssuer(params))
+                    }
+                    "/setCompletionListener" -> {
+                        callResultSuccess(setCompletionListener(params))
+                    }
+                    "/pairDevice" -> {
+                        callResultSuccess(pairDevice(params))
+                    }
+                    "/pairDeviceWithAddress" -> {
+                        callResultSuccess(pairDeviceWithAddress(params))
+                    }
+                    "/stopDevicePairing" -> {
+                        callResultSuccess(stopDevicePairing(params))
+                    }
+                    "/createOperationalCertificate" -> {
+                        callResultSuccess(createOperationalCertificate(params))
+                    }
+                    "/publicKeyFromCSR" -> {
+                        callResultSuccess(publicKeyFromCSR(params))
+                    }
+                    "/onNOCChainGeneration" -> {
+                        callResultSuccess(onNOCChainGeneration(params))
+                    }
+                    "/continueCommissioning" -> {
+                        callResultSuccess(continueCommissioning(params))
+                    }
+                    "/setDeviceAttestationDelegate" -> {
+                        callResultSuccess(setDeviceAttestationDelegate(params))
+                    }
+                    "/deleteDeviceController" -> {
+                        callResultSuccess(deleteDeviceController(params))
+                    }
+                    "/invoke" -> {
+                        callResultSuccess(invoke(params))
+                    }
+                    "/subscribe" -> {
+                        callResultSuccess(subscribe(params))
+                    }
+                    "/read" -> {
+                        callResultSuccess(read(params))
+                    }
+                    "/write" -> {
+                        callResultSuccess(write(params))
+                    }
+                    "/connectedDevice" -> {
+                        callResultSuccess(connectedDevice(params))
+                    }
+                    "/releaseConnectContext" -> {
+                        callResultSuccess(releaseConnectContext(params))
+                    }
+                    "/openPairingWindowWithPIN" -> {
+                        callResultSuccess(openPairingWindowWithPIN(params))
+                    }
+                    "/getFabricIndex" -> {
+                        callResultSuccess(getFabricIndex(params))
+                    }
+                    "/unSubscribe" -> {
+                        callResultSuccess(unSubscribe(params))
+                    }
+                    "/onCloseBleComplete" -> {
+                        callResultSuccess(onCloseBleComplete(params))
+                    }
+                    else -> {
+                        throw Exception("Unable handle path: ${path}")
+                    }
                 }
-                "/createRootCertificate" -> {
-                    callResultSuccess(createRootCertificate(params))
-                }
-                "/setNocChainIssuer" -> {
-                    callResultSuccess(setNocChainIssuer(params))
-                }
-                "/setCompletionListener" -> {
-                    callResultSuccess(setCompletionListener(params))
-                }
-                "/pairDevice" -> {
-                    callResultSuccess(pairDevice(params))
-                }
-                "/pairDeviceWithAddress" -> {
-                    callResultSuccess(pairDeviceWithAddress(params))
-                }
-                "/stopDevicePairing" -> {
-                    callResultSuccess(stopDevicePairing(params))
-                }
-                "/createOperationalCertificate" -> {
-                    callResultSuccess(createOperationalCertificate(params))
-                }
-                "/publicKeyFromCSR" -> {
-                    callResultSuccess(publicKeyFromCSR(params))
-                }
-                "/onNOCChainGeneration" -> {
-                    callResultSuccess(onNOCChainGeneration(params))
-                }
-                "/continueCommissioning" -> {
-                    callResultSuccess(continueCommissioning(params))
-                }
-                "/setDeviceAttestationDelegate" -> {
-                    callResultSuccess(setDeviceAttestationDelegate(params))
-                }
-                "/deleteDeviceController" -> {
-                    callResultSuccess(deleteDeviceController(params))
-                }
-                "/invoke" -> {
-                    callResultSuccess(invoke(params))
-                }
-                "/subscribe" -> {
-                    callResultSuccess(subscribe(params))
-                }
-                "/read" -> {
-                    callResultSuccess(read(params))
-                }
-                "/write" -> {
-                    callResultSuccess(write(params))
-                }
-                "/connectedDevice" -> {
-                    callResultSuccess(connectedDevice(params))
-                }
-                "/releaseConnectContext" -> {
-                    callResultSuccess(releaseConnectContext(params))
-                }
-                "/openPairingWindowWithPIN" -> {
-                    callResultSuccess(openPairingWindowWithPIN(params))
-                }
-                "/getFabricIndex" -> {
-                    callResultSuccess(getFabricIndex(params))
-                }
-                "/unSubscribe" -> {
-                    callResultSuccess(unSubscribe(params))
-                }
-                "/onCloseBleComplete" -> {
-                    callResultSuccess(onCloseBleComplete(params))
-                }
-                else -> {
-                    throw Exception("Unable handle path: ${path}")
-                }
+            } catch (e: Exception) {
+                logDeviceControlException("Device control request $path", e)
+                callResultError(e)
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            callResultError(e.stackTraceToString())
         }
+    } catch (e: RejectedExecutionException) {
+        logDeviceControlException("Device control request submission $path", e)
+        callResultError(e)
     }
 }
 
@@ -480,15 +563,27 @@ fun setNocChainIssuer(params: String): String {
     val handle = jsonObject.optNotNull(jsonKeyHandle)
     val deviceController = Objects.requireNonNull(getDeviceController(handle.toString()), "Not found control handle $handle")
     deviceController!!.setNOCChainIssuer { csrInfo, attestationInfo ->
-        val  result = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
-            createFlutterCallPath(deviceControllerHost, "NOCChainIssuer/onNOCChainGenerationNeeded"),
-            JSONObject(mapOf(
-                jsonKeyHandle to handle,
-                "csrInfo" to csrInfo.toJSONObject(),
-                "attestationInfo" to attestationInfo.toJSONObject()
-            )).toString()
-        )
-        Objects.requireNonNull(result, createCallFlutterExceptionMessage("onNOCChainGenerationNeeded"))
+        try {
+            val result = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
+                createFlutterCallPath(deviceControllerHost, "NOCChainIssuer/onNOCChainGenerationNeeded"),
+                JSONObject(
+                    mapOf(
+                        jsonKeyHandle to handle,
+                        "csrInfo" to csrInfo.toJSONObject(),
+                        "attestationInfo" to attestationInfo.toJSONObject()
+                    )
+                ).toString()
+            )
+            Objects.requireNonNull(
+                result,
+                createCallFlutterExceptionMessage("onNOCChainGenerationNeeded")
+            )
+        } catch (e: Exception) {
+            logDeviceControlException(
+                "NOCChainIssuer.onNOCChainGenerationNeeded",
+                e
+            )
+        }
     }
     return createFlutterRequestResult(0, JSONObject())
 }
@@ -512,7 +607,7 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, null)
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onConnectDeviceComplete"))
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -523,7 +618,7 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, createParams(mapOf("status" to status)).toString())
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onStatusUpdate"))
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -534,7 +629,7 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, createParams(mapOf("errorCode" to errorCode)).toString())
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onPairingComplete"))
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -545,7 +640,7 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, createParams(mapOf("errorCode" to errorCode)).toString())
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onPairingDeleted"))
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -556,7 +651,7 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, createParams(mapOf("nodeId" to nodeId, "errorCode" to errorCode)).toString())
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onCommissioningComplete"))
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -575,13 +670,13 @@ fun setCompletionListener(params: String): String {
                     )
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onReadCommissioningInfo"))
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
         override fun onCommissioningStageStart(nodeId: Long, stage: String) {
             // The Dart API exposes stage completion updates; preserve that contract for now.
-            matterPrint("onCommissioningStageStart: $nodeId $stage")
+            matterPrint("onCommissioningStageStart: $stage")
         }
 
         override fun onCommissioningStatusUpdate(nodeId: Long, stage: String?, errorCode: Long) {
@@ -590,8 +685,11 @@ fun setCompletionListener(params: String): String {
                 val callResult =
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, createParams(mapOf("stage" to stage, "nodeId" to nodeId, "errorCode" to errorCode)).toString())
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onCommissioningStatusUpdate"))
-            }  catch(e: Exception) {
-                matterPrint("Call Flutter onCommissioningStatusUpdate error $e")
+            } catch (e: Exception) {
+                logDeviceControlException(
+                    "CompletionListener.onCommissioningStatusUpdate",
+                    e
+                )
             }
         }
 
@@ -602,7 +700,10 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, null)
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onNotifyChipConnectionClosed"))
             } catch (e: Exception) {
-                matterPrint("Call Flutter onNotifyChipConnectionClosed error: $e")
+                logDeviceControlException(
+                    "CompletionListener.onNotifyChipConnectionClosed",
+                    e
+                )
             }
         }
 
@@ -613,7 +714,7 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, null)
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onCloseBleComplete"))
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -621,11 +722,13 @@ fun setCompletionListener(params: String): String {
             try {
                 val p = createFlutterCallPath(deviceControllerHost, "CompletionListener/onError")
                 val callResult =
-                    FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, createParams(mapOf("error" to error.toString())).toString())
+                    FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
+                        p,
+                        createParams(mapOf("error" to safeError(error))).toString()
+                    )
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onCommissioningStatusUpdate"))
             } catch (e: Exception) {
-                e.printStackTrace()
-                matterPrint("Call Flutter CompletionListener/onError error: $e")
+                logDeviceControlException("CompletionListener.onError", e)
             }
 
         }
@@ -637,7 +740,10 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, createParams(mapOf("csr" to JSONArray(csr))).toString())
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onOpCSRGenerationComplete"))
             } catch (e: Exception) {
-                matterPrint("Call Flutter onOpCSRGenerationComplete error: $e")
+                logDeviceControlException(
+                    "CompletionListener.onOpCSRGenerationComplete",
+                    e
+                )
             }
         }
 
@@ -654,7 +760,10 @@ fun setCompletionListener(params: String): String {
                     createCallFlutterExceptionMessage("onICDRegistrationInfoRequired")
                 )
             } catch (e: Exception) {
-                matterPrint("Call Flutter onICDRegistrationInfoRequired error: $e")
+                logDeviceControlException(
+                    "CompletionListener.onICDRegistrationInfoRequired",
+                    e
+                )
             }
         }
 
@@ -665,7 +774,10 @@ fun setCompletionListener(params: String): String {
                     FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, createParams(mapOf("errorCode" to errorCode, "icdDeviceInfo" to icdDeviceInfo?.toJSONObject())).toString())
                 Objects.requireNonNull(callResult, createCallFlutterExceptionMessage("onICDRegistrationComplete"))
             } catch (e: Exception) {
-                matterPrint("Call Flutter onICDRegistrationComplete failed $e")
+                logDeviceControlException(
+                    "CompletionListener.onICDRegistrationComplete",
+                    e
+                )
             }
         }
 
@@ -675,14 +787,15 @@ fun setCompletionListener(params: String): String {
 
 fun pairDevice(params: String): String {
     val jsonObject = JSONObject(params)
-    val handle = jsonObject.optNotNull(jsonKeyHandle).toString();
-    val control = Objects.requireNonNull(getDeviceController(handle), "Not found control")!!
-    val deviceId = jsonObject.optNotNull("deviceId").toString().toLong()
-    val connId = if (jsonObject.opt("connId") == JSONObject.NULL)  null else jsonObject.optNotNull("connId").toString().toInt()
-    val onboardingPayload = jsonObject.opt("onboardingPayload")
-    var setupPincode = jsonObject.opt("setupPincode")?.toString()?.toLongOrNull()
-    if (setupPincode == null && onboardingPayload != JSONObject.NULL) {
-        val payload = onboardingPayload.toString()
+    val handle = jsonObject.requiredString(jsonKeyHandle)
+    val control = getDeviceController(handle)
+        ?: throw IllegalArgumentException("Not found control")
+    val deviceId = jsonObject.requiredLong("deviceId")
+    val connId = jsonObject.optionalInt("connId")
+    val onboardingPayload = jsonObject.optionalString("onboardingPayload")
+    var setupPincode = jsonObject.optionalLong("setupPincode")
+    if (setupPincode == null && !onboardingPayload.isNullOrEmpty()) {
+        val payload = onboardingPayload
         val op: OnboardingPayload
         if (payload.startsWith("MT:")) {
             op = OnboardingPayloadParser().parseQrCode(payload)
@@ -690,16 +803,15 @@ fun pairDevice(params: String): String {
             op = OnboardingPayloadParser().parseManualPairingCode(payload)
         }
         setupPincode = op.setupPinCode
-    };
-    if (setupPincode == null) {
-        return createFlutterRequestResult(1, JSONObject(mapOf("data" to "Unable get setupPincode")))
     }
+    val resolvedSetupPincode = setupPincode
+        ?: return createFlutterRequestResult(1, JSONObject(mapOf("data" to "Unable get setupPincode")))
     val csrNonce = jsonObject.optJSONArray("csrNonce")?.toByteArray()
     val networkCredentialsJsonObject = jsonObject.optJSONObject("networkCredentials")
-    val attestationDelegate = jsonObject.optString("attestationDelegate");
+    val attestationDelegate = jsonObject.optionalString("attestationDelegate")
     val wifiCredentialsJSONObject = networkCredentialsJsonObject?.optJSONObject("wifiCredentials")
     val threadCredentialsJSONObject = networkCredentialsJsonObject?.optJSONObject("threadCredentials")
-    val completionListenerHandle = jsonObject.optString("completionListener")
+    val completionListenerHandle = jsonObject.optionalString("completionListener")
     val wifiCredentials = parseWiFiCredentialsFromJson(wifiCredentialsJSONObject)
     var threadCredentials: ThreadCredentials? = null
     if (threadCredentialsJSONObject != null) {
@@ -711,81 +823,113 @@ fun pairDevice(params: String): String {
     } else if (threadCredentials != null) {
         networkCredentials = NetworkCredentials.forThread(threadCredentials)
     }
-    Objects.requireNonNull(networkCredentials, "networkCredentials not set wifiCredentials or threadCredentials")
-    if (attestationDelegate != JSONObject.NULL && !attestationDelegate.isNullOrEmpty()) {
-        val failSafeExpiryTimeoutSecs = jsonObject.opt("failSafeExpiryTimeoutSecs").toString().toIntOrNull() ?: 60;
+    val usableNetworkCredentials = networkCredentials
+        ?: throw IllegalArgumentException(
+            "networkCredentials must contain wifiCredentials or threadCredentials"
+        )
+    if (!attestationDelegate.isNullOrEmpty()) {
+        val failSafeExpiryTimeoutSecs = jsonObject.optionalInt("failSafeExpiryTimeoutSecs") ?: 60
         control.setDeviceAttestationDelegate(failSafeExpiryTimeoutSecs) { devicePtr, attestationInfo, errorCode ->
             thread {
-                val p = createFlutterCallPath(deviceControllerHost, "DeviceAttestationDelegate/onDeviceAttestationCompleted")
-                val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, JSONObject(mapOf(
-                    jsonKeyHandle to handle, "devicePtr" to devicePtr, "attestationInfo" to attestationInfo?.toJSONObject(), "errorCode" to errorCode)).toString())
-                Objects.requireNonNull(flutterResult, "Flutter onDeviceAttestationCompleted result null")
+                try {
+                    val p = createFlutterCallPath(
+                        deviceControllerHost,
+                        "DeviceAttestationDelegate/onDeviceAttestationCompleted"
+                    )
+                    val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
+                        p,
+                        JSONObject(
+                            mapOf(
+                                jsonKeyHandle to handle,
+                                "devicePtr" to devicePtr,
+                                "attestationInfo" to attestationInfo?.toJSONObject(),
+                                "errorCode" to errorCode
+                            )
+                        ).toString()
+                    )
+                    Objects.requireNonNull(
+                        flutterResult,
+                        createCallFlutterExceptionMessage("onDeviceAttestationCompleted")
+                    )
+                } catch (e: Exception) {
+                    logDeviceControlException(
+                        "DeviceAttestationDelegate.onDeviceAttestationCompleted",
+                        e
+                    )
+                }
             }
         }
     }
-    if (completionListenerHandle != JSONObject.NULL) {
+    if (!completionListenerHandle.isNullOrEmpty()) {
         setCompletionListener(params)
     }
     if (connId != null) {
-        control.pairDevice(null, connId, deviceId, setupPincode, csrNonce, networkCredentials)
+        control.pairDevice(null, connId, deviceId, resolvedSetupPincode, csrNonce, usableNetworkCredentials)
         // invalici ${ChipDeviceController.connectionId}, unnecessary this value
         // ${ChipDeviceController.connectionId} will hinder the next pairDevice
         control.close()
     } else {
-        if (onboardingPayload == JSONObject.NULL) {
+        if (onboardingPayload == null) {
             return createFlutterRequestResult(1, JSONObject(mapOf("data" to "onboardingPayload not set, connId not set")))
         }
         matterPrint("pairDeviceWithCode")
         val commissionParams = CommissionParameters.Builder()
             .setCsrNonce(csrNonce)
-            .setNetworkCredentials(networkCredentials)
+            .setNetworkCredentials(usableNetworkCredentials)
             .build()
-        control.pairDeviceWithCode(deviceId, onboardingPayload.toString(), false, false, commissionParams)
+        control.pairDeviceWithCode(deviceId, onboardingPayload, false, false, commissionParams)
     }
     return createFlutterRequestResult(0, JSONObject())
 }
 
 fun pairDeviceWithAddress(params: String): String {
     val jsonObject = JSONObject(params)
-    val handle = jsonObject.optNotNull(jsonKeyHandle).toString()
-    val control = Objects.requireNonNull(getDeviceController(handle), "Not found control")!!
-    val deviceId = jsonObject.optNotNull("deviceId").toString().toLong()
-    val address = jsonObject.optNotNull("address").toString()
-    val port = jsonObject.optNotNull("port").toString().toInt()
-    val discriminator = jsonObject.optNotNull("discriminator").toString().toInt()
-    val setupPincode = jsonObject.optNotNull("setupPincode").toString().toLong()
+    val handle = jsonObject.requiredString(jsonKeyHandle)
+    val control = getDeviceController(handle)
+        ?: throw IllegalArgumentException("Not found control")
+    val deviceId = jsonObject.requiredLong("deviceId")
+    val address = jsonObject.requiredString("address")
+    val port = jsonObject.requiredInt("port")
+    val discriminator = jsonObject.requiredInt("discriminator")
+    val setupPincode = jsonObject.requiredLong("setupPincode")
     val csrNonce = jsonObject.optJSONArray("csrNonce")?.toByteArray()
-    val attestationDelegate = jsonObject.optString("attestationDelegate")
-    val completionListenerHandle = jsonObject.optString("completionListener")
+    val attestationDelegate = jsonObject.optionalString("attestationDelegate")
+    val completionListenerHandle = jsonObject.optionalString("completionListener")
 
-    if (attestationDelegate != JSONObject.NULL && !attestationDelegate.isNullOrEmpty()) {
-        val failSafeExpiryTimeoutSecs =
-            jsonObject.opt("failSafeExpiryTimeoutSecs").toString().toIntOrNull() ?: 60
+    if (!attestationDelegate.isNullOrEmpty()) {
+        val failSafeExpiryTimeoutSecs = jsonObject.optionalInt("failSafeExpiryTimeoutSecs") ?: 60
         control.setDeviceAttestationDelegate(failSafeExpiryTimeoutSecs) { devicePtr, attestationInfo, errorCode ->
             thread {
-                val p = createFlutterCallPath(
-                    deviceControllerHost,
-                    "DeviceAttestationDelegate/onDeviceAttestationCompleted"
-                )
-                val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
-                    p,
-                    JSONObject(
-                        mapOf(
-                            jsonKeyHandle to handle,
-                            "devicePtr" to devicePtr,
-                            "attestationInfo" to attestationInfo?.toJSONObject(),
-                            "errorCode" to errorCode
-                        )
-                    ).toString()
-                )
-                Objects.requireNonNull(
-                    flutterResult,
-                    createCallFlutterExceptionMessage("onDeviceAttestationCompleted")
-                )
+                try {
+                    val p = createFlutterCallPath(
+                        deviceControllerHost,
+                        "DeviceAttestationDelegate/onDeviceAttestationCompleted"
+                    )
+                    val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
+                        p,
+                        JSONObject(
+                            mapOf(
+                                jsonKeyHandle to handle,
+                                "devicePtr" to devicePtr,
+                                "attestationInfo" to attestationInfo?.toJSONObject(),
+                                "errorCode" to errorCode
+                            )
+                        ).toString()
+                    )
+                    Objects.requireNonNull(
+                        flutterResult,
+                        createCallFlutterExceptionMessage("onDeviceAttestationCompleted")
+                    )
+                } catch (e: Exception) {
+                    logDeviceControlException(
+                        "DeviceAttestationDelegate.onDeviceAttestationCompleted",
+                        e
+                    )
+                }
             }
         }
     }
-    if (completionListenerHandle != JSONObject.NULL) {
+    if (!completionListenerHandle.isNullOrEmpty()) {
         setCompletionListener(params)
     }
 
@@ -805,16 +949,37 @@ fun pairDeviceWithAddress(params: String): String {
 
 fun setDeviceAttestationDelegate(params: String): String {
     val jsonObject = JSONObject(params)
-    val handle = jsonObject.optNotNull(jsonKeyHandle).toString()
-    val control = Objects.requireNonNull((getDeviceController(handle)), "Not found control")!!
-    val failSafeExpiryTimeoutSecs = jsonObject.optNotNull("failSafeExpiryTimeoutSecs").toString().toInt()
+    val handle = jsonObject.requiredString(jsonKeyHandle)
+    val control = getDeviceController(handle)
+        ?: throw IllegalArgumentException("Not found control")
+    val failSafeExpiryTimeoutSecs = jsonObject.requiredInt("failSafeExpiryTimeoutSecs")
     control.setDeviceAttestationDelegate(failSafeExpiryTimeoutSecs) { devicePtr, attestationInfo, errorCode ->
-//        deviceControllerExecutor.execute {
-            val p = createFlutterCallPath(deviceControllerHost, "DeviceAttestationDelegate/onDeviceAttestationCompleted")
-            val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, JSONObject(mapOf(
-                jsonKeyHandle to handle, "devicePtr" to devicePtr, "attestationInfo" to attestationInfo?.toJSONObject(), "errorCode" to errorCode)).toString())
-            Objects.requireNonNull(flutterResult, "Flutter onDeviceAttestationCompleted result null")
-//        }
+        try {
+            val p = createFlutterCallPath(
+                deviceControllerHost,
+                "DeviceAttestationDelegate/onDeviceAttestationCompleted"
+            )
+            val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
+                p,
+                JSONObject(
+                    mapOf(
+                        jsonKeyHandle to handle,
+                        "devicePtr" to devicePtr,
+                        "attestationInfo" to attestationInfo?.toJSONObject(),
+                        "errorCode" to errorCode
+                    )
+                ).toString()
+            )
+            Objects.requireNonNull(
+                flutterResult,
+                createCallFlutterExceptionMessage("onDeviceAttestationCompleted")
+            )
+        } catch (e: Exception) {
+            logDeviceControlException(
+                "DeviceAttestationDelegate.onDeviceAttestationCompleted",
+                e
+            )
+        }
     }
     return createFlutterRequestResult(0, JSONObject())
 }
@@ -906,10 +1071,13 @@ fun invoke(params: String): String {
                     try {
                         val p = createFlutterCallPath(deviceControllerHost, "InvokeCallback/onError")
                         val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, JSONObject(mapOf(
-                            jsonKeyHandle to controlId, "invokeCallbackPoint" to callbackId, "error" to (ex?.toString() ?: ""))).toString())
+                            jsonKeyHandle to controlId,
+                            "invokeCallbackPoint" to callbackId,
+                            "error" to safeError(ex)
+                        )).toString())
                         Objects.requireNonNull(flutterResult, "Flutter InvokeCallback/onError result null")
                     } catch (e: Exception) {
-                        e.printStackTrace()
+                        logDeviceControlException("Device control callback", e)
                     }
                 }
 
@@ -942,7 +1110,7 @@ fun invoke(params: String): String {
                         val flutterResult = FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(p, cbParams.toString()).toString()
                         Objects.requireNonNull(flutterResult, "Flutter InvokeCallback/onResponse result null")
                     } catch (e: Exception) {
-                        e.printStackTrace()
+                        logDeviceControlException("Device control callback", e)
                     }
 
                 }
@@ -954,7 +1122,7 @@ fun invoke(params: String): String {
                             jsonKeyHandle to controlId, "invokeCallbackPoint" to callbackId)).toString())
                         Objects.requireNonNull(flutterResult, "Flutter InvokeCallback/onDone result null")
                     } catch (e: Exception) {
-                        e.printStackTrace()
+                        logDeviceControlException("Device control callback", e)
                     }
 
                 }
@@ -1033,7 +1201,7 @@ fun subscribe(params: String): String {
             eventPath: ChipEventPath?,
             e: java.lang.Exception
         ) {
-            matterPrint("subscribe onError attributePath:$attributePath eventPath:$eventPath $e")
+            logDeviceControlException("SubscriptionCallback.onError", e)
             val p = createFlutterCallPath(deviceControllerHost, "SubscriptionCallback/onError")
             try {
                 FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
@@ -1041,10 +1209,10 @@ fun subscribe(params: String): String {
                     JSONObject(mapOf(
                         jsonKeyHandle to controlId,
                         "subscriptionCallbackPoint" to callbackHandle,
-                        "error" to e.toString(),
+                        "error" to safeError(e),
                     )).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -1055,7 +1223,7 @@ fun subscribe(params: String): String {
                     p,
                     JSONObject(mapOf(jsonKeyHandle to controlId, "subscriptionCallbackPoint" to callbackHandle, "nodeState" to nodeState?.toJson())).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -1066,7 +1234,7 @@ fun subscribe(params: String): String {
                     p,
                     JSONObject(mapOf(jsonKeyHandle to controlId, "subscriptionCallbackPoint" to callbackHandle)).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
     }
@@ -1082,7 +1250,7 @@ fun subscribe(params: String): String {
                                 p,
                                 JSONObject(mapOf(jsonKeyHandle to controlId, "subscriptionCallbackPoint" to callbackHandle, "subscriptionId" to subscriptionId)).toString())
                         } catch (e: Exception) {
-                            e.printStackTrace()
+                            logDeviceControlException("Device control callback", e)
                         }
                     },
                     null,
@@ -1113,7 +1281,7 @@ fun subscribe(params: String): String {
                         p,
                         JSONObject(mapOf(jsonKeyHandle to controlId, "subscriptionCallbackPoint" to callbackHandle, "subscriptionId" to subscriptionId)).toString())
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    logDeviceControlException("Device control callback", e)
                 }
             },
             null,
@@ -1189,9 +1357,16 @@ fun read(params: String): String {
             try {
                 FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
                     p,
-                    JSONObject(mapOf(jsonKeyHandle to controlId, "reportCallbackPoint" to callbackHandle, "error" to e?.toString())).toString())
+                    JSONObject(
+                        mapOf(
+                            jsonKeyHandle to controlId,
+                            "reportCallbackPoint" to callbackHandle,
+                            "error" to safeError(e)
+                        )
+                    ).toString()
+                )
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -1202,7 +1377,7 @@ fun read(params: String): String {
                     p,
                     JSONObject(mapOf(jsonKeyHandle to controlId, "reportCallbackPoint" to callbackHandle, "nodeState" to nodeState?.toJson())).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -1213,7 +1388,7 @@ fun read(params: String): String {
                     p,
                     JSONObject(mapOf(jsonKeyHandle to controlId, "reportCallbackPoint" to callbackHandle)).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
     }
@@ -1268,12 +1443,12 @@ fun write(params: String): String {
                     JSONObject(mapOf(
                         jsonKeyHandle to controlId,
                         "writeAttributesCallbackPoint" to callbackHandle,
-                        "error" to e?.toString(),
+                        "error" to safeError(e),
                         "attributePath" to attributePath?.toJson()
                     ),
                     ).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -1290,7 +1465,7 @@ fun write(params: String): String {
                     ),
                     ).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -1301,7 +1476,7 @@ fun write(params: String): String {
                     p,
                     JSONObject(mapOf(jsonKeyHandle to controlId, "writeAttributesCallbackPoint" to callbackHandle)).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
     }
@@ -1338,7 +1513,7 @@ fun connectedDevice(params: String): String {
                     p,
                     JSONObject(mapOf(jsonKeyHandle to controlId, "callbackHandle" to callbackHandle, "context" to devicePointer)).toString())
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
 
@@ -1347,9 +1522,17 @@ fun connectedDevice(params: String): String {
             try {
                 FlutterMatterPlugin.externalChannel?.invokeMethodBlockGet(
                     p,
-                    JSONObject(mapOf(jsonKeyHandle to controlId, "callbackHandle" to callbackHandle, "nodeId" to nodeId, "error" to error?.toString())).toString())
+                    JSONObject(
+                        mapOf(
+                            jsonKeyHandle to controlId,
+                            "callbackHandle" to callbackHandle,
+                            "nodeId" to nodeId,
+                            "error" to safeError(error)
+                        )
+                    ).toString()
+                )
             } catch (e: Exception) {
-                e.printStackTrace()
+                logDeviceControlException("Device control callback", e)
             }
         }
     })
@@ -1397,7 +1580,7 @@ fun openPairingWindowWithPIN(params: String): String {
                         ).toString()
                     )
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    logDeviceControlException("Device control callback", e)
                 }
             }
 
@@ -1420,7 +1603,7 @@ fun openPairingWindowWithPIN(params: String): String {
                         ).toString()
                     )
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    logDeviceControlException("Device control callback", e)
                 }
             }
         })

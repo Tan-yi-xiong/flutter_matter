@@ -17,6 +17,7 @@
 
 #import "DefaultsUtils.h"
 #import "FabricKeys.h"
+#import "Utiles.h"
 
 NSString * const ZGMTRToolDefaultsDomain = @"com.matter.CHIPTool";
 NSString * const kNetworkSSIDDefaultsKey = @"networkSSID";
@@ -79,11 +80,13 @@ ZGMTRDeviceController * InitializeZGMTR(void)
         __auto_type * factory = [ZGMTRControllerFactory sharedInstance];
         __auto_type * factoryParams = [[ZGMTRControllerFactoryParams alloc] initWithStorage:storage];
         if (![factory startup:factoryParams]) {
+            FlutterMatterLog(@"Matter controller factory startup failed");
             return;
         }
 
         __auto_type * keys = [[FabricKeys alloc] init];
         if (keys == nil) {
+            FlutterMatterLog(@"Matter fabric keys could not be initialized");
             return;
         }
 
@@ -104,14 +107,14 @@ ZGMTRDeviceController * ZGMTRRestartController(ZGMTRDeviceController * controlle
 {
     __auto_type * keys = [[FabricKeys alloc] init];
     if (keys == nil) {
-        NSLog(@"No keys, can't restart controller");
+        FlutterMatterLog(@"No fabric keys; controller was not restarted");
         return controller;
     }
 
-    NSLog(@"Shutting down the stack");
+    FlutterMatterLog(@"Shutting down Matter controller");
     [controller shutdown];
 
-    NSLog(@"Starting up the stack");
+    FlutterMatterLog(@"Starting Matter controller");
     __auto_type * params = [[ZGMTRDeviceControllerStartupParams alloc] initWithSigningKeypair:keys fabricId:1 ipk:keys.ipk];
 
     sController = [[ZGMTRControllerFactory sharedInstance] startControllerOnExistingFabric:params];
@@ -130,7 +133,15 @@ uint64_t ZGMTRGetLastPairedDeviceId(void)
 
 BOOL ZGMTRGetConnectedDevice(ZGMTRDeviceConnectionCallback completionHandler)
 {
+    if (completionHandler == nil) {
+        FlutterMatterLog(@"Connected-device lookup missing completion handler");
+        return NO;
+    }
     ZGMTRDeviceController * controller = InitializeZGMTR();
+    if (controller == nil) {
+        FlutterMatterLog(@"No Matter controller is available for device lookup");
+        return NO;
+    }
 
     // Let's use the last device that was paired
     uint64_t deviceId = ZGMTRGetLastPairedDeviceId();
@@ -139,11 +150,15 @@ BOOL ZGMTRGetConnectedDevice(ZGMTRDeviceConnectionCallback completionHandler)
 
 ZGMTRBaseDevice * ZGMTRGetDeviceBeingCommissioned(void)
 {
-    NSError * error;
+    NSError * error = nil;
     ZGMTRDeviceController * controller = InitializeZGMTR();
+    if (controller == nil) {
+        FlutterMatterLog(@"No Matter controller is available for device lookup");
+        return nil;
+    }
     ZGMTRBaseDevice * device = [controller getDeviceBeingCommissioned:ZGMTRGetLastPairedDeviceId() error:&error];
     if (error) {
-        NSLog(@"Error retrieving device being commissioned for deviceId %llu", ZGMTRGetLastPairedDeviceId());
+        FlutterMatterLogNSError(@"defaults.getDeviceBeingCommissioned", error);
         return nil;
     }
     return device;
@@ -151,7 +166,15 @@ ZGMTRBaseDevice * ZGMTRGetDeviceBeingCommissioned(void)
 
 BOOL ZGMTRGetConnectedDeviceWithID(uint64_t deviceId, ZGMTRDeviceConnectionCallback completionHandler)
 {
+    if (completionHandler == nil) {
+        FlutterMatterLog(@"Commissioned-device lookup missing completion handler");
+        return NO;
+    }
     ZGMTRDeviceController * controller = InitializeZGMTR();
+    if (controller == nil) {
+        FlutterMatterLog(@"No Matter controller is available for commissioned-device lookup");
+        return NO;
+    }
 
     return [controller getBaseDevice:deviceId queue:dispatch_get_main_queue() completionHandler:completionHandler];
 }
@@ -174,16 +197,24 @@ void ZGMTRUnpairDeviceWithID(uint64_t deviceId)
     ZGMTRSetDevicePaired(deviceId, NO);
     ZGMTRGetConnectedDeviceWithID(deviceId, ^(ZGMTRBaseDevice * _Nullable device, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Failed to unpair device %llu still removing from CHIPTool. %@", deviceId, error);
+            FlutterMatterLogNSError(@"defaults.unpair.lookup", error);
             return;
         }
-        NSLog(@"Attempting to unpair device %llu", deviceId);
+        if (device == nil) {
+            FlutterMatterLog(@"Unpair device lookup returned no device");
+            return;
+        }
+        FlutterMatterLog(@"Attempting to unpair commissioned device");
         ZGMTRBaseClusterOperationalCredentials * opCredsCluster =
             [[ZGMTRBaseClusterOperationalCredentials alloc] initWithDevice:device endpoint:0 queue:dispatch_get_main_queue()];
         [opCredsCluster
             readAttributeCurrentFabricIndexWithCompletionHandler:^(NSNumber * _Nullable value, NSError * _Nullable error) {
                 if (error) {
-                    NSLog(@"Failed to get current fabric index for device %llu still removing from CHIPTool. %@", deviceId, error);
+                    FlutterMatterLogNSError(@"defaults.unpair.fabricIndex", error);
+                    return;
+                }
+                if (value == nil) {
+                    FlutterMatterLog(@"Unpair fabric-index lookup returned no value");
                     return;
                 }
                 ZGMTROperationalCredentialsClusterRemoveFabricParams * params =
@@ -193,11 +224,10 @@ void ZGMTRUnpairDeviceWithID(uint64_t deviceId)
                                      completionHandler:^(ZGMTROperationalCredentialsClusterNOCResponseParams * _Nullable data,
                                          NSError * _Nullable error) {
                                          if (error) {
-                                             NSLog(@"Failed to remove current fabric index %@ for device %llu. %@",
-                                                 params.fabricIndex, deviceId, error);
+                                             FlutterMatterLogNSError(@"defaults.unpair.removeFabric", error);
                                              return;
                                          }
-                                         NSLog(@"Successfully unpaired deviceId %llu", deviceId);
+                                         FlutterMatterLog(@"Successfully unpaired commissioned device");
                                      }];
             }];
     });
@@ -210,7 +240,10 @@ void ZGMTRUnpairDeviceWithID(uint64_t deviceId)
 - (nullable NSData *)storageDataForKey:(NSString *)key
 {
     NSData * value = ZGMTRGetDomainValueForKey(ZGMTRToolDefaultsDomain, key);
-    NSLog(@"ZGMTRPersistentStorageDelegate Get Value for Key: %@, value %@", key, value);
+    if (value != nil && ![value isKindOfClass:[NSData class]]) {
+        FlutterMatterLog(@"Persistent storage returned an unexpected value type");
+        return nil;
+    }
     return value;
 }
 

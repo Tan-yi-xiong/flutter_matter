@@ -23,102 +23,124 @@ static NSMutableDictionary *controls = nil;
 static NSMutableDictionary *onNOCChainGenerationCompletes = nil;
 static dispatch_queue_t connectDeviceQueue = nil;
 
+static void FlutterMatterEnsureDeviceControlState(void) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        controls = [[NSMutableDictionary alloc] init];
+        onNOCChainGenerationCompletes = [[NSMutableDictionary alloc] init];
+        connectDeviceQueue = dispatch_queue_create("connectDeviceQueue", DISPATCH_QUEUE_SERIAL);
+    });
+}
+
+static FlutterDeviceController *FlutterMatterControllerForHandle(NSString *handle) {
+    if (handle.length == 0) {
+        return nil;
+    }
+    FlutterMatterEnsureDeviceControlState();
+    @synchronized (controls) {
+        return controls[handle];
+    }
+}
+
+static void FlutterMatterStoreController(NSString *handle, FlutterDeviceController *controller) {
+    FlutterMatterEnsureDeviceControlState();
+    @synchronized (controls) {
+        controls[handle] = controller;
+    }
+}
+
+static void FlutterMatterRemoveController(NSString *handle) {
+    FlutterMatterEnsureDeviceControlState();
+    @synchronized (controls) {
+        [controls removeObjectForKey:handle];
+    }
+}
+
+static NSError *FlutterMatterOperationError(NSString *message) {
+    return [NSError errorWithDomain:@"FlutterMatter"
+                               code:1
+                           userInfo:@{NSLocalizedDescriptionKey: message ?: @"Matter operation failed."}];
+}
+
+static BOOL FlutterMatterInvokeCallback(NSString *path, NSDictionary *payload) {
+    @try {
+        NSString *arguments = toJSONStringFromObject(payload ?: @{});
+        NSString *result = invokeMethodBlockGet([Global externalChannel], path, arguments);
+        if (result == nil) {
+            FlutterMatterLog([NSString stringWithFormat:@"callback %@ returned no result", path ?: @""]);
+            return NO;
+        }
+        return YES;
+    } @catch (NSException *exception) {
+        FlutterMatterLogException(path ?: @"callback delivery", exception);
+        return NO;
+    }
+}
+
 /////////// Callbacks
 
 @implementation PairingDelegateWarp
 
 - (void)onStatusUpdate:(ZGMTRPairingStatus)status {
-    @try {
-        NSString *p = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onStatusUpdate");
-        NSString *callResult = invokeMethodBlockGet([Global externalChannel], p, toJSONStringFromObject(@{@"status": @(status), jsonKeyHandle: _handle}));
-        if (callResult == nil) {
-            @throw [NSException
-                    exceptionWithName:@"onStatusUpdateException"
-                               reason:@"flutter onStatusUpdate result null"
-                             userInfo:nil];
-        }
-    } @catch (NSException *exception) {
-        FlutterMatterLog([[NSString alloc] initWithFormat:@"onStatusUpdate exception %@", [exception reason]]);
-    } @finally {
-        
-    }
+    NSString *path = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onStatusUpdate");
+    FlutterMatterInvokeCallback(path, @{@"status": @(status), jsonKeyHandle: _handle ?: @""});
 }
 
 - (void)onPairingComplete:(NSError * _Nullable)error {
-    @try {
-        NSString *p = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onPairingComplete");
-        NSString *callResult = invokeMethodBlockGet([Global externalChannel], p, toJSONStringFromObject(@{@"errorCode": error == nil ? @(0) : @([error code]), jsonKeyHandle: _handle}));
-        if (callResult == nil) {
-            @throw [NSException
-                    exceptionWithName:@"onPairingCompleteException"
-                               reason:@"flutter onPairingComplete result null"
-                             userInfo:nil];
-        }
-    } @catch (NSException *exception) {
-        FlutterMatterLog([[NSString alloc] initWithFormat:@"onPairingComplete exception %@", [exception reason]]);
-    } @finally {
-        
-    }
-    if (!error) {
-        NSLog(@"onPairingComplete start commissionDevice");
-        NSError *err;
-        [_deviceController commissionDevice:[_deviceId unsignedLongValue] commissioningParams:_commissioningParameters error:&err];
-        if (err) {
-            [self onCommissioningComplete:err];
+    NSString *path = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onPairingComplete");
+    FlutterMatterInvokeCallback(path, @{
+        @"errorCode": error == nil ? @(0) : @([error code]),
+        jsonKeyHandle: _handle ?: @"",
+    });
+
+    // A CompletionListener-only delegate has no commissioning parameters. Do
+    // not attempt to commission with nil state; the pairDevice path supplies
+    // all three values.
+    if (error == nil && _deviceController != nil && _deviceId != nil && _commissioningParameters != nil) {
+        @try {
+            NSError *commissionError = nil;
+            BOOL started = [_deviceController commissionDevice:[_deviceId unsignedLongLongValue]
+                                            commissioningParams:_commissioningParameters
+                                                          error:&commissionError];
+            if (!started && commissionError == nil) {
+                commissionError = FlutterMatterOperationError(@"Commissioning could not be started.");
+            }
+            if (commissionError != nil) {
+                [self onCommissioningComplete:commissionError];
+            }
+        } @catch (NSException *exception) {
+            FlutterMatterLogException(@"PairingDelegateWarp.onPairingComplete.commission", exception);
+            [self onCommissioningComplete:FlutterMatterOperationError(@"Commissioning failed.")];
         }
     }
 }
 
  - (void)onCommissioningComplete:(NSError * _Nullable)error {
-     @try {
-         NSString *p = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onCommissioningComplete");
-         NSString *callResult = invokeMethodBlockGet([Global externalChannel], p, toJSONStringFromObject(@{@"nodeId": _deviceId, @"errorCode": error == nil ? @(0) : @([error code]), jsonKeyHandle: _handle}));
-         if (callResult == nil) {
-             @throw [NSException
-                     exceptionWithName:@"onCommissioningCompleteException"
-                                reason:@"flutter onCommissioningComplete result null"
-                              userInfo:nil];
-         }
-     } @catch (NSException *exception) {
-         FlutterMatterLog([[NSString alloc] initWithFormat:@"onCommissioningComplete exception %@", [exception reason]]);
-     } @finally {
-         
-     }
+     NSString *path = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onCommissioningComplete");
+     FlutterMatterInvokeCallback(path, @{
+         @"nodeId": _deviceId ?: @(0),
+         @"errorCode": error == nil ? @(0) : @([error code]),
+         jsonKeyHandle: _handle ?: @"",
+     });
  }
 
 - (void)onPairingDeleted:(NSError * _Nullable)error {
-    @try {
-        NSString *p = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onPairingDeleted");
-        NSString *callResult = invokeMethodBlockGet([Global externalChannel], p, toJSONStringFromObject(@{@"errorCode": error == nil ? @(0) : @([error code]), jsonKeyHandle: _handle}));
-        if (callResult == nil) {
-            @throw [NSException
-                    exceptionWithName:@"onPairingDeletedException"
-                               reason:@"flutter onPairingDeleted result null"
-                             userInfo:nil];
-        }
-    } @catch (NSException *exception) {
-        FlutterMatterLog([[NSString alloc] initWithFormat:@"onPairingDeleted exception %@", [exception reason]]);
-    } @finally {
-        
-    }
+    NSString *path = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onPairingDeleted");
+    FlutterMatterInvokeCallback(path, @{
+        @"errorCode": error == nil ? @(0) : @([error code]),
+        jsonKeyHandle: _handle ?: @"",
+    });
 }
 
 - (void)onCommissioningStatusUpdate:(NSNumber * _Nullable)nodeId commissioningStage:(NSString *)commissioningStage error:(NSError * _Nullable)error
 {
-    @try {
-        NSString *p = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onCommissioningStatusUpdate");
-        NSString *callResult = invokeMethodBlockGet([Global externalChannel], p, toJSONStringFromObject(@{@"errorCode": error == nil ? @(0) : @([error code]), jsonKeyHandle: _handle, @"stage": commissioningStage, @"nodeId": nodeId}));
-        if (callResult == nil) {
-            @throw [NSException
-                    exceptionWithName:@"onPairingDeletedException"
-                               reason:@"flutter onPairingDeleted result null"
-                             userInfo:nil];
-        }
-    } @catch (NSException *exception) {
-        FlutterMatterLog([[NSString alloc] initWithFormat:@"onPairingDeleted exception %@", [exception reason]]);
-    } @finally {
-        
-    }
+    NSString *path = createFlutterCallPath(deviceControllerHost, @"CompletionListener/onCommissioningStatusUpdate");
+    FlutterMatterInvokeCallback(path, @{
+        @"errorCode": error == nil ? @(0) : @([error code]),
+        jsonKeyHandle: _handle ?: @"",
+        @"stage": commissioningStage ?: @"",
+        @"nodeId": nodeId ?: @(0),
+    });
 }
 
 - (instancetype)initWithHandle:(NSString *)handle commissioningParameters:(ZGMTRCommissioningParameters *)commissioningParameters deviceController:(ZGMTRDeviceController *)deviceController deviceId:(NSNumber *)deviceId {
@@ -137,46 +159,49 @@ static dispatch_queue_t connectDeviceQueue = nil;
 
 @implementation KeypairWarp
 - (NSData *)signMessageECDSA_DER:(NSData *)message {
-    FlutterMatterLog([[NSString alloc]
-        initWithFormat:@"%@ KeypairDelegate.signMessageECDSA_DER call",
-                       [[NSThread currentThread] name]]);
-    NSString *signMessageECDSA = createFlutterCallPath(
-        deviceControllerHost, @"KeypairDelegate/EcdsaSignMessage");
-    
-    NSString *flutterReuslt = invokeMethodBlockGet(
-        [Global externalChannel], signMessageECDSA,
-        toJSONStringFromObject(@{@"handle" : _handle, @"message" : nsDataToIntegerArray(message)}));
-    
-    if (flutterReuslt == nil) {
-        @throw [NSException
-            exceptionWithName:@"callFlutterExceptionName"
-                       reason:@"KeypairDelegate.EcdsaSignMessage result null"
-                     userInfo:nil];
+    @try {
+        NSString *signMessageECDSA = createFlutterCallPath(
+            deviceControllerHost, @"KeypairDelegate/EcdsaSignMessage");
+        NSString *flutterResult = invokeMethodBlockGet(
+            [Global externalChannel], signMessageECDSA,
+            toJSONStringFromObject(@{@"handle" : _handle ?: @"",
+                                     @"message" : nsDataToIntegerArray(message)}));
+        if (flutterResult == nil) {
+            @throw [NSException exceptionWithName:@"FlutterMatterCallbackDeliveryException"
+                                           reason:@"Keypair signing callback failed."
+                                         userInfo:nil];
+        }
+        return FlutterMatterRequiredByteArray(FlutterMatterParseJSONObject(flutterResult),
+                                              @"ecdsaSign");
+    } @catch (NSException *exception) {
+        FlutterMatterLogException(@"KeypairWarp.signMessageECDSA_DER", exception);
+        return nil;
     }
-    return toByteArrayFromJSONArray(
-        [parseJSONString(flutterReuslt) objectForKey:@"ecdsaSign"]);
 }
 
 - (SecKeyRef)publicKey {
-    FlutterMatterLog(
-        [[NSString alloc] initWithFormat:@"%@ KeypairDelegate.publicKey call",
-                                         [[NSThread currentThread] name]]);
-    NSString *getPublicKeyPath = createFlutterCallPath(
-        deviceControllerHost, @"KeypairDelegate/GetPublicKey");
-    NSString *flutterReuslt =
-        invokeMethodBlockGet([Global externalChannel], getPublicKeyPath,
-                             toJSONStringFromObject(@{@"handle" : _handle}));
-    if (flutterReuslt == nil) {
-        @throw [NSException
-            exceptionWithName:@"MainThreadException"
-                       reason:@"KeypairDelegate.publicKey result null"
-                     userInfo:nil];
+    @try {
+        NSString *getPublicKeyPath = createFlutterCallPath(
+            deviceControllerHost, @"KeypairDelegate/GetPublicKey");
+        NSString *flutterResult =
+            invokeMethodBlockGet([Global externalChannel], getPublicKeyPath,
+                                 toJSONStringFromObject(@{@"handle" : _handle ?: @""}));
+        if (flutterResult == nil) {
+            @throw [NSException exceptionWithName:@"FlutterMatterCallbackDeliveryException"
+                                           reason:@"Keypair public-key callback failed."
+                                         userInfo:nil];
+        }
+        NSData *publicKeyData = FlutterMatterRequiredByteArray(
+            FlutterMatterParseJSONObject(flutterResult), @"publicKey");
+        SecKeyRef key = nsDataToSecKey(publicKeyData);
+        if (key == NULL) {
+            FlutterMatterLog(@"KeypairWarp.publicKey returned an invalid key");
+        }
+        return key;
+    } @catch (NSException *exception) {
+        FlutterMatterLogException(@"KeypairWarp.publicKey", exception);
+        return NULL;
     }
-    NSData *publicKeyData = toByteArrayFromJSONArray(
-        [parseJSONString(flutterReuslt) objectForKey:@"publicKey"]);
-
-    // 使用 SecKeyCreateWithData 创建 SecKeyRef
-    return nsDataToSecKey(publicKeyData);
 }
 
 - (instancetype)initWithHandle:(NSString *)handle {
@@ -193,41 +218,55 @@ static dispatch_queue_t connectDeviceQueue = nil;
 - (void)onNOCChainGenerationNeeded:(ZGCSRInfo *)csrInfo
                    attestationInfo:(ZGAttestationInfo *)attestationInfo
       onNOCChainGenerationComplete:(ZGMTRNOCChainGenerationCompleteHandler)onNOCChainGenerationComplete {
-    FlutterMatterLog([[NSString alloc]
-        initWithFormat:@"%@ KeypairDelegate.signMessageECDSA_DER call",
-                       [[NSThread currentThread] name]]);
-    NSString *requestPath = createFlutterCallPath(deviceControllerHost, @"NOCChainIssuer/onNOCChainGenerationNeeded");
-    NSDictionary *csrInfoJson = @{
-        @"csr": nsDataToIntegerArray([csrInfo csr]),
-        @"elementsSignature": nsDataToIntegerArray([csrInfo elementsSignature]),
-        @"elements": nsDataToIntegerArray([csrInfo elements]),
-        @"nonce": nsDataToIntegerArray([csrInfo nonce])
-    };
-    NSDictionary *attestationInfoJson = @{
-        @"challenge": nsDataToIntegerArray([attestationInfo challenge]),
-        @"nonce": nsDataToIntegerArray([attestationInfo nonce]),
-        @"elements": nsDataToIntegerArray([attestationInfo elements]),
-        @"elementsSignature": nsDataToIntegerArray([attestationInfo elementsSignature]),
-        @"dac": nsDataToIntegerArray([attestationInfo dac]),
-        @"pai": nsDataToIntegerArray([attestationInfo pai]),
-        @"firmwareInfo": nsDataToIntegerArray([attestationInfo firmwareInfo]),
-        @"certificationDeclaration": nsDataToIntegerArray([attestationInfo certificationDeclaration]),
-        @"vendorId": @(0),
-        @"productId": @(0)
-    };
+    FlutterMatterEnsureDeviceControlState();
     NSString *uuid = [[NSUUID UUID] UUIDString];
-    [onNOCChainGenerationCompletes setObject:onNOCChainGenerationComplete forKey:uuid];
-    NSString *flutterReuslt = invokeMethodBlockGet([Global externalChannel], requestPath, toJSONStringFromObject(@{
-        jsonKeyHandle: _handle,
-        @"csrInfo": csrInfoJson,
-        @"attestationInfo": attestationInfoJson,
-        @"onNOCChainGenerationCompleteHandle": uuid
-    }));
-    if (flutterReuslt == nil) {
-        @throw [NSException
-                exceptionWithName:@"onNOCChainGenerationNeededException"
-                           reason:@"flutter onNOCChainGenerationNeeded result null"
-                         userInfo:nil];
+    @try {
+        NSString *requestPath = createFlutterCallPath(deviceControllerHost,
+                                                       @"NOCChainIssuer/onNOCChainGenerationNeeded");
+        NSDictionary *csrInfoJson = @{
+            @"csr": nsDataToIntegerArray([csrInfo csr]),
+            @"elementsSignature": nsDataToIntegerArray([csrInfo elementsSignature]),
+            @"elements": nsDataToIntegerArray([csrInfo elements]),
+            @"nonce": nsDataToIntegerArray([csrInfo nonce]),
+        };
+        NSDictionary *attestationInfoJson = @{
+            @"challenge": nsDataToIntegerArray([attestationInfo challenge]),
+            @"nonce": nsDataToIntegerArray([attestationInfo nonce]),
+            @"elements": nsDataToIntegerArray([attestationInfo elements]),
+            @"elementsSignature": nsDataToIntegerArray([attestationInfo elementsSignature]),
+            @"dac": nsDataToIntegerArray([attestationInfo dac]),
+            @"pai": nsDataToIntegerArray([attestationInfo pai]),
+            @"firmwareInfo": nsDataToIntegerArray([attestationInfo firmwareInfo]),
+            @"certificationDeclaration": nsDataToIntegerArray([attestationInfo certificationDeclaration]),
+            @"vendorId": @(0),
+            @"productId": @(0),
+        };
+
+        @synchronized (onNOCChainGenerationCompletes) {
+            onNOCChainGenerationCompletes[uuid] = [onNOCChainGenerationComplete copy];
+        }
+        NSString *flutterResult = invokeMethodBlockGet(
+            [Global externalChannel], requestPath,
+            toJSONStringFromObject(@{
+                jsonKeyHandle: _handle ?: @"",
+                @"csrInfo": csrInfoJson,
+                @"attestationInfo": attestationInfoJson,
+                @"onNOCChainGenerationCompleteHandle": uuid,
+            }));
+        if (flutterResult == nil) {
+            @throw [NSException exceptionWithName:@"FlutterMatterCallbackDeliveryException"
+                                           reason:@"NOC chain generation callback failed."
+                                         userInfo:nil];
+        }
+    } @catch (NSException *exception) {
+        FlutterMatterLogException(@"ZGMTRNOCChainIssuerWarp.onNOCChainGenerationNeeded",
+                                  exception);
+        @synchronized (onNOCChainGenerationCompletes) {
+            [onNOCChainGenerationCompletes removeObjectForKey:uuid];
+        }
+        NSError *error = FlutterMatterOperationError(@"NOC chain generation callback failed.");
+        onNOCChainGenerationComplete([NSData data], [NSData data], [NSData data],
+                                     [NSData data], nil, &error);
     }
 }
 
@@ -242,73 +281,49 @@ static dispatch_queue_t connectDeviceQueue = nil;
 @end
 
 static FlutterControllerParams * mapFlutterControllerParams(NSDictionary *jsonObject) {
-    NSArray *rootCertificate = [jsonObject objectForKey:@"rootCertificate"];
-    NSData *rootCertificateData = nil;
-    if (![rootCertificate isEqual:[NSNull null]]) {
-        rootCertificateData = toByteArrayFromJSONArray(rootCertificate);
-    }
-    NSArray *intermediateCertificate =
-        [jsonObject objectForKey:@"intermediateCertificate"];
-    NSData *intermediateCertificateData = nil;
-    if (![intermediateCertificate isEqual:[NSNull null]]) {
-        intermediateCertificateData = toByteArrayFromJSONArray(intermediateCertificate);
-    }
-    NSArray *operationalCertificate =
-        [jsonObject objectForKey:@"operationalCertificate"];
-    NSData *operationalCertificateData = nil;
-    if (![operationalCertificate isEqual:[NSNull null]]) {
-        operationalCertificateData = toByteArrayFromJSONArray(operationalCertificate);
-    }
-    NSArray *ipk = [jsonObject objectForKey:@"ipk"];
-    NSData *ipkData = nil;
-    if (![ipk isEqual:[NSNull null]]) {
-        ipkData = toByteArrayFromJSONArray(ipk);
-    }
-    NSNumber *fabricId = [jsonObject objectForKey:@"fabricId"];
-    NSNumber *controllerVendorId =
-        [jsonObject objectForKey:@"controllerVendorId"];
-    NSNumber *udpListenPort = [jsonObject objectForKey:@"udpListenPort"];
-    NSNumber *failsafeTimerSeconds =
-        [jsonObject objectForKey:@"failsafeTimerSeconds"];
-    NSNumber *caseFailsafeTimerSeconds =
-        [jsonObject objectForKey:@"caseFailsafeTimerSeconds"];
-    NSNumber *nodeId = [jsonObject objectForKey:@"nodeId"];
-    NSString *keypairDelegateHandle =
-        [jsonObject objectForKey:@"keypairDelegateHandle"];
-    NSNumber *setUdpListenPort = [jsonObject objectForKey:@"udpListenPort"];
-    NSNumber *attemptNetworkScanWiFi = [jsonObject objectForKey:@"attemptNetworkScanWiFi"];
-    NSNumber *attemptNetworkScanThread = [jsonObject objectForKey:@"attemptNetworkScanThread"];
-    NSNumber *skipCommissioningComplete = [jsonObject objectForKey:@"skipCommissioningComplete"];
-    NSString *countryCode = [jsonObject objectForKey:@"countryCode"];
-    NSNumber *adminSubject = [jsonObject objectForKey:@"adminSubject"];
-    NSNumber *regulatoryLocationType = [jsonObject objectForKey:@"regulatoryLocationType"];
-    NSNumber *enableServerInteractions = [jsonObject objectForKey:@"enableServerInteractions"];
-    if ([setUdpListenPort isEqual:[NSNull null]]) {
-        setUdpListenPort = @(0);
-    }
-    if ([attemptNetworkScanWiFi isEqual:[NSNull null]]) {
-        attemptNetworkScanWiFi = @(0);
-    }
-    if ([attemptNetworkScanThread isEqual:[NSNull null]]) {
-        attemptNetworkScanThread = @(0);
-    }
-    if ([skipCommissioningComplete isEqual:[NSNull null]]) {
-        skipCommissioningComplete = @(0);
-    }
-    if ([regulatoryLocationType isEqual:[NSNull null]]) {
-        regulatoryLocationType = @(0);
-    }
-    if ([enableServerInteractions isEqual:[NSNull null]]) {
-        enableServerInteractions = @(0);
-    }
-    if ([failsafeTimerSeconds isEqual:[NSNull null]]) {
-        failsafeTimerSeconds = @(30);
-    }
-    if ([caseFailsafeTimerSeconds isEqual:[NSNull null]]) {
-        caseFailsafeTimerSeconds = @(30);
-    }
-    
-    return [[FlutterControllerParams alloc] init:[fabricId intValue] udpListenPort:[udpListenPort intValue] controllerVendorId:[controllerVendorId intValue] failsafeTimerSeconds:[failsafeTimerSeconds intValue] caseFailsafeTimerSeconds:[caseFailsafeTimerSeconds intValue] attemptNetworkScanWiFi:[attemptNetworkScanWiFi intValue] != 0 attemptNetworkScanThread:[attemptNetworkScanThread intValue] != 0 skipCommissioningComplete:[skipCommissioningComplete intValue] != 0 countryCode:countryCode regulatoryLocationType:[regulatoryLocationType intValue] keypairDelegate:keypairDelegateHandle rootCertificate:rootCertificateData intermediateCertificate:intermediateCertificateData operationalCertificate:operationalCertificateData ipk:ipkData adminSubject:[adminSubject intValue] enableServerInteractions:[enableServerInteractions intValue] != 0 setupURL:nil nodeId:[nodeId intValue]];
+    NSArray *rootCertificate = FlutterMatterOptionalArray(jsonObject, @"rootCertificate");
+    NSArray *intermediateCertificate = FlutterMatterOptionalArray(jsonObject, @"intermediateCertificate");
+    NSArray *operationalCertificate = FlutterMatterOptionalArray(jsonObject, @"operationalCertificate");
+    NSArray *ipk = FlutterMatterOptionalArray(jsonObject, @"ipk");
+    NSData *rootCertificateData = rootCertificate == nil ? nil : toByteArrayFromJSONArray(rootCertificate);
+    NSData *intermediateCertificateData = intermediateCertificate == nil ? nil : toByteArrayFromJSONArray(intermediateCertificate);
+    NSData *operationalCertificateData = operationalCertificate == nil ? nil : toByteArrayFromJSONArray(operationalCertificate);
+    NSData *ipkData = ipk == nil ? nil : toByteArrayFromJSONArray(ipk);
+
+    NSNumber *fabricId = FlutterMatterOptionalNumber(jsonObject, @"fabricId") ?: @(0);
+    NSNumber *controllerVendorId = FlutterMatterOptionalNumber(jsonObject, @"controllerVendorId") ?: @(0);
+    NSNumber *udpListenPort = FlutterMatterOptionalNumber(jsonObject, @"udpListenPort") ?: @(0);
+    NSNumber *failsafeTimerSeconds = FlutterMatterOptionalNumber(jsonObject, @"failsafeTimerSeconds") ?: @(30);
+    NSNumber *caseFailsafeTimerSeconds = FlutterMatterOptionalNumber(jsonObject, @"caseFailsafeTimerSeconds") ?: @(30);
+    NSNumber *nodeId = FlutterMatterOptionalNumber(jsonObject, @"nodeId") ?: @(0);
+    NSString *keypairDelegateHandle = FlutterMatterOptionalString(jsonObject, @"keypairDelegateHandle");
+    NSNumber *attemptNetworkScanWiFi = FlutterMatterOptionalBoolean(jsonObject, @"attemptNetworkScanWiFi") ?: @(NO);
+    NSNumber *attemptNetworkScanThread = FlutterMatterOptionalBoolean(jsonObject, @"attemptNetworkScanThread") ?: @(NO);
+    NSNumber *skipCommissioningComplete = FlutterMatterOptionalBoolean(jsonObject, @"skipCommissioningComplete") ?: @(NO);
+    NSString *countryCode = FlutterMatterOptionalString(jsonObject, @"countryCode") ?: @"";
+    NSNumber *adminSubject = FlutterMatterOptionalNumber(jsonObject, @"adminSubject") ?: @(0);
+    NSNumber *regulatoryLocationType = FlutterMatterOptionalNumber(jsonObject, @"regulatoryLocationType") ?: @(0);
+    NSNumber *enableServerInteractions = FlutterMatterOptionalBoolean(jsonObject, @"enableServerInteractions") ?: @(NO);
+
+    return [[FlutterControllerParams alloc] init:[fabricId integerValue]
+                                        udpListenPort:[udpListenPort integerValue]
+                                controllerVendorId:[controllerVendorId integerValue]
+                             failsafeTimerSeconds:[failsafeTimerSeconds integerValue]
+                         caseFailsafeTimerSeconds:[caseFailsafeTimerSeconds integerValue]
+                            attemptNetworkScanWiFi:[attemptNetworkScanWiFi boolValue]
+                          attemptNetworkScanThread:[attemptNetworkScanThread boolValue]
+                           skipCommissioningComplete:[skipCommissioningComplete boolValue]
+                                         countryCode:countryCode
+                              regulatoryLocationType:[regulatoryLocationType integerValue]
+                                     keypairDelegate:keypairDelegateHandle
+                                     rootCertificate:rootCertificateData
+                             intermediateCertificate:intermediateCertificateData
+                               operationalCertificate:operationalCertificateData
+                                               ipk:ipkData
+                                      adminSubject:[adminSubject integerValue]
+                           enableServerInteractions:[enableServerInteractions boolValue]
+                                         setupURL:nil
+                                            nodeId:[nodeId integerValue]];
 }
 
 static ZGMTRDeviceControllerStartupParams *
@@ -342,12 +357,11 @@ mapControllerParams(FlutterControllerParams *flutterControllerParams) {
             [params setNodeID:@([flutterControllerParams nodeId])];
         }
     } else {
-        @throw [NSException
-            exceptionWithName:@"CreateControllerParamsException"
-                       reason:@"ipk, rootCertificate, operationalCertificate, "
-                              @"keypairDelegateHandle or ipk, fabricId, "
-                              @"keypairDelegateHandle must not be null"
-                     userInfo:nil];
+        @throw [[FlutterMatterArgumentException alloc]
+            initWithArgumentName:@"controllerParams"
+                           message:@"ipk, rootCertificate, operationalCertificate, and "
+                                   @"keypairDelegateHandle (or ipk, fabricId, and "
+                                   @"keypairDelegateHandle) are required."];
     }
     if ([flutterControllerParams controllerVendorId]) {
         [params setVendorID:@([flutterControllerParams controllerVendorId])];
@@ -356,102 +370,325 @@ mapControllerParams(FlutterControllerParams *flutterControllerParams) {
 }
 
 static ZGMTRDeviceController* getZGMTRDeviceController(NSString *handle) {
-    FlutterDeviceController *c = [controls objectForKey:handle];
+    FlutterDeviceController *c = FlutterMatterControllerForHandle(handle);
     if (c == nil) {
         return nil;
     }
     return [c controller];
 }
 
-/// convert to flutter NodeState class json
-static NSDictionary * convertNodeStateJsonFormat(NSArray<NSDictionary<NSString *,id> *> * _Nullable values) {
-    NSMutableDictionary * nodeState = [[NSMutableDictionary alloc] init];
+static NSString *FlutterMatterPathComponentString(id component) {
+    if ([component isKindOfClass:[NSNumber class]] || [component isKindOfClass:[NSString class]]) {
+        return [component description];
+    }
+    return nil;
+}
+
+static NSMutableDictionary *FlutterMatterMutableDictionaryAtKey(NSMutableDictionary *parent,
+                                                                 NSString *key) {
+    if (key.length == 0) {
+        return nil;
+    }
+    id existing = parent[key];
+    if ([existing isKindOfClass:[NSMutableDictionary class]]) {
+        return existing;
+    }
+    if (existing != nil && existing != [NSNull null]) {
+        return nil;
+    }
+    NSMutableDictionary *created = [NSMutableDictionary dictionary];
+    parent[key] = created;
+    return created;
+}
+
+static NSNumber *FlutterMatterEventTimestampMilliseconds(NSDictionary *data) {
+    id uptime = data[ZGMTREventSystemUpTimeKey];
+    if ([uptime isKindOfClass:[NSNumber class]]) {
+        return @([uptime doubleValue] * 1000.0);
+    }
+    id date = data[ZGMTREventTimestampDateKey];
+    if ([date isKindOfClass:[NSDate class]]) {
+        return @([date timeIntervalSince1970] * 1000.0);
+    }
+    return nil;
+}
+
+static id FlutterMatterTLVJSONValue(id value) {
+    if ([value isKindOfClass:[NSData class]]) {
+        return nsDataToIntegerArray((NSData *)value);
+    }
+    if (value == nil || value == [NSNull null]) {
+        return [NSNull null];
+    }
+    return nil;
+}
+
+static NSError *FlutterMatterNodeStateConversionError(NSString *message) {
+    return [NSError errorWithDomain:@"FlutterMatterNodeStateConversionError"
+                               code:1
+                           userInfo:@{NSLocalizedDescriptionKey: message ?: @"Report payload was invalid."}];
+}
+
+static BOOL FlutterMatterFailNodeStateConversion(NSError **conversionError,
+                                                  NSString *message) {
+    if (conversionError != NULL) {
+        *conversionError = FlutterMatterNodeStateConversionError(message);
+    }
+    return NO;
+}
+
+static NSDictionary *FlutterMatterStatusJSONFromInteractionError(NSError *error,
+                                                                  NSError **conversionError) {
+    if (![error isKindOfClass:[NSError class]] ||
+        ![error.domain isEqualToString:ZGMTRInteractionErrorDomain]) {
+        FlutterMatterFailNodeStateConversion(conversionError,
+                                              @"Report contained a non-interaction path error.");
+        return nil;
+    }
+
+    id clusterStatus = error.userInfo[@"clusterStatus"];
+    if (clusterStatus == [NSNull null]) {
+        clusterStatus = nil;
+    }
+    if (clusterStatus != nil && ![clusterStatus isKindOfClass:[NSNumber class]]) {
+        FlutterMatterFailNodeStateConversion(conversionError,
+                                              @"Report path error contained an invalid clusterStatus.");
+        return nil;
+    }
+
+    NSMutableDictionary *status = [@{@"status": @(error.code)} mutableCopy];
+    if (clusterStatus != nil) {
+        status[@"clusterStatus"] = clusterStatus;
+    }
+    return status;
+}
+
+static NSDictionary *FlutterMatterAttributePathJSON(NSNumber *endpoint,
+                                                     NSNumber *cluster,
+                                                     NSNumber *attribute) {
+    if (![endpoint isKindOfClass:[NSNumber class]] ||
+        ![cluster isKindOfClass:[NSNumber class]] ||
+        ![attribute isKindOfClass:[NSNumber class]]) {
+        return nil;
+    }
+    return @{
+        @"endpointId": @{@"id": endpoint},
+        @"clusterId": @{@"id": cluster},
+        @"attributeId": @{@"id": attribute},
+    };
+}
+
+static NSDictionary *FlutterMatterAttributePathJSONFromResponseValue(id value) {
+    if (![value isKindOfClass:[ZGMTRAttributePath class]]) {
+        return nil;
+    }
+    ZGMTRAttributePath *path = (ZGMTRAttributePath *)value;
+    return FlutterMatterAttributePathJSON(path.endpoint, path.cluster, path.attribute);
+}
+
+/// Convert to Flutter NodeState class JSON.  Framework payloads are validated
+/// here because malformed data must become a callback error, not an
+/// Objective-C exception or a partial report with wrong endpoint/cluster keys.
+/// Return nil and populate conversionError when any report entry is malformed.
+static NSDictionary *convertNodeStateJsonFormat(NSArray<NSDictionary<NSString *, id> *> * _Nullable values,
+                                                 NSError **conversionError) {
+    if (conversionError != NULL) {
+        *conversionError = nil;
+    }
+    if (![values isKindOfClass:[NSArray class]]) {
+        FlutterMatterFailNodeStateConversion(conversionError,
+                                              @"Report payload was not an array.");
+        return nil;
+    }
+
+    NSMutableDictionary *nodeState = [NSMutableDictionary dictionary];
+
     for (id element in values) {
-        if (![element isKindOfClass:NSDictionary.class]) {
+        if (![element isKindOfClass:[NSDictionary class]]) {
+            FlutterMatterFailNodeStateConversion(conversionError,
+                                                  @"Report contained a non-dictionary entry.");
+            return nil;
+        }
+        NSDictionary *entry = (NSDictionary *)element;
+        id attrPathValue = entry[ZGMTRAttributePathKey];
+        id eventPathValue = entry[ZGMTREventPathKey];
+        id errorValue = entry[ZGMTRErrorKey];
+        id dataValue = entry[ZGMTRDataKey];
+
+        if (errorValue != nil) {
+            if (dataValue != nil || (attrPathValue == nil) == (eventPathValue == nil)) {
+                FlutterMatterFailNodeStateConversion(conversionError,
+                                                      @"Report path error was malformed.");
+                return nil;
+            }
+            NSDictionary *status = FlutterMatterStatusJSONFromInteractionError(errorValue,
+                                                                                conversionError);
+            if (status == nil) {
+                return nil;
+            }
+
+            if ([attrPathValue isKindOfClass:[ZGMTRAttributePath class]]) {
+                ZGMTRAttributePath *attrPath = (ZGMTRAttributePath *)attrPathValue;
+                NSString *endpointKey = FlutterMatterPathComponentString([attrPath endpoint]);
+                NSString *clusterKey = FlutterMatterPathComponentString([attrPath cluster]);
+                NSString *attributeKey = FlutterMatterPathComponentString([attrPath attribute]);
+                if (endpointKey == nil || clusterKey == nil || attributeKey == nil) {
+                    FlutterMatterFailNodeStateConversion(conversionError,
+                                                          @"Attribute status contained an invalid path.");
+                    return nil;
+                }
+
+                NSMutableDictionary *endpoints = FlutterMatterMutableDictionaryAtKey(nodeState, @"endpoints");
+                NSMutableDictionary *endpointState = FlutterMatterMutableDictionaryAtKey(endpoints, endpointKey);
+                NSMutableDictionary *clusters = FlutterMatterMutableDictionaryAtKey(endpointState, @"clusters");
+                NSMutableDictionary *clusterState = FlutterMatterMutableDictionaryAtKey(clusters, clusterKey);
+                NSMutableDictionary *attributes = FlutterMatterMutableDictionaryAtKey(clusterState, @"attributes");
+                NSMutableDictionary *attributeStatuses = FlutterMatterMutableDictionaryAtKey(clusterState, @"attributeStatuses");
+                if (attributes == nil || attributeStatuses == nil) {
+                    FlutterMatterFailNodeStateConversion(conversionError,
+                                                          @"Attribute status could not allocate state containers.");
+                    return nil;
+                }
+
+                // Mirror connectedhomeip States.kt addAttributeStatus: a status
+                // replaces any value for the same attribute path.
+                [attributes removeObjectForKey:attributeKey];
+                attributeStatuses[attributeKey] = status;
+                continue;
+            }
+
+            if ([eventPathValue isKindOfClass:[ZGMTREventPath class]]) {
+                ZGMTREventPath *eventPath = (ZGMTREventPath *)eventPathValue;
+                NSString *endpointKey = FlutterMatterPathComponentString([eventPath endpoint]);
+                NSString *clusterKey = FlutterMatterPathComponentString([eventPath cluster]);
+                NSString *eventKey = FlutterMatterPathComponentString([eventPath event]);
+                if (endpointKey == nil || clusterKey == nil || eventKey == nil) {
+                    FlutterMatterFailNodeStateConversion(conversionError,
+                                                          @"Event status contained an invalid path.");
+                    return nil;
+                }
+
+                NSMutableDictionary *endpoints = FlutterMatterMutableDictionaryAtKey(nodeState, @"endpoints");
+                NSMutableDictionary *endpointState = FlutterMatterMutableDictionaryAtKey(endpoints, endpointKey);
+                NSMutableDictionary *clusters = FlutterMatterMutableDictionaryAtKey(endpointState, @"clusters");
+                NSMutableDictionary *clusterState = FlutterMatterMutableDictionaryAtKey(clusters, clusterKey);
+                NSMutableDictionary *events = FlutterMatterMutableDictionaryAtKey(clusterState, @"events");
+                NSMutableDictionary *eventStatuses = FlutterMatterMutableDictionaryAtKey(clusterState, @"eventStatuses");
+                if (events == nil || eventStatuses == nil) {
+                    FlutterMatterFailNodeStateConversion(conversionError,
+                                                          @"Event status could not allocate state containers.");
+                    return nil;
+                }
+
+                // Mirror connectedhomeip States.kt addEventStatus: a status
+                // replaces event values and appends to the status list.
+                [events removeObjectForKey:eventKey];
+                NSMutableArray *statusList = eventStatuses[eventKey];
+                if (statusList == nil) {
+                    statusList = [NSMutableArray array];
+                    eventStatuses[eventKey] = statusList;
+                } else if (![statusList isKindOfClass:[NSMutableArray class]]) {
+                    FlutterMatterFailNodeStateConversion(conversionError,
+                                                          @"Event status list was malformed.");
+                    return nil;
+                }
+                [statusList addObject:status];
+                continue;
+            }
+
+            FlutterMatterFailNodeStateConversion(conversionError,
+                                                  @"Report path error contained an invalid path.");
+            return nil;
+        }
+
+        if (![dataValue isKindOfClass:[NSDictionary class]] ||
+            (attrPathValue == nil) == (eventPathValue == nil)) {
+            FlutterMatterFailNodeStateConversion(conversionError,
+                                                  @"Report entry contained invalid data.");
+            return nil;
+        }
+        NSDictionary *data = (NSDictionary *)dataValue;
+
+        if ([attrPathValue isKindOfClass:[ZGMTRAttributePath class]]) {
+            ZGMTRAttributePath *attrPath = (ZGMTRAttributePath *)attrPathValue;
+            NSString *endpointKey = FlutterMatterPathComponentString([attrPath endpoint]);
+            NSString *clusterKey = FlutterMatterPathComponentString([attrPath cluster]);
+            NSString *attributeKey = FlutterMatterPathComponentString([attrPath attribute]);
+            if (endpointKey == nil || clusterKey == nil || attributeKey == nil) {
+                FlutterMatterFailNodeStateConversion(conversionError,
+                                                      @"Attribute report contained an invalid path.");
+                return nil;
+            }
+
+            NSMutableDictionary *endpoints = FlutterMatterMutableDictionaryAtKey(nodeState, @"endpoints");
+            NSMutableDictionary *endpointState = FlutterMatterMutableDictionaryAtKey(endpoints, endpointKey);
+            NSMutableDictionary *clusters = FlutterMatterMutableDictionaryAtKey(endpointState, @"clusters");
+            NSMutableDictionary *clusterState = FlutterMatterMutableDictionaryAtKey(clusters, clusterKey);
+            NSMutableDictionary *attributes = FlutterMatterMutableDictionaryAtKey(clusterState, @"attributes");
+            if (attributes == nil) {
+                FlutterMatterFailNodeStateConversion(conversionError,
+                                                      @"Attribute report could not allocate state containers.");
+                return nil;
+            }
+            id tlv = FlutterMatterTLVJSONValue(data[ZGMTRTlvValueType]);
+            if (tlv == nil) {
+                FlutterMatterFailNodeStateConversion(conversionError,
+                                                      @"Attribute report contained a non-byte TLV value.");
+                return nil;
+            }
+            attributes[attributeKey] = @{@"tlv": tlv};
             continue;
         }
-        ZGMTRAttributePath * attrPath = [element objectForKey:ZGMTRAttributePathKey];
-        ZGMTREventPath * eventPath = [element objectForKey:ZGMTREventPathKey];
 
-        if (![attrPath isEqual:[NSNull null]] && attrPath != nil) {
-            NSDictionary * data = [element objectForKey:ZGMTRDataKey];
-            if (![data isKindOfClass:NSDictionary.class]) {
-                continue;
+        if ([eventPathValue isKindOfClass:[ZGMTREventPath class]]) {
+            ZGMTREventPath *eventPath = (ZGMTREventPath *)eventPathValue;
+            NSString *endpointKey = FlutterMatterPathComponentString([eventPath endpoint]);
+            NSString *clusterKey = FlutterMatterPathComponentString([eventPath cluster]);
+            NSString *eventKey = FlutterMatterPathComponentString([eventPath event]);
+            NSNumber *eventNumber = data[ZGMTREventNumberKey];
+            NSNumber *priorityLevel = data[ZGMTREventPriorityKey];
+            NSNumber *timestampType = data[ZGMTREventTimeTypeKey];
+            NSNumber *timestampValue = FlutterMatterEventTimestampMilliseconds(data);
+            id tlv = FlutterMatterTLVJSONValue(data[ZGMTRTlvValueType]);
+            if (endpointKey == nil || clusterKey == nil || eventKey == nil ||
+                ![eventNumber isKindOfClass:[NSNumber class]] ||
+                ![priorityLevel isKindOfClass:[NSNumber class]] ||
+                ![timestampType isKindOfClass:[NSNumber class]] ||
+                timestampValue == nil || tlv == nil ||
+                [data.allKeys containsObject:ZGMTRErrorKey]) {
+                FlutterMatterFailNodeStateConversion(conversionError,
+                                                      @"Event report was incomplete or contained an error.");
+                return nil;
             }
-            NSMutableDictionary * endpoints = [nodeState objectForKey:@"endpoints"];
-            if ([endpoints isEqual:[NSNull null]] || endpoints == nil) {
-                endpoints = [[NSMutableDictionary alloc] init];
-                [nodeState setObject:endpoints forKey:@"endpoints"];
+
+            NSMutableDictionary *endpoints = FlutterMatterMutableDictionaryAtKey(nodeState, @"endpoints");
+            NSMutableDictionary *endpointState = FlutterMatterMutableDictionaryAtKey(endpoints, endpointKey);
+            NSMutableDictionary *clusters = FlutterMatterMutableDictionaryAtKey(endpointState, @"clusters");
+            NSMutableDictionary *clusterState = FlutterMatterMutableDictionaryAtKey(clusters, clusterKey);
+            NSMutableDictionary *events = FlutterMatterMutableDictionaryAtKey(clusterState, @"events");
+            if (events == nil) {
+                FlutterMatterFailNodeStateConversion(conversionError,
+                                                      @"Event report could not allocate state containers.");
+                return nil;
             }
-            NSMutableDictionary * endpointState = [endpoints objectForKey:[[attrPath endpoint] description]];
-            if ([endpointState isEqual:[NSNull null]] || endpointState == nil) {
-                endpointState = [[NSMutableDictionary alloc] init];
-                [endpoints setObject:endpointState forKey:[[attrPath endpoint] description]];
+            NSMutableArray *eventList = events[eventKey];
+            if (![eventList isKindOfClass:[NSMutableArray class]]) {
+                eventList = [NSMutableArray array];
+                events[eventKey] = eventList;
             }
-            NSMutableDictionary * clusters = [endpointState objectForKey:@"clusters"];
-            if ([clusters isEqual:[NSNull null]] || clusters == nil) {
-                clusters = [[NSMutableDictionary alloc] init];
-                [endpointState setObject:clusters forKey:@"clusters"];
-            }
-            NSMutableDictionary * clusterState = [clusters objectForKey:[[attrPath cluster] description]];
-            if ([clusterState isEqual:[NSNull null]] || clusterState == nil) {
-                clusterState = [[NSMutableDictionary alloc] init];
-                [clusters setObject:clusterState forKey:[[attrPath cluster] description]];
-            }
-            
-            NSMutableDictionary * attributes = [clusterState objectForKey:@"attributes"];
-            if ([attributes isEqual:[NSNull null]] || attributes == nil) {
-                attributes = [[NSMutableDictionary alloc] init];
-                [clusterState setObject:attributes forKey:@"attributes"];
-            }
-            NSData * tlvData = [data objectForKey:ZGMTRTlvValueType];
-            [attributes setObject:@{
-                @"tlv": tlvData == nil ? [NSNull null] : nsDataToIntegerArray(tlvData)
-            } forKey:[[attrPath attribute] description]];
+            [eventList addObject:@{
+                @"eventNumber": eventNumber,
+                @"priorityLevel": priorityLevel,
+                @"timestampType": timestampType,
+                @"timestampValue": timestampValue,
+                @"tlv": tlv,
+            }];
+            continue;
         }
 
-        if (eventPath) {
-            NSDictionary * data = [element objectForKey:ZGMTRDataKey];
-            if (![data isKindOfClass:NSDictionary.class]) {
-                continue;
-            }
-            NSMutableDictionary * endpoints = [nodeState objectForKey:@"endpoints"];
-            if ([endpoints isEqual:[NSNull null]] || endpoints == nil) {
-                endpoints = [[NSMutableDictionary alloc] init];
-                [nodeState setObject:endpoints forKey:@"endpoints"];
-            }
-            NSMutableDictionary * endpointState = [endpoints objectForKey:[[attrPath endpoint] description]];
-            if ([endpointState isEqual:[NSNull null]] || endpointState == nil) {
-                endpointState = [[NSMutableDictionary alloc] init];
-                [endpoints setObject:endpointState forKey:[[attrPath endpoint] description]];
-            }
-            NSMutableDictionary * clusters = [endpointState objectForKey:@"clusters"];
-            if ([clusters isEqual:[NSNull null]] || clusters == nil) {
-                clusters = [[NSMutableDictionary alloc] init];
-                [endpointState setObject:clusters forKey:@"clusters"];
-            }
-            NSMutableDictionary * clusterState = [clusters objectForKey:[[attrPath cluster] description]];
-            if ([clusterState isEqual:[NSNull null]] || clusterState == nil) {
-                clusterState = [[NSMutableDictionary alloc] init];
-                [clusters setObject:clusterState forKey:[[attrPath cluster] description]];
-            }
-            NSMutableDictionary * events = [clusterState objectForKey:@"events"];
-            if ([events isEqual:[NSNull null]] || events == nil) {
-                events = [[NSMutableDictionary alloc] init];
-                [clusterState setObject:events forKey:@"events"];
-            }
-            
-            if ([[data allKeys] containsObject: ZGMTRErrorKey]) {
-                continue;
-            }
-            [events setObject:@{
-                @"eventNumber": [data objectForKey:ZGMTREventNumberKey],
-                @"priorityLevel": [data objectForKey:ZGMTREventPriorityKey],
-                @"timestampType": [data objectForKey:ZGMTREventTimeTypeKey],
-                @"timestampValue": [[data allKeys] containsObject:ZGMTREventSystemUpTimeKey] ? [data objectForKey:ZGMTREventSystemUpTimeKey] : [data objectForKey:ZGMTREventTimestampDateKey],
-                @"tlv": [data objectForKey:ZGMTRTlvValueType]
-            } forKey:[[eventPath event] description]];
-        }
+        FlutterMatterFailNodeStateConversion(conversionError,
+                                              @"Report entry contained an invalid path.");
+        return nil;
     }
     return nodeState;
 }
@@ -476,7 +713,7 @@ static NSDictionary * convertNodeStateJsonFormat(NSArray<NSDictionary<NSString *
 //  ██████  ██   ██  ███████  ███████
 
 static NSString *newDeviceControllerCall(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
     FlutterControllerParams *fControlParams = mapFlutterControllerParams(jsonObject);
     ZGMTRDeviceControllerStartupParams *controllerParams =
         mapControllerParams(fControlParams);
@@ -487,41 +724,43 @@ static NSString *newDeviceControllerCall(NSString *params) {
             startControllerOnNewFabric:controllerParams];
     }
     if (controller == nil) {
-        @throw [NSException exceptionWithName:@"newDeviceControllerException"
-                                       reason:@"Create Controller failed"
+        @throw [NSException exceptionWithName:@"FlutterMatterControllerCreationException"
+                                       reason:@"Native controller could not be created."
                                      userInfo:nil];
     }
-    NSString *uuid = [[controller uniqueIdentifier] UUIDString];
+    NSString *uuid = [[controller uniqueIdentifier] UUIDString] ?: [[NSUUID UUID] UUIDString];
     FlutterDeviceController *fdController = [[FlutterDeviceController alloc] initWithController:controller controllerParams:fControlParams];
-    [controls setObject:fdController forKey:uuid];
+    FlutterMatterStoreController(uuid, fdController);
     return createFlutterRequestResultWithCode(0, @{@"handle" : uuid});
 }
 
 static NSString *createRootCertificate(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *keypairHandle =
-        requestJsonValueNotNull(jsonObject, @"keypairHandle");
-    NSNumber *issuerId = [jsonObject objectForKey:@"issuerId"];
-    NSNumber *fabricId = [jsonObject objectForKey:@"fabricId"];
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *keypairHandle = FlutterMatterRequiredString(jsonObject, @"keypairHandle");
+    NSNumber *issuerId = FlutterMatterOptionalNumber(jsonObject, @"issuerId");
+    NSNumber *fabricId = FlutterMatterOptionalNumber(jsonObject, @"fabricId");
     KeypairWarp *kp = [[KeypairWarp alloc] initWithHandle:keypairHandle];
+    NSError *error = nil;
     NSData *rcac = [ZGMTRCertificates createRootCertificate:kp
-                                                 issuerID:[issuerId isEqual:[NSNull null]] ? nil : issuerId
-                                                 fabricID:[fabricId isEqual:[NSNull null]] ? nil : fabricId
-                                                    error:nil];
+                                                 issuerID:issuerId
+                                                 fabricID:fabricId
+                                                    error:&error];
     if (rcac == nil) {
-        return createFlutterRequestResultWithCode(1, @{});
+        FlutterMatterLogNSError(@"controller.createRootCertificate", error);
+        return createFlutterRequestResultWithCode(1, @{
+            @"error": @"Unable to create root certificate.",
+        });
     }
     return createFlutterRequestResultWithCode(0, @{@"data" : nsDataToIntegerArray(rcac)});
 }
 
 static NSString *setNocChainIssuer(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    if ([deviceController isEqual:[NSNull null]] || deviceController == nil) {
-        @throw [NSException exceptionWithName:@"setNocChainIssuerException"
-                                       reason:@"Not found deviceController"
-                                     userInfo:nil];
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
     }
     ZGMTRNOCChainIssuerWarp *issuer = [[ZGMTRNOCChainIssuerWarp alloc] initWithHandle:handle];
     [deviceController setNocChainIssuer:issuer queue:dispatch_queue_create("nocChainIssuer", DISPATCH_QUEUE_SERIAL)];
@@ -529,17 +768,25 @@ static NSString *setNocChainIssuer(NSString *params) {
 }
 
 static NSString *onNOCChainGeneration(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    if ([deviceController isEqual:[NSNull null]] || deviceController == nil) {
-        @throw [NSException exceptionWithName:@"setNocChainIssuerException"
-                                       reason:@"Not found deviceController"
-                                     userInfo:nil];
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
     }
-    NSString *onNOCChainGenerationCompleteHandle = requestJsonValueNotNull(jsonObject, @"onNOCChainGenerationCompleteHandle");
-    ZGMTRNOCChainGenerationCompleteHandler completeHandler = [onNOCChainGenerationCompletes objectForKey:onNOCChainGenerationCompleteHandle];
-    FlutterControllerParams *controlParams = mapFlutterControllerParams(requestJsonValueNotNull(jsonObject, @"params"));
+    NSString *onNOCChainGenerationCompleteHandle = FlutterMatterRequiredString(jsonObject, @"onNOCChainGenerationCompleteHandle");
+    ZGMTRNOCChainGenerationCompleteHandler completeHandler = nil;
+    @synchronized (onNOCChainGenerationCompletes) {
+        completeHandler = onNOCChainGenerationCompletes[onNOCChainGenerationCompleteHandle];
+        [onNOCChainGenerationCompletes removeObjectForKey:onNOCChainGenerationCompleteHandle];
+    }
+    if (completeHandler == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"onNOCChainGenerationCompleteHandle"
+                                                                     message:@"Completion handle was not found."];
+    }
+    FlutterControllerParams *controlParams = mapFlutterControllerParams(
+        FlutterMatterRequiredDictionary(jsonObject, @"params"));
     NSData *rootCertificate = [controlParams rootCertificate];
     NSData *intermediateCertificate = [controlParams intermediateCertificate];
     NSData *operationalCertificate = [controlParams operationalCertificate];
@@ -551,117 +798,147 @@ static NSString *onNOCChainGeneration(NSString *params) {
 }
 
 static NSString *setCompletionListener(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    if ([deviceController isEqual:[NSNull null]] || deviceController == nil) {
-        @throw [NSException exceptionWithName:@"setCompletionListener"
-                                       reason:@"Not found deviceController"
-                                     userInfo:nil];
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
     }
     [deviceController setPairingDelegate:[[PairingDelegateWarp alloc] initWithHandle:handle commissioningParameters:nil deviceController:deviceController deviceId:nil] queue:dispatch_queue_create("completionListener", DISPATCH_QUEUE_SERIAL)];
     return createFlutterRequestResultWithCode(0, @{});
 }
 
 static NSString *publicKeyFromCSR(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSData *csr = toByteArrayFromJSONArray(requestJsonValueNotNull(jsonObject, @"csr"));
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSData *csr = FlutterMatterRequiredByteArray(jsonObject, @"csr");
     NSError *error = nil;
     NSData *publicKey = [ZGMTRCertificates publicKeyFromCSR:csr error:&error];
     if (publicKey == nil) {
-        @throw [NSException exceptionWithName:@"publicKeyFromCSRException"
-                                       reason:@"CSR 无效"
-                                     userInfo:nil];
+        FlutterMatterLogNSError(@"controller.publicKeyFromCSR", error);
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"csr"
+                                                                     message:@"Invalid CSR."];
     }
     return createFlutterRequestResultWithCode(0, @{@"data": nsDataToIntegerArray(publicKey)});
 }
 
 static NSString *continueCommissioning(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    if ([deviceController isEqual:[NSNull null]] || deviceController == nil) {
-        @throw [NSException exceptionWithName:@"continueCommissioningException"
-                                       reason:@"Not found deviceController"
-                                     userInfo:nil];
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
     }
-    NSNumber *devicePtr = requestJsonValueNotNull(jsonObject, @"devicePtr");
-    id ignoreAttestationFailureValue = [jsonObject objectForKey:@"ignoreAttestationFailure"];
+    NSNumber *devicePtr = FlutterMatterRequiredNumber(jsonObject, @"devicePtr");
+    NSNumber *ignoreAttestationFailureValue = FlutterMatterOptionalBoolean(jsonObject, @"ignoreAttestationFailure");
     NSError *error = nil;
-    BOOL success = [deviceController continueCommissioningDevice:(void*)[devicePtr unsignedLongValue] ignoreAttestationFailure:[ignoreAttestationFailureValue isKindOfClass:[NSNumber class]] ? [ignoreAttestationFailureValue boolValue] : NO error:&error];
-    return createFlutterRequestResultWithCode(success ? 0 : 1, @{});
+    BOOL success = [deviceController continueCommissioningDevice:(void*)[devicePtr unsignedLongValue] ignoreAttestationFailure:ignoreAttestationFailureValue.boolValue error:&error];
+    if (!success) {
+        FlutterMatterLogNSError(@"controller.continueCommissioning", error);
+        return createFlutterRequestResultWithCode(1, @{
+            @"error": @"Unable to continue commissioning.",
+        });
+    }
+    return createFlutterRequestResultWithCode(0, @{});
 }
 
 static NSString *createOperationalCertificate(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSData *signingCertificate = toByteArrayFromJSONArray(requestJsonValueNotNull(jsonObject, @"signingCertificate"));
-    NSData *operationalPublicKey = toByteArrayFromJSONArray(requestJsonValueNotNull(jsonObject, @"operationalPublicKey"));
-    NSNumber *fabricId = requestJsonValueNotNull(jsonObject, @"fabricId");
-    NSNumber *nodeId = requestJsonValueNotNull(jsonObject, @"nodeId");
-    NSString *keypairHandle = requestJsonValueNotNull(jsonObject, @"keypairHandle");
-    id caseAuthenticatedTags = [jsonObject objectForKey:@"caseAuthenticatedTags"];
-    if (![caseAuthenticatedTags isEqual:[NSNull null]] && caseAuthenticatedTags != nil) {
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSData *signingCertificate = FlutterMatterRequiredByteArray(jsonObject, @"signingCertificate");
+    NSData *operationalPublicKey = FlutterMatterRequiredByteArray(jsonObject, @"operationalPublicKey");
+    NSNumber *fabricId = FlutterMatterRequiredNumber(jsonObject, @"fabricId");
+    NSNumber *nodeId = FlutterMatterRequiredNumber(jsonObject, @"nodeId");
+    NSString *keypairHandle = FlutterMatterRequiredString(jsonObject, @"keypairHandle");
+    id caseAuthenticatedTags = FlutterMatterOptionalArray(jsonObject, @"caseAuthenticatedTags");
+    if (caseAuthenticatedTags != nil) {
         caseAuthenticatedTags = toByteArrayFromJSONArray(caseAuthenticatedTags);
-    } else {
-        caseAuthenticatedTags = nil;
     }
     KeypairWarp *kp =
         [[KeypairWarp alloc] initWithHandle:keypairHandle];
     NSError *error = nil;
     
     NSData *operationalCertificate = [ZGMTRCertificates createOperationalCertificate:kp signingCertificate:signingCertificate operationalPublicKey:nsDataToSecKey(operationalPublicKey) fabricID:fabricId nodeID:nodeId caseAuthenticatedTags:caseAuthenticatedTags error:&error];
+    if (operationalCertificate == nil) {
+        FlutterMatterLogNSError(@"controller.createOperationalCertificate", error);
+        return createFlutterRequestResultWithCode(1, @{
+            @"error": @"Unable to create operational certificate.",
+        });
+    }
     return createFlutterRequestResultWithCode(0, @{@"data": nsDataToIntegerArray(operationalCertificate)});
 }
 
 static NSString *pairDevice(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
-    FlutterDeviceController *c = [controls objectForKey:handle];
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
+    FlutterDeviceController *c = FlutterMatterControllerForHandle(handle);
     ZGMTRDeviceController *deviceController = c == nil ? nil : [c controller];
     FlutterControllerParams *fcp = c == nil ? nil : [c controllerParams];
-    NSNumber *deviceId = requestJsonValueNotNull(jsonObject, @"deviceId");
-    NSString *displayName = requestJsonValueNotNull(jsonObject, @"displayName");
-    NSString *ecosystemName = requestJsonValueNotNull(jsonObject, @"ecosystemName");
-//    NSNumber *connId = requestJsonValueNotNull(jsonObject, @"connId");
-//    NSNumber *setupPINCode = requestJsonValueNotNull(jsonObject, @"setupPincode");
-    NSString *onboardingPayload = [jsonObject objectForKey:@"onboardingPayload"];
-    NSString *completionListenerHandle = [jsonObject objectForKey:@"completionListener"];
-    id csrNonce = [jsonObject objectForKey:@"csrNonce"];
-    NSDictionary *networkCredentials = [jsonObject objectForKey:@"networkCredentials"];
-    NSString *attestationDelegate = [jsonObject objectForKey:@"attestationDelegate"];
+    if (deviceController == nil || fcp == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
+    }
+
+    NSNumber *deviceId = FlutterMatterRequiredNumber(jsonObject, @"deviceId");
+    NSString *displayName = FlutterMatterRequiredString(jsonObject, @"displayName");
+    NSString *ecosystemName = FlutterMatterRequiredString(jsonObject, @"ecosystemName");
+    NSString *onboardingPayload = FlutterMatterOptionalString(jsonObject, @"onboardingPayload");
+    if (onboardingPayload.length == 0) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"onboardingPayload"
+                                                                     message:@"onboardingPayload is required on iOS."];
+    }
+    NSString *completionListenerHandle = FlutterMatterOptionalString(jsonObject, @"completionListener");
+    (void)FlutterMatterOptionalArray(jsonObject, @"csrNonce");
+    NSDictionary *networkCredentials = FlutterMatterOptionalDictionary(jsonObject, @"networkCredentials");
+    NSString *attestationDelegate = FlutterMatterOptionalString(jsonObject, @"attestationDelegate");
     NSString *ssid = nil;
     NSString *pwd = nil;
     NSData *threadOperationalDataset = nil;
-    if (![networkCredentials isEqual:[NSNull null]]) {
-        NSDictionary *wifiCredentials = [networkCredentials objectForKey:@"wifiCredentials"];
-        if (wifiCredentials != nil && ![wifiCredentials isEqual:[NSNull null]]) {
-            ssid = [wifiCredentials objectForKey:@"ssid"];
-            id wifiPassword = [wifiCredentials objectForKey:@"password"];
-            pwd = (wifiPassword == nil || [wifiPassword isEqual:[NSNull null]]) ? @"" : wifiPassword;
+    if (networkCredentials != nil) {
+        NSDictionary *wifiCredentials = FlutterMatterOptionalDictionary(networkCredentials, @"wifiCredentials");
+        NSDictionary *threadCredentials = FlutterMatterOptionalDictionary(networkCredentials, @"threadCredentials");
+        if (wifiCredentials != nil && threadCredentials != nil) {
+            @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"networkCredentials"
+                                                                         message:@"wifiCredentials and threadCredentials are mutually exclusive."];
         }
-        NSDictionary *threadCredentials = [networkCredentials objectForKey:@"threadCredentials"];
-        if (threadCredentials != nil && ![threadCredentials isEqual:[NSNull null]]) {
-            threadOperationalDataset = toByteArrayFromJSONArray([threadCredentials objectForKey:@"operationalDataset"]);
+        if (wifiCredentials != nil) {
+            ssid = FlutterMatterRequiredString(wifiCredentials, @"ssid");
+            pwd = FlutterMatterOptionalString(wifiCredentials, @"password") ?: @"";
+            if (ssid.length == 0) {
+                @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"ssid"
+                                                                             message:@"SSID must not be empty."];
+            }
+        } else if (threadCredentials != nil) {
+            threadOperationalDataset = FlutterMatterRequiredByteArray(threadCredentials, @"operationalDataset");
         }
     }
-    
-    if (![csrNonce isEqual:[NSNull null]]) {
-        csrNonce = toByteArrayFromJSONArray(csrNonce);
-    }
-    
+
     if ([NSThread isMainThread]) {
-        @throw [NSException exceptionWithName:@"Run on main thread"
-                                       reason:@"pairDevice unable run on main thread"
+        @throw [NSException exceptionWithName:@"FlutterMatterThreadingException"
+                                       reason:@"pairDevice cannot run on the main thread."
                                      userInfo:nil];
     }
+
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    __block NSError *pairError;
+    NSLock *completionLock = [[NSLock alloc] init];
+    __block NSError *pairError = nil;
+    __block BOOL completionHandled = NO;
     [MatterDevicePair startPairDeviceWithOnboardingPayload:onboardingPayload displayName:displayName ecosystemName:ecosystemName completion:^(NSString * _Nullable code, NSError * _Nullable err) {
+        [completionLock lock];
+        BOOL isDuplicateCompletion = completionHandled;
+        if (!isDuplicateCompletion) {
+            completionHandled = YES;
+        }
+        [completionLock unlock];
+        if (isDuplicateCompletion) {
+            FlutterMatterLog(@"MatterDevicePair completion invoked more than once");
+            return;
+        }
         @try {
-            if (code != nil) {
-                NSLog(@"pair code %@", code);
-                NSError *error;
-                ZGMTRCommissioningParameters * commissioningParams = [[ZGMTRCommissioningParameters alloc] init];
+            if (code != nil && code.length > 0) {
+                NSError *error = nil;
+                ZGMTRCommissioningParameters *commissioningParams =
+                    [[ZGMTRCommissioningParameters alloc] init];
                 commissioningParams.failSafeTimeout = @([fcp failsafeTimerSeconds]);
                 commissioningParams.skipCommissioningComplete = [fcp skipCommissioningComplete];
                 if (ssid != nil) {
@@ -671,39 +948,38 @@ static NSString *pairDevice(NSString *params) {
                 } else if (threadOperationalDataset != nil) {
                     commissioningParams.threadOperationalDataset = threadOperationalDataset;
                 }
-                if (![attestationDelegate isEqual:[NSNull null]]) {
+                if (attestationDelegate.length > 0) {
                     [commissioningParams setDeviceAttestationDelegate:[[DeviceAttestationDelegate alloc] initWithHandle:handle]];
                 }
-                if (![completionListenerHandle isEqual:[NSNull null]]) {
+                if (completionListenerHandle.length > 0) {
                     PairingDelegateWarp *pairingDelegate = [[PairingDelegateWarp alloc] initWithHandle:handle commissioningParameters:commissioningParams deviceController:deviceController deviceId:deviceId];
-                    [deviceController setPairingDelegate:pairingDelegate queue:[Global backgroundSerialQueue]];
+                    [deviceController setPairingDelegate:pairingDelegate
+                                                   queue:[Global backgroundSerialQueue] ?: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
                 }
-                [deviceController pairDevice:[deviceId unsignedLongValue] onboardingPayload:code error:&error];
-                if (error) {
-                    @throw [NSException exceptionWithName:@"pairDeviceException"
-                                                   reason:[error localizedDescription]
-                                                 userInfo:nil];
+                BOOL started = [deviceController pairDevice:[deviceId unsignedLongLongValue]
+                                           onboardingPayload:code
+                                                       error:&error];
+                if (!started || error != nil) {
+                    pairError = error ?: FlutterMatterOperationError(@"Commissioning could not be started.");
                 }
             } else {
-                if (err != nil) {
-                    @throw [NSException exceptionWithName:@"pairDeviceException"
-                                                   reason:[err localizedDescription]
-                                                 userInfo:nil];
-                }
-                @throw [NSException exceptionWithName:@"OnboardingPayloadException"
-                                                      reason:@"onboardingPayload is nil"
-                                                    userInfo:nil];
+                pairError = err ?: FlutterMatterOperationError(@"Pairing payload was not returned.");
             }
         } @catch (NSException *exception) {
-            pairError = [NSError errorWithDomain:@""
-                                            code:1
-                                        userInfo:@{ NSLocalizedDescriptionKey: [exception reason] }];
+            FlutterMatterLogException(@"pairDevice.completion", exception);
+            pairError = FlutterMatterOperationError(@"Commissioning could not be started.");
         } @finally {
-          dispatch_semaphore_signal(semaphore);
+            dispatch_semaphore_signal(semaphore);
         }
     }];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    return createFlutterRequestResultWithCode(pairError != nil ? [pairError code] : 0, @{});
+    if (pairError != nil) {
+        FlutterMatterLogNSError(@"controller.pairDevice", pairError);
+        return createFlutterRequestResultWithCode(1, @{
+            @"error": FlutterMatterSafeNSErrorSummary(pairError),
+        });
+    }
+    return createFlutterRequestResultWithCode(0, @{});
 }
 
 //static NSString *setDeviceAttestationDelegate(NSString *params) {
@@ -720,150 +996,152 @@ static NSString *pairDevice(NSString *params) {
 //}
 
 static NSString *stopDevicePairing(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    if ([deviceController isEqual:[NSNull null]] || deviceController == nil) {
-        @throw [NSException exceptionWithName:@"stopDevicePairingException"
-                                       reason:@"Not found deviceController"
-                                     userInfo:nil];
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
     }
-    NSNumber *deviceId = requestJsonValueNotNull(jsonObject, @"deviceId");
-    NSError *error;
-    [deviceController cancelCommissioningForNodeID:deviceId error:&error];
+    NSNumber *deviceId = FlutterMatterRequiredNumber(jsonObject, @"deviceId");
+    NSError *error = nil;
+    BOOL cancelled = [deviceController cancelCommissioningForNodeID:deviceId error:&error];
+    if (!cancelled) {
+        FlutterMatterLogNSError(@"controller.stopDevicePairing", error);
+        return createFlutterRequestResultWithCode(1, @{
+            @"error": @"Unable to stop device pairing.",
+        });
+    }
     return createFlutterRequestResultWithCode(0, @{});
 }
 
 static NSString *deleteDeviceController(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *control = getZGMTRDeviceController(handle);
     if (control != nil) {
         [control shutdown];
-        [controls removeObjectForKey:handle];
+        FlutterMatterRemoveController(handle);
     }
     return createFlutterRequestResultWithCode(0, @{});
 }
 
 static NSString *connectedDevice(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    if ([deviceController isEqual:[NSNull null]] || deviceController == nil) {
-        @throw [NSException exceptionWithName:@"stopDevicePairingException"
-                                       reason:@"Not found deviceController"
-                                     userInfo:nil];
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
     }
-    NSNumber *nodeId = requestJsonValueNotNull(jsonObject, @"nodeId");
-    NSString *callbackHandle = requestJsonValueNotNull(jsonObject, @"callbackHandle");
-    [deviceController getBaseDevice:[nodeId intValue] queue:connectDeviceQueue completionHandler:^(ZGMTRBaseDevice * _Nullable device, NSError * _Nullable error) {
+    NSNumber *nodeId = FlutterMatterRequiredNumber(jsonObject, @"nodeId");
+    NSString *callbackHandle = FlutterMatterRequiredString(jsonObject, @"callbackHandle");
+    [deviceController getBaseDevice:[nodeId unsignedLongLongValue] queue:connectDeviceQueue completionHandler:^(ZGMTRBaseDevice * _Nullable device, NSError * _Nullable error) {
         if (device != nil) {
-            FlutterDeviceController *fdc = [controls objectForKey:handle];
+            FlutterDeviceController *fdc = FlutterMatterControllerForHandle(handle);
             if (fdc != nil) {
-                ZGMTRBaseDevice *alreadyConnectDevice = [fdc deviceInfoForNodeID:[nodeId intValue]];
+                ZGMTRBaseDevice *alreadyConnectDevice = [fdc deviceInfoForNodeID:[nodeId unsignedLongLongValue]];
                 if (alreadyConnectDevice == nil) {
-                    [fdc addConnectedDeviceWithNodeID:[nodeId intValue] deviceInfo:device];
+                    [fdc addConnectedDeviceWithNodeID:[nodeId unsignedLongLongValue] deviceInfo:device];
                 }
                 NSString * path = createFlutterCallPath(deviceControllerHost, @"ConnectedDeviceCallback/onDeviceConnected");
-                @try {
-                    invokeMethodBlockGet([Global externalChannel], path, toJSONStringFromObject(@{
-                        jsonKeyHandle: handle,
-                        @"callbackHandle": callbackHandle,
-                        @"context": nodeId
-                    }));
-                } @catch (NSException *exception) {
-                    FlutterMatterLog([[NSString alloc] initWithFormat:@"flutter result connect faile %@", [exception reason]]);
-                } @finally {
-                    
-                }
+                FlutterMatterInvokeCallback(path, @{
+                    jsonKeyHandle: handle,
+                    @"callbackHandle": callbackHandle,
+                    @"context": nodeId,
+                });
                 return;
             }
         }
-        FlutterMatterLog([[NSString alloc] initWithFormat:@"matter case connect %@ failed", nodeId]);
         NSString * path = createFlutterCallPath(deviceControllerHost, @"ConnectedDeviceCallback/onConnectionFailure");
-        @try {
-            invokeMethodBlockGet([Global externalChannel], path, toJSONStringFromObject(@{
-                jsonKeyHandle: handle,
-                @"callbackHandle": callbackHandle,
-                @"context": nodeId,
-                @"nodeId": nodeId,
-                @"error": error == nil ? @"unknown error" : [error localizedDescription]
-            }));
-        } @catch (NSException *exception) {
-            FlutterMatterLog([[NSString alloc] initWithFormat:@"flutter result connect faile %@", [exception reason]]);
-        } @finally {
-            
-        }
+        FlutterMatterInvokeCallback(path, @{
+            jsonKeyHandle: handle,
+            @"callbackHandle": callbackHandle,
+            @"context": nodeId,
+            @"nodeId": nodeId,
+            @"error": error == nil ? @"Connection failed." : FlutterMatterSafeNSErrorSummary(error),
+        });
     }];
     
     return createFlutterRequestResultWithCode(0, @{});
 }
 
 static NSString *releaseConnectContext(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    if ([deviceController isEqual:[NSNull null]] || deviceController == nil) {
-        @throw [NSException exceptionWithName:@"stopDevicePairingException"
-                                       reason:@"Not found deviceController"
-                                     userInfo:nil];
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
+    }
+    NSNumber *connectContext = FlutterMatterOptionalNumber(jsonObject, @"connectContext");
+    if (connectContext != nil) {
+        FlutterDeviceController *fdc = FlutterMatterControllerForHandle(handle);
+        [fdc removeDeviceWithNodeID:[connectContext unsignedLongLongValue]];
     }
     return createFlutterRequestResultWithCode(0, @{});
 }
 
 static ZGMTRBaseDevice * getBaseDevice(FlutterDeviceController * fcontrol, NSNumber * nodeId, NSNumber * connectContext) {
-    if (connectContext == nil) {
-        return [ZGMTRBaseDevice deviceWithNodeID:nodeId controller:[fcontrol controller]];
+    if (fcontrol == nil || nodeId == nil || [fcontrol controller] == nil) {
+        return nil;
     }
-    return [fcontrol deviceInfoForNodeID:[nodeId intValue]];
+    if (connectContext == nil) {
+        return [ZGMTRBaseDevice deviceWithNodeID:nodeId
+                                      controller:[fcontrol controller]];
+    }
+    return [fcontrol deviceInfoForNodeID:[nodeId unsignedLongLongValue]];
+}
+
+static NSNumber *FlutterMatterRequiredPathID(NSDictionary *element, NSString *key) {
+    NSDictionary *path = FlutterMatterRequiredDictionary(element, key);
+    NSNumber *pathID = FlutterMatterRequiredNumber(path, @"id");
+    if (pathID.longLongValue < 0) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:key
+                                                                     message:@"Path id must be non-negative."];
+    }
+    return pathID;
 }
 
 static NSString *invoke(NSString *params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    if ([deviceController isEqual:[NSNull null]] || deviceController == nil) {
-        @throw [NSException exceptionWithName:@"invokeException"
-                                       reason:@"Not found deviceController"
-                                     userInfo:nil];
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
     }
-    NSString *callbackId = requestJsonValueNotNull(jsonObject, @"callback");
-    NSNumber *nodeId = requestJsonValueNotNull(jsonObject, @"nodeId");
+    NSString *callbackId = FlutterMatterRequiredString(jsonObject, @"callback");
+    NSNumber *nodeId = FlutterMatterRequiredNumber(jsonObject, @"nodeId");
     
-    NSNumber *timedRequestTimeoutMs = [jsonObject objectForKey:@"timedRequestTimeoutMs"];
-    if ([timedRequestTimeoutMs isEqual:[NSNull null]]) {
-        timedRequestTimeoutMs = @(5000);
-    }
-    NSNumber *imTimeoutMs = [jsonObject objectForKey:@"imTimeoutMs"];
-    if ([imTimeoutMs isEqual:[NSNull null]]) {
-        imTimeoutMs = @(0);
-    }
+    (void)FlutterMatterOptionalNumber(jsonObject, @"timedRequestTimeoutMs");
+    NSNumber *imTimeoutMs = FlutterMatterOptionalNumber(jsonObject, @"imTimeoutMs") ?: @(0);
     
-    NSDictionary * invokeElementJsonObject = requestJsonValueNotNull(jsonObject, @"invokeElement");
-    NSNumber * endpointId = [requestJsonValueNotNull(invokeElementJsonObject, @"endpointId") objectForKey:@"id"];
-    NSNumber * clusterId = [requestJsonValueNotNull(invokeElementJsonObject, @"clusterId") objectForKey:@"id"];
-    NSNumber * commandId = [requestJsonValueNotNull(invokeElementJsonObject, @"commandId") objectForKey:@"id"];
-    NSNumber * groupId = [invokeElementJsonObject objectForKey:@"groupId"];
-    NSData * tlv = toByteArrayFromJSONArray(requestJsonValueNotNull(invokeElementJsonObject, @"tlv"));
+    NSDictionary *invokeElementJsonObject = FlutterMatterRequiredDictionary(jsonObject, @"invokeElement");
+    NSNumber *endpointId = FlutterMatterRequiredPathID(invokeElementJsonObject, @"endpointId");
+    NSNumber *clusterId = FlutterMatterRequiredPathID(invokeElementJsonObject, @"clusterId");
+    NSNumber *commandId = FlutterMatterRequiredPathID(invokeElementJsonObject, @"commandId");
+    NSNumber *groupId = FlutterMatterOptionalNumber(invokeElementJsonObject, @"groupId") ?: @(0);
+    NSData *tlv = FlutterMatterRequiredByteArray(invokeElementJsonObject, @"tlv");
     
-    NSNumber * connectContext = [jsonObject objectForKey:@"connectContext"];
+    NSNumber *connectContext = FlutterMatterOptionalNumber(jsonObject, @"connectContext");
     
-    FlutterDeviceController *fdc = [controls objectForKey:handle];
-    ZGMTRBaseDevice* baseDevice = getBaseDevice(fdc, nodeId, [connectContext isEqual:[NSNull null]] ? nil : connectContext);
+    FlutterDeviceController *fdc = FlutterMatterControllerForHandle(handle);
+    ZGMTRBaseDevice *baseDevice = getBaseDevice(fdc, nodeId, connectContext);
     if (baseDevice == nil) {
-        return createFlutterRequestResultWithCode(1, @{});
+        return createFlutterRequestResultWithCode(1, @{
+            @"error": @"Connected device was not found.",
+        });
     }
     [baseDevice invokeCommandWithEndpointID:endpointId clusterID:clusterId commandID:commandId commandFields:tlv timedInvokeTimeout:[imTimeoutMs isEqualToNumber:@(0)] ? nil : imTimeoutMs queue:connectDeviceQueue completion:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable values, NSError * _Nullable error) {
         @try {
             if (error) {
-                // failed callback
-                invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"InvokeCallback/onError"), toJSONStringFromObject(@{
+                FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"InvokeCallback/onError"), @{
                     jsonKeyHandle: handle,
                     @"invokeCallbackPoint": callbackId,
-                    @"error": [error localizedDescription]
-                }));
+                    @"error": FlutterMatterSafeNSErrorSummary(error),
+                });
             } else {
-                // success callback
                 NSNumber * resultEndPointId = endpointId;
                 NSNumber * resultClusterId = clusterId;
                 NSNumber * resultCommandId = commandId;
@@ -872,16 +1150,16 @@ static NSString *invoke(NSString *params) {
                     id commandPath = [dictionary objectForKey:@"commandPath"];
                     if (![commandPath isEqual:[NSNull null]] && [commandPath isKindOfClass:[ZGMTRCommandPath class]]) {
                         ZGMTRCommandPath * cp = commandPath;
-                        resultEndPointId = [cp endpoint];
-                        resultClusterId = [cp cluster];
-                        resultCommandId = [cp command];
+                        resultEndPointId = [cp endpoint] ?: resultEndPointId;
+                        resultClusterId = [cp cluster] ?: resultClusterId;
+                        resultCommandId = [cp command] ?: resultCommandId;
                     }
                 }
-                invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"InvokeCallback/onResponse"), toJSONStringFromObject(@{
+                FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"InvokeCallback/onResponse"), @{
                     jsonKeyHandle: handle,
                     @"invokeCallbackPoint": callbackId,
                     @"successCode": @(0),
-                    @"invokeElement": values == nil ? nil : @{
+                    @"invokeElement": @{
                         @"endpointId": @{
                             @"id": resultEndPointId
                         },
@@ -891,20 +1169,23 @@ static NSString *invoke(NSString *params) {
                         @"commandId": @{
                             @"id": resultCommandId
                         },
-                        @"groupId": groupId,
+                        @"groupId": groupId ?: @(0),
                     }
-                }));
+                });
             }
-            // onDone callback
-            invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"InvokeCallback/onDone"), toJSONStringFromObject(@{
-                jsonKeyHandle: handle,
-                @"invokeCallbackPoint": callbackId
-            }));
         } @catch (NSException *exception) {
-            FlutterMatterLog([[NSString alloc] initWithFormat:@"callback invoke error %@", [exception reason]]);
-        } @finally {
-            
+            FlutterMatterLogException(@"InvokeCallback.completion", exception);
+            FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"InvokeCallback/onError"), @{
+                jsonKeyHandle: handle,
+                @"invokeCallbackPoint": callbackId,
+                @"error": @"Invoke callback failed.",
+            });
         }
+        // The Dart callback contract requires onDone even after an error.
+        FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"InvokeCallback/onDone"), @{
+            jsonKeyHandle: handle,
+            @"invokeCallbackPoint": callbackId,
+        });
     }];
     return createFlutterRequestResultWithCode(0, @{});
 }
@@ -914,7 +1195,7 @@ static NSNumber * mapFlutterPathId(id jsonValue, NSError **error) {
         if (error != NULL) {
             *error = [NSError errorWithDomain:@"FlutterMatter"
                                          code:1
-                                     userInfo:@{NSLocalizedDescriptionKey: @"Invalid ChipPathId"}];
+                                     userInfo:@{NSLocalizedDescriptionKey: @"ChipPathId must be an object."}];
         }
         return nil;
     }
@@ -923,11 +1204,12 @@ static NSNumber * mapFlutterPathId(id jsonValue, NSError **error) {
     id typeValue = pathId[@"type"];
     NSNumber *idValue = pathId[@"id"];
 
-    if (typeValue != nil && ![typeValue isKindOfClass:[NSString class]]) {
+    if (typeValue == [NSNull null] ||
+        (typeValue != nil && ![typeValue isKindOfClass:[NSString class]])) {
         if (error != NULL) {
             *error = [NSError errorWithDomain:@"FlutterMatter"
                                          code:1
-                                     userInfo:@{NSLocalizedDescriptionKey: @"Invalid ChipPathId.type"}];
+                                     userInfo:@{NSLocalizedDescriptionKey: @"ChipPathId.type must be a string."}];
         }
         return nil;
     }
@@ -942,16 +1224,17 @@ static NSNumber * mapFlutterPathId(id jsonValue, NSError **error) {
         if (error != NULL) {
             *error = [NSError errorWithDomain:@"FlutterMatter"
                                          code:1
-                                     userInfo:@{NSLocalizedDescriptionKey: @"Unknown ChipPathId.type"}];
+                                     userInfo:@{NSLocalizedDescriptionKey: @"ChipPathId.type must be 'concrete' or 'wildcard'."}];
         }
         return nil;
     }
 
-    if (![idValue isKindOfClass:[NSNumber class]] || idValue.longLongValue < 0) {
+    if (idValue == (id)[NSNull null] ||
+        ![idValue isKindOfClass:[NSNumber class]] || idValue.longLongValue < 0) {
         if (error != NULL) {
             *error = [NSError errorWithDomain:@"FlutterMatter"
                                          code:1
-                                     userInfo:@{NSLocalizedDescriptionKey: @"Invalid ChipPathId.id"}];
+                                     userInfo:@{NSLocalizedDescriptionKey: @"ChipPathId.id must be a non-negative number."}];
         }
         return nil;
     }
@@ -1007,292 +1290,412 @@ static NSArray<ZGMTRAttributeRequestPath *> * mapFlutterAttributePaths(
     return [paths copy];
 }
 
+static NSArray<ZGMTREventRequestPath *> * mapFlutterEventPaths(id jsonValue, NSError **error) {
+    if (jsonValue == nil || jsonValue == [NSNull null]) {
+        return nil;
+    }
+    if (![jsonValue isKindOfClass:[NSArray class]]) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:@"FlutterMatter"
+                                         code:1
+                                     userInfo:@{NSLocalizedDescriptionKey: @"eventPaths must be an array."}];
+        }
+        return nil;
+    }
+
+    NSMutableArray<ZGMTREventRequestPath *> *paths = [NSMutableArray array];
+    for (id item in (NSArray *)jsonValue) {
+        if (![item isKindOfClass:[NSDictionary class]]) {
+            if (error != NULL) {
+                *error = [NSError errorWithDomain:@"FlutterMatter"
+                                             code:1
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Each event path must be an object."}];
+            }
+            return nil;
+        }
+
+        NSDictionary *eventPath = (NSDictionary *)item;
+        NSError *pathError = nil;
+        NSNumber *endpointId = mapFlutterPathId(eventPath[@"endpointId"], &pathError);
+        NSNumber *clusterId = mapFlutterPathId(eventPath[@"clusterId"], &pathError);
+        NSNumber *eventId = mapFlutterPathId(eventPath[@"eventId"], &pathError);
+        if (pathError != nil) {
+            if (error != NULL) {
+                *error = pathError;
+            }
+            return nil;
+        }
+
+        [paths addObject:[ZGMTREventRequestPath requestPathWithEndpointID:endpointId
+                                                               clusterID:clusterId
+                                                                 eventID:eventId]];
+    }
+    return [paths copy];
+}
+
 static NSString * subscribe(NSString * params) {
-    
-   NSDictionary *jsonObject = parseJSONString(params);
-   NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+   NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+   NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
    ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-   NSString *callbackId = requestJsonValueNotNull(jsonObject, @"callbackHandle");
-   NSNumber *nodeId = requestJsonValueNotNull(jsonObject, @"nodeId");
-   NSArray * attributePathsJson = [jsonObject objectForKey:@"attributePaths"];
-   NSArray * eventPathsJson = [jsonObject objectForKey:@"eventPaths"];
-   NSNumber * minInterval = requestJsonValueNotNull(jsonObject, @"minInterval");
-   NSNumber * maxInterval = requestJsonValueNotNull(jsonObject, @"maxInterval");
-   NSArray * dataVersionFiltersJson = [jsonObject objectForKey:@"dataVersionFilters"];
-   NSNumber * keepSubscriptions = [jsonObject objectForKey:@"keepSubscriptions"];
-   NSNumber * isFabricFiltered = [jsonObject objectForKey:@"isFabricFiltered"];
-   NSNumber * imTimeoutMs = [jsonObject objectForKey:@"imTimeoutMs"];
-   NSNumber * connectContext = [jsonObject objectForKey:@"connectContext"];
-   NSNumber * eventMin = [jsonObject objectForKey:@"eventMin"];
-   // dataVersionFiltersJson is parsed and available for future SDK integration
-   FlutterDeviceController *fdc = [controls objectForKey:handle];
-   ZGMTRBaseDevice* baseDevice = getBaseDevice(fdc, nodeId, [connectContext isEqual:[NSNull null]] ? nil : connectContext);
-   if (baseDevice == nil) {
-       return createFlutterRequestResultWithCode(1, @{});
+   if (deviceController == nil) {
+       @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                    message:@"Controller handle was not found."];
    }
-   ZGMTRSubscribeParams * subscribeParams = [[ZGMTRSubscribeParams alloc] initWithMinInterval:minInterval maxInterval:maxInterval];
-   subscribeParams.replaceExistingSubscriptions = [keepSubscriptions isEqual:[NSNull null]] ? NO : keepSubscriptions.boolValue;
-   subscribeParams.filterByFabric = [isFabricFiltered isEqual:[NSNull null]] ? NO : isFabricFiltered.boolValue;
+   NSString *callbackId = FlutterMatterRequiredString(jsonObject, @"callbackHandle");
+   NSNumber *nodeId = FlutterMatterRequiredNumber(jsonObject, @"nodeId");
+   NSArray *attributePathsJson = FlutterMatterOptionalArray(jsonObject, @"attributePaths");
+   NSArray *eventPathsJson = FlutterMatterOptionalArray(jsonObject, @"eventPaths");
+   NSNumber *minInterval = FlutterMatterRequiredNumber(jsonObject, @"minInterval");
+   NSNumber *maxInterval = FlutterMatterRequiredNumber(jsonObject, @"maxInterval");
+   (void)FlutterMatterOptionalArray(jsonObject, @"dataVersionFilters");
+   NSNumber *keepSubscriptions = FlutterMatterOptionalBoolean(jsonObject, @"keepSubscriptions") ?: @(NO);
+   NSNumber *isFabricFiltered = FlutterMatterOptionalBoolean(jsonObject, @"isFabricFiltered") ?: @(NO);
+   (void)FlutterMatterOptionalNumber(jsonObject, @"imTimeoutMs");
+   NSNumber *connectContext = FlutterMatterOptionalNumber(jsonObject, @"connectContext");
+   (void)FlutterMatterOptionalNumber(jsonObject, @"eventMin");
+   if (minInterval.doubleValue < 0 || maxInterval.doubleValue < 0 || maxInterval.doubleValue < minInterval.doubleValue) {
+       @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"minInterval"
+                                                                    message:@"Subscription intervals are invalid."];
+   }
+   FlutterDeviceController *fdc = FlutterMatterControllerForHandle(handle);
+   ZGMTRBaseDevice *baseDevice = getBaseDevice(fdc, nodeId, connectContext);
+   if (baseDevice == nil) {
+       return createFlutterRequestResultWithCode(1, @{
+           @"error": @"Connected device was not found.",
+       });
+   }
+   ZGMTRSubscribeParams *subscribeParams = [[ZGMTRSubscribeParams alloc] initWithMinInterval:minInterval maxInterval:maxInterval];
+   subscribeParams.replaceExistingSubscriptions = keepSubscriptions.boolValue;
+   subscribeParams.filterByFabric = isFabricFiltered.boolValue;
    subscribeParams.resubscribeAutomatically = false;
    
    NSError *attributePathsError = nil;
    NSArray<ZGMTRAttributeRequestPath *> *attributePaths = mapFlutterAttributePaths(attributePathsJson, &attributePathsError);
    if (attributePathsError != nil) {
-       FlutterMatterLog([[NSString alloc] initWithFormat:@"Invalid subscribe attributePaths: %@", attributePathsError.localizedDescription]);
-       return createFlutterRequestResultWithCode(1, @{ @"error": attributePathsError.localizedDescription ?: @"Invalid attributePaths" });
+       @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"attributePaths"
+                                                                    message:@"attributePaths is invalid."];
    }
-   NSMutableArray * eventPaths = nil;
-   if (![eventPathsJson isEqual:[NSNull null]]) {
-       eventPaths = [NSMutableArray array];
-       for (NSUInteger i = 0; i < eventPathsJson.count; i++) {
-           NSDictionary * eventPath = eventPathsJson[i];
-           NSNumber * endpointId = [[eventPath objectForKey:@"endpointId"] objectForKey:@"id"];
-           NSNumber * clusterId = [[eventPath objectForKey:@"clusterId"] objectForKey:@"id"];
-           NSNumber * eventId = [[eventPath objectForKey:@"eventId"] objectForKey:@"id"];
-           [eventPaths addObject:[ZGMTREventRequestPath requestPathWithEndpointID:endpointId clusterID:clusterId eventID:eventId]];
-       }
+   NSError *eventPathsError = nil;
+   NSArray<ZGMTREventRequestPath *> *eventPaths = mapFlutterEventPaths(eventPathsJson, &eventPathsError);
+   if (eventPathsError != nil) {
+       @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"eventPaths"
+                                                                    message:@"eventPaths is invalid."];
    }
+   __block BOOL terminalCallbackSent = NO;
    [baseDevice customSubscribeToAttributePaths:attributePaths eventPaths:eventPaths params:subscribeParams queue:connectDeviceQueue reportHandler:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable values, NSError * _Nullable error) {
-       @try {
-           if (error) {
-               // failed callback
-               invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"SubscriptionCallback/onError"), toJSONStringFromObject(@{
-                   jsonKeyHandle: handle,
-                   @"subscriptionCallbackPoint": callbackId,
-                   @"error": [error localizedDescription]
-               }));
-               invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"SubscriptionCallback/onDone"), toJSONStringFromObject(@{
-                   jsonKeyHandle: handle,
-                   @"subscriptionCallbackPoint": callbackId,
-               }));
-           } else {
-               // success callback
-               invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"SubscriptionCallback/onReport"), toJSONStringFromObject(@{
-                   jsonKeyHandle: handle,
-                   @"subscriptionCallbackPoint": callbackId,
-                   @"nodeState": values == nil ? [NSNull null] : convertNodeStateJsonFormat(values)
-               }));
-           }
-       } @catch (NSException *exception) {
-           FlutterMatterLog([[NSString alloc] initWithFormat:@"Call flutter subscribe result error %@", [exception reason]]);
-       } @finally {
-           
+       if (terminalCallbackSent) {
+           return;
        }
-   } subscriptionEstablished:^(NSNumber * _Nonnull subscriptionId) {
-       NSLog(@"subscriptionEstablished %@", subscriptionId);
-       invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"SubscriptionCallback/onSubscriptionEstablished"), toJSONStringFromObject(@{
+
+       NSError *callbackError = error;
+       NSDictionary *nodeState = nil;
+       if (callbackError == nil) {
+           NSError *conversionError = nil;
+           nodeState = convertNodeStateJsonFormat(values, &conversionError);
+           if (nodeState == nil) {
+               callbackError = conversionError ?: FlutterMatterNodeStateConversionError(@"Report payload was invalid.");
+           }
+       }
+
+       if (callbackError != nil) {
+           // Subscription errors (including malformed reports) are terminal for
+           // this callback registration. Send onError followed by exactly one
+           // onDone so Dart releases the callback only after the final event.
+           terminalCallbackSent = YES;
+           FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"SubscriptionCallback/onError"), @{
+               jsonKeyHandle: handle,
+               @"subscriptionCallbackPoint": callbackId,
+               @"error": FlutterMatterSafeNSErrorSummary(callbackError),
+           });
+           FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"SubscriptionCallback/onDone"), @{
+               jsonKeyHandle: handle,
+               @"subscriptionCallbackPoint": callbackId,
+           });
+           return;
+       }
+
+       // Normal reports keep the established subscription callback alive.
+       FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"SubscriptionCallback/onReport"), @{
            jsonKeyHandle: handle,
            @"subscriptionCallbackPoint": callbackId,
-           @"subscriptionId": subscriptionId
-       }));
+           @"nodeState": nodeState,
+       });
+   } subscriptionEstablished:^(NSNumber * _Nonnull subscriptionId) {
+       if (terminalCallbackSent) {
+           return;
+       }
+       FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"SubscriptionCallback/onSubscriptionEstablished"), @{
+           jsonKeyHandle: handle,
+           @"subscriptionCallbackPoint": callbackId,
+           @"subscriptionId": subscriptionId ?: @(0),
+       });
    } resubscriptionScheduled:nil];
    return createFlutterRequestResultWithCode(0, @{});
     
 }
 
 static NSString * readRequest(NSString * params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
     ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    NSString *callbackId = requestJsonValueNotNull(jsonObject, @"callbackHandle");
-    NSNumber *nodeId = requestJsonValueNotNull(jsonObject, @"nodeId");
-    NSArray * attributePathsJson = [jsonObject objectForKey:@"attributePaths"];
-    NSArray * eventPathsJson = [jsonObject objectForKey:@"eventPaths"];
-    NSArray * dataVersionFiltersJson = [jsonObject objectForKey:@"dataVersionFilters"];
-    NSNumber * isFabricFiltered = [jsonObject objectForKey:@"isFabricFiltered"];
-    NSNumber * imTimeoutMs = [jsonObject objectForKey:@"imTimeoutMs"];
-    NSNumber * connectContext = [jsonObject objectForKey:@"connectContext"];
-    NSNumber * eventMin = [jsonObject objectForKey:@"eventMin"];
-    // dataVersionFiltersJson is parsed and available for future SDK integration
+    if (deviceController == nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                     message:@"Controller handle was not found."];
+    }
+    NSString *callbackId = FlutterMatterRequiredString(jsonObject, @"callbackHandle");
+    NSNumber *nodeId = FlutterMatterRequiredNumber(jsonObject, @"nodeId");
+    NSArray *attributePathsJson = FlutterMatterOptionalArray(jsonObject, @"attributePaths");
+    NSArray *eventPathsJson = FlutterMatterOptionalArray(jsonObject, @"eventPaths");
+    (void)FlutterMatterOptionalArray(jsonObject, @"dataVersionFilters");
+    NSNumber *isFabricFiltered = FlutterMatterOptionalBoolean(jsonObject, @"isFabricFiltered") ?: @(NO);
+    (void)FlutterMatterOptionalNumber(jsonObject, @"imTimeoutMs");
+    NSNumber *connectContext = FlutterMatterOptionalNumber(jsonObject, @"connectContext");
+    NSNumber *eventMin = FlutterMatterOptionalNumber(jsonObject, @"eventMin");
     
-    FlutterDeviceController *fdc = [controls objectForKey:handle];
-    ZGMTRBaseDevice* baseDevice = getBaseDevice(fdc, nodeId, [connectContext isEqual:[NSNull null]] ? nil : connectContext);
+    FlutterDeviceController *fdc = FlutterMatterControllerForHandle(handle);
+    ZGMTRBaseDevice* baseDevice = getBaseDevice(fdc, nodeId, connectContext);
     if (baseDevice == nil) {
-        return createFlutterRequestResultWithCode(1, @{});
+        return createFlutterRequestResultWithCode(1, @{
+            @"error": @"Connected device was not found.",
+        });
     }
     
     NSError *attributePathsError = nil;
     NSArray<ZGMTRAttributeRequestPath *> *attributePaths = mapFlutterAttributePaths(attributePathsJson, &attributePathsError);
     if (attributePathsError != nil) {
-        FlutterMatterLog([[NSString alloc] initWithFormat:@"Invalid read attributePaths: %@", attributePathsError.localizedDescription]);
-        return createFlutterRequestResultWithCode(1, @{ @"error": attributePathsError.localizedDescription ?: @"Invalid attributePaths" });
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"attributePaths"
+                                                                     message:@"attributePaths is invalid."];
     }
-    NSMutableArray * eventPaths = nil;
-    if (![eventPathsJson isEqual:[NSNull null]]) {
-        eventPaths = [NSMutableArray array];
-        for (NSUInteger i = 0; i < eventPathsJson.count; i++) {
-            NSDictionary * eventPath = eventPathsJson[i];
-            NSNumber * endpointId = [[eventPath objectForKey:@"endpointId"] objectForKey:@"id"];
-            NSNumber * clusterId = [[eventPath objectForKey:@"clusterId"] objectForKey:@"id"];
-            NSNumber * eventId = [[eventPath objectForKey:@"eventId"] objectForKey:@"id"];
-            [eventPaths addObject:[ZGMTREventRequestPath requestPathWithEndpointID:endpointId clusterID:clusterId eventID:eventId]];
-        }
+    NSError *eventPathsError = nil;
+    NSArray<ZGMTREventRequestPath *> *eventPaths = mapFlutterEventPaths(eventPathsJson, &eventPathsError);
+    if (eventPathsError != nil) {
+        @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"eventPaths"
+                                                                     message:@"eventPaths is invalid."];
     }
     
-    ZGMTRReadParams * readParams = [ZGMTRReadParams alloc];
+    ZGMTRReadParams *readParams = [ZGMTRReadParams alloc];
     readParams.fabricFiltered = isFabricFiltered;
     readParams.minEventNumber = eventMin;
     [baseDevice readAttributePaths:attributePaths eventPaths:eventPaths params:readParams queue:connectDeviceQueue completion:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable values, NSError * _Nullable error) {
-        @try {
-            if (error) {
-                // failed callback
-                invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"ReportCallback/onError"), toJSONStringFromObject(@{
-                    jsonKeyHandle: handle,
-                    @"reportCallbackPoint": callbackId,
-                    @"error": [error localizedDescription]
-                }));
-            } else {
-                FlutterMatterLog([[NSString alloc] initWithFormat:@"Call flutter readResult values %@", values]);
-                // success callback
-                invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"ReportCallback/onReport"), toJSONStringFromObject(@{
-                    jsonKeyHandle: handle,
-                    @"reportCallbackPoint": callbackId,
-                    @"nodeState": values == nil ? [NSNull null] : convertNodeStateJsonFormat(values)
-                }));
+        NSError *callbackError = error;
+        NSDictionary *nodeState = nil;
+        if (callbackError == nil) {
+            NSError *conversionError = nil;
+            nodeState = convertNodeStateJsonFormat(values, &conversionError);
+            if (nodeState == nil) {
+                callbackError = conversionError ?: FlutterMatterNodeStateConversionError(@"Report payload was invalid.");
             }
-            invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"ReportCallback/onDone"), toJSONStringFromObject(@{
-                jsonKeyHandle: handle,
-                @"reportCallbackPoint": callbackId
-            }));
-        } @catch (NSException *exception) {
-            FlutterMatterLog([[NSString alloc] initWithFormat:@"Call flutter readResult exception %@", [exception reason]]);
-        } @finally {
-            
         }
+
+        if (callbackError != nil) {
+            FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"ReportCallback/onError"), @{
+                jsonKeyHandle: handle,
+                @"reportCallbackPoint": callbackId,
+                @"error": FlutterMatterSafeNSErrorSummary(callbackError),
+            });
+        } else {
+            FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"ReportCallback/onReport"), @{
+                jsonKeyHandle: handle,
+                @"reportCallbackPoint": callbackId,
+                @"nodeState": nodeState,
+            });
+        }
+        FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"ReportCallback/onDone"), @{
+            jsonKeyHandle: handle,
+            @"reportCallbackPoint": callbackId,
+        });
     }];
     
     return createFlutterRequestResultWithCode(0, @{});
 }
 
 static NSString * writeRequest(NSString * params) {
-   NSDictionary *jsonObject = parseJSONString(params);
-   NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+   NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+   NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
    ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-   NSString *callbackId = requestJsonValueNotNull(jsonObject, @"callbackHandle");
+   if (deviceController == nil) {
+       @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                    message:@"Controller handle was not found."];
+   }
+   NSString *callbackId = FlutterMatterRequiredString(jsonObject, @"callbackHandle");
    
-   NSArray * attributeListJson  = requestJsonValueNotNull(jsonObject, @"attributeList");
-   NSNumber *nodeId = requestJsonValueNotNull(jsonObject, @"nodeId");
-   NSNumber * imTimeoutMs = [jsonObject objectForKey:@"imTimeoutMs"];
-   NSNumber * connectContext = [jsonObject objectForKey:@"connectContext"];
-   NSNumber * timedRequestTimeoutMs = [jsonObject objectForKey:@"timedRequestTimeoutMs"];
+   NSArray *attributeListJson = FlutterMatterRequiredArray(jsonObject, @"attributeList");
+   NSNumber *nodeId = FlutterMatterRequiredNumber(jsonObject, @"nodeId");
+   NSNumber *imTimeoutMs = FlutterMatterOptionalNumber(jsonObject, @"imTimeoutMs") ?: @(0);
+   NSNumber *connectContext = FlutterMatterOptionalNumber(jsonObject, @"connectContext");
+   NSNumber *timedRequestTimeoutMs = FlutterMatterOptionalNumber(jsonObject, @"timedRequestTimeoutMs") ?: @(0);
    
-   NSMutableArray * attributePaths = [NSMutableArray array];
-   for (NSDictionary * element in attributeListJson) {
-       NSNumber * endpointId = [[element objectForKey:@"endpointId"] objectForKey:@"id"];
-       NSNumber * clusterId = [[element objectForKey:@"clusterId"] objectForKey:@"id"];
-       NSNumber * attributeId = [[element objectForKey:@"attributeId"] objectForKey:@"id"];
-       NSData * tlv = toByteArrayFromJSONArray(requestJsonValueNotNull(element, @"tlv"));
+   NSMutableArray *attributePaths = [NSMutableArray arrayWithCapacity:attributeListJson.count];
+   for (id item in attributeListJson) {
+       if (![item isKindOfClass:[NSDictionary class]]) {
+           @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:@"attributeList"
+                                                                        message:@"Each attributeList entry must be an object."];
+       }
+       NSDictionary *element = (NSDictionary *)item;
+       NSNumber *endpointId = FlutterMatterRequiredPathID(element, @"endpointId");
+       NSNumber *clusterId = FlutterMatterRequiredPathID(element, @"clusterId");
+       NSNumber *attributeId = FlutterMatterRequiredPathID(element, @"attributeId");
+       NSData *tlv = FlutterMatterRequiredByteArray(element, @"tlv");
        
        [attributePaths addObject: [[ZGMTRAttributeWriteRequest alloc] initWithEndpointID:endpointId clusterID:clusterId attributeID:attributeId tlv:tlv]];
    }
    
-   FlutterDeviceController *fdc = [controls objectForKey:handle];
-   ZGMTRBaseDevice* baseDevice = getBaseDevice(fdc, nodeId, [connectContext isEqual:[NSNull null]] ? nil : connectContext);
+   FlutterDeviceController *fdc = FlutterMatterControllerForHandle(handle);
+   ZGMTRBaseDevice *baseDevice = getBaseDevice(fdc, nodeId, connectContext);
    if (baseDevice == nil) {
-       return createFlutterRequestResultWithCode(1, @{});
+       return createFlutterRequestResultWithCode(1, @{
+           @"error": @"Connected device was not found.",
+       });
    }
    
    [baseDevice writeAttributeRequests:attributePaths timedWriteTimeout:timedRequestTimeoutMs imTimeoutMs:imTimeoutMs queue:connectDeviceQueue completion:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable values, NSError * _Nullable error) {
-       @try {
-           NSNumber * resultEndPointId = @(0);
-           NSNumber * resultClusterId = @(0);
-           NSNumber * resultCommandId = @(0);
-           if (values != nil && [values count] > 0) {
-               NSDictionary<NSString *,id> * dictionary = [values objectAtIndex:0];
-               id commandPath = [dictionary objectForKey:@"commandPath"];
-               if (![commandPath isEqual:[NSNull null]] && [commandPath isKindOfClass:[ZGMTRCommandPath class]]) {
-                   ZGMTRCommandPath * cp = commandPath;
-                   resultEndPointId = [cp endpoint];
-                   resultClusterId = [cp cluster];
-                   resultCommandId = [cp command];
-               }
-           }
-           if (error) {
-               invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onError"), toJSONStringFromObject(@{
-                   jsonKeyHandle: handle,
-                   @"writeAttributesCallbackPoint": callbackId,
-                   @"error": [error localizedDescription],
-                   @"attributePath": @{
-                       @"endpointId": @{
-                           @"id": resultEndPointId
-                       },
-                       @"clusterId": @{
-                           @"id": resultClusterId
-                       },
-                       @"commandId": @{
-                           @"id": resultCommandId
-                       },
-                   }
-               }));
-           } else {
-               invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onResponse"), toJSONStringFromObject(@{
-                   jsonKeyHandle: handle,
-                   @"writeAttributesCallbackPoint": callbackId,
-//                    @"error": [error localizedDescription],
-                   @"attributePath": @{
-                       @"endpointId": @{
-                           @"id": resultEndPointId
-                       },
-                       @"clusterId": @{
-                           @"id": resultClusterId
-                       },
-                       @"attributeId": @{
-                           @"id": resultCommandId
-                       },
-                   }
-               }));
-           }
-           invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onDone"), toJSONStringFromObject(@{
+       NSArray *responseValues = [values isKindOfClass:[NSArray class]] ? values : nil;
+       NSDictionary *errorPath = nil;
+       if (error != nil && responseValues.count == 1 &&
+           [responseValues[0] isKindOfClass:[NSDictionary class]]) {
+           errorPath = FlutterMatterAttributePathJSONFromResponseValue(
+               ((NSDictionary *)responseValues[0])[ZGMTRAttributePathKey]);
+       }
+
+       if (error != nil) {
+           NSMutableDictionary *payload = [@{
                jsonKeyHandle: handle,
                @"writeAttributesCallbackPoint": callbackId,
-           }));
-       } @catch (NSException *exception) {
-           FlutterMatterLog([[NSString alloc] initWithFormat:@"Call flutter writeAttribute exception %@", [exception reason]]);
-       } @finally {
-           
+               @"error": FlutterMatterSafeNSErrorSummary(error),
+           } mutableCopy];
+           if (errorPath != nil) {
+               payload[@"attributePath"] = errorPath;
+           }
+           FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onError"), payload);
+       } else if (responseValues.count == 0) {
+           FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onError"), @{
+               jsonKeyHandle: handle,
+               @"writeAttributesCallbackPoint": callbackId,
+               @"error": @"Write completed without an attribute response.",
+           });
+       } else {
+           for (id responseValue in responseValues) {
+               if (![responseValue isKindOfClass:[NSDictionary class]]) {
+                   FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onError"), @{
+                       jsonKeyHandle: handle,
+                       @"writeAttributesCallbackPoint": callbackId,
+                       @"error": @"Write response contained a malformed entry.",
+                   });
+                   continue;
+               }
+
+               NSDictionary *response = (NSDictionary *)responseValue;
+               NSDictionary *attributePath = FlutterMatterAttributePathJSONFromResponseValue(
+                   response[ZGMTRAttributePathKey]);
+               if (attributePath == nil) {
+                   FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onError"), @{
+                       jsonKeyHandle: handle,
+                       @"writeAttributesCallbackPoint": callbackId,
+                       @"error": @"Write response did not contain a valid attribute path.",
+                   });
+                   continue;
+               }
+
+               id responseError = response[ZGMTRErrorKey];
+               if (responseError == nil) {
+                   FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onResponse"), @{
+                       jsonKeyHandle: handle,
+                       @"writeAttributesCallbackPoint": callbackId,
+                       @"attributePath": attributePath,
+                       @"status": @{@"status": @(0)},
+                   });
+                   continue;
+               }
+
+               if ([responseError isKindOfClass:[NSError class]]) {
+                   NSError *pathError = (NSError *)responseError;
+                   NSError *conversionError = nil;
+                   NSDictionary *status = FlutterMatterStatusJSONFromInteractionError(pathError,
+                                                                                     &conversionError);
+                   if (status != nil) {
+                       FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onResponse"), @{
+                           jsonKeyHandle: handle,
+                           @"writeAttributesCallbackPoint": callbackId,
+                           @"attributePath": attributePath,
+                           @"status": status,
+                       });
+                       continue;
+                   }
+               }
+
+               NSString *summary = [responseError isKindOfClass:[NSError class]]
+                   ? FlutterMatterSafeNSErrorSummary(responseError)
+                   : @"Write path failed.";
+               FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onError"), @{
+                   jsonKeyHandle: handle,
+                   @"writeAttributesCallbackPoint": callbackId,
+                   @"error": summary,
+                   @"attributePath": attributePath,
+               });
+           }
        }
+       FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"WriteAttributesCallback/onDone"), @{
+           jsonKeyHandle: handle,
+           @"writeAttributesCallbackPoint": callbackId,
+       });
    }];
    
    return createFlutterRequestResultWithCode(0, @{});
 }
 
 static NSString * openPairingWindowWithPIN(NSString * params) {
-    NSDictionary *jsonObject = parseJSONString(params);
-    NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
-//    ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-    NSString * callbackId = requestJsonValueNotNull(jsonObject, @"callbackHandle");
-    NSNumber * duration = requestJsonValueNotNull(jsonObject, @"duration");
-    NSNumber * discriminator = requestJsonValueNotNull(jsonObject, @"discriminator");
-    NSNumber * setupPIN = requestJsonValueNotNull(jsonObject, @"setupPIN");
-    NSNumber * connectContext = requestJsonValueNotNull(jsonObject, @"connectContext");
+    NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+    NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
+    NSString *callbackId = FlutterMatterRequiredString(jsonObject, @"callbackHandle");
+    NSNumber *duration = FlutterMatterRequiredNumber(jsonObject, @"duration");
+    NSNumber *discriminator = FlutterMatterRequiredNumber(jsonObject, @"discriminator");
+    NSNumber *setupPIN = FlutterMatterRequiredNumber(jsonObject, @"setupPIN");
+    NSNumber *connectContext = FlutterMatterRequiredNumber(jsonObject, @"connectContext");
     
-    FlutterDeviceController *fdc = [controls objectForKey:handle];
-    ZGMTRBaseDevice* baseDevice = [fdc deviceInfoForNodeID:[connectContext intValue]];;
+    FlutterDeviceController *fdc = FlutterMatterControllerForHandle(handle);
+    ZGMTRBaseDevice *baseDevice = [fdc deviceInfoForNodeID:[connectContext unsignedLongLongValue]];
     if (baseDevice == nil) {
-        return createFlutterRequestResultWithCode(1, @{@"msg": [[NSString alloc] initWithFormat:@"Not found connectDevice by %@", connectContext]});
+        return createFlutterRequestResultWithCode(1, @{
+            @"msg": @"Connected device was not found.",
+        });
     }
     [baseDevice openCommissioningWindowWithSetupPasscode:setupPIN discriminator:discriminator duration:duration queue:connectDeviceQueue completion:^(ZGMTRSetupPayload * _Nullable payload, NSError * _Nullable error) {
         @try {
             if (error || payload == nil) {
-                invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"OpenCommissioningCallback/onError"), toJSONStringFromObject(@{
+                FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"OpenCommissioningCallback/onError"), @{
                     jsonKeyHandle: handle,
                     @"callbackHandle": callbackId,
-                    @"status": error == nil ? @(0) : @([error code]),
-                    @"connectContext": connectContext
-                }));
+                    @"status": error == nil ? @(1) : @([error code]),
+                    @"connectContext": connectContext,
+                });
             } else {
-                invokeMethodBlockGet([Global externalChannel], createFlutterCallPath(deviceControllerHost, @"OpenCommissioningCallback/onSuccess"), toJSONStringFromObject(@{
+                NSString *manualPairingCode = [payload manualEntryCode] ?: @"";
+                NSString *qrCode = [payload qrCodeString] ?: @"";
+                if (manualPairingCode.length == 0 || qrCode.length == 0) {
+                    FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"OpenCommissioningCallback/onError"), @{
+                        jsonKeyHandle: handle,
+                        @"callbackHandle": callbackId,
+                        @"status": @(1),
+                        @"connectContext": connectContext,
+                    });
+                    return;
+                }
+                FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"OpenCommissioningCallback/onSuccess"), @{
                     jsonKeyHandle: handle,
                     @"callbackHandle": callbackId,
                     @"connectContext": connectContext,
-                    @"manualPairingCode": [payload manualEntryCode],
-                    @"qrCode": [payload qrCodeString]
-                }));
+                    @"manualPairingCode": manualPairingCode,
+                    @"qrCode": qrCode,
+                });
             }
         } @catch (NSException *exception) {
-            FlutterMatterLog([[NSString alloc] initWithFormat:@"Call flutter openPairingWindowWithPIN exception %@", [exception reason]]);
-        } @finally {
-            
+            FlutterMatterLogException(@"OpenCommissioningCallback.completion", exception);
+            FlutterMatterInvokeCallback(createFlutterCallPath(deviceControllerHost, @"OpenCommissioningCallback/onError"), @{
+                jsonKeyHandle: handle,
+                @"callbackHandle": callbackId,
+                @"status": @(1),
+                @"connectContext": connectContext,
+            });
         }
     }];
     
@@ -1300,42 +1703,53 @@ static NSString * openPairingWindowWithPIN(NSString * params) {
 }
 
 static NSString * getFabricIndex(NSString * params) {
-  NSDictionary *jsonObject = parseJSONString(params);
-  NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+  NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+  NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
   ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
+  if (deviceController == nil) {
+      @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                   message:@"Controller handle was not found."];
+  }
   return createFlutterRequestResultWithCode(0, @{@"data": [NSNumber numberWithLongLong:[deviceController getFabricIndex]]});
 }
 
 static NSString * unSubscribe(NSString * params) {
-   NSDictionary *jsonObject = parseJSONString(params);
-   NSString *handle = requestJsonValueNotNull(jsonObject, jsonKeyHandle);
+   NSDictionary *jsonObject = FlutterMatterParseJSONObject(params);
+   NSString *handle = FlutterMatterRequiredString(jsonObject, jsonKeyHandle);
    ZGMTRDeviceController *deviceController = getZGMTRDeviceController(handle);
-   NSNumber *nodeId = [jsonObject objectForKey:@"nodeId"];
-   NSNumber *fabricIndex = [jsonObject objectForKey:@"fabricIndex"];
-   NSNumber *subscriptionId = [jsonObject objectForKey:@"subscriptionId"];
+   if (deviceController == nil) {
+       @throw [[FlutterMatterArgumentException alloc] initWithArgumentName:jsonKeyHandle
+                                                                    message:@"Controller handle was not found."];
+   }
+   NSNumber *nodeId = FlutterMatterRequiredNumber(jsonObject, @"nodeId");
+   (void)FlutterMatterOptionalNumber(jsonObject, @"fabricIndex");
+   NSNumber *subscriptionId = FlutterMatterRequiredNumber(jsonObject, @"subscriptionId");
    ZGMTRBaseDevice *device = [ZGMTRBaseDevice deviceWithNodeID:nodeId controller:deviceController];
+   if (device == nil) {
+       return createFlutterRequestResultWithCode(1, @{
+           @"data": @(NO),
+           @"error": @"Connected device was not found.",
+       });
+   }
    BOOL success = [device shutdownSubscription:subscriptionId scopedNodeId:nodeId];
-   return createFlutterRequestResultWithCode(0, @{@"data": @(success)});
+   NSMutableDictionary *result = [@{@"data": @(success)} mutableCopy];
+   if (!success) {
+       result[@"error"] = @"Subscription could not be removed.";
+   }
+   return createFlutterRequestResultWithCode(success ? 0 : 1, result);
 }
 
 void onDeviceControlCall(NSString *path, NSString *params,
                          FlutterResult result) {
-    FlutterMatterLog(
-        [NSString stringWithFormat:@"onDeviceControlCall path: %@ params: %@",
-                                   path, params]);
-    if (controls == nil) {
-        controls = [[NSMutableDictionary alloc] init];
+    FlutterMatterLog([NSString stringWithFormat:@"onDeviceControlCall path: %@", path ?: @""]);
+    FlutterMatterEnsureDeviceControlState();
+    FlutterMatterResultSender *sender = [[FlutterMatterResultSender alloc] initWithResult:result];
+    dispatch_queue_t queue = [Global backgroundSerialQueue];
+    if (queue == nil) {
+        queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
-    if (onNOCChainGenerationCompletes == nil) {
-        onNOCChainGenerationCompletes = [[NSMutableDictionary alloc] init];
-    }
-    if (connectDeviceQueue == nil) {
-        connectDeviceQueue = dispatch_queue_create("connectDeviceQueue", DISPATCH_QUEUE_SERIAL);
-    }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async([Global backgroundSerialQueue], ^() {
+    dispatch_async(queue, ^{
           NSString *resultData = nil;
-          NSException *resultException = nil;
           @try {
               if ([path isEqualToString:@"/new"]) {
                   resultData = newDeviceControllerCall(params);
@@ -1381,24 +1795,19 @@ void onDeviceControlCall(NSString *path, NSString *params,
                   resultData = unSubscribe(params);
               }
           } @catch (NSException *exception) {
-              FlutterMatterLog([[NSString alloc] initWithFormat:@"onDeviceControlCall %@ Exception %@", path, [exception reason]]);
-              resultException = exception;
-          } @finally {
+              FlutterMatterLogException(@"onDeviceControlCall", exception);
+              [sender sendError:FlutterMatterErrorForException(exception,
+                                                                FlutterMatterDeviceControlCallExceptionCode,
+                                                                deviceControllerHost,
+                                                                path ?: @"")];
+              return;
           }
 
-          // callback run on main
-          dispatch_sync(dispatch_get_main_queue(), ^() {
-            if (resultException) {
-                result([FlutterError errorWithCode:@"DeviceControlCallException"
-                                           message:[resultException reason]
-                                           details:nil]);
-            } else if (resultData) {
-                result(resultData);
-            } else {
-                result(FlutterMethodNotImplemented);
-            }
-          });
-        });
+          if (resultData != nil) {
+              [sender sendValue:resultData];
+          } else {
+              [sender sendUnknownPathForHost:deviceControllerHost path:path ?: @""];
+          }
     });
 }
 

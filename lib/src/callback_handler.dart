@@ -1,15 +1,14 @@
 import 'dart:collection';
 
 import 'package:flutter_matter/flutter_matter_platform_interface.dart';
+import 'package:flutter_matter/src/platform_transport_types.dart';
 import 'package:flutter_matter/src/utils.dart';
 
-import '../flutter_matter_method_channel.dart';
-
 abstract class CallbackHandler<T> implements MethodCallHandler {
-  Map<String, T> _handlers = {};
+  final Map<String, T> _handlers = <String, T>{};
 
   CallbackHandler() {
-    (FlutterMatterPlatform.instance as MethodChannelFlutterMatter).addHandler(this);
+    FlutterMatterPlatform.instance.addHandler(this);
   }
 
   Map<String, T> get handlers => UnmodifiableMapView(_handlers);
@@ -26,19 +25,51 @@ abstract class CallbackHandler<T> implements MethodCallHandler {
 
   onCallbackMethodCall(String methodName, dynamic arguments);
 
-
   @override
   bool match(String method, dynamic arguments) {
-    final uri = Uri.parse(method);
-    final splitPaths = uri.path.split('/').where((element) => element.trim().isNotEmpty).toList();
-    final m = splitPaths.length >= 2 && splitPaths.firstOrNull == T.toString();
-    matterPrint('$T CallbackHandler match result: $m');
-    return m;
+    try {
+      final splitPaths = _splitCallbackPath(method);
+      final m =
+          splitPaths.length >= 2 && splitPaths.firstOrNull == T.toString();
+      matterPrint('$T CallbackHandler match result: $m');
+      return m;
+    } on ArgumentError {
+      return false;
+    }
   }
 
   @override
   call(String method, dynamic arguments) {
-    final splitPaths = Uri.parse(method).path.split('/').where((element) => element.trim().isNotEmpty).toList();
+    final splitPaths = _splitCallbackPath(method);
+    if (splitPaths.length < 2) {
+      throw ArgumentError.value(
+        method,
+        'method',
+        'callback path must contain a callback type and method name',
+      );
+    }
     return onCallbackMethodCall(splitPaths.sublist(1).join('/'), arguments);
+  }
+
+  static List<String> _splitCallbackPath(String method) {
+    if (method.trim().isEmpty) {
+      throw ArgumentError.value(method, 'method', 'must not be empty');
+    }
+
+    final Uri uri;
+    try {
+      uri = Uri.parse(method);
+    } on FormatException catch (error) {
+      throw ArgumentError.value(
+        method,
+        'method',
+        'must be a valid callback URI: ${error.message}',
+      );
+    }
+
+    return uri.path
+        .split('/')
+        .where((element) => element.trim().isNotEmpty)
+        .toList(growable: false);
   }
 }

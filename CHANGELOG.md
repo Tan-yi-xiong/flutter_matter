@@ -22,6 +22,18 @@
 - **Android Matter SDK 1.6.1** — Rebuilt the prefixed Android artifact from the same official connectedhomeip commit (`da8f6a0bff`) for `arm64-v8a` and `armeabi-v7a`. The dependency is now `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`.
 - **Breaking: `ControllerParams.setupURL` removed** — Matter 1.6.1 removed `ControllerParams.Builder.setSetupURL`; the field and its JSON wire key were removed. Migrate by omitting `setupURL`; there is no upstream replacement.
 
+### Error Handling and TLV
+- Added typed validation and sanitized error boundaries across the Dart MethodChannel, controller, BLE, DNS-SD, onboarding, model decoders, and cluster helpers. Malformed native payloads now fail with contextual `FormatException`, `ArgumentError`, `CallPlatformException`, or `PlatformProtocolException` instead of unchecked cast errors.
+- Controller `invoke`, `subscribe`, `read`, `write`, and `connectedDevice` requests now rethrow native request rejections and remove only the callback registered for that failed request. Cluster helpers await request acceptance and bound one-shot reads with a 15-second typed timeout instead of hanging.
+- Hardened Android controller, BLE, DNS-SD, onboarding, Bluetooth lifecycle, and shared callback utilities. Unexpected errors retain the external `-99` contract while raw stack traces and sensitive request data stay out of Dart-facing messages.
+- Hardened iOS MethodChannel dispatch and all Matter async callbacks. Normal subscription reports remain non-terminal; terminal errors produce one `onDone`. Path-level StatusIB values map to `attributeStatuses` and `eventStatuses`; write callbacks use `attributeId`, and path-specific write statuses are delivered through `onResponse`. Added stable bridge error codes, type-checked JSON extraction, single-shot result delivery, and safe logging across DeviceControl, BLE, onboarding, attestation, Swift pairing, defaults, and key helpers.
+- Android byte arrays now require integer values in the range `0..255`; onboarding discovery capabilities use stable wire values `1`/`2`/`3`. BLE delegate registration rolls back a new Dart handler when native registration fails, and the example NSD resolver skips a missing host.
+- Rewrote `lib/src/tlv/` against the connectedhomeip Kotlin TLV implementation. This fixes tag matching, all tag widths, byte-view offsets, signed/unsigned ranges, UTF-8 lengths, float32 encoding, truncated input handling, defensive reads, and the writer's previous four-container limit.
+- Added the full-width unsigned APIs `getULongBigInt`, `putUnsignedBigInt`, and `UnsignedIntValue.fromBigInt`. Existing `getULong()` keeps its signature but rejects values above `2^63 - 1` with migration guidance.
+- Preserved `putByteStringArray(Tag, List<int>)` for compatibility, marked it deprecated, and added `putByteStringArrayValues(Tag, List<Uint8List>)` for correct octet-string arrays.
+- Added all 74 connectedhomeip Kotlin TLV tests as Dart tests plus 18 regression tests and focused error-boundary tests. The root suite now covers 171 tests, and the device-test app suite remains at 288 passing tests.
+- Added [Error handling](doc/error-handling.md) with the Dart, Android, and iOS failure contract and validation matrix.
+
 ### Tooling and tests
 - Moved the reproducible ZGMatter framework build pipeline into `ios/zgmatter/`, with explicit `ZGMATTER_CONNECTEDHOMEIP_DIR` or `--connectedhomeip-dir` source configuration and English maintainer documentation.
 - Added a root plugin Dart test suite covering public exports, MethodChannel contracts, models, TLV parsing, onboarding parsing, and callback routing.

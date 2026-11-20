@@ -3,6 +3,8 @@
 #import <Foundation/Foundation.h>
 #import <ZGMatter/ZGMatter.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FlutterDeviceController : NSObject
 @property(nonatomic, strong) ZGMTRDeviceController *controller;
 @property(nonatomic, strong) FlutterControllerParams *controllerParams;
@@ -16,3 +18,5 @@
                   controllerParams:(nonnull FlutterControllerParams *)controllerParams;
 
 @end
+
+NS_ASSUME_NONNULL_END

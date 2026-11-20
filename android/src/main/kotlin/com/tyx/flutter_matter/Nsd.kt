@@ -1,17 +1,17 @@
 package com.tyx.flutter_matter
 
 import android.content.Context
-import android.os.Looper
-import androidx.core.os.HandlerCompat
 import chip.platform.ChipMdnsCallback
 import chip.platform.NsdManagerServiceResolver
 import io.flutter.plugin.common.MethodChannel
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.Arrays
 import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.RejectedExecutionException
 
 private val nsdExecutors = FlutterMatterPlugin.executors
+private const val NSD_CONTEXT = "NSD"
 
 class CustomNsdManagerServiceResolver(
     context: Context?,
@@ -19,6 +19,7 @@ class CustomNsdManagerServiceResolver(
     timeout: Long = 30000L
 ) : NsdManagerServiceResolver(context, nsdManagerResolverAvailState, timeout) {
 
+    @Volatile
     var resolveProxy: ((
         instanceName: String?,
         serviceType: String?,
@@ -28,11 +29,12 @@ class CustomNsdManagerServiceResolver(
         chipMdnsCallback: ChipMdnsCallback) -> Unit)? = null
          set(value) {
             if (field != null && value != null) {
-                throw RuntimeException("repeat set resolveProxy")
+                throw IllegalStateException("NSD resolve proxy is already set")
             }
             field = value
         }
 
+    @Volatile
     var publishProxy: ((
         serviceName: String?,
         hostName: String?,
@@ -43,15 +45,16 @@ class CustomNsdManagerServiceResolver(
         subTypes: Array<out String>?) -> Unit)? = null
         set(value) {
             if (field != null && value != null) {
-                throw RuntimeException("repeat set publishProxy")
+                throw IllegalStateException("NSD publish proxy is already set")
             }
             field = value
         }
 
+    @Volatile
     var removeServicesProxy: (() -> Unit)? = null
         set(value) {
             if (field != null && value != null) {
-                throw RuntimeException("repeat set removeServicesProxy")
+                throw IllegalStateException("NSD remove-services proxy is already set")
             }
             field = value
         }
@@ -63,10 +66,16 @@ class CustomNsdManagerServiceResolver(
         contextHandle: Long,
         chipMdnsCallback: ChipMdnsCallback
     ) {
-        if (resolveProxy != null) {
-            return resolveProxy!!(instanceName, serviceType, callbackHandle, contextHandle, chipMdnsCallback)
+        try {
+            val proxy = resolveProxy
+            if (proxy != null) {
+                proxy(instanceName, serviceType, callbackHandle, contextHandle, chipMdnsCallback)
+            } else {
+                super.resolve(instanceName, serviceType, callbackHandle, contextHandle, chipMdnsCallback)
+            }
+        } catch (e: Exception) {
+            reportNsdCallbackFailure("resolve", e)
         }
-        return super.resolve(instanceName, serviceType, callbackHandle, contextHandle, chipMdnsCallback)
     }
 
     override fun publish(
@@ -78,22 +87,34 @@ class CustomNsdManagerServiceResolver(
         textEntriesDatas: Array<out ByteArray>?,
         subTypes: Array<out String>?
     ) {
-        if (publishProxy != null) {
-            return publishProxy!!(serviceName, hostName, type, port, textEntriesKeys, textEntriesDatas, subTypes)
+        try {
+            val proxy = publishProxy
+            if (proxy != null) {
+                proxy(serviceName, hostName, type, port, textEntriesKeys, textEntriesDatas, subTypes)
+            } else {
+                super.publish(serviceName, hostName, type, port, textEntriesKeys, textEntriesDatas, subTypes)
+            }
+        } catch (e: Exception) {
+            reportNsdCallbackFailure("publish", e)
         }
-        return super.publish(serviceName, hostName, type, port, textEntriesKeys, textEntriesDatas, subTypes)
     }
 
     override fun removeServices() {
-        if (removeServicesProxy != null) {
-            return removeServicesProxy!!()
+        try {
+            val proxy = removeServicesProxy
+            if (proxy != null) {
+                proxy()
+            } else {
+                super.removeServices()
+            }
+        } catch (e: Exception) {
+            reportNsdCallbackFailure("removeServices", e)
         }
-        return super.removeServices()
     }
 }
 
 
-private val chipMdnsCallbackRef = HashMap<String, FlutterChipMdnsCallback>()
+private val chipMdnsCallbackRef = ConcurrentHashMap<String, FlutterChipMdnsCallback>()
 
 private class FlutterChipMdnsCallback(
     private val id: String,
@@ -123,61 +144,81 @@ private class FlutterChipMdnsCallback(
 }
 
 fun onNsdCall(path: String, params: String, result: MethodChannel.Result) {
-    matterPrint("onNsdCall $path $params")
+    matterPrint("onNsdCall $path")
 
-    fun callResultSuccess(data: Any) {
-        HandlerCompat.createAsync(Looper.getMainLooper()).post {
-            result.success(data)
-        }
-    }
-
-    fun callResultError(errorMessage: String) {
-        HandlerCompat.createAsync(Looper.getMainLooper()).post {
-            result.error("-99", errorMessage, errorMessage)
-        }
-    }
-
-    nsdExecutors.execute {
-        try {
-            when (path) {
-                "/setResolve" -> {
-                    callResultSuccess(setResolveProxy(params))
+    try {
+        nsdExecutors.execute {
+            try {
+                val response = when (path) {
+                    "/setResolve" -> setResolveProxy(params)
+                    "/setPublish" -> setPublish(params)
+                    "/setRemoveServices" -> setRemoveServices(params)
+                    "/handleServiceResolve" -> handleServiceResolve(params)
+                    "/handleServiceBrowse" -> handleServiceBrowse(params)
+                    else -> throw IllegalArgumentException("Unknown NSD request path")
                 }
-                "/setPublish" -> {
-                    callResultSuccess(setPublish(params))
-                }
-                "/setRemoveServices" -> {
-                    callResultSuccess(setRemoveServices(params))
-                }
-                "/handleServiceResolve" -> {
-                    callResultSuccess(handleServiceResolve(params))
-                }
-                "/handleServiceBrowse" -> {
-                    callResultSuccess(handleServiceBrowse(params))
-                }
+                result.postPlatformSuccess(response, "NSD $path")
+            } catch (e: Exception) {
+                reportPlatformException("NSD $path failed", e)
+                result.postPlatformError(
+                    "-99",
+                    safePlatformErrorMessage(NSD_CONTEXT, e),
+                    safePlatformErrorDetails(e),
+                    "NSD $path"
+                )
             }
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-            callResultError(e.stackTraceToString())
         }
+    } catch (e: RejectedExecutionException) {
+        reportPlatformException("NSD $path submission failed", e)
+        result.postPlatformError(
+            "-99",
+            "NSD operation is not available",
+            safePlatformErrorDetails(e),
+            "NSD $path"
+        )
     }
+}
 
+private fun nsdServiceResolver(): CustomNsdManagerServiceResolver {
+    val context = FlutterMatterPlugin.globalContext
+        ?: throw IllegalStateException("Plugin context is unavailable")
+    return ChipClient.getServiceResolver(context) as? CustomNsdManagerServiceResolver
+        ?: throw IllegalStateException("NSD service resolver is unavailable")
+}
+
+private fun nsdChannel(): MethodChannel {
+    return FlutterMatterPlugin.externalChannel
+        ?: throw IllegalStateException("Flutter NSD callback channel is unavailable")
+}
+
+private fun optionalProxyHandle(jsonObject: JSONObject): String? {
+    val value = jsonObject.opt("proxyHandle")
+    if (value == null || value == JSONObject.NULL) {
+        return null
+    }
+    if (value !is String || value.isBlank()) {
+        throw IllegalArgumentException("NSD proxy handle must be a non-empty string")
+    }
+    return value
+}
+
+private fun reportNsdCallbackFailure(context: String, error: Exception) {
+    reportPlatformException("NSD $context failed", error)
 }
 
 private fun setResolveProxy(params: String): String {
     val jsonObject = JSONObject(params)
-    val proxyHandle = jsonObject.opt("proxyHandle")
-    val serviceResolver = ChipClient.getServiceResolver(FlutterMatterPlugin.globalContext!!) as CustomNsdManagerServiceResolver
-    if (proxyHandle == JSONObject.NULL || proxyHandle == null) {
+    val proxyHandle = optionalProxyHandle(jsonObject)
+    val serviceResolver = nsdServiceResolver()
+    if (proxyHandle == null) {
         serviceResolver.resolveProxy = null
     } else {
         serviceResolver.resolveProxy = fun (instanceName: String?, serviceType: String?, callbackHandle: Long, contextHandle: Long, chipMdnsCallback: ChipMdnsCallback) {
             val callbackHandleId = UUID.randomUUID().toString()
             chipMdnsCallbackRef[callbackHandleId] = FlutterChipMdnsCallback(callbackHandleId, callbackHandle, contextHandle, chipMdnsCallback)
-            runOnWorkerThread(nsdExecutors) {
+            val task = Runnable {
                 try {
-                    val result = FlutterMatterPlugin.externalChannel!!.invokeMethodBlockGet(
+                    val result = nsdChannel().invokeMethodBlockGet(
                         createFlutterCallPath(nsdHost, "resolve"),
                         JSONObject(mapOf(
                             jsonKeyHandle to proxyHandle,
@@ -187,12 +228,18 @@ private fun setResolveProxy(params: String): String {
                         )).toString()
                     )
                     if (result == null) {
-                        throw RuntimeException("Flutter start resolve failed")
+                        throw IllegalStateException("Flutter NSD resolve returned no result")
                     }
                 } catch (e: Exception) {
                     chipMdnsCallbackRef.remove(callbackHandleId)
-                    matterPrint("resolve exception: $e")
+                    reportNsdCallbackFailure("resolve callback", e)
                 }
+            }
+            try {
+                runOnWorkerThread(nsdExecutors, task)
+            } catch (e: RejectedExecutionException) {
+                chipMdnsCallbackRef.remove(callbackHandleId)
+                reportNsdCallbackFailure("resolve callback submission", e)
             }
         }
     }
@@ -201,10 +248,9 @@ private fun setResolveProxy(params: String): String {
 
 private fun setPublish(params: String): String {
     val jsonObject = JSONObject(params)
-    val proxyHandle = jsonObject.opt("proxyHandle")
-    val serviceResolver =
-        ChipClient.getServiceResolver(FlutterMatterPlugin.globalContext!!) as CustomNsdManagerServiceResolver
-    if (proxyHandle == JSONObject.NULL || proxyHandle == null) {
+    val proxyHandle = optionalProxyHandle(jsonObject)
+    val serviceResolver = nsdServiceResolver()
+    if (proxyHandle == null) {
         serviceResolver.publishProxy = null
     } else {
         serviceResolver.publishProxy = fun(
@@ -216,9 +262,9 @@ private fun setPublish(params: String): String {
             textEntriesDatas: Array<out ByteArray>?,
             subTypes: Array<out String>?
         ) {
-            runOnWorkerThread(nsdExecutors) {
+            val task = Runnable {
                 try {
-                    val result = FlutterMatterPlugin.externalChannel!!.invokeMethodBlockGet(
+                    val result = nsdChannel().invokeMethodBlockGet(
                         createFlutterCallPath(nsdHost, "publish"),
                         JSONObject(
                             mapOf(
@@ -236,12 +282,16 @@ private fun setPublish(params: String): String {
                         ).toString()
                     )
                     if (result == null) {
-                        throw RuntimeException("")
+                        throw IllegalStateException("Flutter NSD publish returned no result")
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
-                    matterPrint("Call flutter publish failed $e")
+                    reportNsdCallbackFailure("publish callback", e)
                 }
+            }
+            try {
+                runOnWorkerThread(nsdExecutors, task)
+            } catch (e: RejectedExecutionException) {
+                reportNsdCallbackFailure("publish callback submission", e)
             }
         }
     }
@@ -250,16 +300,15 @@ private fun setPublish(params: String): String {
 
 private fun setRemoveServices(params: String): String {
     val jsonObject = JSONObject(params)
-    val proxyHandle = jsonObject.opt("proxyHandle")
-    val serviceResolver =
-        ChipClient.getServiceResolver(FlutterMatterPlugin.globalContext!!) as CustomNsdManagerServiceResolver
-    if (proxyHandle == JSONObject.NULL || proxyHandle == null) {
+    val proxyHandle = optionalProxyHandle(jsonObject)
+    val serviceResolver = nsdServiceResolver()
+    if (proxyHandle == null) {
         serviceResolver.removeServicesProxy = null
     } else {
         serviceResolver.removeServicesProxy = fun () {
-            runOnWorkerThread(nsdExecutors) {
+            val task = Runnable {
                 try {
-                    val result = FlutterMatterPlugin.externalChannel!!.invokeMethodBlockGet(
+                    val result = nsdChannel().invokeMethodBlockGet(
                         createFlutterCallPath(nsdHost, "removeServices"),
                         JSONObject(
                             mapOf(
@@ -268,12 +317,16 @@ private fun setRemoveServices(params: String): String {
                         ).toString()
                     )
                     if (result == null) {
-                        throw RuntimeException("")
+                        throw IllegalStateException("Flutter NSD removeServices returned no result")
                     }
                 } catch (e: Exception) {
-                    e.printStackTrace()
-                    matterPrint("Call flutter removeServices failed $e")
+                    reportNsdCallbackFailure("removeServices callback", e)
                 }
+            }
+            try {
+                runOnWorkerThread(nsdExecutors, task)
+            } catch (e: RejectedExecutionException) {
+                reportNsdCallbackFailure("removeServices callback submission", e)
             }
         }
     }
@@ -282,35 +335,51 @@ private fun setRemoveServices(params: String): String {
 
 fun handleServiceResolve(params: String): String {
     val jsonObject = JSONObject(params)
-    val handle = jsonObject.optNotNull(jsonKeyHandle).toString()
-    val instanceName = jsonObject.optNotNull("serviceName").toString()
-    val serviceType = jsonObject.optNotNull("serviceType").toString()
-    val hostName = jsonObject.optNotNull("hostName").toString()
-    val address = jsonObject.optNotNull("address").toString()
-    val port = jsonObject.optNotNull("port").toString().toInt()
-    val textEntriesJson = jsonObject.optJSONObject("attributes")
+    val handle = jsonObject.requiredStringParam(jsonKeyHandle)
+    val instanceName = jsonObject.requiredStringParam("serviceName")
+    val serviceType = jsonObject.requiredStringParam("serviceType")
+    val hostName = jsonObject.requiredStringParam("hostName")
+    val address = jsonObject.requiredStringParam("address")
+    val port = jsonObject.requiredIntParam("port")
+    val attributesValue = jsonObject.opt("attributes")
     var textEntries: HashMap<String, ByteArray>? = null
-    if (textEntriesJson != JSONObject.NULL && textEntriesJson != null) {
+    if (attributesValue != null && attributesValue != JSONObject.NULL) {
+        if (attributesValue !is JSONObject) {
+            throw IllegalArgumentException("NSD attributes must be a JSON object")
+        }
         textEntries = HashMap()
-        textEntriesJson.keys().forEach {
-            textEntries[it] = textEntriesJson.optJSONArray(it)!!.toByteArray()
+        attributesValue.keys().forEach { key ->
+            val attributeValue = attributesValue.opt(key)
+            if (attributeValue !is JSONArray) {
+                throw IllegalArgumentException("NSD attribute values must be byte arrays")
+            }
+            textEntries[key] = attributeValue.toByteArray()
         }
     }
-    val mdnsCallback = chipMdnsCallbackRef[handle] ?: throw RuntimeException("Not found handle [${handle}] callback")
+    val mdnsCallback = chipMdnsCallbackRef[handle]
+        ?: throw IllegalStateException("NSD resolve callback is no longer available")
     mdnsCallback.handleServiceResolve(instanceName, serviceType, hostName, address, port, textEntries)
     return createFlutterRequestResult(0, JSONObject())
 }
 
 fun handleServiceBrowse(params: String): String {
     val jsonObject = JSONObject(params)
-    val handle = jsonObject.optNotNull(jsonKeyHandle).toString()
-    val instanceNameJsonArray = jsonObject.optJSONArray("serviceNames")
-    val serviceType = jsonObject.optNotNull("serviceType").toString()
-    val mdnsCallback = chipMdnsCallbackRef[handle] ?: throw RuntimeException("Not found handle [${handle}] callback")
+    val handle = jsonObject.requiredStringParam(jsonKeyHandle)
+    val namesValue = jsonObject.opt("serviceNames")
+    val serviceType = jsonObject.requiredStringParam("serviceType")
+    val mdnsCallback = chipMdnsCallbackRef[handle]
+        ?: throw IllegalStateException("NSD browse callback is no longer available")
     val instanceName = mutableListOf<String>()
-    if (instanceNameJsonArray != JSONObject.NULL && instanceNameJsonArray != null) {
-        for (i in 0 until instanceNameJsonArray.length()) {
-            instanceName.add(instanceNameJsonArray.getString(i))
+    if (namesValue != null && namesValue != JSONObject.NULL) {
+        if (namesValue !is JSONArray) {
+            throw IllegalArgumentException("NSD serviceNames must be a JSON array")
+        }
+        for (i in 0 until namesValue.length()) {
+            val value = namesValue.opt(i)
+            if (value !is String) {
+                throw IllegalArgumentException("NSD serviceNames entries must be strings")
+            }
+            instanceName.add(value)
         }
     }
     mdnsCallback.handleServiceBrowse(instanceName.toTypedArray(), serviceType)

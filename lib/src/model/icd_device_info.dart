@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import '../utils.dart';
+import 'json_decoding.dart';
 
 /// Information about an ICD (Intermittently Connected Device) returned after
 /// successful ICD registration during commissioning (Matter 1.2+).
@@ -41,17 +41,37 @@ class ICDDeviceInfo {
   });
 
   factory ICDDeviceInfo.fromJson(Map<String, dynamic> json) {
+    final root = decodeJsonObject(json, 'ICDDeviceInfo');
+    final symmetricKey = decodeJsonBytes(
+      root['symmetricKey'],
+      'ICDDeviceInfo.symmetricKey',
+    );
+    if (symmetricKey.length != 16) {
+      throw FormatException(
+        'ICDDeviceInfo.symmetricKey must contain exactly 16 bytes; '
+        'got ${symmetricKey.length}',
+      );
+    }
     return ICDDeviceInfo(
-      symmetricKey: toUint8List(json['symmetricKey']),
-      userActiveModeTriggerHint:
-          (json['userActiveModeTriggerHint'] as List<dynamic>).cast<int>(),
-      userActiveModeTriggerInstruction:
-          json['userActiveModeTriggerInstruction']?.toString() ?? '',
-      icdNodeId: json['icdNodeId'] as int,
-      icdCounter: json['icdCounter'] as int,
-      monitoredSubject: json['monitoredSubject'] as int,
-      fabricId: json['fabricId'] as int,
-      fabricIndex: json['fabricIndex'] as int,
+      symmetricKey: symmetricKey,
+      userActiveModeTriggerHint: decodeJsonIntArray(
+        root['userActiveModeTriggerHint'],
+        'ICDDeviceInfo.userActiveModeTriggerHint',
+      ),
+      userActiveModeTriggerInstruction: decodeJsonNullableString(
+            root['userActiveModeTriggerInstruction'],
+            'ICDDeviceInfo.userActiveModeTriggerInstruction',
+          ) ??
+          '',
+      icdNodeId: decodeJsonInt(root['icdNodeId'], 'ICDDeviceInfo.icdNodeId'),
+      icdCounter: decodeJsonInt(root['icdCounter'], 'ICDDeviceInfo.icdCounter'),
+      monitoredSubject: decodeJsonInt(
+        root['monitoredSubject'],
+        'ICDDeviceInfo.monitoredSubject',
+      ),
+      fabricId: decodeJsonInt(root['fabricId'], 'ICDDeviceInfo.fabricId'),
+      fabricIndex:
+          decodeJsonInt(root['fabricIndex'], 'ICDDeviceInfo.fabricIndex'),
     );
   }
 

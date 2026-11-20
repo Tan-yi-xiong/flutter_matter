@@ -1,3 +1,23 @@
+/*
+ *
+ *    Copyright (c) 2023 Project CHIP Authors
+ *    Copyright (c) 2019-2023 Google LLC.
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+import 'utils.dart';
+
 const MODIFIED_TYPE_MASK = 28;
 const ELEMENT_TYPE_MASK = 31;
 const SIGNED_INT_TYPE = 0;
@@ -14,22 +34,26 @@ const ARRAY = 22;
 const LIST = 23;
 const END_OF_CONTAINER = 24;
 
-// 此文件由kotlin types.kt 使用ai转成dart
-
+/// Describes the type and encoded value/length width of a TLV element.
 abstract class Type {
   final int lengthSize;
   final int valueSize;
 
   Type(this.lengthSize, this.valueSize);
 
+  /// Returns the value-type bits without any tag bits.
   int encode();
 
   factory Type.from(int controlByte) {
-    int modifiedControlByte = (controlByte & MODIFIED_TYPE_MASK);
-    if (!(modifiedControlByte == SIGNED_INT_TYPE ||
-        modifiedControlByte == UNSIGNED_INT_TYPE ||
-        modifiedControlByte == UTF8_STRING_TYPE ||
-        modifiedControlByte == BYTE_STRING_TYPE)) {
+    if (controlByte < 0 || controlByte > 0xff) {
+      throw ArgumentError.value(controlByte, 'controlByte');
+    }
+
+    var modifiedControlByte = controlByte & MODIFIED_TYPE_MASK;
+    if (modifiedControlByte != SIGNED_INT_TYPE &&
+        modifiedControlByte != UNSIGNED_INT_TYPE &&
+        modifiedControlByte != UTF8_STRING_TYPE &&
+        modifiedControlByte != BYTE_STRING_TYPE) {
       modifiedControlByte = controlByte & ELEMENT_TYPE_MASK;
     }
 
@@ -61,13 +85,16 @@ abstract class Type {
       case END_OF_CONTAINER:
         return EndOfContainerType();
       default:
-        throw StateError(
-            "Unexpected control byte ${modifiedControlByte.toRadixString(2)}");
+        throw FormatException(
+          'Unexpected control byte '
+          '${byteToBinary(controlByte)}',
+        );
     }
   }
 
+  /// Extracts the little-endian length/value width encoded by the low bits.
   static int extractSize(int byte) {
-    switch (byte & int.parse('011', radix: 2)) {
+    switch (byte & 0x3) {
       case 0:
         return 1;
       case 1:
@@ -80,30 +107,31 @@ abstract class Type {
   }
 }
 
+/// Converts a supported 1/2/4/8-byte width into its two-bit encoding.
 int encodeSize(int size) {
   switch (size) {
     case 1:
-      return int.parse('000', radix: 2);
+      return 0;
     case 2:
-      return int.parse('001', radix: 2);
+      return 1;
     case 4:
-      return int.parse('010', radix: 2);
+      return 2;
     case 8:
-      return int.parse('011', radix: 2);
+      return 3;
     default:
-      throw StateError("Unexpected size $size");
+      throw ArgumentError.value(size, 'size', 'must be 1, 2, 4 or 8');
   }
 }
 
 class SignedIntType extends Type {
-  SignedIntType(int valueSize) : super(0, valueSize);
+  SignedIntType(int valueSize) : super(0, _validateFixedSize(valueSize));
 
   @override
   int encode() => SIGNED_INT_TYPE | encodeSize(valueSize);
 }
 
 class UnsignedIntType extends Type {
-  UnsignedIntType(int valueSize) : super(0, valueSize);
+  UnsignedIntType(int valueSize) : super(0, _validateFixedSize(valueSize));
 
   @override
   int encode() => UNSIGNED_INT_TYPE | encodeSize(valueSize);
@@ -133,14 +161,14 @@ class DoubleType extends Type {
 }
 
 class Utf8StringType extends Type {
-  Utf8StringType(int lengthSize) : super(lengthSize, 0);
+  Utf8StringType(int lengthSize) : super(_validateLengthSize(lengthSize), 0);
 
   @override
   int encode() => UTF8_STRING_TYPE | encodeSize(lengthSize);
 }
 
 class ByteStringType extends Type {
-  ByteStringType(int lengthSize) : super(lengthSize, 0);
+  ByteStringType(int lengthSize) : super(_validateLengthSize(lengthSize), 0);
 
   @override
   int encode() => BYTE_STRING_TYPE | encodeSize(lengthSize);
@@ -179,4 +207,18 @@ class EndOfContainerType extends Type {
 
   @override
   int encode() => END_OF_CONTAINER;
+}
+
+int _validateFixedSize(int size) {
+  if (size != 1 && size != 2 && size != 4 && size != 8) {
+    throw ArgumentError.value(size, 'size', 'must be 1, 2, 4 or 8');
+  }
+  return size;
+}
+
+int _validateLengthSize(int size) {
+  if (size != 1 && size != 2 && size != 4 && size != 8) {
+    throw ArgumentError.value(size, 'size', 'must be 1, 2, 4 or 8');
+  }
+  return size;
 }

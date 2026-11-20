@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import 'json_decoding.dart';
+
 class AttributeState {
   final Uint8List? tlv;
   final String? json;
@@ -7,9 +9,12 @@ class AttributeState {
   AttributeState({this.tlv, this.json});
 
   factory AttributeState.fromJson(Map jsonMap) {
+    final root = decodeJsonObject(jsonMap, 'AttributeState');
     return AttributeState(
-      tlv: jsonMap['tlv'] == null ? null : Uint8List.fromList(jsonMap['tlv'].cast<int>()),
-      json: jsonMap['json'],
+      tlv: root['tlv'] == null
+          ? null
+          : decodeJsonBytes(root['tlv'], 'AttributeState.tlv'),
+      json: decodeJsonNullableString(root['json'], 'AttributeState.json'),
     );
   }
 }

@@ -4,6 +4,7 @@
 #include <ZGMatter/ZGMatter.h>
 #include <Foundation/Foundation.h>
 #import "FlutterControllerParams.h"
+#import "Utiles.h"
 
 @interface FlutterDeviceController ()
   @property(nonatomic, strong) NSMutableDictionary *connectedDevices;
@@ -26,6 +27,10 @@
 
 
 - (void)addConnectedDeviceWithNodeID:(uint64_t)nodeID deviceInfo:(ZGMTRBaseDevice *)deviceInfo {
+  if (deviceInfo == nil) {
+    FlutterMatterLog(@"Ignored nil connected-device entry");
+    return;
+  }
   @synchronized (self){
     [_connectedDevices setObject:deviceInfo forKey:@(nodeID)];
   }

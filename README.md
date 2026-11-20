@@ -50,6 +50,7 @@ This is a controller-side plugin. It does not turn an app into a Matter commissi
 ### Reference
 
 - [Public API](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/public-api.md)
+- [Error handling](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/error-handling.md)
 - [Platform support](https://github.com/Tan-yi-xiong/flutter_matter/blob/main/doc/platform-support.md)
 
 ### Maintainers
