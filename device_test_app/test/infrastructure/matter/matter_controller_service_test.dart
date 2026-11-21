@@ -152,11 +152,37 @@ void main() {
       },
     );
 
-    test('fails fast when the native status update reports an error', () async {
+    test('ignores the native pairing-success status', () async {
       final fixture = _TestFixture();
       addTearDown(fixture.service.close);
       fixture.controller.onPairDeviceListener = (listener) {
-        scheduleMicrotask(() => listener.onStatusUpdate(1));
+        scheduleMicrotask(() {
+          listener.onStatusUpdate(1);
+          listener.onCommissioningComplete(42, 0);
+        });
+      };
+
+      final result = await fixture.service.commission(
+        MatterCommissionRequest(
+          onboardingPayload: 'MT:TEST-PAYLOAD',
+          setupPinCode: 20202021,
+          nodeId: 42,
+          networkCredentials: MatterWifiNetworkCredentials(
+            MatterWifiCredentials(ssid: 'Lab Wi-Fi', password: 'secret'),
+          ),
+          timeout: const Duration(milliseconds: 500),
+        ),
+      );
+
+      expect(result.nodeId, 42);
+      expect(fixture.controller.stoppedPairingNodeIds, isEmpty);
+    });
+
+    test('fails when the native pairing status reports failure', () async {
+      final fixture = _TestFixture();
+      addTearDown(fixture.service.close);
+      fixture.controller.onPairDeviceListener = (listener) {
+        scheduleMicrotask(() => listener.onStatusUpdate(2));
       };
 
       await expectLater(
@@ -172,11 +198,17 @@ void main() {
           ),
         ),
         throwsA(
-          isA<MatterException>().having(
-            (error) => error.message,
-            'message',
-            contains('error code 1'),
-          ),
+          isA<MatterException>()
+              .having(
+                (error) => error.code,
+                'code',
+                MatterFailureCode.pairingFailed,
+              )
+              .having(
+                (error) => error.message,
+                'message',
+                contains('status 2'),
+              ),
         ),
       );
       expect(fixture.controller.stoppedPairingNodeIds, contains(42));
