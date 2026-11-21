@@ -25,7 +25,6 @@ const List<String> _reportTestIds = <String>[
   'onoff_invoke',
   'onoff_subscription',
   'node_label_read_write',
-  'invalid_setup_passcode',
 ];
 
 /// A CLI error that can be represented as structured JSON.
@@ -2898,7 +2897,7 @@ int _bodySeconds(Map<String, Object?> body, String field,
   return value;
 }
 
-/// Validates a device-test report JSON document against schema v4.
+/// Validates a device-test report JSON document against schema v5.
 ///
 /// This is a narrow, test-facing wrapper around the internal report validator.
 /// It reports field-level validation errors only; error messages and details
@@ -2926,10 +2925,10 @@ void _validateReportJson(
     'sanitization',
   };
   _requireExactKeys(report, requiredKeys, 'report');
-  if (report['schema_version'] != 4) {
+  if (report['schema_version'] != 5) {
     throw const CliFailure(
       code: 'invalid_report',
-      message: 'Report schema_version must be 4.',
+      message: 'Report schema_version must be 5.',
     );
   }
   final generatedAt = report['generated_at'];
@@ -3037,7 +3036,6 @@ void _validateReportJson(
     'onoff_invoke',
     'onoff_subscription',
     'node_label_read_write',
-    'invalid_setup_passcode',
   };
   for (final testId in _reportTestIds) {
     final test = _requiredMap(tests, testId);

@@ -33,8 +33,6 @@ class ProvisioningSecretStore implements SecretAccessPort {
       SecretKeys.secretsBundle(runId),
       jsonEncode(<String, Object?>{
         'onboarding_payload': secrets.onboardingPayload,
-        'invalid_setup_onboarding_payload':
-            secrets.invalidSetupOnboardingPayload,
         'setup_pin_code': secrets.setupPinCode,
         'setup_discriminator': secrets.setupDiscriminator,
         'on_network_endpoint': switch (secrets.onNetworkEndpoint) {
@@ -86,9 +84,8 @@ class ProvisioningSecretStore implements SecretAccessPort {
     }
 
     final payload = decoded['onboarding_payload'];
-    final invalidPayload = decoded['invalid_setup_onboarding_payload'];
     final pin = decoded['setup_pin_code'];
-    if (payload is! String || invalidPayload is! String || pin is! int) {
+    if (payload is! String || pin is! int) {
       throw const FormatException('Stored setup credentials are invalid.');
     }
     final discriminator = decoded['setup_discriminator'];
@@ -110,7 +107,6 @@ class ProvisioningSecretStore implements SecretAccessPort {
     }
     return ProvisioningSecrets(
       onboardingPayload: payload,
-      invalidSetupOnboardingPayload: invalidPayload,
       setupPinCode: pin,
       setupDiscriminator: discriminator as int?,
       onNetworkEndpoint: endpoint,

@@ -2,7 +2,6 @@ import '../domain/domain.dart';
 import 'cases/app_restart_case.dart';
 import 'cases/build_install_case.dart';
 import 'cases/commissioning_case.dart';
-import 'cases/invalid_setup_passcode_case.dart';
 import 'cases/node_label_read_write_case.dart';
 import 'cases/onoff_invoke_case.dart';
 import 'cases/onoff_subscription_case.dart';
@@ -48,7 +47,6 @@ class TestCaseRegistry {
     const OnOffInvokeCase(),
     const OnOffSubscriptionCase(),
     const NodeLabelReadWriteCase(),
-    const InvalidSetupPasscodeCase(),
   ]);
 
   late final Map<DeviceTestId, DeviceTestCase> _cases;

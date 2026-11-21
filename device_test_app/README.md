@@ -9,9 +9,9 @@ Every Run uses a Matter commissionee. The app passes the raw onboarding payload 
 | Profile | Contents | Role |
 | --- | --- | --- |
 | `quick` | Build/install, commissioning, operational connection, OnOff invoke | Developer iteration |
-| `full` | All 8 fixed tests | Formal PR and release evidence |
+| `full` | All 7 fixed tests | Formal PR and release evidence |
 
-Only a completed `full` Run produces formal evidence. See [Device Test Report Contract](../doc/device-test-report.md) for the fixed IDs, timeouts, schema v4 fields, and result rules.
+Only a completed `full` Run produces formal evidence. See [Device Test Report Contract](../doc/device-test-report.md) for the fixed IDs, timeouts, schema v5 fields, and result rules.
 
 A P0 failure or P0 `not_run` blocks later P0 work and ends the Run. Dependent cases are recorded as `not_run` with a reason. P1 failures are recorded without blocking the remaining sequence. No P0 failure is retried in the same Run.
 

@@ -48,7 +48,7 @@ void main() {
     expect(result.contains(ReportValidationIssueKind.semantic), isTrue);
     expect(
       result.issues.map((issue) => issue.message).join(' '),
-      contains('All 8 fixed test IDs'),
+      contains('All 7 fixed test IDs'),
     );
   });
 
@@ -83,7 +83,7 @@ void main() {
   test('rejects summary counts or results that do not match tests', () {
     final json = _clone(buildFixtureReport().toJson());
     final summary = json['summary']! as Map<String, dynamic>;
-    summary['passed'] = 9;
+    summary['passed'] = 8;
     summary['result'] = 'failed';
 
     final result = validator.validateMap(json);
@@ -181,8 +181,8 @@ void main() {
     expect(result.contains(ReportValidationIssueKind.sensitive), isTrue);
   });
 
-  test('rejects schema v1, v2, and v3 reports', () {
-    for (final legacyVersion in <int>[1, 2, 3]) {
+  test('rejects schema v1, v2, v3, and v4 reports', () {
+    for (final legacyVersion in <int>[1, 2, 3, 4]) {
       final json = _clone(buildFixtureReport().toJson());
       json['schema_version'] = legacyVersion;
 

@@ -2,7 +2,7 @@
 
 A device-test Run produces reviewable evidence through two files generated from the same in-memory result:
 
-- `device-test-report.json`: sanitized schema v4 data.
+- `device-test-report.json`: sanitized schema v5 data.
 - `device-test-report.md`: human-readable summary for the pull request.
 
 Formal evidence requires the `full` profile and a real Matter commissionee. The app passes the raw onboarding payload to the Matter SDK, which performs discovery and commissioning.
@@ -46,9 +46,8 @@ Do not include commissionee model, firmware, external state-change method, user-
 | P0 | `onoff_invoke` | Off, On, and Toggle succeed within 10 seconds and change state |
 | P0 | `onoff_subscription` | Initial state and a command-triggered update arrive within 15 seconds |
 | P0 | `node_label_read_write` | A written NodeLabel is read back unchanged |
-| P0 | `invalid_setup_passcode` | A well-formed payload with a deliberately incorrect, same-discriminator passcode fails clearly without a crash |
 
-All 8 IDs must appear exactly once in `tests`. Priority is derived from the ID and is not duplicated in each result. A P0 entry cannot be omitted. P1 may be `not_run` only with a reason.
+All 7 IDs must appear exactly once in `tests`. Priority is derived from the ID and is not duplicated in each result. A P0 entry cannot be omitted. P1 may be `not_run` only with a reason.
 
 ## Run rules
 
@@ -119,13 +118,13 @@ For a device-behavior pull request:
 4. Confirm `plugin_commit` matches the PR head.
 5. Regenerate evidence after any device-relevant code change.
 
-For a stable release, provide separate Android and iOS reports for the candidate commit. Both must use schema v4 and a Matter commissionee.
+For a stable release, provide separate Android and iOS reports for the candidate commit. Both must use schema v5 and a Matter commissionee.
 
 ## Failure handling
 
 - Missing report or attachment: treat the change as unverified.
 - Stale commit: request a new report from the current PR head.
 - Wrong schema or non-Wi-Fi transport: reject as formal evidence.
-- Retired commissionee or transport fields: reject and regenerate from a v4 source.
+- Retired commissionee or transport fields: reject and regenerate from a v5 source.
 - Sensitive attachment: remove it, regenerate the report, and rotate exposed credentials.
 - Invalid app output: keep the result local and record the blocker; do not hand-edit sensitive data into an attachment.

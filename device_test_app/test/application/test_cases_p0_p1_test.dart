@@ -4,7 +4,6 @@ import 'package:flutter_matter_device_test_app/src/application/application.dart'
 import 'package:flutter_matter_device_test_app/src/application/cases/app_restart_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/build_install_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/commissioning_case.dart';
-import 'package:flutter_matter_device_test_app/src/application/cases/invalid_setup_passcode_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/node_label_read_write_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/onoff_invoke_case.dart';
 import 'package:flutter_matter_device_test_app/src/application/cases/onoff_subscription_case.dart';
@@ -429,86 +428,6 @@ void main() {
       final outcome = await const AppRestartCase().execute(context);
 
       expect(outcome.status, DeviceTestStatus.failed);
-    });
-  });
-
-  group('invalid_setup_passcode', () {
-    test('passes when the wrong passcode fails commissioning', () async {
-      final hardware = FakeHardware();
-      final harness = TestContextHarness(
-        testId: DeviceTestId.invalidSetupPasscode,
-        ports: hardware.ports,
-      );
-      final context = harness.build();
-
-      final outcome = await const InvalidSetupPasscodeCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.passed);
-      expect(hardware.commissioningWindow.openCount, 1);
-      expect(hardware.commissioningWindow.discriminators.single, 3840);
-      expect(hardware.commissioningWindow.setupPinCodes.single, 20202021);
-      expect(hardware.commissioning.requests.single.setupPinCode, 20202022);
-      expect(hardware.identity.resetCount, 0);
-      expect(hardware.identity.requests, isEmpty);
-      expect(
-        hardware.commissioning.requests.single.identity.purpose,
-        ControllerIdentityPurpose.main,
-      );
-      expect(
-        hardware.commissioning.requests.single.onNetworkEndpoint?.address,
-        '127.0.0.1',
-      );
-      expect(harness.prompts, isEmpty);
-    });
-
-    test('fails when the wrong passcode is accepted', () async {
-      final hardware = FakeHardware();
-      hardware.commissioning.handler = (_) async =>
-          const CommissioningResult(errorCode: 0, nodeId: 1);
-      final context = TestContextHarness(
-        testId: DeviceTestId.invalidSetupPasscode,
-        ports: hardware.ports,
-      ).build();
-
-      final outcome = await const InvalidSetupPasscodeCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('incorrectly reported success'));
-    });
-
-    test('fails when the commissioning window cannot open', () async {
-      final hardware = FakeHardware();
-      hardware.commissioningWindow.openError =
-          CommissioningWindowFailureCode.openFailed;
-      final context = TestContextHarness(
-        testId: DeviceTestId.invalidSetupPasscode,
-        ports: hardware.ports,
-      ).build();
-
-      final outcome = await const InvalidSetupPasscodeCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.failed);
-      expect(outcome.notes, contains('open_failed'));
-    });
-
-    test('returns not_run without a setup discriminator', () async {
-      final hardware = FakeHardware();
-      final secrets = makeSecrets();
-      final noDiscriminator = ProvisioningSecrets(
-        onboardingPayload: secrets.onboardingPayload,
-        invalidSetupOnboardingPayload: secrets.invalidSetupOnboardingPayload,
-        setupPinCode: secrets.setupPinCode,
-        network: secrets.network,
-      );
-      final context = TestContextHarness(
-        testId: DeviceTestId.invalidSetupPasscode,
-        ports: hardware.ports,
-        secrets: noDiscriminator,
-      ).build();
-
-      final outcome = await const InvalidSetupPasscodeCase().execute(context);
-
-      expect(outcome.status, DeviceTestStatus.notRun);
     });
   });
 }

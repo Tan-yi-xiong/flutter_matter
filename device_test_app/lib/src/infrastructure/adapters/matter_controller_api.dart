@@ -34,8 +34,6 @@ abstract interface class MatterControllerApi {
 
   Future<MatterInvokeResult> removeFabric(MatterRemoveFabricRequest request);
 
-  Future<void> openPairingWindow(MatterOpenPairingWindowRequest request);
-
   Future<void> close();
 }
 
@@ -97,11 +95,6 @@ class MatterControllerServiceApi implements MatterControllerApi {
   @override
   Future<MatterInvokeResult> removeFabric(MatterRemoveFabricRequest request) {
     return _service.removeFabric(request);
-  }
-
-  @override
-  Future<void> openPairingWindow(MatterOpenPairingWindowRequest request) {
-    return _service.openPairingWindow(request);
   }
 
   @override

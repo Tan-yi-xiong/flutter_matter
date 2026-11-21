@@ -9,7 +9,6 @@ void main() {
     final store = ProvisioningSecretStore(secureStore: backing);
     final secrets = ProvisioningSecrets(
       onboardingPayload: 'MT:TEST-PAYLOAD',
-      invalidSetupOnboardingPayload: '24129507534',
       setupPinCode: 20202021,
       network: const WifiProvisioningSecret(
         ssid: 'test-network',
@@ -21,10 +20,6 @@ void main() {
     final loaded = await store.load('run-1');
 
     expect(loaded?.onboardingPayload, secrets.onboardingPayload);
-    expect(
-      loaded?.invalidSetupOnboardingPayload,
-      secrets.invalidSetupOnboardingPayload,
-    );
     expect(loaded?.setupPinCode, secrets.setupPinCode);
     expect(loaded?.network, isA<WifiProvisioningSecret>());
     final network = loaded!.network as WifiProvisioningSecret;
@@ -42,7 +37,6 @@ void main() {
     final store = ProvisioningSecretStore(secureStore: backing);
     final secrets = ProvisioningSecrets(
       onboardingPayload: 'MT:TEST-PAYLOAD',
-      invalidSetupOnboardingPayload: '24129507534',
       setupPinCode: 20202021,
       network: ThreadProvisioningSecret(operationalDataset: [1, 2, 3, 4]),
     );

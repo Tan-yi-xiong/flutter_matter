@@ -333,7 +333,7 @@ USB123    unauthorized usb:1-1 transport_id:2
   group('device test report validator', () {
     const pluginCommit = 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0';
 
-    test('accepts a minimal valid schema 4 report', () {
+    test('accepts a minimal valid schema 5 report', () {
       final report = _validReport(pluginCommit: pluginCommit);
 
       expect(
@@ -345,9 +345,9 @@ USB123    unauthorized usb:1-1 transport_id:2
       );
     });
 
-    test('rejects schema 3 reports', () {
+    test('rejects schema 4 reports', () {
       final report = _validReport(pluginCommit: pluginCommit)
-        ..['schema_version'] = 3;
+        ..['schema_version'] = 4;
 
       final failure = _captureFailure(
         () => validateDeviceTestReportJson(
@@ -357,7 +357,7 @@ USB123    unauthorized usb:1-1 transport_id:2
       );
 
       expect(failure.code, 'invalid_report');
-      expect(failure.message, contains('schema_version must be 4.'));
+      expect(failure.message, contains('schema_version must be 5.'));
     });
 
     test('rejects a generated_at that is not RFC 3339', () {
@@ -483,7 +483,6 @@ USB123    unauthorized usb:1-1 transport_id:2
         'node_label_persistence',
         'app_restart',
         'factory_reset_recommission',
-        'invalid_setup_passcode',
         'bluetooth_disabled',
         'invalid_wifi_password',
         'remove_fabric_ui',
@@ -551,12 +550,11 @@ const List<String> _validReportTestIds = <String>[
   'onoff_invoke',
   'onoff_subscription',
   'node_label_read_write',
-  'invalid_setup_passcode',
 ];
 
 Map<String, Object?> _validReport({required String pluginCommit}) {
   return <String, Object?>{
-    'schema_version': 4,
+    'schema_version': 5,
     'generated_at': '2026-01-01T00:00:00.000Z',
     'test_app': <String, Object?>{
       'name': 'flutter_matter_device_test_app',

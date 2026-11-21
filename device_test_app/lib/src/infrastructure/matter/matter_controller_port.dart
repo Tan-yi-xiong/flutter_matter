@@ -48,14 +48,6 @@ abstract interface class MatterControllerPort {
 
   Future<void> releaseConnectContext(Object connectContext);
 
-  Future<bool> openPairingWindowWithPIN(
-    Object connectContext,
-    int duration,
-    int discriminator,
-    int setupPIN,
-    OpenCommissioningCallback callback,
-  );
-
   Future<void> invoke(
     InvokeCallback callback,
     int nodeId,
@@ -227,23 +219,6 @@ class FlutterMatterControllerPort implements MatterControllerPort {
   @override
   Future<void> releaseConnectContext(Object connectContext) {
     return _controller.releaseConnectContext(connectContext);
-  }
-
-  @override
-  Future<bool> openPairingWindowWithPIN(
-    Object connectContext,
-    int duration,
-    int discriminator,
-    int setupPIN,
-    OpenCommissioningCallback callback,
-  ) {
-    return _controller.openPairingWindowWithPIN(
-      connectContext,
-      duration,
-      discriminator,
-      setupPIN,
-      callback,
-    );
   }
 
   @override

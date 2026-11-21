@@ -1,5 +1,5 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "generated_at": "2026-11-11T12:00:00Z",
   "test_app": {
     "name": "flutter_matter_device_test_app",
@@ -20,7 +20,7 @@
   },
   "summary": {
     "result": "passed",
-    "passed": 8,
+    "passed": 7,
     "failed": 0,
     "not_run": 0
   },
@@ -72,13 +72,6 @@
       "duration_ms": 9600,
       "evidence_files": [
         "android-node-label-write.png"
-      ]
-    },
-    "invalid_setup_passcode": {
-      "status": "passed",
-      "duration_ms": 6100,
-      "evidence_files": [
-        "android-invalid-setup-passcode.png"
       ]
     }
   },

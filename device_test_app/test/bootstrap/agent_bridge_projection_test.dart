@@ -61,8 +61,8 @@ void main() {
       );
 
       expect(payload.status, AgentRunStatus.passed);
-      expect(payload.completedTests, 8);
-      expect(payload.totalTests, 8);
+      expect(payload.completedTests, 7);
+      expect(payload.totalTests, 7);
     });
 
     test('keeps a P0 not-run result out of the passed state', () {

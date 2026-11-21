@@ -21,7 +21,7 @@ Use the PR template for submitted evidence. Use [Contributing](../CONTRIBUTING.m
 
 ## Device evidence
 
-- [ ] Device-behavior changes use the `full` profile, a Matter commissionee, and schema v4 JSON plus generated Markdown.
+- [ ] Device-behavior changes use the `full` profile, a Matter commissionee, and schema v5 JSON plus generated Markdown.
 - [ ] The report records `network_transport: "wifi"`, vendor/product IDs, and no retired commissionee model, firmware, state-change, or commissioning-transport fields.
 - [ ] All required P0 results are `passed`; any P1 failure has an explicit maintainer risk decision.
 - [ ] Failed commissioning or P0 cases were not retried in the same Run.

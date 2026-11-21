@@ -113,10 +113,10 @@ class DeviceTestReportValidator {
 
   /// Validates a typed report for formal evidence use.
   ///
-  /// JSON schema v4 deliberately has no profile field. The caller supplies the
+  /// JSON schema v5 deliberately has no profile field. The caller supplies the
   /// profile that produced the report, and formal evidence must be full.
   ReportValidationResult validateModel(
-    DeviceTestReportV4 report, {
+    DeviceTestReportV5 report, {
     TestProfile profile = TestProfile.full,
   }) {
     final issues = <ReportValidationIssue>[];
@@ -211,7 +211,7 @@ void _validateSemantics(
 }
 
 /// Semantic checks for formal-report safety that stay meaningful even when
-/// a caller supplies a schema older or looser than the canonical v4 asset.
+/// a caller supplies a schema older or looser than the canonical v5 asset.
 void _validateFormalSafety(
   Map<String, dynamic> report,
   List<ReportValidationIssue> issues,

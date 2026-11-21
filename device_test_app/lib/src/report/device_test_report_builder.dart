@@ -19,7 +19,7 @@ class ReportBuildException implements Exception {
 class DeviceTestReportBuilder {
   const DeviceTestReportBuilder();
 
-  DeviceTestReportV4 buildFormal(
+  DeviceTestReportV5 buildFormal(
     RunSession session, {
     required DateTime generatedAt,
     required bool sanitizationReviewed,
@@ -66,7 +66,7 @@ class DeviceTestReportBuilder {
       for (final testId in DeviceTestCatalog.all)
         testId: session.results[testId]!,
     };
-    final report = DeviceTestReportV4(
+    final report = DeviceTestReportV5(
       generatedAt: generatedAt,
       testApp: session.testApp,
       pluginCommit: session.pluginCommit,

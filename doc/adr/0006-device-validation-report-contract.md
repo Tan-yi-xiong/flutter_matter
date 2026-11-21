@@ -47,17 +47,23 @@ The active device-validation contract moved from schema version `3` to version `
 
 The fixed matrix is now 11 tests, and the quick profile is a four-test iteration path. The report still requires a Wi-Fi `network_transport`, does not record device provenance, and describes the invalid-setup-passcode negative test as using a well-formed setup payload with a deliberately incorrect setup passcode and the same discriminator. The test app derives that negative-test payload locally and keeps it only in platform-secure storage. The earlier amendments remain as historical decisions.
 
+## Amendment (2026-11-18): Eight-test matrix and operator-owned commissionee reset
+
+At that time the fixed matrix contained 8 tests: 7 P0 tests, including the retired invalid-setup-passcode negative case, plus the P1 test `app_restart`. The `quick` profile contains 4 tests.
+
+Runs are one-shot and interrupted Runs are never resumed. Every commissioned Run adds one fabric to the commissionee. The post-Run cleanup card purges stored Run secrets and records operator confirmation; it does not reset the commissionee or remove the fabric. A clean cycle therefore starts with an explicit commissionee factory reset and an open commissioning window.
+
+The schema v4 artifact and source test catalog were authoritative until this schema v5 amendment.
+
+## Amendment (2026-11-21): Schema v5 retires the invalid-setup-passcode case
+
+The active device-validation contract moved from schema version `4` to version `5`. The invalid-setup-passcode negative case is removed from the fixed matrix because its second-commissioning-window workflow introduced a test-design dependency rather than a reliable cross-platform release signal. The current matrix contains 7 tests: 6 P0 tests plus the P1 `app_restart` test. The `quick` profile remains a four-test iteration path.
+
+The v5 report schema requires exactly the 7 current test IDs, caps summary counts at 7, and rejects v4 evidence so stale eight-test reports cannot satisfy the release gate. The earlier amendments remain historical decisions.
+
 ## Related Documents
 
 - [Device Validation](../device-validation.md)
 - [Device Test Report Contract](../device-test-report.md)
 - [Device Test Report Schema](../device-test-report.schema.json)
 - [ADR 0005: Dart-Only CI and Pull Request Evidence](0005-dart-only-ci-and-pr-evidence.md)
-
-## Amendment (2026-11-18): Eight-test matrix and operator-owned commissionee reset
-
-The current fixed matrix contains 8 tests: 7 P0 tests, including `invalid_setup_passcode`, plus the P1 test `app_restart`. The `quick` profile contains 4 tests. This supersedes the earlier statement that the full matrix contained 11 tests.
-
-Runs are one-shot and interrupted Runs are never resumed. Every commissioned Run adds one fabric to the commissionee. The post-Run cleanup card purges stored Run secrets and records operator confirmation; it does not reset the commissionee or remove the fabric. A clean cycle therefore starts with an explicit commissionee factory reset and an open commissioning window.
-
-The schema v4 artifact, source test catalog, and generated reports remain authoritative for the current contract.

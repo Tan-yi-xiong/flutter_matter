@@ -5,7 +5,7 @@ import 'device_test_report.dart';
 class DeviceTestReportMarkdownRenderer {
   const DeviceTestReportMarkdownRenderer();
 
-  String render(DeviceTestReportV4 report) {
+  String render(DeviceTestReportV5 report) {
     final buffer = StringBuffer()
       ..writeln('### Device validation summary')
       ..writeln()

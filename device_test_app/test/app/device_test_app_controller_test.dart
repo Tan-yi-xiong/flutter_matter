@@ -43,17 +43,6 @@ void main() {
     expect(secrets, isNotNull);
     expect(secrets!.setupPinCode, 20202021);
     expect(secrets.onboardingPayload, 'MT:TEST-SETUP-CODE');
-    expect(
-      secrets.invalidSetupOnboardingPayload,
-      buildMatterManualPairingCode(
-        discriminator: 1,
-        hasShortDiscriminator: false,
-        setupPinCode: invalidMatterSetupPinCodeFor(20202021),
-        commissioningFlow: 0,
-        vendorId: 1,
-        productId: 1,
-      ),
-    );
     final network = secrets.network as WifiProvisioningSecret;
     expect(network.ssid, 'Test Wi-Fi');
     expect(network.password, 'secret');

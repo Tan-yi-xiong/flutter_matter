@@ -10,8 +10,6 @@ class TestTimeouts {
     this.onOffSubscription = const Duration(seconds: 15),
     this.nodeLabelReadWrite = const Duration(seconds: 45),
     this.appRestart = const Duration(seconds: 60),
-    this.invalidSetupPasscode = const Duration(seconds: 120),
-    this.commissioningWindow = const Duration(seconds: 30),
   });
 
   final Duration buildInstall;
@@ -21,10 +19,6 @@ class TestTimeouts {
   final Duration onOffSubscription;
   final Duration nodeLabelReadWrite;
   final Duration appRestart;
-  final Duration invalidSetupPasscode;
-
-  /// Budget for re-opening a commissioning window as a case sub-step.
-  final Duration commissioningWindow;
 
   Duration forTest(DeviceTestId testId) => switch (testId) {
     DeviceTestId.buildInstall => buildInstall,
@@ -34,6 +28,5 @@ class TestTimeouts {
     DeviceTestId.onoffSubscription => onOffSubscription,
     DeviceTestId.nodeLabelReadWrite => nodeLabelReadWrite,
     DeviceTestId.appRestart => appRestart,
-    DeviceTestId.invalidSetupPasscode => invalidSetupPasscode,
   };
 }

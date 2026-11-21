@@ -56,7 +56,7 @@ Every message is a UTF-8 JSON object:
 | `command` | Host to app | Named command with arguments and idempotency key |
 | `command_result` | App to host | Terminal command status and safe result |
 | `screenshot` | App to host | Base64 image correlated with a command |
-| `report` | App to host | Sanitized schema v4 JSON and matching Markdown |
+| `report` | App to host | Sanitized schema v5 JSON and matching Markdown |
 | `error` | Both | Protocol or command error |
 
 Sequence rules:
@@ -205,7 +205,7 @@ If a prompt is unresolved after three minutes, use `skip_prompt` with a concrete
 Before writing report files, the host verifies:
 
 - protocol and schema versions;
-- exactly 8 fixed test IDs;
+- exactly 7 fixed test IDs;
 - result and duration types;
 - summary counts and overall consistency;
 - `vendor_id`, `product_id`, and `network_transport: "wifi"`;

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Tan-yi-xiong/flutter_matter/main/doc/device-test-report.schema.json",
-  "title": "flutter_matter device test report v4",
+  "title": "flutter_matter device test report v5",
   "description": "Sanitized device-validation result emitted by the flutter_matter device-test app.",
   "type": "object",
   "additionalProperties": false,
@@ -18,7 +18,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": 4
+      "const": 5
     },
     "generated_at": {
       "type": "string",
@@ -124,17 +124,17 @@
         "passed": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 11
+          "maximum": 7
         },
         "failed": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 11
+          "maximum": 7
         },
         "not_run": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 11
+          "maximum": 7
         }
       }
     },
@@ -148,8 +148,7 @@
         "app_restart",
         "onoff_invoke",
         "onoff_subscription",
-        "node_label_read_write",
-        "invalid_setup_passcode"
+        "node_label_read_write"
       ],
       "properties": {
         "build_install": {
@@ -171,9 +170,6 @@
           "$ref": "#/$defs/testResult"
         },
         "node_label_read_write": {
-          "$ref": "#/$defs/testResult"
-        },
-        "invalid_setup_passcode": {
           "$ref": "#/$defs/testResult"
         }
       }

@@ -162,7 +162,7 @@ class RunCoordinator {
   /// Builds formal evidence only for a completed full-profile run.
   ///
   /// Quick runs always return null and never produce a formal report.
-  Future<DeviceTestReportV4?> buildFormalReport({
+  Future<DeviceTestReportV5?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) async {
