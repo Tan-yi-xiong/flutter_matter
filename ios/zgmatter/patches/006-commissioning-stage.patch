@@ -1,0 +1,155 @@
+diff --git a/src/darwin/Framework/CHIP/MTRDeviceController.mm b/src/darwin/Framework/CHIP/MTRDeviceController.mm
+index ae7c9f02..57ca6471 100644
+--- a/src/darwin/Framework/CHIP/MTRDeviceController.mm
++++ b/src/darwin/Framework/CHIP/MTRDeviceController.mm
+@@ -697,6 +697,13 @@ - (void)controller:(MTRDeviceController *)controller commissioningSessionEstabli
+     [self.delegate onPairingComplete:error];
+ }
+ 
++- (void)dispatchCommissioningStatusUpdate:(NSNumber * _Nullable)nodeID stage:(NSString * _Nullable)stage error:(NSError * _Nullable)error
++{
++    if ([self.delegate respondsToSelector:@selector(onCommissioningStatusUpdate:commissioningStage:error:)]) {
++        [self.delegate onCommissioningStatusUpdate:nodeID commissioningStage:stage error:error];
++    }
++}
++
+ - (void)controller:(MTRDeviceController *)controller commissioningComplete:(NSError * _Nullable)error
+ {
+     [self.delegate onCommissioningComplete:error];
+diff --git a/src/darwin/Framework/CHIP/MTRDeviceControllerDelegate.h b/src/darwin/Framework/CHIP/MTRDeviceControllerDelegate.h
+index 48c55c98..ced407f3 100644
+--- a/src/darwin/Framework/CHIP/MTRDeviceControllerDelegate.h
++++ b/src/darwin/Framework/CHIP/MTRDeviceControllerDelegate.h
+@@ -149,6 +149,16 @@ MTR_DEPRECATED("Please use MTRDeviceControllerDelegate", ios(16.1, 16.4), macos(
+ - (void)onCommissioningComplete:(NSError * _Nullable)error;
+ - (void)onPairingDeleted:(NSError * _Nullable)error;
+ 
++/**
++ * ZG extension: Called when a commissioning stage completes.
++ * @param nodeID   The node ID being commissioned (nil for cluster-wide operations).
++ * @param commissioningStage  String name of the commissioning stage.
++ * @param error   The error, if any.  nil indicates the stage completed successfully.
++ */
++- (void)onCommissioningStatusUpdate:(NSNumber * _Nullable)nodeID
++                 commissioningStage:(NSString * _Nullable)commissioningStage
++                              error:(NSError * _Nullable)error;
++
+ @end
+ 
+ NS_ASSUME_NONNULL_END
+diff --git a/src/darwin/Framework/CHIP/MTRDeviceControllerDelegateBridge.h b/src/darwin/Framework/CHIP/MTRDeviceControllerDelegateBridge.h
+index 1069f9c5..c28b5f8a 100644
+--- a/src/darwin/Framework/CHIP/MTRDeviceControllerDelegateBridge.h
++++ b/src/darwin/Framework/CHIP/MTRDeviceControllerDelegateBridge.h
+@@ -28,6 +28,7 @@
+ NS_ASSUME_NONNULL_BEGIN
+ 
+ @class MTRDeviceController;
++@class MTRDevicePairingDelegateShim;
+ 
+ class MTRDeviceControllerDelegateBridge : public chip::Controller::DevicePairingDelegate {
+ public:
+@@ -35,6 +36,7 @@ public:
+     ~MTRDeviceControllerDelegateBridge();
+ 
+     void setDelegate(MTRDeviceController * controller, id<MTRDeviceControllerDelegate> delegate, dispatch_queue_t queue);
++    void setLegacyPairingDelegate(MTRDevicePairingDelegateShim * delegate);
+ 
+     // DevicePairingDelegate implementation
+     void OnStatusUpdate(chip::Controller::DevicePairingDelegate::Status status) override;
+@@ -64,6 +66,7 @@ public:
+ private:
+     MTRDeviceController * __weak mController;
+     _Nullable id<MTRDeviceControllerDelegate> __weak mDelegate;
++    MTRDevicePairingDelegateShim * __weak _Nullable mLegacyPairingDelegate;
+     _Nullable dispatch_queue_t mQueue;
+     chip::NodeId mDeviceNodeId;
+ 
+diff --git a/src/darwin/Framework/CHIP/MTRDeviceControllerDelegateBridge.mm b/src/darwin/Framework/CHIP/MTRDeviceControllerDelegateBridge.mm
+index 737f387f..86ffc31b 100644
+--- a/src/darwin/Framework/CHIP/MTRDeviceControllerDelegateBridge.mm
++++ b/src/darwin/Framework/CHIP/MTRDeviceControllerDelegateBridge.mm
+@@ -34,5 +34,11 @@
+ 
+ #include <lib/core/DataModelTypes.h>
+ 
++@interface MTRDevicePairingDelegateShim ()
++- (void)dispatchCommissioningStatusUpdate:(NSNumber * _Nullable)nodeID
++                                     stage:(NSString * _Nullable)stage
++                                     error:(NSError * _Nullable)error;
++@end
++
+ using namespace chip::Tracing::DarwinFramework;
+ 
+@@ -57,6 +57,12 @@
+     }
+ }
+ 
++
++void MTRDeviceControllerDelegateBridge::setLegacyPairingDelegate(MTRDevicePairingDelegateShim * delegate)
++{
++    mLegacyPairingDelegate = delegate;
++}
++
+ MTRCommissioningStatus MTRDeviceControllerDelegateBridge::MapStatus(chip::Controller::DevicePairingDelegate::Status status)
+ {
+     MTRCommissioningStatus rv = MTRCommissioningStatusUnknown;
+@@ -241,6 +247,22 @@
+             });
+         }
+     }
++
++    // ZG extension: Forward the commissioning stage to the legacy pairing delegate.
++    // This hooks into MTRDevicePairingDelegateShim via onCommissioningStatusUpdate.
++    {
++        auto * legacyShim = static_cast<MTRDevicePairingDelegateShim *>(mLegacyPairingDelegate);
++        if (legacyShim && mQueue) {
++            NSString * stageStr = [NSString stringWithCString:StageToString(stageCompleted) encoding:NSUTF8StringEncoding];
++            NSNumber * nodeID = @(peerId.GetNodeId());
++            NSError * objcError = (error == CHIP_NO_ERROR) ? nil : [MTRError errorForCHIPErrorCode:error];
++            if ([legacyShim respondsToSelector:@selector(dispatchCommissioningStatusUpdate:stage:error:)]) {
++                dispatch_async(mQueue, ^{
++                    [legacyShim dispatchCommissioningStatusUpdate:nodeID stage:stageStr error:objcError];
++                });
++            }
++        }
++    }
+ }
+ 
+ void MTRDeviceControllerDelegateBridge::OnCommissioningStageStart(chip::PeerId peerId, chip::Controller::CommissioningStage stageStarting)
+diff --git a/src/darwin/Framework/CHIP/MTRDeviceController_Concrete.mm b/src/darwin/Framework/CHIP/MTRDeviceController_Concrete.mm
+index efe2f49a..40547e16 100644
+--- a/src/darwin/Framework/CHIP/MTRDeviceController_Concrete.mm
++++ b/src/darwin/Framework/CHIP/MTRDeviceController_Concrete.mm
+@@ -100,6 +100,7 @@ @interface MTRDeviceController_Concrete ()
+ @property (nonatomic, readonly) chip::Credentials::PartialDACVerifier * partialDACVerifier;
+ @property (nonatomic, readonly) chip::Credentials::DefaultDACVerifier * defaultDACVerifier;
+ @property (nonatomic, readonly) MTRDeviceControllerDelegateBridge * deviceControllerDelegateBridge;
++@property (nonatomic, strong) MTRDevicePairingDelegateShim * legacyPairingDelegateShim;
+ @property (nonatomic, readonly) MTROperationalCredentialsDelegate * operationalCredentialsDelegate;
+ @property (nonatomic, readonly) MTRDeviceAttestationDelegateBridge * deviceAttestationDelegateBridge;
+ @property (nonatomic, readonly) dispatch_queue_t chipWorkQueue;
+@@ -788,6 +789,7 @@ - (BOOL)startup:(MTRDeviceControllerStartupParamsInternal *)startupParams
+ 
+         // Set self as delegate, which fans out delegate callbacks to all added delegates
+         self->_deviceControllerDelegateBridge->setDelegate(self, self, _chipWorkQueue);
++        self->_deviceControllerDelegateBridge->setLegacyPairingDelegate(self->_legacyPairingDelegateShim);
+ 
+         MTR_LOG("%@ startup succeeded for nodeID 0x%016llX", self, self->_cppCommissioner->GetNodeId());
+     });
+@@ -925,6 +927,7 @@ - (CHIP_ERROR)startCommissioning:(MTRCommissioningOperation *)commissioning with
+         if (CHIP_NO_ERROR == errorCode) {
+             self->_deviceControllerDelegateBridge->SetDeviceNodeID(commissioningID.unsignedLongLongValue);
+             self->_deviceControllerDelegateBridge->setDelegate(self, commissioning, self->_commissioningQueue);
++            self->_deviceControllerDelegateBridge->setLegacyPairingDelegate(self->_legacyPairingDelegateShim);
+         } else {
+             MATTER_LOG_METRIC_END(kMetricSetupPASESession, errorCode);
+         }
+@@ -2478,6 +2481,7 @@ - (nullable NSString *)openPairingWindowWithPIN:(uint64_t)deviceID
+ - (void)setPairingDelegate:(id<MTRDevicePairingDelegate>)delegate queue:(dispatch_queue_t)queue
+ {
+     auto * delegateShim = [[MTRDevicePairingDelegateShim alloc] initWithDelegate:delegate];
++    _legacyPairingDelegateShim = delegateShim;
+     [self setDeviceControllerDelegate:delegateShim queue:queue];
+ }
+ 

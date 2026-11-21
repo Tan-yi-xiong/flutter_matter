@@ -132,6 +132,7 @@ void main() {
     expect(encoded['controllerVendorId'], 0xFFF4);
     expect(encoded['skipAttestationCertificateValidation'], isTrue);
     expect(encoded['nodeId'], 112233);
+    expect(encoded.containsKey('setupURL'), isFalse);
   });
 
   test('NodeState decodes nested endpoint and cluster state', () {
@@ -182,6 +183,14 @@ void main() {
     expect(cluster.dataVersion, 9);
   });
 
+  test('AttributeState normalizes integer byte JSON without width bounds', () {
+    final state = AttributeState.fromJson(<String, dynamic>{
+      'tlv': <int>[-0x81, -0x80, -1, 0, 0x7f, 0xff, 0x100, 0xffff],
+    });
+
+    expect(state.tlv, <int>[0x7f, 0x80, 0xff, 0, 0x7f, 0xff, 0, 0xff]);
+  });
+
   test('ICDDeviceInfo round-trips through JSON', () {
     final info = ICDDeviceInfo(
       symmetricKey: Uint8List.fromList(List<int>.generate(16, (i) => i)),
@@ -202,5 +211,190 @@ void main() {
     expect(decoded.userActiveModeTriggerInstruction, 'Press the button');
     expect(decoded.icdNodeId, 10);
     expect(decoded.monitoredSubject, 12);
+  });
+
+  group('model JSON validation', () {
+    void expectFormatContaining(String field, void Function() callback) {
+      expect(
+        callback,
+        throwsA(
+          isA<FormatException>().having(
+            (error) => error.message,
+            'message',
+            contains(field),
+          ),
+        ),
+      );
+    }
+
+    final path = <String, dynamic>{'id': 1, 'type': 'concrete'};
+
+    test('path and invoke decoders report field-specific format errors', () {
+      expectFormatContaining(
+        'ChipPathId.id',
+        () => ChipPathId.fromJson(<String, dynamic>{'type': 'concrete'}),
+      );
+      expectFormatContaining(
+        'ChipPathId.type',
+        () => ChipPathId.fromJson(<String, dynamic>{
+          'id': 1,
+          'type': 'future-type',
+        }),
+      );
+      expectFormatContaining(
+        'ChipAttributePath.endpointId',
+        () => ChipAttributePath.fromJson(<String, dynamic>{
+          'endpointId': 'bad',
+          'clusterId': path,
+          'attributeId': path,
+        }),
+      );
+      expectFormatContaining(
+        'InvokeElement.groupId',
+        () => InvokeElement.fromJson(<String, dynamic>{
+          'clusterId': path,
+          'commandId': path,
+          'groupId': '1',
+        }),
+      );
+      expectFormatContaining(
+        'InvokeElement.tlv',
+        () => InvokeElement.fromJson(<String, dynamic>{
+          'clusterId': path,
+          'commandId': path,
+          'tlv': 'not-a-byte-array',
+        }),
+      );
+    });
+
+    test('attribute, event, and status decoders reject invalid field types',
+        () {
+      expectFormatContaining(
+        'AttributeState.tlv',
+        () => AttributeState.fromJson(<String, dynamic>{'tlv': 'bad'}),
+      );
+      expectFormatContaining(
+        'AttributeState.json',
+        () => AttributeState.fromJson(<String, dynamic>{'json': 4}),
+      );
+      expectFormatContaining(
+        'EventState.eventNumber',
+        () => EventState.fromJson(<String, dynamic>{
+          'priorityLevel': 1,
+          'timestampType': 0,
+          'timestampValue': 1,
+        }),
+      );
+      expectFormatContaining(
+        'EventState.tlv[0]',
+        () => EventState.fromJson(<String, dynamic>{
+          'eventNumber': 1,
+          'priorityLevel': 1,
+          'timestampType': 0,
+          'timestampValue': 1,
+          'tlv': <dynamic>['bad'],
+        }),
+      );
+      expectFormatContaining(
+        'Status.status',
+        () => Status.fromJson(<String, dynamic>{'status': '0'}),
+      );
+      expectFormatContaining(
+        'Status.clusterStatus',
+        () => Status.fromJson(<String, dynamic>{
+          'status': 0,
+          'clusterStatus': 'bad',
+        }),
+      );
+    });
+
+    test('node, endpoint, and cluster decoders report nested field context',
+        () {
+      expectFormatContaining(
+        'NodeState.endpoints',
+        () => NodeState.fromJson(<String, dynamic>{
+          'endpoints': <dynamic>[],
+        }),
+      );
+      expectFormatContaining(
+        'NodeState.endpoints key',
+        () => NodeState.fromJson(<String, dynamic>{
+          'endpoints': <String, dynamic>{'not-an-int': <String, dynamic>{}},
+        }),
+      );
+      expectFormatContaining(
+        'NodeState.endpoints[1]',
+        () => NodeState.fromJson(<String, dynamic>{
+          'endpoints': <String, dynamic>{'1': <dynamic>[]},
+        }),
+      );
+      expectFormatContaining(
+        'EndpointState.clusters',
+        () => EndpointState.fromJson(<String, dynamic>{
+          'clusters': 'bad',
+        }),
+      );
+      expectFormatContaining(
+        'ClusterState.attributes',
+        () => ClusterState.fromJson(<String, dynamic>{
+          'attributes': <dynamic>[],
+        }),
+      );
+      expectFormatContaining(
+        'ClusterState.events[1]',
+        () => ClusterState.fromJson(<String, dynamic>{
+          'events': <String, dynamic>{'1': <String, dynamic>{}},
+        }),
+      );
+      expectFormatContaining(
+        'ClusterState.events[1][0]',
+        () => ClusterState.fromJson(<String, dynamic>{
+          'events': <String, dynamic>{
+            '1': <dynamic>[<dynamic>[]],
+          },
+        }),
+      );
+      expectFormatContaining(
+        'ClusterState.dataVersion',
+        () => ClusterState.fromJson(<String, dynamic>{
+          'dataVersion': '9',
+        }),
+      );
+    });
+
+    test('ICD device info validates key, hints, and numeric fields', () {
+      final validIcd = <String, dynamic>{
+        'symmetricKey': List<int>.generate(16, (i) => i),
+        'userActiveModeTriggerHint': <int>[1, 2],
+        'userActiveModeTriggerInstruction': 'Press',
+        'icdNodeId': 1,
+        'icdCounter': 2,
+        'monitoredSubject': 3,
+        'fabricId': 4,
+        'fabricIndex': 5,
+      };
+
+      expectFormatContaining(
+        'ICDDeviceInfo.symmetricKey',
+        () => ICDDeviceInfo.fromJson(<String, dynamic>{
+          ...validIcd,
+          'symmetricKey': <int>[1, 2],
+        }),
+      );
+      expectFormatContaining(
+        'ICDDeviceInfo.userActiveModeTriggerHint',
+        () => ICDDeviceInfo.fromJson(<String, dynamic>{
+          ...validIcd,
+          'userActiveModeTriggerHint': '1,2',
+        }),
+      );
+      expectFormatContaining(
+        'ICDDeviceInfo.icdNodeId',
+        () => ICDDeviceInfo.fromJson(<String, dynamic>{
+          ...validIcd,
+          'icdNodeId': '1',
+        }),
+      );
+    });
   });
 }

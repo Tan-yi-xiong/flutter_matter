@@ -12,28 +12,58 @@
                           attestationDeviceInfo:(ZGMTRDeviceAttestationDeviceInfo *)attestationDeviceInfo
                                           error:(NSError * _Nullable)error
 {
-    NSString *p = createFlutterCallPath(deviceControllerHost, @"DeviceAttestationDelegate/onDeviceAttestationCompleted");
-    NSString *callResult = invokeMethodBlockGet([Global externalChannel], p, toJSONStringFromObject(@{
-        jsonKeyHandle: _handle,
-        @"devicePtr": @((uintptr_t)opaqueDeviceHandle),
-        @"attestationInfo": @{
+    (void)controller;
+    @try {
+        NSString *path = createFlutterCallPath(deviceControllerHost,
+                                               @"DeviceAttestationDelegate/onDeviceAttestationCompleted");
+        NSNumber *vendorId = @(0);
+        NSNumber *productId = @(0);
+        if (attestationDeviceInfo != nil) {
+            if (@available(iOS 16.4, *)) {
+                vendorId = [attestationDeviceInfo vendorID] ?: @(0);
+                productId = [attestationDeviceInfo productID] ?: @(0);
+            }
+        }
+        NSDictionary *attestationInfo = attestationDeviceInfo == nil ? @{
             @"challenge": @[],
             @"nonce": @[],
             @"elements": @[],
             @"elementsSignature": @[],
             @"firmwareInfo": @[],
-            @"dac": [attestationDeviceInfo dacCertificate] == nil ? @[] : nsDataToIntegerArray([attestationDeviceInfo dacCertificate]),
-            @"pai": [attestationDeviceInfo dacPAICertificate] == nil ? @[] : nsDataToIntegerArray([attestationDeviceInfo dacPAICertificate]),
-            @"vendorId": [attestationDeviceInfo vendorID],
-            @"productId": [attestationDeviceInfo productID],
-            @"certificationDeclaration": [attestationDeviceInfo certificateDeclaration] == nil ? @[]: nsDataToIntegerArray([attestationDeviceInfo certificateDeclaration]),
-        },
-        @"errorCode": error == nil ? @(0) : @([error code])
-    }));
-    if (callResult == nil) {
-        @throw [NSException exceptionWithName:@"deviceAttestationCompletedForControllerException"
-                                       reason:@"Flutter onDeviceAttestationCompleted result null"
-                                     userInfo:nil];
+            @"dac": @[],
+            @"pai": @[],
+            @"vendorId": vendorId,
+            @"productId": productId,
+            @"certificationDeclaration": @[],
+        } : @{
+            @"challenge": @[],
+            @"nonce": @[],
+            @"elements": @[],
+            @"elementsSignature": @[],
+            @"firmwareInfo": @[],
+            @"dac": nsDataToIntegerArray([attestationDeviceInfo dacCertificate]),
+            @"pai": nsDataToIntegerArray([attestationDeviceInfo dacPAICertificate]),
+            @"vendorId": vendorId,
+            @"productId": productId,
+            @"certificationDeclaration": nsDataToIntegerArray([attestationDeviceInfo certificateDeclaration]),
+        };
+
+        NSString *callResult = invokeMethodBlockGet(
+            [Global externalChannel], path,
+            toJSONStringFromObject(@{
+                jsonKeyHandle: _handle ?: @"",
+                @"devicePtr": @((uintptr_t)opaqueDeviceHandle),
+                @"attestationInfo": attestationInfo,
+                @"errorCode": error == nil ? @(0) : @([error code]),
+            }));
+        if (callResult == nil) {
+            @throw [NSException exceptionWithName:@"FlutterMatterCallbackDeliveryException"
+                                           reason:@"Device attestation callback delivery failed."
+                                         userInfo:nil];
+        }
+    } @catch (NSException *exception) {
+        FlutterMatterLogException(@"DeviceAttestationDelegate.onDeviceAttestationCompleted",
+                                  exception);
     }
 }
 

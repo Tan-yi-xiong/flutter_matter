@@ -18,7 +18,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-ZGMTR_NEWLY_AVAILABLE
+ZGMTR_EXTERN NSString * const ZGMTRDeviceControllerRegistrationNodeIDsKey ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));
+ZGMTR_EXTERN NSString * const ZGMTRDeviceControllerRegistrationNodeIDKey ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));
+ZGMTR_EXTERN NSString * const ZGMTRDeviceControllerRegistrationControllerContextKey ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));
+ZGMTR_EXTERN NSString * const ZGMTRDeviceControllerRegistrationControllerNodeIDKey ZGMTR_AVAILABLE(ios(18.3), macos(15.3), watchos(11.3), tvos(18.3));
+ZGMTR_EXTERN NSString * const ZGMTRDeviceControllerRegistrationControllerIsRunningKey ZGMTR_AVAILABLE(ios(18.3), macos(15.3), watchos(11.3), tvos(18.3));
+ZGMTR_EXTERN NSString * const ZGMTRDeviceControllerRegistrationDeviceInternalStateKey ZGMTR_AVAILABLE(ios(18.3), macos(15.3), watchos(11.3), tvos(18.3));
+ZGMTR_EXTERN NSString * const ZGMTRDeviceControllerRegistrationControllerCompressedFabricIDKey ZGMTR_AVAILABLE(ios(18.3), macos(15.3), watchos(11.3), tvos(18.3));
+
+ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2))
 @protocol ZGMTRXPCServerProtocol_ZGMTRDevice <NSObject>
 
 - (oneway void)deviceController:(NSUUID *)controller nodeID:(NSNumber *)nodeID getStateWithReply:(void (^)(ZGMTRDeviceState state))reply;
@@ -37,15 +45,21 @@ ZGMTR_NEWLY_AVAILABLE
 - (oneway void)deviceController:(NSUUID *)controller nodeID:(NSNumber *)nodeID openCommissioningWindowWithSetupPasscode:(NSNumber *)setupPasscode discriminator:(NSNumber *)discriminator duration:(NSNumber *)duration completion:(ZGMTRDeviceOpenCommissioningWindowHandler)completion;
 
 - (oneway void)downloadLogOfType:(ZGMTRDiagnosticLogType)type nodeID:(NSNumber *)nodeID timeout:(NSTimeInterval)timeout completion:(void (^)(NSURL * _Nullable url, NSError * _Nullable error))completion;
+
+@optional
+/* Note: The consumer of the completion block should move the file that the url points to or open it for reading before the
+ * completion handler returns. Otherwise, the file will be deleted, and the data will be lost.
+ */
+- (oneway void)deviceController:(NSUUID *)controller nodeID:(NSNumber *)nodeID downloadLogOfType:(ZGMTRDiagnosticLogType)type timeout:(NSTimeInterval)timeout completion:(void (^)(NSURL * _Nullable url, NSError * _Nullable error))completion;
+
+- (oneway void)deviceController:(NSUUID *)controller nodeID:(NSNumber *)nodeID invokeCommands:(NSArray<NSArray<ZGMTRCommandWithRequiredResponse *> *> *)commands completion:(ZGMTRDeviceResponseHandler)completion ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
 @end
 
-ZGMTR_NEWLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.3), macos(15.3), watchos(11.3), tvos(18.3))
 @protocol ZGMTRXPCServerProtocol_ZGMTRDeviceController <NSObject>
 
-- (oneway void)deviceController:(NSUUID *)controller getIsRunningWithReply:(void (^)(BOOL response))reply;
-- (oneway void)deviceController:(NSUUID *)controller getUniqueIdentifierWithReply:(void (^)(NSUUID *))reply;
-- (oneway void)deviceController:(NSUUID *)controller controllerNodeIDWithReply:(void (^)(NSNumber * nodeID))reply;
-
+@optional
 // - (oneway void)deviceController:(NSUUID *)controller setupCommissioningSessionWithPayload:(ZGMTRSetupPayload *)payload newNodeID:(NSNumber *)newNodeID withReply:(void (^)(BOOL success, NSError * _Nullable error))reply;
 // - (oneway void)deviceController:(NSUUID *)controller setupCommissioningSessionWithDiscoveredDevice:(ZGMTRCommissionableBrowserResult *)discoveredDevice payload:(ZGMTRSetupPayload *)payload newNodeID:(NSNumber *)newNodeID withReply:(void (^)(BOOL success, NSError * _Nullable error))reply;
 // - (oneway void)deviceController:(NSUUID *)controller commissionNodeWithID:(NSNumber *)nodeID commissioningParams:(ZGMTRCommissioningParameters *)commissioningParams withReply:(void (^)(BOOL success, NSError * _Nullable error))reply;
@@ -59,13 +73,18 @@ ZGMTR_NEWLY_AVAILABLE
 // - (oneway void)deviceController:(NSUUID *)controller addServerEndpoint:(ZGMTRServerEndpoint *)endpoint withReply:(void (^)(BOOL success))reply;
 // - (oneway void)deviceController:(NSUUID *)controller removeServerEndpoint:(ZGMTRServerEndpoint *)endpoint;
 
+- (oneway void)deviceController:(NSUUID *)controller deleteNodeID:(NSNumber *)nodeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
 - (oneway void)deviceController:(NSUUID *)controller registerNodeID:(NSNumber *)nodeID;
 - (oneway void)deviceController:(NSUUID *)controller unregisterNodeID:(NSNumber *)nodeID;
+- (oneway void)deviceController:(NSUUID *)controller updateControllerConfiguration:(NSDictionary *)controllerState ZGMTR_AVAILABLE(ios(18.3), macos(15.3), watchos(11.3), tvos(18.3));
 
+- (oneway void)deviceController:(NSUUID *)controller getNodesWithStoredDataWithReply:(void (^)(NSArray<NSNumber *> *))reply ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_NEWLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.3), macos(15.3), watchos(11.3), tvos(18.3))
 @protocol ZGMTRXPCServerProtocol <NSObject, ZGMTRXPCServerProtocol_ZGMTRDevice, ZGMTRXPCServerProtocol_ZGMTRDeviceController>
+@optional
 - (oneway void)deviceController:(NSUUID *)controller checkInWithContext:(NSDictionary *)context;
 @end
 

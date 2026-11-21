@@ -16,19 +16,23 @@
  *    limitations under the License.
  */
 
-
 import 'tag.dart';
 import 'values.dart';
 
-// 此文件由kotlin Element.kt 使用ai转成dart
-
 /// Represents a single TLV element.
-///
-/// @property tag the tag of the element and its associated data
-/// @property value the value of the element
 class Element {
   final Tag tag;
   final Value value;
 
   Element(this.tag, this.value);
+
+  @override
+  bool operator ==(Object other) =>
+      other is Element && other.tag == tag && other.value == value;
+
+  @override
+  int get hashCode => Object.hash(tag, value);
+
+  @override
+  String toString() => 'Element($tag, $value)';
 }

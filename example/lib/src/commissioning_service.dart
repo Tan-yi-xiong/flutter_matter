@@ -82,7 +82,7 @@ class MatterCommissioningService {
     } catch (_) {
       if (controller != null) {
         await controller.stopDevicePairing(nodeId).catchError((Object _) {});
-        await controller.deleteDeviceController().catchError((Object _) {});
+        await controller.close().catchError((Object _) {});
       }
       rethrow;
     } finally {
@@ -133,7 +133,7 @@ class MatterCommissioningService {
     } catch (_) {
       if (controller != null) {
         await controller.stopDevicePairing(nodeId).catchError((Object _) {});
-        await controller.deleteDeviceController().catchError((Object _) {});
+        await controller.close().catchError((Object _) {});
       }
       rethrow;
     } finally {
@@ -174,11 +174,12 @@ class MatterCommissioningService {
     onStage(
       'Google fabric ready; second fabric endpoint ${handoff.address}:${handoff.port}',
     );
+    CommissionedNode? commissionedNode;
     try {
       final handoffPayload = await OnboardingPayloadParser().parse(
         handoff.onboardingPayload,
       );
-      await commissionWithAddress(
+      commissionedNode = await commissionWithAddress(
         identity: identity,
         address: handoff.address,
         port: handoff.port,
@@ -190,6 +191,13 @@ class MatterCommissioningService {
     } catch (error) {
       await session.completeHandoff(succeeded: false, errorCode: 1);
       rethrow;
+    } finally {
+      final controller = commissionedNode?.controller;
+      if (controller is ChipDeviceController) {
+        // This flow only needs the controller for the second-fabric
+        // commissioning attempt; the session recreates it when needed.
+        await controller.close().catchError((Object _) {});
+      }
     }
     await session.completeHandoff(succeeded: true);
     final result = await session.result;
@@ -327,7 +335,6 @@ class _CommissioningDelegate
       await controller.onNOCChainGeneration(
         ControllerParams(
           rootCertificate: identity.rootCertificate,
-          intermediateCertificate: identity.rootCertificate,
           operationalCertificate: nodeCertificate,
           adminSubject: kTestControllerNodeId,
           keypairDelegate: delegate,

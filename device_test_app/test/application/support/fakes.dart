@@ -379,8 +379,8 @@ class FakeControllerIdentityPort implements ControllerIdentityPort {
   Future<ControllerIdentity> restart(ControllerIdentityRequest request) async {
     restartCount++;
     requests.add(request);
-    // Stored credentials always rebuild the identity, so the opaque id is
-    // stable across the restart.
+    // Persisted credentials preserve the identity, so the opaque id remains
+    // stable when the controller runtime is closed and rebuilt.
     return identities.putIfAbsent(
       request.purpose,
       () => ControllerIdentity(

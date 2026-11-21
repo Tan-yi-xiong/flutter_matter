@@ -48,7 +48,13 @@ Non-zero codes become Dart plugin errors. Host names, paths, JSON fields, and en
 
 ## Controllers and callbacks
 
-`ChipDeviceController.newControllerIfNotExist` requests a native controller and receives an opaque handle. Native code stores controllers by handle, and later requests include that handle. Controllers with the same `fabricId` and `rootCertificate` are reused.
+`ChipDeviceController.newControllerIfNotExist` requests a controller from the
+process-wide `ChipDeviceControllerManager` and receives an opaque native handle.
+The manager serializes all create/delete transitions and permits exactly one
+live Dart-visible native controller. Requests with the same `fabricId` and
+`rootCertificate` return the same Dart object and increment an acquisition
+reference count. A different identity invalidates the old Dart handle, performs
+native shutdown, and only then creates the replacement.
 
 Native-to-Dart callbacks use the same channel and return:
 
@@ -58,7 +64,18 @@ Native-to-Dart callbacks use the same channel and return:
 
 `resultJson` is a JSON string. Callback families include `CompletionListener`, `NOCChainIssuer`, `DeviceAttestationDelegate`, invoke/subscription/report/write callbacks, connection callbacks, commissioning-window callbacks, and BLE platform delegates. Keep callback objects alive for as long as the native operation can emit events.
 
-`deleteDeviceController()` deletes the native controller. `destroy()` removes Dart handlers and callback maps without making that native request.
+`close()` releases one acquisition; the final release deletes the native
+controller. `deleteDeviceController()` remains a compatibility alias.
+`destroy()` only removes Dart handlers and callback maps, but the manager keeps
+the abandoned native handle so the next acquisition can shut it down before
+creating a replacement. A failed native shutdown poisons the manager until the
+process restarts.
+
+The Dart manager is isolate-scoped. Android also has a process-wide native
+gate because `shutdownCommissioning()` stops process-wide CHIP IO/factory state.
+iOS keeps an independent handle map and does not enforce a native single-controller
+slot, so separate engines may own separate iOS controllers even though each
+engine still serializes its own Dart acquisitions.
 
 ## Threading
 
@@ -68,9 +85,9 @@ iOS runs plugin work on the serial `Matter Thread queue`. Callback bridges dispa
 
 ## Native boundaries
 
-The Android entry point is `FlutterMatterPlugin`. It routes requests by URI host to controller, BLE, onboarding, and NSD handlers. Matter behavior comes from the prefixed Android artifact `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.5`.
+The Android entry point is `FlutterMatterPlugin`. It routes requests by URI host to controller, BLE, onboarding, and NSD handlers. Matter behavior comes from the prefixed Android artifact `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`.
 
-The iOS entry point is the Objective-C `FlutterMatterPlugin`, backed by the vendored `ZGMatter.framework`. It routes controller, BLE, and onboarding hosts. NSD is not implemented on iOS. `InitializeZGMTR()` runs during plugin registration.
+The iOS entry point is the Objective-C `FlutterMatterPlugin`, backed by the vendored `ZGMatter.framework`. It routes controller, BLE, and onboarding hosts. NSD is not implemented on iOS. `ZGMTRInitializeControllerFactory()` starts the process-wide factory during plugin registration without creating a hidden default controller. Controller handles remain independent, allowing the iOS native layer to host more than one controller.
 
 ## Platform differences
 

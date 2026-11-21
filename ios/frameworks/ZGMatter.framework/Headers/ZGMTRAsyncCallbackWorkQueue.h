@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^ZGMTRAsyncCallbackReadyHandler)(id context, NSUInteger retryCount);
 
-ZGMTR_DEPRECATED("This class was not intended to be part of the public Matter API", ios(16.1, 17.2), macos(13.0, 14.2), watchos(9.1, 10.2), tvos(16.1, 17.2))
+ZGMTR_DEPRECATED("This class was not intended to be part of the public ZGMatter API", ios(16.1, 17.2), macos(13.0, 14.2), watchos(9.1, 10.2), tvos(16.1, 17.2))
 @interface ZGMTRAsyncCallbackWorkQueue : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -33,7 +33,7 @@ ZGMTR_DEPRECATED("This class was not intended to be part of the public Matter AP
 - (void)enqueueWorkItem:(ZGMTRAsyncCallbackQueueWorkItem *)item;
 @end
 
-ZGMTR_DEPRECATED("This class was not intended to be part of the public Matter API", ios(16.1, 17.2), macos(13.0, 14.2), watchos(9.1, 10.2), tvos(16.1, 17.2))
+ZGMTR_DEPRECATED("This class was not intended to be part of the public ZGMatter API", ios(16.1, 17.2), macos(13.0, 14.2), watchos(9.1, 10.2), tvos(16.1, 17.2))
 @interface ZGMTRAsyncCallbackQueueWorkItem : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

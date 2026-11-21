@@ -65,7 +65,10 @@ void main() {
       AttributeState,
       BLEManager,
       ChipDeviceController,
+      ChipDeviceControllerManager,
       CompletionListener,
+      ControllerLifecycleException,
+      ControllerLifecycleFailure,
       DescriptorCluster,
       ICDDeviceInfo,
       NsdManager,
@@ -78,6 +81,6 @@ void main() {
     expect(writer.getEncoded(), isEmpty);
     expect(reader.getRemainingLength(), 0);
     expect(payload.vendorId, 1);
-    expect(apiTypes, hasLength(8));
+    expect(apiTypes, hasLength(11));
   });
 }

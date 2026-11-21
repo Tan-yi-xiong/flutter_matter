@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:collection/collection.dart';
-import 'package:flutter_matter/flutter_matter_method_channel.dart';
 import 'package:flutter_matter/flutter_matter_platform_interface.dart';
 
 import 'exception.dart';
+import 'model/json_decoding.dart';
+import 'platform_transport_types.dart';
 
 /// MethodChannel host used by the onboarding parser.
 const String onboardingPayloadHost = 'Onboarding';
@@ -37,7 +37,9 @@ class OnboardingPayload {
   /// Commissioning flow: 0 = standard, 1 = requires user action, 2 = custom
   final int commissioningFlow;
 
-  /// The CHIP device supported rendezvous flags: At least one DiscoveryCapability must be included.
+  /// The CHIP device supported rendezvous flags. This may be empty when the
+  /// payload does not expose discovery capabilities, such as a manual pairing
+  /// code.
   final Set<DiscoveryCapability> discoveryCapabilities;
 
   /// The CHIP device discriminator:
@@ -53,30 +55,68 @@ class OnboardingPayload {
   /// 99999999, 12345678, 87654321}.
   final int setupPinCode;
 
-  OnboardingPayload(
-      {required this.version,
-      required this.vendorId,
-      required this.productId,
-      required this.commissioningFlow,
-      required this.discoveryCapabilities,
-      required this.discriminator,
-      required this.hasShortDiscriminator,
-      required this.setupPinCode});
+  OnboardingPayload({
+    required this.version,
+    required this.vendorId,
+    required this.productId,
+    required this.commissioningFlow,
+    required this.discoveryCapabilities,
+    required this.discriminator,
+    required this.hasShortDiscriminator,
+    required this.setupPinCode,
+  });
 
   factory OnboardingPayload.decode(Map json) {
+    final root = decodeJsonObject(json, 'OnboardingPayload');
+    final rawCapabilities = decodeJsonArray(
+      root['discoveryCapabilities'],
+      'OnboardingPayload.discoveryCapabilities',
+    );
+    final capabilities = <DiscoveryCapability>{};
+    for (var i = 0; i < rawCapabilities.length; i++) {
+      final value = decodeJsonInt(
+        rawCapabilities[i],
+        'OnboardingPayload.discoveryCapabilities[$i]',
+      );
+      var matched = false;
+      for (final capability in DiscoveryCapability.values) {
+        if (capability.value == value) {
+          capabilities.add(capability);
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) {
+        throw FormatException(
+          'OnboardingPayload.discoveryCapabilities[$i] has unsupported value '
+          '$value',
+        );
+      }
+    }
+
     return OnboardingPayload(
-        version: json["version"],
-        vendorId: json["vendorId"],
-        productId: json["productId"],
-        commissioningFlow: json["commissioningFlow"],
-        discriminator: json["discriminator"],
-        setupPinCode: json["setupPinCode"],
-        hasShortDiscriminator: json["hasShortDiscriminator"],
-        discoveryCapabilities: (json["discoveryCapabilities"] as List)
-            .map((e) => DiscoveryCapability.values
-                .firstWhereOrNull((element) => element.value == e))
-            .whereNotNull()
-            .toSet());
+      version: decodeJsonInt(root['version'], 'OnboardingPayload.version'),
+      vendorId: decodeJsonInt(root['vendorId'], 'OnboardingPayload.vendorId'),
+      productId:
+          decodeJsonInt(root['productId'], 'OnboardingPayload.productId'),
+      commissioningFlow: decodeJsonInt(
+        root['commissioningFlow'],
+        'OnboardingPayload.commissioningFlow',
+      ),
+      discriminator: decodeJsonInt(
+        root['discriminator'],
+        'OnboardingPayload.discriminator',
+      ),
+      setupPinCode: decodeJsonInt(
+        root['setupPinCode'],
+        'OnboardingPayload.setupPinCode',
+      ),
+      hasShortDiscriminator: decodeJsonBool(
+        root['hasShortDiscriminator'],
+        'OnboardingPayload.hasShortDiscriminator',
+      ),
+      discoveryCapabilities: capabilities,
+    );
   }
 }
 
@@ -85,16 +125,17 @@ class OnboardingPayload {
 /// Parsing is optional for commissioning. [ChipDeviceController.pairDevice]
 /// accepts the raw onboarding code directly.
 class OnboardingPayloadParser {
-  late MethodChannelFlutterMatter _channel;
+  late FlutterMatterPlatform _channel;
 
   OnboardingPayloadParser() {
-    _channel = FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    _channel = FlutterMatterPlatform.instance;
   }
 
   /// Parses a QR setup code or manual pairing code, selecting the format by
   /// the `MT:` prefix.
   Future<OnboardingPayload> parse(String code) async {
-    if (code.startsWith("MT:")) {
+    _requireNonEmpty(code, 'code');
+    if (code.startsWith('MT:')) {
       return parseQrCode(code);
     }
     return parseManualPairingCode(code);
@@ -102,25 +143,80 @@ class OnboardingPayloadParser {
 
   /// Parses a Matter QR setup code.
   Future<OnboardingPayload> parseQrCode(String qrCode) async {
-    final result = await _channel.requestPlatform(RequestPlatformParams(
-        methodName:
-            createRequestPlatformUrl(onboardingPayloadHost, "parseQrCode"),
-        methodParamsJson: jsonEncode({'qrCode': qrCode})));
-    if (result.code != successCode) {
-      throw Exception("Failed to parse QR code: ${result.code}");
-    }
-    return OnboardingPayload.decode(result.jsonData);
+    _requireNonEmpty(qrCode, 'qrCode');
+    return _parse(
+      methodName: 'parseQrCode',
+      parameterName: 'qrCode',
+      value: qrCode,
+      displayName: 'QR code',
+    );
   }
 
   /// Parses a Matter manual pairing code.
   Future<OnboardingPayload> parseManualPairingCode(String pairingCode) async {
-    final result = await _channel.requestPlatform(RequestPlatformParams(
-        methodName: createRequestPlatformUrl(
-            onboardingPayloadHost, "parseManualPairingCode"),
-        methodParamsJson: jsonEncode({'pairingCode': pairingCode})));
+    _requireNonEmpty(pairingCode, 'pairingCode');
+    return _parse(
+      methodName: 'parseManualPairingCode',
+      parameterName: 'pairingCode',
+      value: pairingCode,
+      displayName: 'manual pairing code',
+    );
+  }
+
+  Future<OnboardingPayload> _parse({
+    required String methodName,
+    required String parameterName,
+    required String value,
+    required String displayName,
+  }) async {
+    final result = await _channel.requestPlatform(
+      RequestPlatformParams(
+        methodName: createRequestPlatformUrl(onboardingPayloadHost, methodName),
+        methodParamsJson: jsonEncode({parameterName: value}),
+      ),
+    );
     if (result.code != successCode) {
-      throw Exception("Failed to parse QR code: ${result.code}");
+      throw CallPlatformException(
+        'Failed to parse $displayName with code ${result.code}',
+        code: result.code,
+        methodName: methodName,
+        details: const <String, Object?>{
+          'host': onboardingPayloadHost,
+          'category': 'platform-error',
+        },
+      );
     }
-    return OnboardingPayload.decode(result.jsonData);
+
+    try {
+      return OnboardingPayload.decode(result.jsonData);
+    } on FormatException catch (error) {
+      throw CallPlatformException(
+        'Invalid payload returned by $methodName: ${error.message}',
+        code: result.code,
+        methodName: methodName,
+        details: const <String, Object?>{
+          'host': onboardingPayloadHost,
+          'category': 'invalid-payload',
+        },
+        cause: error,
+      );
+    } on ArgumentError catch (error) {
+      throw CallPlatformException(
+        'Invalid payload returned by $methodName: ${error.message}',
+        code: result.code,
+        methodName: methodName,
+        details: const <String, Object?>{
+          'host': onboardingPayloadHost,
+          'category': 'invalid-payload',
+        },
+        cause: error,
+      );
+    }
+  }
+
+  static void _requireNonEmpty(String value, String name) {
+    if (value.trim().isEmpty) {
+      throw ArgumentError.value(value, name, 'must not be empty');
+    }
   }
 }

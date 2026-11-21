@@ -1,0 +1,61 @@
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.h b/src/darwin/Framework/CHIP/MTRBaseDevice.h
+index 71f6a9ce..cfe5997d 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.h
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.h
+@@ -127,6 +127,8 @@ MTR_EXTERN NSString * const MTRCommandPathKey MTR_AVAILABLE(ios(16.1), macos(13.
+ MTR_EXTERN NSString * const MTREventPathKey MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+ MTR_EXTERN NSString * const MTRDataKey MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+ MTR_EXTERN NSString * const MTRErrorKey MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
++MTR_EXTERN NSString * const MTRTlvValueType MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
++
+ MTR_EXTERN NSString * const MTRTypeKey MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+ MTR_EXTERN NSString * const MTRValueKey MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+ MTR_EXTERN NSString * const MTRContextTagKey MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.mm b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+index d9afb696..9b19b81f 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.mm
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+@@ -73,6 +73,8 @@
+ NSString * const MTREventPathKey = @"eventPath";
+ NSString * const MTRDataKey = @"data";
+ NSString * const MTRErrorKey = @"error";
++NSString * const MTRTlvValueType = @"tlvData";
++
+ NSString * const MTRTypeKey = @"type";
+ NSString * const MTRValueKey = @"value";
+ NSString * const MTRContextTagKey = @"contextTag";
+@@ -837,11 +839,33 @@ BOOL MTRDataValueDictionaryIsWellFormed(MTRDeviceDataValueDictionary value)
+ 
+     CHIP_ERROR Decode(chip::TLV::TLVReader & data)
+     {
++        // Capture the raw TLV bytes before the decoded-object path advances the reader.
++        TLV::TLVReader rawTLVReader;
++        rawTLVReader.Init(data);
++        size_t bufferLen = rawTLVReader.GetRemainingLength() + rawTLVReader.GetLengthRead();
++        std::unique_ptr<uint8_t[]> buffer = std::unique_ptr<uint8_t[]>(new uint8_t[bufferLen]);
++        TLV::TLVWriter writer;
++        writer.Init(buffer.get(), bufferLen);
++        CHIP_ERROR err = writer.CopyElement(TLV::AnonymousTag(), rawTLVReader);
++        if (err != CHIP_NO_ERROR) {
++            return err;
++        }
++        size_t size = writer.GetLengthWritten();
++        NSData * tlvData = [NSData dataWithBytes:buffer.get() length:size];
++
+         decodedObj = MTRDecodeDataValueDictionaryFromCHIPTLV(&data);
+         if (decodedObj == nil) {
+             MTR_LOG_ERROR("Error: Failed to get value from TLV data for attribute reading response");
++            return CHIP_ERROR_DECODE_FAILED;
++        }
++        NSMutableDictionary * mutableDict = [decodedObj mutableCopy];
++        if (mutableDict == nil) {
++            MTR_LOG_ERROR("Error: decoded TLV value is not a dictionary, cannot inject raw TLV data");
++            return CHIP_ERROR_DECODE_FAILED;
+         }
+-        return (decodedObj) ? CHIP_NO_ERROR : CHIP_ERROR_DECODE_FAILED;
++        [mutableDict setObject:tlvData forKey:MTRTlvValueType];
++        decodedObj = mutableDict;
++        return CHIP_NO_ERROR;
+     }
+ 
+     CHIP_ERROR Encode(chip::TLV::TLVWriter & writer, chip::TLV::Tag tag) const

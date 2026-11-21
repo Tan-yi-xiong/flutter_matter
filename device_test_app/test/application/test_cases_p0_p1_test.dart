@@ -448,6 +448,12 @@ void main() {
       expect(hardware.commissioningWindow.discriminators.single, 3840);
       expect(hardware.commissioningWindow.setupPinCodes.single, 20202021);
       expect(hardware.commissioning.requests.single.setupPinCode, 20202022);
+      expect(hardware.identity.resetCount, 0);
+      expect(hardware.identity.requests, isEmpty);
+      expect(
+        hardware.commissioning.requests.single.identity.purpose,
+        ControllerIdentityPurpose.main,
+      );
       expect(
         hardware.commissioning.requests.single.onNetworkEndpoint?.address,
         '127.0.0.1',

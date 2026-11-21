@@ -1,5 +1,6 @@
 # Repository-only instructions and release tooling.
 AGENTS.md
+ios/zgmatter/
 HANDOFF.md
 .agents/
 device_test_app/

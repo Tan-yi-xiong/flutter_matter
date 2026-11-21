@@ -31,7 +31,8 @@ Use the PR template for submitted evidence. Use [Contributing](../CONTRIBUTING.m
 ## Code, security, and documentation
 
 - [ ] Native compile evidence is present when Kotlin, Objective-C, Swift, or bundled Matter inputs changed.
-- [ ] Error-path changes include regression or negative-case evidence when practical.
+- [ ] Error-path changes include regression or negative-case evidence when practical and follow the [Error handling](error-handling.md) contract.
+- [ ] Dart-facing errors and native logs do not include raw stack traces, setup payloads, credentials, certificates, private keys, or full request JSON.
 - [ ] Workflow changes do not add unnecessary permissions, secrets, or unsafe triggers.
 - [ ] Third-party code and binaries have a documented source or are otherwise reviewable.
 - [ ] Public usage changes update `README.md`, the relevant `doc/` page, or `CHANGELOG.md`.

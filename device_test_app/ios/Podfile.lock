@@ -2,7 +2,7 @@ PODS:
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
-  - flutter_matter (0.0.11):
+  - flutter_matter (0.0.12):
     - Flutter
   - flutter_secure_storage_darwin (10.0.0):
     - Flutter
@@ -53,7 +53,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   device_info_plus: 21fcca2080fbcd348be798aa36c3e5ed849eefbe
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  flutter_matter: 8cde99b875d154e3f5558b3ee338046ca39cedd0
+  flutter_matter: 85415e705eca6587e1fe05aadd1a71f167eedf81
   flutter_secure_storage_darwin: 46e401699982ee74142909676535e0f6a7321e58
   mobile_scanner: 9157936403f5a0644ca3779a38ff8404c5434a93
   network_info_plus: cf61925ab5205dce05a4f0895989afdb6aade5fc

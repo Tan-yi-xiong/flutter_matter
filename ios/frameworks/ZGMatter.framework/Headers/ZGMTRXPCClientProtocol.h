@@ -19,7 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-ZGMTR_NEWLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2))
 @protocol ZGMTRXPCClientProtocol_ZGMTRDevice <NSObject>
 - (oneway void)device:(NSNumber *)nodeID stateChanged:(ZGMTRDeviceState)state;
 - (oneway void)device:(NSNumber *)nodeID receivedAttributeReport:(NSArray<NSDictionary<NSString *, id> *> *)attributeReport;
@@ -30,16 +30,18 @@ ZGMTR_NEWLY_AVAILABLE
 - (oneway void)device:(NSNumber *)nodeID internalStateUpdated:(NSDictionary *)dictionary;
 @end
 
-ZGMTR_NEWLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2))
 @protocol ZGMTRXPCClientProtocol_ZGMTRDeviceController <NSObject>
 // Not Supported via XPC
 //- (oneway void)controller:(NSUUID *)controller statusUpdate:(ZGMTRCommissioningStatus)status;
 //- (oneway void)controller:(NSUUID *)controller commissioningSessionEstablishmentDone:(NSError * _Nullable)error;
 //- (oneway void)controller:(NSUUID *)controller commissioningComplete:(NSError * _Nullable)error nodeID:(NSNumber * _Nullable)nodeID metrics:(ZGMTRMetrics * _Nullable)metrics;
 //- (oneway void)controller:(NSUUID *)controller readCommissioningInfo:(ZGMTRProductIdentity *)info;
+@optional
+- (oneway void)controller:(NSUUID *)controller controllerConfigurationUpdated:(NSDictionary *)configuration ZGMTR_AVAILABLE(ios(18.3), macos(15.3), watchos(11.3), tvos(18.3));
 @end
 
-ZGMTR_NEWLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2))
 @protocol ZGMTRXPCClientProtocol <NSObject, ZGMTRXPCClientProtocol_ZGMTRDevice, ZGMTRXPCClientProtocol_ZGMTRDeviceController>
 @end
 

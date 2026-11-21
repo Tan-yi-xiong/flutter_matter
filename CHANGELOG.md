@@ -18,8 +18,34 @@
 
 ### Compatibility
 - **iOS 16.1 minimum support** — The podspec, Podfile, app framework metadata, and Xcode targets now use iOS 16.1 for both the plugin and the example. A Flutter 3.41 device build without code signing completed with Xcode 26.3 and CocoaPods 1.17.0.
+- **iOS Matter SDK 1.6.1** — Rebuilt `ZGMatter.framework` from official connectedhomeip `v1.6.1-branch` (`da8f6a0bff`) with a reproducible rename + feature-patch pipeline. The framework keeps the ZGMTR-prefixed public APIs and no longer carries the legacy iOS BLE proxy overrides.
+- **Android Matter SDK 1.6.1** — Rebuilt the prefixed Android artifact from the same official connectedhomeip commit (`da8f6a0bff`) for `arm64-v8a` and `armeabi-v7a`. The dependency is now `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`.
+- **Breaking: `ControllerParams.setupURL` removed** — Matter 1.6.1 removed `ControllerParams.Builder.setSetupURL`; the field and its JSON wire key were removed. Migrate by omitting `setupURL`; there is no upstream replacement.
+
+### Controller Lifecycle
+- Added `ChipDeviceControllerManager` as the single-active controller owner for the normal Dart API, with serialized acquire/switch/shutdown transitions and same-fabric acquisition reference counting. Android enforces the same invariant at the native process boundary; iOS keeps independent native handles.
+- Added `ChipDeviceController.close()`, `closed`, and the public `ControllerLifecycleException` / `ControllerLifecycleFailure.closed`, `nativeStateConflict`, and `shutdownFailed` contract. Superseded handles now reject further requests instead of racing the replacement controller.
+- Android `/deleteDeviceController` now calls the supported `shutdownCommissioning()` path, which stops the CHIP IO thread before controller/factory shutdown. The lifecycle gate prevents a second `ChipDeviceController` construction and enters a fail-closed poisoned state if shutdown fails.
+- iOS plugin registration now starts the controller factory without creating a hidden default controller. `DeviceControlHandle` keeps a handle map, allows multiple native controllers, performs explicit `shutdown` on delete, and does not add a native single-controller gate or process-wide poison state.
+- `destroy()` remains Dart-only cleanup. The next acquisition shuts down an abandoned native handle before creating a replacement. Android schedules best-effort active-controller cleanup when its Flutter engine detaches; iOS relies on balanced `close()` or explicit controller deletion.
+- Device-test `app_restart` now verifies a real close-and-recreate cycle from persisted credentials while retaining connection/subscription release cleanup.
+
+### Error Handling and TLV
+- Native TLV byte arrays now accept any integer JSON element and normalize it to the low eight bits, matching the legacy `Uint8List.fromList` behavior. This handles Android signed bytes, unsigned bytes, and wider integer representations without rejecting an otherwise readable NodeState; non-integer array elements still fail with field-specific errors.
+- Fixed the iOS invoke bridge to forward `timedRequestTimeoutMs` as the native timed-invoke timeout. Timed commands such as AdministratorCommissioning `RevokeCommissioning` now work, allowing an existing commissioning window to be revoked before opening a new one.
+- Added typed validation and sanitized error boundaries across the Dart MethodChannel, controller, BLE, DNS-SD, onboarding, model decoders, and cluster helpers. Malformed native payloads now fail with contextual `FormatException`, `ArgumentError`, `CallPlatformException`, or `PlatformProtocolException` instead of unchecked cast errors.
+- Controller `invoke`, `subscribe`, `read`, `write`, and `connectedDevice` requests now rethrow native request rejections and remove only the callback registered for that failed request. Cluster helpers await request acceptance and bound one-shot reads with a 15-second typed timeout instead of hanging.
+- Hardened Android controller, BLE, DNS-SD, onboarding, Bluetooth lifecycle, and shared callback utilities. Unexpected errors retain the external `-99` contract while raw stack traces and sensitive request data stay out of Dart-facing messages.
+- Hardened iOS MethodChannel dispatch and all Matter async callbacks. Normal subscription reports remain non-terminal; terminal errors produce one `onDone`. Path-level StatusIB values map to `attributeStatuses` and `eventStatuses`; write callbacks use `attributeId`, and path-specific write statuses are delivered through `onResponse`. Added stable bridge error codes, type-checked JSON extraction, single-shot result delivery, and safe logging across DeviceControl, BLE, onboarding, attestation, Swift pairing, defaults, and key helpers.
+- Android inbound byte arrays now require integer values in the range `0..255`; native-response byte arrays accept Android's signed representation (`-128..127`) as well as unsigned values and normalize both to octets. Onboarding discovery capabilities use stable wire values `1`/`2`/`3`. BLE delegate registration rolls back a new Dart handler when native registration fails, and the example NSD resolver skips a missing host.
+- Rewrote `lib/src/tlv/` against the connectedhomeip Kotlin TLV implementation. This fixes tag matching, all tag widths, byte-view offsets, signed/unsigned ranges, UTF-8 lengths, float32 encoding, truncated input handling, defensive reads, and the writer's previous four-container limit.
+- Added the full-width unsigned APIs `getULongBigInt`, `putUnsignedBigInt`, and `UnsignedIntValue.fromBigInt`. Existing `getULong()` keeps its signature but rejects values above `2^63 - 1` with migration guidance.
+- Preserved `putByteStringArray(Tag, List<int>)` for compatibility, marked it deprecated, and added `putByteStringArrayValues(Tag, List<Uint8List>)` for correct octet-string arrays.
+- Added all 74 connectedhomeip Kotlin TLV tests as Dart tests plus 18 regression tests and focused error-boundary tests. The root suite now covers 171 tests, and the device-test app suite remains at 288 passing tests.
+- Added [Error handling](doc/error-handling.md) with the Dart, Android, and iOS failure contract and validation matrix.
 
 ### Tooling and tests
+- Moved the reproducible ZGMatter framework build pipeline into `ios/zgmatter/`, with explicit `ZGMATTER_CONNECTEDHOMEIP_DIR` or `--connectedhomeip-dir` source configuration and English maintainer documentation.
 - Added a root plugin Dart test suite covering public exports, MethodChannel contracts, models, TLV parsing, onboarding parsing, and callback routing.
 - Pinned Flutter `3.41.0` through `.fvmrc`; the Dart and Flutter pubspec lower bounds remain unchanged, while only Flutter `3.41.0` is currently validated.
 - Documented the plugin Android baseline as `minSdk 21`, `compileSdk 34`, JDK 17, and Kotlin 1.7.10, with the example Gradle/AGP/Kotlin baseline tracked separately.
@@ -33,6 +59,7 @@
 - Updated the example Android baseline to Kotlin 2.4.0, minSdk 29, and compileSdk 36 for the Google Home SDK, and documented the `GOOGLE_MATTER_SDK_REPO` build prerequisite. The plugin's own Android baseline is unchanged.
 
 ### Bug Fixes
+- Fixed Android Matter 1.6.1 commissioning failing at `GenerateNOCChain` with `CHIP_ERROR_BAD_REQUEST` (`0x92`, callback code `146`). The Android bridge now supplies an empty ICAC instead of `null`.
 - Fixed signed little-endian TLV decoding for negative integer widths.
 - Fixed context-tagged TLV boolean and non-integer type parsing.
 - Fixed nested event and event-status decoding in `ClusterState`.

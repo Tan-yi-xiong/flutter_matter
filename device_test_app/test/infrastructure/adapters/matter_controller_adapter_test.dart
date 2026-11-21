@@ -21,63 +21,92 @@ void main() {
   });
 
   group('identity and direct commissioning', () {
+    test('keeps the main identity stable across repeated loads', () async {
+      final request = ControllerIdentityRequest(
+        runId: 'run-1',
+        purpose: ControllerIdentityPurpose.main,
+        platform: ControllerPlatform.android,
+      );
+
+      final first = await adapter.loadOrCreate(request);
+      final second = await adapter.loadOrCreate(request);
+
+      expect(second.opaqueId, first.opaqueId);
+      expect(second.purpose, ControllerIdentityPurpose.main);
+    });
+
+    test('reset clears the main purpose and invalidates its handle', () async {
+      final request = ControllerIdentityRequest(
+        runId: 'run-1',
+        purpose: ControllerIdentityPurpose.main,
+        platform: ControllerPlatform.android,
+      );
+      final before = await adapter.loadOrCreate(request);
+      final controller = runtimeProvider.controllerFor(
+        ControllerIdentityPurpose.main,
+      );
+      final store = runtimeProvider.identityFor(ControllerIdentityPurpose.main);
+
+      await adapter.reset(request);
+
+      expect(controller.closeCount, 1);
+      expect(store.clearCount, 1);
+      final after = await adapter.loadOrCreate(request);
+      expect(after.opaqueId, isNot(before.opaqueId));
+    });
+
     test(
-      'keeps an identity stable across loads and separated by purpose',
+      'restart releases connections, closes the runtime, and recreates it',
       () async {
         final request = ControllerIdentityRequest(
           runId: 'run-1',
           purpose: ControllerIdentityPurpose.main,
           platform: ControllerPlatform.android,
         );
-        final first = await adapter.loadOrCreate(request);
-        final second = await adapter.loadOrCreate(request);
-        final negative = await adapter.loadOrCreate(
-          ControllerIdentityRequest(
-            runId: 'run-1',
-            purpose: ControllerIdentityPurpose.invalidSetupPasscode,
-            platform: ControllerPlatform.android,
-          ),
+        final identity = await adapter.loadOrCreate(request);
+        final originalController = runtimeProvider.controllerFor(
+          ControllerIdentityPurpose.main,
+        );
+        final originalStore = runtimeProvider.identityFor(
+          ControllerIdentityPurpose.main,
+        );
+        originalController.releaseHandler = (_) async {
+          runtimeProvider.restartEvents.add('release');
+        };
+        originalController.closeHandler = () async {
+          runtimeProvider.restartEvents.add('close');
+        };
+        final connection = await adapter.connect(
+          identity: identity,
+          nodeId: 42,
+          timeout: const Duration(seconds: 1),
         );
 
-        expect(second.opaqueId, first.opaqueId);
-        expect(negative.opaqueId, isNot(first.opaqueId));
+        final restarted = await adapter.restart(request);
+        final replacementController = runtimeProvider.controllerFor(
+          ControllerIdentityPurpose.main,
+        );
+        final replacementStore = runtimeProvider.identityFor(
+          ControllerIdentityPurpose.main,
+        );
+
+        expect(restarted.opaqueId, identity.opaqueId);
+        expect(replacementController, isNot(same(originalController)));
+        expect(replacementStore, isNot(same(originalStore)));
+        expect(originalController.releasedConnections, hasLength(1));
         expect(
-          negative.purpose,
-          ControllerIdentityPurpose.invalidSetupPasscode,
+          originalController.releasedConnections.single.context,
+          'context',
         );
-      },
-    );
-
-    test(
-      'reset clears only the requested purpose and invalidates its handle',
-      () async {
-        final mainRequest = ControllerIdentityRequest(
-          runId: 'run-1',
-          purpose: ControllerIdentityPurpose.main,
-          platform: ControllerPlatform.android,
-        );
-        final negativeRequest = ControllerIdentityRequest(
-          runId: 'run-1',
-          purpose: ControllerIdentityPurpose.invalidSetupPasscode,
-          platform: ControllerPlatform.android,
-        );
-        final mainBefore = await adapter.loadOrCreate(mainRequest);
-        final negativeBefore = await adapter.loadOrCreate(negativeRequest);
-        final mainController = runtimeProvider.controllerFor(
-          ControllerIdentityPurpose.main,
-        );
-        final mainStore = runtimeProvider.identityFor(
-          ControllerIdentityPurpose.main,
-        );
-
-        await adapter.reset(mainRequest);
-
-        expect(mainController.closeCount, 1);
-        expect(mainStore.clearCount, 1);
-        final mainAfter = await adapter.loadOrCreate(mainRequest);
-        final negativeAfter = await adapter.loadOrCreate(negativeRequest);
-        expect(mainAfter.opaqueId, isNot(mainBefore.opaqueId));
-        expect(negativeAfter.opaqueId, negativeBefore.opaqueId);
+        expect(originalController.closeCount, 1);
+        expect(originalStore.loadCount, 1);
+        expect(replacementStore.loadCount, 1);
+        expect(runtimeProvider.restartEvents, <String>[
+          'release',
+          'close',
+          'recreate',
+        ]);
+        expect(connection.opaqueId, isNotEmpty);
       },
     );
 

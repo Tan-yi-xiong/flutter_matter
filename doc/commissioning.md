@@ -64,8 +64,9 @@ See [`MatterCommissioningService.commissionGoogleDualFabric`](../example/lib/src
 - Call `stopDevicePairing(nodeId)` when the user cancels an in-progress commissioning attempt.
 - Complete or fail all waiting `Future`s exactly once. The example uses one `Completer` in `_CommissioningDelegate`.
 - Treat non-zero pairing or commissioning error codes as failure. Do not report a node as commissioned based only on `pairDevice` returning.
-- If commissioning fails, stop pairing and delete the controller when it will not be reused.
-- Keep the controller alive for later operations when commissioning succeeds; do not call `destroy()` as an error-cleanup shortcut.
+- If commissioning fails, stop pairing and call `await controller.close()` when the controller will not be reused.
+- Keep the controller alive for later operations when commissioning succeeds; every successful acquisition must eventually be balanced by `close()`.
+- Do not call `destroy()` as native cleanup. It only clears Dart handlers and callback maps; the next acquisition performs the deferred native shutdown.
 
 See [`cancelCommissioning`](../example/lib/src/commissioning_service.dart#L16-L24) and the failure path in [`commission`](../example/lib/src/commissioning_service.dart#L82-L92).
 

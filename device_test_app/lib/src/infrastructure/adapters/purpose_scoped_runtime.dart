@@ -22,8 +22,8 @@ class MatterControllerRuntime {
 abstract interface class MatterControllerRuntimeProvider {
   Future<MatterControllerRuntime> load(ControllerIdentityRequest request);
 
-  /// Disposes the live controller for [request.purpose] while keeping the
-  /// persisted credentials, then rebuilds the runtime from those credentials.
+  /// Closes the active runtime for [request.purpose], then rebuilds it from
+  /// persisted credentials under the single-active controller lifecycle.
   Future<MatterControllerRuntime> restart(ControllerIdentityRequest request);
 
   Future<void> reset(ControllerIdentityRequest request);
@@ -31,12 +31,11 @@ abstract interface class MatterControllerRuntimeProvider {
   Future<void> close();
 }
 
-/// Creates one purpose-isolated controller per platform.
+/// Creates the device-test controller runtime for a platform.
 ///
-/// A purpose gets its own secure-storage key, so a negative-test controller can
-/// never accidentally reuse the main controller credentials. The storage key
-/// intentionally excludes the run id: the main identity must survive a run and
-/// an app restart.
+/// Controller credentials are scoped by platform and identity purpose. The
+/// storage key intentionally excludes the run id: the main identity must
+/// survive a run and an app restart.
 class FlutterMatterControllerRuntimeProvider
     implements MatterControllerRuntimeProvider {
   FlutterMatterControllerRuntimeProvider({
@@ -99,12 +98,16 @@ class FlutterMatterControllerRuntimeProvider
     final key = _keyFor(request);
     final existing = _runtimes[key];
     if (existing != null) {
-      // Dispose the live controller only; stored credentials survive.
-      await existing.controller.close();
-      _runtimes.remove(key);
+      try {
+        // The single-active lifecycle guarantees the old native controller is
+        // shut down before the replacement runtime is created.
+        await existing.controller.close();
+      } finally {
+        _runtimes.remove(key);
+      }
     }
-    // load() restores credentials from secure storage and builds a brand-new
-    // controller, so the CASE session state does not survive the restart.
+    // Credentials remain in secure storage. load() creates a genuinely new
+    // controller and identity store, then reloads the persisted identity.
     return load(request);
   }
 

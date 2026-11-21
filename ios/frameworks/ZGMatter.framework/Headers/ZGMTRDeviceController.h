@@ -20,9 +20,9 @@
 #import <ZGMatter/ZGMTRCommissionableBrowserDelegate.h>
 #import <ZGMatter/ZGMTRDefines.h>
 #import <ZGMatter/ZGMTROperationalCertificateIssuer.h>
-#import <ZGMatter/ZGMTRDeviceAttestationDelegate.h>
 
 @class ZGMTRBaseDevice;
+@class ZGMTRDevice;
 @class ZGMTRServerEndpoint; // Defined in ZGMTRServerEndpoint.h, which imports ZGMTRAccessGrant.h, which imports ZGMTRBaseClusters.h, which imports this file, so we can't import it.
 
 @class ZGMTRDeviceControllerAbstractParameters;
@@ -69,7 +69,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 /**
  * If true, the controller has been suspended via `suspend` and not resumed yet.
  */
-@property (readonly, nonatomic, getter=isSuspended) BOOL suspended ZGMTR_NEWLY_AVAILABLE;
+@property (readonly, nonatomic, getter=isSuspended) BOOL suspended ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));
 
 /**
  * The ID assigned to this controller at creation time.
@@ -82,6 +82,12 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  */
 @property (readonly, nonatomic, nullable)
     NSNumber * controllerNodeID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+
+/**
+ * Returns the list of ZGMTRDevice instances that this controller has loaded
+ * into memory. Returns an empty array if no devices are in memory.
+ */
+@property (readonly, nonatomic) NSArray<ZGMTRDevice *> * devices ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Set up a commissioning session for a device, using the provided setup payload
@@ -99,12 +105,13 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * Then a PASE session will be established with the device, unless an error
  * occurs.  ZGMTRDeviceControllerDelegate will be notified as follows:
  *
- * * Discovery fails: onStatusUpdate with ZGMTRCommissioningStatusFailed.
+ * * Discovery fails: controller:statusUpdate: with ZGMTRCommissioningStatusFailed.
  *
- * * Discovery succeeds but commissioning session setup fails: onPairingComplete
- *   with an error.
+ * * Commissioning session setup fails:
+ *   controller:commissioningSessionEstablishmentDone: with non-nil error.
  *
- * * Commissioning session setup succeeds: onPairingComplete with no error.
+ * * Commissioning session setup succeeds:
+ *   controller:commissioningSessionEstablishmentDone: with nil error.
  *
  * Once a commissioning session is set up, getDeviceBeingCommissioned
  * can be used to get an ZGMTRBaseDevice and discover what sort of network
@@ -133,11 +140,13 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * Then a PASE session will be established with the device, unless an error
  * occurs.  ZGMTRDeviceControllerDelegate will be notified as follows:
  *
- * * Invalid connection information: onStatusUpdate with ZGMTRCommissioningStatusFailed.
+ * * Invalid connection information: controller:statusUpdate: with ZGMTRCommissioningStatusFailed.
  *
- * * Commissioning session setup fails: onPairingComplete with an error.
+ * * Commissioning session setup fails:
+ *   controller:commissioningSessionEstablishmentDone: with non-nil error.
  *
- * * Commissioning session setup succeeds: onPairingComplete with no error.
+ * * Commissioning session setup succeeds:
+ *   controller:commissioningSessionEstablishmentDone: with nil error.
  *
  * Once a commissioning session is set up, getDeviceBeingCommissioned
  * can be used to get an ZGMTRBaseDevice and discover what sort of network
@@ -153,6 +162,9 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 /**
  * Commission the node with the given node ID.  The node ID must match the node
  * ID that was used to set up the commissioning session.
+ *
+ * NOTE: The forceWiFiScan and forceThreadScan properties of
+ * ZGMTRCommissioningParameters are ignored by this API.
  */
 - (BOOL)commissionNodeWithID:(NSNumber *)nodeID
          commissioningParams:(ZGMTRCommissioningParameters *)commissioningParams
@@ -211,14 +223,14 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * @param[in] queue The queue on which the callbacks will be delivered
  */
 - (void)addDeviceControllerDelegate:(id<ZGMTRDeviceControllerDelegate>)delegate
-                              queue:(dispatch_queue_t)queue ZGMTR_NEWLY_AVAILABLE;
+                              queue:(dispatch_queue_t)queue ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));
 
 /**
  * Removes a Delegate from the device controller
  *
  * @param[in] delegate The delegate to be removed
  */
-- (void)removeDeviceControllerDelegate:(id<ZGMTRDeviceControllerDelegate>)delegate ZGMTR_NEWLY_AVAILABLE;
+- (void)removeDeviceControllerDelegate:(id<ZGMTRDeviceControllerDelegate>)delegate ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));
 
 /**
  * Start scanning for commissionable devices.
@@ -268,6 +280,12 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)removeServerEndpoint:(ZGMTRServerEndpoint *)endpoint ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 /**
+ * Forget any information we have about the device with the given node ID.  That
+ * includes clearing any information we have stored about it.
+ */
+- (void)forgetDeviceWithNodeID:(NSNumber *)nodeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+/**
  * Compute a PASE verifier for the desired setup passcode.
  *
  * @param[in] setupPasscode   The desired passcode to use.
@@ -290,7 +308,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  *
  * Suspending an already-suspended controller has no effect.
  */
-- (void)suspend ZGMTR_NEWLY_AVAILABLE;
+- (void)suspend ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));
 
 /**
  * Resume the controller.  This has no effect if the controller is not
@@ -299,7 +317,14 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * A resume following any number of suspend calls will resume the controller;
  * there does not need to be a resume call to match every suspend call.
  */
-- (void)resume ZGMTR_NEWLY_AVAILABLE;
+- (void)resume ZGMTR_AVAILABLE(ios(18.2), macos(15.2), watchos(11.2), tvos(18.2));
+
+/**
+ * Returns the list of node IDs for which this controller has stored
+ * information.  Returns empty list if the controller does not have any
+ * information stored.
+ */
+@property (readonly, nonatomic) NSArray<NSNumber *> * nodesWithStoredData ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Shut down the controller. Calls to shutdown after the first one are NO-OPs.
@@ -308,7 +333,15 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  */
 - (void)shutdown;
 
-- (uint64_t)getFabricIndex;
+@end
+
+
+@interface ZGMTRDeviceController (ZGExtensions)
+
+/**
+ * ZG extension: Returns the fabric index for this controller.
+ */
+- (uint64_t)getFabricIndex ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 @end
 
@@ -327,26 +360,12 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
     ZGMTR_DEPRECATED("Please use [ZGMTRBaseDevice deviceWithNodeID:controller:]", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),
         tvos(16.1, 16.4));
 
-- (BOOL)getZGBaseDevice:(uint64_t)deviceID
-                queue:(dispatch_queue_t)queue
-    completionHandler:(ZGMTRDeviceConnectionCallback)completionHandler
-    ZGMTR_DEPRECATED("Please use [ZGMTRBaseDevice deviceWithNodeID:controller:]", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),
-        tvos(16.1, 16.4));
-
 - (BOOL)pairDevice:(uint64_t)deviceID
      discriminator:(uint16_t)discriminator
       setupPINCode:(uint32_t)setupPINCode
              error:(NSError * __autoreleasing *)error
     ZGMTR_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
         watchos(9.1, 9.4), tvos(16.1, 16.4));
-
-- (BOOL)pairDevice:(uint64_t)deviceID
-            connId:(id)connId
-      setupPINCode:(uint32_t)setupPINCode
-             error:(NSError * __autoreleasing *)error
-    ZGMTR_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
-        watchos(9.1, 9.4), tvos(16.1, 16.4));
-
 - (BOOL)pairDevice:(uint64_t)deviceID
            address:(NSString *)address
               port:(uint16_t)port

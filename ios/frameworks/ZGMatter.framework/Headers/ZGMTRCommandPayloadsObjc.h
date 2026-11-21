@@ -34,7 +34,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -66,7 +66,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -98,7 +98,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -135,7 +135,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -174,7 +174,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -213,7 +213,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -252,7 +252,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -284,7 +284,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -318,7 +318,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -355,7 +355,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -392,7 +392,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -424,7 +424,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -457,7 +457,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -485,7 +485,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -513,7 +513,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -545,7 +545,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -578,7 +578,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -612,7 +612,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -648,7 +648,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -684,7 +684,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -722,7 +722,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -754,7 +754,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -790,7 +790,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -826,7 +826,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -864,7 +864,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -896,7 +896,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -926,7 +926,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -942,10 +942,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRAccessControlClusterReviewFabricRestrictionsParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull arl ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull arl ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -956,7 +956,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -972,10 +972,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRAccessControlClusterReviewFabricRestrictionsResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull token ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull token ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRAccessControlClusterReviewFabricRestrictionsResponseParams with a response-value dictionary
@@ -988,7 +988,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -1007,7 +1007,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1041,7 +1041,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1073,7 +1073,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1107,7 +1107,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1139,7 +1139,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1171,7 +1171,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1205,7 +1205,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1237,7 +1237,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1269,7 +1269,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1303,7 +1303,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1335,7 +1335,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1369,7 +1369,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1397,7 +1397,7 @@ ZGMTR_DEPRECATED("This command has been removed", ios(16.1, 16.4), macos(13.0, 1
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1441,7 +1441,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1481,7 +1481,7 @@ ZGMTR_DEPRECATED("Please use ZGMTROTASoftwareUpdateProviderClusterQueryImagePara
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1532,7 +1532,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1580,7 +1580,7 @@ ZGMTR_DEPRECATED("Please use ZGMTROTASoftwareUpdateProviderClusterQueryImageResp
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1603,7 +1603,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1635,7 +1635,7 @@ ZGMTR_DEPRECATED("Please use ZGMTROTASoftwareUpdateProviderClusterApplyUpdateReq
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1667,7 +1667,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1703,7 +1703,7 @@ ZGMTR_DEPRECATED("Please use ZGMTROTASoftwareUpdateProviderClusterApplyUpdateRes
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1726,7 +1726,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1758,7 +1758,7 @@ ZGMTR_DEPRECATED("Please use ZGMTROTASoftwareUpdateProviderClusterNotifyUpdateAp
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1796,7 +1796,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1830,7 +1830,7 @@ ZGMTR_DEPRECATED("Please use ZGMTROTASoftwareUpdateRequestorClusterAnnounceOTAPr
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1869,7 +1869,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1901,7 +1901,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1939,7 +1939,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -1971,7 +1971,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2003,7 +2003,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2035,7 +2035,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2071,7 +2071,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2122,7 +2122,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2158,7 +2158,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2202,7 +2202,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2234,7 +2234,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2266,7 +2266,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2304,7 +2304,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2340,7 +2340,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2374,7 +2374,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2412,7 +2412,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2444,7 +2444,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2499,7 +2499,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2535,7 +2535,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2578,7 +2578,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2594,7 +2594,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRGeneralDiagnosticsClusterTimeSnapshotParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -2606,7 +2606,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2622,12 +2622,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRGeneralDiagnosticsClusterTimeSnapshotResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull systemTimeMs ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull systemTimeMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable posixTimeMs ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable posixTimeMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRGeneralDiagnosticsClusterTimeSnapshotResponseParams with a response-value dictionary
@@ -2640,17 +2640,17 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRGeneralDiagnosticsClusterPayloadTestRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull enableKey ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull enableKey ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull value ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull value ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy, getter=getCount) NSNumber * _Nonnull count ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getCount) NSNumber * _Nonnull count ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -2661,7 +2661,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2677,10 +2677,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRGeneralDiagnosticsClusterPayloadTestResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull payload ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull payload ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRGeneralDiagnosticsClusterPayloadTestResponseParams with a response-value dictionary
@@ -2693,7 +2693,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -2708,7 +2708,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2736,7 +2736,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2764,7 +2764,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2792,7 +2792,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2826,7 +2826,7 @@ ZGMTR_AVAILABLE(ios(17.2), macos(14.2), watchos(10.2), tvos(17.2))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2860,7 +2860,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2876,10 +2876,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRTimeSynchronizationClusterSetTrustedTimeSourceParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) ZGMTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct * _Nullable trustedTimeSource ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) ZGMTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct * _Nullable trustedTimeSource ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -2890,7 +2890,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2906,10 +2906,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRTimeSynchronizationClusterSetTimeZoneParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull timeZone ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull timeZone ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -2920,7 +2920,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2936,10 +2936,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRTimeSynchronizationClusterSetTimeZoneResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull dstOffsetRequired ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull dstOffsetRequired ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRTimeSynchronizationClusterSetTimeZoneResponseParams with a response-value dictionary
@@ -2952,13 +2952,13 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRTimeSynchronizationClusterSetDSTOffsetParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull dstOffset ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull dstOffset ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -2969,7 +2969,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -2985,10 +2985,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRTimeSynchronizationClusterSetDefaultNTPParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nullable defaultNTP ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable defaultNTP ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -2999,7 +2999,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3015,12 +3015,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRBridgedDeviceBasicInformationClusterKeepActiveParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull stayActiveDuration ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull stayActiveDuration ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull timeoutMs ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull timeoutMs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3031,7 +3031,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3069,7 +3069,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3104,7 +3104,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3132,7 +3132,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3162,7 +3162,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3194,7 +3194,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3233,7 +3233,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3263,7 +3263,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3299,7 +3299,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3331,7 +3331,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3373,7 +3373,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3405,7 +3405,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3439,7 +3439,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3473,7 +3473,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3503,7 +3503,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3533,7 +3533,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3554,6 +3554,95 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy) NSData * _Nonnull rootCertificate ZGMTR_DEPRECATED("Please use rootCACertificate", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTROperationalCredentialsClusterSetVIDVerificationStatementParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable vendorID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable vidVerificationStatement ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable vvsc ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTROperationalCredentialsClusterSignVIDVerificationRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull fabricIndex ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull clientChallenge ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTROperationalCredentialsClusterSignVIDVerificationResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull fabricIndex ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull fabricBindingVersion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull signature ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTROperationalCredentialsClusterSignVIDVerificationResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface ZGMTRGroupKeyManagementClusterKeySetWriteParams : NSObject <NSCopying>
 
@@ -3568,7 +3657,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3598,7 +3687,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3628,7 +3717,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3662,7 +3751,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3690,7 +3779,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3720,7 +3809,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3740,18 +3829,18 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
                                          error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRICDManagementClusterRegisterClientParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull checkInNodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull checkInNodeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull monitoredSubject ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull monitoredSubject ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull key ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull key ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nullable verificationKey ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable verificationKey ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull clientType ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull clientType ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3762,7 +3851,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3778,10 +3867,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRICDManagementClusterRegisterClientResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull icdCounter ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull icdCounter ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRICDManagementClusterRegisterClientResponseParams with a response-value dictionary
@@ -3794,15 +3883,15 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRICDManagementClusterUnregisterClientParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull checkInNodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull checkInNodeID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nullable verificationKey ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable verificationKey ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3813,7 +3902,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3829,10 +3918,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRICDManagementClusterStayActiveRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull stayActiveDuration ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull stayActiveDuration ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -3843,7 +3932,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -3859,10 +3948,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRICDManagementClusterStayActiveResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull promisedActiveDuration ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull promisedActiveDuration ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRICDManagementClusterStayActiveResponseParams with a response-value dictionary
@@ -3875,156 +3964,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRTimerClusterSetTimerParams : NSObject <NSCopying>
-
-@property (nonatomic, copy, getter=getNewTime) NSNumber * _Nonnull newTime ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRTimerClusterResetTimerParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRTimerClusterAddTimeParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSNumber * _Nonnull additionalTime ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRTimerClusterReduceTimeParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSNumber * _Nonnull timeReduction ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTROvenCavityOperationalStateClusterPauseParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTROvenCavityOperationalStateClusterStopParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -4036,7 +3979,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4052,7 +3995,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTROvenCavityOperationalStateClusterStartParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -4064,7 +4007,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4080,38 +4023,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTROvenCavityOperationalStateClusterResumeParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) ZGMTROvenCavityOperationalStateClusterErrorStateStruct * _Nonnull commandResponseState ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) ZGMTROvenCavityOperationalStateClusterErrorStateStruct * _Nonnull commandResponseState ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTROvenCavityOperationalStateClusterOperationalCommandResponseParams with a response-value dictionary
@@ -4124,13 +4039,13 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTROvenModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4141,7 +4056,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4157,12 +4072,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTROvenModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTROvenModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -4175,7 +4090,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -4192,7 +4107,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4208,10 +4123,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRLaundryWasherModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4222,7 +4137,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4238,12 +4153,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRLaundryWasherModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRLaundryWasherModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -4256,13 +4171,13 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4273,7 +4188,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4289,12 +4204,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -4307,7 +4222,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
@@ -4324,7 +4239,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4375,7 +4290,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4412,12 +4327,12 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
                                          error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRTemperatureControlClusterSetTemperatureParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable targetTemperature ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable targetTemperature ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable targetTemperatureLevel ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable targetTemperatureLevel ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4428,7 +4343,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4444,10 +4359,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRDishwasherModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4458,7 +4373,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4474,12 +4389,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRDishwasherModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRDishwasherModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -4492,7 +4407,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
@@ -4507,7 +4422,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4523,10 +4438,10 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRDishwasherAlarmClusterResetParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull alarms ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull alarms ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4537,7 +4452,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4553,10 +4468,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRDishwasherAlarmClusterModifyEnabledAlarmsParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull mask ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull mask ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4567,7 +4482,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4583,18 +4498,18 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRMicrowaveOvenControlClusterSetCookingParametersParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable cookMode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable cookMode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable cookTime ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable cookTime ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable powerSetting ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable powerSetting ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @property (nonatomic, copy) NSNumber * _Nullable wattSettingIndex ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nullable startAfterSetting ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable startAfterSetting ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4605,7 +4520,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4621,10 +4536,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRMicrowaveOvenControlClusterAddMoreTimeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull timeToAdd ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull timeToAdd ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4635,7 +4550,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4663,7 +4578,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4691,7 +4606,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4719,7 +4634,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4747,7 +4662,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4794,7 +4709,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4822,7 +4737,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4857,7 +4772,7 @@ ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4))
                                          error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(17.4), macos(14.4), watchos(10.4), tvos(17.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRRVCOperationalStateClusterGoHomeParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -4869,7 +4784,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4896,7 +4811,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSString * _Nonnull sceneName ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSArray * _Nonnull extensionFieldSets ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull extensionFieldSetStructs ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -4907,7 +4822,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4962,7 +4877,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -4991,7 +4906,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSString * _Nullable sceneName ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSArray * _Nullable extensionFieldSets ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nullable extensionFieldSetStructs ZGMTR_PROVISIONALLY_AVAILABLE;
 
 /**
  * Initialize an ZGMTRScenesManagementClusterViewSceneResponseParams with a response-value dictionary
@@ -5023,7 +4938,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5076,7 +4991,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5129,7 +5044,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5186,7 +5101,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5216,7 +5131,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5279,7 +5194,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5318,6 +5233,199 @@ ZGMTR_PROVISIONALLY_AVAILABLE
                                          error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
 @end
 
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRGroupcastClusterJoinGroupParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nonnull endpoints ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull keySetID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable key ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable useAuxiliaryACL ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable replaceEndpoints ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable mcastAddrPolicy ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRGroupcastClusterLeaveGroupParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable endpoints ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRGroupcastClusterLeaveGroupResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nonnull endpoints ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRGroupcastClusterLeaveGroupResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRGroupcastClusterUpdateGroupKeyParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull keySetID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable key ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRGroupcastClusterConfigureAuxiliaryACLParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull useAuxiliaryACL ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRGroupcastClusterGroupcastTestingParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull testOperation ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable durationSeconds ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
 ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 @interface ZGMTRHEPAFilterMonitoringClusterResetConditionParams : NSObject <NSCopying>
 /**
@@ -5330,7 +5438,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5358,7 +5466,35 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRWaterTankLevelMonitoringClusterResetConditionParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5388,7 +5524,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5418,7 +5554,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5450,7 +5586,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5478,7 +5614,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5494,10 +5630,10 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRWaterHeaterManagementClusterBoostParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) ZGMTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct * _Nonnull boostInfo ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) ZGMTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct * _Nonnull boostInfo ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -5508,7 +5644,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5524,7 +5660,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRWaterHeaterManagementClusterCancelBoostParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -5536,7 +5672,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5553,9 +5689,9 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDemandResponseLoadControlClusterRegisterLoadControlProgramRequestParams : NSObject <NSCopying>
+@interface ZGMTRCommodityPriceClusterGetDetailedPriceRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) ZGMTRDemandResponseLoadControlClusterLoadControlProgramStruct * _Nonnull loadControlProgram ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull details ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -5566,7 +5702,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -5583,452 +5719,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDemandResponseLoadControlClusterUnregisterLoadControlProgramRequestParams : NSObject <NSCopying>
+@interface ZGMTRCommodityPriceClusterGetDetailedPriceResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull loadControlProgramID ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+@property (nonatomic, copy) ZGMTRCommodityPriceClusterCommodityPriceStruct * _Nullable currentPrice ZGMTR_PROVISIONALLY_AVAILABLE;
 
 /**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDemandResponseLoadControlClusterAddLoadControlEventRequestParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) ZGMTRDemandResponseLoadControlClusterLoadControlEventStruct * _Nonnull event ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDemandResponseLoadControlClusterRemoveLoadControlEventRequestParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSData * _Nonnull eventID ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull cancelControl ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDemandResponseLoadControlClusterClearLoadControlEventsRequestParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRMessagesClusterPresentMessagesRequestParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSData * _Nonnull messageID ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull priority ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull messageControl ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nullable startTime ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nullable duration ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSString * _Nonnull messageText ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSArray * _Nullable responses ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRMessagesClusterCancelMessagesRequestParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSArray * _Nonnull messageIDs ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementClusterPowerAdjustRequestParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSNumber * _Nonnull power ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull duration ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSNumber * _Nonnull requestedStartTime ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementClusterPauseRequestParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSNumber * _Nonnull duration ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementClusterResumeRequestParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementClusterModifyForecastRequestParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSNumber * _Nonnull forecastID ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSArray * _Nonnull slotAdjustments ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSArray * _Nonnull constraints ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_PROVISIONALLY_AVAILABLE;
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementClusterCancelRequestParams : NSObject <NSCopying>
-/**
- * Controls whether the command is a timed command (using Timed Invoke).
- *
- * If nil (the default value), a regular invoke is done for commands that do
- * not require a timed invoke and a timed invoke with some default timed request
- * timeout is done for commands that require a timed invoke.
- *
- * If not nil, a timed invoke is done, with the provided value used as the timed
- * request timeout.  The value should be chosen small enough to provide the
- * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
- * request) within the timeout window.
- *
- */
-@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
-
-/**
- * Controls how much time, in seconds, we will allow for the server to process the command.
- *
- * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
- *
- * If nil, the framework will try to select an appropriate timeout value itself.
- */
-@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
-@end
-
-ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTREnergyEVSEClusterGetTargetsResponseParams : NSObject <NSCopying>
-
-@property (nonatomic, copy) NSArray * _Nonnull chargingTargetSchedules ZGMTR_PROVISIONALLY_AVAILABLE;
-
-/**
- * Initialize an ZGMTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary
+ * Initialize an ZGMTRCommodityPriceClusterGetDetailedPriceResponseParams with a response-value dictionary
  * of the sort that ZGMTRDeviceResponseHandler would receive.
  *
  * Will return nil and hand out an error if the response-value dictionary is not
@@ -6042,7 +5738,9 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTREnergyEVSEClusterDisableParams : NSObject <NSCopying>
+@interface ZGMTRCommodityPriceClusterGetDetailedForecastRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull details ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6053,7 +5751,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6070,13 +5768,40 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTREnergyEVSEClusterEnableChargingParams : NSObject <NSCopying>
+@interface ZGMTRCommodityPriceClusterGetDetailedForecastResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable chargingEnabledUntil ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull priceForecast ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nonnull minimumChargeCurrent ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Initialize an ZGMTRCommodityPriceClusterGetDetailedForecastResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
 
-@property (nonatomic, copy) NSNumber * _Nonnull maximumChargeCurrent ZGMTR_PROVISIONALLY_AVAILABLE;
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRMessagesClusterPresentMessagesRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull messageID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull priority ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull messageControl ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nullable startTime ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nullable duration ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSString * _Nonnull messageText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSArray * _Nullable responses ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6087,7 +5812,430 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRMessagesClusterCancelMessagesRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull messageIDs ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementClusterPowerAdjustRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull power ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull duration ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull requestedStartTime ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementClusterPauseRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull duration ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementClusterResumeRequestParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementClusterModifyForecastRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull forecastID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSArray * _Nonnull slotAdjustments ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull constraints ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementClusterCancelRequestParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRDeviceEnergyManagementClusterPowerRangeAdjustRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable minPower ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable maxPower ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull duration ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull cause ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRDeviceEnergyManagementClusterCancelPowerRangeAdjustRequestParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTREnergyEVSEClusterGetTargetsResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull chargingTargetSchedules ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+/**
+ * Initialize an ZGMTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTREnergyEVSEClusterDisableParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTREnergyEVSEClusterEnableChargingParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable chargingEnabledUntil ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull minimumChargeCurrent ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull maximumChargeCurrent ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6119,7 +6267,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6135,7 +6283,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTREnergyEVSEClusterStartDiagnosticsParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6147,7 +6295,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6163,10 +6311,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTREnergyEVSEClusterSetTargetsParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSArray * _Nonnull chargingTargetSchedules ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull chargingTargetSchedules ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6177,7 +6325,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6193,7 +6341,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTREnergyEVSEClusterGetTargetsParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6205,7 +6353,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6221,7 +6369,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTREnergyEVSEClusterClearTargetsParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -6233,7 +6381,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6249,10 +6397,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTREnergyEVSEModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6263,7 +6411,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6279,12 +6427,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTREnergyEVSEModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTREnergyEVSEModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -6297,13 +6445,13 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRWaterHeaterModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6314,7 +6462,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6330,12 +6478,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRWaterHeaterModeClusterChangeToModeResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRWaterHeaterModeClusterChangeToModeResponseParams with a response-value dictionary
@@ -6348,13 +6496,13 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRDeviceEnergyManagementModeClusterChangeToModeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, getter=getNewMode) NSNumber * _Nonnull newMode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -6365,7 +6513,58 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRDeviceEnergyManagementModeClusterChangeToModeResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+/**
+ * Initialize an ZGMTRDeviceEnergyManagementModeClusterChangeToModeResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRElectricalAlarmClusterResetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull alarms ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6382,24 +6581,111 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRDeviceEnergyManagementModeClusterChangeToModeResponseParams : NSObject <NSCopying>
+@interface ZGMTRElectricalAlarmClusterModifyEnabledAlarmsParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSString * _Nullable statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull mask ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
 
 /**
- * Initialize an ZGMTRDeviceEnergyManagementModeClusterChangeToModeResponseParams with a response-value dictionary
- * of the sort that ZGMTRDeviceResponseHandler would receive.
+ * Controls how much time, in seconds, we will allow for the server to process the command.
  *
- * Will return nil and hand out an error if the response-value dictionary is not
- * a command data response or is not the right command response.
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
  *
- * Will return nil and hand out an error if the data response does not match the known
- * schema for this command.
+ * If nil, the framework will try to select an appropriate timeout value itself.
  */
-- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRElectricalAlarmClusterSetElectricalAlarmThresholdsParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable overVoltageThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable underVoltageThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable overFrequencyThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable underFrequencyThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable overPowerThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable underPowerThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable overCurrentThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable underCurrentThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable powerImportThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable powerExportThreshold ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRElectricalProtectionAlarmClusterModifyEnabledAlarmsParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull mask ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -6416,7 +6702,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6446,7 +6732,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6478,7 +6764,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6520,7 +6806,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6552,7 +6838,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6596,7 +6882,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6632,7 +6918,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6668,7 +6954,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6700,7 +6986,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6738,7 +7024,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6774,7 +7060,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6810,7 +7096,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6840,7 +7126,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6878,7 +7164,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6912,7 +7198,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6954,7 +7240,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -6989,7 +7275,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7037,7 +7323,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7076,7 +7362,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7116,7 +7402,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7150,7 +7436,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7184,7 +7470,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7213,7 +7499,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 @property (nonatomic, copy) NSNumber * _Nullable nextCredentialIndex ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-@property (nonatomic, copy) NSData * _Nullable credentialData ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable credentialData ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7224,7 +7510,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7258,7 +7544,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7274,10 +7560,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRDoorLockClusterUnboltDoorParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nullable pinCode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable pinCode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7288,7 +7574,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7304,16 +7590,16 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRDoorLockClusterSetAliroReaderConfigParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull signingKey ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull signingKey ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull verificationKey ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull verificationKey ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull groupIdentifier ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull groupIdentifier ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nullable groupResolvingKey ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable groupResolvingKey ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7324,7 +7610,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7340,7 +7626,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRDoorLockClusterClearAliroReaderConfigParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -7352,7 +7638,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7380,7 +7666,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7408,7 +7694,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7436,7 +7722,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7466,7 +7752,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7496,7 +7782,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7526,7 +7812,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7556,7 +7842,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7573,9 +7859,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRServiceAreaClusterSelectAreasParams : NSObject <NSCopying>
-
-@property (nonatomic, copy, getter=getNewAreas) NSArray * _Nonnull newAreas ZGMTR_PROVISIONALLY_AVAILABLE;
+@interface ZGMTRClosureControlClusterStopParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7586,7 +7870,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7603,11 +7887,273 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClosureControlClusterMoveToParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable position ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable latch ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable speed ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClosureControlClusterCalibrateParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClosureControlClusterGroupedMoveToParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable position ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable latch ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable speed ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClosureDimensionClusterSetTargetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable position ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable latch ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable speed ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClosureDimensionClusterStepParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull direction ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull numberOfSteps ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable speed ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClosureDimensionClusterGroupedSetTargetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable position ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable latch ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable speed ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRClosureDimensionClusterGroupedStepParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull direction ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull numberOfSteps ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable speed ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRServiceAreaClusterSelectAreasParams : NSObject <NSCopying>
+
+@property (nonatomic, copy, getter=getNewAreas) NSArray * _Nonnull newAreas ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRServiceAreaClusterSelectAreasResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nonnull statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRServiceAreaClusterSelectAreasResponseParams with a response-value dictionary
@@ -7620,13 +8166,13 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRServiceAreaClusterSkipAreaParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull skippedArea ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull skippedArea ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7637,7 +8183,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7653,12 +8199,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRServiceAreaClusterSkipAreaResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nonnull statusText ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull statusText ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRServiceAreaClusterSkipAreaResponseParams with a response-value dictionary
@@ -7671,7 +8217,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -7690,7 +8236,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7726,7 +8272,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7766,7 +8312,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7798,7 +8344,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7812,6 +8358,25 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If nil, the framework will try to select an appropriate timeout value itself.
  */
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRThermostatClusterAddThermostatSuggestionResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull uniqueID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRThermostatClusterAddThermostatSuggestionResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
 @end
 
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -7826,7 +8391,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7842,10 +8407,10 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRThermostatClusterSetActiveScheduleRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull scheduleHandle ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull scheduleHandle ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7856,7 +8421,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7872,10 +8437,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRThermostatClusterSetActivePresetRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nullable presetHandle ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable presetHandle ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7886,7 +8451,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7903,13 +8468,77 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRThermostatClusterAddThermostatSuggestionParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull presetHandle ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable effectiveTime ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull expirationInMinutes ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRThermostatClusterRemoveThermostatSuggestionParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull uniqueID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRThermostatClusterAtomicResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull statusCode ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull statusCode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nonnull attributeStatus ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull attributeStatus ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable timeout ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable timeout ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRThermostatClusterAtomicResponseParams with a response-value dictionary
@@ -7922,17 +8551,17 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRThermostatClusterAtomicRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull requestType ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull requestType ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nonnull attributeRequests ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull attributeRequests ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable timeout ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable timeout ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -7943,7 +8572,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -7977,7 +8606,47 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRHumidistatClusterSetSettingsParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable userSetpoint ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable mode ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable mistType ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable continuous ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable sleep ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable optimal ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8015,7 +8684,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8051,7 +8720,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8089,7 +8758,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8125,7 +8794,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8161,7 +8830,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8199,7 +8868,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8237,7 +8906,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8275,7 +8944,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8311,7 +8980,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8349,7 +9018,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8385,7 +9054,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8428,7 +9097,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8464,7 +9133,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8502,7 +9171,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8540,7 +9209,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8582,7 +9251,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8614,7 +9283,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8654,7 +9323,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8696,7 +9365,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8713,6 +9382,380 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRDynamicLightingClusterStartEffectParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull effectID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull speed ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable colorMode ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable colorPalette ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRDynamicLightingClusterStopEffectParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRProximityRangingClusterStartRangingRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull technology ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRProximityRangingClusterWiFiRangingDeviceRoleConfigStruct * _Nullable wiFiRangingDeviceRoleConfig ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRProximityRangingClusterBLERangingDeviceRoleConfigStruct * _Nullable bleRangingDeviceRoleConfig ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRProximityRangingClusterBLTChannelSoundingDeviceRoleConfigStruct * _Nullable bltChannelSoundingDeviceRoleConfig ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable frequencyBand ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable bandwidth ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull securityMode ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRProximityRangingClusterRangingTriggerConditionStruct * _Nonnull trigger ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRProximityRangingClusterReportingConditionStruct * _Nullable reportingCondition ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRProximityRangingClusterStartRangingResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull resultCode ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable sessionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRProximityRangingClusterStartRangingResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRProximityRangingClusterStopRangingRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull sessionID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRNetworkIdentityManagementClusterAddClientParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull clientIdentity ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRNetworkIdentityManagementClusterAddClientResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull clientIndex ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRNetworkIdentityManagementClusterAddClientResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRNetworkIdentityManagementClusterRemoveClientParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable clientIndex ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable clientIdentifier ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRNetworkIdentityManagementClusterQueryIdentityParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable networkIdentityIndex ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable networkIdentityType ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable clientIndex ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable identifier ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRNetworkIdentityManagementClusterQueryIdentityResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull identity ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRNetworkIdentityManagementClusterQueryIdentityResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRNetworkIdentityManagementClusterImportAdminSecretParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull networkAdministratorSharedSecret ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRNetworkIdentityManagementClusterExportAdminSecretParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRNetworkIdentityManagementClusterExportAdminSecretResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull networkAdministratorSharedSecret ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRNetworkIdentityManagementClusterExportAdminSecretResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -8724,7 +9767,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8740,10 +9783,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull passphrase ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull passphrase ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams with a response-value dictionary
@@ -8756,10 +9799,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -8771,7 +9814,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8787,7 +9830,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -8799,7 +9842,239 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull dataset ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+/**
+ * Initialize an ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull activeDataset ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nullable breadcrumb ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull pendingDataset ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRThreadNetworkDirectoryClusterAddNetworkParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull operationalDataset ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRThreadNetworkDirectoryClusterRemoveNetworkParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull extendedPanID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRThreadNetworkDirectoryClusterGetOperationalDatasetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull extendedPanID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull operationalDataset ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+/**
+ * Initialize an ZGMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCommissioningProxyClusterProxyConnectRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nullable address ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull transport ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull discriminator ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull vendorID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull productID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull timeout ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable wiFiBand ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8816,12 +10091,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams : NSObject <NSCopying>
+@interface ZGMTRCommissioningProxyClusterProxyConnectResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull dataset ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull sessionID ZGMTR_PROVISIONALLY_AVAILABLE;
 
 /**
- * Initialize an ZGMTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary
+ * Initialize an ZGMTRCommissioningProxyClusterProxyConnectResponseParams with a response-value dictionary
  * of the sort that ZGMTRDeviceResponseHandler would receive.
  *
  * Will return nil and hand out an error if the response-value dictionary is not
@@ -8835,11 +10110,9 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams : NSObject <NSCopying>
+@interface ZGMTRCommissioningProxyClusterProxyDisconnectRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull activeDataset ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nullable breadcrumb ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable sessionID ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -8850,7 +10123,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8867,9 +10140,11 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams : NSObject <NSCopying>
+@interface ZGMTRCommissioningProxyClusterProxyScanRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull pendingDataset ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull transport ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable wiFiBands ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -8880,7 +10155,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8897,9 +10172,34 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRThreadNetworkDirectoryClusterAddNetworkParams : NSObject <NSCopying>
+@interface ZGMTRCommissioningProxyClusterProxyScanResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull operationalDataset ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull numberOfResults ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nonnull proxyScanResult ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRCommissioningProxyClusterProxyScanResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCommissioningProxyClusterProxyBackGroundScanStartRequestParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull transport ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull timeout ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable wiFiBands ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -8910,7 +10210,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8927,9 +10227,11 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRThreadNetworkDirectoryClusterRemoveNetworkParams : NSObject <NSCopying>
+@interface ZGMTRCommissioningProxyClusterProxyBackGroundScanStopRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull extendedPanID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull transport ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable wiFiBands ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -8940,7 +10242,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8957,9 +10259,13 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRThreadNetworkDirectoryClusterGetOperationalDatasetParams : NSObject <NSCopying>
+@interface ZGMTRCommissioningProxyClusterProxyMessageRequestParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull extendedPanID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull sessionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull responseTimeout ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable message ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -8970,7 +10276,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -8987,12 +10293,14 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams : NSObject <NSCopying>
+@interface ZGMTRCommissioningProxyClusterProxyMessageResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSData * _Nonnull operationalDataset ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull sessionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable message ZGMTR_PROVISIONALLY_AVAILABLE;
 
 /**
- * Initialize an ZGMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary
+ * Initialize an ZGMTRCommissioningProxyClusterProxyMessageResponseParams with a response-value dictionary
  * of the sort that ZGMTRDeviceResponseHandler would receive.
  *
  * Will return nil and hand out an error if the response-value dictionary is not
@@ -9019,7 +10327,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9051,7 +10359,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9087,7 +10395,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9117,7 +10425,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9133,22 +10441,22 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRChannelClusterGetProgramGuideParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable startTime ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable startTime ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable endTime ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable endTime ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nullable channelList ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nullable channelList ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) ZGMTRChannelClusterPageTokenStruct * _Nullable pageToken ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) ZGMTRChannelClusterPageTokenStruct * _Nullable pageToken ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nullable recordingFlag ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable recordingFlag ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @property (nonatomic, copy) NSArray * _Nullable externalIDList ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSData * _Nullable data ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nullable data ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9159,7 +10467,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9175,12 +10483,12 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRChannelClusterProgramGuideResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) ZGMTRChannelClusterChannelPagingStruct * _Nonnull paging ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) ZGMTRChannelClusterChannelPagingStruct * _Nonnull paging ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSArray * _Nonnull programList ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull programList ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRChannelClusterProgramGuideResponseParams with a response-value dictionary
@@ -9193,19 +10501,19 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
-                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRChannelClusterRecordProgramParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nonnull programIdentifier ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull programIdentifier ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull shouldRecordSeries ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull shouldRecordSeries ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @property (nonatomic, copy) NSArray * _Nonnull externalIDList ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSData * _Nonnull data ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull data ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9216,7 +10524,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9232,16 +10540,16 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRChannelClusterCancelRecordProgramParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nonnull programIdentifier ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull programIdentifier ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull shouldRecordSeries ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull shouldRecordSeries ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @property (nonatomic, copy) NSArray * _Nonnull externalIDList ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSData * _Nonnull data ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull data ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9252,7 +10560,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9284,7 +10592,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9316,7 +10624,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9348,7 +10656,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9376,7 +10684,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9404,7 +10712,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9432,7 +10740,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRMediaPlaybackClusterStopParams", ios(16.1, 16.
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9460,7 +10768,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9488,7 +10796,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9516,7 +10824,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9535,7 +10843,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface ZGMTRMediaPlaybackClusterRewindParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable audioAdvanceUnmuted ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable audioAdvanceUnmuted ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9546,7 +10854,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9565,7 +10873,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface ZGMTRMediaPlaybackClusterFastForwardParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable audioAdvanceUnmuted ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable audioAdvanceUnmuted ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9576,7 +10884,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9606,7 +10914,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9636,7 +10944,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9668,7 +10976,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9702,7 +11010,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9718,12 +11026,12 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRMediaPlaybackClusterActivateAudioTrackParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nonnull trackID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull trackID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull audioOutputIndex ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull audioOutputIndex ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9734,7 +11042,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9750,10 +11058,10 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRMediaPlaybackClusterActivateTextTrackParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nonnull trackID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull trackID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -9764,7 +11072,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9780,7 +11088,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRMediaPlaybackClusterDeactivateTextTrackParams : NSObject <NSCopying>
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
@@ -9792,7 +11100,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9822,7 +11130,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9850,7 +11158,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9878,7 +11186,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9910,7 +11218,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9938,7 +11246,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9968,7 +11276,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -9998,7 +11306,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10029,7 +11337,11 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 @property (nonatomic, copy) ZGMTRContentLauncherClusterPlaybackPreferencesStruct * _Nullable playbackPreferences ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nullable useCurrentContext ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable useCurrentContext ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nullable contentAppVendorID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable contentAppProductID ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10040,7 +11352,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10064,6 +11376,18 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @property (nonatomic, copy) NSString * _Nullable displayString ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
 @property (nonatomic, copy) ZGMTRContentLauncherClusterBrandingInformationStruct * _Nullable brandingInformation ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
+
+@property (nonatomic, copy) ZGMTRContentLauncherClusterPlaybackPreferencesStruct * _Nullable playbackPreferences ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nullable contentType ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable contentHeaders ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable offsetMillisecs ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable queueType ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nullable nextUrl ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10074,7 +11398,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10106,7 +11430,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10142,11 +11466,90 @@ ZGMTR_DEPRECATED("Please use ZGMTRContentLauncherClusterLauncherResponseParams",
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
 @property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs ZGMTR_DEPRECATED("Timed invoke does not make sense for server to client commands", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRContentLauncherClusterContentReplicationRequestParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRContentLauncherClusterContentReplicationResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRContentLauncherClusterReplicationInfo * _Nullable replicationInfo ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRContentLauncherClusterContentReplicationResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRContentLauncherClusterPlayPresetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull presetID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
@@ -10163,7 +11566,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10195,7 +11598,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10227,7 +11630,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10257,7 +11660,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10287,7 +11690,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10319,7 +11722,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10353,7 +11756,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10383,7 +11786,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10410,7 +11813,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 @property (nonatomic, copy) NSString * _Nonnull setupPIN ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
 
-@property (nonatomic, copy) NSNumber * _Nullable node ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable node ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10421,7 +11824,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10440,7 +11843,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 @interface ZGMTRAccountLoginClusterLogoutParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nullable node ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable node ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10451,7 +11854,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10470,7 +11873,7 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 ZGMTR_PROVISIONALLY_AVAILABLE
 @interface ZGMTRContentControlClusterUpdatePINParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nullable oldPIN ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nonnull oldPIN ZGMTR_PROVISIONALLY_AVAILABLE;
 
 @property (nonatomic, copy, getter=getNewPIN) NSString * _Nonnull newPIN ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
@@ -10483,7 +11886,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10511,7 +11914,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10558,7 +11961,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10586,7 +11989,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10607,7 +12010,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSString * _Nullable pinCode ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nullable bonusTime ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull bonusTime ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10618,7 +12021,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10648,7 +12051,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10676,7 +12079,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10704,7 +12107,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10734,7 +12137,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10764,7 +12167,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10781,11 +12184,9 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRContentAppObserverClusterContentAppMessageParams : NSObject <NSCopying>
+@interface ZGMTRContentControlClusterAddBlockChannelsParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSString * _Nullable data ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSString * _Nonnull encodingHint ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull channels ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10796,7 +12197,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10813,16 +12214,255 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRContentControlClusterRemoveBlockChannelsParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull channelIndexes ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRContentControlClusterAddBlockApplicationsParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull applications ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRContentControlClusterRemoveBlockApplicationsParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull applications ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRContentControlClusterSetBlockContentTimeWindowParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRContentControlClusterTimeWindowStruct * _Nonnull timeWindow ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRContentControlClusterRemoveBlockContentTimeWindowParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull timeWindowIndexes ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRContentAppObserverClusterContentAppMessageParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSString * _Nullable data ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSString * _Nonnull encodingHint ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRContentAppObserverClusterContentAppMessageResponseParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable data ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable data ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSString * _Nullable encodingHint ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSString * _Nullable encodingHint ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRContentAppObserverClusterContentAppMessageResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRMediaFileManagementClusterAddFileParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSString * _Nonnull name ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull size ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull mimeType ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull imageUri ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRMediaFileManagementClusterAddFileResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable fileID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRMediaFileManagementClusterAddFileResponseParams with a response-value dictionary
  * of the sort that ZGMTRDeviceResponseHandler would receive.
  *
  * Will return nil and hand out an error if the response-value dictionary is not
@@ -10836,19 +12476,9 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRWebRTCTransportProviderClusterSolicitOfferParams : NSObject <NSCopying>
+@interface ZGMTRMediaFileManagementClusterDeleteFileParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull streamType ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nullable videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nullable audioStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSArray * _Nullable iceServers ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSString * _Nullable iceTransportPolicy ZGMTR_PROVISIONALLY_AVAILABLE;
-
-@property (nonatomic, copy) NSNumber * _Nullable metadataOptions ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull fileID ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10859,7 +12489,1191 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRMediaFileManagementClusterRequestSharedFilesParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSString * _Nonnull clientName ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull requestID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable supportedMimeTypes ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRMediaFileManagementClusterGetSharedFileParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull responseID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRMediaFileManagementClusterGetSharedFileResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull status ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRMediaFileManagementClusterFileDescriptionStruct * _Nullable fileDescription ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRMediaFileManagementClusterGetSharedFileResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRMediaFileManagementClusterOfferFileParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSString * _Nonnull clientName ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull name ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull size ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull mimeType ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull imageUri ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAudioControlClusterMuteParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAudioControlClusterUnmuteParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAudioControlClusterToggleMutedParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAudioControlClusterSetVolumeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy, getter=getNewVolume) NSNumber * _Nonnull newVolume ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable unmutePolicy ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAudioControlClusterIncreaseVolumeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable stepSize ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable unmutePolicy ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable unmuteVolume ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAudioControlClusterDecreaseVolumeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable stepSize ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable unmutePolicy ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRZoneManagementClusterCreateTwoDCartesianZoneParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRZoneManagementClusterTwoDCartesianZoneStruct * _Nonnull zone ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRZoneManagementClusterCreateTwoDCartesianZoneResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull zoneID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRZoneManagementClusterCreateTwoDCartesianZoneResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRZoneManagementClusterUpdateTwoDCartesianZoneParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull zoneID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRZoneManagementClusterTwoDCartesianZoneStruct * _Nonnull zone ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRZoneManagementClusterRemoveZoneParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull zoneID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRZoneManagementClusterCreateOrUpdateTriggerParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRZoneManagementClusterZoneTriggerControlStruct * _Nonnull trigger ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRZoneManagementClusterRemoveTriggerParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull zoneID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterAudioStreamAllocateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull streamUsage ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull audioCodec ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull channelCount ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull sampleRate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull bitRate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull bitDepth ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterAudioStreamAllocateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull audioStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRCameraAVStreamManagementClusterAudioStreamAllocateResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterAudioStreamDeallocateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull audioStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterVideoStreamAllocateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull streamUsage ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull videoCodec ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull minFrameRate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull maxFrameRate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRCameraAVStreamManagementClusterVideoResolutionStruct * _Nonnull minResolution ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRCameraAVStreamManagementClusterVideoResolutionStruct * _Nonnull maxResolution ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull minBitRate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull maxBitRate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull keyFrameInterval ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable watermarkEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable osdEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterVideoStreamAllocateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRCameraAVStreamManagementClusterVideoStreamAllocateResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterVideoStreamModifyParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable watermarkEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable osdEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterVideoStreamDeallocateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterSnapshotStreamAllocateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull imageCodec ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull maxFrameRate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRCameraAVStreamManagementClusterVideoResolutionStruct * _Nonnull minResolution ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRCameraAVStreamManagementClusterVideoResolutionStruct * _Nonnull maxResolution ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull quality ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable watermarkEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable osdEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterSnapshotStreamAllocateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull snapshotStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRCameraAVStreamManagementClusterSnapshotStreamAllocateResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterSnapshotStreamModifyParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull snapshotStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable watermarkEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable osdEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterSnapshotStreamDeallocateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull snapshotStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterSetStreamPrioritiesParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull streamPriorities ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterCaptureSnapshotParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable snapshotStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRCameraAVStreamManagementClusterVideoResolutionStruct * _Nonnull requestedResolution ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVStreamManagementClusterCaptureSnapshotResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull data ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull imageCodec ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRCameraAVStreamManagementClusterVideoResolutionStruct * _Nonnull resolution ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRCameraAVStreamManagementClusterCaptureSnapshotResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZSetPositionParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable pan ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable tilt ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable zoom ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZRelativeMoveParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable panDelta ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable tiltDelta ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable zoomDelta ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZMoveToPresetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull presetID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZSavePresetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable presetID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull name ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVSettingsUserLevelManagementClusterMPTZRemovePresetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull presetID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVSettingsUserLevelManagementClusterDPTZSetViewportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRDataTypeViewportStruct * _Nonnull viewport ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCameraAVSettingsUserLevelManagementClusterDPTZRelativeMoveParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable deltaX ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable deltaY ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable zoomDelta ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRWebRTCTransportProviderClusterSolicitOfferParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull streamUsage ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull originatingEndpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable audioStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable iceServers ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nullable iceTransportPolicy ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable metadataEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRWebRTCTransportProviderClusterSFrameStruct * _Nullable sFrameConfig ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable videoStreams ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable audioStreams ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10907,7 +13721,9 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSString * _Nonnull sdp ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nonnull streamType ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull streamUsage ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull originatingEndpointID ZGMTR_PROVISIONALLY_AVAILABLE;
 
 @property (nonatomic, copy) NSNumber * _Nullable videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
 
@@ -10917,7 +13733,13 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSString * _Nullable iceTransportPolicy ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nullable metadataOptions ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable metadataEnabled ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRWebRTCTransportProviderClusterSFrameStruct * _Nullable sFrameConfig ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable videoStreams ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable audioStreams ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -10928,7 +13750,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -10949,9 +13771,9 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 
 @property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nonnull videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable videoStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSNumber * _Nonnull audioStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nullable audioStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
 
 /**
  * Initialize an ZGMTRWebRTCTransportProviderClusterProvideOfferResponseParams with a response-value dictionary
@@ -10983,7 +13805,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11000,11 +13822,11 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRWebRTCTransportProviderClusterProvideICECandidateParams : NSObject <NSCopying>
+@interface ZGMTRWebRTCTransportProviderClusterProvideICECandidatesParams : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID ZGMTR_PROVISIONALLY_AVAILABLE;
 
-@property (nonatomic, copy) NSString * _Nonnull iceCandidate ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nonnull iceCandidates ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11015,7 +13837,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11047,7 +13869,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11061,10 +13883,372 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If nil, the framework will try to select an appropriate timeout value itself.
  */
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRWebRTCTransportRequestorClusterOfferParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull sdp ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nullable iceServers ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nullable iceTransportPolicy ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRWebRTCTransportRequestorClusterAnswerParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull sdp ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRWebRTCTransportRequestorClusterICECandidatesParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nonnull iceCandidates ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRWebRTCTransportRequestorClusterEndParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull webRTCSessionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull reason ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRPushAVStreamTransportClusterAllocatePushTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRPushAVStreamTransportClusterTransportOptionsStruct * _Nonnull transportOptions ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRPushAVStreamTransportClusterAllocatePushTransportResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRPushAVStreamTransportClusterTransportConfigurationStruct * _Nonnull transportConfiguration ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRPushAVStreamTransportClusterAllocatePushTransportResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRPushAVStreamTransportClusterDeallocatePushTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull connectionID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRPushAVStreamTransportClusterModifyPushTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull connectionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRPushAVStreamTransportClusterTransportOptionsStruct * _Nonnull transportOptions ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRPushAVStreamTransportClusterSetTransportStatusParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable connectionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull transportStatus ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRPushAVStreamTransportClusterManuallyTriggerTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull connectionID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull activationReason ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRPushAVStreamTransportClusterTransportMotionTriggerTimeControlStruct * _Nullable timeControl ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable userDefined ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRPushAVStreamTransportClusterFindTransportParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable connectionID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRPushAVStreamTransportClusterFindTransportResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull transportConfigurations ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRPushAVStreamTransportClusterFindTransportResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
 @interface ZGMTRChimeClusterPlayChimeSoundParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable chimeID ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11075,7 +14259,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11092,15 +14276,265 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
-@interface ZGMTRCommissionerControlClusterRequestCommissioningApprovalParams : NSObject <NSCopying>
+@interface ZGMTRAVAnalysisClusterEnableContextTriggersParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull requestID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSArray * _Nullable contextTriggers ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
 
-@property (nonatomic, copy) NSNumber * _Nonnull vendorID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
 
-@property (nonatomic, copy) NSNumber * _Nonnull productID ZGMTR_PROVISIONALLY_AVAILABLE;
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAVAnalysisClusterDisableContextTriggersParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nullable contextTriggers ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAVAnalysisClusterEstablishAnalysisStreamParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAVAnalysisClusterEstablishAnalysisStreamResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull analysisStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRAVAnalysisClusterEstablishAnalysisStreamResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAVAnalysisClusterActivateAnalysisStreamParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull analysisStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable webRTCEndpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable pushAVEndpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAVAnalysisClusterDeactivateAnalysisStreamParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull analysisStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRAVAnalysisClusterRemoveAnalysisStreamParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull analysisStreamID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCommodityTariffClusterGetTariffComponentParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull tariffComponentID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCommodityTariffClusterGetTariffComponentResponseParams : NSObject <NSCopying>
 
 @property (nonatomic, copy) NSString * _Nullable label ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nonnull dayEntryIDs ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRCommodityTariffClusterTariffComponentStruct * _Nonnull tariffComponent ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRCommodityTariffClusterGetTariffComponentResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCommodityTariffClusterGetDayEntryParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull dayEntryID ZGMTR_PROVISIONALLY_AVAILABLE;
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11111,7 +14545,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11128,11 +14562,66 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @end
 
 ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRCommodityTariffClusterGetDayEntryResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRCommodityTariffClusterDayEntryStruct * _Nonnull dayEntry ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRCommodityTariffClusterGetDayEntryResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
+@interface ZGMTRCommissionerControlClusterRequestCommissioningApprovalParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull requestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull vendorID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSNumber * _Nonnull productID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+
+@property (nonatomic, copy) NSString * _Nullable label ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRCommissionerControlClusterCommissionNodeParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull requestID ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull requestID ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull responseTimeoutSeconds ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull responseTimeoutSeconds ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 /**
  * Controls whether the command is a timed command (using Timed Invoke).
  *
@@ -11143,7 +14632,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11159,18 +14648,18 @@ ZGMTR_PROVISIONALLY_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
-ZGMTR_PROVISIONALLY_AVAILABLE
+ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4))
 @interface ZGMTRCommissionerControlClusterReverseOpenCommissioningWindowParams : NSObject <NSCopying>
 
-@property (nonatomic, copy) NSNumber * _Nonnull commissioningTimeout ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull commissioningTimeout ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull pakePasscodeVerifier ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull pakePasscodeVerifier ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull discriminator ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull discriminator ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSNumber * _Nonnull iterations ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSNumber * _Nonnull iterations ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
-@property (nonatomic, copy) NSData * _Nonnull salt ZGMTR_PROVISIONALLY_AVAILABLE;
+@property (nonatomic, copy) NSData * _Nonnull salt ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 /**
  * Initialize an ZGMTRCommissionerControlClusterReverseOpenCommissioningWindowParams with a response-value dictionary
@@ -11183,7 +14672,1438 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * schema for this command.
  */
 - (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterAddKeySetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRJointFabricDatastoreClusterDatastoreGroupKeySetStruct * _Nonnull groupKeySet ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterUpdateKeySetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRJointFabricDatastoreClusterDatastoreGroupKeySetStruct * _Nonnull groupKeySet ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterRemoveKeySetParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupKeySetID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterAddGroupParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull friendlyName ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable groupKeySetID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable groupCAT ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable groupCATVersion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupPermission ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterUpdateGroupParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nullable friendlyName ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable groupKeySetID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable groupCAT ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable groupCATVersion ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable groupPermission ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterRemoveGroupParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterAddAdminParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull friendlyName ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull vendorID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull icac ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterUpdateAdminParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nullable friendlyName ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable icac ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterRemoveAdminParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterAddPendingNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull friendlyName ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterRefreshNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterUpdateNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull friendlyName ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterRemoveNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterUpdateEndpointForNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSString * _Nonnull friendlyName ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterAddGroupIDToEndpointForNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterRemoveGroupIDFromEndpointForNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull groupID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterAddBindingToEndpointForNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRJointFabricDatastoreClusterDatastoreBindingTargetStruct * _Nonnull binding ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterRemoveBindingFromEndpointForNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull listID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterAddACLToNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) ZGMTRJointFabricDatastoreClusterDatastoreAccessControlEntryStruct * _Nonnull aclEntry ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricDatastoreClusterRemoveACLFromNodeParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull listID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull nodeID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterICACCSRRequestParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterICACCSRResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull statusCode ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nullable icaccsr ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRJointFabricAdministratorClusterICACCSRResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
                                          error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterAddICACParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull icacValue ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterICACResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull statusCode ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRJointFabricAdministratorClusterICACResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterOpenJointCommissioningWindowParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull commissioningTimeout ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull pakePasscodeVerifier ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull discriminator ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull iterations ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull salt ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterTransferAnchorRequestParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterTransferAnchorResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull statusCode ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRJointFabricAdministratorClusterTransferAnchorResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterTransferAnchorCompleteParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRJointFabricAdministratorClusterAnnounceJointFabricAdministratorParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterProvisionRootCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull certificate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable caid ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterProvisionRootCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull caid ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRTLSCertificateManagementClusterProvisionRootCertificateResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterFindRootCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable caid ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterFindRootCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull certificateDetails ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRTLSCertificateManagementClusterFindRootCertificateResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterLookupRootCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull fingerprint ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterLookupRootCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull caid ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRTLSCertificateManagementClusterLookupRootCertificateResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterRemoveRootCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull caid ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterClientCSRParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull nonce ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable ccdid ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterClientCSRResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull csr ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull nonceSignature ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRTLSCertificateManagementClusterClientCSRResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterProvisionClientCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSData * _Nonnull clientCertificate ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSArray * _Nonnull intermediateCertificates ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterFindClientCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nullable ccdid ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterFindClientCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSArray * _Nonnull certificateDetails ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRTLSCertificateManagementClusterFindClientCertificateResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterLookupClientCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull fingerprint ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterLookupClientCertificateResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRTLSCertificateManagementClusterLookupClientCertificateResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSCertificateManagementClusterRemoveClientCertificateParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull ccdid ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSClientManagementClusterProvisionEndpointParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSData * _Nonnull hostname ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull port ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nonnull caid ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable ccdid ZGMTR_PROVISIONALLY_AVAILABLE;
+
+@property (nonatomic, copy) NSNumber * _Nullable endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSClientManagementClusterProvisionEndpointResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRTLSClientManagementClusterProvisionEndpointResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSClientManagementClusterFindEndpointParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSClientManagementClusterFindEndpointResponseParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) ZGMTRTLSClientManagementClusterTLSEndpointStruct * _Nonnull endpoint ZGMTR_PROVISIONALLY_AVAILABLE;
+
+/**
+ * Initialize an ZGMTRTLSClientManagementClusterFindEndpointResponseParams with a response-value dictionary
+ * of the sort that ZGMTRDeviceResponseHandler would receive.
+ *
+ * Will return nil and hand out an error if the response-value dictionary is not
+ * a command data response or is not the right command response.
+ *
+ * Will return nil and hand out an error if the data response does not match the known
+ * schema for this command.
+ */
+- (nullable instancetype)initWithResponseValue:(NSDictionary<NSString *, id> *)responseValue
+                                         error:(NSError * __autoreleasing *)error ZGMTR_PROVISIONALLY_AVAILABLE;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRTLSClientManagementClusterRemoveEndpointParams : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSNumber * _Nonnull endpointID ZGMTR_PROVISIONALLY_AVAILABLE;
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
 @end
 
 ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
@@ -11198,7 +16118,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11226,7 +16146,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestParams", ios(16.1, 16.4)
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11256,7 +16176,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11290,7 +16210,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestSpecificResponseParams",
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11309,7 +16229,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11337,7 +16257,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestNotHandledParams", ios(1
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11367,7 +16287,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11401,7 +16321,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestAddArgumentsResponsePara
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11420,7 +16340,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11448,7 +16368,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestSpecificParams", ios(16.
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11478,7 +16398,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11512,7 +16432,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestSimpleArgumentResponsePa
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11531,7 +16451,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11559,7 +16479,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestUnknownCommandParams", i
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11599,7 +16519,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11643,7 +16563,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestStructArrayArgumentRespo
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11666,7 +16586,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11698,7 +16618,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestAddArgumentsParams", ios
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11728,7 +16648,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11762,7 +16682,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestListInt8UReverseResponse
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11783,7 +16703,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11813,7 +16733,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestSimpleArgumentRequestPar
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11845,7 +16765,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11881,7 +16801,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestEnumsResponseParams", io
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11912,7 +16832,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11952,7 +16872,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestStructArrayArgumentReque
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -11988,7 +16908,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12028,7 +16948,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestNullableOptionalResponse
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12049,7 +16969,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12079,7 +16999,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestStructArgumentRequestPar
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12163,7 +17083,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12251,7 +17171,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestComplexNullableOptionalR
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12272,7 +17192,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12302,7 +17222,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestNestedStructArgumentRequ
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12332,7 +17252,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12366,7 +17286,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterBooleanResponseParams", ios(
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12387,7 +17307,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12417,7 +17337,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestListStructArgumentReques
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12447,7 +17367,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12481,7 +17401,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterSimpleStructResponseParams",
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12502,7 +17422,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12532,7 +17452,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestListInt8UArgumentRequest
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12562,7 +17482,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12596,7 +17516,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestEmitTestEventResponsePar
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12617,7 +17537,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12647,7 +17567,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestNestedStructListArgument
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12677,7 +17597,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12711,7 +17631,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestEmitTestFabricScopedEven
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12732,7 +17652,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12762,7 +17682,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestListNestedStructListArgu
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12811,7 +17731,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12841,7 +17761,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestListInt8UReverseRequestP
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12892,7 +17812,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12924,7 +17844,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestEnumsRequestParams", ios
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -12975,7 +17895,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13005,7 +17925,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestNullableOptionalRequestP
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13057,7 +17977,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13109,7 +18029,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestComplexNullableOptionalR
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13139,7 +18059,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13169,7 +18089,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterSimpleStructEchoRequestParam
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13197,7 +18117,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13225,7 +18145,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTimedInvokeRequestParams", i
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13255,7 +18175,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13285,7 +18205,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestSimpleOptionalArgumentRe
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13319,7 +18239,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13353,7 +18273,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestEmitTestEventRequestPara
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13383,7 +18303,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13413,7 +18333,7 @@ ZGMTR_DEPRECATED("Please use ZGMTRUnitTestingClusterTestEmitTestFabricScopedEven
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13447,7 +18367,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13481,7 +18401,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13511,7 +18431,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13543,7 +18463,35 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
+ * request) within the timeout window.
+ *
+ */
+@property (nonatomic, copy, nullable) NSNumber * timedInvokeTimeoutMs;
+
+/**
+ * Controls how much time, in seconds, we will allow for the server to process the command.
+ *
+ * The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes.
+ *
+ * If nil, the framework will try to select an appropriate timeout value itself.
+ */
+@property (nonatomic, copy, nullable) NSNumber * serverSideProcessingTimeout;
+@end
+
+ZGMTR_PROVISIONALLY_AVAILABLE
+@interface ZGMTRUnitTestingClusterTestCheckCommandFlagsParams : NSObject <NSCopying>
+/**
+ * Controls whether the command is a timed command (using Timed Invoke).
+ *
+ * If nil (the default value), a regular invoke is done for commands that do
+ * not require a timed invoke and a timed invoke with some default timed request
+ * timeout is done for commands that require a timed invoke.
+ *
+ * If not nil, a timed invoke is done, with the provided value used as the timed
+ * request timeout.  The value should be chosen small enough to provide the
+ * desired security properties but large enough that it will allow a round-trip
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13573,7 +18521,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13622,7 +18570,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */
@@ -13673,7 +18621,7 @@ ZGMTR_PROVISIONALLY_AVAILABLE
  * If not nil, a timed invoke is done, with the provided value used as the timed
  * request timeout.  The value should be chosen small enough to provide the
  * desired security properties but large enough that it will allow a round-trip
- * from the sever to the client (for the status response and actual invoke
+ * from the server to the client (for the status response and actual invoke
  * request) within the timeout window.
  *
  */

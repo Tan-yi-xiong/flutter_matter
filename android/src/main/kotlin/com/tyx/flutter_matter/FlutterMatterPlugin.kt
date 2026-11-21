@@ -22,16 +22,25 @@ class FlutterMatterPlugin: FlutterPlugin, MethodCallHandler {
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_matter")
     channel.setMethodCallHandler(this)
-    externalChannel = channel
+    engineSessions.register(this, channel)
+    if (!hasDeviceControllerLifecycleActivity()) {
+      externalChannel = channel
+    }
     globalContext = flutterPluginBinding.applicationContext
     ChipClient.getAndroidChipPlatform(flutterPluginBinding.applicationContext)
+  }
+
+  internal fun isAttachedToEngine(): Boolean = engineSessions.isRegistered(this)
+
+  internal fun useControllerChannel() {
+    externalChannel = channel
   }
 
   override fun onMethodCall(call: MethodCall, result: Result) {
     val uri = Uri.parse(call.method)
     when (uri.host?.lowercase()) {
       deviceControllerHost -> {
-        onDeviceControlCall(uri.path!!, call.arguments.toString(), result)
+        onDeviceControlCall(uri.path!!, call.arguments.toString(), result, this)
       }
       bleHost -> {
         onBLECall(uri.path!!, call.arguments.toString(), result)
@@ -50,10 +59,18 @@ class FlutterMatterPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
     channel.setMethodCallHandler(null)
+    val ownsController = isDeviceControllerOwnedBy(this)
+    val fallbackChannel = engineSessions.unregister(this)
+    if (externalChannel === channel) {
+      externalChannel = if (ownsController) null else fallbackChannel
+    }
+    scheduleDeviceControllerShutdownOnEngineDetach(this)
   }
 
   companion object {
     private const val TAG = "FlutterMatterPlugin"
+    private val engineSessions = EngineSessionRegistry<FlutterMatterPlugin, MethodChannel>()
+    @Volatile
     var externalChannel : MethodChannel? = null
     @SuppressLint("StaticFieldLeak")
     var globalContext: Context? = null

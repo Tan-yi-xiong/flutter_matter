@@ -1,42 +1,104 @@
 import 'dart:typed_data';
 
 import 'chip_path_id.dart';
+import 'json_decoding.dart';
 
 class InvokeElement {
-    final ChipPathId? endpointId;
-    final ChipPathId clusterId;
-    final ChipPathId commandId;
-    final int groupId;
-    final Uint8List? tlv;
-    final String? json;
+  final ChipPathId? endpointId;
+  final ChipPathId clusterId;
+  final ChipPathId commandId;
+  final int groupId;
+  final Uint8List? tlv;
+  final String? json;
 
-  InvokeElement({this.endpointId, required this.clusterId, required this.commandId, required this.groupId, this.tlv, this.json});
+  InvokeElement({
+    this.endpointId,
+    required this.clusterId,
+    required this.commandId,
+    required this.groupId,
+    this.tlv,
+    this.json,
+  });
 
-  factory InvokeElement.create(int endpointId, int clusterId, int commandId, Uint8List? tlv, String? json) {
+  InvokeElement._({
+    this.endpointId,
+    required this.clusterId,
+    required this.commandId,
+    required this.groupId,
+    this.tlv,
+    this.json,
+  });
+
+  factory InvokeElement.create(
+    int endpointId,
+    int clusterId,
+    int commandId,
+    Uint8List? tlv,
+    String? json,
+  ) {
     return InvokeElement(
       endpointId: ChipPathId.forId(endpointId),
       clusterId: ChipPathId.forId(clusterId),
       commandId: ChipPathId.forId(commandId),
       groupId: 0,
       tlv: tlv,
-      json: json
+      json: json,
     );
   }
 
-  toJson() => {
-    "endpointId": endpointId?.toJson(),
-    "clusterId": clusterId.toJson(),
-    "commandId": commandId.toJson(),
-    "groupId": groupId,
-    "tlv": tlv == null ? null : List.from(tlv!),
-    "json": json
-  };
+  InvokeElement.fromJson(jsonMap)
+      : this._(
+          endpointId: _decodeEndpointId(jsonMap),
+          clusterId: _decodePath(jsonMap, 'clusterId'),
+          commandId: _decodePath(jsonMap, 'commandId'),
+          groupId: _decodeGroupId(jsonMap),
+          tlv: _decodeTlv(jsonMap),
+          json: _decodeJsonStringField(jsonMap),
+        );
 
-  InvokeElement.fromJson(jsonMap):
-    endpointId = jsonMap['endpointId'] == null ? null : ChipPathId.fromJson(jsonMap['endpointId']),
-    clusterId = ChipPathId.fromJson(jsonMap['clusterId']),
-    commandId = ChipPathId.fromJson(jsonMap['commandId']),
-    groupId = jsonMap['groupId'] ?? 0,
-    tlv = jsonMap['tlv'] == null ? null : Uint8List.fromList(jsonMap['tlv'].cast<int>()),
-    json = jsonMap['json'];
- }
+  toJson() => {
+        'endpointId': endpointId?.toJson(),
+        'clusterId': clusterId.toJson(),
+        'commandId': commandId.toJson(),
+        'groupId': groupId,
+        'tlv': tlv == null ? null : List.from(tlv!),
+        'json': json,
+      };
+}
+
+ChipPathId? _decodeEndpointId(Object? jsonMap) {
+  final root = decodeJsonObject(jsonMap, 'InvokeElement');
+  final endpoint = root['endpointId'];
+  if (endpoint == null) {
+    return null;
+  }
+  return ChipPathId.fromJson(
+    decodeJsonObject(endpoint, 'InvokeElement.endpointId'),
+  );
+}
+
+ChipPathId _decodePath(Object? jsonMap, String field) {
+  final root = decodeJsonObject(jsonMap, 'InvokeElement');
+  return ChipPathId.fromJson(
+    decodeJsonObject(root[field], 'InvokeElement.$field'),
+  );
+}
+
+int _decodeGroupId(Object? jsonMap) {
+  final root = decodeJsonObject(jsonMap, 'InvokeElement');
+  return root['groupId'] == null
+      ? 0
+      : decodeJsonInt(root['groupId'], 'InvokeElement.groupId');
+}
+
+Uint8List? _decodeTlv(Object? jsonMap) {
+  final root = decodeJsonObject(jsonMap, 'InvokeElement');
+  return root['tlv'] == null
+      ? null
+      : decodeJsonBytes(root['tlv'], 'InvokeElement.tlv');
+}
+
+String? _decodeJsonStringField(Object? jsonMap) {
+  final root = decodeJsonObject(jsonMap, 'InvokeElement');
+  return decodeJsonNullableString(root['json'], 'InvokeElement.json');
+}

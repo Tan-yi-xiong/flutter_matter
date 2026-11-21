@@ -8,17 +8,15 @@ import 'runner_state.dart';
 
 /// Controller identity material stays behind the adapter. The application only
 /// sees an opaque identity handle.
-enum ControllerIdentityPurpose { main, invalidSetupPasscode }
+enum ControllerIdentityPurpose { main }
 
 extension ControllerIdentityPurposeWire on ControllerIdentityPurpose {
   String get wireName => switch (this) {
     ControllerIdentityPurpose.main => 'main',
-    ControllerIdentityPurpose.invalidSetupPasscode => 'invalid_setup_passcode',
   };
 
   static ControllerIdentityPurpose parse(Object? value) => switch (value) {
     'main' => ControllerIdentityPurpose.main,
-    'invalid_setup_passcode' => ControllerIdentityPurpose.invalidSetupPasscode,
     _ => throw FormatException('Unknown controller identity purpose: $value'),
   };
 }
@@ -49,9 +47,9 @@ class ControllerIdentityRequest {
 abstract interface class ControllerIdentityPort {
   Future<ControllerIdentity> loadOrCreate(ControllerIdentityRequest request);
 
-  /// Disposes the live controller runtime for [request.purpose] while keeping
-  /// the persisted credentials, then rebuilds the runtime from those stored
-  /// credentials. Returns the restored identity.
+  /// Releases live operational state, closes the active runtime for
+  /// [request.purpose], and rebuilds it from persisted credentials under the
+  /// single-active controller lifecycle. Returns the restored identity.
   Future<ControllerIdentity> restart(ControllerIdentityRequest request);
 
   Future<void> reset(ControllerIdentityRequest request);

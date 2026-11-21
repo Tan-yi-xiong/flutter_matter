@@ -80,12 +80,16 @@ class MatterNsdMonitor extends ChangeNotifier {
       if (service.name != serviceName && serviceName.isNotEmpty) {
         return;
       }
+      final host = service.host;
+      if (host == null || host.trim().isEmpty) {
+        return;
+      }
       await chipMdnsCallback(
         NsdServiceInfo(
-          hostName: service.host ?? '',
+          hostName: host,
           serviceType: service.type,
           serviceName: service.name,
-          address: service.host ?? '',
+          address: host,
           port: service.port,
           attributes: service.attributes.map(
             (key, value) =>

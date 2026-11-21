@@ -1,23 +1,42 @@
 package com.tyx.flutter_matter
 
 import android.util.Base64
+import android.util.Log
 import chip.devicecontroller.AttestationTrustStoreDelegate
 import chip.devicecontroller.ChipDeviceController
 import chip.devicecontroller.DeviceAttestation
-import java.util.*
+import java.util.Arrays
 
 class ExampleAttestationTrustStoreDelegate(val chipDeviceController: ChipDeviceController) :
   AttestationTrustStoreDelegate {
 
-  private val paaCerts = arrayListOf(TEST_PAA_FFF1_Cert, TEST_PAA_NOVID_CERT)
+  private val paaCerts: List<ByteArray> by lazy {
+    listOf(TEST_PAA_FFF1_Cert, TEST_PAA_NOVID_CERT).mapNotNull { encodedCert ->
+      try {
+        Base64.decode(encodedCert, Base64.DEFAULT)
+      } catch (e: IllegalArgumentException) {
+        Log.e(TAG, "Unable to decode embedded test PAA certificate", e)
+        null
+      }
+    }
+  }
 
   override fun getProductAttestationAuthorityCert(skid: ByteArray): ByteArray? {
-    return paaCerts
-      .map { Base64.decode(it, Base64.DEFAULT) }
-      .firstOrNull { cert -> Arrays.equals(DeviceAttestation.extractSkidFromPaaCert(cert), skid) }
+    if (skid.isEmpty()) {
+      return null
+    }
+    return paaCerts.firstOrNull { cert ->
+      try {
+        Arrays.equals(DeviceAttestation.extractSkidFromPaaCert(cert), skid)
+      } catch (e: Exception) {
+        Log.e(TAG, "Unable to inspect embedded test PAA certificate", e)
+        false
+      }
+    }
   }
 
   companion object {
+    private const val TAG = "FlutterMatter.Attestation"
     const val TEST_PAA_FFF1_Cert =
       "MIIBvTCCAWSgAwIBAgIITqjoMYLUHBwwCgYIKoZIzj0EAwIwMDEYMBYGA1UEAwwP\n" +
         "TWF0dGVyIFRlc3QgUEFBMRQwEgYKKwYBBAGConwCAQwERkZGMTAgFw0yMTA2Mjgx\n" +

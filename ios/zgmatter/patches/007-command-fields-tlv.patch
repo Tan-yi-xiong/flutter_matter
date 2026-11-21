@@ -1,0 +1,74 @@
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.mm b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+index d9afb69..6c6924d 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.mm
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+@@ -39,6 +39,7 @@
+ 
+ #import "app/ConcreteAttributePath.h"
+ #import "app/ConcreteCommandPath.h"
++#import "app/MessageDef/CommandDataIB.h"
+ #import "app/ConcreteEventPath.h"
+ #import "app/StatusResponse.h"
+ #import "lib/core/CHIPError.h"
+@@ -823,6 +824,45 @@ BOOL MTRDataValueDictionaryIsWellFormed(MTRDeviceDataValueDictionary value)
+ // Callback type to pass data value as an NSObject
+ typedef void (*MTRDataValueDictionaryCallback)(void * context, id value);
+ 
++// ZG extension: decodable type that accepts pre-encoded command-field TLV
++// bytes (NSData) instead of a data-value dictionary.
++class MTRDataValueNSDataDecodableType {
++public:
++    MTRDataValueNSDataDecodableType()
++        : decodedObj(nil)
++    {
++    }
++    MTRDataValueNSDataDecodableType(id obj)
++        : decodedObj(obj)
++    {
++    }
++
++    CHIP_ERROR Decode(chip::TLV::TLVReader & data)
++    {
++        return CHIP_ERROR_DECODE_FAILED;
++    }
++
++    CHIP_ERROR Encode(chip::TLV::TLVWriter & writer, chip::TLV::Tag tag) const
++    {
++        if (decodedObj == nil) {
++            return CHIP_ERROR_DECODE_FAILED;
++        }
++        TLV::TLVReader reader;
++        reader.Init(AsByteSpan(decodedObj));
++        ReturnErrorOnFailure(reader.Next());
++        return writer.CopyContainer(TLV::ContextTag(app::CommandDataIB::Tag::kFields), reader);
++    }
++
++    static constexpr bool kIsFabricScoped = false;
++
++    static bool MustUseTimedInvoke() { return false; }
++
++    NSData * _Nullable GetDecodedObject() const { return decodedObj; }
++
++private:
++    NSData * _Nullable decodedObj;
++};
++
+ // Rename to be generic for decode and encode
+ class MTRDataValueDictionaryDecodableType {
+ public:
+@@ -1555,8 +1595,13 @@ - (void)_invokeCommandWithEndpointID:(NSNumber *)endpointID
+             auto commandSender = chip::Platform::MakeUnique<app::CommandSender>(decoder.get(), &exchangeManager, isTimedRequest);
+             VerifyOrReturnError(commandSender != nullptr, CHIP_ERROR_NO_MEMORY);
+ 
+-            ReturnErrorOnFailure(commandSender->AddRequestData(commandPath, MTRDataValueDictionaryDecodableType(commandFields),
+-                (timeoutMs == nil) ? NullOptional : Optional<uint16_t>([timeoutMs unsignedShortValue])));
++            if ([commandFields isKindOfClass:NSData.class]) {
++                ReturnErrorOnFailure(commandSender->AddRequestData(commandPath, MTRDataValueNSDataDecodableType(commandFields),
++                    (timeoutMs == nil) ? NullOptional : Optional<uint16_t>([timeoutMs unsignedShortValue])));
++            } else {
++                ReturnErrorOnFailure(commandSender->AddRequestData(commandPath, MTRDataValueDictionaryDecodableType(commandFields),
++                    (timeoutMs == nil) ? NullOptional : Optional<uint16_t>([timeoutMs unsignedShortValue])));
++            }
+ 
+             Optional<System::Clock::Timeout> invokeTimeout;
+             if (serverSideProcessingTimeout != nil) {

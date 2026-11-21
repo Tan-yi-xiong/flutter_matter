@@ -1,11 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_matter/flutter_matter.dart';
-import 'package:flutter_matter/flutter_matter_method_channel.dart';
 import 'package:flutter_matter/flutter_matter_platform_interface.dart';
+import 'package:flutter_matter/src/platform_transport_types.dart';
 import 'package:flutter_matter/src/callback_handler.dart';
 import 'package:flutter_matter/src/constant.dart';
 import 'package:flutter_matter/src/utils.dart';
@@ -19,6 +20,9 @@ import 'model/data_version_filter.dart';
 import 'model/invoke_element.dart';
 import 'model/node_state.dart';
 import 'model/status.dart';
+
+export 'exception.dart'
+    show ControllerLifecycleException, ControllerLifecycleFailure;
 
 const _hostName = 'devicecontroller';
 
@@ -129,15 +133,28 @@ class KeypairDelegateCallbackHandler extends CallbackHandler<KeypairDelegate> {
 
   @override
   onCallbackMethodCall(String methodName, arguments) {
-    matterPrint('$runtimeType onCallbackMethodCall $methodName $arguments');
-    final decodeArgs = jsonDecode(arguments);
-    KeypairDelegate? kd = handlers[decodeArgs['handle'].toString()];
+    final decoded = jsonDecode(arguments);
+    if (decoded is! Map) {
+      throw ArgumentError.value(
+        decoded,
+        'arguments',
+        'Keypair callback arguments must be a JSON object',
+      );
+    }
+    final decodeArgs = decoded;
+    final callbackContext = '$runtimeType.onCallbackMethodCall';
+    final handle = checkCallArgNotNull(
+      decodeArgs,
+      'handle',
+      context: callbackContext,
+    ).toString();
+    KeypairDelegate? kd = handlers[handle];
     if (kd == null) {
-      final errorMsg = "Not found delegate for handle: ${decodeArgs['handle']}";
-      matterPrint(errorMsg);
+      final errorMsg = 'Not found delegate for handle: $handle';
+      reportMatterError(callbackContext, StateError(errorMsg));
       return createPlatformCallExceptionResult(argsInvalid, errorMsg);
     }
-    matterPrint("$kd $methodName call");
+    matterPrint('$runtimeType $methodName call');
     switch (methodName) {
       case 'GeneratePrivateKey':
         kd.generatePrivateKey();
@@ -156,6 +173,11 @@ class KeypairDelegateCallbackHandler extends CallbackHandler<KeypairDelegate> {
         return createPlatformCallSuccessResult(
             successMsg:
                 jsonEncode({'certificateSigningRequest': List.from(csr)}));
+      default:
+        return createPlatformCallExceptionResult(
+          methodNoFound,
+          'Not found method $methodName',
+        );
     }
   }
 }
@@ -454,26 +476,6 @@ abstract class ConnectedDeviceCallback {
   void onConnected(Object? context);
 }
 
-final List<ChipDeviceController> _controls = [];
-
-ChipDeviceController? _findSameFarbicControl(ControllerParams params) {
-  for (var control in _controls) {
-    if (control.params.fabricId == params.fabricId &&
-        listEquals(control.params.rootCertificate, params.rootCertificate)) {
-      return control;
-    }
-  }
-  return null;
-}
-
-_saveControl(ChipDeviceController control) {
-  _controls.add(control);
-}
-
-_removeControl(ChipDeviceController control) {
-  _controls.remove(control);
-}
-
 /// Native controller configuration for one Matter fabric.
 ///
 /// Reuse the same [fabricId] and [rootCertificate] to reuse an existing
@@ -501,7 +503,6 @@ class ControllerParams extends TransportObject {
   final Uint8List? ipk;
   final int adminSubject;
   final bool enableServerInteractions;
-  final String setupURL;
   final int nodeId;
 
   ControllerParams({
@@ -523,7 +524,6 @@ class ControllerParams extends TransportObject {
     this.ipk,
     this.adminSubject = 0,
     this.enableServerInteractions = false,
-    this.setupURL = "",
     this.nodeId = kTestControllerNodeId,
   });
 
@@ -551,7 +551,6 @@ class ControllerParams extends TransportObject {
         "ipk": ipk,
         "adminSubject": adminSubject,
         "enableServerInteractions": enableServerInteractions,
-        "setupURL": setupURL,
         "nodeId": nodeId,
       };
 }
@@ -578,9 +577,9 @@ final defaultIpk = Uint8List.fromList([
 /// Stateful Matter controller for one fabric.
 ///
 /// A controller owns native commissioning and connection state. Keep it alive
-/// for the lifetime of the fabric session. Use [deleteDeviceController] when
-/// the native controller should be deleted, and [destroy] only to clear
-/// Dart-side handlers.
+/// for the lifetime of the fabric session. Prefer [close] for balanced release
+/// of an acquired controller. [deleteDeviceController] is a compatibility
+/// alias, while [destroy] performs local cleanup only.
 class ChipDeviceController implements MethodCallHandler {
   static const matchPathList = [
     'NOCChainIssuer',
@@ -597,7 +596,7 @@ class ChipDeviceController implements MethodCallHandler {
   final ControllerParams params;
   NOCChainIssuer? _nocChainIssuer;
   CompletionListener? _completionListener;
-  late MethodChannelFlutterMatter _channelFlutterMatter;
+  late FlutterMatterPlatform _channelFlutterMatter;
   final String? _platformDeviceControllerHandle;
   DeviceAttestationDelegate? deviceAttestationDelegate;
   String? _keypairDelegateHandleId;
@@ -608,18 +607,48 @@ class ChipDeviceController implements MethodCallHandler {
   final Map<String, ReportCallback> _reportCallbacks = {};
   final Map<String, WriteAttributesCallback> _writeAttributesCallback = {};
   final Map<String, ConnectedDeviceCallback> _connectedDeviceCallback = {};
+  final Completer<void> _closedCompleter = Completer<void>();
+  bool _isClosed = false;
 
   bool get isRunning => _isRunning;
 
+  /// Completes when this Dart handle is closed, destroyed, or superseded by a
+  /// controller switch.
+  ///
+  /// Completion is independent of native shutdown success. Await the future
+  /// returned by [close] or [deleteDeviceController] for that result.
+  Future<void> get closed => _closedCompleter.future;
+
   @override
   call(String method, arguments) {
-    matterPrint('DeviceController call: $method, arguments: $arguments');
+    if (_isClosed) {
+      return createPlatformCallExceptionResult(
+        argsInvalid,
+        'Controller is closed',
+      );
+    }
+    matterPrint('DeviceController call: $method');
     final uri = Uri.parse(method);
     final splitPaths = uri.path
         .split('/')
         .where((element) => element.trim().isNotEmpty)
         .toList();
-    final decodeArgs = jsonDecode(arguments);
+    if (splitPaths.length < 2) {
+      return createPlatformCallExceptionResult(
+        methodNoFound,
+        'Device controller callback path must include a callback type and method',
+      );
+    }
+    final decoded = jsonDecode(arguments);
+    if (decoded is! Map) {
+      throw ArgumentError.value(
+        decoded,
+        'arguments',
+        'Device controller callback arguments must be a JSON object',
+      );
+    }
+    final decodeArgs = decoded;
+    final callbackContext = '$runtimeType ${splitPaths.join('/')}';
     matterPrint("$runtimeType ${splitPaths.join('/')} call");
     ////// NOCChainIssuer //////
     if (splitPaths.firstOrNull == 'NOCChainIssuer') {
@@ -629,9 +658,11 @@ class ChipDeviceController implements MethodCallHandler {
       }
       switch (splitPaths[1]) {
         case "onNOCChainGenerationNeeded":
-          final csrInfoJson = checkCallArgNotNull(decodeArgs, 'csrInfo');
-          final attestationInfoJson =
-              checkCallArgNotNull(decodeArgs, 'attestationInfo');
+          final csrInfoJson = checkCallArgNotNull(decodeArgs, 'csrInfo',
+              context: callbackContext);
+          final attestationInfoJson = checkCallArgNotNull(
+              decodeArgs, 'attestationInfo',
+              context: callbackContext);
           _nocChainIssuer!.onNOCChainGenerationNeeded(
               decodeArgs['onNOCChainGenerationCompleteHandle'],
               CSRInfo.decode(csrInfoJson),
@@ -652,34 +683,44 @@ class ChipDeviceController implements MethodCallHandler {
           _completionListener!.onConnectDeviceComplete();
           return createPlatformCallSuccessResult();
         case 'onStatusUpdate':
-          _completionListener!
-              .onStatusUpdate(checkCallArgNotNull(decodeArgs, 'status'));
+          _completionListener!.onStatusUpdate(checkCallArgNotNull(
+              decodeArgs, 'status',
+              context: callbackContext));
           return createPlatformCallSuccessResult();
         case 'onPairingComplete':
-          _completionListener!
-              .onPairingComplete(checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!.onPairingComplete(checkCallArgNotNull(
+              decodeArgs, 'errorCode',
+              context: callbackContext));
           return createPlatformCallSuccessResult();
         case 'onPairingDeleted':
-          _completionListener!
-              .onPairingDeleted(checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!.onPairingDeleted(checkCallArgNotNull(
+              decodeArgs, 'errorCode',
+              context: callbackContext));
           return createPlatformCallSuccessResult();
         case 'onCommissioningComplete':
-          _completionListener!.onCommissioningComplete(decodeArgs["nodeId"],
-              checkCallArgNotNull(decodeArgs, 'errorCode'));
+          _completionListener!.onCommissioningComplete(
+              decodeArgs["nodeId"],
+              checkCallArgNotNull(decodeArgs, 'errorCode',
+                  context: callbackContext));
           return createPlatformCallSuccessResult();
         case 'onReadCommissioningInfo':
           _completionListener!.onReadCommissioningInfo(
-            checkCallArgNotNull(decodeArgs, 'vendorId'),
-            checkCallArgNotNull(decodeArgs, 'productId'),
-            checkCallArgNotNull(decodeArgs, 'wifiEndpointId'),
-            checkCallArgNotNull(decodeArgs, 'threadEndpointId'),
+            checkCallArgNotNull(decodeArgs, 'vendorId',
+                context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'productId',
+                context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'wifiEndpointId',
+                context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'threadEndpointId',
+                context: callbackContext),
           );
           return createPlatformCallSuccessResult();
         case 'onCommissioningStatusUpdate':
           _completionListener!.onCommissioningStatusUpdate(
-            checkCallArgNotNull(decodeArgs, 'nodeId'),
-            checkCallArgNotNull(decodeArgs, 'stage'),
-            checkCallArgNotNull(decodeArgs, 'errorCode'),
+            checkCallArgNotNull(decodeArgs, 'nodeId', context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'stage', context: callbackContext),
+            checkCallArgNotNull(decodeArgs, 'errorCode',
+                context: callbackContext),
           );
           return createPlatformCallSuccessResult();
         case 'onNotifyChipConnectionClosed':
@@ -689,12 +730,14 @@ class ChipDeviceController implements MethodCallHandler {
           // _completionListener!.onCloseBleComplete();
           return createPlatformCallSuccessResult();
         case 'onError':
-          _completionListener!
-              .onError(Exception(checkCallArgNotNull(decodeArgs, 'error')));
+          _completionListener!.onError(Exception(checkCallArgNotNull(
+              decodeArgs, 'error',
+              context: callbackContext)));
           return createPlatformCallSuccessResult();
         case 'onOpCSRGenerationComplete':
           _completionListener!.onOpCSRGenerationComplete(
-            toUint8List(checkCallArgNotNull(decodeArgs, 'csr')),
+            toUint8List(checkCallArgNotNull(decodeArgs, 'csr',
+                context: callbackContext)),
           );
           return createPlatformCallSuccessResult();
         case 'onICDRegistrationInfoRequired':
@@ -702,7 +745,8 @@ class ChipDeviceController implements MethodCallHandler {
           return createPlatformCallSuccessResult();
         case 'onICDRegistrationComplete':
           _completionListener!.onICDRegistrationComplete(
-            checkCallArgNotNull(decodeArgs, 'errorCode'),
+            checkCallArgNotNull(decodeArgs, 'errorCode',
+                context: callbackContext),
             decodeArgs['icdDeviceInfo'] == null
                 ? null
                 : ICDDeviceInfo.fromJson((decodeArgs['icdDeviceInfo'] as Map)
@@ -716,18 +760,21 @@ class ChipDeviceController implements MethodCallHandler {
       switch (splitPaths[1]) {
         case "onDeviceAttestationCompleted":
           deviceAttestationDelegate?.onDeviceAttestationCompleted(
-              checkCallArgNotNull(decodeArgs, "devicePtr"),
+              checkCallArgNotNull(decodeArgs, "devicePtr",
+                  context: callbackContext),
               decodeArgs["attestationInfo"] == null
                   ? null
                   : AttestationInfo.decode(decodeArgs["attestationInfo"]),
-              checkCallArgNotNull(decodeArgs, "errorCode"));
+              checkCallArgNotNull(decodeArgs, "errorCode",
+                  context: callbackContext));
           return createPlatformCallSuccessResult();
       }
     }
     ////// InvokeCallback //////
     else if (splitPaths.firstOrNull == 'InvokeCallback') {
-      String invokeCallbackPoint =
-          checkCallArgNotNull(decodeArgs, 'invokeCallbackPoint');
+      String invokeCallbackPoint = checkCallArgNotNull(
+          decodeArgs, 'invokeCallbackPoint',
+          context: callbackContext);
       final callback = _invokeCallbacks[invokeCallbackPoint];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -737,34 +784,37 @@ class ChipDeviceController implements MethodCallHandler {
         case "onDone":
           try {
             callback.onDone();
-          } catch (e) {
-            matterPrint('$runtimeType invoke callback onDone error $e');
+          } catch (e, s) {
+            reportMatterError('$runtimeType InvokeCallback.onDone', e, s);
           }
+          _invokeCallbacks.remove(invokeCallbackPoint);
           return createPlatformCallSuccessResult();
         case "onResponse":
           try {
             callback.onResponse(
-                InvokeElement.fromJson(
-                    checkCallArgNotNull(decodeArgs, "invokeElement")),
-                checkCallArgNotNull(decodeArgs, "successCode"));
-          } catch (e) {
-            matterPrint('$runtimeType invoke callback onResponse error $e');
+                InvokeElement.fromJson(checkCallArgNotNull(
+                    decodeArgs, "invokeElement", context: callbackContext)),
+                checkCallArgNotNull(decodeArgs, "successCode",
+                    context: callbackContext));
+          } catch (e, s) {
+            reportMatterError('$runtimeType InvokeCallback.onResponse', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback
-                .onError(Exception(checkCallArgNotNull(decodeArgs, "error")));
-          } catch (e) {
-            matterPrint('$runtimeType invoke callback onError error $e');
+            callback.onError(Exception(checkCallArgNotNull(decodeArgs, "error",
+                context: callbackContext)));
+          } catch (e, s) {
+            reportMatterError('$runtimeType InvokeCallback.onError', e, s);
           }
           return createPlatformCallSuccessResult();
       }
     }
     ///// SubscriptionCallback //////
     else if (splitPaths.firstOrNull == 'SubscriptionCallback') {
-      String subscriptionCallbackPoint =
-          checkCallArgNotNull(decodeArgs, 'subscriptionCallbackPoint');
+      String subscriptionCallbackPoint = checkCallArgNotNull(
+          decodeArgs, 'subscriptionCallbackPoint',
+          context: callbackContext);
       final callback = _subscriptionCallbacks[subscriptionCallbackPoint];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -773,34 +823,46 @@ class ChipDeviceController implements MethodCallHandler {
       switch (splitPaths[1]) {
         case "onSubscriptionEstablished":
           try {
-            callback.onSubscriptionEstablished(
-                checkCallArgNotNull(decodeArgs, 'subscriptionId'));
-          } catch (e) {
+            callback.onSubscriptionEstablished(checkCallArgNotNull(
+                decodeArgs, 'subscriptionId',
+                context: callbackContext));
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType SubscriptionCallback.onSubscriptionEstablished',
+              e,
+              s,
+            );
             return createPlatformCallExceptionResult(
-                argsInvalid, "Error in callback: $e");
+                argsInvalid, 'Subscription callback failed');
           }
-          break;
+          return createPlatformCallSuccessResult();
         case "onReport":
           try {
-            callback.onReport(NodeState.fromJson(
-                checkCallArgNotNull(decodeArgs, "nodeState")));
-          } catch (e) {
-            matterPrint('subscription callback onReport error $e');
+            callback.onReport(NodeState.fromJson(checkCallArgNotNull(
+                decodeArgs, "nodeState",
+                context: callbackContext)));
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType SubscriptionCallback.onReport', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(null, null,
-                Exception(checkCallArgNotNull(decodeArgs, "error")));
-          } catch (e) {
-            matterPrint('subscription callback onError error $e');
+            callback.onError(
+                null,
+                null,
+                Exception(checkCallArgNotNull(decodeArgs, "error",
+                    context: callbackContext)));
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType SubscriptionCallback.onError', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch (e) {
-            matterPrint('subscription callback onDone error $e');
+          } catch (e, s) {
+            reportMatterError('$runtimeType SubscriptionCallback.onDone', e, s);
           }
           _subscriptionCallbacks.remove(subscriptionCallbackPoint);
           return createPlatformCallSuccessResult();
@@ -808,8 +870,9 @@ class ChipDeviceController implements MethodCallHandler {
     }
     ///// ReportCallback //////
     else if (splitPaths.firstOrNull == 'ReportCallback') {
-      String reportCallbackPoint =
-          checkCallArgNotNull(decodeArgs, 'reportCallbackPoint');
+      String reportCallbackPoint = checkCallArgNotNull(
+          decodeArgs, 'reportCallbackPoint',
+          context: callbackContext);
       final callback = _reportCallbacks[reportCallbackPoint];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -818,26 +881,29 @@ class ChipDeviceController implements MethodCallHandler {
       switch (splitPaths[1]) {
         case "onReport":
           try {
-            callback.onReport(NodeState.fromJson(
-                checkCallArgNotNull(decodeArgs, "nodeState")));
+            callback.onReport(NodeState.fromJson(checkCallArgNotNull(
+                decodeArgs, "nodeState",
+                context: callbackContext)));
           } catch (e, s) {
-            matterPrint('ReportCallback onReport error $e');
-            print(s);
+            reportMatterError('$runtimeType ReportCallback.onReport', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(null, null,
-                Exception(checkCallArgNotNull(decodeArgs, "error")));
-          } catch (e) {
-            matterPrint('ReportCallback onError error $e');
+            callback.onError(
+                null,
+                null,
+                Exception(checkCallArgNotNull(decodeArgs, "error",
+                    context: callbackContext)));
+          } catch (e, s) {
+            reportMatterError('$runtimeType ReportCallback.onError', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch (e) {
-            matterPrint('ReportCallback onDone error $e');
+          } catch (e, s) {
+            reportMatterError('$runtimeType ReportCallback.onDone', e, s);
           }
           _reportCallbacks.remove(reportCallbackPoint);
           return createPlatformCallSuccessResult();
@@ -845,8 +911,9 @@ class ChipDeviceController implements MethodCallHandler {
     }
     ///// WriteAttributesCallback //////
     else if (splitPaths.firstOrNull == 'WriteAttributesCallback') {
-      String writeAttributesCallbackPoint =
-          checkCallArgNotNull(decodeArgs, 'writeAttributesCallbackPoint');
+      String writeAttributesCallbackPoint = checkCallArgNotNull(
+          decodeArgs, 'writeAttributesCallbackPoint',
+          context: callbackContext);
       final callback = _writeAttributesCallback[writeAttributesCallbackPoint];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -862,8 +929,9 @@ class ChipDeviceController implements MethodCallHandler {
                 decodeArgs["status"] == null
                     ? null
                     : Status.fromJson(decodeArgs["status"]));
-          } catch (e) {
-            matterPrint('WriteAttributesCallback onReport error $e');
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType WriteAttributesCallback.onResponse', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onError":
@@ -873,15 +941,17 @@ class ChipDeviceController implements MethodCallHandler {
                     ? null
                     : ChipAttributePath.fromJson(decodeArgs["attributePath"]),
                 Exception(decodeArgs['error'] ?? 'Unknown Error'));
-          } catch (e) {
-            matterPrint('WriteAttributesCallback onError error $e');
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType WriteAttributesCallback.onError', e, s);
           }
           return createPlatformCallSuccessResult();
         case "onDone":
           try {
             callback.onDone();
-          } catch (e) {
-            matterPrint('WriteAttributesCallback onDone error $e');
+          } catch (e, s) {
+            reportMatterError(
+                '$runtimeType WriteAttributesCallback.onDone', e, s);
           }
           _writeAttributesCallback.remove(writeAttributesCallbackPoint);
           return createPlatformCallSuccessResult();
@@ -889,7 +959,8 @@ class ChipDeviceController implements MethodCallHandler {
     }
     ///// ConnectedDeviceCallback /////
     else if (splitPaths.firstOrNull == "ConnectedDeviceCallback") {
-      String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle');
+      String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle',
+          context: callbackContext);
       final callback = _connectedDeviceCallback[callbackHandle];
       if (callback == null) {
         return createPlatformCallExceptionResult(
@@ -899,18 +970,24 @@ class ChipDeviceController implements MethodCallHandler {
         case "onDeviceConnected":
           try {
             callback.onConnected(decodeArgs['context']);
-          } catch (e) {
-            matterPrint(
-                'connected device callback onConnectionClosed error $e');
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType ConnectedDeviceCallback.onDeviceConnected',
+              e,
+              s,
+            );
           }
           _connectedDeviceCallback.remove(callbackHandle);
           return createPlatformCallSuccessResult();
         case "onConnectionFailure":
           try {
             callback.onError(Exception(decodeArgs['error'] ?? "Unknown error"));
-          } catch (e) {
-            matterPrint(
-                'connected device callback onDisconnectionError error $e');
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType ConnectedDeviceCallback.onConnectionFailure',
+              e,
+              s,
+            );
           }
           _connectedDeviceCallback.remove(callbackHandle);
           return createPlatformCallSuccessResult();
@@ -919,7 +996,8 @@ class ChipDeviceController implements MethodCallHandler {
 
     ///// OpenCommissioningCallback /////
     else if (splitPaths.firstOrNull == "OpenCommissioningCallback") {
-      String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle');
+      String callbackHandle = checkCallArgNotNull(decodeArgs, 'callbackHandle',
+          context: callbackContext);
       final callback = _openCommissioningCallbacks[callbackHandle];
       if (callback == null) {
         return createPlatformCallExceptionResult(argsInvalid,
@@ -930,22 +1008,34 @@ class ChipDeviceController implements MethodCallHandler {
           try {
             callback.onSuccess(
               decodeArgs['connectContext'],
-              checkCallArgNotNull(decodeArgs, 'manualPairingCode'),
-              checkCallArgNotNull(decodeArgs, 'qrCode'),
+              checkCallArgNotNull(decodeArgs, 'manualPairingCode',
+                  context: callbackContext),
+              checkCallArgNotNull(decodeArgs, 'qrCode',
+                  context: callbackContext),
             );
-          } catch (e) {
-            matterPrint(
-                'open commissioning callback onOpenCommissioningWindow error $e');
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType OpenCommissioningCallback.onSuccess',
+              e,
+              s,
+            );
           }
+          _openCommissioningCallbacks.remove(callbackHandle);
           return createPlatformCallSuccessResult();
         case "onError":
           try {
-            callback.onError(checkCallArgNotNull(decodeArgs, "status") as int,
+            callback.onError(
+                checkCallArgNotNull(decodeArgs, "status",
+                    context: callbackContext) as int,
                 decodeArgs['connectContext']);
-          } catch (e) {
-            matterPrint(
-                'open commissioning callback onOpenCommissioningWindow error $e');
+          } catch (e, s) {
+            reportMatterError(
+              '$runtimeType OpenCommissioningCallback.onError',
+              e,
+              s,
+            );
           }
+          _openCommissioningCallbacks.remove(callbackHandle);
           return createPlatformCallSuccessResult();
       }
     }
@@ -957,6 +1047,9 @@ class ChipDeviceController implements MethodCallHandler {
 
   @override
   bool match(String method, arguments) {
+    if (_isClosed) {
+      return false;
+    }
     try {
       final uri = Uri.parse(method);
       final splitPaths = uri.path
@@ -967,19 +1060,17 @@ class ChipDeviceController implements MethodCallHandler {
       final isMatch = handleId == _platformDeviceControllerHandle &&
           uri.host == _hostName &&
           matchPathList.contains(splitPaths.firstOrNull);
-      matterPrint(
-          'ChipDeviceController($_platformDeviceControllerHandle) match $isMatch');
+      matterPrint('$runtimeType match $isMatch');
       return isMatch;
     } catch (e, s) {
-      matterPrint('$runtimeType match error $s');
+      reportMatterError('$runtimeType match', e, s);
     }
     return false;
   }
 
   ChipDeviceController._(this.params, this._platformDeviceControllerHandle,
       this._keypairDelegateHandleId) {
-    _channelFlutterMatter =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    _channelFlutterMatter = FlutterMatterPlatform.instance;
     _channelFlutterMatter.addHandler(this);
     _isRunning = true;
   }
@@ -991,51 +1082,106 @@ class ChipDeviceController implements MethodCallHandler {
   /// callbacks are in flight.
   static Future<ChipDeviceController> newControllerIfNotExist(
       ControllerParams params) async {
-    ChipDeviceController? controller = _findSameFarbicControl(params);
-    if (controller != null) {
-      return controller;
-    }
+    return ChipDeviceControllerManager.instance.acquire(params);
+  }
 
-    final channelFlutterMatter =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+  static Future<ChipDeviceController> _create(ControllerParams params) async {
+    final channelFlutterMatter = FlutterMatterPlatform.instance;
     String? keypairDelegateHandleId;
     if (params.keypairDelegate != null) {
       keypairDelegateHandleId =
           _keypairDelegateCallbackHandler.addHandler(params.keypairDelegate!);
     }
-    final result = await channelFlutterMatter.requestPlatform(
-        RequestPlatformParams(
-            methodName: createRequestPlatformUrl(_hostName, 'new').toString(),
-            methodParamsJson: params.encode()));
-    if (result.code != 0) {
-      throw Exception("newDeviceController failed(${result.code})");
+    try {
+      final result = await channelFlutterMatter.requestPlatform(
+          RequestPlatformParams(
+              methodName: createRequestPlatformUrl(_hostName, 'new').toString(),
+              methodParamsJson: params.encode()));
+      if (result.code != 0) {
+        throw CallPlatformException(
+          'newDeviceController failed with code ${result.code}',
+          code: result.code,
+          methodName: 'new',
+          details: const <String, Object?>{
+            'host': 'devicecontroller',
+            'category': 'platform-error',
+          },
+        );
+      }
+      final handle = result.jsonData[jsonKeyHandle];
+      if (handle is! String || handle.trim().isEmpty) {
+        throw ControllerLifecycleException(
+          ControllerLifecycleFailure.nativeStateConflict,
+          'Native controller creation succeeded without a usable handle',
+          methodName: 'new',
+        );
+      }
+      return ChipDeviceController._(params, handle, keypairDelegateHandleId);
+    } catch (e, s) {
+      // The native controller is not usable when creation fails. Remove only
+      // the handle registered for this attempt; the hashCode-based ID scheme
+      // itself remains unchanged.
+      if (keypairDelegateHandleId != null) {
+        _keypairDelegateCallbackHandler.removeHandler(keypairDelegateHandleId);
+      }
+      reportMatterError(
+        'ChipDeviceController.newControllerIfNotExist',
+        e,
+        s,
+      );
+      rethrow;
     }
-    matterPrint('newController ${result.jsonData}');
-    controller = ChipDeviceController._(
-        params, result.jsonData[jsonKeyHandle], keypairDelegateHandleId);
-    _saveControl(controller);
-    return controller;
+  }
+
+  /// Releases one acquisition of this controller.
+  ///
+  /// Repeated acquires for the same fabric identity return this object and
+  /// increment a manager-owned acquisition count. Each close releases exactly
+  /// one acquisition; only the final release invalidates this handle and asks
+  /// native code to delete the controller. Closing an already closed or
+  /// superseded handle throws [ControllerLifecycleFailure.closed].
+  Future<void> close() {
+    return ChipDeviceControllerManager.instance.release(this);
   }
 
   /// Removes Dart-side handlers and callback state without requesting native
   /// controller deletion.
   ///
-  /// Use [deleteDeviceController] when the native controller should also be
-  /// deleted.
+  /// The manager remembers the abandoned native handle. The next acquire first
+  /// deletes that abandoned handle and then creates a fresh controller. Use
+  /// [close] or [deleteDeviceController] when a balanced release should perform
+  /// native deletion immediately.
   void destroy() {
-    _channelFlutterMatter.removeHandler(this);
-    if (_keypairDelegateHandleId != null) {
-      _keypairDelegateCallbackHandler.removeHandler(_keypairDelegateHandleId!);
+    if (_isClosed) {
+      return;
     }
-    _invokeCallbacks.clear();
-    _subscriptionCallbacks.clear();
-    _reportCallbacks.clear();
-    _writeAttributesCallback.clear();
-    _removeControl(this);
-    _isRunning = false;
+    _markClosed();
+    ChipDeviceControllerManager.instance._controllerDestroyed(this);
   }
 
-  Future<Map<String, dynamic>?> _requestPlatform(
+  Future<Map<String, dynamic>> _requestPlatform(
+      String methodName, String methodParamsJson) async {
+    _ensureOpen(methodName);
+    final result = await _channelFlutterMatter.requestPlatform(
+        RequestPlatformParams(
+            methodName: createRequestPlatformUrl(_hostName, methodName),
+            methodParamsJson: methodParamsJson));
+    _ensureOpen(methodName);
+    if (result.code == 0) {
+      return result.jsonData;
+    }
+    throw CallPlatformException(
+      'Call $methodName failed with code ${result.code}',
+      code: result.code,
+      methodName: methodName,
+      details: const <String, Object?>{
+        'host': 'devicecontroller',
+        'category': 'platform-error',
+      },
+    );
+  }
+
+  Future<Map<String, dynamic>> _requestPlatformUnchecked(
       String methodName, String methodParamsJson) async {
     final result = await _channelFlutterMatter.requestPlatform(
         RequestPlatformParams(
@@ -1045,12 +1191,70 @@ class ChipDeviceController implements MethodCallHandler {
       return result.jsonData;
     }
     throw CallPlatformException(
-        "[${result.code}] Call $methodName params $methodParamsJson failed");
+      'Call $methodName failed with code ${result.code}',
+      code: result.code,
+      methodName: methodName,
+      details: const <String, Object?>{
+        'host': 'devicecontroller',
+        'category': 'platform-error',
+      },
+    );
+  }
+
+  void _ensureOpen(String operation) {
+    if (_isClosed) {
+      throw ControllerLifecycleException(
+        ControllerLifecycleFailure.closed,
+        'Controller is closed; cannot perform $operation',
+        methodName: operation,
+      );
+    }
+  }
+
+  void _markClosed() {
+    if (_isClosed) {
+      return;
+    }
+    _isClosed = true;
+    _isRunning = false;
+    _channelFlutterMatter.removeHandler(this);
+    if (_keypairDelegateHandleId != null) {
+      _keypairDelegateCallbackHandler.removeHandler(_keypairDelegateHandleId!);
+    }
+    _nocChainIssuer = null;
+    _completionListener = null;
+    deviceAttestationDelegate = null;
+    _invokeCallbacks.clear();
+    _subscriptionCallbacks.clear();
+    _reportCallbacks.clear();
+    _writeAttributesCallback.clear();
+    _connectedDeviceCallback.clear();
+    _openCommissioningCallbacks.clear();
+    if (!_closedCompleter.isCompleted) {
+      _closedCompleter.complete();
+    }
+  }
+
+  /// Handles a native request rejection and removes its pending callback.
+  ///
+  /// Cleanup is intentionally limited to the rejection path. A successful
+  /// response means native accepted an asynchronous operation and may still
+  /// invoke the callback later, so this must not run in `finally`.
+  void _handleRejectedRequest<T>(
+    Map<String, T> callbacks,
+    String callbackHandle,
+    String operation,
+    Object error,
+    StackTrace stackTrace,
+  ) {
+    reportMatterError(operation, error, stackTrace);
+    callbacks.remove(callbackHandle);
   }
 
   /// Sets this DeviceController to use the given issuer for issuing operational certs and verifying
   /// the DAC. By default, the DeviceController uses an internal, OperationalCredentialsDelegate
   Future<void> setNocChainIssuer(NOCChainIssuer nocChainIssuer) async {
+    _ensureOpen('setNocChainIssuer');
     _nocChainIssuer = nocChainIssuer;
     await _requestPlatform('setNocChainIssuer',
         jsonEncode({jsonKeyHandle: _platformDeviceControllerHandle}));
@@ -1061,6 +1265,7 @@ class ChipDeviceController implements MethodCallHandler {
   /// Prefer passing the listener directly to [pairDevice] when you have it
   /// available; use this method if you need to update the listener separately.
   Future<void> setCompletionListener(CompletionListener listener) async {
+    _ensureOpen('setCompletionListener');
     _completionListener = listener;
     await _requestPlatform('setCompletionListener',
         jsonEncode({jsonKeyHandle: _platformDeviceControllerHandle}));
@@ -1089,6 +1294,7 @@ class ChipDeviceController implements MethodCallHandler {
       String displayName = 'Flutter Matter', //only for iOS
       String ecosystemName = 'FlutterEcosystem' //only for iOS
       }) async {
+    _ensureOpen('pairDevice');
     if (setupPincode == null && onboardingPayload == null) {
       throw Exception("setupPincode or onboardingPayload must be provided");
     }
@@ -1112,7 +1318,7 @@ class ChipDeviceController implements MethodCallHandler {
           'setupPincode': setupPincode,
           'csrNonce': csrNonce == null ? null : List.from(csrNonce),
           'networkCredentials': networkCredentials.toJson(),
-          'attestationDelegate': attestationDelegate.hashCode.toString(),
+          'attestationDelegate': attestationDelegate?.hashCode.toString(),
           'failSafeExpiryTimeoutSecs': failSafeExpiryTimeoutSecs,
           'completionListener': completionListener?.hashCode.toString(),
           'onboardingPayload': onboardingPayload,
@@ -1138,6 +1344,7 @@ class ChipDeviceController implements MethodCallHandler {
     CompletionListener? completionListener,
     int failSafeExpiryTimeoutSecs = 60,
   }) async {
+    _ensureOpen('pairDeviceWithAddress');
     if (address.trim().isEmpty) {
       throw ArgumentError.value(address, 'address', 'Must not be empty');
     }
@@ -1171,7 +1378,7 @@ class ChipDeviceController implements MethodCallHandler {
         'discriminator': discriminator,
         'setupPincode': setupPincode,
         'csrNonce': csrNonce == null ? null : List.from(csrNonce),
-        'attestationDelegate': attestationDelegate.hashCode.toString(),
+        'attestationDelegate': attestationDelegate?.hashCode.toString(),
         'failSafeExpiryTimeoutSecs': failSafeExpiryTimeoutSecs,
         'completionListener': completionListener?.hashCode.toString(),
       }),
@@ -1194,8 +1401,7 @@ class ChipDeviceController implements MethodCallHandler {
   static Future<Uint8List> createRootCertificate(
       KeypairDelegate keypair, int issuerId, int? fabricId) async {
     final id = _keypairDelegateCallbackHandler.addHandler(keypair);
-    final channel =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channel = FlutterMatterPlatform.instance;
     final result = await channel
         .requestPlatform(RequestPlatformParams(
             methodName:
@@ -1210,9 +1416,17 @@ class ChipDeviceController implements MethodCallHandler {
       _keypairDelegateCallbackHandler.removeHandler(id);
     });
     if (result.code != 0) {
-      throw Exception("createRootCertificate failed(${result.code})");
+      throw CallPlatformException(
+        'createRootCertificate failed with code ${result.code}',
+        code: result.code,
+        methodName: 'createRootCertificate',
+        details: const <String, Object?>{
+          'host': 'devicecontroller',
+          'category': 'platform-error',
+        },
+      );
     }
-    return toUint8List(result.jsonData['data']);
+    return _platformBytesOrThrow(result.jsonData, 'createRootCertificate');
   }
 
   /// Create an X.509 DER encoded certificate that has the right fields to be a valid Matter
@@ -1225,8 +1439,7 @@ class ChipDeviceController implements MethodCallHandler {
       int nodeId,
       List<int>? caseAuthenticatedTags) async {
     final id = _keypairDelegateCallbackHandler.addHandler(signingKeypair);
-    final channel =
-        FlutterMatterPlatform.instance as MethodChannelFlutterMatter;
+    final channel = FlutterMatterPlatform.instance;
     final result = await channel
         .requestPlatform(RequestPlatformParams(
             methodName: createRequestPlatformUrl(
@@ -1246,9 +1459,18 @@ class ChipDeviceController implements MethodCallHandler {
       _keypairDelegateCallbackHandler.removeHandler(id);
     });
     if (result.code != 0) {
-      throw Exception("createOperationalCertificate failed(${result.code})");
+      throw CallPlatformException(
+        'createOperationalCertificate failed with code ${result.code}',
+        code: result.code,
+        methodName: 'createOperationalCertificate',
+        details: const <String, Object?>{
+          'host': 'devicecontroller',
+          'category': 'platform-error',
+        },
+      );
     }
-    return toUint8List(result.jsonData['data']);
+    return _platformBytesOrThrow(
+        result.jsonData, 'createOperationalCertificate');
   }
 
   /// Extract the public key from the given PKCS#10 certificate signing request. This is the public
@@ -1260,7 +1482,7 @@ class ChipDeviceController implements MethodCallHandler {
           jsonKeyHandle: _platformDeviceControllerHandle,
           'csr': List.from(csr)
         }));
-    return toUint8List(result!['data']);
+    return _platformBytesOrThrow(result, 'publicKeyFromCSR');
   }
 
   /// When a NOCChainIssuer is set for this controller, then onNOCChainGenerationNeeded will be
@@ -1276,7 +1498,15 @@ class ChipDeviceController implements MethodCallHandler {
           'onNOCChainGenerationCompleteHandle':
               onNOCChainGenerationCompleteHandle
         }));
-    return result!['data'] as int;
+    final data = result['data'];
+    if (data is! int) {
+      throw PlatformProtocolException(
+        'data must be an integer',
+        code: unHandlerException,
+        methodName: 'onNOCChainGeneration',
+      );
+    }
+    return data;
   }
 
   /// This function instructs the commissioner to proceed to the next stage of commissioning after
@@ -1306,27 +1536,27 @@ class ChipDeviceController implements MethodCallHandler {
   //   }));
   // }
 
-  /// Deletes the native controller and releases its Dart-side handler state.
+  /// Compatibility alias for [close].
+  ///
+  /// The final acquisition release deletes the native controller and clears
+  /// this handle. Earlier releases only decrement the acquisition count.
   Future<void> deleteDeviceController() async {
-    await _requestPlatform(
-        'deleteDeviceController',
-        jsonEncode({
-          jsonKeyHandle: _platformDeviceControllerHandle,
-        }));
-    destroy();
+    await close();
   }
 
   /// Sends an Interaction Model command to [nodeId].
   ///
   /// Responses and failures are delivered to [callback]. Pass
   /// [connectContext] from [connectedDevice] to reuse an existing CASE
-  /// connection. `timedRequestTimeoutMs` and `imTimeoutMs` use the native
-  /// defaults when set to zero.
+  /// connection. `timedRequestTimeoutMs` is the timed-invoke timeout and
+  /// `imTimeoutMs` overrides the Interaction Model timeout where the platform
+  /// supports it. A value of zero uses the native defaults.
   Future<void> invoke(
       InvokeCallback callback, int nodeId, InvokeElement invokeElement,
       {Object? connectContext,
       int timedRequestTimeoutMs = 0,
       int imTimeoutMs = 0}) async {
+    _ensureOpen('invoke');
     String callbackId = callback.hashCode.toString();
     _invokeCallbacks[callbackId] = callback;
     try {
@@ -1341,8 +1571,10 @@ class ChipDeviceController implements MethodCallHandler {
             'imTimeoutMs': imTimeoutMs,
             'connectContext': connectContext
           }));
-    } catch (e) {
-      _invokeCallbacks.remove(callbackId);
+    } catch (e, s) {
+      _handleRejectedRequest(
+          _invokeCallbacks, callbackId, '$runtimeType invoke', e, s);
+      rethrow;
     }
   }
 
@@ -1391,6 +1623,7 @@ class ChipDeviceController implements MethodCallHandler {
       int imTimeoutMs,
       int eventMin,
       {Object? connectContext}) async {
+    _ensureOpen('subscribe');
     String callbackHandle = callback.hashCode.toString();
     _subscriptionCallbacks[callbackHandle] = callback;
     try {
@@ -1413,8 +1646,9 @@ class ChipDeviceController implements MethodCallHandler {
             'connectContext': connectContext
           }));
     } catch (e, s) {
-      print(s);
-      _subscriptionCallbacks.remove(callbackHandle);
+      _handleRejectedRequest(_subscriptionCallbacks, callbackHandle,
+          '$runtimeType subscribe', e, s);
+      rethrow;
     }
   }
 
@@ -1454,6 +1688,7 @@ class ChipDeviceController implements MethodCallHandler {
       int imTimeoutMs,
       int eventMin,
       {Object? connectContext}) async {
+    _ensureOpen('read');
     String callbackHandle = callback.hashCode.toString();
     _reportCallbacks[callbackHandle] = callback;
     try {
@@ -1473,8 +1708,9 @@ class ChipDeviceController implements MethodCallHandler {
             'connectContext': connectContext,
           }));
     } catch (e, s) {
-      print(s);
-      _reportCallbacks.remove(callbackHandle);
+      _handleRejectedRequest(
+          _reportCallbacks, callbackHandle, '$runtimeType read', e, s);
+      rethrow;
     }
   }
 
@@ -1491,6 +1727,7 @@ class ChipDeviceController implements MethodCallHandler {
       int timedRequestTimeoutMs,
       int imTimeoutMs,
       {Object? connectContext}) async {
+    _ensureOpen('write');
     String callbackHandle = callback.hashCode.toString();
     _writeAttributesCallback[callbackHandle] = callback;
     try {
@@ -1507,8 +1744,9 @@ class ChipDeviceController implements MethodCallHandler {
             'connectContext': connectContext,
           }));
     } catch (e, s) {
-      print(s);
-      _writeAttributesCallback.remove(callbackHandle);
+      _handleRejectedRequest(
+          _writeAttributesCallback, callbackHandle, '$runtimeType write', e, s);
+      rethrow;
     }
   }
 
@@ -1519,6 +1757,7 @@ class ChipDeviceController implements MethodCallHandler {
   /// context with [releaseConnectContext] when the session ends.
   Future<void> connectedDevice(int nodeId, ConnectedDeviceCallback callback,
       {Object? connectContext}) async {
+    _ensureOpen('connectedDevice');
     String callbackHandle = callback.hashCode.toString();
     _connectedDeviceCallback[callbackHandle] = callback;
     try {
@@ -1530,9 +1769,10 @@ class ChipDeviceController implements MethodCallHandler {
             'callbackHandle': callbackHandle,
             'connectContext': connectContext,
           }));
-    } catch (e) {
-      matterPrint('$e');
-      _connectedDeviceCallback.remove(callbackHandle);
+    } catch (e, s) {
+      _handleRejectedRequest(_connectedDeviceCallback, callbackHandle,
+          '$runtimeType connectedDevice', e, s);
+      rethrow;
     }
   }
 
@@ -1551,12 +1791,21 @@ class ChipDeviceController implements MethodCallHandler {
   ///
   /// The pairing codes are delivered through [callback]. [duration] is in
   /// seconds. Callers must keep [callback] alive until it completes.
+  ///
+  /// This API is deprecated because platform implementations may not match the
+  /// expected commissioning-window semantics. Verify the behavior on each
+  /// target platform before relying on it.
+  @Deprecated(
+    'Platform-specific behavior may not match the expected commissioning-window '
+    'semantics; verify each target platform before use.',
+  )
   Future<bool> openPairingWindowWithPIN(
       Object connectContext,
       int duration,
       int discriminator,
       int setupPIN,
       OpenCommissioningCallback callback) async {
+    _ensureOpen('openPairingWindowWithPIN');
     final callbackId = callback.hashCode.toString();
     _openCommissioningCallbacks[callbackId] = callback;
     try {
@@ -1570,8 +1819,11 @@ class ChipDeviceController implements MethodCallHandler {
             'setupPIN': setupPIN,
             'callbackHandle': callbackId
           }));
-      return result?['data'] == true;
-    } catch (e) {
+      return result['data'] == true;
+    } on ControllerLifecycleException {
+      rethrow;
+    } catch (e, s) {
+      reportMatterError('$runtimeType openPairingWindowWithPIN', e, s);
       _openCommissioningCallbacks.remove(callbackId);
     }
     return false;
@@ -1586,8 +1838,11 @@ class ChipDeviceController implements MethodCallHandler {
           jsonEncode({
             jsonKeyHandle: _platformDeviceControllerHandle,
           }));
-      return result?['data'];
-    } catch (e) {
+      return result['data'];
+    } on ControllerLifecycleException {
+      rethrow;
+    } catch (e, s) {
+      reportMatterError('$runtimeType getFabricIndex', e, s);
       return null;
     }
   }
@@ -1607,9 +1862,327 @@ class ChipDeviceController implements MethodCallHandler {
             "nodeId": nodeId,
             "subscriptionId": subscriptionId,
           }));
-      return result?['data'] == true;
-    } catch (e) {
+      return result['data'] == true;
+    } on ControllerLifecycleException {
+      rethrow;
+    } catch (e, s) {
+      reportMatterError('$runtimeType unSubscription', e, s);
       return false;
     }
+  }
+}
+
+enum _ControllerManagerPhase {
+  idle,
+  active,
+  switching,
+  shuttingDown,
+  poisoned,
+}
+
+/// Process-wide owner of the single active native Matter controller.
+///
+/// The manager serializes acquisition and shutdown so two controller
+/// constructions can never overlap. Repeating [acquire] for the same
+/// [ControllerParams.fabricId] and [ControllerParams.rootCertificate] returns
+/// the same [ChipDeviceController] and increments its acquisition count.
+/// Requesting a different identity closes the old handle, performs native
+/// deletion, and only then creates the replacement.
+///
+/// Queued acquire, release, and close operations execute in invocation order.
+/// Switching or closing a handle invalidates every outstanding acquisition of
+/// that object; a later acquire for the old identity creates a new object with
+/// a fresh count. [ChipDeviceController.destroy] is synchronous and local-only,
+/// so it invalidates immediately: a release queued before it then fails as
+/// closed, while a queued acquire cleans up the abandoned native handle.
+class ChipDeviceControllerManager {
+  ChipDeviceControllerManager._();
+
+  /// The process-wide controller lifecycle manager.
+  static final ChipDeviceControllerManager instance =
+      ChipDeviceControllerManager._();
+
+  ChipDeviceController? _active;
+  ChipDeviceController? _abandoned;
+  int _acquisitionCount = 0;
+  _ControllerManagerPhase _phase = _ControllerManagerPhase.idle;
+  ControllerLifecycleException? _poison;
+  Future<void> _operationTail = Future<void>.value();
+
+  /// The controller currently owning the native slot.
+  ///
+  /// Returns `null` while creating, switching, shutting down, poisoned, or
+  /// after the active handle has closed.
+  ChipDeviceController? get activeController {
+    final controller = _active;
+    if (_phase != _ControllerManagerPhase.active ||
+        controller == null ||
+        controller._isClosed) {
+      return null;
+    }
+    return controller;
+  }
+
+  /// Whether a live controller currently owns the native controller slot.
+  bool get hasActiveController => activeController != null;
+
+  /// Acquires the controller for [params], creating or switching when needed.
+  ///
+  /// Identical fabric identity requests share one Dart object. A different
+  /// identity immediately invalidates and closes the old handle before native
+  /// deletion starts, then creates the replacement after deletion succeeds.
+  Future<ChipDeviceController> acquire(ControllerParams params) {
+    return _serialize(() async {
+      _throwIfPoisoned('acquire');
+
+      final current = _active;
+      if (current != null &&
+          !current._isClosed &&
+          _sameIdentity(current.params, params)) {
+        _acquisitionCount++;
+        return current;
+      }
+
+      if (current != null) {
+        await _shutdownActive(current, _ControllerManagerPhase.switching);
+      } else if (_abandoned != null) {
+        await _shutdownAbandoned(_ControllerManagerPhase.switching);
+      }
+
+      _throwIfPoisoned('acquire');
+      _phase = _ControllerManagerPhase.switching;
+      try {
+        final controller = await ChipDeviceController._create(params);
+        _active = controller;
+        _acquisitionCount = 1;
+        _phase = _ControllerManagerPhase.active;
+        return controller;
+      } on ControllerLifecycleException catch (error, stackTrace) {
+        if (error.reason == ControllerLifecycleFailure.nativeStateConflict) {
+          _poisonControllerManager(
+            reason: ControllerLifecycleFailure.nativeStateConflict,
+            message: error.message,
+            operation: 'new',
+            error: error,
+            stackTrace: stackTrace,
+          );
+          throw _poison!;
+        }
+        _phase = _ControllerManagerPhase.idle;
+        rethrow;
+      } catch (_) {
+        _phase = _ControllerManagerPhase.idle;
+        rethrow;
+      }
+    });
+  }
+
+  /// Releases one acquisition of [controller].
+  ///
+  /// Only the final release invalidates the handle and requests native
+  /// deletion. Releasing a closed, superseded, or non-active controller throws
+  /// [ControllerLifecycleFailure.closed]. Each successful [acquire] must have
+  /// exactly one matching release or [ChipDeviceController.close] call.
+  Future<void> release(ChipDeviceController controller) {
+    return _serialize(() async {
+      _throwIfPoisoned('release');
+      final current = _active;
+      if (current == null ||
+          !identical(current, controller) ||
+          controller._isClosed) {
+        throw ControllerLifecycleException(
+          ControllerLifecycleFailure.closed,
+          'Controller is no longer active; cannot release it',
+          methodName: 'release',
+        );
+      }
+      if (_acquisitionCount <= 0) {
+        throw ControllerLifecycleException(
+          ControllerLifecycleFailure.nativeStateConflict,
+          'Controller acquisition count is invalid',
+          methodName: 'release',
+        );
+      }
+
+      _acquisitionCount--;
+      if (_acquisitionCount > 0) {
+        return;
+      }
+      await _shutdownActive(
+        controller,
+        _ControllerManagerPhase.shuttingDown,
+      );
+    });
+  }
+
+  /// Force-closes the active or abandoned controller and clears acquisitions.
+  ///
+  /// A successful call leaves the manager idle and reusable. Native shutdown
+  /// failure poisons the manager until process restart.
+  Future<void> closeAll() {
+    return _serialize(() async {
+      _throwIfPoisoned('closeAll');
+      _phase = _ControllerManagerPhase.shuttingDown;
+      final current = _active;
+      if (current != null) {
+        await _shutdownActive(current, _ControllerManagerPhase.shuttingDown);
+      } else if (_abandoned != null) {
+        await _shutdownAbandoned(_ControllerManagerPhase.shuttingDown);
+      }
+      if (_phase != _ControllerManagerPhase.poisoned) {
+        _phase = _ControllerManagerPhase.idle;
+      }
+    });
+  }
+
+  /// Records a local-only destroy so the next acquire can clean up native state.
+  void _controllerDestroyed(ChipDeviceController controller) {
+    if (identical(_active, controller)) {
+      _active = null;
+      _acquisitionCount = 0;
+      _abandoned = controller;
+      _phase = _ControllerManagerPhase.idle;
+      return;
+    }
+    if (identical(_abandoned, controller)) {
+      _acquisitionCount = 0;
+    }
+  }
+
+  Future<void> _shutdownActive(
+    ChipDeviceController controller,
+    _ControllerManagerPhase phase,
+  ) async {
+    _phase = phase;
+    _active = null;
+    _acquisitionCount = 0;
+    controller._markClosed();
+    try {
+      await controller._requestPlatformUnchecked(
+        'deleteDeviceController',
+        jsonEncode({jsonKeyHandle: controller._platformDeviceControllerHandle}),
+      );
+      _phase = _ControllerManagerPhase.idle;
+    } catch (error, stackTrace) {
+      _poisonControllerManager(
+        reason: ControllerLifecycleFailure.shutdownFailed,
+        message: 'Native controller shutdown failed; restart the process '
+            'before creating another controller',
+        operation: 'deleteDeviceController',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      throw _poison!;
+    }
+  }
+
+  Future<void> _shutdownAbandoned(_ControllerManagerPhase phase) async {
+    final controller = _abandoned!;
+    _abandoned = null;
+    _phase = phase;
+    try {
+      await controller._requestPlatformUnchecked(
+        'deleteDeviceController',
+        jsonEncode({jsonKeyHandle: controller._platformDeviceControllerHandle}),
+      );
+      _phase = _ControllerManagerPhase.idle;
+    } catch (error, stackTrace) {
+      _poisonControllerManager(
+        reason: ControllerLifecycleFailure.shutdownFailed,
+        message: 'Native controller shutdown failed; restart the process '
+            'before creating another controller',
+        operation: 'deleteDeviceController',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      throw _poison!;
+    }
+  }
+
+  void _poisonControllerManager({
+    required ControllerLifecycleFailure reason,
+    required String message,
+    required String operation,
+    required Object error,
+    required StackTrace stackTrace,
+  }) {
+    _active = null;
+    _abandoned = null;
+    _acquisitionCount = 0;
+    _phase = _ControllerManagerPhase.poisoned;
+    _poison = ControllerLifecycleException(
+      reason,
+      message,
+      methodName: operation,
+      cause: error,
+    );
+    reportMatterError(
+        'ChipDeviceControllerManager.$operation', error, stackTrace);
+  }
+
+  void _throwIfPoisoned(String operation) {
+    final poison = _poison;
+    if (poison == null) {
+      return;
+    }
+    throw ControllerLifecycleException(
+      poison.reason,
+      'Controller manager is poisoned by an earlier shutdown failure; cannot '
+      'perform $operation',
+      methodName: operation,
+      cause: poison.cause,
+    );
+  }
+
+  Future<T> _serialize<T>(Future<T> Function() operation) {
+    final completer = Completer<T>();
+    _operationTail = _operationTail.then((_) async {
+      try {
+        completer.complete(await operation());
+      } catch (error, stackTrace) {
+        completer.completeError(error, stackTrace);
+      }
+    });
+    return completer.future;
+  }
+
+  bool _sameIdentity(ControllerParams left, ControllerParams right) {
+    return left.fabricId == right.fabricId &&
+        listEquals(left.rootCertificate, right.rootCertificate);
+  }
+
+  /// Clears in-memory lifecycle state without issuing a native request.
+  ///
+  /// This is intentionally limited to tests that swap platform transports.
+  @visibleForTesting
+  void resetForTesting() {
+    _active?._markClosed();
+    _abandoned?._markClosed();
+    _active = null;
+    _abandoned = null;
+    _acquisitionCount = 0;
+    _phase = _ControllerManagerPhase.idle;
+    _poison = null;
+    _operationTail = Future<void>.value();
+  }
+}
+
+Uint8List _platformBytesOrThrow(
+  Map<String, dynamic> jsonData,
+  String methodName,
+) {
+  try {
+    final data = jsonData['data'];
+    if (data is! List) {
+      throw const FormatException('data must be a byte array');
+    }
+    return toUint8List(data);
+  } catch (error) {
+    throw PlatformProtocolException(
+      'data must be a byte array',
+      code: unHandlerException,
+      methodName: methodName,
+      cause: error,
+    );
   }
 }

@@ -23,7 +23,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Represents information relating to a certificate signing request for a Matter
+ * Represents information relating to a certificate signing request for a ZGMatter
  * operational certificate.
  */
 ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
@@ -98,7 +98,7 @@ ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 @end
 
 ZGMTR_DEPRECATED("Please use ZGMTROperationalCSRInfo", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
-@interface CSRInfo : NSObject
+@interface ZGCSRInfo : NSObject
 
 @property (nonatomic, copy) NSData * nonce;
 

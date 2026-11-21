@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * A representation of an endpoint implemented by an ZGMTRDeviceController.
+ *
+ * ZGMTRServerEndpoint's API can be accessed from any thread.
  */
 NS_SWIFT_SENDABLE
 ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
@@ -62,9 +64,9 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  */
 - (BOOL)addServerCluster:(ZGMTRServerCluster *)serverCluster;
 
-@property (nonatomic, copy, readonly) NSNumber * endpointID;
+@property (atomic, copy, readonly) NSNumber * endpointID;
 
-@property (nonatomic, copy, readonly) NSArray<ZGMTRDeviceTypeRevision *> * deviceTypes;
+@property (atomic, copy, readonly) NSArray<ZGMTRDeviceTypeRevision *> * deviceTypes;
 
 /**
  * The list of entities that are allowed to access all clusters on this
@@ -73,7 +75,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  *
  * Defaults to empty list, which means no access granted.
  */
-@property (nonatomic, copy, readonly) NSArray<ZGMTRAccessGrant *> * accessGrants;
+@property (atomic, copy, readonly) NSArray<ZGMTRAccessGrant *> * accessGrants;
 
 /**
  * A list of server clusters supported on this endpoint.  The Descriptor cluster
@@ -82,7 +84,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * grants.  If not included, the Descriptor cluster will be generated
  * automatically.
  */
-@property (nonatomic, copy, readonly) NSArray<ZGMTRServerCluster *> * serverClusters;
+@property (atomic, copy, readonly) NSArray<ZGMTRServerCluster *> * serverClusters;
 
 @end
 

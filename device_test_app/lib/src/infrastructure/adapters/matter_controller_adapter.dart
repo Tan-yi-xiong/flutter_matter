@@ -71,6 +71,7 @@ class MatterControllerAdapter
         .where((entry) => entry.value.purpose == request.purpose)
         .map((entry) => entry.key)
         .toSet();
+    await _releaseConnectionsForIdentities(removedIdentities);
     await _cancelSubscriptionsForIdentities(removedIdentities);
     try {
       final runtime = await _runtimeProvider.restart(request);
@@ -703,6 +704,29 @@ class MatterControllerAdapter
         if (!ignoreErrors) {
           rethrow;
         }
+      } finally {
+        _connections.remove(handle.lease.opaqueId);
+      }
+    }
+  }
+
+  Future<void> _releaseConnectionsForIdentities(
+    Set<String> identityOpaqueIds,
+  ) async {
+    if (identityOpaqueIds.isEmpty) {
+      return;
+    }
+    final matching = _connections.values
+        .where((handle) => identityOpaqueIds.contains(handle.identityOpaqueId))
+        .toList(growable: false);
+    await _cancelSubscriptionsForConnections(
+      matching.map((handle) => handle.lease.opaqueId).toSet(),
+    );
+    for (final handle in matching) {
+      try {
+        await handle.runtime.controller.releaseConnection(
+          handle.matterConnection,
+        );
       } finally {
         _connections.remove(handle.lease.opaqueId);
       }

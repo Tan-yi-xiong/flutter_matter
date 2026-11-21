@@ -21,6 +21,7 @@
 
 #import <ZGMatter/ZGMTRAccessGrant.h>
 #import <ZGMatter/ZGMTRAsyncCallbackWorkQueue.h>
+#import <ZGMatter/ZGMTRAttributeValueWaiter.h>
 #import <ZGMatter/ZGMTRBackwardsCompatShims.h>
 #import <ZGMatter/ZGMTRBaseClusters.h>
 #import <ZGMatter/ZGMTRBaseDevice.h>
@@ -33,8 +34,12 @@
 #import <ZGMatter/ZGMTRClusterStateCacheContainer.h>
 #import <ZGMatter/ZGMTRClusters.h>
 #import <ZGMatter/ZGMTRCommandPayloadsObjc.h>
+#import <ZGMatter/ZGMTRCommandWithRequiredResponse.h>
 #import <ZGMatter/ZGMTRCommissionableBrowserDelegate.h>
 #import <ZGMatter/ZGMTRCommissionableBrowserResult.h>
+#import <ZGMatter/ZGMTRCommissioneeInfo.h>
+#import <ZGMatter/ZGMTRCommissioningDelegate.h>
+#import <ZGMatter/ZGMTRCommissioningOperation.h>
 #import <ZGMatter/ZGMTRCommissioningParameters.h>
 #import <ZGMatter/ZGMTRDefines.h>
 #import <ZGMatter/ZGMTRDevice.h>
@@ -48,18 +53,22 @@
 #import <ZGMatter/ZGMTRDeviceControllerStartupParams.h>
 #import <ZGMatter/ZGMTRDeviceControllerStorageDelegate.h>
 #import <ZGMatter/ZGMTRDeviceStorageBehaviorConfiguration.h>
+#import <ZGMatter/ZGMTRDeviceType.h>
 #import <ZGMatter/ZGMTRDeviceTypeRevision.h>
 #import <ZGMatter/ZGMTRDiagnosticLogsType.h>
+#import <ZGMatter/ZGMTREndpointInfo.h>
 #import <ZGMatter/ZGMTRError.h>
 #import <ZGMatter/ZGMTRFabricInfo.h>
 #import <ZGMatter/ZGMTRKeypair.h>
 #import <ZGMatter/ZGMTRLogging.h>
 #import <ZGMatter/ZGMTRManualSetupPayloadParser.h>
 #import <ZGMatter/ZGMTRMetrics.h>
+#import <ZGMatter/ZGMTRNetworkInterfaceInfo.h>
 #import <ZGMatter/ZGMTROTAHeader.h>
 #import <ZGMatter/ZGMTROTAProviderDelegate.h>
 #import <ZGMatter/ZGMTROnboardingPayloadParser.h>
 #import <ZGMatter/ZGMTROperationalCertificateIssuer.h>
+#import <ZGMatter/ZGMTRProductIdentity.h>
 #import <ZGMatter/ZGMTRQRCodeSetupPayloadParser.h>
 #import <ZGMatter/ZGMTRServerAttribute.h>
 #import <ZGMatter/ZGMTRServerCluster.h>
@@ -71,9 +80,5 @@
 
 #import <ZGMatter/ZGMTRXPCClientProtocol.h>
 #import <ZGMatter/ZGMTRXPCServerProtocol.h>
-
-#import <ZGMatter/ZGMTRBleManager.h>
-#import <ZGMatter/ZGMTRBlePlatformDelegate.h>
-#import <ZGMatter/ZGTlv.h>
 
 #undef ZGMTR_INCLUDED_FROM_UMBRELLA_HEADER

@@ -27,6 +27,7 @@ typedef NS_OPTIONS(NSUInteger, ZGMTRDiscoveryCapabilities) {
     ZGMTRDiscoveryCapabilitiesSoftAP = 1 << 0, // Device supports WiFi softAP
     ZGMTRDiscoveryCapabilitiesBLE = 1 << 1, // Device supports BLE
     ZGMTRDiscoveryCapabilitiesOnNetwork = 1 << 2, // Device supports On Network setup
+    ZGMTRDiscoveryCapabilitiesNFC ZGMTR_PROVISIONALLY_AVAILABLE = 1 << 4, // Device supports NFC-based commissioning
 
     // Note: New values added here need to be included in ZGMTRDiscoveryCapabilitiesAsString()
 
@@ -51,7 +52,7 @@ typedef NS_ENUM(NSUInteger, ZGMTROptionalQRCodeInfoType) {
 /**
  * An optional information item present in the setup payload.
  *
- * Note that while the Matter specification allows elements containing
+ * Note that while the ZGMatter specification allows elements containing
  * arbitrary TLV data types, this implementation currently only supports
  * String and Int32 values.
  *
@@ -101,7 +102,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 @end
 
 /**
- * A Matter Onboarding Payload.
+ * A ZGMatter Onboarding Payload.
  *
  * It can be represented as a numeric Manual Pairing Code or as QR Code.
  * The QR Code format contains more information though, so creating a
@@ -119,6 +120,25 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * Returns nil if the payload is not valid.
  */
 - (nullable instancetype)initWithPayload:(NSString *)payload ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
+
+/**
+ * Whether this object represents a concatenated QR Code payload consisting
+ * of two or more underlying payloads. If YES, then:
+ *
+ * - The constituent payloads are exposed in the `subPayloads` property.
+ *
+ * - Properties other than `subPayloads` and `qrCodeString` (e.g. `vendorID`, `discriminator`)
+ *   are not relevant to a concatenated payload and should not be used. If accessed, they will
+ *   act as if the payload was not in fact concatenated, and return the relevant value associated
+ *   with the first sub-payload. Mutating such a property will discard the additional sub-payloads.
+ */
+@property (nonatomic, readonly, assign, getter=isConcatenated) BOOL concatenated ZGMTR_AVAILABLE(ios(26.2), macos(26.2), watchos(26.2), tvos(26.2));
+
+/**
+ * The individual constituent payloads, if the receiver represents a concatenated payload.
+ * @see concatenated
+ */
+@property (nonatomic, strong) NSArray<ZGMTRSetupPayload *> * subPayloads ZGMTR_AVAILABLE(ios(26.2), macos(26.2), watchos(26.2), tvos(26.2));
 
 @property (nonatomic, copy) NSNumber * version;
 @property (nonatomic, copy) NSNumber * vendorID;
@@ -173,12 +193,12 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 - (void)addOrReplaceVendorElement:(ZGMTROptionalQRCodeInfo *)element ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
 
 /**
- * Generate a random Matter-valid setup PIN.
+ * Generate a random ZGMatter-valid setup PIN.
  */
-+ (NSUInteger)generateRandomPIN;
++ (NSUInteger)generateRandomPIN ZGMTR_DEPRECATED("Please use generateRandomSetupPasscode", ios(16.1, 18.4), macos(13.0, 15.4), watchos(9.1, 11.4), tvos(16.1, 18.4));
 
 /**
- * Generate a random Matter-valid setup passcode.
+ * Generate a random ZGMatter-valid setup passcode.
  */
 + (NSNumber *)generateRandomSetupPasscode ZGMTR_AVAILABLE(ios(16.2), macos(13.1), watchos(9.2), tvos(16.2));
 
@@ -211,8 +231,17 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
  * - setupPasscode
  * - discriminator (must be long)
  * - discoveryCapabilities (not ZGMTRDiscoveryCapabilitiesUnknown)
+ *
+ * If this object represents a `concatenated` payload, then this property will
+ * include the QR Code strings of all the underlying `subPayloads.`
  */
 - (NSString * _Nullable)qrCodeString ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
+
+/**
+ * Check whether the provided setup passcode (represented as an unsigned
+ * integer) is a valid setup passcode.
+ */
++ (BOOL)isValidSetupPasscode:(NSNumber *)setupPasscode ZGMTR_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4));
 
 @end
 

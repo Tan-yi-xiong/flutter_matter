@@ -1,0 +1,66 @@
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.h b/src/darwin/Framework/CHIP/MTRBaseDevice.h
+index 71f6a9ce..bb992161 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.h
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.h
+@@ -568,6 +568,13 @@ MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
+                completion:(void (^)(NSURL * _Nullable url, NSError * _Nullable error))completion
+     MTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6));
+ 
++/**
++ * ZG extension: Shut down a subscription by its subscription ID and scoped node ID.
++ * Returns YES on success, NO on failure.
++ */
++- (BOOL)shutdownSubscription:(nonnull NSNumber *)subscriptionId scopedNodeId:(nonnull NSNumber *)scopedNodeId
++    MTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1));
++
+ @end
+ 
+ /**
+diff --git a/src/darwin/Framework/CHIP/MTRBaseDevice.mm b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+index d9afb696..d5ec9f67 100644
+--- a/src/darwin/Framework/CHIP/MTRBaseDevice.mm
++++ b/src/darwin/Framework/CHIP/MTRBaseDevice.mm
+@@ -60,6 +60,13 @@
+ 
+ #import <memory>
+ 
++@interface MTRDeviceController_Concrete (MTRBaseDevicePrivate)
++- (uint64_t)getFabricIndex;
++- (BOOL)syncRunOnWorkQueueWithBoolReturnValue:(BOOL (^)(void))block error:(NSError * __autoreleasing *)error;
++@end
++
++
++
+ using namespace chip;
+ using namespace chip::app;
+ using namespace chip::Protocols::InteractionModel;
+@@ -2291,9 +2298,29 @@
+ - (NSString *)description
+ {
+     return [NSString
+         stringWithFormat:@"<%@: %p, node: %016llX-%016llX (%llu)>", NSStringFromClass(self.class), self, _deviceController.compressedFabricID.unsignedLongLongValue, _nodeID, _nodeID];
+ }
+ 
++- (BOOL)shutdownSubscription:(nonnull NSNumber *)subscriptionId scopedNodeId:(nonnull NSNumber *)scopedNodeId
++{
++    __block BOOL result = NO;
++    auto * concreteController = self.concreteController;
++    if (concreteController == nil) {
++        MTR_LOG_ERROR("Unable to shutdown subscription: no concrete controller");
++        return NO;
++    }
++
++    [concreteController syncRunOnWorkQueueWithBoolReturnValue:^BOOL() {
++        CHIP_ERROR err = InteractionModelEngine::GetInstance()->ShutdownSubscription(
++            chip::ScopedNodeId(static_cast<chip::NodeId>([scopedNodeId unsignedLongLongValue]),
++                static_cast<chip::FabricIndex>([concreteController getFabricIndex])),
++            [subscriptionId unsignedIntValue]);
++        result = (err == CHIP_NO_ERROR);
++        return result;
++    } error:nil];
++    return result;
++}
++
+ @end
+ 
+ @implementation MTRBaseDevice (Deprecated)

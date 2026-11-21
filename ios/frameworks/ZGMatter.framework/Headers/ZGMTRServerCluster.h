@@ -88,7 +88,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 
 /**
  * Create a cluster description for the descriptor cluster.  This will set
- * clusterRevision to the current version implemented by Matter.framework.
+ * clusterRevision to the current version implemented by ZGMatter.framework.
  */
 + (ZGMTRServerCluster *)newDescriptorCluster;
 

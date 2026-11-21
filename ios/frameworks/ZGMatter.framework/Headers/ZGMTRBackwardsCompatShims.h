@@ -16,8 +16,10 @@
 
 #import <Foundation/Foundation.h>
 
+#import <ZGMatter/ZGMTRBaseClusters.h>
 #import <ZGMatter/ZGMTRCluster.h>
 #import <ZGMatter/ZGMTRClusterStateCacheContainer.h>
+#import <ZGMatter/ZGMTRClusters.h>
 #import <ZGMatter/ZGMTRCommandPayloadsObjc.h>
 #import <ZGMatter/ZGMTRDefines.h>
 #import <ZGMatter/ZGMTRStructsObjc.h>
@@ -168,27 +170,98 @@ typedef NS_ENUM(uint8_t, ZGMTROTASoftwareUpdateRequestorOTAUpdateState) {
  * SaturationMoveMode and SaturationStepMode.
  */
 typedef NS_ENUM(uint8_t, ZGMTRColorControlSaturationMoveMode) {
-    ZGMTRColorControlSaturationMoveModeStop ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
-        ZGMTR_NEWLY_DEPRECATED("Please use ZGMTRColorControlMoveModeStop")
+    ZGMTRColorControlSaturationMoveModeStop ZGMTR_DEPRECATED("Please use ZGMTRColorControlMoveModeStop", ios(16.1, 18.2), macos(13.0, 15.2), watchos(9.1, 11.2), tvos(16.1, 18.2))
     = 0x00,
-    ZGMTRColorControlSaturationMoveModeUp ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
-        ZGMTR_NEWLY_DEPRECATED("Please use ZGMTRColorControlMoveModeUp")
+    ZGMTRColorControlSaturationMoveModeUp ZGMTR_DEPRECATED("Please use ZGMTRColorControlMoveModeUp", ios(16.1, 18.2), macos(13.0, 15.2), watchos(9.1, 11.2), tvos(16.1, 18.2))
     = 0x01,
-    ZGMTRColorControlSaturationMoveModeDown ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
-        ZGMTR_NEWLY_DEPRECATED("Please use ZGMTRColorControlMoveModeDown")
+    ZGMTRColorControlSaturationMoveModeDown ZGMTR_DEPRECATED("Please use ZGMTRColorControlMoveModeDown", ios(16.1, 18.2), macos(13.0, 15.2), watchos(9.1, 11.2), tvos(16.1, 18.2))
     = 0x03,
-} ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
-    ZGMTR_NEWLY_DEPRECATED("Please use ZGMTRColorControlMoveMode");
+} ZGMTR_DEPRECATED("Please use ZGMTRColorControlMoveMode", ios(16.1, 18.2), macos(13.0, 15.2), watchos(9.1, 11.2), tvos(16.1, 18.2));
 
 typedef NS_ENUM(uint8_t, ZGMTRColorControlSaturationStepMode) {
-    ZGMTRColorControlSaturationStepModeUp ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
-        ZGMTR_NEWLY_DEPRECATED("Please use ZGMTRColorControlStepModeUp")
+    ZGMTRColorControlSaturationStepModeUp ZGMTR_DEPRECATED("Please use ZGMTRColorControlStepModeUp", ios(16.1, 18.2), macos(13.0, 15.2), watchos(9.1, 11.2), tvos(16.1, 18.2))
     = 0x01,
-    ZGMTRColorControlSaturationStepModeDown ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
-        ZGMTR_NEWLY_DEPRECATED("Please use ZGMTRColorControlStepModeDown")
+    ZGMTRColorControlSaturationStepModeDown ZGMTR_DEPRECATED("Please use ZGMTRColorControlStepModeDown", ios(16.1, 18.2), macos(13.0, 15.2), watchos(9.1, 11.2), tvos(16.1, 18.2))
     = 0x03,
-} ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
-    ZGMTR_NEWLY_DEPRECATED("Please use ZGMTRColorControlStepMode");
+} ZGMTR_DEPRECATED("Please use ZGMTRColorControlStepMode", ios(16.1, 18.2), macos(13.0, 15.2), watchos(9.1, 11.2), tvos(16.1, 18.2));
+
+#pragma mark - Color Control attributes that used to be writable but were switched to readonly.
+
+@interface ZGMTRBaseClusterColorControl (AttributesNowReadonly)
+
+- (void)writeAttributeWhitePointXWithValue:(NSNumber * _Nonnull)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeWhitePointXWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeWhitePointYWithValue:(NSNumber * _Nonnull)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeWhitePointYWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointRXWithValue:(NSNumber * _Nonnull)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointRXWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointRYWithValue:(NSNumber * _Nonnull)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointRYWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointRIntensityWithValue:(NSNumber * _Nullable)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointRIntensityWithValue:(NSNumber * _Nullable)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointGXWithValue:(NSNumber * _Nonnull)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointGXWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointGYWithValue:(NSNumber * _Nonnull)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointGYWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointGIntensityWithValue:(NSNumber * _Nullable)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointGIntensityWithValue:(NSNumber * _Nullable)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointBXWithValue:(NSNumber * _Nonnull)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointBXWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointBYWithValue:(NSNumber * _Nonnull)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointBYWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointBIntensityWithValue:(NSNumber * _Nullable)value completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeColorPointBIntensityWithValue:(NSNumber * _Nullable)value params:(ZGMTRWriteParams * _Nullable)params completion:(ZGMTRStatusCompletion)completion ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.4, 26.1), macos(13.3, 26.1), watchos(9.4, 26.1), tvos(16.4, 26.1));
+- (void)writeAttributeWhitePointXWithValue:(NSNumber * _Nonnull)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeWhitePointXWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeWhitePointXWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeWhitePointXWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeWhitePointYWithValue:(NSNumber * _Nonnull)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeWhitePointYWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeWhitePointYWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeWhitePointYWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointRXWithValue:(NSNumber * _Nonnull)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointRXWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointRXWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointRXWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointRYWithValue:(NSNumber * _Nonnull)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointRYWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointRYWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointRYWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointRIntensityWithValue:(NSNumber * _Nullable)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointRIntensityWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointRIntensityWithValue:(NSNumber * _Nullable)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointRIntensityWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointGXWithValue:(NSNumber * _Nonnull)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointGXWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointGXWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointGXWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointGYWithValue:(NSNumber * _Nonnull)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointGYWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointGYWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointGYWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointGIntensityWithValue:(NSNumber * _Nullable)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointGIntensityWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointGIntensityWithValue:(NSNumber * _Nullable)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointGIntensityWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointBXWithValue:(NSNumber * _Nonnull)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointBXWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointBXWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointBXWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointBYWithValue:(NSNumber * _Nonnull)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointBYWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointBYWithValue:(NSNumber * _Nonnull)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointBYWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointBIntensityWithValue:(NSNumber * _Nullable)value completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointBIntensityWithValue:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+- (void)writeAttributeColorPointBIntensityWithValue:(NSNumber * _Nullable)value params:(ZGMTRWriteParams * _Nullable)params completionHandler:(ZGMTRStatusCompletion)completionHandler ZGMTR_DEPRECATED("Please use writeAttributeColorPointBIntensityWithValue:params:completion:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+
+@end
+
+@interface ZGMTRClusterColorControl (AttributesNowReadonly)
+
+- (void)writeAttributeWhitePointXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeWhitePointXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeWhitePointYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeWhitePointYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointRXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointRXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointRYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointRYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointRIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointRIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointGXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointGXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointGYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointGYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointGIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointGIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointBXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointBXWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointBYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointBYWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointBIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+- (void)writeAttributeColorPointBIntensityWithValue:(NSDictionary<NSString *, id> *)dataValueDictionary expectedValueInterval:(NSNumber *)expectedValueIntervalMs params:(ZGMTRWriteParams * _Nullable)params ZGMTR_DEPRECATED("This attribute is no longer writable in the ZGMatter standard", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+
+@end
 
 #pragma mark - Clusters that were removed wholesale: OnOffSwitchConfiguration
 

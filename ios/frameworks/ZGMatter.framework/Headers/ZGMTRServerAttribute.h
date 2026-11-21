@@ -38,7 +38,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
  * Initialize as a readonly attribute.  The value is a data-value as documented
  * in ZGMTRBaseDevice.h.
  *
- * Will fail if the attribute ID is not valid per the Matter specification or
+ * Will fail if the attribute ID is not valid per the ZGMatter specification or
  * the attribute value is not a valid data-value.
  *
  * requiredPrivilege is the privilege required to read the attribute. This

@@ -29,6 +29,10 @@ void main() {
           fixture.controllerFactory.params!.rootCertificate,
           fixture.certificateIssuer.rootCertificate,
         );
+        expect(
+          fixture.controllerFactory.params!.intermediateCertificate,
+          isEmpty,
+        );
       },
     );
 
@@ -80,6 +84,8 @@ void main() {
       final operationalCertificateCreated = Completer<void>();
       fixture.certificateIssuer.operationalCertificateCreated =
           operationalCertificateCreated;
+      final nocChainGenerationCreated = Completer<void>();
+      fixture.controller.nocChainGenerationCreated = nocChainGenerationCreated;
       fixture.controller.nocChainIssuer!.onNOCChainGenerationNeeded(
         'completion-handle',
         CSRInfo(
@@ -102,10 +108,15 @@ void main() {
         ),
       );
       await operationalCertificateCreated.future;
+      await nocChainGenerationCreated.future;
 
       expect(
         fixture.certificateIssuer.operationalSigningKeypair,
         isNot(same(controllerIdentity)),
+      );
+      expect(
+        fixture.controller.nocChainGenerationParams!.intermediateCertificate,
+        isEmpty,
       );
     });
 
@@ -408,6 +419,8 @@ class _FakeMatterControllerPort implements MatterControllerPort {
   MatterPairDeviceRequest? pairRequest;
   MatterPairDeviceWithAddressRequest? pairWithAddressRequest;
   NOCChainIssuer? nocChainIssuer;
+  ControllerParams? nocChainGenerationParams;
+  Completer<void>? nocChainGenerationCreated;
   InvokeElement? lastInvokeElement;
   InvokeCallback? lastInvokeCallback;
   ChipAttributePath? lastReadPath;
@@ -497,6 +510,8 @@ class _FakeMatterControllerPort implements MatterControllerPort {
     ControllerParams params, {
     String? onNOCChainGenerationCompleteHandle,
   }) async {
+    nocChainGenerationParams = params;
+    nocChainGenerationCreated?.complete();
     return 0;
   }
 

@@ -27,7 +27,6 @@ typedef void (^SubscriptionEstablishedHandler)(void);
 
 typedef void (^ZGMTRStatusCompletion)(NSError * _Nullable error);
 typedef void (^ZGMTRSubscriptionEstablishedHandler)(void);
-typedef void (^ZGMTRSubscriptionEstablishedWithIdHandler)(NSNumber * _Nonnull subscriptionId);
 
 @class ZGMTRBaseDevice;
 @class ZGMTRDevice;

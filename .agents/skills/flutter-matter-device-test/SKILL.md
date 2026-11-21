@@ -223,7 +223,9 @@ If the prompt allows skipping or must be failed, use `skip_prompt` or `fail_prom
 
 ### `app_restart` behavior
 
-The `app_restart` case restarts the controller runtime in place: it disposes the live controller, rebuilds it from the persisted credentials, and verifies CASE reconnection without recommissioning. It is fully automatic and never prompts or waits for an app restart; there is no checkpoint and no resume path. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
+The `app_restart` case performs a controller-runtime rebuild: it releases established operational connections and subscriptions, closes the active runtime, reloads persisted credentials into a new runtime through the single-active controller lifecycle, and verifies CASE reconnection without recommissioning. The old native controller must finish shutting down before the replacement is created. The case is fully automatic and never prompts or waits for a process-level app restart; there is no checkpoint and no resume path. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
+
+The `invalid_setup_passcode` case reuses the active main controller after reopening the commissioning window. It keeps the public `invalid_setup_passcode` test ID but does not allocate a second controller identity.
 
 ## Step 7: Verify progress
 

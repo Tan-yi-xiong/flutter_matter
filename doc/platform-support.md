@@ -12,7 +12,7 @@ Use [Getting started](getting-started.md) for host-app setup, [Commissioning](co
 | Dart SDK | `>=3.3.3 <4.0.0` in `pubspec.yaml` |
 | Flutter SDK constraint | `>=3.3.0` in `pubspec.yaml` |
 | Validated Flutter version | 3.41.0 |
-| Android plugin | `minSdk 21`, `compileSdk 34`, JDK 17, Kotlin 1.7.10 |
+| Android plugin | `minSdk 21`, `compileSdk 34`, JDK 17, Kotlin 1.7.10, Matter 1.6.1 artifact `1.0.6` |
 | Example Android build | `minSdk 29`, `compileSdk 36`, Kotlin 2.4.0, Gradle 8.7, AGP 8.6.0 |
 | Device-test app Android | `minSdk 24`, `compileSdk 36`, arm64 |
 | iOS | 16.1 or later for the plugin and example |
@@ -31,6 +31,8 @@ export GOOGLE_MATTER_SDK_REPO=/absolute/path/to/home.android.sdk_1_11_1/repo
 Download `home.android.sdk_1_11_1.zip` from the [Google Home Android release notes](https://developers.home.google.com/apis/android/release-notes) and verify SHA-256 `9154ee88b3d93e7eafb85a1132043e281a14d1f60fc50913a4c230b34afafef4`. Do not commit the extracted SDK.
 
 The iOS minimum is 16.1 across the podspec, Podfile, framework metadata, and Xcode targets. A Flutter 3.41 device build without code signing has been validated with Xcode 26.3 and CocoaPods 1.17.0; Xcode 16.4 remains the documented minimum.
+
+The vendored framework is generated from a pinned official `connectedhomeip` commit by the reproducible pipeline in `ios/zgmatter/`. See [ZGMatter framework build](zgmatter-build.md) for the explicit source-path contract, patch workflow, and validation steps.
 
 ## Device and simulator policy
 
@@ -60,6 +62,8 @@ The iOS minimum is 16.1 across the podspec, Podfile, framework metadata, and Xco
 ## Verification boundary
 
 The required Dart workflow covers only the Dart layer. Native builds and Matter behavior are pull-request evidence, not CI results. Device-behavior changes require a `full` Run with a schema v4 report on every affected controller platform.
+
+Dart, Android, and iOS failure behavior follows the [Error handling](error-handling.md) contract. Native error-path changes require Android and iOS compile evidence even when the Dart gate is green.
 
 See [Contributing](../CONTRIBUTING.md), [Device validation](device-validation.md), and [Device test report contract](device-test-report.md).
 

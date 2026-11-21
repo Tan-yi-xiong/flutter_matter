@@ -31,12 +31,14 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 + (instancetype)new NS_UNAVAILABLE;
 
 /**
- * The vendor ID from the Device Attestation Certificate. May be nil only if attestation was unsuccessful.
+ * The vendor ID from the Device Attestation Certificate. May be nil only if
+ * attestation verification failed.
  */
 @property (nonatomic, readonly, nullable) NSNumber * vendorID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
- * The product ID from the Device Attestation Certificate. May be nil only if attestation was unsuccessful.
+ * The product ID from the Device Attestation Certificate. May be nil only if
+ * attestation verification failed.
  */
 @property (nonatomic, readonly, nullable) NSNumber * productID ZGMTR_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
@@ -56,7 +58,37 @@ ZGMTR_AVAILABLE(ios(16.1), macos(13.0), watchos(9.1), tvos(16.1))
 
 @property (nonatomic, readonly) ZGMTRCertificateDERBytes dacCertificate;
 @property (nonatomic, readonly) ZGMTRCertificateDERBytes dacPAICertificate;
-@property (nonatomic, readonly, nullable) NSData * certificateDeclaration;
+@property (nonatomic, readonly, nullable) NSData * certificateDeclaration ZGMTR_DEPRECATED_WITH_REPLACEMENT("certificationDeclaration", ios(16.1, 26.1), macos(13.0, 26.1), watchos(9.1, 26.1), tvos(16.1, 26.1));
+
+/**
+ * The attestation challenge from the secure session.
+ */
+@property (nonatomic, copy, readonly) NSData * attestationChallenge ZGMTR_AVAILABLE(ios(26.1), macos(26.1), watchos(26.1), tvos(26.1));
+
+/**
+ * The attestation nonce from the AttestationRequest command.
+ */
+@property (nonatomic, copy, readonly) NSData * attestationNonce ZGMTR_AVAILABLE(ios(26.1), macos(26.1), watchos(26.1), tvos(26.1));
+
+/**
+ * The TLV-encoded attestation_elements_message that was used to find the
+ * certificationDeclaration (possibly unsuccessfully).
+ */
+@property (nonatomic, copy, readonly) ZGMTRTLVBytes elementsTLV ZGMTR_AVAILABLE(ios(26.1), macos(26.1), watchos(26.1), tvos(26.1));
+
+/**
+ * The certification declaration of the device, if available.  This is a DER-encoded string
+ * representing a CMS-formatted certification declaration.  May be nil only if
+ * attestation verification failed.
+ */
+@property (nonatomic, copy, readonly, nullable) NSData * certificationDeclaration ZGMTR_AVAILABLE(ios(26.1), macos(26.1), watchos(26.1), tvos(26.1));
+
+/**
+ * A signature, using the device attestation private key of the device that sent
+ * the attestation information, over the concatenation of elementsTLV and
+ * attestationChallenge.
+ */
+@property (nonatomic, copy, readonly) NSData * elementsSignature ZGMTR_AVAILABLE(ios(26.1), macos(26.1), watchos(26.1), tvos(26.1));
 
 @end
 

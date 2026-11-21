@@ -19,6 +19,7 @@ import chip.platform.AndroidBleManager
 import chip.platform.BleCallback
 import java.util.UUID
 import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.channels.ProducerScope
 import kotlinx.coroutines.channels.awaitClose
@@ -27,10 +28,15 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeoutOrNull
 
+private class BluetoothScanException(message: String, cause: Throwable? = null) :
+  Exception(message, cause)
+
 @SuppressLint("MissingPermission")
 class BluetoothManager : BleCallback {
-  private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+  private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+  @Volatile
   private var bleGatt: BluetoothGatt? = null
+  @Volatile
   var connectionId = 0
     private set
 
@@ -61,35 +67,56 @@ class BluetoothManager : BleCallback {
     discriminator: Int,
     isShortDiscriminator: Boolean
   ): BluetoothDevice? {
-    if (!bluetoothAdapter.isEnabled) {
-      bluetoothAdapter.enable()
+    val adapter = bluetoothAdapter ?: run {
+      Log.e(TAG, "Bluetooth adapter is unavailable")
+      return null
+    }
+    if (!adapter.isEnabled && !adapter.enable()) {
+      Log.e(TAG, "Unable to enable Bluetooth adapter")
+      return null
     }
 
     val scanner =
-      bluetoothAdapter.bluetoothLeScanner
+      adapter.bluetoothLeScanner
         ?: run {
           Log.e(TAG, "No bluetooth scanner found")
           return null
         }
 
-    return withTimeoutOrNull(10000) {
-      callbackFlow {
+    return try {
+      withTimeoutOrNull(10000) {
+        callbackFlow {
+          val producerScope: ProducerScope<BluetoothDevice> = this@callbackFlow
           val scanCallback =
             object : ScanCallback() {
               override fun onScanResult(callbackType: Int, result: ScanResult) {
-                val device = result.device
-                Log.i(TAG, "Bluetooth Device Scanned Addr: ${device.address}, Name ${device.name}")
+                try {
+                  val device = result.device
+                  Log.i(TAG, "Bluetooth device scanned")
 
-                val producerScope: ProducerScope<BluetoothDevice> = this@callbackFlow
-                if (producerScope.channel.isClosedForSend) {
-                  Log.w(TAG, "Bluetooth device was scanned, but channel is already closed")
-                } else {
-                  producerScope.trySend(device)
+                  if (producerScope.channel.isClosedForSend) {
+                    Log.w(TAG, "Bluetooth device was scanned, but channel is already closed")
+                  } else {
+                    val sendResult = producerScope.trySend(device)
+                    if (sendResult.isFailure) {
+                      Log.w(TAG, "Unable to deliver scanned Bluetooth device")
+                    }
+                  }
+                } catch (e: Exception) {
+                  reportPlatformException("Bluetooth scan result handling failed", e)
+                  producerScope.close(BluetoothScanException("Bluetooth scan result failed", e))
                 }
               }
 
               override fun onScanFailed(errorCode: Int) {
-                Log.e(TAG, "Scan failed $errorCode")
+                try {
+                  Log.e(TAG, "Bluetooth scan failed with status code $errorCode")
+                  producerScope.close(
+                    BluetoothScanException("Bluetooth scan failed with status code $errorCode")
+                  )
+                } catch (e: Exception) {
+                  reportPlatformException("Bluetooth scan failure handling failed", e)
+                }
               }
             }
 
@@ -106,9 +133,17 @@ class BluetoothManager : BleCallback {
 
           Log.i(TAG, "Starting Bluetooth scan serviceData: ${serviceData.map { it.toString(16) }} serviceDataMask: ${serviceDataMask.map { it.toString(16) }}")
           scanner.startScan(listOf(scanFilter), scanSettings, scanCallback)
-          awaitClose { scanner.stopScan(scanCallback) }
-        }
-        .first()
+          awaitClose {
+            try {
+              scanner.stopScan(scanCallback)
+            } catch (e: Exception) {
+              reportPlatformException("Bluetooth scan cleanup failed", e)
+            }
+          }
+        }.first()
+      }
+    } catch (e: BluetoothScanException) {
+      null
     }
   }
 
@@ -117,15 +152,31 @@ class BluetoothManager : BleCallback {
    */
   suspend fun connect(context: Context, device: BluetoothDevice): BluetoothGatt? {
     return suspendCancellableCoroutine { continuation ->
-      val bluetoothGattCallback = getBluetoothGattCallback(context, continuation)
+      var gatt: BluetoothGatt? = null
+      try {
+        val bluetoothManager = ChipClient.getAndroidChipPlatform(context).bleManager
+        val bluetoothGattCallback = getBluetoothGattCallback(context, continuation)
 
-      Log.i(TAG, "Connecting")
-      bleGatt = device.connectGatt(context, false, bluetoothGattCallback)
+        Log.i(TAG, "Connecting")
+        gatt = device.connectGatt(context, false, bluetoothGattCallback)
+        if (gatt == null) {
+          Log.e(TAG, "Bluetooth connect did not create a GATT client")
+          continuation.resume(null)
+          return@suspendCancellableCoroutine
+        }
 
-      connectionId = ChipClient.getAndroidChipPlatform(context).bleManager.addConnection(bleGatt)
-      ChipClient.getAndroidChipPlatform(context).bleManager.setBleCallback(this)
-
-      continuation.invokeOnCancellation { bleGatt?.disconnect() }
+        bleGatt = gatt
+        connectionId = bluetoothManager.addConnection(gatt)
+        bluetoothManager.setBleCallback(this)
+        continuation.invokeOnCancellation { closeGatt(gatt) }
+      } catch (e: Exception) {
+        reportPlatformException("Bluetooth connect failed", e)
+        closeGatt(gatt)
+        connectionId = 0
+        if (continuation.isActive) {
+          continuation.resumeWithException(e)
+        }
+      }
     }
   }
 
@@ -133,39 +184,123 @@ class BluetoothManager : BleCallback {
     context: Context,
     continuation: CancellableContinuation<BluetoothGatt?>
   ): BluetoothGattCallback {
+    val wrappedCallback = ChipClient.getAndroidChipPlatform(context).bleManager.callback
     return object : BluetoothGattCallback() {
-      private val wrappedCallback = ChipClient.getAndroidChipPlatform(context).bleManager.callback
-
       private val coroutineContinuation = continuation
+      private val completionLock = Any()
+      private var completionDelivered = false
+
+      private fun completeConnection(gatt: BluetoothGatt?) {
+        val shouldResume = synchronized(completionLock) {
+          if (completionDelivered) {
+            false
+          } else {
+            completionDelivered = true
+            true
+          }
+        }
+        if (shouldResume && coroutineContinuation.isActive) {
+          coroutineContinuation.resume(gatt)
+        }
+      }
+
+      private fun failConnection(error: Exception) {
+        val shouldResume = synchronized(completionLock) {
+          if (completionDelivered) {
+            false
+          } else {
+            completionDelivered = true
+            true
+          }
+        }
+        if (shouldResume && coroutineContinuation.isActive) {
+          coroutineContinuation.resumeWithException(error)
+        }
+      }
+
+      private fun runCallback(operation: String, callback: () -> Unit): Boolean {
+        return try {
+          callback()
+          true
+        } catch (e: Exception) {
+          reportPlatformException("Bluetooth $operation callback failed", e)
+          failConnection(IllegalStateException("Bluetooth callback failed: $operation", e))
+          false
+        }
+      }
 
       override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
-        super.onConnectionStateChange(gatt, status, newState)
         Log.i(
           TAG,
-          "${gatt?.device?.name}.onConnectionStateChange status = $status, newState=$newState"
+          "onConnectionStateChange status = $status, newState = $newState"
         )
-        wrappedCallback.onConnectionStateChange(gatt, status, newState)
+        try {
+          super.onConnectionStateChange(gatt, status, newState)
+        } catch (e: Exception) {
+          reportPlatformException("Bluetooth onConnectionStateChange super callback failed", e)
+        }
+        if (!runCallback("onConnectionStateChange") {
+            wrappedCallback.onConnectionStateChange(gatt, status, newState)
+          }) {
+          return
+        }
 
         if (newState == BluetoothProfile.STATE_CONNECTED && status == BluetoothGatt.GATT_SUCCESS) {
-          Log.i("$TAG", "Discovering Services...")
-          gatt?.discoverServices()
+          Log.i(TAG, "Discovering services")
+          val discoveryStarted = try {
+            gatt?.discoverServices() == true
+          } catch (e: Exception) {
+            reportPlatformException("Bluetooth service discovery failed", e)
+            false
+          }
+          if (!discoveryStarted) {
+            failConnection(IllegalStateException("Unable to discover Bluetooth services"))
+          }
+        } else if (newState == BluetoothProfile.STATE_DISCONNECTED || status != BluetoothGatt.GATT_SUCCESS) {
+          completeConnection(null)
         }
       }
 
       override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
-        Log.d(TAG, "${gatt?.device?.name}.onServicesDiscovered status = $status")
-        wrappedCallback.onServicesDiscovered(gatt, status)
+        Log.d(TAG, "onServicesDiscovered status = $status")
+        if (!runCallback("onServicesDiscovered") {
+            wrappedCallback.onServicesDiscovered(gatt, status)
+          }) {
+          return
+        }
+        if (gatt == null || status != BluetoothGatt.GATT_SUCCESS) {
+          completeConnection(null)
+          return
+        }
 
-        Log.i("$TAG", "Services Discovered")
-        gatt?.requestMtu(247)
+        Log.i(TAG, "Services discovered")
+        val mtuRequested = try {
+          gatt.requestMtu(247)
+        } catch (e: Exception) {
+          reportPlatformException("Bluetooth MTU request failed", e)
+          false
+        }
+        if (!mtuRequested) {
+          failConnection(IllegalStateException("Unable to request Bluetooth MTU"))
+        }
       }
 
       override fun onMtuChanged(gatt: BluetoothGatt?, mtu: Int, status: Int) {
-        Log.d(TAG, "${gatt?.device?.name}.onMtuChanged: connecting to CHIP device")
-        super.onMtuChanged(gatt, mtu, status)
-        wrappedCallback.onMtuChanged(gatt, mtu, status)
-        if (coroutineContinuation.isActive) {
-          coroutineContinuation.resume(gatt)
+        Log.d(TAG, "onMtuChanged mtu = $mtu, status = $status")
+        try {
+          super.onMtuChanged(gatt, mtu, status)
+        } catch (e: Exception) {
+          reportPlatformException("Bluetooth onMtuChanged super callback failed", e)
+        }
+        if (!runCallback("onMtuChanged") {
+            wrappedCallback.onMtuChanged(gatt, mtu, status)
+          }) {
+          return
+        }
+        if (gatt != null && status == BluetoothGatt.GATT_SUCCESS) {
+          completeConnection(gatt)
+        } else {
+          completeConnection(null)
         }
       }
 
@@ -173,8 +308,10 @@ class BluetoothManager : BleCallback {
         gatt: BluetoothGatt,
         characteristic: BluetoothGattCharacteristic
       ) {
-        Log.d(TAG, "${gatt.device.name}.onCharacteristicChanged: ${characteristic.uuid}")
-        wrappedCallback.onCharacteristicChanged(gatt, characteristic)
+        Log.d(TAG, "onCharacteristicChanged: ${characteristic.uuid}")
+        runCallback("onCharacteristicChanged") {
+          wrappedCallback.onCharacteristicChanged(gatt, characteristic)
+        }
       }
 
       override fun onCharacteristicRead(
@@ -182,8 +319,10 @@ class BluetoothManager : BleCallback {
         characteristic: BluetoothGattCharacteristic,
         status: Int
       ) {
-        Log.d(TAG, "${gatt.device.name}.onCharacteristicRead: ${characteristic.uuid} -> $status")
-        wrappedCallback.onCharacteristicRead(gatt, characteristic, status)
+        Log.d(TAG, "onCharacteristicRead: ${characteristic.uuid} -> $status")
+        runCallback("onCharacteristicRead") {
+          wrappedCallback.onCharacteristicRead(gatt, characteristic, status)
+        }
       }
 
       override fun onCharacteristicWrite(
@@ -191,8 +330,10 @@ class BluetoothManager : BleCallback {
         characteristic: BluetoothGattCharacteristic,
         status: Int
       ) {
-        Log.d(TAG, "${gatt.device.name}.onCharacteristicWrite: ${characteristic.uuid} -> $status")
-        wrappedCallback.onCharacteristicWrite(gatt, characteristic, status)
+        Log.d(TAG, "onCharacteristicWrite: ${characteristic.uuid} -> $status")
+        runCallback("onCharacteristicWrite") {
+          wrappedCallback.onCharacteristicWrite(gatt, characteristic, status)
+        }
       }
 
       override fun onDescriptorRead(
@@ -200,8 +341,10 @@ class BluetoothManager : BleCallback {
         descriptor: BluetoothGattDescriptor,
         status: Int
       ) {
-        Log.d(TAG, "${gatt.device.name}.onDescriptorRead: ${descriptor.uuid} -> $status")
-        wrappedCallback.onDescriptorRead(gatt, descriptor, status)
+        Log.d(TAG, "onDescriptorRead: ${descriptor.uuid} -> $status")
+        runCallback("onDescriptorRead") {
+          wrappedCallback.onDescriptorRead(gatt, descriptor, status)
+        }
       }
 
       override fun onDescriptorWrite(
@@ -209,19 +352,48 @@ class BluetoothManager : BleCallback {
         descriptor: BluetoothGattDescriptor,
         status: Int
       ) {
-        Log.d(TAG, "${gatt.device.name}.onDescriptorWrite: ${descriptor.uuid} -> $status")
-        wrappedCallback.onDescriptorWrite(gatt, descriptor, status)
+        Log.d(TAG, "onDescriptorWrite: ${descriptor.uuid} -> $status")
+        runCallback("onDescriptorWrite") {
+          wrappedCallback.onDescriptorWrite(gatt, descriptor, status)
+        }
       }
 
       override fun onReadRemoteRssi(gatt: BluetoothGatt, rssi: Int, status: Int) {
-        Log.d(TAG, "${gatt.device.name}.onReadRemoteRssi: $rssi -> $status")
-        wrappedCallback.onReadRemoteRssi(gatt, rssi, status)
+        Log.d(TAG, "onReadRemoteRssi: $rssi -> $status")
+        runCallback("onReadRemoteRssi") {
+          wrappedCallback.onReadRemoteRssi(gatt, rssi, status)
+        }
       }
 
       override fun onReliableWriteCompleted(gatt: BluetoothGatt, status: Int) {
-        Log.d(TAG, "${gatt.device.name}.onReliableWriteCompleted: $status")
-        wrappedCallback.onReliableWriteCompleted(gatt, status)
+        Log.d(TAG, "onReliableWriteCompleted: $status")
+        runCallback("onReliableWriteCompleted") {
+          wrappedCallback.onReliableWriteCompleted(gatt, status)
+        }
       }
+    }
+  }
+
+  internal fun releaseConnection() {
+    val gatt = bleGatt
+    bleGatt = null
+    connectionId = 0
+    closeGatt(gatt)
+  }
+
+  private fun closeGatt(gatt: BluetoothGatt?) {
+    if (gatt == null) {
+      return
+    }
+    try {
+      gatt.disconnect()
+    } catch (e: Exception) {
+      reportPlatformException("Bluetooth GATT disconnect cleanup failed", e)
+    }
+    try {
+      gatt.close()
+    } catch (e: Exception) {
+      reportPlatformException("Bluetooth GATT close cleanup failed", e)
     }
   }
 
@@ -231,36 +403,51 @@ class BluetoothManager : BleCallback {
   }
 
   override fun onCloseBleComplete(connId: Int) {
-    connectionId = 0
+    releaseConnection()
     Log.d(TAG, "onCloseBleComplete")
   }
 
   override fun onNotifyChipConnectionClosed(connId: Int) {
-    bleGatt?.close()
-    connectionId = 0
+    releaseConnection()
     Log.d(TAG, "onNotifyChipConnectionClosed")
   }
 }
 
 class ZGAndroidBleManager(context: Context) : AndroidBleManager(context) {
 
+  @Volatile
   var platformDelegate: BlePlatformDelegate? = null
     set(value) {
       if (value != null && field != null) {
-        throw RuntimeException("Already set BlePlatformDelegate")
+        throw IllegalStateException("BlePlatformDelegate is already set")
       }
       field = value
     }
+
+  private fun reportCallbackFailure(operation: String, error: Exception) {
+    reportPlatformException("Bluetooth GATT manager $operation failed", error)
+  }
 
   override fun onSubscribeCharacteristic(
     connId: Int,
     svcId: ByteArray?,
     charId: ByteArray?
   ): Boolean {
-    if (platformDelegate != null) {
-      return platformDelegate!!.onSubscribeCharacteristic(connId, svcId, charId)
+    val delegate = platformDelegate
+    if (delegate != null) {
+      return try {
+        delegate.onSubscribeCharacteristic(connId, svcId, charId)
+      } catch (e: Exception) {
+        reportCallbackFailure("onSubscribeCharacteristic", e)
+        false
+      }
     }
-    return super.onSubscribeCharacteristic(connId, svcId, charId)
+    return try {
+      super.onSubscribeCharacteristic(connId, svcId, charId)
+    } catch (e: Exception) {
+      reportCallbackFailure("onSubscribeCharacteristic", e)
+      false
+    }
   }
 
   override fun onUnsubscribeCharacteristic(
@@ -268,17 +455,39 @@ class ZGAndroidBleManager(context: Context) : AndroidBleManager(context) {
     svcId: ByteArray?,
     charId: ByteArray?
   ): Boolean {
-    if (platformDelegate != null) {
-      return platformDelegate!!.onUnsubscribeCharacteristic(connId, svcId, charId)
+    val delegate = platformDelegate
+    if (delegate != null) {
+      return try {
+        delegate.onUnsubscribeCharacteristic(connId, svcId, charId)
+      } catch (e: Exception) {
+        reportCallbackFailure("onUnsubscribeCharacteristic", e)
+        false
+      }
     }
-    return super.onUnsubscribeCharacteristic(connId, svcId, charId)
+    return try {
+      super.onUnsubscribeCharacteristic(connId, svcId, charId)
+    } catch (e: Exception) {
+      reportCallbackFailure("onUnsubscribeCharacteristic", e)
+      false
+    }
   }
 
   override fun onCloseConnection(connId: Int): Boolean {
-    if (platformDelegate != null) {
-      return platformDelegate!!.onCloseConnection(connId)
+    val delegate = platformDelegate
+    if (delegate != null) {
+      return try {
+        delegate.onCloseConnection(connId)
+      } catch (e: Exception) {
+        reportCallbackFailure("onCloseConnection", e)
+        false
+      }
     }
-    return super.onCloseConnection(connId)
+    return try {
+      super.onCloseConnection(connId)
+    } catch (e: Exception) {
+      reportCallbackFailure("onCloseConnection", e)
+      false
+    }
   }
 
   override fun onSendWriteRequest(
@@ -287,17 +496,39 @@ class ZGAndroidBleManager(context: Context) : AndroidBleManager(context) {
     charId: ByteArray?,
     characteristicData: ByteArray?
   ): Boolean {
-    if (platformDelegate != null) {
-      return platformDelegate!!.onSendWriteRequest(connId, svcId, charId, characteristicData)
+    val delegate = platformDelegate
+    if (delegate != null) {
+      return try {
+        delegate.onSendWriteRequest(connId, svcId, charId, characteristicData)
+      } catch (e: Exception) {
+        reportCallbackFailure("onSendWriteRequest", e)
+        false
+      }
     }
-    return super.onSendWriteRequest(connId, svcId, charId, characteristicData)
+    return try {
+      super.onSendWriteRequest(connId, svcId, charId, characteristicData)
+    } catch (e: Exception) {
+      reportCallbackFailure("onSendWriteRequest", e)
+      false
+    }
   }
 
   override fun onGetMTU(connId: Int): Int {
-    if (platformDelegate != null) {
-      return platformDelegate!!.onGetMTU(connId)
+    val delegate = platformDelegate
+    if (delegate != null) {
+      return try {
+        delegate.onGetMTU(connId)
+      } catch (e: Exception) {
+        reportCallbackFailure("onGetMTU", e)
+        DEFAULT_ATT_MTU
+      }
     }
-    return super.onGetMTU(connId)
+    return try {
+      super.onGetMTU(connId)
+    } catch (e: Exception) {
+      reportCallbackFailure("onGetMTU", e)
+      DEFAULT_ATT_MTU
+    }
   }
 
   interface BlePlatformDelegate {
@@ -306,5 +537,9 @@ class ZGAndroidBleManager(context: Context) : AndroidBleManager(context) {
     fun onCloseConnection(connId: Int): Boolean
     fun onSendWriteRequest(connId: Int, svcId: ByteArray?, charId: ByteArray?, characteristicData: ByteArray?): Boolean
     fun onGetMTU(connId: Int): Int
+  }
+
+  companion object {
+    private const val DEFAULT_ATT_MTU = 23
   }
 }

@@ -21,7 +21,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * An access grant, which can be represented as an entry in the Matter Access
+ * An access grant, which can be represented as an entry in the ZGMatter Access
  * Control cluster.
  */
 NS_SWIFT_SENDABLE
@@ -40,7 +40,7 @@ ZGMTR_AVAILABLE(ios(17.6), macos(14.6), watchos(10.6), tvos(17.6))
 /**
  * Grant access to any node on the fabric that has a matching CASE Authenticated
  * Tag in its operational certificate.  The provided caseAuthenticatedTag must
- * be a 32-bit unsigned integer with lower 16 bits not 0, per the Matter
+ * be a 32-bit unsigned integer with lower 16 bits not 0, per the ZGMatter
  * specification.
  */
 + (nullable ZGMTRAccessGrant *)accessGrantForCASEAuthenticatedTag:(NSNumber *)caseAuthenticatedTag privilege:(ZGMTRAccessControlEntryPrivilege)privilege;

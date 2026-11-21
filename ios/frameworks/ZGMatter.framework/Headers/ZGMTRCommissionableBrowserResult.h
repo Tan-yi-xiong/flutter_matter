@@ -43,7 +43,7 @@ ZGMTR_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0))
 @property (readonly, nonatomic) NSNumber * productID;
 
 /**
- * A 12-bit value matching the field of the same name in MTRSetupPayload.
+ * A 12-bit value matching the field of the same name in ZGMTRSetupPayload.
  */
 @property (readonly, nonatomic) NSNumber * discriminator;
 

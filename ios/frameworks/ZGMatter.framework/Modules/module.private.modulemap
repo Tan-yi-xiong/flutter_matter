@@ -1,0 +1,9 @@
+framework module ZGMatter_Private [system] {
+    umbrella header "ZGMatter_Private.h"
+    export *
+
+    explicit module LocalTestStorage {
+        header "ZGMTRDeviceControllerLocalTestStorage.h"
+        export *
+    }
+}

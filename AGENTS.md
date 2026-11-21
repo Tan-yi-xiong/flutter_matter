@@ -2,7 +2,7 @@
 
 Guidelines for coding agents working in **this repository only**.
 
-This is a Flutter plugin (`flutter_matter` 0.0.11) that exposes a low-level [Matter](https://csa-iot.org/) API on **Android and iOS**. Do not apply the parent workspace Python/Django `AGENTS.md` here.
+This is a Flutter plugin (`flutter_matter` 0.0.12) that exposes a low-level [Matter](https://csa-iot.org/) API on **Android and iOS**. Do not apply the parent workspace Python/Django `AGENTS.md` here.
 
 ## Overview
 
@@ -17,7 +17,7 @@ This is a Flutter plugin (`flutter_matter` 0.0.11) that exposes a low-level [Mat
   - `nsd` on Android only
 - Android plugin: `com.tyx.flutter_matter.FlutterMatterPlugin`
 - iOS plugin: `FlutterMatterPlugin` (Objective-C), vendored `ios/frameworks/ZGMatter.framework`
-- Android Matter stack: `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.5`
+- Android Matter stack: `com.github.Tan-yi-xiong:flutter_matter_android_prefixed:1.0.6`
 - FVM Flutter **3.41.0** (`.fvmrc`). Prefer `fvm flutter` / `fvm dart` when FVM is available; otherwise use Flutter `3.41.0` and `flutter` / `dart` on PATH.
 
 ## Commands
@@ -80,6 +80,7 @@ flutter_matter/
 ├── android/src/main/kotlin/com/tyx/flutter_matter/
 ├── ios/Classes/                               # ObjC + some Swift
 ├── ios/frameworks/ZGMatter.framework
+├── ios/zgmatter/                              # Reproducible framework build pipeline and patches
 ├── doc/                                       # setup, commissioning, operations, API, validation, release, and ADR docs
 ├── tool/release.dart                          # release metadata and notes CLI
 ├── tool/device_test_app.dart                  # commit metadata and app build wrapper
@@ -101,14 +102,15 @@ New public types and functions must be exported from `lib/flutter_matter.dart`, 
 - Preserve the MethodChannel URL scheme and JSON result shapes (`{code, jsonData}` / `{code, resultJson}`).
 - Native → Dart callbacks use path prefixes such as `NOCChainIssuer`, `CompletionListener`, `InvokeCallback`, `SubscriptionCallback`, `ReportCallback`, `WriteAttributesCallback`, `ConnectedDeviceCallback`, `OpenCommissioningCallback`.
 - Prefer existing wrappers: `ReportCallbackWarp`, `SubscriptionCallbackWarp`, `WriteAttributesCallbackWarp`.
-- `ChipDeviceController.newControllerIfNotExist` reuses a controller with the same `fabricId` + `rootCertificate`.
+- `ChipDeviceController.newControllerIfNotExist` delegates to the singleton `ChipDeviceControllerManager`. Same-identity acquisitions share one Dart handle and increment a reference count; every successful acquisition must be balanced by `close()` (or the compatibility alias `deleteDeviceController()`).
+- The Dart manager allows one live Dart-visible controller per isolate. Android additionally enforces one native controller per process because its shutdown path stops process-wide IO/factory state. iOS stores independent native handles and does not impose a native single-controller gate. A different fabric identity is switched by invalidating/closing the old handle, awaiting native shutdown, then creating the replacement.
+- `destroy()` is Dart-only cleanup. Never use it as a substitute for native shutdown.
 - iOS `pairDevice` requires `onboardingPayload`.
 - Open Wi-Fi: empty `WiFiCredentials.password` is valid.
 - Thread: `NetworkCredentials.thread(ThreadCredentials(operationalDataset: ...))`.
 - ICD: implement `CompletionListener.onICDRegistrationComplete`.
 - `subscribe()` `dataVersionFilters` is currently Android-only.
 - Keep legacy constructors (`NetworkCredentials({required WiFiCredentials ...})`) unless a breaking change is explicitly requested.
-- Known typo in code: `_findSameFarbicControl`. Do not rename it unless that is the task.
 - Generated cluster code is not currently present, and code-generation dependencies are intentionally omitted. Add `built_value` / `build_runner` only when introducing generated code.
 
 ## Native conventions
@@ -118,6 +120,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ### Android (Kotlin, `com.tyx.flutter_matter`)
 
 - Entry: `FlutterMatterPlugin.kt` dispatches by URI host to `onDeviceControlCall`, `onBLECall`, `onOnboardingCall`, `onNsdCall`.
+- `DeviceControl.kt` uses the single-active `ControllerLifecycleGate`. Native deletion must call `ChipDeviceController.shutdownCommissioning()`; do not restore reflection-based `finalize()` or construct a second controller before shutdown completes.
 - minSdk 21, compileSdk 34, Kotlin plugin 1.7.10, JVM target 1.8.
 - Do not revive `com.zengge.flutter_matter`.
 - Example applicationId / namespace: `com.fluttermatter.example`.
@@ -126,8 +129,9 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 ### iOS (ObjC plugin + Swift Matter Extension)
 
 - Entry: `ios/Classes/FlutterMatterPlugin.m` — hosts for device controller, BLE, and onboarding only.
-- Matter work runs on the `Global` serial queue; `InitializeZGMTR()` runs on plugin register.
+- Matter work runs on the `Global` serial queue; `ZGMTRInitializeControllerFactory()` runs on plugin registration and must not create a hidden default controller. `DeviceControlHandle.m` keeps controllers in a handle map and may host multiple native controllers; the Dart manager controls the common single-active application path.
 - Vendored framework: `ZGMatter.framework` via `ios/flutter_matter.podspec`.
+- Framework build tools live in `ios/zgmatter/`. The external connectedhomeip checkout must be supplied explicitly with `--connectedhomeip-dir` or `ZGMATTER_CONNECTEDHOMEIP_DIR`.
 - Deployment targets are iOS 16.1. Documented toolchain baseline is Xcode 16.4 or later with CocoaPods 1.17; the migration build evidence used Xcode 26.3 and CocoaPods 1.17.0.
 - The vendored `ZGMatter.framework` is iPhoneOS arm64 only; simulator builds are not supported.
 - Host apps need a Matter Extension, App Groups, `AppGroupId`, and Matter Allow Setup Payload; see `doc/getting-started.md`. Copy `example/ios/MatterExt/RequestHandler.swift`.
@@ -173,6 +177,7 @@ When adding a Dart platform call, implement **both** Android and iOS unless the 
 | Plugin tests | `fvm flutter test` |
 | Example Android build | `cd example && GOOGLE_MATTER_SDK_REPO=/absolute/path/to/repo fvm flutter build apk --debug` |
 | Example iOS build | `cd example && fvm flutter build ios --debug --no-codesign` |
+| ZGMatter framework validation | `export ZGMATTER_CONNECTEDHOMEIP_DIR=/absolute/path/to/connectedhomeip && ios/zgmatter/build_zgmatter_framework.sh --no-copy` |
 | Run example | `cd example && fvm flutter run` |
 | iOS workspace | `open example/ios/Runner.xcworkspace` |
 | Device test app analyze/tests | `cd device_test_app && fvm flutter analyze --no-fatal-infos --no-fatal-warnings && fvm flutter test` |
