@@ -214,6 +214,11 @@ abstract class CompletionListener {
   void onConnectDeviceComplete();
 
   /// Notifies the pairing status.
+  ///
+  /// Values follow the Matter pairing-status enum: `0` unknown, `1` success,
+  /// `2` failed, and `3` discovering more devices. This is not a CHIP error
+  /// code; terminal commissioning errors arrive through
+  /// [onCommissioningComplete].
   void onStatusUpdate(int status);
 
   /// Notifies the completion of pairing.

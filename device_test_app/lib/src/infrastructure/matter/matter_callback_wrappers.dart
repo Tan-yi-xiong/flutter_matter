@@ -31,6 +31,8 @@ class MatterCommissioningListener implements CompletionListener {
   MatterCommissioningListener({required int fallbackNodeId})
     : _fallbackNodeId = fallbackNodeId;
 
+  static const int _pairingStatusFailed = 2;
+
   final int _fallbackNodeId;
   final Completer<MatterCommissionOutcome> _completion =
       Completer<MatterCommissionOutcome>();
@@ -67,16 +69,17 @@ class MatterCommissioningListener implements CompletionListener {
 
   @override
   void onStatusUpdate(int status) {
-    // The native completion callback reports CHIP error codes here. Progress
-    // updates arrive through onCommissioningStatusUpdate, so a non-zero
-    // status is terminal and must not be swallowed by the collector.
-    if (status == 0) {
+    // Native pairing status is an enum, not a CHIP error code:
+    // 0 unknown, 1 success, 2 failed, 3 discovering more devices.
+    // Treat only the explicit failed status as terminal; success must not
+    // cancel the commissioning operation before operational discovery starts.
+    if (status != _pairingStatusFailed) {
       return;
     }
     fail(
       MatterException(
-        MatterFailureCode.commissioningFailed,
-        'Commissioning failed with error code $status',
+        MatterFailureCode.pairingFailed,
+        'Pairing failed with status $status',
       ),
     );
   }
