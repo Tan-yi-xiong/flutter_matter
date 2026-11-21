@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import '../domain/domain.dart';
-import 'matter_manual_pairing_code.dart';
 import 'operator_prompt.dart';
 import 'runner_state.dart';
 
@@ -99,7 +98,6 @@ class ThreadProvisioningSecret extends ProvisioningNetworkSecret {
 class ProvisioningSecrets {
   ProvisioningSecrets({
     required this.onboardingPayload,
-    required this.invalidSetupOnboardingPayload,
     required this.setupPinCode,
     required this.network,
     this.setupDiscriminator,
@@ -109,13 +107,6 @@ class ProvisioningSecrets {
       throw ArgumentError.value(
         onboardingPayload,
         'onboardingPayload',
-        'Must not be empty',
-      );
-    }
-    if (invalidSetupOnboardingPayload.trim().isEmpty) {
-      throw ArgumentError.value(
-        invalidSetupOnboardingPayload,
-        'invalidSetupOnboardingPayload',
         'Must not be empty',
       );
     }
@@ -138,15 +129,12 @@ class ProvisioningSecrets {
   }
 
   final String onboardingPayload;
-  final String invalidSetupOnboardingPayload;
   final int setupPinCode;
   final ProvisioningNetworkSecret network;
   final int? setupDiscriminator;
   final OnNetworkCommissioningEndpoint? onNetworkEndpoint;
 
   NetworkTransport get transport => network.transport;
-
-  int get invalidSetupPinCode => invalidMatterSetupPinCodeFor(setupPinCode);
 
   @override
   String toString() => 'ProvisioningSecrets(redacted)';
@@ -456,43 +444,6 @@ class FabricException implements Exception {
   String toString() => 'FabricException(${code.wireName})';
 }
 
-enum CommissioningWindowFailureCode { notConnected, openFailed, timeout, other }
-
-extension CommissioningWindowFailureCodeWire on CommissioningWindowFailureCode {
-  String get wireName => switch (this) {
-    CommissioningWindowFailureCode.notConnected => 'not_connected',
-    CommissioningWindowFailureCode.openFailed => 'open_failed',
-    CommissioningWindowFailureCode.timeout => 'timeout',
-    CommissioningWindowFailureCode.other => 'other',
-  };
-}
-
-class CommissioningWindowException implements Exception {
-  CommissioningWindowException(this.code);
-
-  final CommissioningWindowFailureCode code;
-
-  @override
-  String toString() => 'CommissioningWindowException(${code.wireName})';
-}
-
-/// Re-opens a commissionable advertisement on an already commissioned node.
-///
-/// The window reuses the original discriminator and setup passcode so the
-/// invalid-commissioning scenarios can discover the commissionee with the
-/// regular onboarding payload after the main fabric is in place.
-abstract interface class CommissioningWindowPort {
-  Future<void> open({
-    required ControllerIdentity identity,
-    required int nodeId,
-    required OperationalConnectionLease connection,
-    required int durationSeconds,
-    required int discriminator,
-    required int setupPinCode,
-    required Duration timeout,
-  });
-}
-
 abstract interface class FabricPort {
   Future<FabricStatus> inspect({
     required ControllerIdentity identity,
@@ -559,7 +510,6 @@ abstract interface class RunPersistencePort {
 class TestPorts {
   const TestPorts({
     required this.commissioning,
-    required this.commissioningWindow,
     required this.operationalConnection,
     required this.onOff,
     required this.nodeLabel,
@@ -568,7 +518,6 @@ class TestPorts {
   });
 
   final CommissioningPort commissioning;
-  final CommissioningWindowPort commissioningWindow;
   final OperationalConnectionPort operationalConnection;
   final OnOffPort onOff;
   final NodeLabelPort nodeLabel;

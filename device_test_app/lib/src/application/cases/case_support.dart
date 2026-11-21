@@ -4,10 +4,6 @@ import '../ports.dart';
 import '../test_case.dart';
 import '../test_context.dart';
 
-/// Commissioning window lifetime in seconds. Matches the worked example's
-/// 180-second window and stays within the spec's allowed timeout range.
-const int commissioningWindowDurationSeconds = 180;
-
 /// Converts a prompt decision into a terminal outcome when the run must stop
 /// the current case. A confirmed decision returns null.
 TestCaseOutcome? outcomeForPromptDecision(

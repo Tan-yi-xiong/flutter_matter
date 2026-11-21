@@ -152,11 +152,6 @@ class FakeMatterControllerApi implements MatterControllerApi {
   }
 
   @override
-  Future<void> openPairingWindow(MatterOpenPairingWindowRequest request) async {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> close() async {
     closeCount++;
     await closeHandler?.call();

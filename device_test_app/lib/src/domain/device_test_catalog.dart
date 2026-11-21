@@ -37,11 +37,6 @@ enum DeviceTestId {
     wireName: 'node_label_read_write',
     priority: DeviceTestPriority.p0,
     title: 'NodeLabel read/write',
-  ),
-  invalidSetupPasscode(
-    wireName: 'invalid_setup_passcode',
-    priority: DeviceTestPriority.p0,
-    title: 'Invalid setup passcode',
   );
 
   const DeviceTestId({

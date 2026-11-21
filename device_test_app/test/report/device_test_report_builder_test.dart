@@ -22,7 +22,7 @@ void main() {
     );
 
     expect(jsonEncode(first.toJson()), jsonEncode(second.toJson()));
-    expect(first.summary.passed, 8);
+    expect(first.summary.passed, 7);
     expect(first.summary.notRun, 0);
     expect(first.summary.result, ReportResult.passed);
     expect(first.profile, TestProfile.full);
@@ -31,12 +31,12 @@ void main() {
     expect(first.commissionee.networkTransport, NetworkTransport.wifi);
   });
 
-  test('emits schema version 4 without any transport route field', () {
+  test('emits schema version 5 without any transport route field', () {
     final report = buildFixtureReport();
     final json = report.toJson();
 
-    expect(report.schemaVersion, 4);
-    expect(json['schema_version'], 4);
+    expect(report.schemaVersion, 5);
+    expect(json['schema_version'], 5);
     expect(
       (json['commissionee']! as Map<String, dynamic>).containsKey(
         'commissioning_transport',
@@ -51,31 +51,30 @@ void main() {
 
   test('typed reports survive a JSON round trip', () {
     final original = buildFixtureReport();
-    final decoded = DeviceTestReportV4.fromJson(
+    final decoded = DeviceTestReportV5.fromJson(
       jsonDecode(jsonEncode(original.toJson())) as Map<String, dynamic>,
     );
 
     expect(jsonEncode(decoded.toJson()), jsonEncode(original.toJson()));
   });
 
-  test('rejects legacy v2 and v3 schema versions', () {
-    final v3Json = <String, Object?>{
-      ...buildFixtureReport().toJson(),
-      'schema_version': 3,
-    };
-    final v2Json = <String, Object?>{
-      ...buildFixtureReport().toJson(),
-      'schema_version': 2,
-    };
-
-    expect(() => DeviceTestReportV4.fromJson(v3Json), throwsArgumentError);
-    expect(() => DeviceTestReportV4.fromJson(v2Json), throwsArgumentError);
+  test('rejects legacy v2, v3, and v4 schema versions', () {
+    for (final legacyVersion in <int>[2, 3, 4]) {
+      final legacyJson = <String, Object?>{
+        ...buildFixtureReport().toJson(),
+        'schema_version': legacyVersion,
+      };
+      expect(
+        () => DeviceTestReportV5.fromJson(legacyJson),
+        throwsArgumentError,
+      );
+    }
   });
 
   test('rejects constructing a typed report with a retired schema version', () {
     expect(
-      () => DeviceTestReportV4(
-        schemaVersion: 3,
+      () => DeviceTestReportV5(
+        schemaVersion: 4,
         generatedAt: fixtureGeneratedAt,
         testApp: fixtureTestApp,
         pluginCommit: fixturePluginCommit,

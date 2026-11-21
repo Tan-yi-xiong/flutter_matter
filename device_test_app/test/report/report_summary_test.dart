@@ -10,10 +10,10 @@ void main() {
     ]);
 
     expect(summary.result, ReportResult.passed);
-    expect(summary.passed, 8);
+    expect(summary.passed, 7);
     expect(summary.failed, 0);
     expect(summary.notRun, 0);
-    expect(summary.total, 8);
+    expect(summary.total, 7);
   });
 
   test('a P0 not_run makes the overall result not_run', () {
@@ -43,7 +43,7 @@ void main() {
     ]);
 
     expect(summary.result, ReportResult.passed);
-    expect(summary.passed, 7);
+    expect(summary.passed, 6);
     expect(summary.notRun, 1);
   });
 
@@ -52,7 +52,7 @@ void main() {
       for (final testId in DeviceTestCatalog.all)
         DeviceTestResult(
           testId: testId,
-          status: testId == DeviceTestId.invalidSetupPasscode
+          status: testId == DeviceTestId.onoffInvoke
               ? DeviceTestStatus.failed
               : DeviceTestStatus.passed,
         ),

@@ -93,7 +93,7 @@ class DeviceTestAppController extends ChangeNotifier
     status: ReportUiValidationStatus.unavailable,
     message: 'No formal report is available yet.',
   );
-  DeviceTestReportV4? _formalReport;
+  DeviceTestReportV5? _formalReport;
   ReportValidationResult? _validationResult;
   DeviceTestReportFiles? _reportFiles;
   String? _markdownContents;
@@ -119,7 +119,7 @@ class DeviceTestAppController extends ChangeNotifier
   /// Provided to ApplicationPorts during production wiring.
   OperatorPromptPort get operatorPromptPort => _prompts;
 
-  DeviceTestReportV4? get formalReport => _formalReport;
+  DeviceTestReportV5? get formalReport => _formalReport;
 
   ReportValidationResult? get reportValidation => _validationResult;
 
@@ -211,19 +211,8 @@ class DeviceTestAppController extends ChangeNotifier
 
       final runId = _runIdFactory();
       final targetNodeId = _targetNodeIdFactory(runId);
-      final invalidSetupPinCode = invalidMatterSetupPinCodeFor(
-        payload.setupPinCode,
-      );
       final secrets = ProvisioningSecrets(
         onboardingPayload: setupCode,
-        invalidSetupOnboardingPayload: buildMatterManualPairingCode(
-          discriminator: payload.discriminator,
-          hasShortDiscriminator: payload.hasShortDiscriminator,
-          setupPinCode: invalidSetupPinCode,
-          commissioningFlow: payload.commissioningFlow,
-          vendorId: payload.vendorId,
-          productId: payload.productId,
-        ),
         setupPinCode: payload.setupPinCode,
         setupDiscriminator: payload.discriminator,
         onNetworkEndpoint: request.onNetworkEndpoint,

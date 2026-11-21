@@ -116,7 +116,7 @@ void main() {
     );
 
     test(
-      'full profile reaches 8 terminal results and sanitized state',
+      'full profile reaches 7 terminal results and sanitized state',
       () async {
         final hardware = FakeHardware();
         final persistence = MemoryRunPersistencePort();
@@ -150,7 +150,7 @@ void main() {
 
         expect(snapshot.status, RunnerStatus.passed);
         expect(snapshot.session!.allResultsTerminal, isTrue);
-        expect(snapshot.session!.orderedResults.length, 8);
+        expect(snapshot.session!.orderedResults.length, 7);
         expect(
           snapshot.session!.orderedResults.every(
             (result) => result.status == DeviceTestStatus.passed,
@@ -206,7 +206,7 @@ void main() {
           DeviceTestStatus.failed,
         );
         expect(
-          snapshot.session!.results[DeviceTestId.invalidSetupPasscode]!.status,
+          snapshot.session!.results[DeviceTestId.appRestart]!.status,
           DeviceTestStatus.notRun,
         );
         expect(snapshot.session!.allResultsTerminal, isTrue);
@@ -287,38 +287,6 @@ void main() {
       );
     });
 
-    test('P0 invalid-passcode failure produces a failed run', () async {
-      final hardware = FakeHardware();
-      final persistence = MemoryRunPersistencePort();
-      final ports = hardware.applicationPorts(
-        persistence: persistence,
-        secrets: FakeSecretAccessPort(makeSecrets()),
-        prompts: FakeOperatorPromptPort(),
-        clock: FakeClock(),
-      );
-      final invalidSetup = ScriptedCase(
-        DeviceTestId.invalidSetupPasscode,
-        (_) => TestCaseOutcome.failed('invalid passcode was accepted'),
-      );
-      final coordinator = RunCoordinator(
-        ports: ports,
-        registry: scriptedRegistry(
-          overrides: {DeviceTestId.invalidSetupPasscode: invalidSetup},
-        ),
-        timeouts: fastTimeouts,
-      );
-      addTearDown(coordinator.dispose);
-
-      final snapshot = await coordinator.start(startRequest(TestProfile.full));
-
-      expect(snapshot.status, RunnerStatus.failed);
-      expect(
-        snapshot.session!.results[DeviceTestId.invalidSetupPasscode]!.status,
-        DeviceTestStatus.failed,
-      );
-      expect(snapshot.session!.allResultsTerminal, isTrue);
-    });
-
     test('case timeout is converted into a failed result', () async {
       final hardware = FakeHardware();
       final persistence = MemoryRunPersistencePort();
@@ -345,8 +313,6 @@ void main() {
           onOffSubscription: Duration(milliseconds: 100),
           nodeLabelReadWrite: Duration(milliseconds: 100),
           appRestart: Duration(milliseconds: 100),
-          invalidSetupPasscode: Duration(milliseconds: 100),
-          commissioningWindow: Duration(milliseconds: 100),
         ),
       );
       addTearDown(coordinator.dispose);

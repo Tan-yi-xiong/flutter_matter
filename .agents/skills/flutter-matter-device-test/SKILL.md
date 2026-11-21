@@ -5,7 +5,7 @@ description: Execute flutter_matter device validation through the dedicated test
 
 # Flutter Matter Device Test
 
-Run `flutter_matter` device validation without guessing which phone or commissionee to use. The device-test app is the authoritative runner for Matter commissionees and does not inspect device provenance. It passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning, and emits schema v4 evidence.
+Run `flutter_matter` device validation without guessing which phone or commissionee to use. The device-test app is the authoritative runner for Matter commissionees and does not inspect device provenance. It passes the raw onboarding payload directly to the Matter SDK, which performs commissionee discovery and commissioning, and emits schema v5 evidence.
 
 ## Hard rules
 
@@ -18,7 +18,7 @@ Run `flutter_matter` device validation without guessing which phone or commissio
 7. Do not add commissioning-transport selection, host-side scanning, or readiness gating. The app passes the raw onboarding payload to the Matter SDK, which performs discovery and commissioning.
 8. If commissioning fails, preserve the failure and stop the Run. Do not retry commissioning in the same Run.
 9. Do not send Thread commissioning material or Thread-specific setup fields.
-10. `quick` contains four iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 8 fixed tests.
+10. `quick` contains four iteration tests and is never formal evidence. Formal PR/release evidence requires a completed `full` run with all 7 fixed tests.
 11. Never retry a failed P0 test in the same Run to manufacture a passing result.
 12. Do not put full UDIDs, serial numbers, SSIDs, passwords, setup codes, onboarding payloads, certificates, private keys, or raw logs in reports, screenshots, or PR text.
 13. Use structured state first. Take a screenshot only when semantic state is insufficient for a decision.
@@ -225,8 +225,6 @@ If the prompt allows skipping or must be failed, use `skip_prompt` or `fail_prom
 
 The `app_restart` case performs a controller-runtime rebuild: it releases established operational connections and subscriptions, closes the active runtime, reloads persisted credentials into a new runtime through the single-active controller lifecycle, and verifies CASE reconnection without recommissioning. The old native controller must finish shutting down before the replacement is created. The case is fully automatic and never prompts or waits for a process-level app restart; there is no checkpoint and no resume path. `restart-app` remains available only as a bridge-recovery tool when the WebSocket disconnects.
 
-The `invalid_setup_passcode` case reuses the active main controller after reopening the commissioning window. It keeps the public `invalid_setup_passcode` test ID but does not allocate a second controller identity.
-
 ## Step 7: Verify progress
 
 Use structured state first:
@@ -348,6 +346,6 @@ Do not execute destructive purge steps without user confirmation.
 - Automatic cleanup ran or a cleanup failure blocked the Run before persistence.
 - Android prompts were handled only on the selected controller and verified through semantic state.
 - Human prompts were explicitly handed to the operator.
-- The formal report is schema v4, from a `full` run, and matches the PR head.
+- The formal report is schema v5, from a `full` run, and matches the PR head.
 - Sanitization was verified and no P0 failure was retried to hide a result.
 - The user received the fabric, commissionee, credential, and app-data purge reminder.

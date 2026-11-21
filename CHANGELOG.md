@@ -33,6 +33,7 @@
 ### Error Handling and TLV
 - Native TLV byte arrays now accept any integer JSON element and normalize it to the low eight bits, matching the legacy `Uint8List.fromList` behavior. This handles Android signed bytes, unsigned bytes, and wider integer representations without rejecting an otherwise readable NodeState; non-integer array elements still fail with field-specific errors.
 - Fixed the iOS invoke bridge to forward `timedRequestTimeoutMs` as the native timed-invoke timeout. Timed commands such as AdministratorCommissioning `RevokeCommissioning` now work, allowing an existing commissioning window to be revoked before opening a new one.
+- Retired the test-only invalid setup-passcode flow from the device-test app and raised the formal device-test report contract to schema v5 with 7 fixed tests (6 P0 plus `app_restart` P1).
 - Fixed DeviceTestApp treating iOS pairing status `1` (`Success`) as a failure. The incorrect handling cancelled `FindOperationalForStayActive` and surfaced an otherwise successful commissioning attempt as `commissioning_failed`/`code 1`; only status `2` (`Failed`) is now terminal.
 - Added typed validation and sanitized error boundaries across the Dart MethodChannel, controller, BLE, DNS-SD, onboarding, model decoders, and cluster helpers. Malformed native payloads now fail with contextual `FormatException`, `ArgumentError`, `CallPlatformException`, or `PlatformProtocolException` instead of unchecked cast errors.
 - Controller `invoke`, `subscribe`, `read`, `write`, and `connectedDevice` requests now rethrow native request rejections and remove only the callback registered for that failed request. Cluster helpers await request acceptance and bound one-shot reads with a 15-second typed timeout instead of hanging.
@@ -42,7 +43,7 @@
 - Rewrote `lib/src/tlv/` against the connectedhomeip Kotlin TLV implementation. This fixes tag matching, all tag widths, byte-view offsets, signed/unsigned ranges, UTF-8 lengths, float32 encoding, truncated input handling, defensive reads, and the writer's previous four-container limit.
 - Added the full-width unsigned APIs `getULongBigInt`, `putUnsignedBigInt`, and `UnsignedIntValue.fromBigInt`. Existing `getULong()` keeps its signature but rejects values above `2^63 - 1` with migration guidance.
 - Preserved `putByteStringArray(Tag, List<int>)` for compatibility, marked it deprecated, and added `putByteStringArrayValues(Tag, List<Uint8List>)` for correct octet-string arrays.
-- Added all 74 connectedhomeip Kotlin TLV tests as Dart tests plus 18 regression tests and focused error-boundary tests. The root suite now covers 202 tests, and the device-test app suite covers 290 passing tests.
+- Added all 74 connectedhomeip Kotlin TLV tests as Dart tests plus 18 regression tests and focused error-boundary tests. The root suite now covers 202 tests, and the device-test app suite covers 278 passing tests.
 - Added [Error handling](doc/error-handling.md) with the Dart, Android, and iOS failure contract and validation matrix.
 
 ### Tooling and tests
@@ -74,7 +75,7 @@
 - Added the Flutter 3.41 UIScene migration for the iOS example and aligned its deployment targets to iOS 16.1.
 - Clarified that `example/**` is never an automated test target and that iOS simulator builds are unsupported by the current vendored Matter framework.
 - Corrected the public documentation to describe fabric removal through OperationalCredentials `read` + `invoke`; `unPairDevice` is not part of the current exported controller API.
-- Refreshed the README and core project documentation around plugin-user onboarding, platform baselines, device-test lifecycle, and the 8-test schema v4 matrix; consolidated the device-test app guide into its README; reduced duplication across the PR template, review checklist, and contributor guide.
+- Refreshed the README and core project documentation around plugin-user onboarding, platform baselines, and the device-test lifecycle; consolidated the device-test app guide into its README; reduced duplication across the PR template, review checklist, and contributor guide.
 
 ## 0.0.11
 

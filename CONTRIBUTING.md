@@ -77,7 +77,7 @@ A change affects device behavior when it touches commissioning, BLE, discovery, 
 For those changes:
 
 1. Use a Matter On/Off commissionee.
-2. Run the `full` device-test profile and produce schema v4 JSON plus generated Markdown.
+2. Run the `full` device-test profile and produce schema v5 JSON plus generated Markdown.
 3. Confirm the report commit matches the PR head.
 4. Attach sanitized evidence.
 5. Cover Android and physical iOS for shared behavior, or document the platform exception.

@@ -121,8 +121,8 @@ class ReportSummary {
 ///
 /// Formal reports are always full-profile reports. Quick-profile smoke runs
 /// must not be represented by this type; use [RunSession] progress instead.
-class DeviceTestReportV4 {
-  DeviceTestReportV4({
+class DeviceTestReportV5 {
+  DeviceTestReportV5({
     required this.generatedAt,
     required this.testApp,
     required this.pluginCommit,
@@ -131,14 +131,14 @@ class DeviceTestReportV4 {
     required this.summary,
     required Map<DeviceTestId, DeviceTestResult> tests,
     required this.sanitizationReviewed,
-    this.schemaVersion = 4,
+    this.schemaVersion = 5,
     this.sanitizationPolicyVersion = 1,
   }) : _tests = _normalizeTests(tests) {
-    if (schemaVersion != 4) {
+    if (schemaVersion != 5) {
       throw ArgumentError.value(
         schemaVersion,
         'schemaVersion',
-        'Only schema version 4 is supported',
+        'Only schema version 5 is supported',
       );
     }
     if (sanitizationPolicyVersion != 1) {
@@ -163,7 +163,7 @@ class DeviceTestReportV4 {
 
   /// Formal reports are full-profile artifacts by definition.
   ///
-  /// Profile is not serialized because schema v4 deliberately has no profile
+  /// Profile is not serialized because schema v5 deliberately has no profile
   /// field; the presence of every catalog test ID is the JSON-level invariant.
   TestProfile get profile => TestProfile.full;
 
@@ -174,7 +174,7 @@ class DeviceTestReportV4 {
     return _tests[testId]!;
   }
 
-  factory DeviceTestReportV4.fromJson(Map<String, dynamic> json) {
+  factory DeviceTestReportV5.fromJson(Map<String, dynamic> json) {
     final rawTests = _requiredMap(json, 'tests');
     final tests = <DeviceTestId, DeviceTestResult>{};
     for (final entry in rawTests.entries) {
@@ -200,7 +200,7 @@ class DeviceTestReportV4 {
       throw const FormatException('schema_version must be an integer');
     }
 
-    return DeviceTestReportV4(
+    return DeviceTestReportV5(
       schemaVersion: schemaVersion,
       generatedAt: _requiredDateTime(json, 'generated_at'),
       testApp: TestAppMetadata.fromJson(_requiredMap(json, 'test_app')),

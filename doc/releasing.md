@@ -25,7 +25,7 @@ The release-preparation pull request is the durable record of stable-release dev
 
 Each report must:
 
-- use schema version 4 and include `device-test-report.json` plus its generated Markdown summary;
+- use schema version 5 and include `device-test-report.json` plus its generated Markdown summary;
 - identify the exact candidate commit in `plugin_commit`;
 - contain one complete clean P0 cycle;
 - use a Matter On/Off commissionee and record `network_transport: "wifi"`;

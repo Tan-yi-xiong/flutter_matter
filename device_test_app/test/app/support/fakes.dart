@@ -183,7 +183,7 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
       StreamController<RunnerEvent>.broadcast();
 
   RunnerStateSnapshot? _snapshot;
-  DeviceTestReportV4? reportToBuild;
+  DeviceTestReportV5? reportToBuild;
   int buildReportCount = 0;
   int cleanupCount = 0;
   RunStartRequest? startRequest;
@@ -238,7 +238,7 @@ class FakeDeviceTestRunner implements DeviceTestRunPort {
   Future<void> stop({String reason = 'Stopped by operator.'}) async {}
 
   @override
-  Future<DeviceTestReportV4?> buildFormalReport({
+  Future<DeviceTestReportV5?> buildFormalReport({
     required DateTime generatedAt,
     required bool sanitizationReviewed,
   }) async {

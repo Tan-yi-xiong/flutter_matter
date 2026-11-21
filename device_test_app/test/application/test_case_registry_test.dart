@@ -15,9 +15,9 @@ class _FakeCase implements DeviceTestCase {
 
 void main() {
   group('TestCaseRegistry', () {
-    test('contains all 8 fixed cases in canonical order', () {
+    test('contains all 7 fixed cases in canonical order', () {
       final registry = TestCaseRegistry.canonical();
-      expect(registry.allCases.length, 8);
+      expect(registry.allCases.length, 7);
       expect(
         registry.allCases.map((testCase) => testCase.id).toList(),
         DeviceTestCatalog.all,
@@ -37,7 +37,7 @@ void main() {
         for (final id in DeviceTestCatalog.all) _FakeCase(id),
       ];
       expect(
-        () => TestCaseRegistry(cases.sublist(0, 7)),
+        () => TestCaseRegistry(cases.sublist(0, 6)),
         throwsA(isA<TestCaseRegistryException>()),
       );
       expect(

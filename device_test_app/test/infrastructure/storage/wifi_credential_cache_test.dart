@@ -128,7 +128,6 @@ void main() {
         'run-1',
         ProvisioningSecrets(
           onboardingPayload: 'MT:TEST-PAYLOAD',
-          invalidSetupOnboardingPayload: '24129507534',
           setupPinCode: 20202021,
           network: const WifiProvisioningSecret(
             ssid: 'run-net',
