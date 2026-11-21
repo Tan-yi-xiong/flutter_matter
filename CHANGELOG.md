@@ -1,4 +1,4 @@
-## Unreleased
+## 0.0.12
 
 ### Packaging and Licensing
 - Relicensed original `flutter_matter` code under the MIT License while preserving Apache-2.0 notices for Project CHIP/Matter SDK-derived source and bundled binaries.
@@ -41,7 +41,7 @@
 - Rewrote `lib/src/tlv/` against the connectedhomeip Kotlin TLV implementation. This fixes tag matching, all tag widths, byte-view offsets, signed/unsigned ranges, UTF-8 lengths, float32 encoding, truncated input handling, defensive reads, and the writer's previous four-container limit.
 - Added the full-width unsigned APIs `getULongBigInt`, `putUnsignedBigInt`, and `UnsignedIntValue.fromBigInt`. Existing `getULong()` keeps its signature but rejects values above `2^63 - 1` with migration guidance.
 - Preserved `putByteStringArray(Tag, List<int>)` for compatibility, marked it deprecated, and added `putByteStringArrayValues(Tag, List<Uint8List>)` for correct octet-string arrays.
-- Added all 74 connectedhomeip Kotlin TLV tests as Dart tests plus 18 regression tests and focused error-boundary tests. The root suite now covers 171 tests, and the device-test app suite remains at 288 passing tests.
+- Added all 74 connectedhomeip Kotlin TLV tests as Dart tests plus 18 regression tests and focused error-boundary tests. The root suite now covers 202 tests, and the device-test app suite covers 290 passing tests.
 - Added [Error handling](doc/error-handling.md) with the Dart, Android, and iOS failure contract and validation matrix.
 
 ### Tooling and tests

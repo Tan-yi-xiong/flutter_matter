@@ -26,10 +26,10 @@ ios/zgmatter/
 └── patches/
 ```
 
-The six patches preserve the ZG feature contract that is not available through
+The seven patches preserve the ZG feature contract that is not available through
 the official public Objective-C API: subscription ID delivery, pre-encoded
-batch attribute writes, subscription shutdown, raw TLV data, fabric index, and
-commissioning-stage forwarding.
+batch attribute writes, subscription shutdown, raw TLV data, fabric index,
+commissioning-stage forwarding, and pre-encoded command-field TLV support.
 
 ## Path contract
 
